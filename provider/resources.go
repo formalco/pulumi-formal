@@ -131,7 +131,7 @@ func Provider() tfbridge.ProviderInfo {
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
 		Keywords:          []string{"formal", "category/cloud", "category/database", "category/network"},
-		License:           "Apache-2.0",
+		License:           "MPL-2.0",
 		Homepage:          "https://joinformal.com",
 		Repository:        "https://github.com/formalco/pulumi-formal",
 		TFProviderLicense: &tfLicense,
