@@ -1,14 +1,12 @@
-# Terraform Bridge Provider Boilerplate
+<a href="https://joinformal.com">
+    <img src=".github/formal_logo.svg" alt="Formal logo" title="Formal" align="right" height="50" />
+</a>
 
-This repository is the template for authoring a Pulumi package from an existing Terraform provider as part of the guide for [authoring and publishing Pulumi packages](https://www.pulumi.com/docs/iac/packages-and-automation/pulumi-packages/authoring/).
+# Formal Resource Provider
 
-This repository is initially set up as a fictitious provider named "xyz" to demonstrate a resource, a data source and configuration derived from the [github.com/pulumi/terraform-provider-xyz provider](https://github.com/pulumi/terraform-provider-xyz).
+[joinformal.com](https://joinformal.com)
 
-Read the [setup instructions](SETUP.md) for step-by-step instructions on how to bridge a new provider and refer to our complete docs [guide for authoring and publishing a Pulumi Package](https://www.pulumi.com/docs/iac/packages-and-automation/pulumi-packages/authoring/).
-
-# Xyz Resource Provider
-
-The Xyz Resource Provider lets you manage [Xyz](http://example.com) resources.
+The Formal Resource Provider allows for the full lifecycle management of Formal resources.
 
 ## Installing
 
@@ -19,13 +17,13 @@ This package is available for several languages/platforms:
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
 ```bash
-npm install @pulumi/xyz
+npm install @pulumi/formal
 ```
 
 or `yarn`:
 
 ```bash
-yarn add @pulumi/xyz
+yarn add @pulumi/formal
 ```
 
 ### Python
@@ -33,7 +31,7 @@ yarn add @pulumi/xyz
 To use from Python, install using `pip`:
 
 ```bash
-pip install pulumi_xyz
+pip install pulumi_formal
 ```
 
 ### Go
@@ -41,7 +39,7 @@ pip install pulumi_xyz
 To use from Go, use `go get` to grab the latest version of the library:
 
 ```bash
-go get github.com/pulumi/pulumi-xyz/sdk/go/...
+go get github.com/formalco/pulumi-formal/sdk/go/...
 ```
 
 ### .NET
@@ -49,15 +47,13 @@ go get github.com/pulumi/pulumi-xyz/sdk/go/...
 To use from .NET, install using `dotnet add package`:
 
 ```bash
-dotnet add package Pulumi.Xyz
+dotnet add package Pulumi.Formal
 ```
 
 ## Configuration
 
-The following configuration points are available for the `xyz` provider:
-
-- `xyz:region` (environment: `XYZ_REGION`) - the region in which to deploy resources
+No configuration points are currently available for the `formal` provider.
 
 ## Reference
 
-For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/xyz/api-docs/).
+For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/formal/api-docs/).

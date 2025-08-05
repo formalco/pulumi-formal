@@ -5,10 +5,140 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export { GetDataSourceArgs, GetDataSourceResult, GetDataSourceOutputArgs } from "./getDataSource";
-export const getDataSource: typeof import("./getDataSource").getDataSource = null as any;
-export const getDataSourceOutput: typeof import("./getDataSource").getDataSourceOutput = null as any;
-utilities.lazyLoad(exports, ["getDataSource","getDataSourceOutput"], () => require("./getDataSource"));
+export { ConnectorArgs, ConnectorState } from "./connector";
+export type Connector = import("./connector").Connector;
+export const Connector: typeof import("./connector").Connector = null as any;
+utilities.lazyLoad(exports, ["Connector"], () => require("./connector"));
+
+export { ConnectorConfigurationArgs, ConnectorConfigurationState } from "./connectorConfiguration";
+export type ConnectorConfiguration = import("./connectorConfiguration").ConnectorConfiguration;
+export const ConnectorConfiguration: typeof import("./connectorConfiguration").ConnectorConfiguration = null as any;
+utilities.lazyLoad(exports, ["ConnectorConfiguration"], () => require("./connectorConfiguration"));
+
+export { ConnectorHostnameArgs, ConnectorHostnameState } from "./connectorHostname";
+export type ConnectorHostname = import("./connectorHostname").ConnectorHostname;
+export const ConnectorHostname: typeof import("./connectorHostname").ConnectorHostname = null as any;
+utilities.lazyLoad(exports, ["ConnectorHostname"], () => require("./connectorHostname"));
+
+export { ConnectorListenerArgs, ConnectorListenerState } from "./connectorListener";
+export type ConnectorListener = import("./connectorListener").ConnectorListener;
+export const ConnectorListener: typeof import("./connectorListener").ConnectorListener = null as any;
+utilities.lazyLoad(exports, ["ConnectorListener"], () => require("./connectorListener"));
+
+export { ConnectorListenerLinkArgs, ConnectorListenerLinkState } from "./connectorListenerLink";
+export type ConnectorListenerLink = import("./connectorListenerLink").ConnectorListenerLink;
+export const ConnectorListenerLink: typeof import("./connectorListenerLink").ConnectorListenerLink = null as any;
+utilities.lazyLoad(exports, ["ConnectorListenerLink"], () => require("./connectorListenerLink"));
+
+export { ConnectorListenerRuleArgs, ConnectorListenerRuleState } from "./connectorListenerRule";
+export type ConnectorListenerRule = import("./connectorListenerRule").ConnectorListenerRule;
+export const ConnectorListenerRule: typeof import("./connectorListenerRule").ConnectorListenerRule = null as any;
+utilities.lazyLoad(exports, ["ConnectorListenerRule"], () => require("./connectorListenerRule"));
+
+export { DataDiscoveryArgs, DataDiscoveryState } from "./dataDiscovery";
+export type DataDiscovery = import("./dataDiscovery").DataDiscovery;
+export const DataDiscovery: typeof import("./dataDiscovery").DataDiscovery = null as any;
+utilities.lazyLoad(exports, ["DataDiscovery"], () => require("./dataDiscovery"));
+
+export { DataDomainArgs, DataDomainState } from "./dataDomain";
+export type DataDomain = import("./dataDomain").DataDomain;
+export const DataDomain: typeof import("./dataDomain").DataDomain = null as any;
+utilities.lazyLoad(exports, ["DataDomain"], () => require("./dataDomain"));
+
+export { DataLabelArgs, DataLabelState } from "./dataLabel";
+export type DataLabel = import("./dataLabel").DataLabel;
+export const DataLabel: typeof import("./dataLabel").DataLabel = null as any;
+utilities.lazyLoad(exports, ["DataLabel"], () => require("./dataLabel"));
+
+export { EncryptionKeyArgs, EncryptionKeyState } from "./encryptionKey";
+export type EncryptionKey = import("./encryptionKey").EncryptionKey;
+export const EncryptionKey: typeof import("./encryptionKey").EncryptionKey = null as any;
+utilities.lazyLoad(exports, ["EncryptionKey"], () => require("./encryptionKey"));
+
+export { GetGroupArgs, GetGroupResult, GetGroupOutputArgs } from "./getGroup";
+export const getGroup: typeof import("./getGroup").getGroup = null as any;
+export const getGroupOutput: typeof import("./getGroup").getGroupOutput = null as any;
+utilities.lazyLoad(exports, ["getGroup","getGroupOutput"], () => require("./getGroup"));
+
+export { GetResourceArgs, GetResourceResult, GetResourceOutputArgs } from "./getResource";
+export const getResource: typeof import("./getResource").getResource = null as any;
+export const getResourceOutput: typeof import("./getResource").getResourceOutput = null as any;
+utilities.lazyLoad(exports, ["getResource","getResourceOutput"], () => require("./getResource"));
+
+export { GroupArgs, GroupState } from "./group";
+export type Group = import("./group").Group;
+export const Group: typeof import("./group").Group = null as any;
+utilities.lazyLoad(exports, ["Group"], () => require("./group"));
+
+export { GroupUserLinkArgs, GroupUserLinkState } from "./groupUserLink";
+export type GroupUserLink = import("./groupUserLink").GroupUserLink;
+export const GroupUserLink: typeof import("./groupUserLink").GroupUserLink = null as any;
+utilities.lazyLoad(exports, ["GroupUserLink"], () => require("./groupUserLink"));
+
+export { IntegrationBiArgs, IntegrationBiState } from "./integrationBi";
+export type IntegrationBi = import("./integrationBi").IntegrationBi;
+export const IntegrationBi: typeof import("./integrationBi").IntegrationBi = null as any;
+utilities.lazyLoad(exports, ["IntegrationBi"], () => require("./integrationBi"));
+
+export { IntegrationCloudArgs, IntegrationCloudState } from "./integrationCloud";
+export type IntegrationCloud = import("./integrationCloud").IntegrationCloud;
+export const IntegrationCloud: typeof import("./integrationCloud").IntegrationCloud = null as any;
+utilities.lazyLoad(exports, ["IntegrationCloud"], () => require("./integrationCloud"));
+
+export { IntegrationDataCatalogArgs, IntegrationDataCatalogState } from "./integrationDataCatalog";
+export type IntegrationDataCatalog = import("./integrationDataCatalog").IntegrationDataCatalog;
+export const IntegrationDataCatalog: typeof import("./integrationDataCatalog").IntegrationDataCatalog = null as any;
+utilities.lazyLoad(exports, ["IntegrationDataCatalog"], () => require("./integrationDataCatalog"));
+
+export { IntegrationLogArgs, IntegrationLogState } from "./integrationLog";
+export type IntegrationLog = import("./integrationLog").IntegrationLog;
+export const IntegrationLog: typeof import("./integrationLog").IntegrationLog = null as any;
+utilities.lazyLoad(exports, ["IntegrationLog"], () => require("./integrationLog"));
+
+export { IntegrationMdmArgs, IntegrationMdmState } from "./integrationMdm";
+export type IntegrationMdm = import("./integrationMdm").IntegrationMdm;
+export const IntegrationMdm: typeof import("./integrationMdm").IntegrationMdm = null as any;
+utilities.lazyLoad(exports, ["IntegrationMdm"], () => require("./integrationMdm"));
+
+export { IntegrationMfaArgs, IntegrationMfaState } from "./integrationMfa";
+export type IntegrationMfa = import("./integrationMfa").IntegrationMfa;
+export const IntegrationMfa: typeof import("./integrationMfa").IntegrationMfa = null as any;
+utilities.lazyLoad(exports, ["IntegrationMfa"], () => require("./integrationMfa"));
+
+export { InventoryObjectDataLabelLinkArgs, InventoryObjectDataLabelLinkState } from "./inventoryObjectDataLabelLink";
+export type InventoryObjectDataLabelLink = import("./inventoryObjectDataLabelLink").InventoryObjectDataLabelLink;
+export const InventoryObjectDataLabelLink: typeof import("./inventoryObjectDataLabelLink").InventoryObjectDataLabelLink = null as any;
+utilities.lazyLoad(exports, ["InventoryObjectDataLabelLink"], () => require("./inventoryObjectDataLabelLink"));
+
+export { LogConfigurationArgs, LogConfigurationState } from "./logConfiguration";
+export type LogConfiguration = import("./logConfiguration").LogConfiguration;
+export const LogConfiguration: typeof import("./logConfiguration").LogConfiguration = null as any;
+utilities.lazyLoad(exports, ["LogConfiguration"], () => require("./logConfiguration"));
+
+export { NativeUserArgs, NativeUserState } from "./nativeUser";
+export type NativeUser = import("./nativeUser").NativeUser;
+export const NativeUser: typeof import("./nativeUser").NativeUser = null as any;
+utilities.lazyLoad(exports, ["NativeUser"], () => require("./nativeUser"));
+
+export { NativeUserLinkArgs, NativeUserLinkState } from "./nativeUserLink";
+export type NativeUserLink = import("./nativeUserLink").NativeUserLink;
+export const NativeUserLink: typeof import("./nativeUserLink").NativeUserLink = null as any;
+utilities.lazyLoad(exports, ["NativeUserLink"], () => require("./nativeUserLink"));
+
+export { PermissionArgs, PermissionState } from "./permission";
+export type Permission = import("./permission").Permission;
+export const Permission: typeof import("./permission").Permission = null as any;
+utilities.lazyLoad(exports, ["Permission"], () => require("./permission"));
+
+export { PolicyArgs, PolicyState } from "./policy";
+export type Policy = import("./policy").Policy;
+export const Policy: typeof import("./policy").Policy = null as any;
+utilities.lazyLoad(exports, ["Policy"], () => require("./policy"));
+
+export { PolicyDataLoaderArgs, PolicyDataLoaderState } from "./policyDataLoader";
+export type PolicyDataLoader = import("./policyDataLoader").PolicyDataLoader;
+export const PolicyDataLoader: typeof import("./policyDataLoader").PolicyDataLoader = null as any;
+utilities.lazyLoad(exports, ["PolicyDataLoader"], () => require("./policyDataLoader"));
 
 export * from "./provider";
 import { Provider } from "./provider";
@@ -18,15 +148,63 @@ export type Resource = import("./resource").Resource;
 export const Resource: typeof import("./resource").Resource = null as any;
 utilities.lazyLoad(exports, ["Resource"], () => require("./resource"));
 
+export { ResourceClassifierConfigurationArgs, ResourceClassifierConfigurationState } from "./resourceClassifierConfiguration";
+export type ResourceClassifierConfiguration = import("./resourceClassifierConfiguration").ResourceClassifierConfiguration;
+export const ResourceClassifierConfiguration: typeof import("./resourceClassifierConfiguration").ResourceClassifierConfiguration = null as any;
+utilities.lazyLoad(exports, ["ResourceClassifierConfiguration"], () => require("./resourceClassifierConfiguration"));
+
+export { ResourceHealthCheckArgs, ResourceHealthCheckState } from "./resourceHealthCheck";
+export type ResourceHealthCheck = import("./resourceHealthCheck").ResourceHealthCheck;
+export const ResourceHealthCheck: typeof import("./resourceHealthCheck").ResourceHealthCheck = null as any;
+utilities.lazyLoad(exports, ["ResourceHealthCheck"], () => require("./resourceHealthCheck"));
+
+export { ResourceHostnameArgs, ResourceHostnameState } from "./resourceHostname";
+export type ResourceHostname = import("./resourceHostname").ResourceHostname;
+export const ResourceHostname: typeof import("./resourceHostname").ResourceHostname = null as any;
+utilities.lazyLoad(exports, ["ResourceHostname"], () => require("./resourceHostname"));
+
+export { ResourceTlsConfigurationArgs, ResourceTlsConfigurationState } from "./resourceTlsConfiguration";
+export type ResourceTlsConfiguration = import("./resourceTlsConfiguration").ResourceTlsConfiguration;
+export const ResourceTlsConfiguration: typeof import("./resourceTlsConfiguration").ResourceTlsConfiguration = null as any;
+utilities.lazyLoad(exports, ["ResourceTlsConfiguration"], () => require("./resourceTlsConfiguration"));
+
+export { SatelliteArgs, SatelliteState } from "./satellite";
+export type Satellite = import("./satellite").Satellite;
+export const Satellite: typeof import("./satellite").Satellite = null as any;
+utilities.lazyLoad(exports, ["Satellite"], () => require("./satellite"));
+
+export { SidecarArgs, SidecarState } from "./sidecar";
+export type Sidecar = import("./sidecar").Sidecar;
+export const Sidecar: typeof import("./sidecar").Sidecar = null as any;
+utilities.lazyLoad(exports, ["Sidecar"], () => require("./sidecar"));
+
+export { SidecarResourceLinkArgs, SidecarResourceLinkState } from "./sidecarResourceLink";
+export type SidecarResourceLink = import("./sidecarResourceLink").SidecarResourceLink;
+export const SidecarResourceLink: typeof import("./sidecarResourceLink").SidecarResourceLink = null as any;
+utilities.lazyLoad(exports, ["SidecarResourceLink"], () => require("./sidecarResourceLink"));
+
+export { SpaceArgs, SpaceState } from "./space";
+export type Space = import("./space").Space;
+export const Space: typeof import("./space").Space = null as any;
+utilities.lazyLoad(exports, ["Space"], () => require("./space"));
+
+export { TrackerArgs, TrackerState } from "./tracker";
+export type Tracker = import("./tracker").Tracker;
+export const Tracker: typeof import("./tracker").Tracker = null as any;
+utilities.lazyLoad(exports, ["Tracker"], () => require("./tracker"));
+
+export { UserArgs, UserState } from "./user";
+export type User = import("./user").User;
+export const User: typeof import("./user").User = null as any;
+utilities.lazyLoad(exports, ["User"], () => require("./user"));
+
 
 // Export sub-modules:
 import * as config from "./config";
-import * as region from "./region";
 import * as types from "./types";
 
 export {
     config,
-    region,
     types,
 };
 
@@ -34,18 +212,123 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "xyz:index/resource:Resource":
+            case "formal:index/connector:Connector":
+                return new Connector(name, <any>undefined, { urn })
+            case "formal:index/connectorConfiguration:ConnectorConfiguration":
+                return new ConnectorConfiguration(name, <any>undefined, { urn })
+            case "formal:index/connectorHostname:ConnectorHostname":
+                return new ConnectorHostname(name, <any>undefined, { urn })
+            case "formal:index/connectorListener:ConnectorListener":
+                return new ConnectorListener(name, <any>undefined, { urn })
+            case "formal:index/connectorListenerLink:ConnectorListenerLink":
+                return new ConnectorListenerLink(name, <any>undefined, { urn })
+            case "formal:index/connectorListenerRule:ConnectorListenerRule":
+                return new ConnectorListenerRule(name, <any>undefined, { urn })
+            case "formal:index/dataDiscovery:DataDiscovery":
+                return new DataDiscovery(name, <any>undefined, { urn })
+            case "formal:index/dataDomain:DataDomain":
+                return new DataDomain(name, <any>undefined, { urn })
+            case "formal:index/dataLabel:DataLabel":
+                return new DataLabel(name, <any>undefined, { urn })
+            case "formal:index/encryptionKey:EncryptionKey":
+                return new EncryptionKey(name, <any>undefined, { urn })
+            case "formal:index/group:Group":
+                return new Group(name, <any>undefined, { urn })
+            case "formal:index/groupUserLink:GroupUserLink":
+                return new GroupUserLink(name, <any>undefined, { urn })
+            case "formal:index/integrationBi:IntegrationBi":
+                return new IntegrationBi(name, <any>undefined, { urn })
+            case "formal:index/integrationCloud:IntegrationCloud":
+                return new IntegrationCloud(name, <any>undefined, { urn })
+            case "formal:index/integrationDataCatalog:IntegrationDataCatalog":
+                return new IntegrationDataCatalog(name, <any>undefined, { urn })
+            case "formal:index/integrationLog:IntegrationLog":
+                return new IntegrationLog(name, <any>undefined, { urn })
+            case "formal:index/integrationMdm:IntegrationMdm":
+                return new IntegrationMdm(name, <any>undefined, { urn })
+            case "formal:index/integrationMfa:IntegrationMfa":
+                return new IntegrationMfa(name, <any>undefined, { urn })
+            case "formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink":
+                return new InventoryObjectDataLabelLink(name, <any>undefined, { urn })
+            case "formal:index/logConfiguration:LogConfiguration":
+                return new LogConfiguration(name, <any>undefined, { urn })
+            case "formal:index/nativeUser:NativeUser":
+                return new NativeUser(name, <any>undefined, { urn })
+            case "formal:index/nativeUserLink:NativeUserLink":
+                return new NativeUserLink(name, <any>undefined, { urn })
+            case "formal:index/permission:Permission":
+                return new Permission(name, <any>undefined, { urn })
+            case "formal:index/policy:Policy":
+                return new Policy(name, <any>undefined, { urn })
+            case "formal:index/policyDataLoader:PolicyDataLoader":
+                return new PolicyDataLoader(name, <any>undefined, { urn })
+            case "formal:index/resource:Resource":
                 return new Resource(name, <any>undefined, { urn })
+            case "formal:index/resourceClassifierConfiguration:ResourceClassifierConfiguration":
+                return new ResourceClassifierConfiguration(name, <any>undefined, { urn })
+            case "formal:index/resourceHealthCheck:ResourceHealthCheck":
+                return new ResourceHealthCheck(name, <any>undefined, { urn })
+            case "formal:index/resourceHostname:ResourceHostname":
+                return new ResourceHostname(name, <any>undefined, { urn })
+            case "formal:index/resourceTlsConfiguration:ResourceTlsConfiguration":
+                return new ResourceTlsConfiguration(name, <any>undefined, { urn })
+            case "formal:index/satellite:Satellite":
+                return new Satellite(name, <any>undefined, { urn })
+            case "formal:index/sidecar:Sidecar":
+                return new Sidecar(name, <any>undefined, { urn })
+            case "formal:index/sidecarResourceLink:SidecarResourceLink":
+                return new SidecarResourceLink(name, <any>undefined, { urn })
+            case "formal:index/space:Space":
+                return new Space(name, <any>undefined, { urn })
+            case "formal:index/tracker:Tracker":
+                return new Tracker(name, <any>undefined, { urn })
+            case "formal:index/user:User":
+                return new User(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
-pulumi.runtime.registerResourceModule("xyz", "index/resource", _module)
-pulumi.runtime.registerResourcePackage("xyz", {
+pulumi.runtime.registerResourceModule("formal", "index/connector", _module)
+pulumi.runtime.registerResourceModule("formal", "index/connectorConfiguration", _module)
+pulumi.runtime.registerResourceModule("formal", "index/connectorHostname", _module)
+pulumi.runtime.registerResourceModule("formal", "index/connectorListener", _module)
+pulumi.runtime.registerResourceModule("formal", "index/connectorListenerLink", _module)
+pulumi.runtime.registerResourceModule("formal", "index/connectorListenerRule", _module)
+pulumi.runtime.registerResourceModule("formal", "index/dataDiscovery", _module)
+pulumi.runtime.registerResourceModule("formal", "index/dataDomain", _module)
+pulumi.runtime.registerResourceModule("formal", "index/dataLabel", _module)
+pulumi.runtime.registerResourceModule("formal", "index/encryptionKey", _module)
+pulumi.runtime.registerResourceModule("formal", "index/group", _module)
+pulumi.runtime.registerResourceModule("formal", "index/groupUserLink", _module)
+pulumi.runtime.registerResourceModule("formal", "index/integrationBi", _module)
+pulumi.runtime.registerResourceModule("formal", "index/integrationCloud", _module)
+pulumi.runtime.registerResourceModule("formal", "index/integrationDataCatalog", _module)
+pulumi.runtime.registerResourceModule("formal", "index/integrationLog", _module)
+pulumi.runtime.registerResourceModule("formal", "index/integrationMdm", _module)
+pulumi.runtime.registerResourceModule("formal", "index/integrationMfa", _module)
+pulumi.runtime.registerResourceModule("formal", "index/inventoryObjectDataLabelLink", _module)
+pulumi.runtime.registerResourceModule("formal", "index/logConfiguration", _module)
+pulumi.runtime.registerResourceModule("formal", "index/nativeUser", _module)
+pulumi.runtime.registerResourceModule("formal", "index/nativeUserLink", _module)
+pulumi.runtime.registerResourceModule("formal", "index/permission", _module)
+pulumi.runtime.registerResourceModule("formal", "index/policy", _module)
+pulumi.runtime.registerResourceModule("formal", "index/policyDataLoader", _module)
+pulumi.runtime.registerResourceModule("formal", "index/resource", _module)
+pulumi.runtime.registerResourceModule("formal", "index/resourceClassifierConfiguration", _module)
+pulumi.runtime.registerResourceModule("formal", "index/resourceHealthCheck", _module)
+pulumi.runtime.registerResourceModule("formal", "index/resourceHostname", _module)
+pulumi.runtime.registerResourceModule("formal", "index/resourceTlsConfiguration", _module)
+pulumi.runtime.registerResourceModule("formal", "index/satellite", _module)
+pulumi.runtime.registerResourceModule("formal", "index/sidecar", _module)
+pulumi.runtime.registerResourceModule("formal", "index/sidecarResourceLink", _module)
+pulumi.runtime.registerResourceModule("formal", "index/space", _module)
+pulumi.runtime.registerResourceModule("formal", "index/tracker", _module)
+pulumi.runtime.registerResourceModule("formal", "index/user", _module)
+pulumi.runtime.registerResourcePackage("formal", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
-        if (type !== "pulumi:providers:xyz") {
+        if (type !== "pulumi:providers:formal") {
             throw new Error(`unknown provider type ${type}`);
         }
         return new Provider(name, <any>undefined, { urn });
