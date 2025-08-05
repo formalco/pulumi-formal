@@ -1,6 +1,12 @@
+<a href="https://joinformal.com">
+    <img src=".github/formal_logo.svg" alt="Formal logo" title="Formal" align="right" height="50" />
+</a>
+
 # Formal Resource Provider
 
-The Formal Resource Provider lets you manage [Formal](http://example.com) resources.
+[joinformal.com](https://joinformal.com)
+
+The Formal Resource Provider allows for the full lifecycle management of Formal resources.
 
 ## Installing
 
@@ -33,7 +39,7 @@ pip install pulumi_formal
 To use from Go, use `go get` to grab the latest version of the library:
 
 ```bash
-go get github.com/pulumi/pulumi-formal/sdk/go/...
+go get github.com/formalco/pulumi-formal/sdk/go/...
 ```
 
 ### .NET
@@ -46,9 +52,7 @@ dotnet add package Pulumi.Formal
 
 ## Configuration
 
-The following configuration points are available for the `formal` provider:
-
-- `formal:region` (environment: `FORMAL_REGION`) - the region in which to deploy resources
+No configuration points are currently available for the `formal` provider.
 
 ## Reference
 
