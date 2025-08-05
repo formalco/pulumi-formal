@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Pulumi.Xyz
+namespace Pulumi.Formal
 {
     public static class Config
     {
@@ -30,16 +30,20 @@ namespace Pulumi.Xyz
             }
         }
 
-        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("xyz");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("formal");
 
-        private static readonly __Value<Pulumi.Xyz.Region.Region?> _region = new __Value<Pulumi.Xyz.Region.Region?>(() => __config.GetObject<Pulumi.Xyz.Region.Region>("region"));
-        /// <summary>
-        /// A region which should be used.
-        /// </summary>
-        public static Pulumi.Xyz.Region.Region? Region
+        private static readonly __Value<string?> _apiKey = new __Value<string?>(() => __config.Get("apiKey"));
+        public static string? ApiKey
         {
-            get => _region.Get();
-            set => _region.Set(value);
+            get => _apiKey.Get();
+            set => _apiKey.Set(value);
+        }
+
+        private static readonly __Value<bool?> _retrieveSensitiveValues = new __Value<bool?>(() => __config.GetBoolean("retrieveSensitiveValues"));
+        public static bool? RetrieveSensitiveValues
+        {
+            get => _retrieveSensitiveValues.Get();
+            set => _retrieveSensitiveValues.Set(value);
         }
 
     }

@@ -7,16 +7,67 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Xyz
+namespace Pulumi.Formal
 {
-    [XyzResourceType("xyz:index/resource:Resource")]
+    /// <summary>
+    /// Registering a Resource with Formal.
+    /// </summary>
+    [FormalResourceType("formal:index/resource:Resource")]
     public partial class Resource : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Sample attribute.
+        /// Creation time of the Resource.
         /// </summary>
-        [Output("sampleAttribute")]
-        public Output<string?> SampleAttribute { get; private set; } = null!;
+        [Output("createdAt")]
+        public Output<int> CreatedAt { get; private set; } = null!;
+
+        /// <summary>
+        /// Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
+        /// </summary>
+        [Output("environment")]
+        public Output<string?> Environment { get; private set; } = null!;
+
+        /// <summary>
+        /// Hostname of the Resource.
+        /// </summary>
+        [Output("hostname")]
+        public Output<string> Hostname { get; private set; } = null!;
+
+        /// <summary>
+        /// Friendly name for the Resource.
+        /// </summary>
+        [Output("name")]
+        public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// The port your Resource is listening on.
+        /// </summary>
+        [Output("port")]
+        public Output<int> Port { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the Space to create the Resource in.
+        /// </summary>
+        [Output("spaceId")]
+        public Output<string?> SpaceId { get; private set; } = null!;
+
+        /// <summary>
+        /// Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+        /// </summary>
+        [Output("technology")]
+        public Output<string> Technology { get; private set; } = null!;
+
+        /// <summary>
+        /// For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
+        /// </summary>
+        [Output("technologyProvider")]
+        public Output<string?> TechnologyProvider { get; private set; } = null!;
+
+        /// <summary>
+        /// If set to true, the Resource cannot be deleted.
+        /// </summary>
+        [Output("terminationProtection")]
+        public Output<bool?> TerminationProtection { get; private set; } = null!;
 
 
         /// <summary>
@@ -26,13 +77,13 @@ namespace Pulumi.Xyz
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Resource(string name, ResourceArgs? args = null, CustomResourceOptions? options = null)
-            : base("xyz:index/resource:Resource", name, args ?? new ResourceArgs(), MakeResourceOptions(options, ""))
+        public Resource(string name, ResourceArgs args, CustomResourceOptions? options = null)
+            : base("formal:index/resource:Resource", name, args ?? new ResourceArgs(), MakeResourceOptions(options, ""))
         {
         }
 
         private Resource(string name, Input<string> id, ResourceState? state = null, CustomResourceOptions? options = null)
-            : base("xyz:index/resource:Resource", name, state, MakeResourceOptions(options, id))
+            : base("formal:index/resource:Resource", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -65,10 +116,52 @@ namespace Pulumi.Xyz
     public sealed class ResourceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Sample attribute.
+        /// Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         /// </summary>
-        [Input("sampleAttribute")]
-        public Input<string>? SampleAttribute { get; set; }
+        [Input("environment")]
+        public Input<string>? Environment { get; set; }
+
+        /// <summary>
+        /// Hostname of the Resource.
+        /// </summary>
+        [Input("hostname", required: true)]
+        public Input<string> Hostname { get; set; } = null!;
+
+        /// <summary>
+        /// Friendly name for the Resource.
+        /// </summary>
+        [Input("name")]
+        public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The port your Resource is listening on.
+        /// </summary>
+        [Input("port", required: true)]
+        public Input<int> Port { get; set; } = null!;
+
+        /// <summary>
+        /// The ID of the Space to create the Resource in.
+        /// </summary>
+        [Input("spaceId")]
+        public Input<string>? SpaceId { get; set; }
+
+        /// <summary>
+        /// Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+        /// </summary>
+        [Input("technology", required: true)]
+        public Input<string> Technology { get; set; } = null!;
+
+        /// <summary>
+        /// For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
+        /// </summary>
+        [Input("technologyProvider")]
+        public Input<string>? TechnologyProvider { get; set; }
+
+        /// <summary>
+        /// If set to true, the Resource cannot be deleted.
+        /// </summary>
+        [Input("terminationProtection")]
+        public Input<bool>? TerminationProtection { get; set; }
 
         public ResourceArgs()
         {
@@ -79,10 +172,58 @@ namespace Pulumi.Xyz
     public sealed class ResourceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Sample attribute.
+        /// Creation time of the Resource.
         /// </summary>
-        [Input("sampleAttribute")]
-        public Input<string>? SampleAttribute { get; set; }
+        [Input("createdAt")]
+        public Input<int>? CreatedAt { get; set; }
+
+        /// <summary>
+        /// Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
+        /// </summary>
+        [Input("environment")]
+        public Input<string>? Environment { get; set; }
+
+        /// <summary>
+        /// Hostname of the Resource.
+        /// </summary>
+        [Input("hostname")]
+        public Input<string>? Hostname { get; set; }
+
+        /// <summary>
+        /// Friendly name for the Resource.
+        /// </summary>
+        [Input("name")]
+        public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The port your Resource is listening on.
+        /// </summary>
+        [Input("port")]
+        public Input<int>? Port { get; set; }
+
+        /// <summary>
+        /// The ID of the Space to create the Resource in.
+        /// </summary>
+        [Input("spaceId")]
+        public Input<string>? SpaceId { get; set; }
+
+        /// <summary>
+        /// Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+        /// </summary>
+        [Input("technology")]
+        public Input<string>? Technology { get; set; }
+
+        /// <summary>
+        /// For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
+        /// </summary>
+        [Input("technologyProvider")]
+        public Input<string>? TechnologyProvider { get; set; }
+
+        /// <summary>
+        /// If set to true, the Resource cannot be deleted.
+        /// </summary>
+        [Input("terminationProtection")]
+        public Input<bool>? TerminationProtection { get; set; }
 
         public ResourceState()
         {

@@ -1,0 +1,3 @@
+[submodule "terraform-provider-formal"]
+	path = upstream
+	url = https://github.com/formalco/terraform-provider-formal

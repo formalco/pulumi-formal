@@ -4,5 +4,212 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
-import * as enums from "../types/enums";
+
+export interface DataDomainOwner {
+    objectId: string;
+    objectType: string;
+}
+
+export interface IntegrationBiMetabase {
+    /**
+     * Hostname of the Metabase instance.
+     */
+    hostname: string;
+    /**
+     * Password for the Metabase instance.
+     */
+    password: string;
+    /**
+     * Username for the Metabase instance.
+     */
+    username: string;
+}
+
+export interface IntegrationCloudAws {
+    /**
+     * Allows the Cloud Integration to access S3 buckets for Log Integrations.
+     */
+    allowS3Access?: boolean;
+    /**
+     * The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+     */
+    awsCustomerRoleArn?: string;
+    /**
+     * Enables resource autodiscovery for EC2 instances.
+     */
+    enableEc2Autodiscovery?: boolean;
+    /**
+     * Enables resource autodiscovery for ECS clusters.
+     */
+    enableEcsAutodiscovery?: boolean;
+    /**
+     * Enables resource autodiscovery for EKS clusters.
+     */
+    enableEksAutodiscovery?: boolean;
+    /**
+     * Enables resource autodiscovery for RDS instances (PostgreSQL, MySQL, MongoDB).
+     */
+    enableRdsAutodiscovery?: boolean;
+    /**
+     * Enables resource autodiscovery for Redshift clusters.
+     */
+    enableRedshiftAutodiscovery?: boolean;
+    /**
+     * The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
+     */
+    s3BucketArn?: string;
+    /**
+     * The template version of the CloudFormation stack. Use `latest` to stay in sync.
+     */
+    templateVersion: string;
+}
+
+export interface IntegrationDataCatalogDatahub {
+    /**
+     * Api Key for the Datahub instance.
+     */
+    apiKey: string;
+    /**
+     * Generalized metadata service url for the Datahub instance.
+     */
+    generalizedMetadataServiceUrl: string;
+    /**
+     * Webhook secret of the Datahub instance.
+     */
+    webhookSecret: string;
+}
+
+export interface IntegrationLogAwsS3 {
+    /**
+     * Cloud Integration ID.
+     */
+    cloudIntegrationId: string;
+    /**
+     * AWS Region.
+     */
+    region: string;
+    /**
+     * AWS S3 Bucket Name.
+     */
+    s3BucketName: string;
+}
+
+export interface IntegrationLogDatadog {
+    /**
+     * Account ID of Datadog.
+     */
+    accountId: string;
+    /**
+     * API Key of Datadog.
+     */
+    apiKey: string;
+    /**
+     * URL of your Datadog app.
+     */
+    site: string;
+}
+
+export interface IntegrationLogSplunk {
+    /**
+     * Access Token of Splunk.
+     */
+    accessToken: string;
+    /**
+     * URL of your Splunk app.
+     */
+    host: string;
+    /**
+     * Port of your Splunk app.
+     */
+    port: number;
+}
+
+export interface IntegrationMdmKandji {
+    /**
+     * API Key of your Kandji organization.
+     */
+    apiKey: string;
+    /**
+     * API URL of your Kandji organization.
+     */
+    apiUrl: string;
+}
+
+export interface IntegrationMfaDuo {
+    /**
+     * Duo API Hostname.
+     */
+    apiHostname: string;
+    /**
+     * Duo Integration Key.
+     */
+    integrationKey: string;
+    /**
+     * Duo Secret Key.
+     */
+    secretKey: string;
+}
+
+export interface LogConfigurationRequest {
+    /**
+     * Whether to encrypt request payloads.
+     */
+    encrypt: boolean;
+    /**
+     * Maximum size of request payloads to log.
+     */
+    maxPayloadSize: number;
+    /**
+     * SQL logging configuration for requests.
+     */
+    sql?: outputs.LogConfigurationRequestSql;
+}
+
+export interface LogConfigurationRequestSql {
+    /**
+     * Whether to encrypt SQL queries in logs.
+     */
+    encrypt: boolean;
+    /**
+     * Whether to obfuscate SQL queries in logs.
+     */
+    stripValues: boolean;
+}
+
+export interface LogConfigurationResponse {
+    /**
+     * Whether to encrypt response payloads.
+     */
+    encrypt: boolean;
+    /**
+     * Maximum size of response payloads to log.
+     */
+    maxPayloadSize: number;
+}
+
+export interface LogConfigurationScope {
+    /**
+     * The ID of the connector (required when type is connector).
+     */
+    connectorId?: string;
+    /**
+     * The ID of the resource (required when type is resource).
+     */
+    resourceId?: string;
+    /**
+     * The ID of the space (required when type is space).
+     */
+    spaceId?: string;
+    /**
+     * The type of scope (resource, connector, space, org).
+     */
+    type: string;
+}
+
+export interface LogConfigurationStream {
+    /**
+     * Whether to encrypt stream data.
+     */
+    encrypt: boolean;
+}
 
