@@ -9,7 +9,7 @@
         "category/network"
     ],
     "homepage": "https://joinformal.com",
-    "license": "Apache-2.0",
+    "license": "MPL-2.0",
     "attribution": "This Pulumi package is based on the [`formal` Terraform Provider](https://github.com/formalco/terraform-provider-formal).",
     "repository": "https://github.com/formalco/pulumi-formal",
     "logoUrl": "https://avatars3.githubusercontent.com/formalco",
