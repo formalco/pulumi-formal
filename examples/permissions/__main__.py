@@ -1,4 +1,3 @@
-import pulumi
 import pulumi_formal as formal
 
 read_only = formal.Permission('read_only',
@@ -19,4 +18,3 @@ allow if {
 ''',
     status='draft'
 )
-config = pulumi.Config()
