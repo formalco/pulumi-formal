@@ -1,5 +1,2 @@
 name: permissions
 runtime: python
-config:
-  formal:apiKey:
-    value: 'APIKEY'

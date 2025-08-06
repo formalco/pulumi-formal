@@ -17,7 +17,6 @@ allow if {
     "Security Team" in input.user.groups
 }
 ''',
-    status='active'
+    status='draft'
 )
 config = pulumi.Config()
-formal_api_key = config.require("formalApiKey")
