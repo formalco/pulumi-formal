@@ -53,3 +53,8 @@ publishRegistry: false
 
 toolVersions:
   pulumictl: "v0.0.48"
+
+license:
+  ignore:
+    - github.com/formalco/go-sdk
+    - buf.build/gen/go/formal

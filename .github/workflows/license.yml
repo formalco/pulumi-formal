@@ -44,6 +44,8 @@ jobs:
         with:
           module-path: provider
           ignore-modules: >-
+            github.com/formalco/go-sdk,
+            buf.build/gen/go/formal,
             github.com/aead/chacha20,
             github.com/apache/arrow/go/v12,
             github.com/apache/thrift/lib/go/thrift,
@@ -60,6 +62,4 @@ jobs:
             github.com/pjbgf/sha1cd,
             github.com/pulumi,
             github.com/segmentio/asm,
-            golang.org,
-            github.com/formalco/go-sdk,
-            buf.build/gen/go/formal
+            golang.org

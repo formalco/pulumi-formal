@@ -41,6 +41,8 @@ jobs:
   prerequisites:
     name: prerequisites
     runs-on: ubuntu-latest
+    # NOTE: DO NOT DELETE THIS WHEN RUNNING `make ci-mgmt`!!!
+    # See https://github.com/pulumi/ci-mgmt/pull/1642
     permissions:
       contents: read
       pull-requests: write
