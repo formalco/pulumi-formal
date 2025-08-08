@@ -126,13 +126,13 @@ jobs:
       if: inputs.skipJavaSdk == false
       uses: pulumi/pulumi-package-publisher@c1672c7928591d563dccb12729e05e315c21f8c2 # v0.0.22
       with:
-        sdk: all,!java
+        sdk: python,nodejs
         version: ${{ inputs.version }}
     - name: Publish SDKs (except Java)
       if: inputs.skipJavaSdk == true
       uses: pulumi/pulumi-package-publisher@c1672c7928591d563dccb12729e05e315c21f8c2 # v0.0.22
       with:
-        sdk: all,!java,!java
+        sdk: python,nodejs
         version: ${{ inputs.version }}
     - name: Download Go SDK
       uses: ./.github/actions/download-sdk
@@ -164,7 +164,7 @@ jobs:
     name: Clean up release labels
     # Only run for non-prerelease, if the publish_go_sdk job was successful or skipped
     if: inputs.isPrerelease == false
-    
+
     needs: publish_sdk
     runs-on: ubuntu-latest
     steps:
