@@ -25,6 +25,23 @@ mask_emails = formal.Policy('mask_emails',
     owner=owner,
     notification='consumer',
     status='active',
+    module='''
+package formal.v2
+
+import future.keywords.if
+
+post_request := { "action": "mask", "type": "redact.partial", "sub_type": "email_mask_username", "columns": columns, "typesafe": "fallback_to_default" } if {
+    columns := [col | col := input.columns[_]; col["data_label"] == "email_address";]
+}
+'''
+)
+
+row_level_hashing = formal.Policy('row_level_hashing',
+    name='test-row-level-hashing-eu',
+    description='hash every row that has the eu column set to true.',
+    owner=owner,
+    notification='all',
+    status='active',
     module='''package formal.v2
 
 import future.keywords.if
