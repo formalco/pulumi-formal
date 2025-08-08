@@ -1,4 +1,4 @@
-name: permissions-ts
+name: permissions
 runtime:
   name: nodejs
   options:
