@@ -30,7 +30,7 @@ const maskEmails = new formal.Policy('mask_emails', {
 import future.keywords.if
 
 post_request := { "action": "mask", "type": "redact.partial", "sub_type": "email_mask_username", "columns": columns, "typesafe": "fallback_to_default" } if {
-    columns := [col | col := input.columns[_]; col["data_label"] == "email_address";]
+    columns := [col | col := input.columns[_]; col["data_label"] == "email_address"]
 }
 `
 });
