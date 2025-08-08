@@ -17,13 +17,13 @@ This package is available for several languages/platforms:
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
 ```bash
-npm install @pulumi/formal
+npm install @formalco/pulumi
 ```
 
 or `yarn`:
 
 ```bash
-yarn add @pulumi/formal
+yarn add @formalco/pulumi
 ```
 
 ### Python
@@ -39,20 +39,18 @@ pip install pulumi_formal
 To use from Go, use `go get` to grab the latest version of the library:
 
 ```bash
-go get github.com/formalco/pulumi-formal/sdk/go/...
+go get github.com/formalco/pulumi-formal/sdk/go/v1
 ```
 
 ### .NET
 
-To use from .NET, install using `dotnet add package`:
-
-```bash
-dotnet add package Pulumi.Formal
-```
+We currently do not publish .NET versions of the Formal Pulumi SDK.
+Please feel free to reach out to the Formal development team for any feature requests!
 
 ## Configuration
 
-No configuration points are currently available for the `formal` provider.
+The following configuration points are available:
+- `formal:apiKey` - (Required) The API key used to access the Formal control plane. For more information, see the [API keys documentation page.](https://docs.joinformal.com/tools/api-keys)
 
 ## Reference
 

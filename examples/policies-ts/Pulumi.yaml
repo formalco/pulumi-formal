@@ -1,4 +1,5 @@
-name: permissions
+name: policies
+description: A minimal TypeScript Pulumi program
 runtime:
   name: nodejs
   options:
