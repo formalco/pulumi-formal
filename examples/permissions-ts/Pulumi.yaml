@@ -1,0 +1,9 @@
+name: permissions-ts
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: typescript

@@ -1,0 +1,12 @@
+{
+    "name": "permissions-ts",
+    "main": "index.ts",
+    "devDependencies": {
+        "@types/node": "^18",
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "@formalco/pulumi": "file:../../sdk/nodejs",
+        "@pulumi/pulumi": "^3.113.0"
+    }
+}
