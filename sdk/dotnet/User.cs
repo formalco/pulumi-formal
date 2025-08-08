@@ -98,6 +98,7 @@ namespace Pulumi.Formal
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/formalco",
                 AdditionalSecretOutputs =
                 {
                     "machineUserAccessToken",

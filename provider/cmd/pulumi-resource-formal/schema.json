@@ -13,6 +13,7 @@
     "attribution": "This Pulumi package is based on the [`formal` Terraform Provider](https://github.com/formalco/terraform-provider-formal).",
     "repository": "https://github.com/formalco/pulumi-formal",
     "logoUrl": "https://avatars3.githubusercontent.com/formalco",
+    "pluginDownloadURL": "github://api.github.com/formalco",
     "publisher": "Formal",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
