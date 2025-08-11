@@ -61,4 +61,4 @@ export FORMAL_API_KEY="some_api_key" pulumi up
 
 ## Examples
 
-See various examples on how to deploy Formal resources in the `examples/` folder.
+See various examples on how to deploy Formal resources in the [`examples/`](https://github.com/formalco/pulumi-formal/tree/main/examples) folder.
