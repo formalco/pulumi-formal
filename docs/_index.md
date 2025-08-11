@@ -6,7 +6,7 @@ layout: package
 
 ## Installation
 
-The Formal provider is available as a package in all Pulumi languages:
+The Formal provider is available as a package in the following Pulumi languages:
 
 * JavaScript/TypeScript: [`@formalco/pulumi`](https://www.npmjs.com/package/@formalco/pulumi)
 * Python: [`pulumi-formal`](https://pypi.org/project/pulumi-formal/)
