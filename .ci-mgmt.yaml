@@ -43,7 +43,7 @@ publish:
   cdn: false
 
 # Enables automatic generation of basic docs pages for the registry.
-# registryDocs: true
+registryDocs: true
 
 # Disables a pulumi-internal-only step for running create_docs_build during the release
 publishRegistry: false
