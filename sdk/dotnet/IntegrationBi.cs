@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a BI App.
     /// </summary>
-    [FormalResourceType("formal:index/integrationBi:IntegrationBi")]
+    [PulumiResourceType("formal:index/integrationBi:IntegrationBi")]
     public partial class IntegrationBi : global::Pulumi.CustomResource
     {
         /// <summary>

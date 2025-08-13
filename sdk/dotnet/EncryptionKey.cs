@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering an Encryption Key with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/encryptionKey:EncryptionKey")]
+    [PulumiResourceType("formal:index/encryptionKey:EncryptionKey")]
     public partial class EncryptionKey : global::Pulumi.CustomResource
     {
         /// <summary>

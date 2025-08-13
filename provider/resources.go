@@ -176,6 +176,11 @@ func Provider() tfbridge.ProviderInfo {
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},
+			// This makes the package name Formal.Pulumi which follows the same format as the NPM package
+			RootNamespace: "Formal",
+			Namespaces: map[string]string{
+				"formal": "Pulumi",
+			},
 		},
 	}
 

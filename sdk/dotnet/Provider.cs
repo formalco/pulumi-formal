@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// The provider type for the formal package. By default, resources use package-wide configuration
@@ -15,7 +16,7 @@ namespace Pulumi.Formal
     /// construction to achieve fine-grained programmatic control over provider settings. See the
     /// [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
     /// </summary>
-    [FormalResourceType("pulumi:providers:formal")]
+    [PulumiResourceType("pulumi:providers:formal")]
     public partial class Provider : global::Pulumi.ProviderResource
     {
         [Output("apiKey")]

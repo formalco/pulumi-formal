@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// A Resource Classifier Configuration is a configuration for a resource classifier.
     /// </summary>
-    [FormalResourceType("formal:index/resourceClassifierConfiguration:ResourceClassifierConfiguration")]
+    [PulumiResourceType("formal:index/resourceClassifierConfiguration:ResourceClassifierConfiguration")]
     public partial class ResourceClassifierConfiguration : global::Pulumi.CustomResource
     {
         /// <summary>

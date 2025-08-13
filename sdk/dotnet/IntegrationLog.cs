@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Integration Logs app.
     /// </summary>
-    [FormalResourceType("formal:index/integrationLog:IntegrationLog")]
+    [PulumiResourceType("formal:index/integrationLog:IntegrationLog")]
     public partial class IntegrationLog : global::Pulumi.CustomResource
     {
         /// <summary>

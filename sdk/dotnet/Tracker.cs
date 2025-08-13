@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Creating a Tracker in Formal.
     /// </summary>
-    [FormalResourceType("formal:index/tracker:Tracker")]
+    [PulumiResourceType("formal:index/tracker:Tracker")]
     public partial class Tracker : global::Pulumi.CustomResource
     {
         /// <summary>

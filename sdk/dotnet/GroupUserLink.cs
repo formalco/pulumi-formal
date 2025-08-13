@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Linking a User to a Group in Formal.
     /// </summary>
-    [FormalResourceType("formal:index/groupUserLink:GroupUserLink")]
+    [PulumiResourceType("formal:index/groupUserLink:GroupUserLink")]
     public partial class GroupUserLink : global::Pulumi.CustomResource
     {
         /// <summary>

@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Space with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/space:Space")]
+    [PulumiResourceType("formal:index/space:Space")]
     public partial class Space : global::Pulumi.CustomResource
     {
         /// <summary>

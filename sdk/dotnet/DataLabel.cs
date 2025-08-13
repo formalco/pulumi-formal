@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Data Label with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/dataLabel:DataLabel")]
+    [PulumiResourceType("formal:index/dataLabel:DataLabel")]
     public partial class DataLabel : global::Pulumi.CustomResource
     {
         /// <summary>

@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Data Discovery with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/dataDiscovery:DataDiscovery")]
+    [PulumiResourceType("formal:index/dataDiscovery:DataDiscovery")]
     public partial class DataDiscovery : global::Pulumi.CustomResource
     {
         /// <summary>

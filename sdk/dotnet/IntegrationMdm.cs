@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Integration MDM app.
     /// </summary>
-    [FormalResourceType("formal:index/integrationMdm:IntegrationMdm")]
+    [PulumiResourceType("formal:index/integrationMdm:IntegrationMdm")]
     public partial class IntegrationMdm : global::Pulumi.CustomResource
     {
         /// <summary>

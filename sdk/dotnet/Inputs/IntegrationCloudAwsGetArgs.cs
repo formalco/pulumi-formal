@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal.Inputs
+namespace Formal.Pulumi.Inputs
 {
 
     public sealed class IntegrationCloudAwsGetArgs : global::Pulumi.ResourceArgs

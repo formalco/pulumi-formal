@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Connector Listener Rule with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/connectorListenerRule:ConnectorListenerRule")]
+    [PulumiResourceType("formal:index/connectorListenerRule:ConnectorListenerRule")]
     public partial class ConnectorListenerRule : global::Pulumi.CustomResource
     {
         /// <summary>

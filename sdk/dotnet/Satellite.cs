@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Satellite
     /// </summary>
-    [FormalResourceType("formal:index/satellite:Satellite")]
+    [PulumiResourceType("formal:index/satellite:Satellite")]
     public partial class Satellite : global::Pulumi.CustomResource
     {
         /// <summary>

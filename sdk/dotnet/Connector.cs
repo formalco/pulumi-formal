@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Connector with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/connector:Connector")]
+    [PulumiResourceType("formal:index/connector:Connector")]
     public partial class Connector : global::Pulumi.CustomResource
     {
         /// <summary>

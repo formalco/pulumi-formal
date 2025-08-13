@@ -11,6 +11,7 @@ The Formal provider is available as a package in the following Pulumi languages:
 * JavaScript/TypeScript: [`@formalco/pulumi`](https://www.npmjs.com/package/@formalco/pulumi)
 * Python: [`pulumi-formal`](https://pypi.org/project/pulumi-formal/)
 * Go: [`github.com/formalco/pulumi-formal/sdk/go/formal`](https://pkg.go.dev/github.com/formalco/pulumi-formal/sdk/go/formal)
+* .NET: [`Formal.Pulumi`](https://www.nuget.org/packages/Formal.Pulumi)
 
 ## Overview
 

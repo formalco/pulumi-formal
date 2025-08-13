@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// User in Formal.
     /// </summary>
-    [FormalResourceType("formal:index/user:User")]
+    [PulumiResourceType("formal:index/user:User")]
     public partial class User : global::Pulumi.CustomResource
     {
         /// <summary>

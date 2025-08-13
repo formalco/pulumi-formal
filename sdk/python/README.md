@@ -44,8 +44,10 @@ go get github.com/formalco/pulumi-formal/sdk/go/v1
 
 ### .NET
 
-We currently do not publish .NET versions of the Formal Pulumi SDK.
-Please feel free to reach out to the Formal development team for any feature requests!
+To use from .NET, install using `dotnet add package`:
+```bash
+dotnet add package Formal.Pulumi
+```
 
 ## Configuration
 

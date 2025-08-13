@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Creating a Permission in Formal.
     /// </summary>
-    [FormalResourceType("formal:index/permission:Permission")]
+    [PulumiResourceType("formal:index/permission:Permission")]
     public partial class Permission : global::Pulumi.CustomResource
     {
         /// <summary>

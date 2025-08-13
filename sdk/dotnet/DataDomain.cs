@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Data Domain with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/dataDomain:DataDomain")]
+    [PulumiResourceType("formal:index/dataDomain:DataDomain")]
     public partial class DataDomain : global::Pulumi.CustomResource
     {
         /// <summary>

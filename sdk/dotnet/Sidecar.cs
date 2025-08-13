@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Sidecar with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/sidecar:Sidecar")]
+    [PulumiResourceType("formal:index/sidecar:Sidecar")]
     public partial class Sidecar : global::Pulumi.CustomResource
     {
         /// <summary>
