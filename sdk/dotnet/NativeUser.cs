@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// This resource creates a Native User.
     /// </summary>
-    [FormalResourceType("formal:index/nativeUser:NativeUser")]
+    [PulumiResourceType("formal:index/nativeUser:NativeUser")]
     public partial class NativeUser : global::Pulumi.CustomResource
     {
         /// <summary>

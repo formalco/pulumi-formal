@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Cloud integration.
     /// </summary>
-    [FormalResourceType("formal:index/integrationCloud:IntegrationCloud")]
+    [PulumiResourceType("formal:index/integrationCloud:IntegrationCloud")]
     public partial class IntegrationCloud : global::Pulumi.CustomResource
     {
         /// <summary>

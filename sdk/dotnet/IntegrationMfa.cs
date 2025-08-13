@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Integration MFA app.
     /// </summary>
-    [FormalResourceType("formal:index/integrationMfa:IntegrationMfa")]
+    [PulumiResourceType("formal:index/integrationMfa:IntegrationMfa")]
     public partial class IntegrationMfa : global::Pulumi.CustomResource
     {
         /// <summary>

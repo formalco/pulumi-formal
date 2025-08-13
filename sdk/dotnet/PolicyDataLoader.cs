@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a policy data loader with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/policyDataLoader:PolicyDataLoader")]
+    [PulumiResourceType("formal:index/policyDataLoader:PolicyDataLoader")]
     public partial class PolicyDataLoader : global::Pulumi.CustomResource
     {
         /// <summary>

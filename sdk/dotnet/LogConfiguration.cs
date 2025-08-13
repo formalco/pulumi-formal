@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Managing Log Configuration with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/logConfiguration:LogConfiguration")]
+    [PulumiResourceType("formal:index/logConfiguration:LogConfiguration")]
     public partial class LogConfiguration : global::Pulumi.CustomResource
     {
         /// <summary>

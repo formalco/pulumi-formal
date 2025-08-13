@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Creating a Policy in Formal.
     /// </summary>
-    [FormalResourceType("formal:index/policy:Policy")]
+    [PulumiResourceType("formal:index/policy:Policy")]
     public partial class Policy : global::Pulumi.CustomResource
     {
         /// <summary>

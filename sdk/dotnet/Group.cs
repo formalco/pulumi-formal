@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Creating a Group in Formal.
     /// </summary>
-    [FormalResourceType("formal:index/group:Group")]
+    [PulumiResourceType("formal:index/group:Group")]
     public partial class Group : global::Pulumi.CustomResource
     {
         /// <summary>

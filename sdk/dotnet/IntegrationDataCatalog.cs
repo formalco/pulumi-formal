@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Data Catalog integration.
     /// </summary>
-    [FormalResourceType("formal:index/integrationDataCatalog:IntegrationDataCatalog")]
+    [PulumiResourceType("formal:index/integrationDataCatalog:IntegrationDataCatalog")]
     public partial class IntegrationDataCatalog : global::Pulumi.CustomResource
     {
         /// <summary>

@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     public static class Config
     {

@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Connector Hostname with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/connectorHostname:ConnectorHostname")]
+    [PulumiResourceType("formal:index/connectorHostname:ConnectorHostname")]
     public partial class ConnectorHostname : global::Pulumi.CustomResource
     {
         /// <summary>

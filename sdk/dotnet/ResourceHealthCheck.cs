@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Creating a Health Check in Formal.
     /// </summary>
-    [FormalResourceType("formal:index/resourceHealthCheck:ResourceHealthCheck")]
+    [PulumiResourceType("formal:index/resourceHealthCheck:ResourceHealthCheck")]
     public partial class ResourceHealthCheck : global::Pulumi.CustomResource
     {
         /// <summary>

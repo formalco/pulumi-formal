@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Registering a Resource Hostname with Formal.
     /// </summary>
-    [FormalResourceType("formal:index/resourceHostname:ResourceHostname")]
+    [PulumiResourceType("formal:index/resourceHostname:ResourceHostname")]
     public partial class ResourceHostname : global::Pulumi.CustomResource
     {
         /// <summary>

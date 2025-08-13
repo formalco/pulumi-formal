@@ -23,7 +23,11 @@
             "packageReferences": {
                 "Pulumi": "3.*"
             },
+            "namespaces": {
+                "formal": "Pulumi"
+            },
             "compatibility": "tfbridge20",
+            "rootNamespace": "Formal",
             "respectSchemaVersion": true
         },
         "go": {

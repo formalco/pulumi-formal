@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Formal
+namespace Formal.Pulumi
 {
     /// <summary>
     /// Creating a TLS Configuration of a Resource in Formal.
     /// </summary>
-    [FormalResourceType("formal:index/resourceTlsConfiguration:ResourceTlsConfiguration")]
+    [PulumiResourceType("formal:index/resourceTlsConfiguration:ResourceTlsConfiguration")]
     public partial class ResourceTlsConfiguration : global::Pulumi.CustomResource
     {
         /// <summary>
