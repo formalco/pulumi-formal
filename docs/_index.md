@@ -41,7 +41,7 @@ config:
         value: '<apiKey>'
 ```
 
-You can also use `pulumi config set formal:apiKey <apiKey>` to set the API key.
+You can also use `pulumi config set formal:apiKey <apiKey> --secret` to set the API key.
 
 Credentials can also be provided by using the `FORMAL_API_KEY` environment variable.
 
