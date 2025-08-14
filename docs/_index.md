@@ -30,9 +30,7 @@ Configuration for the Formal Provider is derived from the API tokens you can gen
 configuration and risks secret leakage should this file ever be committed to a
 public version control system.
 
-Credentials can be provided by adding an `apiKey`.
-
-Usage:
+Credentials can be provided by adding an `apiKey`:
 
 ```yaml
 # Pulumi.yaml provider configuration file
@@ -43,12 +41,11 @@ config:
         value: '<apiKey>'
 ```
 
+You can also use `pulumi config set formal:apiKey <apiKey>` to set the API key.
+
 Credentials can also be provided by using the `FORMAL_API_KEY` environment variable.
 
 For example:
-
-Usage:
-
 ```yaml
 # Pulumi.yaml provider configuration file
 name: configuration-example
@@ -62,4 +59,77 @@ export FORMAL_API_KEY="some_api_key" pulumi up
 
 ## Examples
 
-See various examples on how to deploy Formal resources in the [`examples/`](https://github.com/formalco/pulumi-formal/tree/main/examples) folder.
+{{< chooser language "go,typescript,python,csharp" >}}
+{{% choosable language go %}}
+```go
+package main
+
+import (
+    formal "github.com/formalco/pulumi-formal/sdk/go/formal"
+    "github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+)
+
+func main() {
+    pulumi.Run(func(ctx *pulumi.Context) error {
+        // Create a new connector instance.
+        _, err := formal.NewConnector(ctx, "demo-connector", &formal.ConnectorArgs{
+            Name:                  pulumi.String("demo-connector"),
+            SpaceId:               nil,
+            TerminationProtection: pulumi.Bool(false),
+        })
+
+        return err
+    })
+}
+```
+{{% /choosable %}}
+
+{{% choosable language typescript %}}
+```typescript
+import * as formal from "@formalco/pulumi";
+
+new formal.Connector('demo-connector', {
+    name: 'demo-connector',
+    spaceId: undefined,
+    terminationProtection: false,
+})
+```
+{{% /choosable %}}
+
+{{% choosable language python %}}
+```python
+import pulumi_formal as formal
+
+formal.Connector('demo-connector',
+    name='demo-connector',
+    space_id=None,
+    termination_protection=False,
+)
+```
+{{% /choosable %}}
+
+{{% choosable language csharp %}}
+```csharp
+using System.Collections.Generic;
+using Pulumi;
+using Formal.Pulumi;
+
+return await Deployment.RunAsync(() =>
+{
+    var connector = new Connector("demo-connector", new ConnectorArgs {
+        Name = "demo-connector",
+        SpaceId = null,
+        TerminationProtection = false
+    });
+
+    // Export outputs here
+    return new Dictionary<string, object?>
+    {
+        ["demo-connector"] = connector.Id
+    };
+});
+```
+{{% /choosable %}}
+{{< /chooser >}}
+
+More examples on how to deploy Formal resources are available in the [`examples/`](https://github.com/formalco/pulumi-formal/tree/main/examples) folder of the Formal Pulumi repository.
