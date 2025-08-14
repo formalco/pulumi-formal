@@ -1,5 +1,5 @@
 <a href="https://joinformal.com">
-    <img src=".github/formal_logo.svg" alt="Formal logo" title="Formal" align="right" height="50" />
+    <img src="https://raw.githubusercontent.com/formalco/pulumi-formal/refs/heads/main/.github/formal_logo.svg" alt="Formal logo" title="Formal" align="right" height="50" />
 </a>
 
 # Formal Resource Provider
