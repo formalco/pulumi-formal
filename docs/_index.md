@@ -26,7 +26,7 @@ Configuration for the Formal Provider is derived from the API tokens you can gen
 
 ### Provider Configuration
 
-!> **Warning:** Hard-coded credentials are not recommended in any Pulumi
+> **Warning:** Hard-coded credentials are not recommended in any Pulumi
 configuration and risks secret leakage should this file ever be committed to a
 public version control system.
 
