@@ -44,6 +44,9 @@ jobs:
       version: ${{ needs.prerequisites.outputs.version }}
 
   lint:
+    permissions:
+      pull-requests: write
+      id-token: write # For ESC secrets.
     name: lint
     uses: ./.github/workflows/lint.yml
     secrets: inherit
