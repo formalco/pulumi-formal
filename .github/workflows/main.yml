@@ -62,6 +62,9 @@ jobs:
     uses: ./.github/workflows/lint.yml
     secrets: inherit
   license_check:
+      contents: read
+      pull-requests: write
+      id-token: write # For ESC secrets.
     name: License Check
     uses: ./.github/workflows/license.yml
     secrets: inherit

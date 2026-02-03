@@ -142,6 +142,9 @@ jobs:
       version: ${{ needs.prerequisites.outputs.version }}
 
   license_check:
+      contents: read
+      pull-requests: write
+      id-token: write # For ESC secrets.
     name: License Check
     uses: ./.github/workflows/license.yml
     secrets: inherit
