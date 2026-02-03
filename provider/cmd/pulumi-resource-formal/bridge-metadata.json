@@ -25,6 +25,10 @@
                 "current": "formal:index/connectorListenerRule:ConnectorListenerRule",
                 "majorVersion": 1
             },
+            "formal_connector_satellite_link": {
+                "current": "formal:index/connectorSatelliteLink:ConnectorSatelliteLink",
+                "majorVersion": 1
+            },
             "formal_data_discovery": {
                 "current": "formal:index/dataDiscovery:DataDiscovery",
                 "majorVersion": 1
@@ -114,15 +118,6 @@
                     }
                 }
             },
-            "formal_integration_mfa": {
-                "current": "formal:index/integrationMfa:IntegrationMfa",
-                "majorVersion": 1,
-                "fields": {
-                    "duo": {
-                        "maxItemsOne": true
-                    }
-                }
-            },
             "formal_inventory_object_data_label_link": {
                 "current": "formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink",
                 "majorVersion": 1
@@ -145,6 +140,9 @@
                         "maxItemsOne": true
                     },
                     "scope": {
+                        "maxItemsOne": true
+                    },
+                    "session": {
                         "maxItemsOne": true
                     },
                     "stream": {
@@ -196,6 +194,14 @@
                 "current": "formal:index/satellite:Satellite",
                 "majorVersion": 1
             },
+            "formal_satellite_hostname": {
+                "current": "formal:index/satelliteHostname:SatelliteHostname",
+                "majorVersion": 1
+            },
+            "formal_satellite_link": {
+                "current": "formal:index/satelliteLink:SatelliteLink",
+                "majorVersion": 1
+            },
             "formal_sidecar": {
                 "current": "formal:index/sidecar:Sidecar",
                 "majorVersion": 1
@@ -208,22 +214,30 @@
                 "current": "formal:index/space:Space",
                 "majorVersion": 1
             },
-            "formal_tracker": {
-                "current": "formal:index/tracker:Tracker",
-                "majorVersion": 1
-            },
             "formal_user": {
                 "current": "formal:index/user:User",
+                "majorVersion": 1
+            },
+            "formal_workflow": {
+                "current": "formal:index/workflow:Workflow",
                 "majorVersion": 1
             }
         },
         "datasources": {
+            "formal_connector": {
+                "current": "formal:index/getConnector:getConnector",
+                "majorVersion": 1
+            },
             "formal_group": {
                 "current": "formal:index/getGroup:getGroup",
                 "majorVersion": 1
             },
             "formal_resource": {
                 "current": "formal:index/getResource:getResource",
+                "majorVersion": 1
+            },
+            "formal_space": {
+                "current": "formal:index/getSpace:getSpace",
                 "majorVersion": 1
             }
         }

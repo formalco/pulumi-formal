@@ -83,26 +83,21 @@
             "properties": {
                 "hostname": {
                     "type": "string",
-                    "description": "Hostname of the Metabase instance.\n",
+                    "description": "Metabase server hostname. Required when `sync=true`.\n",
                     "willReplaceOnChanges": true
                 },
                 "password": {
                     "type": "string",
-                    "description": "Password for the Metabase instance.\n",
+                    "description": "Metabase admin password. Required when `sync=true`.\n",
                     "willReplaceOnChanges": true
                 },
                 "username": {
                     "type": "string",
-                    "description": "Username for the Metabase instance.\n",
+                    "description": "Metabase admin username. Required when `sync=true`.\n",
                     "willReplaceOnChanges": true
                 }
             },
-            "type": "object",
-            "required": [
-                "hostname",
-                "password",
-                "username"
-            ]
+            "type": "object"
         },
         "formal:index/IntegrationCloudAws:IntegrationCloudAws": {
             "properties": {
@@ -133,6 +128,10 @@
                 "enableRedshiftAutodiscovery": {
                     "type": "boolean",
                     "description": "Enables resource autodiscovery for Redshift clusters.\n"
+                },
+                "enableS3Autodiscovery": {
+                    "type": "boolean",
+                    "description": "Enables resource autodiscovery for S3 buckets.\n"
                 },
                 "s3BucketArn": {
                     "type": "string",
@@ -264,30 +263,6 @@
                 "apiUrl"
             ]
         },
-        "formal:index/IntegrationMfaDuo:IntegrationMfaDuo": {
-            "properties": {
-                "apiHostname": {
-                    "type": "string",
-                    "description": "Duo API Hostname.\n",
-                    "secret": true
-                },
-                "integrationKey": {
-                    "type": "string",
-                    "description": "Duo Integration Key.\n"
-                },
-                "secretKey": {
-                    "type": "string",
-                    "description": "Duo Secret Key.\n",
-                    "secret": true
-                }
-            },
-            "type": "object",
-            "required": [
-                "apiHostname",
-                "integrationKey",
-                "secretKey"
-            ]
-        },
         "formal:index/LogConfigurationRequest:LogConfigurationRequest": {
             "properties": {
                 "encrypt": {
@@ -298,6 +273,10 @@
                     "type": "integer",
                     "description": "Maximum size of request payloads to log.\n"
                 },
+                "policyEvalInputRetention": {
+                    "type": "string",
+                    "description": "Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.\n"
+                },
                 "sql": {
                     "$ref": "#/types/formal:index/LogConfigurationRequestSql:LogConfigurationRequestSql",
                     "description": "SQL logging configuration for requests.\n"
@@ -305,8 +284,7 @@
             },
             "type": "object",
             "required": [
-                "encrypt",
-                "maxPayloadSize"
+                "encrypt"
             ]
         },
         "formal:index/LogConfigurationRequestSql:LogConfigurationRequestSql": {
@@ -335,12 +313,15 @@
                 "maxPayloadSize": {
                     "type": "integer",
                     "description": "Maximum size of response payloads to log.\n"
+                },
+                "policyEvalInputRetention": {
+                    "type": "string",
+                    "description": "Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.\n"
                 }
             },
             "type": "object",
             "required": [
-                "encrypt",
-                "maxPayloadSize"
+                "encrypt"
             ]
         },
         "formal:index/LogConfigurationScope:LogConfigurationScope": {
@@ -366,6 +347,15 @@
             "required": [
                 "type"
             ]
+        },
+        "formal:index/LogConfigurationSession:LogConfigurationSession": {
+            "properties": {
+                "policyEvalInputRetention": {
+                    "type": "string",
+                    "description": "Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.\n"
+                }
+            },
+            "type": "object"
         },
         "formal:index/LogConfigurationStream:LogConfigurationStream": {
             "properties": {
@@ -473,13 +463,21 @@
                     "type": "string",
                     "description": "The ID of the Connector this configuration is linked to.\n"
                 },
-                "healthCheckPort": {
-                    "type": "integer",
-                    "description": "The port to be used for this Connector's health check.\n"
-                },
                 "logLevel": {
                     "type": "string",
                     "description": "The log level to be configured for this Connector.\n"
+                },
+                "otelEndpointHostname": {
+                    "type": "string",
+                    "description": "The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.\n"
+                },
+                "otelEndpointPort": {
+                    "type": "integer",
+                    "description": "The OpenTelemetry endpoint port for this Connector. Defaults to 4317.\n"
+                },
+                "resourcesHealthChecksFrequencySeconds": {
+                    "type": "integer",
+                    "description": "The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.\n"
                 }
             },
             "required": [
@@ -491,13 +489,21 @@
                     "description": "The ID of the Connector this configuration is linked to.\n",
                     "willReplaceOnChanges": true
                 },
-                "healthCheckPort": {
-                    "type": "integer",
-                    "description": "The port to be used for this Connector's health check.\n"
-                },
                 "logLevel": {
                     "type": "string",
                     "description": "The log level to be configured for this Connector.\n"
+                },
+                "otelEndpointHostname": {
+                    "type": "string",
+                    "description": "The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.\n"
+                },
+                "otelEndpointPort": {
+                    "type": "integer",
+                    "description": "The OpenTelemetry endpoint port for this Connector. Defaults to 4317.\n"
+                },
+                "resourcesHealthChecksFrequencySeconds": {
+                    "type": "integer",
+                    "description": "The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.\n"
                 }
             },
             "requiredInputs": [
@@ -511,13 +517,21 @@
                         "description": "The ID of the Connector this configuration is linked to.\n",
                         "willReplaceOnChanges": true
                     },
-                    "healthCheckPort": {
-                        "type": "integer",
-                        "description": "The port to be used for this Connector's health check.\n"
-                    },
                     "logLevel": {
                         "type": "string",
                         "description": "The log level to be configured for this Connector.\n"
+                    },
+                    "otelEndpointHostname": {
+                        "type": "string",
+                        "description": "The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.\n"
+                    },
+                    "otelEndpointPort": {
+                        "type": "integer",
+                        "description": "The OpenTelemetry endpoint port for this Connector. Defaults to 4317.\n"
+                    },
+                    "resourcesHealthChecksFrequencySeconds": {
+                        "type": "integer",
+                        "description": "The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.\n"
                     }
                 },
                 "type": "object"
@@ -526,6 +540,11 @@
         "formal:index/connectorHostname:ConnectorHostname": {
             "description": "Registering a Connector Hostname with Formal.\n",
             "properties": {
+                "certificate": {
+                    "type": "string",
+                    "description": "The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.\n",
+                    "secret": true
+                },
                 "connectorId": {
                     "type": "string",
                     "description": "The ID of the Connector this hostname is linked to.\n"
@@ -547,6 +566,11 @@
                     "description": "Deprecated: If set to true, Formal will manage the TLS certificate for this hostname.\n",
                     "deprecationMessage": "This field is deprecated and has no effect. It will be removed in a future release."
                 },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.\n",
+                    "secret": true
+                },
                 "terminationProtection": {
                     "type": "boolean",
                     "description": "If set to true, this connector hostname cannot be deleted.\n"
@@ -563,6 +587,11 @@
                 "tlsCertificateStatus"
             ],
             "inputProperties": {
+                "certificate": {
+                    "type": "string",
+                    "description": "The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.\n",
+                    "secret": true
+                },
                 "connectorId": {
                     "type": "string",
                     "description": "The ID of the Connector this hostname is linked to.\n",
@@ -582,6 +611,11 @@
                     "description": "Deprecated: If set to true, Formal will manage the TLS certificate for this hostname.\n",
                     "deprecationMessage": "This field is deprecated and has no effect. It will be removed in a future release."
                 },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.\n",
+                    "secret": true
+                },
                 "terminationProtection": {
                     "type": "boolean",
                     "description": "If set to true, this connector hostname cannot be deleted.\n"
@@ -594,6 +628,11 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering ConnectorHostname resources.\n",
                 "properties": {
+                    "certificate": {
+                        "type": "string",
+                        "description": "The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.\n",
+                        "secret": true
+                    },
                     "connectorId": {
                         "type": "string",
                         "description": "The ID of the Connector this hostname is linked to.\n",
@@ -617,6 +656,11 @@
                         "description": "Deprecated: If set to true, Formal will manage the TLS certificate for this hostname.\n",
                         "deprecationMessage": "This field is deprecated and has no effect. It will be removed in a future release."
                     },
+                    "privateKey": {
+                        "type": "string",
+                        "description": "The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.\n",
+                        "secret": true
+                    },
                     "terminationProtection": {
                         "type": "boolean",
                         "description": "If set to true, this connector hostname cannot be deleted.\n"
@@ -632,6 +676,10 @@
         "formal:index/connectorListener:ConnectorListener": {
             "description": "Registering a Connector Listener with Formal.\n",
             "properties": {
+                "connectorId": {
+                    "type": "string",
+                    "description": "The ID of the connector this listener is associated with.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the connector listener.\n"
@@ -650,6 +698,11 @@
                 "port"
             ],
             "inputProperties": {
+                "connectorId": {
+                    "type": "string",
+                    "description": "The ID of the connector this listener is associated with.\n",
+                    "willReplaceOnChanges": true
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the connector listener.\n",
@@ -670,6 +723,11 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering ConnectorListener resources.\n",
                 "properties": {
+                    "connectorId": {
+                        "type": "string",
+                        "description": "The ID of the connector this listener is associated with.\n",
+                        "willReplaceOnChanges": true
+                    },
                     "name": {
                         "type": "string",
                         "description": "The name of the connector listener.\n",
@@ -820,6 +878,89 @@
                         "type": "string",
                         "description": "The type of the rule. It can be either `any`, `resource` or `technology`\n",
                         "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "formal:index/connectorSatelliteLink:ConnectorSatelliteLink": {
+            "description": "Link a Connector to a Satellite.\n",
+            "properties": {
+                "connectorId": {
+                    "type": "string",
+                    "description": "The ID of the Connector to link to the satellite.\n"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "The timestamp when the connector satellite link was created.\n"
+                },
+                "satelliteId": {
+                    "type": "string",
+                    "description": "The ID of the Satellite to link to the connector.\n"
+                },
+                "satelliteType": {
+                    "type": "string",
+                    "description": "The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.\n"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "The timestamp when the connector satellite link was last updated.\n"
+                }
+            },
+            "required": [
+                "connectorId",
+                "createdAt",
+                "satelliteId",
+                "satelliteType",
+                "updatedAt"
+            ],
+            "inputProperties": {
+                "connectorId": {
+                    "type": "string",
+                    "description": "The ID of the Connector to link to the satellite.\n",
+                    "willReplaceOnChanges": true
+                },
+                "satelliteId": {
+                    "type": "string",
+                    "description": "The ID of the Satellite to link to the connector.\n",
+                    "willReplaceOnChanges": true
+                },
+                "satelliteType": {
+                    "type": "string",
+                    "description": "The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "connectorId",
+                "satelliteId",
+                "satelliteType"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ConnectorSatelliteLink resources.\n",
+                "properties": {
+                    "connectorId": {
+                        "type": "string",
+                        "description": "The ID of the Connector to link to the satellite.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "The timestamp when the connector satellite link was created.\n"
+                    },
+                    "satelliteId": {
+                        "type": "string",
+                        "description": "The ID of the Satellite to link to the connector.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "satelliteType": {
+                        "type": "string",
+                        "description": "The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "The timestamp when the connector satellite link was last updated.\n"
                     }
                 },
                 "type": "object"
@@ -1141,7 +1282,6 @@
             "required": [
                 "algorithm",
                 "createdAt",
-                "decryptorUri",
                 "keyId",
                 "keyProvider",
                 "updatedAt"
@@ -1166,7 +1306,6 @@
             },
             "requiredInputs": [
                 "algorithm",
-                "decryptorUri",
                 "keyId",
                 "keyProvider"
             ],
@@ -1327,11 +1466,11 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "Friendly name for the App.\n"
+                    "description": "Friendly name for this app.\n"
                 },
                 "sync": {
                     "type": "boolean",
-                    "description": "Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.\n"
+                    "description": "Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.\n"
                 }
             },
             "required": [
@@ -1346,12 +1485,12 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "Friendly name for the App.\n",
+                    "description": "Friendly name for this app.\n",
                     "willReplaceOnChanges": true
                 },
                 "sync": {
                     "type": "boolean",
-                    "description": "Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.\n",
+                    "description": "Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.\n",
                     "willReplaceOnChanges": true
                 }
             },
@@ -1368,12 +1507,12 @@
                     },
                     "name": {
                         "type": "string",
-                        "description": "Friendly name for the App.\n",
+                        "description": "Friendly name for this app.\n",
                         "willReplaceOnChanges": true
                     },
                     "sync": {
                         "type": "boolean",
-                        "description": "Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.\n",
+                        "description": "Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.\n",
                         "willReplaceOnChanges": true
                     }
                 },
@@ -1410,6 +1549,10 @@
                 "awsEnableRedshiftAutodiscovery": {
                     "type": "boolean",
                     "description": "Whether AWS Redshift autodiscovery is enabled or not.\n"
+                },
+                "awsEnableS3Autodiscovery": {
+                    "type": "boolean",
+                    "description": "Whether AWS S3 autodiscovery is enabled or not.\n"
                 },
                 "awsFormalIamRole": {
                     "type": "string",
@@ -1452,6 +1595,7 @@
                 "awsEnableEksAutodiscovery",
                 "awsEnableRdsAutodiscovery",
                 "awsEnableRedshiftAutodiscovery",
+                "awsEnableS3Autodiscovery",
                 "awsFormalIamRole",
                 "awsFormalPingbackArn",
                 "awsFormalStackName",
@@ -1515,6 +1659,10 @@
                         "type": "boolean",
                         "description": "Whether AWS Redshift autodiscovery is enabled or not.\n"
                     },
+                    "awsEnableS3Autodiscovery": {
+                        "type": "boolean",
+                        "description": "Whether AWS S3 autodiscovery is enabled or not.\n"
+                    },
                     "awsFormalIamRole": {
                         "type": "string",
                         "description": "The IAM role ID Formal will use to access your resources.\n"
@@ -1555,7 +1703,7 @@
             }
         },
         "formal:index/integrationDataCatalog:IntegrationDataCatalog": {
-            "description": "Registering a Data Catalog integration.\n",
+            "description": "(Deprecated) Registering a Data Catalog integration.\n",
             "properties": {
                 "datahub": {
                     "$ref": "#/types/formal:index/IntegrationDataCatalogDatahub:IntegrationDataCatalogDatahub",
@@ -1751,64 +1899,6 @@
                 "type": "object"
             }
         },
-        "formal:index/integrationMfa:IntegrationMfa": {
-            "description": "Registering a Integration MFA app.\n",
-            "properties": {
-                "duo": {
-                    "$ref": "#/types/formal:index/IntegrationMfaDuo:IntegrationMfaDuo",
-                    "description": "Configuration block for Duo integration. This block is optional and may be omitted if not configuring a Duo integration.\n"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Name of the Integration\n"
-                },
-                "terminationProtection": {
-                    "type": "boolean",
-                    "description": "If set to true, this Integration MFA cannot be deleted.\n"
-                }
-            },
-            "required": [
-                "name"
-            ],
-            "inputProperties": {
-                "duo": {
-                    "$ref": "#/types/formal:index/IntegrationMfaDuo:IntegrationMfaDuo",
-                    "description": "Configuration block for Duo integration. This block is optional and may be omitted if not configuring a Duo integration.\n",
-                    "willReplaceOnChanges": true
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Name of the Integration\n",
-                    "willReplaceOnChanges": true
-                },
-                "terminationProtection": {
-                    "type": "boolean",
-                    "description": "If set to true, this Integration MFA cannot be deleted.\n",
-                    "willReplaceOnChanges": true
-                }
-            },
-            "stateInputs": {
-                "description": "Input properties used for looking up and filtering IntegrationMfa resources.\n",
-                "properties": {
-                    "duo": {
-                        "$ref": "#/types/formal:index/IntegrationMfaDuo:IntegrationMfaDuo",
-                        "description": "Configuration block for Duo integration. This block is optional and may be omitted if not configuring a Duo integration.\n",
-                        "willReplaceOnChanges": true
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Name of the Integration\n",
-                        "willReplaceOnChanges": true
-                    },
-                    "terminationProtection": {
-                        "type": "boolean",
-                        "description": "If set to true, this Integration MFA cannot be deleted.\n",
-                        "willReplaceOnChanges": true
-                    }
-                },
-                "type": "object"
-            }
-        },
         "formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink": {
             "description": "Registering a Data Label with Formal.\n",
             "properties": {
@@ -1909,6 +1999,10 @@
                     "$ref": "#/types/formal:index/LogConfigurationScope:LogConfigurationScope",
                     "description": "The scope configuration for this log configuration.\n"
                 },
+                "session": {
+                    "$ref": "#/types/formal:index/LogConfigurationSession:LogConfigurationSession",
+                    "description": "Session logging configuration.\n"
+                },
                 "stream": {
                     "$ref": "#/types/formal:index/LogConfigurationStream:LogConfigurationStream",
                     "description": "Stream logging configuration.\n"
@@ -1920,7 +2014,6 @@
             },
             "required": [
                 "createdAt",
-                "encryptionKeyId",
                 "name",
                 "request",
                 "response",
@@ -1948,13 +2041,16 @@
                     "$ref": "#/types/formal:index/LogConfigurationScope:LogConfigurationScope",
                     "description": "The scope configuration for this log configuration.\n"
                 },
+                "session": {
+                    "$ref": "#/types/formal:index/LogConfigurationSession:LogConfigurationSession",
+                    "description": "Session logging configuration.\n"
+                },
                 "stream": {
                     "$ref": "#/types/formal:index/LogConfigurationStream:LogConfigurationStream",
                     "description": "Stream logging configuration.\n"
                 }
             },
             "requiredInputs": [
-                "encryptionKeyId",
                 "request",
                 "response",
                 "scope"
@@ -1986,6 +2082,10 @@
                         "$ref": "#/types/formal:index/LogConfigurationScope:LogConfigurationScope",
                         "description": "The scope configuration for this log configuration.\n"
                     },
+                    "session": {
+                        "$ref": "#/types/formal:index/LogConfigurationSession:LogConfigurationSession",
+                        "description": "Session logging configuration.\n"
+                    },
                     "stream": {
                         "$ref": "#/types/formal:index/LogConfigurationStream:LogConfigurationStream",
                         "description": "Stream logging configuration.\n"
@@ -2007,8 +2107,11 @@
                 },
                 "nativeUserSecret": {
                     "type": "string",
-                    "description": "The password of the Native User.\n",
                     "secret": true
+                },
+                "nativeUserSecretWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for `native_user_secret_wo`. Increment this value to update the secret.\n"
                 },
                 "resourceId": {
                     "type": "string",
@@ -2025,7 +2128,6 @@
             },
             "required": [
                 "nativeUserId",
-                "nativeUserSecret",
                 "resourceId"
             ],
             "inputProperties": {
@@ -2036,8 +2138,11 @@
                 },
                 "nativeUserSecret": {
                     "type": "string",
-                    "description": "The password of the Native User.\n",
                     "secret": true
+                },
+                "nativeUserSecretWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for `native_user_secret_wo`. Increment this value to update the secret.\n"
                 },
                 "resourceId": {
                     "type": "string",
@@ -2055,7 +2160,6 @@
             },
             "requiredInputs": [
                 "nativeUserId",
-                "nativeUserSecret",
                 "resourceId"
             ],
             "stateInputs": {
@@ -2068,8 +2172,11 @@
                     },
                     "nativeUserSecret": {
                         "type": "string",
-                        "description": "The password of the Native User.\n",
                         "secret": true
+                    },
+                    "nativeUserSecretWoVersion": {
+                        "type": "integer",
+                        "description": "Version trigger for `native_user_secret_wo`. Increment this value to update the secret.\n"
                     },
                     "resourceId": {
                         "type": "string",
@@ -2277,7 +2384,7 @@
                 },
                 "notification": {
                     "type": "string",
-                    "description": "Notification settings for this policy.\n"
+                    "description": "Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.\n"
                 },
                 "owner": {
                     "type": "string",
@@ -2321,7 +2428,7 @@
                 },
                 "notification": {
                     "type": "string",
-                    "description": "Notification settings for this policy.\n"
+                    "description": "Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.\n"
                 },
                 "owner": {
                     "type": "string",
@@ -2364,7 +2471,7 @@
                     },
                     "notification": {
                         "type": "string",
-                        "description": "Notification settings for this policy.\n"
+                        "description": "Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.\n"
                     },
                     "owner": {
                         "type": "string",
@@ -2558,9 +2665,16 @@
                     "type": "string",
                     "description": "The ID of the Space to create the Resource in.\n"
                 },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Tags to apply to the Resource.\n"
+                },
                 "technology": {
                     "type": "string",
-                    "description": "Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.\n"
+                    "description": "Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.\n"
                 },
                 "technologyProvider": {
                     "type": "string",
@@ -2601,9 +2715,16 @@
                     "type": "string",
                     "description": "The ID of the Space to create the Resource in.\n"
                 },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Tags to apply to the Resource.\n"
+                },
                 "technology": {
                     "type": "string",
-                    "description": "Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.\n",
+                    "description": "Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.\n",
                     "willReplaceOnChanges": true
                 },
                 "technologyProvider": {
@@ -2649,9 +2770,16 @@
                         "type": "string",
                         "description": "The ID of the Space to create the Resource in.\n"
                     },
+                    "tags": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Tags to apply to the Resource.\n"
+                    },
                     "technology": {
                         "type": "string",
-                        "description": "Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.\n",
+                        "description": "Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.\n",
                         "willReplaceOnChanges": true
                     },
                     "technologyProvider": {
@@ -2669,9 +2797,21 @@
         "formal:index/resourceClassifierConfiguration:ResourceClassifierConfiguration": {
             "description": "A Resource Classifier Configuration is a configuration for a resource classifier.\n",
             "properties": {
+                "aiAnalysisScope": {
+                    "type": "string",
+                    "description": "Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.\n"
+                },
+                "aiAnalysisTimeoutSeconds": {
+                    "type": "integer",
+                    "description": "The timeout for the AI analysis in seconds.\n"
+                },
                 "createdAt": {
                     "type": "integer",
                     "description": "The timestamp of the Resource Classifier Preference creation.\n"
+                },
+                "enforceStrictClassifierResultCount": {
+                    "type": "boolean",
+                    "description": "Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.\n"
                 },
                 "preference": {
                     "type": "string",
@@ -2687,12 +2827,26 @@
                 }
             },
             "required": [
+                "aiAnalysisScope",
+                "aiAnalysisTimeoutSeconds",
                 "createdAt",
                 "preference",
                 "resourceId",
                 "updatedAt"
             ],
             "inputProperties": {
+                "aiAnalysisScope": {
+                    "type": "string",
+                    "description": "Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.\n"
+                },
+                "aiAnalysisTimeoutSeconds": {
+                    "type": "integer",
+                    "description": "The timeout for the AI analysis in seconds.\n"
+                },
+                "enforceStrictClassifierResultCount": {
+                    "type": "boolean",
+                    "description": "Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.\n"
+                },
                 "preference": {
                     "type": "string",
                     "description": "The preference. Supported values are `nlp`, `llm`, `both`, and `none`.\n"
@@ -2703,15 +2857,29 @@
                 }
             },
             "requiredInputs": [
+                "aiAnalysisScope",
+                "aiAnalysisTimeoutSeconds",
                 "preference",
                 "resourceId"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering ResourceClassifierConfiguration resources.\n",
                 "properties": {
+                    "aiAnalysisScope": {
+                        "type": "string",
+                        "description": "Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.\n"
+                    },
+                    "aiAnalysisTimeoutSeconds": {
+                        "type": "integer",
+                        "description": "The timeout for the AI analysis in seconds.\n"
+                    },
                     "createdAt": {
                         "type": "integer",
                         "description": "The timestamp of the Resource Classifier Preference creation.\n"
+                    },
+                    "enforceStrictClassifierResultCount": {
+                        "type": "boolean",
+                        "description": "Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.\n"
                     },
                     "preference": {
                         "type": "string",
@@ -2873,7 +3041,7 @@
                 },
                 "tlsConfig": {
                     "type": "string",
-                    "description": "Validation mode for the TLS configuration.\n"
+                    "description": "Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).\n"
                 },
                 "tlsMinVersion": {
                     "type": "string",
@@ -2896,7 +3064,7 @@
                 },
                 "tlsConfig": {
                     "type": "string",
-                    "description": "Validation mode for the TLS configuration.\n"
+                    "description": "Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).\n"
                 },
                 "tlsMinVersion": {
                     "type": "string",
@@ -2921,7 +3089,7 @@
                     },
                     "tlsConfig": {
                         "type": "string",
-                        "description": "Validation mode for the TLS configuration.\n"
+                        "description": "Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).\n"
                     },
                     "tlsMinVersion": {
                         "type": "string",
@@ -2943,6 +3111,10 @@
                     "type": "string",
                     "description": "Friendly name for the Satellite.\n"
                 },
+                "satelliteType": {
+                    "type": "string",
+                    "description": "The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.\n"
+                },
                 "spaceId": {
                     "type": "string",
                     "description": "The ID of the Space to create the Satellite in.\n"
@@ -2959,12 +3131,18 @@
             "required": [
                 "apiKey",
                 "name",
+                "satelliteType",
                 "tlsCert"
             ],
             "inputProperties": {
                 "name": {
                     "type": "string",
                     "description": "Friendly name for the Satellite.\n",
+                    "willReplaceOnChanges": true
+                },
+                "satelliteType": {
+                    "type": "string",
+                    "description": "The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.\n",
                     "willReplaceOnChanges": true
                 },
                 "spaceId": {
@@ -2976,6 +3154,9 @@
                     "description": "If set to true, this Satellite cannot be deleted.\n"
                 }
             },
+            "requiredInputs": [
+                "satelliteType"
+            ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Satellite resources.\n",
                 "properties": {
@@ -2987,6 +3168,11 @@
                     "name": {
                         "type": "string",
                         "description": "Friendly name for the Satellite.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "satelliteType": {
+                        "type": "string",
+                        "description": "The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.\n",
                         "willReplaceOnChanges": true
                     },
                     "spaceId": {
@@ -3005,8 +3191,154 @@
                 "type": "object"
             }
         },
+        "formal:index/satelliteHostname:SatelliteHostname": {
+            "description": "Manage a Satellite Hostname.\n",
+            "properties": {
+                "createdAt": {
+                    "type": "string",
+                    "description": "The timestamp when the satellite hostname was created.\n"
+                },
+                "hostname": {
+                    "type": "string",
+                    "description": "The hostname for the satellite.\n"
+                },
+                "satelliteId": {
+                    "type": "string",
+                    "description": "The ID of the Satellite to create the hostname for.\n"
+                },
+                "terminationProtection": {
+                    "type": "boolean",
+                    "description": "If set to true, this satellite hostname cannot be deleted.\n"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "The timestamp when the satellite hostname was last updated.\n"
+                }
+            },
+            "required": [
+                "createdAt",
+                "hostname",
+                "satelliteId",
+                "updatedAt"
+            ],
+            "inputProperties": {
+                "hostname": {
+                    "type": "string",
+                    "description": "The hostname for the satellite.\n",
+                    "willReplaceOnChanges": true
+                },
+                "satelliteId": {
+                    "type": "string",
+                    "description": "The ID of the Satellite to create the hostname for.\n",
+                    "willReplaceOnChanges": true
+                },
+                "terminationProtection": {
+                    "type": "boolean",
+                    "description": "If set to true, this satellite hostname cannot be deleted.\n"
+                }
+            },
+            "requiredInputs": [
+                "hostname",
+                "satelliteId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering SatelliteHostname resources.\n",
+                "properties": {
+                    "createdAt": {
+                        "type": "string",
+                        "description": "The timestamp when the satellite hostname was created.\n"
+                    },
+                    "hostname": {
+                        "type": "string",
+                        "description": "The hostname for the satellite.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "satelliteId": {
+                        "type": "string",
+                        "description": "The ID of the Satellite to create the hostname for.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "terminationProtection": {
+                        "type": "boolean",
+                        "description": "If set to true, this satellite hostname cannot be deleted.\n"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "The timestamp when the satellite hostname was last updated.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "formal:index/satelliteLink:SatelliteLink": {
+            "description": "Link a Satellite to another Satellite. For example, link a Data Discovery Satellite to an AI Satellite for column classification.\n",
+            "properties": {
+                "createdAt": {
+                    "type": "string",
+                    "description": "The timestamp when the satellite link was created.\n"
+                },
+                "sourceSatelliteId": {
+                    "type": "string",
+                    "description": "The ID of the source Satellite (e.g., Data Discovery Satellite).\n"
+                },
+                "targetSatelliteId": {
+                    "type": "string",
+                    "description": "The ID of the target Satellite (e.g., AI Satellite).\n"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "The timestamp when the satellite link was last updated.\n"
+                }
+            },
+            "required": [
+                "createdAt",
+                "sourceSatelliteId",
+                "targetSatelliteId",
+                "updatedAt"
+            ],
+            "inputProperties": {
+                "sourceSatelliteId": {
+                    "type": "string",
+                    "description": "The ID of the source Satellite (e.g., Data Discovery Satellite).\n",
+                    "willReplaceOnChanges": true
+                },
+                "targetSatelliteId": {
+                    "type": "string",
+                    "description": "The ID of the target Satellite (e.g., AI Satellite).\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "sourceSatelliteId",
+                "targetSatelliteId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering SatelliteLink resources.\n",
+                "properties": {
+                    "createdAt": {
+                        "type": "string",
+                        "description": "The timestamp when the satellite link was created.\n"
+                    },
+                    "sourceSatelliteId": {
+                        "type": "string",
+                        "description": "The ID of the source Satellite (e.g., Data Discovery Satellite).\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "targetSatelliteId": {
+                        "type": "string",
+                        "description": "The ID of the target Satellite (e.g., AI Satellite).\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "The timestamp when the satellite link was last updated.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "formal:index/sidecar:Sidecar": {
-            "description": "Registering a Sidecar with Formal.\n",
+            "description": "(Deprecated) Registering a Sidecar with Formal.\n",
             "properties": {
                 "apiKey": {
                     "type": "string",
@@ -3121,7 +3453,7 @@
             }
         },
         "formal:index/sidecarResourceLink:SidecarResourceLink": {
-            "description": "Linking a Resource to a Sidecar in Formal.\n",
+            "description": "(Deprecated) Linking a Resource to a Sidecar in Formal.\n",
             "properties": {
                 "port": {
                     "type": "integer",
@@ -3251,99 +3583,6 @@
                     "terminationProtection": {
                         "type": "boolean",
                         "description": "If set to true, this Space cannot be deleted.\n"
-                    }
-                },
-                "type": "object"
-            }
-        },
-        "formal:index/tracker:Tracker": {
-            "description": "Creating a Tracker in Formal.\n",
-            "properties": {
-                "allowClearTextValue": {
-                    "type": "boolean",
-                    "description": "If set to true, this Tracker allow clear text value.\n"
-                },
-                "createdAt": {
-                    "type": "string",
-                    "description": "When the policy was created.\n"
-                },
-                "path": {
-                    "type": "string",
-                    "description": "Path associated with this tracker.\n"
-                },
-                "resourceId": {
-                    "type": "string",
-                    "description": "Tracker linked to the following resource id.\n"
-                },
-                "terminationProtection": {
-                    "type": "boolean",
-                    "description": "If set to true, this Tracker cannot be deleted.\n"
-                },
-                "updatedAt": {
-                    "type": "string",
-                    "description": "Last update time.\n"
-                }
-            },
-            "required": [
-                "createdAt",
-                "path",
-                "resourceId",
-                "updatedAt"
-            ],
-            "inputProperties": {
-                "allowClearTextValue": {
-                    "type": "boolean",
-                    "description": "If set to true, this Tracker allow clear text value.\n",
-                    "willReplaceOnChanges": true
-                },
-                "path": {
-                    "type": "string",
-                    "description": "Path associated with this tracker.\n",
-                    "willReplaceOnChanges": true
-                },
-                "resourceId": {
-                    "type": "string",
-                    "description": "Tracker linked to the following resource id.\n",
-                    "willReplaceOnChanges": true
-                },
-                "terminationProtection": {
-                    "type": "boolean",
-                    "description": "If set to true, this Tracker cannot be deleted.\n"
-                }
-            },
-            "requiredInputs": [
-                "path",
-                "resourceId"
-            ],
-            "stateInputs": {
-                "description": "Input properties used for looking up and filtering Tracker resources.\n",
-                "properties": {
-                    "allowClearTextValue": {
-                        "type": "boolean",
-                        "description": "If set to true, this Tracker allow clear text value.\n",
-                        "willReplaceOnChanges": true
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "description": "When the policy was created.\n"
-                    },
-                    "path": {
-                        "type": "string",
-                        "description": "Path associated with this tracker.\n",
-                        "willReplaceOnChanges": true
-                    },
-                    "resourceId": {
-                        "type": "string",
-                        "description": "Tracker linked to the following resource id.\n",
-                        "willReplaceOnChanges": true
-                    },
-                    "terminationProtection": {
-                        "type": "boolean",
-                        "description": "If set to true, this Tracker cannot be deleted.\n"
-                    },
-                    "updatedAt": {
-                        "type": "string",
-                        "description": "Last update time.\n"
                     }
                 },
                 "type": "object"
@@ -3488,23 +3727,117 @@
                 },
                 "type": "object"
             }
+        },
+        "formal:index/workflow:Workflow": {
+            "description": "Workflows enable automation of actions based on triggers. A workflow is defined using YAML code that specifies a trigger (what starts the workflow) and actions (what the workflow does).\n",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "The workflow definition in YAML format. Defines the trigger and actions for the workflow.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the workflow. Must be unique within the organization.\n"
+                }
+            },
+            "required": [
+                "code",
+                "name"
+            ],
+            "inputProperties": {
+                "code": {
+                    "type": "string",
+                    "description": "The workflow definition in YAML format. Defines the trigger and actions for the workflow.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the workflow. Must be unique within the organization.\n"
+                }
+            },
+            "requiredInputs": [
+                "code"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Workflow resources.\n",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "The workflow definition in YAML format. Defines the trigger and actions for the workflow.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the workflow. Must be unique within the organization.\n"
+                    }
+                },
+                "type": "object"
+            }
         }
     },
     "functions": {
+        "formal:index/getConnector:getConnector": {
+            "description": "Data source for looking up a Connector by name or by ID. Use either `name` or `id`, but not both.\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getConnector.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of the Connector to look up.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Connector to look up. Use this to fetch a connector by name.\n"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getConnector.\n",
+                "properties": {
+                    "apiKey": {
+                        "description": "Api key for the deployed Connector.\n",
+                        "secret": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "The ID of the Connector to look up.\n",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "The name of the Connector to look up. Use this to fetch a connector by name.\n",
+                        "type": "string"
+                    },
+                    "spaceId": {
+                        "description": "The ID of the Space the Connector is in.\n",
+                        "type": "string"
+                    },
+                    "terminationProtection": {
+                        "description": "If set to true, this Connector cannot be deleted.\n",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "apiKey",
+                    "spaceId",
+                    "terminationProtection"
+                ],
+                "type": "object"
+            }
+        },
         "formal:index/getGroup:getGroup": {
-            "description": "Data source for looking up a Group by name.\n",
+            "description": "Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getGroup.\n",
                 "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of this Group.\n"
+                    },
                     "name": {
                         "type": "string",
-                        "description": "The name of the Group.\n"
+                        "description": "The name of the Group to look up. Use this to fetch a group by name.\n"
                     }
                 },
-                "type": "object",
-                "required": [
-                    "name"
-                ]
+                "type": "object"
             },
             "outputs": {
                 "description": "A collection of values returned by getGroup.\n",
@@ -3514,11 +3847,11 @@
                         "type": "string"
                     },
                     "id": {
-                        "description": "The Formal ID for this Group.\n",
+                        "description": "The ID of this Group.\n",
                         "type": "string"
                     },
                     "name": {
-                        "description": "The name of the Group.\n",
+                        "description": "The name of the Group to look up. Use this to fetch a group by name.\n",
                         "type": "string"
                     },
                     "terminationProtection": {
@@ -3528,27 +3861,26 @@
                 },
                 "required": [
                     "description",
-                    "id",
-                    "name",
                     "terminationProtection"
                 ],
                 "type": "object"
             }
         },
         "formal:index/getResource:getResource": {
-            "description": "Data source for looking up a Resource by name.\n",
+            "description": "Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getResource.\n",
                 "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of this Resource.\n"
+                    },
                     "name": {
                         "type": "string",
-                        "description": "The name of the Resource.\n"
+                        "description": "The name of the Resource to look up. Use this to fetch a resource by name.\n"
                     }
                 },
-                "type": "object",
-                "required": [
-                    "name"
-                ]
+                "type": "object"
             },
             "outputs": {
                 "description": "A collection of values returned by getResource.\n",
@@ -3566,11 +3898,11 @@
                         "type": "string"
                     },
                     "id": {
-                        "description": "The provider-assigned unique ID for this managed resource.\n",
+                        "description": "The ID of this Resource.\n",
                         "type": "string"
                     },
                     "name": {
-                        "description": "The name of the Resource.\n",
+                        "description": "The name of the Resource to look up. Use this to fetch a resource by name.\n",
                         "type": "string"
                     },
                     "port": {
@@ -3594,12 +3926,58 @@
                     "createdAt",
                     "environment",
                     "hostname",
-                    "name",
                     "port",
                     "spaceId",
                     "technology",
-                    "terminationProtection",
-                    "id"
+                    "terminationProtection"
+                ],
+                "type": "object"
+            }
+        },
+        "formal:index/getSpace:getSpace": {
+            "description": "Data source for looking up a Space by ID or by name. Use either `id` or `name`, but not both.\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getSpace.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The Formal ID for this Space.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Space to look up. Use this to fetch a space by name.\n"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getSpace.\n",
+                "properties": {
+                    "createdAt": {
+                        "description": "Creation time of the Space.\n",
+                        "type": "integer"
+                    },
+                    "description": {
+                        "description": "Description of the Space.\n",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "The Formal ID for this Space.\n",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "The name of the Space to look up. Use this to fetch a space by name.\n",
+                        "type": "string"
+                    },
+                    "terminationProtection": {
+                        "description": "If set to true, this Space cannot be deleted.\n",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "createdAt",
+                    "description",
+                    "terminationProtection"
                 ],
                 "type": "object"
             }
