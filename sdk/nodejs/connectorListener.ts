@@ -36,6 +36,10 @@ export class ConnectorListener extends pulumi.CustomResource {
     }
 
     /**
+     * The ID of the connector this listener is associated with.
+     */
+    public readonly connectorId!: pulumi.Output<string | undefined>;
+    /**
      * The name of the connector listener.
      */
     public readonly name!: pulumi.Output<string>;
@@ -61,6 +65,7 @@ export class ConnectorListener extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConnectorListenerState | undefined;
+            resourceInputs["connectorId"] = state ? state.connectorId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
@@ -69,6 +74,7 @@ export class ConnectorListener extends pulumi.CustomResource {
             if ((!args || args.port === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'port'");
             }
+            resourceInputs["connectorId"] = args ? args.connectorId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
@@ -82,6 +88,10 @@ export class ConnectorListener extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ConnectorListener resources.
  */
 export interface ConnectorListenerState {
+    /**
+     * The ID of the connector this listener is associated with.
+     */
+    connectorId?: pulumi.Input<string>;
     /**
      * The name of the connector listener.
      */
@@ -100,6 +110,10 @@ export interface ConnectorListenerState {
  * The set of arguments for constructing a ConnectorListener resource.
  */
 export interface ConnectorListenerArgs {
+    /**
+     * The ID of the connector this listener is associated with.
+     */
+    connectorId?: pulumi.Input<string>;
     /**
      * The name of the connector listener.
      */

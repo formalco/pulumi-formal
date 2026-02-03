@@ -19,21 +19,36 @@ __all__ = ['SatelliteArgs', 'Satellite']
 @pulumi.input_type
 class SatelliteArgs:
     def __init__(__self__, *,
+                 satellite_type: pulumi.Input[_builtins.str],
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  space_id: Optional[pulumi.Input[_builtins.str]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Satellite resource.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Satellite.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Satellite in.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Satellite cannot be deleted.
         """
+        pulumi.set(__self__, "satellite_type", satellite_type)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if space_id is not None:
             pulumi.set(__self__, "space_id", space_id)
         if termination_protection is not None:
             pulumi.set(__self__, "termination_protection", termination_protection)
+
+    @_builtins.property
+    @pulumi.getter(name="satelliteType")
+    def satellite_type(self) -> pulumi.Input[_builtins.str]:
+        """
+        The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        """
+        return pulumi.get(self, "satellite_type")
+
+    @satellite_type.setter
+    def satellite_type(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "satellite_type", value)
 
     @_builtins.property
     @pulumi.getter
@@ -77,6 +92,7 @@ class _SatelliteState:
     def __init__(__self__, *,
                  api_key: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
+                 satellite_type: Optional[pulumi.Input[_builtins.str]] = None,
                  space_id: Optional[pulumi.Input[_builtins.str]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
                  tls_cert: Optional[pulumi.Input[_builtins.str]] = None):
@@ -84,6 +100,7 @@ class _SatelliteState:
         Input properties used for looking up and filtering Satellite resources.
         :param pulumi.Input[_builtins.str] api_key: Api key of the Satellite.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Satellite.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Satellite in.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Satellite cannot be deleted.
         :param pulumi.Input[_builtins.str] tls_cert: TLS certificate of the Satellite.
@@ -92,6 +109,8 @@ class _SatelliteState:
             pulumi.set(__self__, "api_key", api_key)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if satellite_type is not None:
+            pulumi.set(__self__, "satellite_type", satellite_type)
         if space_id is not None:
             pulumi.set(__self__, "space_id", space_id)
         if termination_protection is not None:
@@ -122,6 +141,18 @@ class _SatelliteState:
     @name.setter
     def name(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="satelliteType")
+    def satellite_type(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        """
+        return pulumi.get(self, "satellite_type")
+
+    @satellite_type.setter
+    def satellite_type(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "satellite_type", value)
 
     @_builtins.property
     @pulumi.getter(name="spaceId")
@@ -167,6 +198,7 @@ class Satellite(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
+                 satellite_type: Optional[pulumi.Input[_builtins.str]] = None,
                  space_id: Optional[pulumi.Input[_builtins.str]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
                  __props__=None):
@@ -176,6 +208,7 @@ class Satellite(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Satellite.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Satellite in.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Satellite cannot be deleted.
         """
@@ -183,7 +216,7 @@ class Satellite(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: Optional[SatelliteArgs] = None,
+                 args: SatelliteArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Registering a Satellite
@@ -204,6 +237,7 @@ class Satellite(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
+                 satellite_type: Optional[pulumi.Input[_builtins.str]] = None,
                  space_id: Optional[pulumi.Input[_builtins.str]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
                  __props__=None):
@@ -216,6 +250,9 @@ class Satellite(pulumi.CustomResource):
             __props__ = SatelliteArgs.__new__(SatelliteArgs)
 
             __props__.__dict__["name"] = name
+            if satellite_type is None and not opts.urn:
+                raise TypeError("Missing required property 'satellite_type'")
+            __props__.__dict__["satellite_type"] = satellite_type
             __props__.__dict__["space_id"] = space_id
             __props__.__dict__["termination_protection"] = termination_protection
             __props__.__dict__["api_key"] = None
@@ -234,6 +271,7 @@ class Satellite(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             api_key: Optional[pulumi.Input[_builtins.str]] = None,
             name: Optional[pulumi.Input[_builtins.str]] = None,
+            satellite_type: Optional[pulumi.Input[_builtins.str]] = None,
             space_id: Optional[pulumi.Input[_builtins.str]] = None,
             termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
             tls_cert: Optional[pulumi.Input[_builtins.str]] = None) -> 'Satellite':
@@ -246,6 +284,7 @@ class Satellite(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] api_key: Api key of the Satellite.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Satellite.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Satellite in.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Satellite cannot be deleted.
         :param pulumi.Input[_builtins.str] tls_cert: TLS certificate of the Satellite.
@@ -256,6 +295,7 @@ class Satellite(pulumi.CustomResource):
 
         __props__.__dict__["api_key"] = api_key
         __props__.__dict__["name"] = name
+        __props__.__dict__["satellite_type"] = satellite_type
         __props__.__dict__["space_id"] = space_id
         __props__.__dict__["termination_protection"] = termination_protection
         __props__.__dict__["tls_cert"] = tls_cert
@@ -276,6 +316,14 @@ class Satellite(pulumi.CustomResource):
         Friendly name for the Satellite.
         """
         return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="satelliteType")
+    def satellite_type(self) -> pulumi.Output[_builtins.str]:
+        """
+        The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        """
+        return pulumi.get(self, "satellite_type")
 
     @_builtins.property
     @pulumi.getter(name="spaceId")

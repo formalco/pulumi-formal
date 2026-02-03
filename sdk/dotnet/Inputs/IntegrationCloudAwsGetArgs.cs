@@ -56,6 +56,12 @@ namespace Formal.Pulumi.Inputs
         public Input<bool>? EnableRedshiftAutodiscovery { get; set; }
 
         /// <summary>
+        /// Enables resource autodiscovery for S3 buckets.
+        /// </summary>
+        [Input("enableS3Autodiscovery")]
+        public Input<bool>? EnableS3Autodiscovery { get; set; }
+
+        /// <summary>
         /// The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
         /// </summary>
         [Input("s3BucketArn")]

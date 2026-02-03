@@ -17,6 +17,12 @@ namespace Formal.Pulumi
     public partial class ConnectorListener : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// The ID of the connector this listener is associated with.
+        /// </summary>
+        [Output("connectorId")]
+        public Output<string?> ConnectorId { get; private set; } = null!;
+
+        /// <summary>
         /// The name of the connector listener.
         /// </summary>
         [Output("name")]
@@ -82,6 +88,12 @@ namespace Formal.Pulumi
     public sealed class ConnectorListenerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The ID of the connector this listener is associated with.
+        /// </summary>
+        [Input("connectorId")]
+        public Input<string>? ConnectorId { get; set; }
+
+        /// <summary>
         /// The name of the connector listener.
         /// </summary>
         [Input("name")]
@@ -107,6 +119,12 @@ namespace Formal.Pulumi
 
     public sealed class ConnectorListenerState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The ID of the connector this listener is associated with.
+        /// </summary>
+        [Input("connectorId")]
+        public Input<string>? ConnectorId { get; set; }
+
         /// <summary>
         /// The name of the connector listener.
         /// </summary>

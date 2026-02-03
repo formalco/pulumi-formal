@@ -12,7 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Registering a Data Catalog integration.
+// (Deprecated) Registering a Data Catalog integration.
 type IntegrationDataCatalog struct {
 	pulumi.CustomResourceState
 

@@ -30,7 +30,9 @@ type Resource struct {
 	Port pulumi.IntOutput `pulumi:"port"`
 	// The ID of the Space to create the Resource in.
 	SpaceId pulumi.StringPtrOutput `pulumi:"spaceId"`
-	// Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+	// Tags to apply to the Resource.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
+	// Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
 	Technology pulumi.StringOutput `pulumi:"technology"`
 	// For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
 	TechnologyProvider pulumi.StringPtrOutput `pulumi:"technologyProvider"`
@@ -91,7 +93,9 @@ type resourceState struct {
 	Port *int `pulumi:"port"`
 	// The ID of the Space to create the Resource in.
 	SpaceId *string `pulumi:"spaceId"`
-	// Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+	// Tags to apply to the Resource.
+	Tags map[string]string `pulumi:"tags"`
+	// Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
 	Technology *string `pulumi:"technology"`
 	// For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
 	TechnologyProvider *string `pulumi:"technologyProvider"`
@@ -114,7 +118,9 @@ type ResourceState struct {
 	Port pulumi.IntPtrInput
 	// The ID of the Space to create the Resource in.
 	SpaceId pulumi.StringPtrInput
-	// Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+	// Tags to apply to the Resource.
+	Tags pulumi.StringMapInput
+	// Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
 	Technology pulumi.StringPtrInput
 	// For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
 	TechnologyProvider pulumi.StringPtrInput
@@ -139,7 +145,9 @@ type resourceArgs struct {
 	Port int `pulumi:"port"`
 	// The ID of the Space to create the Resource in.
 	SpaceId *string `pulumi:"spaceId"`
-	// Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+	// Tags to apply to the Resource.
+	Tags map[string]string `pulumi:"tags"`
+	// Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
 	Technology string `pulumi:"technology"`
 	// For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
 	TechnologyProvider *string `pulumi:"technologyProvider"`
@@ -161,7 +169,9 @@ type ResourceArgs struct {
 	Port pulumi.IntInput
 	// The ID of the Space to create the Resource in.
 	SpaceId pulumi.StringPtrInput
-	// Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+	// Tags to apply to the Resource.
+	Tags pulumi.StringMapInput
+	// Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
 	Technology pulumi.StringInput
 	// For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
 	TechnologyProvider pulumi.StringPtrInput
@@ -288,7 +298,12 @@ func (o ResourceOutput) SpaceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Resource) pulumi.StringPtrOutput { return v.SpaceId }).(pulumi.StringPtrOutput)
 }
 
-// Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+// Tags to apply to the Resource.
+func (o ResourceOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Resource) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
+}
+
+// Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
 func (o ResourceOutput) Technology() pulumi.StringOutput {
 	return o.ApplyT(func(v *Resource) pulumi.StringOutput { return v.Technology }).(pulumi.StringOutput)
 }

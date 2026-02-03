@@ -17,6 +17,12 @@ namespace Formal.Pulumi
     public partial class ConnectorHostname : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+        /// </summary>
+        [Output("certificate")]
+        public Output<string?> Certificate { get; private set; } = null!;
+
+        /// <summary>
         /// The ID of the Connector this hostname is linked to.
         /// </summary>
         [Output("connectorId")]
@@ -45,6 +51,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Output("managedTls")]
         public Output<bool?> ManagedTls { get; private set; } = null!;
+
+        /// <summary>
+        /// The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+        /// </summary>
+        [Output("privateKey")]
+        public Output<string?> PrivateKey { get; private set; } = null!;
 
         /// <summary>
         /// If set to true, this connector hostname cannot be deleted.
@@ -82,6 +94,11 @@ namespace Formal.Pulumi
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/formalco",
+                AdditionalSecretOutputs =
+                {
+                    "certificate",
+                    "privateKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -105,6 +122,22 @@ namespace Formal.Pulumi
 
     public sealed class ConnectorHostnameArgs : global::Pulumi.ResourceArgs
     {
+        [Input("certificate")]
+        private Input<string>? _certificate;
+
+        /// <summary>
+        /// The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+        /// </summary>
+        public Input<string>? Certificate
+        {
+            get => _certificate;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _certificate = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         /// <summary>
         /// The ID of the Connector this hostname is linked to.
         /// </summary>
@@ -129,6 +162,22 @@ namespace Formal.Pulumi
         [Input("managedTls")]
         public Input<bool>? ManagedTls { get; set; }
 
+        [Input("privateKey")]
+        private Input<string>? _privateKey;
+
+        /// <summary>
+        /// The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+        /// </summary>
+        public Input<string>? PrivateKey
+        {
+            get => _privateKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         /// <summary>
         /// If set to true, this connector hostname cannot be deleted.
         /// </summary>
@@ -143,6 +192,22 @@ namespace Formal.Pulumi
 
     public sealed class ConnectorHostnameState : global::Pulumi.ResourceArgs
     {
+        [Input("certificate")]
+        private Input<string>? _certificate;
+
+        /// <summary>
+        /// The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+        /// </summary>
+        public Input<string>? Certificate
+        {
+            get => _certificate;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _certificate = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         /// <summary>
         /// The ID of the Connector this hostname is linked to.
         /// </summary>
@@ -172,6 +237,22 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("managedTls")]
         public Input<bool>? ManagedTls { get; set; }
+
+        [Input("privateKey")]
+        private Input<string>? _privateKey;
+
+        /// <summary>
+        /// The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+        /// </summary>
+        public Input<string>? PrivateKey
+        {
+            get => _privateKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// If set to true, this connector hostname cannot be deleted.

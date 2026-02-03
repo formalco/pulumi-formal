@@ -30,6 +30,8 @@ type IntegrationCloud struct {
 	AwsEnableRdsAutodiscovery pulumi.BoolOutput `pulumi:"awsEnableRdsAutodiscovery"`
 	// Whether AWS Redshift autodiscovery is enabled or not.
 	AwsEnableRedshiftAutodiscovery pulumi.BoolOutput `pulumi:"awsEnableRedshiftAutodiscovery"`
+	// Whether AWS S3 autodiscovery is enabled or not.
+	AwsEnableS3Autodiscovery pulumi.BoolOutput `pulumi:"awsEnableS3Autodiscovery"`
 	// The IAM role ID Formal will use to access your resources.
 	AwsFormalIamRole pulumi.StringOutput `pulumi:"awsFormalIamRole"`
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
@@ -97,6 +99,8 @@ type integrationCloudState struct {
 	AwsEnableRdsAutodiscovery *bool `pulumi:"awsEnableRdsAutodiscovery"`
 	// Whether AWS Redshift autodiscovery is enabled or not.
 	AwsEnableRedshiftAutodiscovery *bool `pulumi:"awsEnableRedshiftAutodiscovery"`
+	// Whether AWS S3 autodiscovery is enabled or not.
+	AwsEnableS3Autodiscovery *bool `pulumi:"awsEnableS3Autodiscovery"`
 	// The IAM role ID Formal will use to access your resources.
 	AwsFormalIamRole *string `pulumi:"awsFormalIamRole"`
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
@@ -132,6 +136,8 @@ type IntegrationCloudState struct {
 	AwsEnableRdsAutodiscovery pulumi.BoolPtrInput
 	// Whether AWS Redshift autodiscovery is enabled or not.
 	AwsEnableRedshiftAutodiscovery pulumi.BoolPtrInput
+	// Whether AWS S3 autodiscovery is enabled or not.
+	AwsEnableS3Autodiscovery pulumi.BoolPtrInput
 	// The IAM role ID Formal will use to access your resources.
 	AwsFormalIamRole pulumi.StringPtrInput
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
@@ -303,6 +309,11 @@ func (o IntegrationCloudOutput) AwsEnableRdsAutodiscovery() pulumi.BoolOutput {
 // Whether AWS Redshift autodiscovery is enabled or not.
 func (o IntegrationCloudOutput) AwsEnableRedshiftAutodiscovery() pulumi.BoolOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.AwsEnableRedshiftAutodiscovery }).(pulumi.BoolOutput)
+}
+
+// Whether AWS S3 autodiscovery is enabled or not.
+func (o IntegrationCloudOutput) AwsEnableS3Autodiscovery() pulumi.BoolOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.AwsEnableS3Autodiscovery }).(pulumi.BoolOutput)
 }
 
 // The IAM role ID Formal will use to access your resources.

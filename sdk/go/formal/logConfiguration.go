@@ -19,7 +19,7 @@ type LogConfiguration struct {
 	// When the log configuration was created.
 	CreatedAt pulumi.StringOutput `pulumi:"createdAt"`
 	// The ID of the encryption key to use for this log configuration.
-	EncryptionKeyId pulumi.StringOutput `pulumi:"encryptionKeyId"`
+	EncryptionKeyId pulumi.StringPtrOutput `pulumi:"encryptionKeyId"`
 	// The name of this log configuration.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Request logging configuration.
@@ -28,6 +28,8 @@ type LogConfiguration struct {
 	Response LogConfigurationResponseOutput `pulumi:"response"`
 	// The scope configuration for this log configuration.
 	Scope LogConfigurationScopeOutput `pulumi:"scope"`
+	// Session logging configuration.
+	Session LogConfigurationSessionPtrOutput `pulumi:"session"`
 	// Stream logging configuration.
 	Stream LogConfigurationStreamPtrOutput `pulumi:"stream"`
 	// Last update time.
@@ -41,9 +43,6 @@ func NewLogConfiguration(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.EncryptionKeyId == nil {
-		return nil, errors.New("invalid value for required argument 'EncryptionKeyId'")
-	}
 	if args.Request == nil {
 		return nil, errors.New("invalid value for required argument 'Request'")
 	}
@@ -88,6 +87,8 @@ type logConfigurationState struct {
 	Response *LogConfigurationResponse `pulumi:"response"`
 	// The scope configuration for this log configuration.
 	Scope *LogConfigurationScope `pulumi:"scope"`
+	// Session logging configuration.
+	Session *LogConfigurationSession `pulumi:"session"`
 	// Stream logging configuration.
 	Stream *LogConfigurationStream `pulumi:"stream"`
 	// Last update time.
@@ -107,6 +108,8 @@ type LogConfigurationState struct {
 	Response LogConfigurationResponsePtrInput
 	// The scope configuration for this log configuration.
 	Scope LogConfigurationScopePtrInput
+	// Session logging configuration.
+	Session LogConfigurationSessionPtrInput
 	// Stream logging configuration.
 	Stream LogConfigurationStreamPtrInput
 	// Last update time.
@@ -119,7 +122,7 @@ func (LogConfigurationState) ElementType() reflect.Type {
 
 type logConfigurationArgs struct {
 	// The ID of the encryption key to use for this log configuration.
-	EncryptionKeyId string `pulumi:"encryptionKeyId"`
+	EncryptionKeyId *string `pulumi:"encryptionKeyId"`
 	// The name of this log configuration.
 	Name *string `pulumi:"name"`
 	// Request logging configuration.
@@ -128,6 +131,8 @@ type logConfigurationArgs struct {
 	Response LogConfigurationResponse `pulumi:"response"`
 	// The scope configuration for this log configuration.
 	Scope LogConfigurationScope `pulumi:"scope"`
+	// Session logging configuration.
+	Session *LogConfigurationSession `pulumi:"session"`
 	// Stream logging configuration.
 	Stream *LogConfigurationStream `pulumi:"stream"`
 }
@@ -135,7 +140,7 @@ type logConfigurationArgs struct {
 // The set of arguments for constructing a LogConfiguration resource.
 type LogConfigurationArgs struct {
 	// The ID of the encryption key to use for this log configuration.
-	EncryptionKeyId pulumi.StringInput
+	EncryptionKeyId pulumi.StringPtrInput
 	// The name of this log configuration.
 	Name pulumi.StringPtrInput
 	// Request logging configuration.
@@ -144,6 +149,8 @@ type LogConfigurationArgs struct {
 	Response LogConfigurationResponseInput
 	// The scope configuration for this log configuration.
 	Scope LogConfigurationScopeInput
+	// Session logging configuration.
+	Session LogConfigurationSessionPtrInput
 	// Stream logging configuration.
 	Stream LogConfigurationStreamPtrInput
 }
@@ -241,8 +248,8 @@ func (o LogConfigurationOutput) CreatedAt() pulumi.StringOutput {
 }
 
 // The ID of the encryption key to use for this log configuration.
-func (o LogConfigurationOutput) EncryptionKeyId() pulumi.StringOutput {
-	return o.ApplyT(func(v *LogConfiguration) pulumi.StringOutput { return v.EncryptionKeyId }).(pulumi.StringOutput)
+func (o LogConfigurationOutput) EncryptionKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogConfiguration) pulumi.StringPtrOutput { return v.EncryptionKeyId }).(pulumi.StringPtrOutput)
 }
 
 // The name of this log configuration.
@@ -263,6 +270,11 @@ func (o LogConfigurationOutput) Response() LogConfigurationResponseOutput {
 // The scope configuration for this log configuration.
 func (o LogConfigurationOutput) Scope() LogConfigurationScopeOutput {
 	return o.ApplyT(func(v *LogConfiguration) LogConfigurationScopeOutput { return v.Scope }).(LogConfigurationScopeOutput)
+}
+
+// Session logging configuration.
+func (o LogConfigurationOutput) Session() LogConfigurationSessionPtrOutput {
+	return o.ApplyT(func(v *LogConfiguration) LogConfigurationSessionPtrOutput { return v.Session }).(LogConfigurationSessionPtrOutput)
 }
 
 // Stream logging configuration.

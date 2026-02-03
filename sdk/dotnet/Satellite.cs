@@ -29,6 +29,12 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        /// </summary>
+        [Output("satelliteType")]
+        public Output<string> SatelliteType { get; private set; } = null!;
+
+        /// <summary>
         /// The ID of the Space to create the Satellite in.
         /// </summary>
         [Output("spaceId")]
@@ -54,7 +60,7 @@ namespace Formal.Pulumi
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Satellite(string name, SatelliteArgs? args = null, CustomResourceOptions? options = null)
+        public Satellite(string name, SatelliteArgs args, CustomResourceOptions? options = null)
             : base("formal:index/satellite:Satellite", name, args ?? new SatelliteArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -104,6 +110,12 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        /// </summary>
+        [Input("satelliteType", required: true)]
+        public Input<string> SatelliteType { get; set; } = null!;
+
+        /// <summary>
         /// The ID of the Space to create the Satellite in.
         /// </summary>
         [Input("spaceId")]
@@ -144,6 +156,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        /// </summary>
+        [Input("satelliteType")]
+        public Input<string>? SatelliteType { get; set; }
 
         /// <summary>
         /// The ID of the Space to create the Satellite in.

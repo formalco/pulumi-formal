@@ -41,7 +41,7 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Notification settings for this policy.
+        /// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
         /// </summary>
         [Output("notification")]
         public Output<string> Notification { get; private set; } = null!;
@@ -136,7 +136,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Notification settings for this policy.
+        /// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
         /// </summary>
         [Input("notification", required: true)]
         public Input<string> Notification { get; set; } = null!;
@@ -192,7 +192,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Notification settings for this policy.
+        /// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
         /// </summary>
         [Input("notification")]
         public Input<string>? Notification { get; set; }

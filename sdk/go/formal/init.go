@@ -33,6 +33,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ConnectorListenerLink{}
 	case "formal:index/connectorListenerRule:ConnectorListenerRule":
 		r = &ConnectorListenerRule{}
+	case "formal:index/connectorSatelliteLink:ConnectorSatelliteLink":
+		r = &ConnectorSatelliteLink{}
 	case "formal:index/dataDiscovery:DataDiscovery":
 		r = &DataDiscovery{}
 	case "formal:index/dataDomain:DataDomain":
@@ -55,8 +57,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &IntegrationLog{}
 	case "formal:index/integrationMdm:IntegrationMdm":
 		r = &IntegrationMdm{}
-	case "formal:index/integrationMfa:IntegrationMfa":
-		r = &IntegrationMfa{}
 	case "formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink":
 		r = &InventoryObjectDataLabelLink{}
 	case "formal:index/logConfiguration:LogConfiguration":
@@ -83,16 +83,20 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ResourceTlsConfiguration{}
 	case "formal:index/satellite:Satellite":
 		r = &Satellite{}
+	case "formal:index/satelliteHostname:SatelliteHostname":
+		r = &SatelliteHostname{}
+	case "formal:index/satelliteLink:SatelliteLink":
+		r = &SatelliteLink{}
 	case "formal:index/sidecar:Sidecar":
 		r = &Sidecar{}
 	case "formal:index/sidecarResourceLink:SidecarResourceLink":
 		r = &SidecarResourceLink{}
 	case "formal:index/space:Space":
 		r = &Space{}
-	case "formal:index/tracker:Tracker":
-		r = &Tracker{}
 	case "formal:index/user:User":
 		r = &User{}
+	case "formal:index/workflow:Workflow":
+		r = &Workflow{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -156,6 +160,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
+		"index/connectorSatelliteLink",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
 		"index/dataDiscovery",
 		&module{version},
 	)
@@ -207,11 +216,6 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/integrationMdm",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"formal",
-		"index/integrationMfa",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -281,6 +285,16 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
+		"index/satelliteHostname",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/satelliteLink",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
 		"index/sidecar",
 		&module{version},
 	)
@@ -296,12 +310,12 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
-		"index/tracker",
+		"index/user",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
-		"index/user",
+		"index/workflow",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

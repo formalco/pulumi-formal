@@ -24,11 +24,11 @@ __all__ = [
     'IntegrationLogDatadog',
     'IntegrationLogSplunk',
     'IntegrationMdmKandji',
-    'IntegrationMfaDuo',
     'LogConfigurationRequest',
     'LogConfigurationRequestSql',
     'LogConfigurationResponse',
     'LogConfigurationScope',
+    'LogConfigurationSession',
     'LogConfigurationStream',
 ]
 
@@ -73,39 +73,42 @@ class DataDomainOwner(dict):
 @pulumi.output_type
 class IntegrationBiMetabase(dict):
     def __init__(__self__, *,
-                 hostname: _builtins.str,
-                 password: _builtins.str,
-                 username: _builtins.str):
+                 hostname: Optional[_builtins.str] = None,
+                 password: Optional[_builtins.str] = None,
+                 username: Optional[_builtins.str] = None):
         """
-        :param _builtins.str hostname: Hostname of the Metabase instance.
-        :param _builtins.str password: Password for the Metabase instance.
-        :param _builtins.str username: Username for the Metabase instance.
+        :param _builtins.str hostname: Metabase server hostname. Required when `sync=true`.
+        :param _builtins.str password: Metabase admin password. Required when `sync=true`.
+        :param _builtins.str username: Metabase admin username. Required when `sync=true`.
         """
-        pulumi.set(__self__, "hostname", hostname)
-        pulumi.set(__self__, "password", password)
-        pulumi.set(__self__, "username", username)
+        if hostname is not None:
+            pulumi.set(__self__, "hostname", hostname)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if username is not None:
+            pulumi.set(__self__, "username", username)
 
     @_builtins.property
     @pulumi.getter
-    def hostname(self) -> _builtins.str:
+    def hostname(self) -> Optional[_builtins.str]:
         """
-        Hostname of the Metabase instance.
+        Metabase server hostname. Required when `sync=true`.
         """
         return pulumi.get(self, "hostname")
 
     @_builtins.property
     @pulumi.getter
-    def password(self) -> _builtins.str:
+    def password(self) -> Optional[_builtins.str]:
         """
-        Password for the Metabase instance.
+        Metabase admin password. Required when `sync=true`.
         """
         return pulumi.get(self, "password")
 
     @_builtins.property
     @pulumi.getter
-    def username(self) -> _builtins.str:
+    def username(self) -> Optional[_builtins.str]:
         """
-        Username for the Metabase instance.
+        Metabase admin username. Required when `sync=true`.
         """
         return pulumi.get(self, "username")
 
@@ -131,6 +134,8 @@ class IntegrationCloudAws(dict):
             suggest = "enable_rds_autodiscovery"
         elif key == "enableRedshiftAutodiscovery":
             suggest = "enable_redshift_autodiscovery"
+        elif key == "enableS3Autodiscovery":
+            suggest = "enable_s3_autodiscovery"
         elif key == "s3BucketArn":
             suggest = "s3_bucket_arn"
 
@@ -154,6 +159,7 @@ class IntegrationCloudAws(dict):
                  enable_eks_autodiscovery: Optional[_builtins.bool] = None,
                  enable_rds_autodiscovery: Optional[_builtins.bool] = None,
                  enable_redshift_autodiscovery: Optional[_builtins.bool] = None,
+                 enable_s3_autodiscovery: Optional[_builtins.bool] = None,
                  s3_bucket_arn: Optional[_builtins.str] = None):
         """
         :param _builtins.str template_version: The template version of the CloudFormation stack. Use `latest` to stay in sync.
@@ -164,6 +170,7 @@ class IntegrationCloudAws(dict):
         :param _builtins.bool enable_eks_autodiscovery: Enables resource autodiscovery for EKS clusters.
         :param _builtins.bool enable_rds_autodiscovery: Enables resource autodiscovery for RDS instances (PostgreSQL, MySQL, MongoDB).
         :param _builtins.bool enable_redshift_autodiscovery: Enables resource autodiscovery for Redshift clusters.
+        :param _builtins.bool enable_s3_autodiscovery: Enables resource autodiscovery for S3 buckets.
         :param _builtins.str s3_bucket_arn: The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
         """
         pulumi.set(__self__, "template_version", template_version)
@@ -181,6 +188,8 @@ class IntegrationCloudAws(dict):
             pulumi.set(__self__, "enable_rds_autodiscovery", enable_rds_autodiscovery)
         if enable_redshift_autodiscovery is not None:
             pulumi.set(__self__, "enable_redshift_autodiscovery", enable_redshift_autodiscovery)
+        if enable_s3_autodiscovery is not None:
+            pulumi.set(__self__, "enable_s3_autodiscovery", enable_s3_autodiscovery)
         if s3_bucket_arn is not None:
             pulumi.set(__self__, "s3_bucket_arn", s3_bucket_arn)
 
@@ -247,6 +256,14 @@ class IntegrationCloudAws(dict):
         Enables resource autodiscovery for Redshift clusters.
         """
         return pulumi.get(self, "enable_redshift_autodiscovery")
+
+    @_builtins.property
+    @pulumi.getter(name="enableS3Autodiscovery")
+    def enable_s3_autodiscovery(self) -> Optional[_builtins.bool]:
+        """
+        Enables resource autodiscovery for S3 buckets.
+        """
+        return pulumi.get(self, "enable_s3_autodiscovery")
 
     @_builtins.property
     @pulumi.getter(name="s3BucketArn")
@@ -543,73 +560,14 @@ class IntegrationMdmKandji(dict):
 
 
 @pulumi.output_type
-class IntegrationMfaDuo(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "apiHostname":
-            suggest = "api_hostname"
-        elif key == "integrationKey":
-            suggest = "integration_key"
-        elif key == "secretKey":
-            suggest = "secret_key"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in IntegrationMfaDuo. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        IntegrationMfaDuo.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        IntegrationMfaDuo.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 api_hostname: _builtins.str,
-                 integration_key: _builtins.str,
-                 secret_key: _builtins.str):
-        """
-        :param _builtins.str api_hostname: Duo API Hostname.
-        :param _builtins.str integration_key: Duo Integration Key.
-        :param _builtins.str secret_key: Duo Secret Key.
-        """
-        pulumi.set(__self__, "api_hostname", api_hostname)
-        pulumi.set(__self__, "integration_key", integration_key)
-        pulumi.set(__self__, "secret_key", secret_key)
-
-    @_builtins.property
-    @pulumi.getter(name="apiHostname")
-    def api_hostname(self) -> _builtins.str:
-        """
-        Duo API Hostname.
-        """
-        return pulumi.get(self, "api_hostname")
-
-    @_builtins.property
-    @pulumi.getter(name="integrationKey")
-    def integration_key(self) -> _builtins.str:
-        """
-        Duo Integration Key.
-        """
-        return pulumi.get(self, "integration_key")
-
-    @_builtins.property
-    @pulumi.getter(name="secretKey")
-    def secret_key(self) -> _builtins.str:
-        """
-        Duo Secret Key.
-        """
-        return pulumi.get(self, "secret_key")
-
-
-@pulumi.output_type
 class LogConfigurationRequest(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
         if key == "maxPayloadSize":
             suggest = "max_payload_size"
+        elif key == "policyEvalInputRetention":
+            suggest = "policy_eval_input_retention"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in LogConfigurationRequest. Access the value via the '{suggest}' property getter instead.")
@@ -624,15 +582,20 @@ class LogConfigurationRequest(dict):
 
     def __init__(__self__, *,
                  encrypt: _builtins.bool,
-                 max_payload_size: _builtins.int,
+                 max_payload_size: Optional[_builtins.int] = None,
+                 policy_eval_input_retention: Optional[_builtins.str] = None,
                  sql: Optional['outputs.LogConfigurationRequestSql'] = None):
         """
         :param _builtins.bool encrypt: Whether to encrypt request payloads.
         :param _builtins.int max_payload_size: Maximum size of request payloads to log.
+        :param _builtins.str policy_eval_input_retention: Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         :param 'LogConfigurationRequestSqlArgs' sql: SQL logging configuration for requests.
         """
         pulumi.set(__self__, "encrypt", encrypt)
-        pulumi.set(__self__, "max_payload_size", max_payload_size)
+        if max_payload_size is not None:
+            pulumi.set(__self__, "max_payload_size", max_payload_size)
+        if policy_eval_input_retention is not None:
+            pulumi.set(__self__, "policy_eval_input_retention", policy_eval_input_retention)
         if sql is not None:
             pulumi.set(__self__, "sql", sql)
 
@@ -646,11 +609,19 @@ class LogConfigurationRequest(dict):
 
     @_builtins.property
     @pulumi.getter(name="maxPayloadSize")
-    def max_payload_size(self) -> _builtins.int:
+    def max_payload_size(self) -> Optional[_builtins.int]:
         """
         Maximum size of request payloads to log.
         """
         return pulumi.get(self, "max_payload_size")
+
+    @_builtins.property
+    @pulumi.getter(name="policyEvalInputRetention")
+    def policy_eval_input_retention(self) -> Optional[_builtins.str]:
+        """
+        Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+        """
+        return pulumi.get(self, "policy_eval_input_retention")
 
     @_builtins.property
     @pulumi.getter
@@ -714,6 +685,8 @@ class LogConfigurationResponse(dict):
         suggest = None
         if key == "maxPayloadSize":
             suggest = "max_payload_size"
+        elif key == "policyEvalInputRetention":
+            suggest = "policy_eval_input_retention"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in LogConfigurationResponse. Access the value via the '{suggest}' property getter instead.")
@@ -728,13 +701,18 @@ class LogConfigurationResponse(dict):
 
     def __init__(__self__, *,
                  encrypt: _builtins.bool,
-                 max_payload_size: _builtins.int):
+                 max_payload_size: Optional[_builtins.int] = None,
+                 policy_eval_input_retention: Optional[_builtins.str] = None):
         """
         :param _builtins.bool encrypt: Whether to encrypt response payloads.
         :param _builtins.int max_payload_size: Maximum size of response payloads to log.
+        :param _builtins.str policy_eval_input_retention: Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         """
         pulumi.set(__self__, "encrypt", encrypt)
-        pulumi.set(__self__, "max_payload_size", max_payload_size)
+        if max_payload_size is not None:
+            pulumi.set(__self__, "max_payload_size", max_payload_size)
+        if policy_eval_input_retention is not None:
+            pulumi.set(__self__, "policy_eval_input_retention", policy_eval_input_retention)
 
     @_builtins.property
     @pulumi.getter
@@ -746,11 +724,19 @@ class LogConfigurationResponse(dict):
 
     @_builtins.property
     @pulumi.getter(name="maxPayloadSize")
-    def max_payload_size(self) -> _builtins.int:
+    def max_payload_size(self) -> Optional[_builtins.int]:
         """
         Maximum size of response payloads to log.
         """
         return pulumi.get(self, "max_payload_size")
+
+    @_builtins.property
+    @pulumi.getter(name="policyEvalInputRetention")
+    def policy_eval_input_retention(self) -> Optional[_builtins.str]:
+        """
+        Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+        """
+        return pulumi.get(self, "policy_eval_input_retention")
 
 
 @pulumi.output_type
@@ -826,6 +812,42 @@ class LogConfigurationScope(dict):
         The ID of the space (required when type is space).
         """
         return pulumi.get(self, "space_id")
+
+
+@pulumi.output_type
+class LogConfigurationSession(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "policyEvalInputRetention":
+            suggest = "policy_eval_input_retention"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in LogConfigurationSession. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        LogConfigurationSession.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        LogConfigurationSession.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 policy_eval_input_retention: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str policy_eval_input_retention: Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+        """
+        if policy_eval_input_retention is not None:
+            pulumi.set(__self__, "policy_eval_input_retention", policy_eval_input_retention)
+
+    @_builtins.property
+    @pulumi.getter(name="policyEvalInputRetention")
+    def policy_eval_input_retention(self) -> Optional[_builtins.str]:
+        """
+        Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+        """
+        return pulumi.get(self, "policy_eval_input_retention")
 
 
 @pulumi.output_type

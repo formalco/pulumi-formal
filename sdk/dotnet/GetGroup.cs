@@ -13,19 +13,19 @@ namespace Formal.Pulumi
     public static class GetGroup
     {
         /// <summary>
-        /// Data source for looking up a Group by name.
+        /// Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.
         /// </summary>
-        public static Task<GetGroupResult> InvokeAsync(GetGroupArgs args, InvokeOptions? options = null)
+        public static Task<GetGroupResult> InvokeAsync(GetGroupArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupResult>("formal:index/getGroup:getGroup", args ?? new GetGroupArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Group by name.
+        /// Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.
         /// </summary>
-        public static Output<GetGroupResult> Invoke(GetGroupInvokeArgs args, InvokeOptions? options = null)
+        public static Output<GetGroupResult> Invoke(GetGroupInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupResult>("formal:index/getGroup:getGroup", args ?? new GetGroupInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Group by name.
+        /// Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.
         /// </summary>
         public static Output<GetGroupResult> Invoke(GetGroupInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupResult>("formal:index/getGroup:getGroup", args ?? new GetGroupInvokeArgs(), options.WithDefaults());
@@ -35,10 +35,16 @@ namespace Formal.Pulumi
     public sealed class GetGroupArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The name of the Group.
+        /// The ID of this Group.
         /// </summary>
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
+        [Input("id")]
+        public string? Id { get; set; }
+
+        /// <summary>
+        /// The name of the Group to look up. Use this to fetch a group by name.
+        /// </summary>
+        [Input("name")]
+        public string? Name { get; set; }
 
         public GetGroupArgs()
         {
@@ -49,10 +55,16 @@ namespace Formal.Pulumi
     public sealed class GetGroupInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The name of the Group.
+        /// The ID of this Group.
         /// </summary>
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
+        [Input("id")]
+        public Input<string>? Id { get; set; }
+
+        /// <summary>
+        /// The name of the Group to look up. Use this to fetch a group by name.
+        /// </summary>
+        [Input("name")]
+        public Input<string>? Name { get; set; }
 
         public GetGroupInvokeArgs()
         {
@@ -69,13 +81,13 @@ namespace Formal.Pulumi
         /// </summary>
         public readonly string Description;
         /// <summary>
-        /// The Formal ID for this Group.
+        /// The ID of this Group.
         /// </summary>
-        public readonly string Id;
+        public readonly string? Id;
         /// <summary>
-        /// The name of the Group.
+        /// The name of the Group to look up. Use this to fetch a group by name.
         /// </summary>
-        public readonly string Name;
+        public readonly string? Name;
         /// <summary>
         /// If set to true, this Group cannot be deleted.
         /// </summary>
@@ -85,9 +97,9 @@ namespace Formal.Pulumi
         private GetGroupResult(
             string description,
 
-            string id,
+            string? id,
 
-            string name,
+            string? name,
 
             bool terminationProtection)
         {

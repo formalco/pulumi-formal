@@ -21,41 +21,34 @@ __all__ = ['LogConfigurationArgs', 'LogConfiguration']
 @pulumi.input_type
 class LogConfigurationArgs:
     def __init__(__self__, *,
-                 encryption_key_id: pulumi.Input[_builtins.str],
                  request: pulumi.Input['LogConfigurationRequestArgs'],
                  response: pulumi.Input['LogConfigurationResponseArgs'],
                  scope: pulumi.Input['LogConfigurationScopeArgs'],
+                 encryption_key_id: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
+                 session: Optional[pulumi.Input['LogConfigurationSessionArgs']] = None,
                  stream: Optional[pulumi.Input['LogConfigurationStreamArgs']] = None):
         """
         The set of arguments for constructing a LogConfiguration resource.
-        :param pulumi.Input[_builtins.str] encryption_key_id: The ID of the encryption key to use for this log configuration.
         :param pulumi.Input['LogConfigurationRequestArgs'] request: Request logging configuration.
         :param pulumi.Input['LogConfigurationResponseArgs'] response: Response logging configuration.
         :param pulumi.Input['LogConfigurationScopeArgs'] scope: The scope configuration for this log configuration.
+        :param pulumi.Input[_builtins.str] encryption_key_id: The ID of the encryption key to use for this log configuration.
         :param pulumi.Input[_builtins.str] name: The name of this log configuration.
+        :param pulumi.Input['LogConfigurationSessionArgs'] session: Session logging configuration.
         :param pulumi.Input['LogConfigurationStreamArgs'] stream: Stream logging configuration.
         """
-        pulumi.set(__self__, "encryption_key_id", encryption_key_id)
         pulumi.set(__self__, "request", request)
         pulumi.set(__self__, "response", response)
         pulumi.set(__self__, "scope", scope)
+        if encryption_key_id is not None:
+            pulumi.set(__self__, "encryption_key_id", encryption_key_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if session is not None:
+            pulumi.set(__self__, "session", session)
         if stream is not None:
             pulumi.set(__self__, "stream", stream)
-
-    @_builtins.property
-    @pulumi.getter(name="encryptionKeyId")
-    def encryption_key_id(self) -> pulumi.Input[_builtins.str]:
-        """
-        The ID of the encryption key to use for this log configuration.
-        """
-        return pulumi.get(self, "encryption_key_id")
-
-    @encryption_key_id.setter
-    def encryption_key_id(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "encryption_key_id", value)
 
     @_builtins.property
     @pulumi.getter
@@ -94,6 +87,18 @@ class LogConfigurationArgs:
         pulumi.set(self, "scope", value)
 
     @_builtins.property
+    @pulumi.getter(name="encryptionKeyId")
+    def encryption_key_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The ID of the encryption key to use for this log configuration.
+        """
+        return pulumi.get(self, "encryption_key_id")
+
+    @encryption_key_id.setter
+    def encryption_key_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "encryption_key_id", value)
+
+    @_builtins.property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
@@ -104,6 +109,18 @@ class LogConfigurationArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def session(self) -> Optional[pulumi.Input['LogConfigurationSessionArgs']]:
+        """
+        Session logging configuration.
+        """
+        return pulumi.get(self, "session")
+
+    @session.setter
+    def session(self, value: Optional[pulumi.Input['LogConfigurationSessionArgs']]):
+        pulumi.set(self, "session", value)
 
     @_builtins.property
     @pulumi.getter
@@ -127,6 +144,7 @@ class _LogConfigurationState:
                  request: Optional[pulumi.Input['LogConfigurationRequestArgs']] = None,
                  response: Optional[pulumi.Input['LogConfigurationResponseArgs']] = None,
                  scope: Optional[pulumi.Input['LogConfigurationScopeArgs']] = None,
+                 session: Optional[pulumi.Input['LogConfigurationSessionArgs']] = None,
                  stream: Optional[pulumi.Input['LogConfigurationStreamArgs']] = None,
                  updated_at: Optional[pulumi.Input[_builtins.str]] = None):
         """
@@ -137,6 +155,7 @@ class _LogConfigurationState:
         :param pulumi.Input['LogConfigurationRequestArgs'] request: Request logging configuration.
         :param pulumi.Input['LogConfigurationResponseArgs'] response: Response logging configuration.
         :param pulumi.Input['LogConfigurationScopeArgs'] scope: The scope configuration for this log configuration.
+        :param pulumi.Input['LogConfigurationSessionArgs'] session: Session logging configuration.
         :param pulumi.Input['LogConfigurationStreamArgs'] stream: Stream logging configuration.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         """
@@ -152,6 +171,8 @@ class _LogConfigurationState:
             pulumi.set(__self__, "response", response)
         if scope is not None:
             pulumi.set(__self__, "scope", scope)
+        if session is not None:
+            pulumi.set(__self__, "session", session)
         if stream is not None:
             pulumi.set(__self__, "stream", stream)
         if updated_at is not None:
@@ -231,6 +252,18 @@ class _LogConfigurationState:
 
     @_builtins.property
     @pulumi.getter
+    def session(self) -> Optional[pulumi.Input['LogConfigurationSessionArgs']]:
+        """
+        Session logging configuration.
+        """
+        return pulumi.get(self, "session")
+
+    @session.setter
+    def session(self, value: Optional[pulumi.Input['LogConfigurationSessionArgs']]):
+        pulumi.set(self, "session", value)
+
+    @_builtins.property
+    @pulumi.getter
     def stream(self) -> Optional[pulumi.Input['LogConfigurationStreamArgs']]:
         """
         Stream logging configuration.
@@ -265,6 +298,7 @@ class LogConfiguration(pulumi.CustomResource):
                  request: Optional[pulumi.Input[Union['LogConfigurationRequestArgs', 'LogConfigurationRequestArgsDict']]] = None,
                  response: Optional[pulumi.Input[Union['LogConfigurationResponseArgs', 'LogConfigurationResponseArgsDict']]] = None,
                  scope: Optional[pulumi.Input[Union['LogConfigurationScopeArgs', 'LogConfigurationScopeArgsDict']]] = None,
+                 session: Optional[pulumi.Input[Union['LogConfigurationSessionArgs', 'LogConfigurationSessionArgsDict']]] = None,
                  stream: Optional[pulumi.Input[Union['LogConfigurationStreamArgs', 'LogConfigurationStreamArgsDict']]] = None,
                  __props__=None):
         """
@@ -277,6 +311,7 @@ class LogConfiguration(pulumi.CustomResource):
         :param pulumi.Input[Union['LogConfigurationRequestArgs', 'LogConfigurationRequestArgsDict']] request: Request logging configuration.
         :param pulumi.Input[Union['LogConfigurationResponseArgs', 'LogConfigurationResponseArgsDict']] response: Response logging configuration.
         :param pulumi.Input[Union['LogConfigurationScopeArgs', 'LogConfigurationScopeArgsDict']] scope: The scope configuration for this log configuration.
+        :param pulumi.Input[Union['LogConfigurationSessionArgs', 'LogConfigurationSessionArgsDict']] session: Session logging configuration.
         :param pulumi.Input[Union['LogConfigurationStreamArgs', 'LogConfigurationStreamArgsDict']] stream: Stream logging configuration.
         """
         ...
@@ -308,6 +343,7 @@ class LogConfiguration(pulumi.CustomResource):
                  request: Optional[pulumi.Input[Union['LogConfigurationRequestArgs', 'LogConfigurationRequestArgsDict']]] = None,
                  response: Optional[pulumi.Input[Union['LogConfigurationResponseArgs', 'LogConfigurationResponseArgsDict']]] = None,
                  scope: Optional[pulumi.Input[Union['LogConfigurationScopeArgs', 'LogConfigurationScopeArgsDict']]] = None,
+                 session: Optional[pulumi.Input[Union['LogConfigurationSessionArgs', 'LogConfigurationSessionArgsDict']]] = None,
                  stream: Optional[pulumi.Input[Union['LogConfigurationStreamArgs', 'LogConfigurationStreamArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -318,8 +354,6 @@ class LogConfiguration(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = LogConfigurationArgs.__new__(LogConfigurationArgs)
 
-            if encryption_key_id is None and not opts.urn:
-                raise TypeError("Missing required property 'encryption_key_id'")
             __props__.__dict__["encryption_key_id"] = encryption_key_id
             __props__.__dict__["name"] = name
             if request is None and not opts.urn:
@@ -331,6 +365,7 @@ class LogConfiguration(pulumi.CustomResource):
             if scope is None and not opts.urn:
                 raise TypeError("Missing required property 'scope'")
             __props__.__dict__["scope"] = scope
+            __props__.__dict__["session"] = session
             __props__.__dict__["stream"] = stream
             __props__.__dict__["created_at"] = None
             __props__.__dict__["updated_at"] = None
@@ -350,6 +385,7 @@ class LogConfiguration(pulumi.CustomResource):
             request: Optional[pulumi.Input[Union['LogConfigurationRequestArgs', 'LogConfigurationRequestArgsDict']]] = None,
             response: Optional[pulumi.Input[Union['LogConfigurationResponseArgs', 'LogConfigurationResponseArgsDict']]] = None,
             scope: Optional[pulumi.Input[Union['LogConfigurationScopeArgs', 'LogConfigurationScopeArgsDict']]] = None,
+            session: Optional[pulumi.Input[Union['LogConfigurationSessionArgs', 'LogConfigurationSessionArgsDict']]] = None,
             stream: Optional[pulumi.Input[Union['LogConfigurationStreamArgs', 'LogConfigurationStreamArgsDict']]] = None,
             updated_at: Optional[pulumi.Input[_builtins.str]] = None) -> 'LogConfiguration':
         """
@@ -365,6 +401,7 @@ class LogConfiguration(pulumi.CustomResource):
         :param pulumi.Input[Union['LogConfigurationRequestArgs', 'LogConfigurationRequestArgsDict']] request: Request logging configuration.
         :param pulumi.Input[Union['LogConfigurationResponseArgs', 'LogConfigurationResponseArgsDict']] response: Response logging configuration.
         :param pulumi.Input[Union['LogConfigurationScopeArgs', 'LogConfigurationScopeArgsDict']] scope: The scope configuration for this log configuration.
+        :param pulumi.Input[Union['LogConfigurationSessionArgs', 'LogConfigurationSessionArgsDict']] session: Session logging configuration.
         :param pulumi.Input[Union['LogConfigurationStreamArgs', 'LogConfigurationStreamArgsDict']] stream: Stream logging configuration.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         """
@@ -378,6 +415,7 @@ class LogConfiguration(pulumi.CustomResource):
         __props__.__dict__["request"] = request
         __props__.__dict__["response"] = response
         __props__.__dict__["scope"] = scope
+        __props__.__dict__["session"] = session
         __props__.__dict__["stream"] = stream
         __props__.__dict__["updated_at"] = updated_at
         return LogConfiguration(resource_name, opts=opts, __props__=__props__)
@@ -392,7 +430,7 @@ class LogConfiguration(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="encryptionKeyId")
-    def encryption_key_id(self) -> pulumi.Output[_builtins.str]:
+    def encryption_key_id(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
         The ID of the encryption key to use for this log configuration.
         """
@@ -429,6 +467,14 @@ class LogConfiguration(pulumi.CustomResource):
         The scope configuration for this log configuration.
         """
         return pulumi.get(self, "scope")
+
+    @_builtins.property
+    @pulumi.getter
+    def session(self) -> pulumi.Output[Optional['outputs.LogConfigurationSession']]:
+        """
+        Session logging configuration.
+        """
+        return pulumi.get(self, "session")
 
     @_builtins.property
     @pulumi.getter

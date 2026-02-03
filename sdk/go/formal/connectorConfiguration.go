@@ -18,10 +18,14 @@ type ConnectorConfiguration struct {
 
 	// The ID of the Connector this configuration is linked to.
 	ConnectorId pulumi.StringOutput `pulumi:"connectorId"`
-	// The port to be used for this Connector's health check.
-	HealthCheckPort pulumi.IntPtrOutput `pulumi:"healthCheckPort"`
 	// The log level to be configured for this Connector.
 	LogLevel pulumi.StringPtrOutput `pulumi:"logLevel"`
+	// The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+	OtelEndpointHostname pulumi.StringPtrOutput `pulumi:"otelEndpointHostname"`
+	// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+	OtelEndpointPort pulumi.IntPtrOutput `pulumi:"otelEndpointPort"`
+	// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+	ResourcesHealthChecksFrequencySeconds pulumi.IntPtrOutput `pulumi:"resourcesHealthChecksFrequencySeconds"`
 }
 
 // NewConnectorConfiguration registers a new resource with the given unique name, arguments, and options.
@@ -59,19 +63,27 @@ func GetConnectorConfiguration(ctx *pulumi.Context,
 type connectorConfigurationState struct {
 	// The ID of the Connector this configuration is linked to.
 	ConnectorId *string `pulumi:"connectorId"`
-	// The port to be used for this Connector's health check.
-	HealthCheckPort *int `pulumi:"healthCheckPort"`
 	// The log level to be configured for this Connector.
 	LogLevel *string `pulumi:"logLevel"`
+	// The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+	OtelEndpointHostname *string `pulumi:"otelEndpointHostname"`
+	// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+	OtelEndpointPort *int `pulumi:"otelEndpointPort"`
+	// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+	ResourcesHealthChecksFrequencySeconds *int `pulumi:"resourcesHealthChecksFrequencySeconds"`
 }
 
 type ConnectorConfigurationState struct {
 	// The ID of the Connector this configuration is linked to.
 	ConnectorId pulumi.StringPtrInput
-	// The port to be used for this Connector's health check.
-	HealthCheckPort pulumi.IntPtrInput
 	// The log level to be configured for this Connector.
 	LogLevel pulumi.StringPtrInput
+	// The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+	OtelEndpointHostname pulumi.StringPtrInput
+	// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+	OtelEndpointPort pulumi.IntPtrInput
+	// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+	ResourcesHealthChecksFrequencySeconds pulumi.IntPtrInput
 }
 
 func (ConnectorConfigurationState) ElementType() reflect.Type {
@@ -81,20 +93,28 @@ func (ConnectorConfigurationState) ElementType() reflect.Type {
 type connectorConfigurationArgs struct {
 	// The ID of the Connector this configuration is linked to.
 	ConnectorId string `pulumi:"connectorId"`
-	// The port to be used for this Connector's health check.
-	HealthCheckPort *int `pulumi:"healthCheckPort"`
 	// The log level to be configured for this Connector.
 	LogLevel *string `pulumi:"logLevel"`
+	// The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+	OtelEndpointHostname *string `pulumi:"otelEndpointHostname"`
+	// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+	OtelEndpointPort *int `pulumi:"otelEndpointPort"`
+	// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+	ResourcesHealthChecksFrequencySeconds *int `pulumi:"resourcesHealthChecksFrequencySeconds"`
 }
 
 // The set of arguments for constructing a ConnectorConfiguration resource.
 type ConnectorConfigurationArgs struct {
 	// The ID of the Connector this configuration is linked to.
 	ConnectorId pulumi.StringInput
-	// The port to be used for this Connector's health check.
-	HealthCheckPort pulumi.IntPtrInput
 	// The log level to be configured for this Connector.
 	LogLevel pulumi.StringPtrInput
+	// The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+	OtelEndpointHostname pulumi.StringPtrInput
+	// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+	OtelEndpointPort pulumi.IntPtrInput
+	// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+	ResourcesHealthChecksFrequencySeconds pulumi.IntPtrInput
 }
 
 func (ConnectorConfigurationArgs) ElementType() reflect.Type {
@@ -189,14 +209,24 @@ func (o ConnectorConfigurationOutput) ConnectorId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConnectorConfiguration) pulumi.StringOutput { return v.ConnectorId }).(pulumi.StringOutput)
 }
 
-// The port to be used for this Connector's health check.
-func (o ConnectorConfigurationOutput) HealthCheckPort() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *ConnectorConfiguration) pulumi.IntPtrOutput { return v.HealthCheckPort }).(pulumi.IntPtrOutput)
-}
-
 // The log level to be configured for this Connector.
 func (o ConnectorConfigurationOutput) LogLevel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ConnectorConfiguration) pulumi.StringPtrOutput { return v.LogLevel }).(pulumi.StringPtrOutput)
+}
+
+// The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+func (o ConnectorConfigurationOutput) OtelEndpointHostname() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorConfiguration) pulumi.StringPtrOutput { return v.OtelEndpointHostname }).(pulumi.StringPtrOutput)
+}
+
+// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+func (o ConnectorConfigurationOutput) OtelEndpointPort() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectorConfiguration) pulumi.IntPtrOutput { return v.OtelEndpointPort }).(pulumi.IntPtrOutput)
+}
+
+// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+func (o ConnectorConfigurationOutput) ResourcesHealthChecksFrequencySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectorConfiguration) pulumi.IntPtrOutput { return v.ResourcesHealthChecksFrequencySeconds }).(pulumi.IntPtrOutput)
 }
 
 type ConnectorConfigurationArrayOutput struct{ *pulumi.OutputState }

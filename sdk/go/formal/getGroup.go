@@ -11,7 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Data source for looking up a Group by name.
+// Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.
 func LookupGroup(ctx *pulumi.Context, args *LookupGroupArgs, opts ...pulumi.InvokeOption) (*LookupGroupResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupGroupResult
@@ -24,18 +24,20 @@ func LookupGroup(ctx *pulumi.Context, args *LookupGroupArgs, opts ...pulumi.Invo
 
 // A collection of arguments for invoking getGroup.
 type LookupGroupArgs struct {
-	// The name of the Group.
-	Name string `pulumi:"name"`
+	// The ID of this Group.
+	Id *string `pulumi:"id"`
+	// The name of the Group to look up. Use this to fetch a group by name.
+	Name *string `pulumi:"name"`
 }
 
 // A collection of values returned by getGroup.
 type LookupGroupResult struct {
 	// Description for this Group.
 	Description string `pulumi:"description"`
-	// The Formal ID for this Group.
-	Id string `pulumi:"id"`
-	// The name of the Group.
-	Name string `pulumi:"name"`
+	// The ID of this Group.
+	Id *string `pulumi:"id"`
+	// The name of the Group to look up. Use this to fetch a group by name.
+	Name *string `pulumi:"name"`
 	// If set to true, this Group cannot be deleted.
 	TerminationProtection bool `pulumi:"terminationProtection"`
 }
@@ -51,8 +53,10 @@ func LookupGroupOutput(ctx *pulumi.Context, args LookupGroupOutputArgs, opts ...
 
 // A collection of arguments for invoking getGroup.
 type LookupGroupOutputArgs struct {
-	// The name of the Group.
-	Name pulumi.StringInput `pulumi:"name"`
+	// The ID of this Group.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// The name of the Group to look up. Use this to fetch a group by name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
 }
 
 func (LookupGroupOutputArgs) ElementType() reflect.Type {
@@ -79,14 +83,14 @@ func (o LookupGroupResultOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupGroupResult) string { return v.Description }).(pulumi.StringOutput)
 }
 
-// The Formal ID for this Group.
-func (o LookupGroupResultOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupGroupResult) string { return v.Id }).(pulumi.StringOutput)
+// The ID of this Group.
+func (o LookupGroupResultOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupGroupResult) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
-// The name of the Group.
-func (o LookupGroupResultOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupGroupResult) string { return v.Name }).(pulumi.StringOutput)
+// The name of the Group to look up. Use this to fetch a group by name.
+func (o LookupGroupResultOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupGroupResult) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
 // If set to true, this Group cannot be deleted.

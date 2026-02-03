@@ -17,9 +17,10 @@ type NativeUser struct {
 	pulumi.CustomResourceState
 
 	// The username of the Native User.
-	NativeUserId pulumi.StringOutput `pulumi:"nativeUserId"`
-	// The password of the Native User.
-	NativeUserSecret pulumi.StringOutput `pulumi:"nativeUserSecret"`
+	NativeUserId     pulumi.StringOutput    `pulumi:"nativeUserId"`
+	NativeUserSecret pulumi.StringPtrOutput `pulumi:"nativeUserSecret"`
+	// Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
+	NativeUserSecretWoVersion pulumi.IntPtrOutput `pulumi:"nativeUserSecretWoVersion"`
 	// The Sidecar ID for the resource this Native User is for.
 	ResourceId pulumi.StringOutput `pulumi:"resourceId"`
 	// If set to true, this Native User cannot be deleted.
@@ -38,14 +39,11 @@ func NewNativeUser(ctx *pulumi.Context,
 	if args.NativeUserId == nil {
 		return nil, errors.New("invalid value for required argument 'NativeUserId'")
 	}
-	if args.NativeUserSecret == nil {
-		return nil, errors.New("invalid value for required argument 'NativeUserSecret'")
-	}
 	if args.ResourceId == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceId'")
 	}
 	if args.NativeUserSecret != nil {
-		args.NativeUserSecret = pulumi.ToSecret(args.NativeUserSecret).(pulumi.StringInput)
+		args.NativeUserSecret = pulumi.ToSecret(args.NativeUserSecret).(pulumi.StringPtrInput)
 	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
 		"nativeUserSecret",
@@ -75,9 +73,10 @@ func GetNativeUser(ctx *pulumi.Context,
 // Input properties used for looking up and filtering NativeUser resources.
 type nativeUserState struct {
 	// The username of the Native User.
-	NativeUserId *string `pulumi:"nativeUserId"`
-	// The password of the Native User.
+	NativeUserId     *string `pulumi:"nativeUserId"`
 	NativeUserSecret *string `pulumi:"nativeUserSecret"`
+	// Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
+	NativeUserSecretWoVersion *int `pulumi:"nativeUserSecretWoVersion"`
 	// The Sidecar ID for the resource this Native User is for.
 	ResourceId *string `pulumi:"resourceId"`
 	// If set to true, this Native User cannot be deleted.
@@ -88,9 +87,10 @@ type nativeUserState struct {
 
 type NativeUserState struct {
 	// The username of the Native User.
-	NativeUserId pulumi.StringPtrInput
-	// The password of the Native User.
+	NativeUserId     pulumi.StringPtrInput
 	NativeUserSecret pulumi.StringPtrInput
+	// Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
+	NativeUserSecretWoVersion pulumi.IntPtrInput
 	// The Sidecar ID for the resource this Native User is for.
 	ResourceId pulumi.StringPtrInput
 	// If set to true, this Native User cannot be deleted.
@@ -105,9 +105,10 @@ func (NativeUserState) ElementType() reflect.Type {
 
 type nativeUserArgs struct {
 	// The username of the Native User.
-	NativeUserId string `pulumi:"nativeUserId"`
-	// The password of the Native User.
-	NativeUserSecret string `pulumi:"nativeUserSecret"`
+	NativeUserId     string  `pulumi:"nativeUserId"`
+	NativeUserSecret *string `pulumi:"nativeUserSecret"`
+	// Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
+	NativeUserSecretWoVersion *int `pulumi:"nativeUserSecretWoVersion"`
 	// The Sidecar ID for the resource this Native User is for.
 	ResourceId string `pulumi:"resourceId"`
 	// If set to true, this Native User cannot be deleted.
@@ -119,9 +120,10 @@ type nativeUserArgs struct {
 // The set of arguments for constructing a NativeUser resource.
 type NativeUserArgs struct {
 	// The username of the Native User.
-	NativeUserId pulumi.StringInput
-	// The password of the Native User.
-	NativeUserSecret pulumi.StringInput
+	NativeUserId     pulumi.StringInput
+	NativeUserSecret pulumi.StringPtrInput
+	// Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
+	NativeUserSecretWoVersion pulumi.IntPtrInput
 	// The Sidecar ID for the resource this Native User is for.
 	ResourceId pulumi.StringInput
 	// If set to true, this Native User cannot be deleted.
@@ -222,9 +224,13 @@ func (o NativeUserOutput) NativeUserId() pulumi.StringOutput {
 	return o.ApplyT(func(v *NativeUser) pulumi.StringOutput { return v.NativeUserId }).(pulumi.StringOutput)
 }
 
-// The password of the Native User.
-func (o NativeUserOutput) NativeUserSecret() pulumi.StringOutput {
-	return o.ApplyT(func(v *NativeUser) pulumi.StringOutput { return v.NativeUserSecret }).(pulumi.StringOutput)
+func (o NativeUserOutput) NativeUserSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUser) pulumi.StringPtrOutput { return v.NativeUserSecret }).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
+func (o NativeUserOutput) NativeUserSecretWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeUser) pulumi.IntPtrOutput { return v.NativeUserSecretWoVersion }).(pulumi.IntPtrOutput)
 }
 
 // The Sidecar ID for the resource this Native User is for.

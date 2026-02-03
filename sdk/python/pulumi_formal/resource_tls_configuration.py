@@ -26,7 +26,7 @@ class ResourceTlsConfigurationArgs:
         """
         The set of arguments for constructing a ResourceTlsConfiguration resource.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the TLS configuration is applied to.
-        :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration.
+        :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         :param pulumi.Input[_builtins.str] tls_ca_truststore: PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
         :param pulumi.Input[_builtins.str] tls_min_version: Minimum TLS version to be used for connections.
         """
@@ -53,7 +53,7 @@ class ResourceTlsConfigurationArgs:
     @pulumi.getter(name="tlsConfig")
     def tls_config(self) -> pulumi.Input[_builtins.str]:
         """
-        Validation mode for the TLS configuration.
+        Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         """
         return pulumi.get(self, "tls_config")
 
@@ -97,7 +97,7 @@ class _ResourceTlsConfigurationState:
         Input properties used for looking up and filtering ResourceTlsConfiguration resources.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the TLS configuration is applied to.
         :param pulumi.Input[_builtins.str] tls_ca_truststore: PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
-        :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration.
+        :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         :param pulumi.Input[_builtins.str] tls_min_version: Minimum TLS version to be used for connections.
         """
         if resource_id is not None:
@@ -137,7 +137,7 @@ class _ResourceTlsConfigurationState:
     @pulumi.getter(name="tlsConfig")
     def tls_config(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        Validation mode for the TLS configuration.
+        Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         """
         return pulumi.get(self, "tls_config")
 
@@ -176,7 +176,7 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the TLS configuration is applied to.
         :param pulumi.Input[_builtins.str] tls_ca_truststore: PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
-        :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration.
+        :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         :param pulumi.Input[_builtins.str] tls_min_version: Minimum TLS version to be used for connections.
         """
         ...
@@ -247,7 +247,7 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the TLS configuration is applied to.
         :param pulumi.Input[_builtins.str] tls_ca_truststore: PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
-        :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration.
+        :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         :param pulumi.Input[_builtins.str] tls_min_version: Minimum TLS version to be used for connections.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -280,7 +280,7 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
     @pulumi.getter(name="tlsConfig")
     def tls_config(self) -> pulumi.Output[_builtins.str]:
         """
-        Validation mode for the TLS configuration.
+        Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         """
         return pulumi.get(self, "tls_config")
 

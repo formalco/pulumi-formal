@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Linking a Resource to a Sidecar in Formal.
+ * (Deprecated) Linking a Resource to a Sidecar in Formal.
  */
 export class SidecarResourceLink extends pulumi.CustomResource {
     /**

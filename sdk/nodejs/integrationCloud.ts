@@ -66,6 +66,10 @@ export class IntegrationCloud extends pulumi.CustomResource {
      */
     public /*out*/ readonly awsEnableRedshiftAutodiscovery!: pulumi.Output<boolean>;
     /**
+     * Whether AWS S3 autodiscovery is enabled or not.
+     */
+    public /*out*/ readonly awsEnableS3Autodiscovery!: pulumi.Output<boolean>;
+    /**
      * The IAM role ID Formal will use to access your resources.
      */
     public /*out*/ readonly awsFormalIamRole!: pulumi.Output<string>;
@@ -120,6 +124,7 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["awsEnableEksAutodiscovery"] = state ? state.awsEnableEksAutodiscovery : undefined;
             resourceInputs["awsEnableRdsAutodiscovery"] = state ? state.awsEnableRdsAutodiscovery : undefined;
             resourceInputs["awsEnableRedshiftAutodiscovery"] = state ? state.awsEnableRedshiftAutodiscovery : undefined;
+            resourceInputs["awsEnableS3Autodiscovery"] = state ? state.awsEnableS3Autodiscovery : undefined;
             resourceInputs["awsFormalIamRole"] = state ? state.awsFormalIamRole : undefined;
             resourceInputs["awsFormalPingbackArn"] = state ? state.awsFormalPingbackArn : undefined;
             resourceInputs["awsFormalStackName"] = state ? state.awsFormalStackName : undefined;
@@ -143,6 +148,7 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["awsEnableEksAutodiscovery"] = undefined /*out*/;
             resourceInputs["awsEnableRdsAutodiscovery"] = undefined /*out*/;
             resourceInputs["awsEnableRedshiftAutodiscovery"] = undefined /*out*/;
+            resourceInputs["awsEnableS3Autodiscovery"] = undefined /*out*/;
             resourceInputs["awsFormalIamRole"] = undefined /*out*/;
             resourceInputs["awsFormalPingbackArn"] = undefined /*out*/;
             resourceInputs["awsFormalStackName"] = undefined /*out*/;
@@ -186,6 +192,10 @@ export interface IntegrationCloudState {
      * Whether AWS Redshift autodiscovery is enabled or not.
      */
     awsEnableRedshiftAutodiscovery?: pulumi.Input<boolean>;
+    /**
+     * Whether AWS S3 autodiscovery is enabled or not.
+     */
+    awsEnableS3Autodiscovery?: pulumi.Input<boolean>;
     /**
      * The IAM role ID Formal will use to access your resources.
      */

@@ -11,62 +11,56 @@ using Pulumi;
 namespace Formal.Pulumi
 {
     /// <summary>
-    /// Creating a Tracker in Formal.
+    /// Manage a Satellite Hostname.
     /// </summary>
-    [PulumiResourceType("formal:index/tracker:Tracker")]
-    public partial class Tracker : global::Pulumi.CustomResource
+    [PulumiResourceType("formal:index/satelliteHostname:SatelliteHostname")]
+    public partial class SatelliteHostname : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// If set to true, this Tracker allow clear text value.
-        /// </summary>
-        [Output("allowClearTextValue")]
-        public Output<bool?> AllowClearTextValue { get; private set; } = null!;
-
-        /// <summary>
-        /// When the policy was created.
+        /// The timestamp when the satellite hostname was created.
         /// </summary>
         [Output("createdAt")]
         public Output<string> CreatedAt { get; private set; } = null!;
 
         /// <summary>
-        /// Path associated with this tracker.
+        /// The hostname for the satellite.
         /// </summary>
-        [Output("path")]
-        public Output<string> Path { get; private set; } = null!;
+        [Output("hostname")]
+        public Output<string> Hostname { get; private set; } = null!;
 
         /// <summary>
-        /// Tracker linked to the following resource id.
+        /// The ID of the Satellite to create the hostname for.
         /// </summary>
-        [Output("resourceId")]
-        public Output<string> ResourceId { get; private set; } = null!;
+        [Output("satelliteId")]
+        public Output<string> SatelliteId { get; private set; } = null!;
 
         /// <summary>
-        /// If set to true, this Tracker cannot be deleted.
+        /// If set to true, this satellite hostname cannot be deleted.
         /// </summary>
         [Output("terminationProtection")]
         public Output<bool?> TerminationProtection { get; private set; } = null!;
 
         /// <summary>
-        /// Last update time.
+        /// The timestamp when the satellite hostname was last updated.
         /// </summary>
         [Output("updatedAt")]
         public Output<string> UpdatedAt { get; private set; } = null!;
 
 
         /// <summary>
-        /// Create a Tracker resource with the given unique name, arguments, and options.
+        /// Create a SatelliteHostname resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Tracker(string name, TrackerArgs args, CustomResourceOptions? options = null)
-            : base("formal:index/tracker:Tracker", name, args ?? new TrackerArgs(), MakeResourceOptions(options, ""))
+        public SatelliteHostname(string name, SatelliteHostnameArgs args, CustomResourceOptions? options = null)
+            : base("formal:index/satelliteHostname:SatelliteHostname", name, args ?? new SatelliteHostnameArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private Tracker(string name, Input<string> id, TrackerState? state = null, CustomResourceOptions? options = null)
-            : base("formal:index/tracker:Tracker", name, state, MakeResourceOptions(options, id))
+        private SatelliteHostname(string name, Input<string> id, SatelliteHostnameState? state = null, CustomResourceOptions? options = null)
+            : base("formal:index/satelliteHostname:SatelliteHostname", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -83,7 +77,7 @@ namespace Formal.Pulumi
             return merged;
         }
         /// <summary>
-        /// Get an existing Tracker resource's state with the given name, ID, and optional extra
+        /// Get an existing SatelliteHostname resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -91,85 +85,73 @@ namespace Formal.Pulumi
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static Tracker Get(string name, Input<string> id, TrackerState? state = null, CustomResourceOptions? options = null)
+        public static SatelliteHostname Get(string name, Input<string> id, SatelliteHostnameState? state = null, CustomResourceOptions? options = null)
         {
-            return new Tracker(name, id, state, options);
+            return new SatelliteHostname(name, id, state, options);
         }
     }
 
-    public sealed class TrackerArgs : global::Pulumi.ResourceArgs
+    public sealed class SatelliteHostnameArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// If set to true, this Tracker allow clear text value.
+        /// The hostname for the satellite.
         /// </summary>
-        [Input("allowClearTextValue")]
-        public Input<bool>? AllowClearTextValue { get; set; }
+        [Input("hostname", required: true)]
+        public Input<string> Hostname { get; set; } = null!;
 
         /// <summary>
-        /// Path associated with this tracker.
+        /// The ID of the Satellite to create the hostname for.
         /// </summary>
-        [Input("path", required: true)]
-        public Input<string> Path { get; set; } = null!;
+        [Input("satelliteId", required: true)]
+        public Input<string> SatelliteId { get; set; } = null!;
 
         /// <summary>
-        /// Tracker linked to the following resource id.
-        /// </summary>
-        [Input("resourceId", required: true)]
-        public Input<string> ResourceId { get; set; } = null!;
-
-        /// <summary>
-        /// If set to true, this Tracker cannot be deleted.
+        /// If set to true, this satellite hostname cannot be deleted.
         /// </summary>
         [Input("terminationProtection")]
         public Input<bool>? TerminationProtection { get; set; }
 
-        public TrackerArgs()
+        public SatelliteHostnameArgs()
         {
         }
-        public static new TrackerArgs Empty => new TrackerArgs();
+        public static new SatelliteHostnameArgs Empty => new SatelliteHostnameArgs();
     }
 
-    public sealed class TrackerState : global::Pulumi.ResourceArgs
+    public sealed class SatelliteHostnameState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// If set to true, this Tracker allow clear text value.
-        /// </summary>
-        [Input("allowClearTextValue")]
-        public Input<bool>? AllowClearTextValue { get; set; }
-
-        /// <summary>
-        /// When the policy was created.
+        /// The timestamp when the satellite hostname was created.
         /// </summary>
         [Input("createdAt")]
         public Input<string>? CreatedAt { get; set; }
 
         /// <summary>
-        /// Path associated with this tracker.
+        /// The hostname for the satellite.
         /// </summary>
-        [Input("path")]
-        public Input<string>? Path { get; set; }
+        [Input("hostname")]
+        public Input<string>? Hostname { get; set; }
 
         /// <summary>
-        /// Tracker linked to the following resource id.
+        /// The ID of the Satellite to create the hostname for.
         /// </summary>
-        [Input("resourceId")]
-        public Input<string>? ResourceId { get; set; }
+        [Input("satelliteId")]
+        public Input<string>? SatelliteId { get; set; }
 
         /// <summary>
-        /// If set to true, this Tracker cannot be deleted.
+        /// If set to true, this satellite hostname cannot be deleted.
         /// </summary>
         [Input("terminationProtection")]
         public Input<bool>? TerminationProtection { get; set; }
 
         /// <summary>
-        /// Last update time.
+        /// The timestamp when the satellite hostname was last updated.
         /// </summary>
         [Input("updatedAt")]
         public Input<string>? UpdatedAt { get; set; }
 
-        public TrackerState()
+        public SatelliteHostnameState()
         {
         }
-        public static new TrackerState Empty => new TrackerState();
+        public static new SatelliteHostnameState Empty => new SatelliteHostnameState();
     }
 }

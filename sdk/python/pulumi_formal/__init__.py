@@ -12,12 +12,15 @@ from .connector_hostname import *
 from .connector_listener import *
 from .connector_listener_link import *
 from .connector_listener_rule import *
+from .connector_satellite_link import *
 from .data_discovery import *
 from .data_domain import *
 from .data_label import *
 from .encryption_key import *
+from .get_connector import *
 from .get_group import *
 from .get_resource import *
+from .get_space import *
 from .group import *
 from .group_user_link import *
 from .integration_bi import *
@@ -25,7 +28,6 @@ from .integration_cloud import *
 from .integration_data_catalog import *
 from .integration_log import *
 from .integration_mdm import *
-from .integration_mfa import *
 from .inventory_object_data_label_link import *
 from .log_configuration import *
 from .native_user import *
@@ -40,11 +42,13 @@ from .resource_health_check import *
 from .resource_hostname import *
 from .resource_tls_configuration import *
 from .satellite import *
+from .satellite_hostname import *
+from .satellite_link import *
 from .sidecar import *
 from .sidecar_resource_link import *
 from .space import *
-from .tracker import *
 from .user import *
+from .workflow import *
 from ._inputs import *
 from . import outputs
 
@@ -104,6 +108,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/connectorListenerRule:ConnectorListenerRule": "ConnectorListenerRule"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/connectorSatelliteLink",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/connectorSatelliteLink:ConnectorSatelliteLink": "ConnectorSatelliteLink"
   }
  },
  {
@@ -192,14 +204,6 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/integrationMdm:IntegrationMdm": "IntegrationMdm"
-  }
- },
- {
-  "pkg": "formal",
-  "mod": "index/integrationMfa",
-  "fqn": "pulumi_formal",
-  "classes": {
-   "formal:index/integrationMfa:IntegrationMfa": "IntegrationMfa"
   }
  },
  {
@@ -308,6 +312,22 @@ _utilities.register(
  },
  {
   "pkg": "formal",
+  "mod": "index/satelliteHostname",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/satelliteHostname:SatelliteHostname": "SatelliteHostname"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/satelliteLink",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/satelliteLink:SatelliteLink": "SatelliteLink"
+  }
+ },
+ {
+  "pkg": "formal",
   "mod": "index/sidecar",
   "fqn": "pulumi_formal",
   "classes": {
@@ -332,18 +352,18 @@ _utilities.register(
  },
  {
   "pkg": "formal",
-  "mod": "index/tracker",
-  "fqn": "pulumi_formal",
-  "classes": {
-   "formal:index/tracker:Tracker": "Tracker"
-  }
- },
- {
-  "pkg": "formal",
   "mod": "index/user",
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/user:User": "User"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/workflow",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/workflow:Workflow": "Workflow"
   }
  }
 ]

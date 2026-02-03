@@ -23,13 +23,13 @@ namespace Formal.Pulumi
         public Output<Outputs.IntegrationBiMetabase?> Metabase { get; private set; } = null!;
 
         /// <summary>
-        /// Friendly name for the App.
+        /// Friendly name for this app.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+        /// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         /// </summary>
         [Output("sync")]
         public Output<bool> Sync { get; private set; } = null!;
@@ -88,13 +88,13 @@ namespace Formal.Pulumi
         public Input<Inputs.IntegrationBiMetabaseArgs>? Metabase { get; set; }
 
         /// <summary>
-        /// Friendly name for the App.
+        /// Friendly name for this app.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+        /// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         /// </summary>
         [Input("sync", required: true)]
         public Input<bool> Sync { get; set; } = null!;
@@ -114,13 +114,13 @@ namespace Formal.Pulumi
         public Input<Inputs.IntegrationBiMetabaseGetArgs>? Metabase { get; set; }
 
         /// <summary>
-        /// Friendly name for the App.
+        /// Friendly name for this app.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+        /// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         /// </summary>
         [Input("sync")]
         public Input<bool>? Sync { get; set; }

@@ -62,7 +62,11 @@ export class Resource extends pulumi.CustomResource {
      */
     public readonly spaceId!: pulumi.Output<string | undefined>;
     /**
-     * Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+     * Tags to apply to the Resource.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: string} | undefined>;
+    /**
+     * Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
      */
     public readonly technology!: pulumi.Output<string>;
     /**
@@ -93,6 +97,7 @@ export class Resource extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["spaceId"] = state ? state.spaceId : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["technology"] = state ? state.technology : undefined;
             resourceInputs["technologyProvider"] = state ? state.technologyProvider : undefined;
             resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
@@ -112,6 +117,7 @@ export class Resource extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["spaceId"] = args ? args.spaceId : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["technology"] = args ? args.technology : undefined;
             resourceInputs["technologyProvider"] = args ? args.technologyProvider : undefined;
             resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
@@ -153,7 +159,11 @@ export interface ResourceState {
      */
     spaceId?: pulumi.Input<string>;
     /**
-     * Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+     * Tags to apply to the Resource.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
      */
     technology?: pulumi.Input<string>;
     /**
@@ -193,7 +203,11 @@ export interface ResourceArgs {
      */
     spaceId?: pulumi.Input<string>;
     /**
-     * Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+     * Tags to apply to the Resource.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
      */
     technology: pulumi.Input<string>;
     /**

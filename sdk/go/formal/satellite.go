@@ -7,6 +7,7 @@ import (
 	"context"
 	"reflect"
 
+	"errors"
 	"github.com/formalco/pulumi-formal/sdk/go/formal/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
@@ -19,6 +20,8 @@ type Satellite struct {
 	ApiKey pulumi.StringOutput `pulumi:"apiKey"`
 	// Friendly name for the Satellite.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+	SatelliteType pulumi.StringOutput `pulumi:"satelliteType"`
 	// The ID of the Space to create the Satellite in.
 	SpaceId pulumi.StringPtrOutput `pulumi:"spaceId"`
 	// If set to true, this Satellite cannot be deleted.
@@ -31,9 +34,12 @@ type Satellite struct {
 func NewSatellite(ctx *pulumi.Context,
 	name string, args *SatelliteArgs, opts ...pulumi.ResourceOption) (*Satellite, error) {
 	if args == nil {
-		args = &SatelliteArgs{}
+		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.SatelliteType == nil {
+		return nil, errors.New("invalid value for required argument 'SatelliteType'")
+	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
 		"apiKey",
 	})
@@ -65,6 +71,8 @@ type satelliteState struct {
 	ApiKey *string `pulumi:"apiKey"`
 	// Friendly name for the Satellite.
 	Name *string `pulumi:"name"`
+	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+	SatelliteType *string `pulumi:"satelliteType"`
 	// The ID of the Space to create the Satellite in.
 	SpaceId *string `pulumi:"spaceId"`
 	// If set to true, this Satellite cannot be deleted.
@@ -78,6 +86,8 @@ type SatelliteState struct {
 	ApiKey pulumi.StringPtrInput
 	// Friendly name for the Satellite.
 	Name pulumi.StringPtrInput
+	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+	SatelliteType pulumi.StringPtrInput
 	// The ID of the Space to create the Satellite in.
 	SpaceId pulumi.StringPtrInput
 	// If set to true, this Satellite cannot be deleted.
@@ -93,6 +103,8 @@ func (SatelliteState) ElementType() reflect.Type {
 type satelliteArgs struct {
 	// Friendly name for the Satellite.
 	Name *string `pulumi:"name"`
+	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+	SatelliteType string `pulumi:"satelliteType"`
 	// The ID of the Space to create the Satellite in.
 	SpaceId *string `pulumi:"spaceId"`
 	// If set to true, this Satellite cannot be deleted.
@@ -103,6 +115,8 @@ type satelliteArgs struct {
 type SatelliteArgs struct {
 	// Friendly name for the Satellite.
 	Name pulumi.StringPtrInput
+	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+	SatelliteType pulumi.StringInput
 	// The ID of the Space to create the Satellite in.
 	SpaceId pulumi.StringPtrInput
 	// If set to true, this Satellite cannot be deleted.
@@ -204,6 +218,11 @@ func (o SatelliteOutput) ApiKey() pulumi.StringOutput {
 // Friendly name for the Satellite.
 func (o SatelliteOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Satellite) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+func (o SatelliteOutput) SatelliteType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Satellite) pulumi.StringOutput { return v.SatelliteType }).(pulumi.StringOutput)
 }
 
 // The ID of the Space to create the Satellite in.

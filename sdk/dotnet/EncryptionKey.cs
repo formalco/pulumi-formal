@@ -32,7 +32,7 @@ namespace Formal.Pulumi
         /// The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
         /// </summary>
         [Output("decryptorUri")]
-        public Output<string> DecryptorUri { get; private set; } = null!;
+        public Output<string?> DecryptorUri { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
@@ -108,8 +108,8 @@ namespace Formal.Pulumi
         /// <summary>
         /// The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
         /// </summary>
-        [Input("decryptorUri", required: true)]
-        public Input<string> DecryptorUri { get; set; } = null!;
+        [Input("decryptorUri")]
+        public Input<string>? DecryptorUri { get; set; }
 
         /// <summary>
         /// The ID of the key in the provider's system (e.g., key ARN for AWS KMS).

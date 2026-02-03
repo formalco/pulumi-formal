@@ -5,11 +5,13 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Data source for looking up a Resource by name.
+ * Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.
  */
-export function getResource(args: GetResourceArgs, opts?: pulumi.InvokeOptions): Promise<GetResourceResult> {
+export function getResource(args?: GetResourceArgs, opts?: pulumi.InvokeOptions): Promise<GetResourceResult> {
+    args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("formal:index/getResource:getResource", {
+        "id": args.id,
         "name": args.name,
     }, opts);
 }
@@ -19,9 +21,13 @@ export function getResource(args: GetResourceArgs, opts?: pulumi.InvokeOptions):
  */
 export interface GetResourceArgs {
     /**
-     * The name of the Resource.
+     * The ID of this Resource.
      */
-    name: string;
+    id?: string;
+    /**
+     * The name of the Resource to look up. Use this to fetch a resource by name.
+     */
+    name?: string;
 }
 
 /**
@@ -41,13 +47,13 @@ export interface GetResourceResult {
      */
     readonly hostname: string;
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * The ID of this Resource.
      */
-    readonly id: string;
+    readonly id?: string;
     /**
-     * The name of the Resource.
+     * The name of the Resource to look up. Use this to fetch a resource by name.
      */
-    readonly name: string;
+    readonly name?: string;
     /**
      * The port your Resource is listening on.
      */
@@ -66,11 +72,13 @@ export interface GetResourceResult {
     readonly terminationProtection: boolean;
 }
 /**
- * Data source for looking up a Resource by name.
+ * Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.
  */
-export function getResourceOutput(args: GetResourceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetResourceResult> {
+export function getResourceOutput(args?: GetResourceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetResourceResult> {
+    args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("formal:index/getResource:getResource", {
+        "id": args.id,
         "name": args.name,
     }, opts);
 }
@@ -80,7 +88,11 @@ export function getResourceOutput(args: GetResourceOutputArgs, opts?: pulumi.Inv
  */
 export interface GetResourceOutputArgs {
     /**
-     * The name of the Resource.
+     * The ID of this Resource.
      */
-    name: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * The name of the Resource to look up. Use this to fetch a resource by name.
+     */
+    name?: pulumi.Input<string>;
 }

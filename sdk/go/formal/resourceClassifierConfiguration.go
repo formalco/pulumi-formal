@@ -16,8 +16,14 @@ import (
 type ResourceClassifierConfiguration struct {
 	pulumi.CustomResourceState
 
+	// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+	AiAnalysisScope pulumi.StringOutput `pulumi:"aiAnalysisScope"`
+	// The timeout for the AI analysis in seconds.
+	AiAnalysisTimeoutSeconds pulumi.IntOutput `pulumi:"aiAnalysisTimeoutSeconds"`
 	// The timestamp of the Resource Classifier Preference creation.
 	CreatedAt pulumi.IntOutput `pulumi:"createdAt"`
+	// Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+	EnforceStrictClassifierResultCount pulumi.BoolPtrOutput `pulumi:"enforceStrictClassifierResultCount"`
 	// The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
 	Preference pulumi.StringOutput `pulumi:"preference"`
 	// The ID of the Resource.
@@ -33,6 +39,12 @@ func NewResourceClassifierConfiguration(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.AiAnalysisScope == nil {
+		return nil, errors.New("invalid value for required argument 'AiAnalysisScope'")
+	}
+	if args.AiAnalysisTimeoutSeconds == nil {
+		return nil, errors.New("invalid value for required argument 'AiAnalysisTimeoutSeconds'")
+	}
 	if args.Preference == nil {
 		return nil, errors.New("invalid value for required argument 'Preference'")
 	}
@@ -62,8 +74,14 @@ func GetResourceClassifierConfiguration(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ResourceClassifierConfiguration resources.
 type resourceClassifierConfigurationState struct {
+	// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+	AiAnalysisScope *string `pulumi:"aiAnalysisScope"`
+	// The timeout for the AI analysis in seconds.
+	AiAnalysisTimeoutSeconds *int `pulumi:"aiAnalysisTimeoutSeconds"`
 	// The timestamp of the Resource Classifier Preference creation.
 	CreatedAt *int `pulumi:"createdAt"`
+	// Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+	EnforceStrictClassifierResultCount *bool `pulumi:"enforceStrictClassifierResultCount"`
 	// The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
 	Preference *string `pulumi:"preference"`
 	// The ID of the Resource.
@@ -73,8 +91,14 @@ type resourceClassifierConfigurationState struct {
 }
 
 type ResourceClassifierConfigurationState struct {
+	// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+	AiAnalysisScope pulumi.StringPtrInput
+	// The timeout for the AI analysis in seconds.
+	AiAnalysisTimeoutSeconds pulumi.IntPtrInput
 	// The timestamp of the Resource Classifier Preference creation.
 	CreatedAt pulumi.IntPtrInput
+	// Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+	EnforceStrictClassifierResultCount pulumi.BoolPtrInput
 	// The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
 	Preference pulumi.StringPtrInput
 	// The ID of the Resource.
@@ -88,6 +112,12 @@ func (ResourceClassifierConfigurationState) ElementType() reflect.Type {
 }
 
 type resourceClassifierConfigurationArgs struct {
+	// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+	AiAnalysisScope string `pulumi:"aiAnalysisScope"`
+	// The timeout for the AI analysis in seconds.
+	AiAnalysisTimeoutSeconds int `pulumi:"aiAnalysisTimeoutSeconds"`
+	// Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+	EnforceStrictClassifierResultCount *bool `pulumi:"enforceStrictClassifierResultCount"`
 	// The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
 	Preference string `pulumi:"preference"`
 	// The ID of the Resource.
@@ -96,6 +126,12 @@ type resourceClassifierConfigurationArgs struct {
 
 // The set of arguments for constructing a ResourceClassifierConfiguration resource.
 type ResourceClassifierConfigurationArgs struct {
+	// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+	AiAnalysisScope pulumi.StringInput
+	// The timeout for the AI analysis in seconds.
+	AiAnalysisTimeoutSeconds pulumi.IntInput
+	// Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+	EnforceStrictClassifierResultCount pulumi.BoolPtrInput
 	// The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
 	Preference pulumi.StringInput
 	// The ID of the Resource.
@@ -189,9 +225,26 @@ func (o ResourceClassifierConfigurationOutput) ToResourceClassifierConfiguration
 	return o
 }
 
+// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+func (o ResourceClassifierConfigurationOutput) AiAnalysisScope() pulumi.StringOutput {
+	return o.ApplyT(func(v *ResourceClassifierConfiguration) pulumi.StringOutput { return v.AiAnalysisScope }).(pulumi.StringOutput)
+}
+
+// The timeout for the AI analysis in seconds.
+func (o ResourceClassifierConfigurationOutput) AiAnalysisTimeoutSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v *ResourceClassifierConfiguration) pulumi.IntOutput { return v.AiAnalysisTimeoutSeconds }).(pulumi.IntOutput)
+}
+
 // The timestamp of the Resource Classifier Preference creation.
 func (o ResourceClassifierConfigurationOutput) CreatedAt() pulumi.IntOutput {
 	return o.ApplyT(func(v *ResourceClassifierConfiguration) pulumi.IntOutput { return v.CreatedAt }).(pulumi.IntOutput)
+}
+
+// Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+func (o ResourceClassifierConfigurationOutput) EnforceStrictClassifierResultCount() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ResourceClassifierConfiguration) pulumi.BoolPtrOutput {
+		return v.EnforceStrictClassifierResultCount
+	}).(pulumi.BoolPtrOutput)
 }
 
 // The preference. Supported values are `nlp`, `llm`, `both`, and `none`.

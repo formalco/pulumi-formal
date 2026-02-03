@@ -12,7 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Linking a Resource to a Sidecar in Formal.
+// (Deprecated) Linking a Resource to a Sidecar in Formal.
 type SidecarResourceLink struct {
 	pulumi.CustomResourceState
 

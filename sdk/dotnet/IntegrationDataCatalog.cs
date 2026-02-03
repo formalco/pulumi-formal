@@ -11,7 +11,7 @@ using Pulumi;
 namespace Formal.Pulumi
 {
     /// <summary>
-    /// Registering a Data Catalog integration.
+    /// (Deprecated) Registering a Data Catalog integration.
     /// </summary>
     [PulumiResourceType("formal:index/integrationDataCatalog:IntegrationDataCatalog")]
     public partial class IntegrationDataCatalog : global::Pulumi.CustomResource

@@ -21,7 +21,11 @@ namespace Formal.Pulumi.Outputs
         /// <summary>
         /// Maximum size of request payloads to log.
         /// </summary>
-        public readonly int MaxPayloadSize;
+        public readonly int? MaxPayloadSize;
+        /// <summary>
+        /// Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+        /// </summary>
+        public readonly string? PolicyEvalInputRetention;
         /// <summary>
         /// SQL logging configuration for requests.
         /// </summary>
@@ -31,12 +35,15 @@ namespace Formal.Pulumi.Outputs
         private LogConfigurationRequest(
             bool encrypt,
 
-            int maxPayloadSize,
+            int? maxPayloadSize,
+
+            string? policyEvalInputRetention,
 
             Outputs.LogConfigurationRequestSql? sql)
         {
             Encrypt = encrypt;
             MaxPayloadSize = maxPayloadSize;
+            PolicyEvalInputRetention = policyEvalInputRetention;
             Sql = sql;
         }
     }

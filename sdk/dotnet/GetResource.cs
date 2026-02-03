@@ -13,19 +13,19 @@ namespace Formal.Pulumi
     public static class GetResource
     {
         /// <summary>
-        /// Data source for looking up a Resource by name.
+        /// Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.
         /// </summary>
-        public static Task<GetResourceResult> InvokeAsync(GetResourceArgs args, InvokeOptions? options = null)
+        public static Task<GetResourceResult> InvokeAsync(GetResourceArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourceResult>("formal:index/getResource:getResource", args ?? new GetResourceArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Resource by name.
+        /// Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.
         /// </summary>
-        public static Output<GetResourceResult> Invoke(GetResourceInvokeArgs args, InvokeOptions? options = null)
+        public static Output<GetResourceResult> Invoke(GetResourceInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceResult>("formal:index/getResource:getResource", args ?? new GetResourceInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Resource by name.
+        /// Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.
         /// </summary>
         public static Output<GetResourceResult> Invoke(GetResourceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceResult>("formal:index/getResource:getResource", args ?? new GetResourceInvokeArgs(), options.WithDefaults());
@@ -35,10 +35,16 @@ namespace Formal.Pulumi
     public sealed class GetResourceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The name of the Resource.
+        /// The ID of this Resource.
         /// </summary>
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
+        [Input("id")]
+        public string? Id { get; set; }
+
+        /// <summary>
+        /// The name of the Resource to look up. Use this to fetch a resource by name.
+        /// </summary>
+        [Input("name")]
+        public string? Name { get; set; }
 
         public GetResourceArgs()
         {
@@ -49,10 +55,16 @@ namespace Formal.Pulumi
     public sealed class GetResourceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The name of the Resource.
+        /// The ID of this Resource.
         /// </summary>
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
+        [Input("id")]
+        public Input<string>? Id { get; set; }
+
+        /// <summary>
+        /// The name of the Resource to look up. Use this to fetch a resource by name.
+        /// </summary>
+        [Input("name")]
+        public Input<string>? Name { get; set; }
 
         public GetResourceInvokeArgs()
         {
@@ -77,13 +89,13 @@ namespace Formal.Pulumi
         /// </summary>
         public readonly string Hostname;
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// The ID of this Resource.
         /// </summary>
-        public readonly string Id;
+        public readonly string? Id;
         /// <summary>
-        /// The name of the Resource.
+        /// The name of the Resource to look up. Use this to fetch a resource by name.
         /// </summary>
-        public readonly string Name;
+        public readonly string? Name;
         /// <summary>
         /// The port your Resource is listening on.
         /// </summary>
@@ -109,9 +121,9 @@ namespace Formal.Pulumi
 
             string hostname,
 
-            string id,
+            string? id,
 
-            string name,
+            string? name,
 
             int port,
 

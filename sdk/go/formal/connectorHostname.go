@@ -16,6 +16,8 @@ import (
 type ConnectorHostname struct {
 	pulumi.CustomResourceState
 
+	// The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+	Certificate pulumi.StringPtrOutput `pulumi:"certificate"`
 	// The ID of the Connector this hostname is linked to.
 	ConnectorId pulumi.StringOutput `pulumi:"connectorId"`
 	// The DNS record for this hostname.
@@ -28,6 +30,8 @@ type ConnectorHostname struct {
 	//
 	// Deprecated: This field is deprecated and has no effect. It will be removed in a future release.
 	ManagedTls pulumi.BoolPtrOutput `pulumi:"managedTls"`
+	// The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+	PrivateKey pulumi.StringPtrOutput `pulumi:"privateKey"`
 	// If set to true, this connector hostname cannot be deleted.
 	TerminationProtection pulumi.BoolPtrOutput `pulumi:"terminationProtection"`
 	// The status of the TLS certificate for this hostname. Accepted values are `none`, `issuing`, and `issued`.
@@ -47,6 +51,17 @@ func NewConnectorHostname(ctx *pulumi.Context,
 	if args.Hostname == nil {
 		return nil, errors.New("invalid value for required argument 'Hostname'")
 	}
+	if args.Certificate != nil {
+		args.Certificate = pulumi.ToSecret(args.Certificate).(pulumi.StringPtrInput)
+	}
+	if args.PrivateKey != nil {
+		args.PrivateKey = pulumi.ToSecret(args.PrivateKey).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"certificate",
+		"privateKey",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ConnectorHostname
 	err := ctx.RegisterResource("formal:index/connectorHostname:ConnectorHostname", name, args, &resource, opts...)
@@ -70,6 +85,8 @@ func GetConnectorHostname(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ConnectorHostname resources.
 type connectorHostnameState struct {
+	// The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+	Certificate *string `pulumi:"certificate"`
 	// The ID of the Connector this hostname is linked to.
 	ConnectorId *string `pulumi:"connectorId"`
 	// The DNS record for this hostname.
@@ -82,6 +99,8 @@ type connectorHostnameState struct {
 	//
 	// Deprecated: This field is deprecated and has no effect. It will be removed in a future release.
 	ManagedTls *bool `pulumi:"managedTls"`
+	// The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+	PrivateKey *string `pulumi:"privateKey"`
 	// If set to true, this connector hostname cannot be deleted.
 	TerminationProtection *bool `pulumi:"terminationProtection"`
 	// The status of the TLS certificate for this hostname. Accepted values are `none`, `issuing`, and `issued`.
@@ -89,6 +108,8 @@ type connectorHostnameState struct {
 }
 
 type ConnectorHostnameState struct {
+	// The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+	Certificate pulumi.StringPtrInput
 	// The ID of the Connector this hostname is linked to.
 	ConnectorId pulumi.StringPtrInput
 	// The DNS record for this hostname.
@@ -101,6 +122,8 @@ type ConnectorHostnameState struct {
 	//
 	// Deprecated: This field is deprecated and has no effect. It will be removed in a future release.
 	ManagedTls pulumi.BoolPtrInput
+	// The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+	PrivateKey pulumi.StringPtrInput
 	// If set to true, this connector hostname cannot be deleted.
 	TerminationProtection pulumi.BoolPtrInput
 	// The status of the TLS certificate for this hostname. Accepted values are `none`, `issuing`, and `issued`.
@@ -112,6 +135,8 @@ func (ConnectorHostnameState) ElementType() reflect.Type {
 }
 
 type connectorHostnameArgs struct {
+	// The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+	Certificate *string `pulumi:"certificate"`
 	// The ID of the Connector this hostname is linked to.
 	ConnectorId string `pulumi:"connectorId"`
 	// The DNS record for this hostname.
@@ -122,12 +147,16 @@ type connectorHostnameArgs struct {
 	//
 	// Deprecated: This field is deprecated and has no effect. It will be removed in a future release.
 	ManagedTls *bool `pulumi:"managedTls"`
+	// The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+	PrivateKey *string `pulumi:"privateKey"`
 	// If set to true, this connector hostname cannot be deleted.
 	TerminationProtection *bool `pulumi:"terminationProtection"`
 }
 
 // The set of arguments for constructing a ConnectorHostname resource.
 type ConnectorHostnameArgs struct {
+	// The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+	Certificate pulumi.StringPtrInput
 	// The ID of the Connector this hostname is linked to.
 	ConnectorId pulumi.StringInput
 	// The DNS record for this hostname.
@@ -138,6 +167,8 @@ type ConnectorHostnameArgs struct {
 	//
 	// Deprecated: This field is deprecated and has no effect. It will be removed in a future release.
 	ManagedTls pulumi.BoolPtrInput
+	// The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+	PrivateKey pulumi.StringPtrInput
 	// If set to true, this connector hostname cannot be deleted.
 	TerminationProtection pulumi.BoolPtrInput
 }
@@ -229,6 +260,11 @@ func (o ConnectorHostnameOutput) ToConnectorHostnameOutputWithContext(ctx contex
 	return o
 }
 
+// The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+func (o ConnectorHostnameOutput) Certificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorHostname) pulumi.StringPtrOutput { return v.Certificate }).(pulumi.StringPtrOutput)
+}
+
 // The ID of the Connector this hostname is linked to.
 func (o ConnectorHostnameOutput) ConnectorId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConnectorHostname) pulumi.StringOutput { return v.ConnectorId }).(pulumi.StringOutput)
@@ -254,6 +290,11 @@ func (o ConnectorHostnameOutput) Hostname() pulumi.StringOutput {
 // Deprecated: This field is deprecated and has no effect. It will be removed in a future release.
 func (o ConnectorHostnameOutput) ManagedTls() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ConnectorHostname) pulumi.BoolPtrOutput { return v.ManagedTls }).(pulumi.BoolPtrOutput)
+}
+
+// The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+func (o ConnectorHostnameOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorHostname) pulumi.StringPtrOutput { return v.PrivateKey }).(pulumi.StringPtrOutput)
 }
 
 // If set to true, this connector hostname cannot be deleted.

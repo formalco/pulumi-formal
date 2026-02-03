@@ -251,7 +251,7 @@ class Sidecar(pulumi.CustomResource):
                  version: Optional[pulumi.Input[_builtins.str]] = None,
                  __props__=None):
         """
-        Registering a Sidecar with Formal.
+        (Deprecated) Registering a Sidecar with Formal.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -268,7 +268,7 @@ class Sidecar(pulumi.CustomResource):
                  args: SidecarArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Registering a Sidecar with Formal.
+        (Deprecated) Registering a Sidecar with Formal.
 
         :param str resource_name: The name of the resource.
         :param SidecarArgs args: The arguments to use to populate this resource's properties.

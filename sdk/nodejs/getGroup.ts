@@ -5,11 +5,13 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Data source for looking up a Group by name.
+ * Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.
  */
-export function getGroup(args: GetGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupResult> {
+export function getGroup(args?: GetGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupResult> {
+    args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("formal:index/getGroup:getGroup", {
+        "id": args.id,
         "name": args.name,
     }, opts);
 }
@@ -19,9 +21,13 @@ export function getGroup(args: GetGroupArgs, opts?: pulumi.InvokeOptions): Promi
  */
 export interface GetGroupArgs {
     /**
-     * The name of the Group.
+     * The ID of this Group.
      */
-    name: string;
+    id?: string;
+    /**
+     * The name of the Group to look up. Use this to fetch a group by name.
+     */
+    name?: string;
 }
 
 /**
@@ -33,24 +39,26 @@ export interface GetGroupResult {
      */
     readonly description: string;
     /**
-     * The Formal ID for this Group.
+     * The ID of this Group.
      */
-    readonly id: string;
+    readonly id?: string;
     /**
-     * The name of the Group.
+     * The name of the Group to look up. Use this to fetch a group by name.
      */
-    readonly name: string;
+    readonly name?: string;
     /**
      * If set to true, this Group cannot be deleted.
      */
     readonly terminationProtection: boolean;
 }
 /**
- * Data source for looking up a Group by name.
+ * Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.
  */
-export function getGroupOutput(args: GetGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupResult> {
+export function getGroupOutput(args?: GetGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupResult> {
+    args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("formal:index/getGroup:getGroup", {
+        "id": args.id,
         "name": args.name,
     }, opts);
 }
@@ -60,7 +68,11 @@ export function getGroupOutput(args: GetGroupOutputArgs, opts?: pulumi.InvokeOut
  */
 export interface GetGroupOutputArgs {
     /**
-     * The name of the Group.
+     * The ID of this Group.
      */
-    name: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * The name of the Group to look up. Use this to fetch a group by name.
+     */
+    name?: pulumi.Input<string>;
 }

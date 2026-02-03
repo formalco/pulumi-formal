@@ -25,16 +25,18 @@ class ResourceArgs:
                  environment: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  space_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  technology_provider: Optional[pulumi.Input[_builtins.str]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Resource resource.
         :param pulumi.Input[_builtins.str] hostname: Hostname of the Resource.
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
         :param pulumi.Input[_builtins.str] environment: Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Resource.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags to apply to the Resource.
         :param pulumi.Input[_builtins.str] technology_provider: For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, the Resource cannot be deleted.
         """
@@ -50,6 +52,8 @@ class ResourceArgs:
             pulumi.set(__self__, "name", name)
         if space_id is not None:
             pulumi.set(__self__, "space_id", space_id)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if technology_provider is not None:
             pulumi.set(__self__, "technology_provider", technology_provider)
         if termination_protection is not None:
@@ -83,7 +87,7 @@ class ResourceArgs:
     @pulumi.getter
     def technology(self) -> pulumi.Input[_builtins.str]:
         """
-        Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+        Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
         """
         return pulumi.get(self, "technology")
 
@@ -129,6 +133,18 @@ class ResourceArgs:
         pulumi.set(self, "space_id", value)
 
     @_builtins.property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]:
+        """
+        Tags to apply to the Resource.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @_builtins.property
     @pulumi.getter(name="technologyProvider")
     def technology_provider(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
@@ -162,6 +178,7 @@ class _ResourceState:
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  port: Optional[pulumi.Input[_builtins.int]] = None,
                  space_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  technology: Optional[pulumi.Input[_builtins.str]] = None,
                  technology_provider: Optional[pulumi.Input[_builtins.str]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
@@ -173,7 +190,8 @@ class _ResourceState:
         :param pulumi.Input[_builtins.str] name: Friendly name for the Resource.
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags to apply to the Resource.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
         :param pulumi.Input[_builtins.str] technology_provider: For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, the Resource cannot be deleted.
         """
@@ -192,6 +210,8 @@ class _ResourceState:
             pulumi.set(__self__, "port", port)
         if space_id is not None:
             pulumi.set(__self__, "space_id", space_id)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if technology is not None:
             pulumi.set(__self__, "technology", technology)
         if technology_provider is not None:
@@ -274,9 +294,21 @@ class _ResourceState:
 
     @_builtins.property
     @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]:
+        """
+        Tags to apply to the Resource.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @_builtins.property
+    @pulumi.getter
     def technology(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+        Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
         """
         return pulumi.get(self, "technology")
 
@@ -320,6 +352,7 @@ class Resource(pulumi.CustomResource):
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  port: Optional[pulumi.Input[_builtins.int]] = None,
                  space_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  technology: Optional[pulumi.Input[_builtins.str]] = None,
                  technology_provider: Optional[pulumi.Input[_builtins.str]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -334,7 +367,8 @@ class Resource(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: Friendly name for the Resource.
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags to apply to the Resource.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
         :param pulumi.Input[_builtins.str] technology_provider: For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, the Resource cannot be deleted.
         """
@@ -367,6 +401,7 @@ class Resource(pulumi.CustomResource):
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  port: Optional[pulumi.Input[_builtins.int]] = None,
                  space_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  technology: Optional[pulumi.Input[_builtins.str]] = None,
                  technology_provider: Optional[pulumi.Input[_builtins.str]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -388,6 +423,7 @@ class Resource(pulumi.CustomResource):
                 raise TypeError("Missing required property 'port'")
             __props__.__dict__["port"] = port
             __props__.__dict__["space_id"] = space_id
+            __props__.__dict__["tags"] = tags
             if technology is None and not opts.urn:
                 raise TypeError("Missing required property 'technology'")
             __props__.__dict__["technology"] = technology
@@ -410,6 +446,7 @@ class Resource(pulumi.CustomResource):
             name: Optional[pulumi.Input[_builtins.str]] = None,
             port: Optional[pulumi.Input[_builtins.int]] = None,
             space_id: Optional[pulumi.Input[_builtins.str]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
             technology: Optional[pulumi.Input[_builtins.str]] = None,
             technology_provider: Optional[pulumi.Input[_builtins.str]] = None,
             termination_protection: Optional[pulumi.Input[_builtins.bool]] = None) -> 'Resource':
@@ -426,7 +463,8 @@ class Resource(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: Friendly name for the Resource.
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags to apply to the Resource.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
         :param pulumi.Input[_builtins.str] technology_provider: For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, the Resource cannot be deleted.
         """
@@ -440,6 +478,7 @@ class Resource(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["port"] = port
         __props__.__dict__["space_id"] = space_id
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["technology"] = technology
         __props__.__dict__["technology_provider"] = technology_provider
         __props__.__dict__["termination_protection"] = termination_protection
@@ -496,9 +535,17 @@ class Resource(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, _builtins.str]]]:
+        """
+        Tags to apply to the Resource.
+        """
+        return pulumi.get(self, "tags")
+
+    @_builtins.property
+    @pulumi.getter
     def technology(self) -> pulumi.Output[_builtins.str]:
         """
-        Technology of the Resource: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis` and `ssh`.
+        Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
         """
         return pulumi.get(self, "technology")
 

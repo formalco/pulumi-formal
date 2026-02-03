@@ -12,7 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Registering a Sidecar with Formal.
+// (Deprecated) Registering a Sidecar with Formal.
 type Sidecar struct {
 	pulumi.CustomResourceState
 

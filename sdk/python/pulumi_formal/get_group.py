@@ -50,17 +50,17 @@ class GetGroupResult:
 
     @_builtins.property
     @pulumi.getter
-    def id(self) -> _builtins.str:
+    def id(self) -> Optional[_builtins.str]:
         """
-        The Formal ID for this Group.
+        The ID of this Group.
         """
         return pulumi.get(self, "id")
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> _builtins.str:
+    def name(self) -> Optional[_builtins.str]:
         """
-        The name of the Group.
+        The name of the Group to look up. Use this to fetch a group by name.
         """
         return pulumi.get(self, "name")
 
@@ -85,15 +85,18 @@ class AwaitableGetGroupResult(GetGroupResult):
             termination_protection=self.termination_protection)
 
 
-def get_group(name: Optional[_builtins.str] = None,
+def get_group(id: Optional[_builtins.str] = None,
+              name: Optional[_builtins.str] = None,
               opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetGroupResult:
     """
-    Data source for looking up a Group by name.
+    Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.
 
 
-    :param _builtins.str name: The name of the Group.
+    :param _builtins.str id: The ID of this Group.
+    :param _builtins.str name: The name of the Group to look up. Use this to fetch a group by name.
     """
     __args__ = dict()
+    __args__['id'] = id
     __args__['name'] = name
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('formal:index/getGroup:getGroup', __args__, opts=opts, typ=GetGroupResult).value
@@ -103,15 +106,18 @@ def get_group(name: Optional[_builtins.str] = None,
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'),
         termination_protection=pulumi.get(__ret__, 'termination_protection'))
-def get_group_output(name: Optional[pulumi.Input[_builtins.str]] = None,
+def get_group_output(id: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
+                     name: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
                      opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetGroupResult]:
     """
-    Data source for looking up a Group by name.
+    Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.
 
 
-    :param _builtins.str name: The name of the Group.
+    :param _builtins.str id: The ID of this Group.
+    :param _builtins.str name: The name of the Group to look up. Use this to fetch a group by name.
     """
     __args__ = dict()
+    __args__['id'] = id
     __args__['name'] = name
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('formal:index/getGroup:getGroup', __args__, opts=opts, typ=GetGroupResult)

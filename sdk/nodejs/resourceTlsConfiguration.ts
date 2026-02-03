@@ -44,7 +44,7 @@ export class ResourceTlsConfiguration extends pulumi.CustomResource {
      */
     public readonly tlsCaTruststore!: pulumi.Output<string | undefined>;
     /**
-     * Validation mode for the TLS configuration.
+     * Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
      */
     public readonly tlsConfig!: pulumi.Output<string>;
     /**
@@ -100,7 +100,7 @@ export interface ResourceTlsConfigurationState {
      */
     tlsCaTruststore?: pulumi.Input<string>;
     /**
-     * Validation mode for the TLS configuration.
+     * Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
      */
     tlsConfig?: pulumi.Input<string>;
     /**
@@ -122,7 +122,7 @@ export interface ResourceTlsConfigurationArgs {
      */
     tlsCaTruststore?: pulumi.Input<string>;
     /**
-     * Validation mode for the TLS configuration.
+     * Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
      */
     tlsConfig: pulumi.Input<string>;
     /**

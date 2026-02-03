@@ -39,10 +39,11 @@ export class NativeUser extends pulumi.CustomResource {
      * The username of the Native User.
      */
     public readonly nativeUserId!: pulumi.Output<string>;
+    public readonly nativeUserSecret!: pulumi.Output<string | undefined>;
     /**
-     * The password of the Native User.
+     * Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
      */
-    public readonly nativeUserSecret!: pulumi.Output<string>;
+    public readonly nativeUserSecretWoVersion!: pulumi.Output<number | undefined>;
     /**
      * The Sidecar ID for the resource this Native User is for.
      */
@@ -71,6 +72,7 @@ export class NativeUser extends pulumi.CustomResource {
             const state = argsOrState as NativeUserState | undefined;
             resourceInputs["nativeUserId"] = state ? state.nativeUserId : undefined;
             resourceInputs["nativeUserSecret"] = state ? state.nativeUserSecret : undefined;
+            resourceInputs["nativeUserSecretWoVersion"] = state ? state.nativeUserSecretWoVersion : undefined;
             resourceInputs["resourceId"] = state ? state.resourceId : undefined;
             resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
             resourceInputs["useAsDefault"] = state ? state.useAsDefault : undefined;
@@ -79,14 +81,12 @@ export class NativeUser extends pulumi.CustomResource {
             if ((!args || args.nativeUserId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'nativeUserId'");
             }
-            if ((!args || args.nativeUserSecret === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'nativeUserSecret'");
-            }
             if ((!args || args.resourceId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'resourceId'");
             }
             resourceInputs["nativeUserId"] = args ? args.nativeUserId : undefined;
             resourceInputs["nativeUserSecret"] = args?.nativeUserSecret ? pulumi.secret(args.nativeUserSecret) : undefined;
+            resourceInputs["nativeUserSecretWoVersion"] = args ? args.nativeUserSecretWoVersion : undefined;
             resourceInputs["resourceId"] = args ? args.resourceId : undefined;
             resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
             resourceInputs["useAsDefault"] = args ? args.useAsDefault : undefined;
@@ -106,10 +106,11 @@ export interface NativeUserState {
      * The username of the Native User.
      */
     nativeUserId?: pulumi.Input<string>;
-    /**
-     * The password of the Native User.
-     */
     nativeUserSecret?: pulumi.Input<string>;
+    /**
+     * Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
+     */
+    nativeUserSecretWoVersion?: pulumi.Input<number>;
     /**
      * The Sidecar ID for the resource this Native User is for.
      */
@@ -132,10 +133,11 @@ export interface NativeUserArgs {
      * The username of the Native User.
      */
     nativeUserId: pulumi.Input<string>;
+    nativeUserSecret?: pulumi.Input<string>;
     /**
-     * The password of the Native User.
+     * Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
      */
-    nativeUserSecret: pulumi.Input<string>;
+    nativeUserSecretWoVersion?: pulumi.Input<number>;
     /**
      * The Sidecar ID for the resource this Native User is for.
      */

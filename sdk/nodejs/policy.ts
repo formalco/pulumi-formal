@@ -52,7 +52,7 @@ export class Policy extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Notification settings for this policy.
+     * Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
      */
     public readonly notification!: pulumi.Output<string>;
     /**
@@ -147,7 +147,7 @@ export interface PolicyState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Notification settings for this policy.
+     * Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
      */
     notification?: pulumi.Input<string>;
     /**
@@ -185,7 +185,7 @@ export interface PolicyArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Notification settings for this policy.
+     * Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
      */
     notification: pulumi.Input<string>;
     /**

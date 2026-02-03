@@ -42,11 +42,11 @@ export class IntegrationBi extends pulumi.CustomResource {
      */
     public readonly metabase!: pulumi.Output<outputs.IntegrationBiMetabase | undefined>;
     /**
-     * Friendly name for the App.
+     * Friendly name for this app.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+     * Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
      */
     public readonly sync!: pulumi.Output<boolean>;
 
@@ -89,11 +89,11 @@ export interface IntegrationBiState {
      */
     metabase?: pulumi.Input<inputs.IntegrationBiMetabase>;
     /**
-     * Friendly name for the App.
+     * Friendly name for this app.
      */
     name?: pulumi.Input<string>;
     /**
-     * Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+     * Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
      */
     sync?: pulumi.Input<boolean>;
 }
@@ -107,11 +107,11 @@ export interface IntegrationBiArgs {
      */
     metabase?: pulumi.Input<inputs.IntegrationBiMetabase>;
     /**
-     * Friendly name for the App.
+     * Friendly name for this app.
      */
     name?: pulumi.Input<string>;
     /**
-     * Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+     * Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
      */
     sync: pulumi.Input<boolean>;
 }

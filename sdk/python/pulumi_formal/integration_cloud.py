@@ -103,6 +103,7 @@ class _IntegrationCloudState:
                  aws_enable_eks_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
                  aws_enable_rds_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
                  aws_enable_redshift_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
+                 aws_enable_s3_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
                  aws_formal_iam_role: Optional[pulumi.Input[_builtins.str]] = None,
                  aws_formal_pingback_arn: Optional[pulumi.Input[_builtins.str]] = None,
                  aws_formal_stack_name: Optional[pulumi.Input[_builtins.str]] = None,
@@ -120,6 +121,7 @@ class _IntegrationCloudState:
         :param pulumi.Input[_builtins.bool] aws_enable_eks_autodiscovery: Whether AWS EKS autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] aws_enable_rds_autodiscovery: Whether AWS RDS autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] aws_enable_redshift_autodiscovery: Whether AWS Redshift autodiscovery is enabled or not.
+        :param pulumi.Input[_builtins.bool] aws_enable_s3_autodiscovery: Whether AWS S3 autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.str] aws_formal_iam_role: The IAM role ID Formal will use to access your resources.
         :param pulumi.Input[_builtins.str] aws_formal_pingback_arn: The SNS topic ARN CloudFormation can use to send events to Formal.
         :param pulumi.Input[_builtins.str] aws_formal_stack_name: A generated name for your CloudFormation stack.
@@ -143,6 +145,8 @@ class _IntegrationCloudState:
             pulumi.set(__self__, "aws_enable_rds_autodiscovery", aws_enable_rds_autodiscovery)
         if aws_enable_redshift_autodiscovery is not None:
             pulumi.set(__self__, "aws_enable_redshift_autodiscovery", aws_enable_redshift_autodiscovery)
+        if aws_enable_s3_autodiscovery is not None:
+            pulumi.set(__self__, "aws_enable_s3_autodiscovery", aws_enable_s3_autodiscovery)
         if aws_formal_iam_role is not None:
             pulumi.set(__self__, "aws_formal_iam_role", aws_formal_iam_role)
         if aws_formal_pingback_arn is not None:
@@ -246,6 +250,18 @@ class _IntegrationCloudState:
     @aws_enable_redshift_autodiscovery.setter
     def aws_enable_redshift_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "aws_enable_redshift_autodiscovery", value)
+
+    @_builtins.property
+    @pulumi.getter(name="awsEnableS3Autodiscovery")
+    def aws_enable_s3_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether AWS S3 autodiscovery is enabled or not.
+        """
+        return pulumi.get(self, "aws_enable_s3_autodiscovery")
+
+    @aws_enable_s3_autodiscovery.setter
+    def aws_enable_s3_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "aws_enable_s3_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="awsFormalIamRole")
@@ -415,6 +431,7 @@ class IntegrationCloud(pulumi.CustomResource):
             __props__.__dict__["aws_enable_eks_autodiscovery"] = None
             __props__.__dict__["aws_enable_rds_autodiscovery"] = None
             __props__.__dict__["aws_enable_redshift_autodiscovery"] = None
+            __props__.__dict__["aws_enable_s3_autodiscovery"] = None
             __props__.__dict__["aws_formal_iam_role"] = None
             __props__.__dict__["aws_formal_pingback_arn"] = None
             __props__.__dict__["aws_formal_stack_name"] = None
@@ -437,6 +454,7 @@ class IntegrationCloud(pulumi.CustomResource):
             aws_enable_eks_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
             aws_enable_rds_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
             aws_enable_redshift_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
+            aws_enable_s3_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
             aws_formal_iam_role: Optional[pulumi.Input[_builtins.str]] = None,
             aws_formal_pingback_arn: Optional[pulumi.Input[_builtins.str]] = None,
             aws_formal_stack_name: Optional[pulumi.Input[_builtins.str]] = None,
@@ -459,6 +477,7 @@ class IntegrationCloud(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] aws_enable_eks_autodiscovery: Whether AWS EKS autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] aws_enable_rds_autodiscovery: Whether AWS RDS autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] aws_enable_redshift_autodiscovery: Whether AWS Redshift autodiscovery is enabled or not.
+        :param pulumi.Input[_builtins.bool] aws_enable_s3_autodiscovery: Whether AWS S3 autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.str] aws_formal_iam_role: The IAM role ID Formal will use to access your resources.
         :param pulumi.Input[_builtins.str] aws_formal_pingback_arn: The SNS topic ARN CloudFormation can use to send events to Formal.
         :param pulumi.Input[_builtins.str] aws_formal_stack_name: A generated name for your CloudFormation stack.
@@ -479,6 +498,7 @@ class IntegrationCloud(pulumi.CustomResource):
         __props__.__dict__["aws_enable_eks_autodiscovery"] = aws_enable_eks_autodiscovery
         __props__.__dict__["aws_enable_rds_autodiscovery"] = aws_enable_rds_autodiscovery
         __props__.__dict__["aws_enable_redshift_autodiscovery"] = aws_enable_redshift_autodiscovery
+        __props__.__dict__["aws_enable_s3_autodiscovery"] = aws_enable_s3_autodiscovery
         __props__.__dict__["aws_formal_iam_role"] = aws_formal_iam_role
         __props__.__dict__["aws_formal_pingback_arn"] = aws_formal_pingback_arn
         __props__.__dict__["aws_formal_stack_name"] = aws_formal_stack_name
@@ -544,6 +564,14 @@ class IntegrationCloud(pulumi.CustomResource):
         Whether AWS Redshift autodiscovery is enabled or not.
         """
         return pulumi.get(self, "aws_enable_redshift_autodiscovery")
+
+    @_builtins.property
+    @pulumi.getter(name="awsEnableS3Autodiscovery")
+    def aws_enable_s3_autodiscovery(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether AWS S3 autodiscovery is enabled or not.
+        """
+        return pulumi.get(self, "aws_enable_s3_autodiscovery")
 
     @_builtins.property
     @pulumi.getter(name="awsFormalIamRole")

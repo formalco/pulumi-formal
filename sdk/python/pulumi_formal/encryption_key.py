@@ -20,20 +20,21 @@ __all__ = ['EncryptionKeyArgs', 'EncryptionKey']
 class EncryptionKeyArgs:
     def __init__(__self__, *,
                  algorithm: pulumi.Input[_builtins.str],
-                 decryptor_uri: pulumi.Input[_builtins.str],
                  key_id: pulumi.Input[_builtins.str],
-                 key_provider: pulumi.Input[_builtins.str]):
+                 key_provider: pulumi.Input[_builtins.str],
+                 decryptor_uri: Optional[pulumi.Input[_builtins.str]] = None):
         """
         The set of arguments for constructing a EncryptionKey resource.
         :param pulumi.Input[_builtins.str] algorithm: The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.
-        :param pulumi.Input[_builtins.str] decryptor_uri: The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
         :param pulumi.Input[_builtins.str] key_id: The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
         :param pulumi.Input[_builtins.str] key_provider: The provider of the encryption key. Currently only 'aws' is supported.
+        :param pulumi.Input[_builtins.str] decryptor_uri: The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
         """
         pulumi.set(__self__, "algorithm", algorithm)
-        pulumi.set(__self__, "decryptor_uri", decryptor_uri)
         pulumi.set(__self__, "key_id", key_id)
         pulumi.set(__self__, "key_provider", key_provider)
+        if decryptor_uri is not None:
+            pulumi.set(__self__, "decryptor_uri", decryptor_uri)
 
     @_builtins.property
     @pulumi.getter
@@ -46,18 +47,6 @@ class EncryptionKeyArgs:
     @algorithm.setter
     def algorithm(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "algorithm", value)
-
-    @_builtins.property
-    @pulumi.getter(name="decryptorUri")
-    def decryptor_uri(self) -> pulumi.Input[_builtins.str]:
-        """
-        The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
-        """
-        return pulumi.get(self, "decryptor_uri")
-
-    @decryptor_uri.setter
-    def decryptor_uri(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "decryptor_uri", value)
 
     @_builtins.property
     @pulumi.getter(name="keyId")
@@ -82,6 +71,18 @@ class EncryptionKeyArgs:
     @key_provider.setter
     def key_provider(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "key_provider", value)
+
+    @_builtins.property
+    @pulumi.getter(name="decryptorUri")
+    def decryptor_uri(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
+        """
+        return pulumi.get(self, "decryptor_uri")
+
+    @decryptor_uri.setter
+    def decryptor_uri(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "decryptor_uri", value)
 
 
 @pulumi.input_type
@@ -249,8 +250,6 @@ class EncryptionKey(pulumi.CustomResource):
             if algorithm is None and not opts.urn:
                 raise TypeError("Missing required property 'algorithm'")
             __props__.__dict__["algorithm"] = algorithm
-            if decryptor_uri is None and not opts.urn:
-                raise TypeError("Missing required property 'decryptor_uri'")
             __props__.__dict__["decryptor_uri"] = decryptor_uri
             if key_id is None and not opts.urn:
                 raise TypeError("Missing required property 'key_id'")
@@ -320,7 +319,7 @@ class EncryptionKey(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="decryptorUri")
-    def decryptor_uri(self) -> pulumi.Output[_builtins.str]:
+    def decryptor_uri(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
         The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
         """

@@ -21,7 +21,7 @@ type EncryptionKey struct {
 	// When the encryption key was created.
 	CreatedAt pulumi.StringOutput `pulumi:"createdAt"`
 	// The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
-	DecryptorUri pulumi.StringOutput `pulumi:"decryptorUri"`
+	DecryptorUri pulumi.StringPtrOutput `pulumi:"decryptorUri"`
 	// The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
 	KeyId pulumi.StringOutput `pulumi:"keyId"`
 	// The provider of the encryption key. Currently only 'aws' is supported.
@@ -39,9 +39,6 @@ func NewEncryptionKey(ctx *pulumi.Context,
 
 	if args.Algorithm == nil {
 		return nil, errors.New("invalid value for required argument 'Algorithm'")
-	}
-	if args.DecryptorUri == nil {
-		return nil, errors.New("invalid value for required argument 'DecryptorUri'")
 	}
 	if args.KeyId == nil {
 		return nil, errors.New("invalid value for required argument 'KeyId'")
@@ -109,7 +106,7 @@ type encryptionKeyArgs struct {
 	// The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.
 	Algorithm string `pulumi:"algorithm"`
 	// The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
-	DecryptorUri string `pulumi:"decryptorUri"`
+	DecryptorUri *string `pulumi:"decryptorUri"`
 	// The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
 	KeyId string `pulumi:"keyId"`
 	// The provider of the encryption key. Currently only 'aws' is supported.
@@ -121,7 +118,7 @@ type EncryptionKeyArgs struct {
 	// The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.
 	Algorithm pulumi.StringInput
 	// The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
-	DecryptorUri pulumi.StringInput
+	DecryptorUri pulumi.StringPtrInput
 	// The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
 	KeyId pulumi.StringInput
 	// The provider of the encryption key. Currently only 'aws' is supported.
@@ -226,8 +223,8 @@ func (o EncryptionKeyOutput) CreatedAt() pulumi.StringOutput {
 }
 
 // The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
-func (o EncryptionKeyOutput) DecryptorUri() pulumi.StringOutput {
-	return o.ApplyT(func(v *EncryptionKey) pulumi.StringOutput { return v.DecryptorUri }).(pulumi.StringOutput)
+func (o EncryptionKeyOutput) DecryptorUri() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *EncryptionKey) pulumi.StringPtrOutput { return v.DecryptorUri }).(pulumi.StringPtrOutput)
 }
 
 // The ID of the key in the provider's system (e.g., key ARN for AWS KMS).

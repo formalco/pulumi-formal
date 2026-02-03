@@ -7,7 +7,7 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Registering a Data Catalog integration.
+ * (Deprecated) Registering a Data Catalog integration.
  */
 export class IntegrationDataCatalog extends pulumi.CustomResource {
     /**

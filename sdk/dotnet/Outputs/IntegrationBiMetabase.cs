@@ -15,25 +15,25 @@ namespace Formal.Pulumi.Outputs
     public sealed class IntegrationBiMetabase
     {
         /// <summary>
-        /// Hostname of the Metabase instance.
+        /// Metabase server hostname. Required when `sync=true`.
         /// </summary>
-        public readonly string Hostname;
+        public readonly string? Hostname;
         /// <summary>
-        /// Password for the Metabase instance.
+        /// Metabase admin password. Required when `sync=true`.
         /// </summary>
-        public readonly string Password;
+        public readonly string? Password;
         /// <summary>
-        /// Username for the Metabase instance.
+        /// Metabase admin username. Required when `sync=true`.
         /// </summary>
-        public readonly string Username;
+        public readonly string? Username;
 
         [OutputConstructor]
         private IntegrationBiMetabase(
-            string hostname,
+            string? hostname,
 
-            string password,
+            string? password,
 
-            string username)
+            string? username)
         {
             Hostname = hostname;
             Password = password;

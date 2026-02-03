@@ -11,7 +11,7 @@ using Pulumi;
 namespace Formal.Pulumi
 {
     /// <summary>
-    /// Registering a Sidecar with Formal.
+    /// (Deprecated) Registering a Sidecar with Formal.
     /// </summary>
     [PulumiResourceType("formal:index/sidecar:Sidecar")]
     public partial class Sidecar : global::Pulumi.CustomResource

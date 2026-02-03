@@ -43,6 +43,10 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly bool? EnableRedshiftAutodiscovery;
         /// <summary>
+        /// Enables resource autodiscovery for S3 buckets.
+        /// </summary>
+        public readonly bool? EnableS3Autodiscovery;
+        /// <summary>
         /// The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
         /// </summary>
         public readonly string? S3BucketArn;
@@ -67,6 +71,8 @@ namespace Formal.Pulumi.Outputs
 
             bool? enableRedshiftAutodiscovery,
 
+            bool? enableS3Autodiscovery,
+
             string? s3BucketArn,
 
             string templateVersion)
@@ -78,6 +84,7 @@ namespace Formal.Pulumi.Outputs
             EnableEksAutodiscovery = enableEksAutodiscovery;
             EnableRdsAutodiscovery = enableRdsAutodiscovery;
             EnableRedshiftAutodiscovery = enableRedshiftAutodiscovery;
+            EnableS3Autodiscovery = enableS3Autodiscovery;
             S3BucketArn = s3BucketArn;
             TemplateVersion = templateVersion;
         }

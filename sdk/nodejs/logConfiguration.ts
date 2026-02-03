@@ -44,7 +44,7 @@ export class LogConfiguration extends pulumi.CustomResource {
     /**
      * The ID of the encryption key to use for this log configuration.
      */
-    public readonly encryptionKeyId!: pulumi.Output<string>;
+    public readonly encryptionKeyId!: pulumi.Output<string | undefined>;
     /**
      * The name of this log configuration.
      */
@@ -61,6 +61,10 @@ export class LogConfiguration extends pulumi.CustomResource {
      * The scope configuration for this log configuration.
      */
     public readonly scope!: pulumi.Output<outputs.LogConfigurationScope>;
+    /**
+     * Session logging configuration.
+     */
+    public readonly session!: pulumi.Output<outputs.LogConfigurationSession | undefined>;
     /**
      * Stream logging configuration.
      */
@@ -89,13 +93,11 @@ export class LogConfiguration extends pulumi.CustomResource {
             resourceInputs["request"] = state ? state.request : undefined;
             resourceInputs["response"] = state ? state.response : undefined;
             resourceInputs["scope"] = state ? state.scope : undefined;
+            resourceInputs["session"] = state ? state.session : undefined;
             resourceInputs["stream"] = state ? state.stream : undefined;
             resourceInputs["updatedAt"] = state ? state.updatedAt : undefined;
         } else {
             const args = argsOrState as LogConfigurationArgs | undefined;
-            if ((!args || args.encryptionKeyId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'encryptionKeyId'");
-            }
             if ((!args || args.request === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'request'");
             }
@@ -110,6 +112,7 @@ export class LogConfiguration extends pulumi.CustomResource {
             resourceInputs["request"] = args ? args.request : undefined;
             resourceInputs["response"] = args ? args.response : undefined;
             resourceInputs["scope"] = args ? args.scope : undefined;
+            resourceInputs["session"] = args ? args.session : undefined;
             resourceInputs["stream"] = args ? args.stream : undefined;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
@@ -148,6 +151,10 @@ export interface LogConfigurationState {
      */
     scope?: pulumi.Input<inputs.LogConfigurationScope>;
     /**
+     * Session logging configuration.
+     */
+    session?: pulumi.Input<inputs.LogConfigurationSession>;
+    /**
      * Stream logging configuration.
      */
     stream?: pulumi.Input<inputs.LogConfigurationStream>;
@@ -164,7 +171,7 @@ export interface LogConfigurationArgs {
     /**
      * The ID of the encryption key to use for this log configuration.
      */
-    encryptionKeyId: pulumi.Input<string>;
+    encryptionKeyId?: pulumi.Input<string>;
     /**
      * The name of this log configuration.
      */
@@ -181,6 +188,10 @@ export interface LogConfigurationArgs {
      * The scope configuration for this log configuration.
      */
     scope: pulumi.Input<inputs.LogConfigurationScope>;
+    /**
+     * Session logging configuration.
+     */
+    session?: pulumi.Input<inputs.LogConfigurationSession>;
     /**
      * Stream logging configuration.
      */

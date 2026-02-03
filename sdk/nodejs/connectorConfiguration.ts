@@ -40,13 +40,21 @@ export class ConnectorConfiguration extends pulumi.CustomResource {
      */
     public readonly connectorId!: pulumi.Output<string>;
     /**
-     * The port to be used for this Connector's health check.
-     */
-    public readonly healthCheckPort!: pulumi.Output<number | undefined>;
-    /**
      * The log level to be configured for this Connector.
      */
     public readonly logLevel!: pulumi.Output<string | undefined>;
+    /**
+     * The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+     */
+    public readonly otelEndpointHostname!: pulumi.Output<string | undefined>;
+    /**
+     * The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+     */
+    public readonly otelEndpointPort!: pulumi.Output<number | undefined>;
+    /**
+     * The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+     */
+    public readonly resourcesHealthChecksFrequencySeconds!: pulumi.Output<number | undefined>;
 
     /**
      * Create a ConnectorConfiguration resource with the given unique name, arguments, and options.
@@ -62,16 +70,20 @@ export class ConnectorConfiguration extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ConnectorConfigurationState | undefined;
             resourceInputs["connectorId"] = state ? state.connectorId : undefined;
-            resourceInputs["healthCheckPort"] = state ? state.healthCheckPort : undefined;
             resourceInputs["logLevel"] = state ? state.logLevel : undefined;
+            resourceInputs["otelEndpointHostname"] = state ? state.otelEndpointHostname : undefined;
+            resourceInputs["otelEndpointPort"] = state ? state.otelEndpointPort : undefined;
+            resourceInputs["resourcesHealthChecksFrequencySeconds"] = state ? state.resourcesHealthChecksFrequencySeconds : undefined;
         } else {
             const args = argsOrState as ConnectorConfigurationArgs | undefined;
             if ((!args || args.connectorId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'connectorId'");
             }
             resourceInputs["connectorId"] = args ? args.connectorId : undefined;
-            resourceInputs["healthCheckPort"] = args ? args.healthCheckPort : undefined;
             resourceInputs["logLevel"] = args ? args.logLevel : undefined;
+            resourceInputs["otelEndpointHostname"] = args ? args.otelEndpointHostname : undefined;
+            resourceInputs["otelEndpointPort"] = args ? args.otelEndpointPort : undefined;
+            resourceInputs["resourcesHealthChecksFrequencySeconds"] = args ? args.resourcesHealthChecksFrequencySeconds : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ConnectorConfiguration.__pulumiType, name, resourceInputs, opts);
@@ -87,13 +99,21 @@ export interface ConnectorConfigurationState {
      */
     connectorId?: pulumi.Input<string>;
     /**
-     * The port to be used for this Connector's health check.
-     */
-    healthCheckPort?: pulumi.Input<number>;
-    /**
      * The log level to be configured for this Connector.
      */
     logLevel?: pulumi.Input<string>;
+    /**
+     * The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+     */
+    otelEndpointHostname?: pulumi.Input<string>;
+    /**
+     * The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+     */
+    otelEndpointPort?: pulumi.Input<number>;
+    /**
+     * The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+     */
+    resourcesHealthChecksFrequencySeconds?: pulumi.Input<number>;
 }
 
 /**
@@ -105,11 +125,19 @@ export interface ConnectorConfigurationArgs {
      */
     connectorId: pulumi.Input<string>;
     /**
-     * The port to be used for this Connector's health check.
-     */
-    healthCheckPort?: pulumi.Input<number>;
-    /**
      * The log level to be configured for this Connector.
      */
     logLevel?: pulumi.Input<string>;
+    /**
+     * The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+     */
+    otelEndpointHostname?: pulumi.Input<string>;
+    /**
+     * The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+     */
+    otelEndpointPort?: pulumi.Input<number>;
+    /**
+     * The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+     */
+    resourcesHealthChecksFrequencySeconds?: pulumi.Input<number>;
 }

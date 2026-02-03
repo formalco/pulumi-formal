@@ -26,9 +26,9 @@ class IntegrationBiArgs:
                  name: Optional[pulumi.Input[_builtins.str]] = None):
         """
         The set of arguments for constructing a IntegrationBi resource.
-        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         :param pulumi.Input['IntegrationBiMetabaseArgs'] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
-        :param pulumi.Input[_builtins.str] name: Friendly name for the App.
+        :param pulumi.Input[_builtins.str] name: Friendly name for this app.
         """
         pulumi.set(__self__, "sync", sync)
         if metabase is not None:
@@ -40,7 +40,7 @@ class IntegrationBiArgs:
     @pulumi.getter
     def sync(self) -> pulumi.Input[_builtins.bool]:
         """
-        Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+        Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         """
         return pulumi.get(self, "sync")
 
@@ -64,7 +64,7 @@ class IntegrationBiArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        Friendly name for the App.
+        Friendly name for this app.
         """
         return pulumi.get(self, "name")
 
@@ -82,8 +82,8 @@ class _IntegrationBiState:
         """
         Input properties used for looking up and filtering IntegrationBi resources.
         :param pulumi.Input['IntegrationBiMetabaseArgs'] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
-        :param pulumi.Input[_builtins.str] name: Friendly name for the App.
-        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+        :param pulumi.Input[_builtins.str] name: Friendly name for this app.
+        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         """
         if metabase is not None:
             pulumi.set(__self__, "metabase", metabase)
@@ -108,7 +108,7 @@ class _IntegrationBiState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        Friendly name for the App.
+        Friendly name for this app.
         """
         return pulumi.get(self, "name")
 
@@ -120,7 +120,7 @@ class _IntegrationBiState:
     @pulumi.getter
     def sync(self) -> Optional[pulumi.Input[_builtins.bool]]:
         """
-        Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+        Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         """
         return pulumi.get(self, "sync")
 
@@ -145,8 +145,8 @@ class IntegrationBi(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
-        :param pulumi.Input[_builtins.str] name: Friendly name for the App.
-        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+        :param pulumi.Input[_builtins.str] name: Friendly name for this app.
+        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         """
         ...
     @overload
@@ -210,8 +210,8 @@ class IntegrationBi(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
-        :param pulumi.Input[_builtins.str] name: Friendly name for the App.
-        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+        :param pulumi.Input[_builtins.str] name: Friendly name for this app.
+        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -234,7 +234,7 @@ class IntegrationBi(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[_builtins.str]:
         """
-        Friendly name for the App.
+        Friendly name for this app.
         """
         return pulumi.get(self, "name")
 
@@ -242,7 +242,7 @@ class IntegrationBi(pulumi.CustomResource):
     @pulumi.getter
     def sync(self) -> pulumi.Output[_builtins.bool]:
         """
-        Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+        Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         """
         return pulumi.get(self, "sync")
 

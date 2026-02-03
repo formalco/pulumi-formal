@@ -59,6 +59,12 @@ namespace Formal.Pulumi
         public Output<bool> AwsEnableRedshiftAutodiscovery { get; private set; } = null!;
 
         /// <summary>
+        /// Whether AWS S3 autodiscovery is enabled or not.
+        /// </summary>
+        [Output("awsEnableS3Autodiscovery")]
+        public Output<bool> AwsEnableS3Autodiscovery { get; private set; } = null!;
+
+        /// <summary>
         /// The IAM role ID Formal will use to access your resources.
         /// </summary>
         [Output("awsFormalIamRole")]
@@ -226,6 +232,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("awsEnableRedshiftAutodiscovery")]
         public Input<bool>? AwsEnableRedshiftAutodiscovery { get; set; }
+
+        /// <summary>
+        /// Whether AWS S3 autodiscovery is enabled or not.
+        /// </summary>
+        [Input("awsEnableS3Autodiscovery")]
+        public Input<bool>? AwsEnableS3Autodiscovery { get; set; }
 
         /// <summary>
         /// The IAM role ID Formal will use to access your resources.

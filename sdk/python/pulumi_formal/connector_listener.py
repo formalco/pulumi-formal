@@ -20,15 +20,19 @@ __all__ = ['ConnectorListenerArgs', 'ConnectorListener']
 class ConnectorListenerArgs:
     def __init__(__self__, *,
                  port: pulumi.Input[_builtins.int],
+                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
         """
         The set of arguments for constructing a ConnectorListener resource.
         :param pulumi.Input[_builtins.int] port: The listening port for this connector listener.
+        :param pulumi.Input[_builtins.str] connector_id: The ID of the connector this listener is associated with.
         :param pulumi.Input[_builtins.str] name: The name of the connector listener.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this connector listener cannot be deleted.
         """
         pulumi.set(__self__, "port", port)
+        if connector_id is not None:
+            pulumi.set(__self__, "connector_id", connector_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if termination_protection is not None:
@@ -45,6 +49,18 @@ class ConnectorListenerArgs:
     @port.setter
     def port(self, value: pulumi.Input[_builtins.int]):
         pulumi.set(self, "port", value)
+
+    @_builtins.property
+    @pulumi.getter(name="connectorId")
+    def connector_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The ID of the connector this listener is associated with.
+        """
+        return pulumi.get(self, "connector_id")
+
+    @connector_id.setter
+    def connector_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "connector_id", value)
 
     @_builtins.property
     @pulumi.getter
@@ -74,21 +90,37 @@ class ConnectorListenerArgs:
 @pulumi.input_type
 class _ConnectorListenerState:
     def __init__(__self__, *,
+                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  port: Optional[pulumi.Input[_builtins.int]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
         """
         Input properties used for looking up and filtering ConnectorListener resources.
+        :param pulumi.Input[_builtins.str] connector_id: The ID of the connector this listener is associated with.
         :param pulumi.Input[_builtins.str] name: The name of the connector listener.
         :param pulumi.Input[_builtins.int] port: The listening port for this connector listener.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this connector listener cannot be deleted.
         """
+        if connector_id is not None:
+            pulumi.set(__self__, "connector_id", connector_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if port is not None:
             pulumi.set(__self__, "port", port)
         if termination_protection is not None:
             pulumi.set(__self__, "termination_protection", termination_protection)
+
+    @_builtins.property
+    @pulumi.getter(name="connectorId")
+    def connector_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The ID of the connector this listener is associated with.
+        """
+        return pulumi.get(self, "connector_id")
+
+    @connector_id.setter
+    def connector_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "connector_id", value)
 
     @_builtins.property
     @pulumi.getter
@@ -133,6 +165,7 @@ class ConnectorListener(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  port: Optional[pulumi.Input[_builtins.int]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -142,6 +175,7 @@ class ConnectorListener(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.str] connector_id: The ID of the connector this listener is associated with.
         :param pulumi.Input[_builtins.str] name: The name of the connector listener.
         :param pulumi.Input[_builtins.int] port: The listening port for this connector listener.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this connector listener cannot be deleted.
@@ -170,6 +204,7 @@ class ConnectorListener(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  port: Optional[pulumi.Input[_builtins.int]] = None,
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -182,6 +217,7 @@ class ConnectorListener(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ConnectorListenerArgs.__new__(ConnectorListenerArgs)
 
+            __props__.__dict__["connector_id"] = connector_id
             __props__.__dict__["name"] = name
             if port is None and not opts.urn:
                 raise TypeError("Missing required property 'port'")
@@ -197,6 +233,7 @@ class ConnectorListener(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            connector_id: Optional[pulumi.Input[_builtins.str]] = None,
             name: Optional[pulumi.Input[_builtins.str]] = None,
             port: Optional[pulumi.Input[_builtins.int]] = None,
             termination_protection: Optional[pulumi.Input[_builtins.bool]] = None) -> 'ConnectorListener':
@@ -207,6 +244,7 @@ class ConnectorListener(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.str] connector_id: The ID of the connector this listener is associated with.
         :param pulumi.Input[_builtins.str] name: The name of the connector listener.
         :param pulumi.Input[_builtins.int] port: The listening port for this connector listener.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this connector listener cannot be deleted.
@@ -215,10 +253,19 @@ class ConnectorListener(pulumi.CustomResource):
 
         __props__ = _ConnectorListenerState.__new__(_ConnectorListenerState)
 
+        __props__.__dict__["connector_id"] = connector_id
         __props__.__dict__["name"] = name
         __props__.__dict__["port"] = port
         __props__.__dict__["termination_protection"] = termination_protection
         return ConnectorListener(resource_name, opts=opts, __props__=__props__)
+
+    @_builtins.property
+    @pulumi.getter(name="connectorId")
+    def connector_id(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        The ID of the connector this listener is associated with.
+        """
+        return pulumi.get(self, "connector_id")
 
     @_builtins.property
     @pulumi.getter

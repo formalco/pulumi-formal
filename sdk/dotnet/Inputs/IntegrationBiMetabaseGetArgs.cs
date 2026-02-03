@@ -14,22 +14,22 @@ namespace Formal.Pulumi.Inputs
     public sealed class IntegrationBiMetabaseGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Hostname of the Metabase instance.
+        /// Metabase server hostname. Required when `sync=true`.
         /// </summary>
-        [Input("hostname", required: true)]
-        public Input<string> Hostname { get; set; } = null!;
+        [Input("hostname")]
+        public Input<string>? Hostname { get; set; }
 
         /// <summary>
-        /// Password for the Metabase instance.
+        /// Metabase admin password. Required when `sync=true`.
         /// </summary>
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
+        [Input("password")]
+        public Input<string>? Password { get; set; }
 
         /// <summary>
-        /// Username for the Metabase instance.
+        /// Metabase admin username. Required when `sync=true`.
         /// </summary>
-        [Input("username", required: true)]
-        public Input<string> Username { get; set; } = null!;
+        [Input("username")]
+        public Input<string>? Username { get; set; }
 
         public IntegrationBiMetabaseGetArgs()
         {

@@ -35,6 +35,11 @@ export type ConnectorListenerRule = import("./connectorListenerRule").ConnectorL
 export const ConnectorListenerRule: typeof import("./connectorListenerRule").ConnectorListenerRule = null as any;
 utilities.lazyLoad(exports, ["ConnectorListenerRule"], () => require("./connectorListenerRule"));
 
+export { ConnectorSatelliteLinkArgs, ConnectorSatelliteLinkState } from "./connectorSatelliteLink";
+export type ConnectorSatelliteLink = import("./connectorSatelliteLink").ConnectorSatelliteLink;
+export const ConnectorSatelliteLink: typeof import("./connectorSatelliteLink").ConnectorSatelliteLink = null as any;
+utilities.lazyLoad(exports, ["ConnectorSatelliteLink"], () => require("./connectorSatelliteLink"));
+
 export { DataDiscoveryArgs, DataDiscoveryState } from "./dataDiscovery";
 export type DataDiscovery = import("./dataDiscovery").DataDiscovery;
 export const DataDiscovery: typeof import("./dataDiscovery").DataDiscovery = null as any;
@@ -55,6 +60,11 @@ export type EncryptionKey = import("./encryptionKey").EncryptionKey;
 export const EncryptionKey: typeof import("./encryptionKey").EncryptionKey = null as any;
 utilities.lazyLoad(exports, ["EncryptionKey"], () => require("./encryptionKey"));
 
+export { GetConnectorArgs, GetConnectorResult, GetConnectorOutputArgs } from "./getConnector";
+export const getConnector: typeof import("./getConnector").getConnector = null as any;
+export const getConnectorOutput: typeof import("./getConnector").getConnectorOutput = null as any;
+utilities.lazyLoad(exports, ["getConnector","getConnectorOutput"], () => require("./getConnector"));
+
 export { GetGroupArgs, GetGroupResult, GetGroupOutputArgs } from "./getGroup";
 export const getGroup: typeof import("./getGroup").getGroup = null as any;
 export const getGroupOutput: typeof import("./getGroup").getGroupOutput = null as any;
@@ -64,6 +74,11 @@ export { GetResourceArgs, GetResourceResult, GetResourceOutputArgs } from "./get
 export const getResource: typeof import("./getResource").getResource = null as any;
 export const getResourceOutput: typeof import("./getResource").getResourceOutput = null as any;
 utilities.lazyLoad(exports, ["getResource","getResourceOutput"], () => require("./getResource"));
+
+export { GetSpaceArgs, GetSpaceResult, GetSpaceOutputArgs } from "./getSpace";
+export const getSpace: typeof import("./getSpace").getSpace = null as any;
+export const getSpaceOutput: typeof import("./getSpace").getSpaceOutput = null as any;
+utilities.lazyLoad(exports, ["getSpace","getSpaceOutput"], () => require("./getSpace"));
 
 export { GroupArgs, GroupState } from "./group";
 export type Group = import("./group").Group;
@@ -99,11 +114,6 @@ export { IntegrationMdmArgs, IntegrationMdmState } from "./integrationMdm";
 export type IntegrationMdm = import("./integrationMdm").IntegrationMdm;
 export const IntegrationMdm: typeof import("./integrationMdm").IntegrationMdm = null as any;
 utilities.lazyLoad(exports, ["IntegrationMdm"], () => require("./integrationMdm"));
-
-export { IntegrationMfaArgs, IntegrationMfaState } from "./integrationMfa";
-export type IntegrationMfa = import("./integrationMfa").IntegrationMfa;
-export const IntegrationMfa: typeof import("./integrationMfa").IntegrationMfa = null as any;
-utilities.lazyLoad(exports, ["IntegrationMfa"], () => require("./integrationMfa"));
 
 export { InventoryObjectDataLabelLinkArgs, InventoryObjectDataLabelLinkState } from "./inventoryObjectDataLabelLink";
 export type InventoryObjectDataLabelLink = import("./inventoryObjectDataLabelLink").InventoryObjectDataLabelLink;
@@ -173,6 +183,16 @@ export type Satellite = import("./satellite").Satellite;
 export const Satellite: typeof import("./satellite").Satellite = null as any;
 utilities.lazyLoad(exports, ["Satellite"], () => require("./satellite"));
 
+export { SatelliteHostnameArgs, SatelliteHostnameState } from "./satelliteHostname";
+export type SatelliteHostname = import("./satelliteHostname").SatelliteHostname;
+export const SatelliteHostname: typeof import("./satelliteHostname").SatelliteHostname = null as any;
+utilities.lazyLoad(exports, ["SatelliteHostname"], () => require("./satelliteHostname"));
+
+export { SatelliteLinkArgs, SatelliteLinkState } from "./satelliteLink";
+export type SatelliteLink = import("./satelliteLink").SatelliteLink;
+export const SatelliteLink: typeof import("./satelliteLink").SatelliteLink = null as any;
+utilities.lazyLoad(exports, ["SatelliteLink"], () => require("./satelliteLink"));
+
 export { SidecarArgs, SidecarState } from "./sidecar";
 export type Sidecar = import("./sidecar").Sidecar;
 export const Sidecar: typeof import("./sidecar").Sidecar = null as any;
@@ -188,15 +208,15 @@ export type Space = import("./space").Space;
 export const Space: typeof import("./space").Space = null as any;
 utilities.lazyLoad(exports, ["Space"], () => require("./space"));
 
-export { TrackerArgs, TrackerState } from "./tracker";
-export type Tracker = import("./tracker").Tracker;
-export const Tracker: typeof import("./tracker").Tracker = null as any;
-utilities.lazyLoad(exports, ["Tracker"], () => require("./tracker"));
-
 export { UserArgs, UserState } from "./user";
 export type User = import("./user").User;
 export const User: typeof import("./user").User = null as any;
 utilities.lazyLoad(exports, ["User"], () => require("./user"));
+
+export { WorkflowArgs, WorkflowState } from "./workflow";
+export type Workflow = import("./workflow").Workflow;
+export const Workflow: typeof import("./workflow").Workflow = null as any;
+utilities.lazyLoad(exports, ["Workflow"], () => require("./workflow"));
 
 
 // Export sub-modules:
@@ -224,6 +244,8 @@ const _module = {
                 return new ConnectorListenerLink(name, <any>undefined, { urn })
             case "formal:index/connectorListenerRule:ConnectorListenerRule":
                 return new ConnectorListenerRule(name, <any>undefined, { urn })
+            case "formal:index/connectorSatelliteLink:ConnectorSatelliteLink":
+                return new ConnectorSatelliteLink(name, <any>undefined, { urn })
             case "formal:index/dataDiscovery:DataDiscovery":
                 return new DataDiscovery(name, <any>undefined, { urn })
             case "formal:index/dataDomain:DataDomain":
@@ -246,8 +268,6 @@ const _module = {
                 return new IntegrationLog(name, <any>undefined, { urn })
             case "formal:index/integrationMdm:IntegrationMdm":
                 return new IntegrationMdm(name, <any>undefined, { urn })
-            case "formal:index/integrationMfa:IntegrationMfa":
-                return new IntegrationMfa(name, <any>undefined, { urn })
             case "formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink":
                 return new InventoryObjectDataLabelLink(name, <any>undefined, { urn })
             case "formal:index/logConfiguration:LogConfiguration":
@@ -274,16 +294,20 @@ const _module = {
                 return new ResourceTlsConfiguration(name, <any>undefined, { urn })
             case "formal:index/satellite:Satellite":
                 return new Satellite(name, <any>undefined, { urn })
+            case "formal:index/satelliteHostname:SatelliteHostname":
+                return new SatelliteHostname(name, <any>undefined, { urn })
+            case "formal:index/satelliteLink:SatelliteLink":
+                return new SatelliteLink(name, <any>undefined, { urn })
             case "formal:index/sidecar:Sidecar":
                 return new Sidecar(name, <any>undefined, { urn })
             case "formal:index/sidecarResourceLink:SidecarResourceLink":
                 return new SidecarResourceLink(name, <any>undefined, { urn })
             case "formal:index/space:Space":
                 return new Space(name, <any>undefined, { urn })
-            case "formal:index/tracker:Tracker":
-                return new Tracker(name, <any>undefined, { urn })
             case "formal:index/user:User":
                 return new User(name, <any>undefined, { urn })
+            case "formal:index/workflow:Workflow":
+                return new Workflow(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -295,6 +319,7 @@ pulumi.runtime.registerResourceModule("formal", "index/connectorHostname", _modu
 pulumi.runtime.registerResourceModule("formal", "index/connectorListener", _module)
 pulumi.runtime.registerResourceModule("formal", "index/connectorListenerLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/connectorListenerRule", _module)
+pulumi.runtime.registerResourceModule("formal", "index/connectorSatelliteLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/dataDiscovery", _module)
 pulumi.runtime.registerResourceModule("formal", "index/dataDomain", _module)
 pulumi.runtime.registerResourceModule("formal", "index/dataLabel", _module)
@@ -306,7 +331,6 @@ pulumi.runtime.registerResourceModule("formal", "index/integrationCloud", _modul
 pulumi.runtime.registerResourceModule("formal", "index/integrationDataCatalog", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationLog", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationMdm", _module)
-pulumi.runtime.registerResourceModule("formal", "index/integrationMfa", _module)
 pulumi.runtime.registerResourceModule("formal", "index/inventoryObjectDataLabelLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/logConfiguration", _module)
 pulumi.runtime.registerResourceModule("formal", "index/nativeUser", _module)
@@ -320,11 +344,13 @@ pulumi.runtime.registerResourceModule("formal", "index/resourceHealthCheck", _mo
 pulumi.runtime.registerResourceModule("formal", "index/resourceHostname", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceTlsConfiguration", _module)
 pulumi.runtime.registerResourceModule("formal", "index/satellite", _module)
+pulumi.runtime.registerResourceModule("formal", "index/satelliteHostname", _module)
+pulumi.runtime.registerResourceModule("formal", "index/satelliteLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/sidecar", _module)
 pulumi.runtime.registerResourceModule("formal", "index/sidecarResourceLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/space", _module)
-pulumi.runtime.registerResourceModule("formal", "index/tracker", _module)
 pulumi.runtime.registerResourceModule("formal", "index/user", _module)
+pulumi.runtime.registerResourceModule("formal", "index/workflow", _module)
 pulumi.runtime.registerResourcePackage("formal", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

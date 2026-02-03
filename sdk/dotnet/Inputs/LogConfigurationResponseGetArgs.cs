@@ -22,8 +22,14 @@ namespace Formal.Pulumi.Inputs
         /// <summary>
         /// Maximum size of response payloads to log.
         /// </summary>
-        [Input("maxPayloadSize", required: true)]
-        public Input<int> MaxPayloadSize { get; set; } = null!;
+        [Input("maxPayloadSize")]
+        public Input<int>? MaxPayloadSize { get; set; }
+
+        /// <summary>
+        /// Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+        /// </summary>
+        [Input("policyEvalInputRetention")]
+        public Input<string>? PolicyEvalInputRetention { get; set; }
 
         public LogConfigurationResponseGetArgs()
         {

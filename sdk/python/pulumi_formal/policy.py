@@ -30,7 +30,7 @@ class PolicyArgs:
         The set of arguments for constructing a Policy resource.
         :param pulumi.Input[_builtins.str] description: Policy Description.
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
-        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy.
+        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
         :param pulumi.Input[_builtins.str] owner: Owner of this policy: it can be either a group name or a user email.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         :param pulumi.Input[_builtins.str] name: Policy Name
@@ -74,7 +74,7 @@ class PolicyArgs:
     @pulumi.getter
     def notification(self) -> pulumi.Input[_builtins.str]:
         """
-        Notification settings for this policy.
+        Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
         """
         return pulumi.get(self, "notification")
 
@@ -149,7 +149,7 @@ class _PolicyState:
         :param pulumi.Input[_builtins.str] description: Policy Description.
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] name: Policy Name
-        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy.
+        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
         :param pulumi.Input[_builtins.str] owner: Owner of this policy: it can be either a group name or a user email.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Policy cannot be deleted.
@@ -226,7 +226,7 @@ class _PolicyState:
     @pulumi.getter
     def notification(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        Notification settings for this policy.
+        Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
         """
         return pulumi.get(self, "notification")
 
@@ -305,7 +305,7 @@ class Policy(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] description: Policy Description.
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] name: Policy Name
-        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy.
+        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
         :param pulumi.Input[_builtins.str] owner: Owner of this policy: it can be either a group name or a user email.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Policy cannot be deleted.
@@ -399,7 +399,7 @@ class Policy(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] description: Policy Description.
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] name: Policy Name
-        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy.
+        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
         :param pulumi.Input[_builtins.str] owner: Owner of this policy: it can be either a group name or a user email.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Policy cannot be deleted.
@@ -456,7 +456,7 @@ class Policy(pulumi.CustomResource):
     @pulumi.getter
     def notification(self) -> pulumi.Output[_builtins.str]:
         """
-        Notification settings for this policy.
+        Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
         """
         return pulumi.get(self, "notification")
 

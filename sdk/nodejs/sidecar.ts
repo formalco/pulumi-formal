@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Registering a Sidecar with Formal.
+ * (Deprecated) Registering a Sidecar with Formal.
  */
 export class Sidecar extends pulumi.CustomResource {
     /**

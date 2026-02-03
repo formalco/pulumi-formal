@@ -31,8 +31,6 @@ __all__ = [
     'IntegrationLogSplunkArgsDict',
     'IntegrationMdmKandjiArgs',
     'IntegrationMdmKandjiArgsDict',
-    'IntegrationMfaDuoArgs',
-    'IntegrationMfaDuoArgsDict',
     'LogConfigurationRequestArgs',
     'LogConfigurationRequestArgsDict',
     'LogConfigurationRequestSqlArgs',
@@ -41,6 +39,8 @@ __all__ = [
     'LogConfigurationResponseArgsDict',
     'LogConfigurationScopeArgs',
     'LogConfigurationScopeArgsDict',
+    'LogConfigurationSessionArgs',
+    'LogConfigurationSessionArgsDict',
     'LogConfigurationStreamArgs',
     'LogConfigurationStreamArgsDict',
 ]
@@ -83,17 +83,17 @@ class DataDomainOwnerArgs:
 
 if not MYPY:
     class IntegrationBiMetabaseArgsDict(TypedDict):
-        hostname: pulumi.Input[_builtins.str]
+        hostname: NotRequired[pulumi.Input[_builtins.str]]
         """
-        Hostname of the Metabase instance.
+        Metabase server hostname. Required when `sync=true`.
         """
-        password: pulumi.Input[_builtins.str]
+        password: NotRequired[pulumi.Input[_builtins.str]]
         """
-        Password for the Metabase instance.
+        Metabase admin password. Required when `sync=true`.
         """
-        username: pulumi.Input[_builtins.str]
+        username: NotRequired[pulumi.Input[_builtins.str]]
         """
-        Username for the Metabase instance.
+        Metabase admin username. Required when `sync=true`.
         """
 elif False:
     IntegrationBiMetabaseArgsDict: TypeAlias = Mapping[str, Any]
@@ -101,52 +101,55 @@ elif False:
 @pulumi.input_type
 class IntegrationBiMetabaseArgs:
     def __init__(__self__, *,
-                 hostname: pulumi.Input[_builtins.str],
-                 password: pulumi.Input[_builtins.str],
-                 username: pulumi.Input[_builtins.str]):
+                 hostname: Optional[pulumi.Input[_builtins.str]] = None,
+                 password: Optional[pulumi.Input[_builtins.str]] = None,
+                 username: Optional[pulumi.Input[_builtins.str]] = None):
         """
-        :param pulumi.Input[_builtins.str] hostname: Hostname of the Metabase instance.
-        :param pulumi.Input[_builtins.str] password: Password for the Metabase instance.
-        :param pulumi.Input[_builtins.str] username: Username for the Metabase instance.
+        :param pulumi.Input[_builtins.str] hostname: Metabase server hostname. Required when `sync=true`.
+        :param pulumi.Input[_builtins.str] password: Metabase admin password. Required when `sync=true`.
+        :param pulumi.Input[_builtins.str] username: Metabase admin username. Required when `sync=true`.
         """
-        pulumi.set(__self__, "hostname", hostname)
-        pulumi.set(__self__, "password", password)
-        pulumi.set(__self__, "username", username)
+        if hostname is not None:
+            pulumi.set(__self__, "hostname", hostname)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if username is not None:
+            pulumi.set(__self__, "username", username)
 
     @_builtins.property
     @pulumi.getter
-    def hostname(self) -> pulumi.Input[_builtins.str]:
+    def hostname(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        Hostname of the Metabase instance.
+        Metabase server hostname. Required when `sync=true`.
         """
         return pulumi.get(self, "hostname")
 
     @hostname.setter
-    def hostname(self, value: pulumi.Input[_builtins.str]):
+    def hostname(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "hostname", value)
 
     @_builtins.property
     @pulumi.getter
-    def password(self) -> pulumi.Input[_builtins.str]:
+    def password(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        Password for the Metabase instance.
+        Metabase admin password. Required when `sync=true`.
         """
         return pulumi.get(self, "password")
 
     @password.setter
-    def password(self, value: pulumi.Input[_builtins.str]):
+    def password(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "password", value)
 
     @_builtins.property
     @pulumi.getter
-    def username(self) -> pulumi.Input[_builtins.str]:
+    def username(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        Username for the Metabase instance.
+        Metabase admin username. Required when `sync=true`.
         """
         return pulumi.get(self, "username")
 
     @username.setter
-    def username(self, value: pulumi.Input[_builtins.str]):
+    def username(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "username", value)
 
 
@@ -184,6 +187,10 @@ if not MYPY:
         """
         Enables resource autodiscovery for Redshift clusters.
         """
+        enable_s3_autodiscovery: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Enables resource autodiscovery for S3 buckets.
+        """
         s3_bucket_arn: NotRequired[pulumi.Input[_builtins.str]]
         """
         The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
@@ -202,6 +209,7 @@ class IntegrationCloudAwsArgs:
                  enable_eks_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
                  enable_rds_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
                  enable_redshift_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
+                 enable_s3_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
                  s3_bucket_arn: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] template_version: The template version of the CloudFormation stack. Use `latest` to stay in sync.
@@ -212,6 +220,7 @@ class IntegrationCloudAwsArgs:
         :param pulumi.Input[_builtins.bool] enable_eks_autodiscovery: Enables resource autodiscovery for EKS clusters.
         :param pulumi.Input[_builtins.bool] enable_rds_autodiscovery: Enables resource autodiscovery for RDS instances (PostgreSQL, MySQL, MongoDB).
         :param pulumi.Input[_builtins.bool] enable_redshift_autodiscovery: Enables resource autodiscovery for Redshift clusters.
+        :param pulumi.Input[_builtins.bool] enable_s3_autodiscovery: Enables resource autodiscovery for S3 buckets.
         :param pulumi.Input[_builtins.str] s3_bucket_arn: The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
         """
         pulumi.set(__self__, "template_version", template_version)
@@ -229,6 +238,8 @@ class IntegrationCloudAwsArgs:
             pulumi.set(__self__, "enable_rds_autodiscovery", enable_rds_autodiscovery)
         if enable_redshift_autodiscovery is not None:
             pulumi.set(__self__, "enable_redshift_autodiscovery", enable_redshift_autodiscovery)
+        if enable_s3_autodiscovery is not None:
+            pulumi.set(__self__, "enable_s3_autodiscovery", enable_s3_autodiscovery)
         if s3_bucket_arn is not None:
             pulumi.set(__self__, "s3_bucket_arn", s3_bucket_arn)
 
@@ -327,6 +338,18 @@ class IntegrationCloudAwsArgs:
     @enable_redshift_autodiscovery.setter
     def enable_redshift_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "enable_redshift_autodiscovery", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enableS3Autodiscovery")
+    def enable_s3_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Enables resource autodiscovery for S3 buckets.
+        """
+        return pulumi.get(self, "enable_s3_autodiscovery")
+
+    @enable_s3_autodiscovery.setter
+    def enable_s3_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "enable_s3_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="s3BucketArn")
@@ -669,83 +692,18 @@ class IntegrationMdmKandjiArgs:
 
 
 if not MYPY:
-    class IntegrationMfaDuoArgsDict(TypedDict):
-        api_hostname: pulumi.Input[_builtins.str]
-        """
-        Duo API Hostname.
-        """
-        integration_key: pulumi.Input[_builtins.str]
-        """
-        Duo Integration Key.
-        """
-        secret_key: pulumi.Input[_builtins.str]
-        """
-        Duo Secret Key.
-        """
-elif False:
-    IntegrationMfaDuoArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class IntegrationMfaDuoArgs:
-    def __init__(__self__, *,
-                 api_hostname: pulumi.Input[_builtins.str],
-                 integration_key: pulumi.Input[_builtins.str],
-                 secret_key: pulumi.Input[_builtins.str]):
-        """
-        :param pulumi.Input[_builtins.str] api_hostname: Duo API Hostname.
-        :param pulumi.Input[_builtins.str] integration_key: Duo Integration Key.
-        :param pulumi.Input[_builtins.str] secret_key: Duo Secret Key.
-        """
-        pulumi.set(__self__, "api_hostname", api_hostname)
-        pulumi.set(__self__, "integration_key", integration_key)
-        pulumi.set(__self__, "secret_key", secret_key)
-
-    @_builtins.property
-    @pulumi.getter(name="apiHostname")
-    def api_hostname(self) -> pulumi.Input[_builtins.str]:
-        """
-        Duo API Hostname.
-        """
-        return pulumi.get(self, "api_hostname")
-
-    @api_hostname.setter
-    def api_hostname(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "api_hostname", value)
-
-    @_builtins.property
-    @pulumi.getter(name="integrationKey")
-    def integration_key(self) -> pulumi.Input[_builtins.str]:
-        """
-        Duo Integration Key.
-        """
-        return pulumi.get(self, "integration_key")
-
-    @integration_key.setter
-    def integration_key(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "integration_key", value)
-
-    @_builtins.property
-    @pulumi.getter(name="secretKey")
-    def secret_key(self) -> pulumi.Input[_builtins.str]:
-        """
-        Duo Secret Key.
-        """
-        return pulumi.get(self, "secret_key")
-
-    @secret_key.setter
-    def secret_key(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "secret_key", value)
-
-
-if not MYPY:
     class LogConfigurationRequestArgsDict(TypedDict):
         encrypt: pulumi.Input[_builtins.bool]
         """
         Whether to encrypt request payloads.
         """
-        max_payload_size: pulumi.Input[_builtins.int]
+        max_payload_size: NotRequired[pulumi.Input[_builtins.int]]
         """
         Maximum size of request payloads to log.
+        """
+        policy_eval_input_retention: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         """
         sql: NotRequired[pulumi.Input['LogConfigurationRequestSqlArgsDict']]
         """
@@ -758,15 +716,20 @@ elif False:
 class LogConfigurationRequestArgs:
     def __init__(__self__, *,
                  encrypt: pulumi.Input[_builtins.bool],
-                 max_payload_size: pulumi.Input[_builtins.int],
+                 max_payload_size: Optional[pulumi.Input[_builtins.int]] = None,
+                 policy_eval_input_retention: Optional[pulumi.Input[_builtins.str]] = None,
                  sql: Optional[pulumi.Input['LogConfigurationRequestSqlArgs']] = None):
         """
         :param pulumi.Input[_builtins.bool] encrypt: Whether to encrypt request payloads.
         :param pulumi.Input[_builtins.int] max_payload_size: Maximum size of request payloads to log.
+        :param pulumi.Input[_builtins.str] policy_eval_input_retention: Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         :param pulumi.Input['LogConfigurationRequestSqlArgs'] sql: SQL logging configuration for requests.
         """
         pulumi.set(__self__, "encrypt", encrypt)
-        pulumi.set(__self__, "max_payload_size", max_payload_size)
+        if max_payload_size is not None:
+            pulumi.set(__self__, "max_payload_size", max_payload_size)
+        if policy_eval_input_retention is not None:
+            pulumi.set(__self__, "policy_eval_input_retention", policy_eval_input_retention)
         if sql is not None:
             pulumi.set(__self__, "sql", sql)
 
@@ -784,15 +747,27 @@ class LogConfigurationRequestArgs:
 
     @_builtins.property
     @pulumi.getter(name="maxPayloadSize")
-    def max_payload_size(self) -> pulumi.Input[_builtins.int]:
+    def max_payload_size(self) -> Optional[pulumi.Input[_builtins.int]]:
         """
         Maximum size of request payloads to log.
         """
         return pulumi.get(self, "max_payload_size")
 
     @max_payload_size.setter
-    def max_payload_size(self, value: pulumi.Input[_builtins.int]):
+    def max_payload_size(self, value: Optional[pulumi.Input[_builtins.int]]):
         pulumi.set(self, "max_payload_size", value)
+
+    @_builtins.property
+    @pulumi.getter(name="policyEvalInputRetention")
+    def policy_eval_input_retention(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+        """
+        return pulumi.get(self, "policy_eval_input_retention")
+
+    @policy_eval_input_retention.setter
+    def policy_eval_input_retention(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "policy_eval_input_retention", value)
 
     @_builtins.property
     @pulumi.getter
@@ -863,9 +838,13 @@ if not MYPY:
         """
         Whether to encrypt response payloads.
         """
-        max_payload_size: pulumi.Input[_builtins.int]
+        max_payload_size: NotRequired[pulumi.Input[_builtins.int]]
         """
         Maximum size of response payloads to log.
+        """
+        policy_eval_input_retention: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         """
 elif False:
     LogConfigurationResponseArgsDict: TypeAlias = Mapping[str, Any]
@@ -874,13 +853,18 @@ elif False:
 class LogConfigurationResponseArgs:
     def __init__(__self__, *,
                  encrypt: pulumi.Input[_builtins.bool],
-                 max_payload_size: pulumi.Input[_builtins.int]):
+                 max_payload_size: Optional[pulumi.Input[_builtins.int]] = None,
+                 policy_eval_input_retention: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.bool] encrypt: Whether to encrypt response payloads.
         :param pulumi.Input[_builtins.int] max_payload_size: Maximum size of response payloads to log.
+        :param pulumi.Input[_builtins.str] policy_eval_input_retention: Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         """
         pulumi.set(__self__, "encrypt", encrypt)
-        pulumi.set(__self__, "max_payload_size", max_payload_size)
+        if max_payload_size is not None:
+            pulumi.set(__self__, "max_payload_size", max_payload_size)
+        if policy_eval_input_retention is not None:
+            pulumi.set(__self__, "policy_eval_input_retention", policy_eval_input_retention)
 
     @_builtins.property
     @pulumi.getter
@@ -896,15 +880,27 @@ class LogConfigurationResponseArgs:
 
     @_builtins.property
     @pulumi.getter(name="maxPayloadSize")
-    def max_payload_size(self) -> pulumi.Input[_builtins.int]:
+    def max_payload_size(self) -> Optional[pulumi.Input[_builtins.int]]:
         """
         Maximum size of response payloads to log.
         """
         return pulumi.get(self, "max_payload_size")
 
     @max_payload_size.setter
-    def max_payload_size(self, value: pulumi.Input[_builtins.int]):
+    def max_payload_size(self, value: Optional[pulumi.Input[_builtins.int]]):
         pulumi.set(self, "max_payload_size", value)
+
+    @_builtins.property
+    @pulumi.getter(name="policyEvalInputRetention")
+    def policy_eval_input_retention(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+        """
+        return pulumi.get(self, "policy_eval_input_retention")
+
+    @policy_eval_input_retention.setter
+    def policy_eval_input_retention(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "policy_eval_input_retention", value)
 
 
 if not MYPY:
@@ -996,6 +992,38 @@ class LogConfigurationScopeArgs:
     @space_id.setter
     def space_id(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "space_id", value)
+
+
+if not MYPY:
+    class LogConfigurationSessionArgsDict(TypedDict):
+        policy_eval_input_retention: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+        """
+elif False:
+    LogConfigurationSessionArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class LogConfigurationSessionArgs:
+    def __init__(__self__, *,
+                 policy_eval_input_retention: Optional[pulumi.Input[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] policy_eval_input_retention: Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+        """
+        if policy_eval_input_retention is not None:
+            pulumi.set(__self__, "policy_eval_input_retention", policy_eval_input_retention)
+
+    @_builtins.property
+    @pulumi.getter(name="policyEvalInputRetention")
+    def policy_eval_input_retention(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+        """
+        return pulumi.get(self, "policy_eval_input_retention")
+
+    @policy_eval_input_retention.setter
+    def policy_eval_input_retention(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "policy_eval_input_retention", value)
 
 
 if not MYPY:

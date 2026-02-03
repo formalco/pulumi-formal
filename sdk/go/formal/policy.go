@@ -24,7 +24,7 @@ type Policy struct {
 	Module pulumi.StringOutput `pulumi:"module"`
 	// Policy Name
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Notification settings for this policy.
+	// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
 	Notification pulumi.StringOutput `pulumi:"notification"`
 	// Owner of this policy: it can be either a group name or a user email.
 	Owner pulumi.StringOutput `pulumi:"owner"`
@@ -89,7 +89,7 @@ type policyState struct {
 	Module *string `pulumi:"module"`
 	// Policy Name
 	Name *string `pulumi:"name"`
-	// Notification settings for this policy.
+	// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
 	Notification *string `pulumi:"notification"`
 	// Owner of this policy: it can be either a group name or a user email.
 	Owner *string `pulumi:"owner"`
@@ -110,7 +110,7 @@ type PolicyState struct {
 	Module pulumi.StringPtrInput
 	// Policy Name
 	Name pulumi.StringPtrInput
-	// Notification settings for this policy.
+	// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
 	Notification pulumi.StringPtrInput
 	// Owner of this policy: it can be either a group name or a user email.
 	Owner pulumi.StringPtrInput
@@ -133,7 +133,7 @@ type policyArgs struct {
 	Module string `pulumi:"module"`
 	// Policy Name
 	Name *string `pulumi:"name"`
-	// Notification settings for this policy.
+	// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
 	Notification string `pulumi:"notification"`
 	// Owner of this policy: it can be either a group name or a user email.
 	Owner string `pulumi:"owner"`
@@ -151,7 +151,7 @@ type PolicyArgs struct {
 	Module pulumi.StringInput
 	// Policy Name
 	Name pulumi.StringPtrInput
-	// Notification settings for this policy.
+	// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
 	Notification pulumi.StringInput
 	// Owner of this policy: it can be either a group name or a user email.
 	Owner pulumi.StringInput
@@ -268,7 +268,7 @@ func (o PolicyOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Policy) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Notification settings for this policy.
+// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
 func (o PolicyOutput) Notification() pulumi.StringOutput {
 	return o.ApplyT(func(v *Policy) pulumi.StringOutput { return v.Notification }).(pulumi.StringOutput)
 }

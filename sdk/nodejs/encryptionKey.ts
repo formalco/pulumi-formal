@@ -46,7 +46,7 @@ export class EncryptionKey extends pulumi.CustomResource {
     /**
      * The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
      */
-    public readonly decryptorUri!: pulumi.Output<string>;
+    public readonly decryptorUri!: pulumi.Output<string | undefined>;
     /**
      * The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
      */
@@ -83,9 +83,6 @@ export class EncryptionKey extends pulumi.CustomResource {
             const args = argsOrState as EncryptionKeyArgs | undefined;
             if ((!args || args.algorithm === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'algorithm'");
-            }
-            if ((!args || args.decryptorUri === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'decryptorUri'");
             }
             if ((!args || args.keyId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'keyId'");
@@ -146,7 +143,7 @@ export interface EncryptionKeyArgs {
     /**
      * The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
      */
-    decryptorUri: pulumi.Input<string>;
+    decryptorUri?: pulumi.Input<string>;
     /**
      * The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
      */

@@ -36,9 +36,21 @@ export class ResourceClassifierConfiguration extends pulumi.CustomResource {
     }
 
     /**
+     * Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+     */
+    public readonly aiAnalysisScope!: pulumi.Output<string>;
+    /**
+     * The timeout for the AI analysis in seconds.
+     */
+    public readonly aiAnalysisTimeoutSeconds!: pulumi.Output<number>;
+    /**
      * The timestamp of the Resource Classifier Preference creation.
      */
     public /*out*/ readonly createdAt!: pulumi.Output<number>;
+    /**
+     * Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+     */
+    public readonly enforceStrictClassifierResultCount!: pulumi.Output<boolean | undefined>;
     /**
      * The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
      */
@@ -65,18 +77,30 @@ export class ResourceClassifierConfiguration extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ResourceClassifierConfigurationState | undefined;
+            resourceInputs["aiAnalysisScope"] = state ? state.aiAnalysisScope : undefined;
+            resourceInputs["aiAnalysisTimeoutSeconds"] = state ? state.aiAnalysisTimeoutSeconds : undefined;
             resourceInputs["createdAt"] = state ? state.createdAt : undefined;
+            resourceInputs["enforceStrictClassifierResultCount"] = state ? state.enforceStrictClassifierResultCount : undefined;
             resourceInputs["preference"] = state ? state.preference : undefined;
             resourceInputs["resourceId"] = state ? state.resourceId : undefined;
             resourceInputs["updatedAt"] = state ? state.updatedAt : undefined;
         } else {
             const args = argsOrState as ResourceClassifierConfigurationArgs | undefined;
+            if ((!args || args.aiAnalysisScope === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'aiAnalysisScope'");
+            }
+            if ((!args || args.aiAnalysisTimeoutSeconds === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'aiAnalysisTimeoutSeconds'");
+            }
             if ((!args || args.preference === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'preference'");
             }
             if ((!args || args.resourceId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'resourceId'");
             }
+            resourceInputs["aiAnalysisScope"] = args ? args.aiAnalysisScope : undefined;
+            resourceInputs["aiAnalysisTimeoutSeconds"] = args ? args.aiAnalysisTimeoutSeconds : undefined;
+            resourceInputs["enforceStrictClassifierResultCount"] = args ? args.enforceStrictClassifierResultCount : undefined;
             resourceInputs["preference"] = args ? args.preference : undefined;
             resourceInputs["resourceId"] = args ? args.resourceId : undefined;
             resourceInputs["createdAt"] = undefined /*out*/;
@@ -92,9 +116,21 @@ export class ResourceClassifierConfiguration extends pulumi.CustomResource {
  */
 export interface ResourceClassifierConfigurationState {
     /**
+     * Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+     */
+    aiAnalysisScope?: pulumi.Input<string>;
+    /**
+     * The timeout for the AI analysis in seconds.
+     */
+    aiAnalysisTimeoutSeconds?: pulumi.Input<number>;
+    /**
      * The timestamp of the Resource Classifier Preference creation.
      */
     createdAt?: pulumi.Input<number>;
+    /**
+     * Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+     */
+    enforceStrictClassifierResultCount?: pulumi.Input<boolean>;
     /**
      * The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
      */
@@ -113,6 +149,18 @@ export interface ResourceClassifierConfigurationState {
  * The set of arguments for constructing a ResourceClassifierConfiguration resource.
  */
 export interface ResourceClassifierConfigurationArgs {
+    /**
+     * Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+     */
+    aiAnalysisScope: pulumi.Input<string>;
+    /**
+     * The timeout for the AI analysis in seconds.
+     */
+    aiAnalysisTimeoutSeconds: pulumi.Input<number>;
+    /**
+     * Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+     */
+    enforceStrictClassifierResultCount?: pulumi.Input<boolean>;
     /**
      * The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
      */

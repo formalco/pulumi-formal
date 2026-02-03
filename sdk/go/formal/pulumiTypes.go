@@ -114,12 +114,12 @@ func (o DataDomainOwnerArrayOutput) Index(i pulumi.IntInput) DataDomainOwnerOutp
 }
 
 type IntegrationBiMetabase struct {
-	// Hostname of the Metabase instance.
-	Hostname string `pulumi:"hostname"`
-	// Password for the Metabase instance.
-	Password string `pulumi:"password"`
-	// Username for the Metabase instance.
-	Username string `pulumi:"username"`
+	// Metabase server hostname. Required when `sync=true`.
+	Hostname *string `pulumi:"hostname"`
+	// Metabase admin password. Required when `sync=true`.
+	Password *string `pulumi:"password"`
+	// Metabase admin username. Required when `sync=true`.
+	Username *string `pulumi:"username"`
 }
 
 // IntegrationBiMetabaseInput is an input type that accepts IntegrationBiMetabaseArgs and IntegrationBiMetabaseOutput values.
@@ -134,12 +134,12 @@ type IntegrationBiMetabaseInput interface {
 }
 
 type IntegrationBiMetabaseArgs struct {
-	// Hostname of the Metabase instance.
-	Hostname pulumi.StringInput `pulumi:"hostname"`
-	// Password for the Metabase instance.
-	Password pulumi.StringInput `pulumi:"password"`
-	// Username for the Metabase instance.
-	Username pulumi.StringInput `pulumi:"username"`
+	// Metabase server hostname. Required when `sync=true`.
+	Hostname pulumi.StringPtrInput `pulumi:"hostname"`
+	// Metabase admin password. Required when `sync=true`.
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// Metabase admin username. Required when `sync=true`.
+	Username pulumi.StringPtrInput `pulumi:"username"`
 }
 
 func (IntegrationBiMetabaseArgs) ElementType() reflect.Type {
@@ -219,19 +219,19 @@ func (o IntegrationBiMetabaseOutput) ToIntegrationBiMetabasePtrOutputWithContext
 	}).(IntegrationBiMetabasePtrOutput)
 }
 
-// Hostname of the Metabase instance.
-func (o IntegrationBiMetabaseOutput) Hostname() pulumi.StringOutput {
-	return o.ApplyT(func(v IntegrationBiMetabase) string { return v.Hostname }).(pulumi.StringOutput)
+// Metabase server hostname. Required when `sync=true`.
+func (o IntegrationBiMetabaseOutput) Hostname() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IntegrationBiMetabase) *string { return v.Hostname }).(pulumi.StringPtrOutput)
 }
 
-// Password for the Metabase instance.
-func (o IntegrationBiMetabaseOutput) Password() pulumi.StringOutput {
-	return o.ApplyT(func(v IntegrationBiMetabase) string { return v.Password }).(pulumi.StringOutput)
+// Metabase admin password. Required when `sync=true`.
+func (o IntegrationBiMetabaseOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IntegrationBiMetabase) *string { return v.Password }).(pulumi.StringPtrOutput)
 }
 
-// Username for the Metabase instance.
-func (o IntegrationBiMetabaseOutput) Username() pulumi.StringOutput {
-	return o.ApplyT(func(v IntegrationBiMetabase) string { return v.Username }).(pulumi.StringOutput)
+// Metabase admin username. Required when `sync=true`.
+func (o IntegrationBiMetabaseOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IntegrationBiMetabase) *string { return v.Username }).(pulumi.StringPtrOutput)
 }
 
 type IntegrationBiMetabasePtrOutput struct{ *pulumi.OutputState }
@@ -258,33 +258,33 @@ func (o IntegrationBiMetabasePtrOutput) Elem() IntegrationBiMetabaseOutput {
 	}).(IntegrationBiMetabaseOutput)
 }
 
-// Hostname of the Metabase instance.
+// Metabase server hostname. Required when `sync=true`.
 func (o IntegrationBiMetabasePtrOutput) Hostname() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *IntegrationBiMetabase) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.Hostname
+		return v.Hostname
 	}).(pulumi.StringPtrOutput)
 }
 
-// Password for the Metabase instance.
+// Metabase admin password. Required when `sync=true`.
 func (o IntegrationBiMetabasePtrOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *IntegrationBiMetabase) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.Password
+		return v.Password
 	}).(pulumi.StringPtrOutput)
 }
 
-// Username for the Metabase instance.
+// Metabase admin username. Required when `sync=true`.
 func (o IntegrationBiMetabasePtrOutput) Username() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *IntegrationBiMetabase) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.Username
+		return v.Username
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -303,6 +303,8 @@ type IntegrationCloudAws struct {
 	EnableRdsAutodiscovery *bool `pulumi:"enableRdsAutodiscovery"`
 	// Enables resource autodiscovery for Redshift clusters.
 	EnableRedshiftAutodiscovery *bool `pulumi:"enableRedshiftAutodiscovery"`
+	// Enables resource autodiscovery for S3 buckets.
+	EnableS3Autodiscovery *bool `pulumi:"enableS3Autodiscovery"`
 	// The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
 	S3BucketArn *string `pulumi:"s3BucketArn"`
 	// The template version of the CloudFormation stack. Use `latest` to stay in sync.
@@ -335,6 +337,8 @@ type IntegrationCloudAwsArgs struct {
 	EnableRdsAutodiscovery pulumi.BoolPtrInput `pulumi:"enableRdsAutodiscovery"`
 	// Enables resource autodiscovery for Redshift clusters.
 	EnableRedshiftAutodiscovery pulumi.BoolPtrInput `pulumi:"enableRedshiftAutodiscovery"`
+	// Enables resource autodiscovery for S3 buckets.
+	EnableS3Autodiscovery pulumi.BoolPtrInput `pulumi:"enableS3Autodiscovery"`
 	// The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
 	S3BucketArn pulumi.StringPtrInput `pulumi:"s3BucketArn"`
 	// The template version of the CloudFormation stack. Use `latest` to stay in sync.
@@ -453,6 +457,11 @@ func (o IntegrationCloudAwsOutput) EnableRedshiftAutodiscovery() pulumi.BoolPtrO
 	return o.ApplyT(func(v IntegrationCloudAws) *bool { return v.EnableRedshiftAutodiscovery }).(pulumi.BoolPtrOutput)
 }
 
+// Enables resource autodiscovery for S3 buckets.
+func (o IntegrationCloudAwsOutput) EnableS3Autodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudAws) *bool { return v.EnableS3Autodiscovery }).(pulumi.BoolPtrOutput)
+}
+
 // The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
 func (o IntegrationCloudAwsOutput) S3BucketArn() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v IntegrationCloudAws) *string { return v.S3BucketArn }).(pulumi.StringPtrOutput)
@@ -554,6 +563,16 @@ func (o IntegrationCloudAwsPtrOutput) EnableRedshiftAutodiscovery() pulumi.BoolP
 			return nil
 		}
 		return v.EnableRedshiftAutodiscovery
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Enables resource autodiscovery for S3 buckets.
+func (o IntegrationCloudAwsPtrOutput) EnableS3Autodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudAws) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnableS3Autodiscovery
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -1433,186 +1452,13 @@ func (o IntegrationMdmKandjiPtrOutput) ApiUrl() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type IntegrationMfaDuo struct {
-	// Duo API Hostname.
-	ApiHostname string `pulumi:"apiHostname"`
-	// Duo Integration Key.
-	IntegrationKey string `pulumi:"integrationKey"`
-	// Duo Secret Key.
-	SecretKey string `pulumi:"secretKey"`
-}
-
-// IntegrationMfaDuoInput is an input type that accepts IntegrationMfaDuoArgs and IntegrationMfaDuoOutput values.
-// You can construct a concrete instance of `IntegrationMfaDuoInput` via:
-//
-//	IntegrationMfaDuoArgs{...}
-type IntegrationMfaDuoInput interface {
-	pulumi.Input
-
-	ToIntegrationMfaDuoOutput() IntegrationMfaDuoOutput
-	ToIntegrationMfaDuoOutputWithContext(context.Context) IntegrationMfaDuoOutput
-}
-
-type IntegrationMfaDuoArgs struct {
-	// Duo API Hostname.
-	ApiHostname pulumi.StringInput `pulumi:"apiHostname"`
-	// Duo Integration Key.
-	IntegrationKey pulumi.StringInput `pulumi:"integrationKey"`
-	// Duo Secret Key.
-	SecretKey pulumi.StringInput `pulumi:"secretKey"`
-}
-
-func (IntegrationMfaDuoArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*IntegrationMfaDuo)(nil)).Elem()
-}
-
-func (i IntegrationMfaDuoArgs) ToIntegrationMfaDuoOutput() IntegrationMfaDuoOutput {
-	return i.ToIntegrationMfaDuoOutputWithContext(context.Background())
-}
-
-func (i IntegrationMfaDuoArgs) ToIntegrationMfaDuoOutputWithContext(ctx context.Context) IntegrationMfaDuoOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(IntegrationMfaDuoOutput)
-}
-
-func (i IntegrationMfaDuoArgs) ToIntegrationMfaDuoPtrOutput() IntegrationMfaDuoPtrOutput {
-	return i.ToIntegrationMfaDuoPtrOutputWithContext(context.Background())
-}
-
-func (i IntegrationMfaDuoArgs) ToIntegrationMfaDuoPtrOutputWithContext(ctx context.Context) IntegrationMfaDuoPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(IntegrationMfaDuoOutput).ToIntegrationMfaDuoPtrOutputWithContext(ctx)
-}
-
-// IntegrationMfaDuoPtrInput is an input type that accepts IntegrationMfaDuoArgs, IntegrationMfaDuoPtr and IntegrationMfaDuoPtrOutput values.
-// You can construct a concrete instance of `IntegrationMfaDuoPtrInput` via:
-//
-//	        IntegrationMfaDuoArgs{...}
-//
-//	or:
-//
-//	        nil
-type IntegrationMfaDuoPtrInput interface {
-	pulumi.Input
-
-	ToIntegrationMfaDuoPtrOutput() IntegrationMfaDuoPtrOutput
-	ToIntegrationMfaDuoPtrOutputWithContext(context.Context) IntegrationMfaDuoPtrOutput
-}
-
-type integrationMfaDuoPtrType IntegrationMfaDuoArgs
-
-func IntegrationMfaDuoPtr(v *IntegrationMfaDuoArgs) IntegrationMfaDuoPtrInput {
-	return (*integrationMfaDuoPtrType)(v)
-}
-
-func (*integrationMfaDuoPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**IntegrationMfaDuo)(nil)).Elem()
-}
-
-func (i *integrationMfaDuoPtrType) ToIntegrationMfaDuoPtrOutput() IntegrationMfaDuoPtrOutput {
-	return i.ToIntegrationMfaDuoPtrOutputWithContext(context.Background())
-}
-
-func (i *integrationMfaDuoPtrType) ToIntegrationMfaDuoPtrOutputWithContext(ctx context.Context) IntegrationMfaDuoPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(IntegrationMfaDuoPtrOutput)
-}
-
-type IntegrationMfaDuoOutput struct{ *pulumi.OutputState }
-
-func (IntegrationMfaDuoOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*IntegrationMfaDuo)(nil)).Elem()
-}
-
-func (o IntegrationMfaDuoOutput) ToIntegrationMfaDuoOutput() IntegrationMfaDuoOutput {
-	return o
-}
-
-func (o IntegrationMfaDuoOutput) ToIntegrationMfaDuoOutputWithContext(ctx context.Context) IntegrationMfaDuoOutput {
-	return o
-}
-
-func (o IntegrationMfaDuoOutput) ToIntegrationMfaDuoPtrOutput() IntegrationMfaDuoPtrOutput {
-	return o.ToIntegrationMfaDuoPtrOutputWithContext(context.Background())
-}
-
-func (o IntegrationMfaDuoOutput) ToIntegrationMfaDuoPtrOutputWithContext(ctx context.Context) IntegrationMfaDuoPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v IntegrationMfaDuo) *IntegrationMfaDuo {
-		return &v
-	}).(IntegrationMfaDuoPtrOutput)
-}
-
-// Duo API Hostname.
-func (o IntegrationMfaDuoOutput) ApiHostname() pulumi.StringOutput {
-	return o.ApplyT(func(v IntegrationMfaDuo) string { return v.ApiHostname }).(pulumi.StringOutput)
-}
-
-// Duo Integration Key.
-func (o IntegrationMfaDuoOutput) IntegrationKey() pulumi.StringOutput {
-	return o.ApplyT(func(v IntegrationMfaDuo) string { return v.IntegrationKey }).(pulumi.StringOutput)
-}
-
-// Duo Secret Key.
-func (o IntegrationMfaDuoOutput) SecretKey() pulumi.StringOutput {
-	return o.ApplyT(func(v IntegrationMfaDuo) string { return v.SecretKey }).(pulumi.StringOutput)
-}
-
-type IntegrationMfaDuoPtrOutput struct{ *pulumi.OutputState }
-
-func (IntegrationMfaDuoPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**IntegrationMfaDuo)(nil)).Elem()
-}
-
-func (o IntegrationMfaDuoPtrOutput) ToIntegrationMfaDuoPtrOutput() IntegrationMfaDuoPtrOutput {
-	return o
-}
-
-func (o IntegrationMfaDuoPtrOutput) ToIntegrationMfaDuoPtrOutputWithContext(ctx context.Context) IntegrationMfaDuoPtrOutput {
-	return o
-}
-
-func (o IntegrationMfaDuoPtrOutput) Elem() IntegrationMfaDuoOutput {
-	return o.ApplyT(func(v *IntegrationMfaDuo) IntegrationMfaDuo {
-		if v != nil {
-			return *v
-		}
-		var ret IntegrationMfaDuo
-		return ret
-	}).(IntegrationMfaDuoOutput)
-}
-
-// Duo API Hostname.
-func (o IntegrationMfaDuoPtrOutput) ApiHostname() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *IntegrationMfaDuo) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.ApiHostname
-	}).(pulumi.StringPtrOutput)
-}
-
-// Duo Integration Key.
-func (o IntegrationMfaDuoPtrOutput) IntegrationKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *IntegrationMfaDuo) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.IntegrationKey
-	}).(pulumi.StringPtrOutput)
-}
-
-// Duo Secret Key.
-func (o IntegrationMfaDuoPtrOutput) SecretKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *IntegrationMfaDuo) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.SecretKey
-	}).(pulumi.StringPtrOutput)
-}
-
 type LogConfigurationRequest struct {
 	// Whether to encrypt request payloads.
 	Encrypt bool `pulumi:"encrypt"`
 	// Maximum size of request payloads to log.
-	MaxPayloadSize int `pulumi:"maxPayloadSize"`
+	MaxPayloadSize *int `pulumi:"maxPayloadSize"`
+	// Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+	PolicyEvalInputRetention *string `pulumi:"policyEvalInputRetention"`
 	// SQL logging configuration for requests.
 	Sql *LogConfigurationRequestSql `pulumi:"sql"`
 }
@@ -1632,7 +1478,9 @@ type LogConfigurationRequestArgs struct {
 	// Whether to encrypt request payloads.
 	Encrypt pulumi.BoolInput `pulumi:"encrypt"`
 	// Maximum size of request payloads to log.
-	MaxPayloadSize pulumi.IntInput `pulumi:"maxPayloadSize"`
+	MaxPayloadSize pulumi.IntPtrInput `pulumi:"maxPayloadSize"`
+	// Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+	PolicyEvalInputRetention pulumi.StringPtrInput `pulumi:"policyEvalInputRetention"`
 	// SQL logging configuration for requests.
 	Sql LogConfigurationRequestSqlPtrInput `pulumi:"sql"`
 }
@@ -1720,8 +1568,13 @@ func (o LogConfigurationRequestOutput) Encrypt() pulumi.BoolOutput {
 }
 
 // Maximum size of request payloads to log.
-func (o LogConfigurationRequestOutput) MaxPayloadSize() pulumi.IntOutput {
-	return o.ApplyT(func(v LogConfigurationRequest) int { return v.MaxPayloadSize }).(pulumi.IntOutput)
+func (o LogConfigurationRequestOutput) MaxPayloadSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v LogConfigurationRequest) *int { return v.MaxPayloadSize }).(pulumi.IntPtrOutput)
+}
+
+// Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+func (o LogConfigurationRequestOutput) PolicyEvalInputRetention() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LogConfigurationRequest) *string { return v.PolicyEvalInputRetention }).(pulumi.StringPtrOutput)
 }
 
 // SQL logging configuration for requests.
@@ -1769,8 +1622,18 @@ func (o LogConfigurationRequestPtrOutput) MaxPayloadSize() pulumi.IntPtrOutput {
 		if v == nil {
 			return nil
 		}
-		return &v.MaxPayloadSize
+		return v.MaxPayloadSize
 	}).(pulumi.IntPtrOutput)
+}
+
+// Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+func (o LogConfigurationRequestPtrOutput) PolicyEvalInputRetention() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogConfigurationRequest) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PolicyEvalInputRetention
+	}).(pulumi.StringPtrOutput)
 }
 
 // SQL logging configuration for requests.
@@ -1943,7 +1806,9 @@ type LogConfigurationResponse struct {
 	// Whether to encrypt response payloads.
 	Encrypt bool `pulumi:"encrypt"`
 	// Maximum size of response payloads to log.
-	MaxPayloadSize int `pulumi:"maxPayloadSize"`
+	MaxPayloadSize *int `pulumi:"maxPayloadSize"`
+	// Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+	PolicyEvalInputRetention *string `pulumi:"policyEvalInputRetention"`
 }
 
 // LogConfigurationResponseInput is an input type that accepts LogConfigurationResponseArgs and LogConfigurationResponseOutput values.
@@ -1961,7 +1826,9 @@ type LogConfigurationResponseArgs struct {
 	// Whether to encrypt response payloads.
 	Encrypt pulumi.BoolInput `pulumi:"encrypt"`
 	// Maximum size of response payloads to log.
-	MaxPayloadSize pulumi.IntInput `pulumi:"maxPayloadSize"`
+	MaxPayloadSize pulumi.IntPtrInput `pulumi:"maxPayloadSize"`
+	// Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+	PolicyEvalInputRetention pulumi.StringPtrInput `pulumi:"policyEvalInputRetention"`
 }
 
 func (LogConfigurationResponseArgs) ElementType() reflect.Type {
@@ -2047,8 +1914,13 @@ func (o LogConfigurationResponseOutput) Encrypt() pulumi.BoolOutput {
 }
 
 // Maximum size of response payloads to log.
-func (o LogConfigurationResponseOutput) MaxPayloadSize() pulumi.IntOutput {
-	return o.ApplyT(func(v LogConfigurationResponse) int { return v.MaxPayloadSize }).(pulumi.IntOutput)
+func (o LogConfigurationResponseOutput) MaxPayloadSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v LogConfigurationResponse) *int { return v.MaxPayloadSize }).(pulumi.IntPtrOutput)
+}
+
+// Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+func (o LogConfigurationResponseOutput) PolicyEvalInputRetention() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LogConfigurationResponse) *string { return v.PolicyEvalInputRetention }).(pulumi.StringPtrOutput)
 }
 
 type LogConfigurationResponsePtrOutput struct{ *pulumi.OutputState }
@@ -2091,8 +1963,18 @@ func (o LogConfigurationResponsePtrOutput) MaxPayloadSize() pulumi.IntPtrOutput 
 		if v == nil {
 			return nil
 		}
-		return &v.MaxPayloadSize
+		return v.MaxPayloadSize
 	}).(pulumi.IntPtrOutput)
+}
+
+// Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+func (o LogConfigurationResponsePtrOutput) PolicyEvalInputRetention() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogConfigurationResponse) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PolicyEvalInputRetention
+	}).(pulumi.StringPtrOutput)
 }
 
 type LogConfigurationScope struct {
@@ -2289,6 +2171,143 @@ func (o LogConfigurationScopePtrOutput) Type() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type LogConfigurationSession struct {
+	// Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+	PolicyEvalInputRetention *string `pulumi:"policyEvalInputRetention"`
+}
+
+// LogConfigurationSessionInput is an input type that accepts LogConfigurationSessionArgs and LogConfigurationSessionOutput values.
+// You can construct a concrete instance of `LogConfigurationSessionInput` via:
+//
+//	LogConfigurationSessionArgs{...}
+type LogConfigurationSessionInput interface {
+	pulumi.Input
+
+	ToLogConfigurationSessionOutput() LogConfigurationSessionOutput
+	ToLogConfigurationSessionOutputWithContext(context.Context) LogConfigurationSessionOutput
+}
+
+type LogConfigurationSessionArgs struct {
+	// Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+	PolicyEvalInputRetention pulumi.StringPtrInput `pulumi:"policyEvalInputRetention"`
+}
+
+func (LogConfigurationSessionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogConfigurationSession)(nil)).Elem()
+}
+
+func (i LogConfigurationSessionArgs) ToLogConfigurationSessionOutput() LogConfigurationSessionOutput {
+	return i.ToLogConfigurationSessionOutputWithContext(context.Background())
+}
+
+func (i LogConfigurationSessionArgs) ToLogConfigurationSessionOutputWithContext(ctx context.Context) LogConfigurationSessionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogConfigurationSessionOutput)
+}
+
+func (i LogConfigurationSessionArgs) ToLogConfigurationSessionPtrOutput() LogConfigurationSessionPtrOutput {
+	return i.ToLogConfigurationSessionPtrOutputWithContext(context.Background())
+}
+
+func (i LogConfigurationSessionArgs) ToLogConfigurationSessionPtrOutputWithContext(ctx context.Context) LogConfigurationSessionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogConfigurationSessionOutput).ToLogConfigurationSessionPtrOutputWithContext(ctx)
+}
+
+// LogConfigurationSessionPtrInput is an input type that accepts LogConfigurationSessionArgs, LogConfigurationSessionPtr and LogConfigurationSessionPtrOutput values.
+// You can construct a concrete instance of `LogConfigurationSessionPtrInput` via:
+//
+//	        LogConfigurationSessionArgs{...}
+//
+//	or:
+//
+//	        nil
+type LogConfigurationSessionPtrInput interface {
+	pulumi.Input
+
+	ToLogConfigurationSessionPtrOutput() LogConfigurationSessionPtrOutput
+	ToLogConfigurationSessionPtrOutputWithContext(context.Context) LogConfigurationSessionPtrOutput
+}
+
+type logConfigurationSessionPtrType LogConfigurationSessionArgs
+
+func LogConfigurationSessionPtr(v *LogConfigurationSessionArgs) LogConfigurationSessionPtrInput {
+	return (*logConfigurationSessionPtrType)(v)
+}
+
+func (*logConfigurationSessionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**LogConfigurationSession)(nil)).Elem()
+}
+
+func (i *logConfigurationSessionPtrType) ToLogConfigurationSessionPtrOutput() LogConfigurationSessionPtrOutput {
+	return i.ToLogConfigurationSessionPtrOutputWithContext(context.Background())
+}
+
+func (i *logConfigurationSessionPtrType) ToLogConfigurationSessionPtrOutputWithContext(ctx context.Context) LogConfigurationSessionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogConfigurationSessionPtrOutput)
+}
+
+type LogConfigurationSessionOutput struct{ *pulumi.OutputState }
+
+func (LogConfigurationSessionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogConfigurationSession)(nil)).Elem()
+}
+
+func (o LogConfigurationSessionOutput) ToLogConfigurationSessionOutput() LogConfigurationSessionOutput {
+	return o
+}
+
+func (o LogConfigurationSessionOutput) ToLogConfigurationSessionOutputWithContext(ctx context.Context) LogConfigurationSessionOutput {
+	return o
+}
+
+func (o LogConfigurationSessionOutput) ToLogConfigurationSessionPtrOutput() LogConfigurationSessionPtrOutput {
+	return o.ToLogConfigurationSessionPtrOutputWithContext(context.Background())
+}
+
+func (o LogConfigurationSessionOutput) ToLogConfigurationSessionPtrOutputWithContext(ctx context.Context) LogConfigurationSessionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LogConfigurationSession) *LogConfigurationSession {
+		return &v
+	}).(LogConfigurationSessionPtrOutput)
+}
+
+// Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+func (o LogConfigurationSessionOutput) PolicyEvalInputRetention() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LogConfigurationSession) *string { return v.PolicyEvalInputRetention }).(pulumi.StringPtrOutput)
+}
+
+type LogConfigurationSessionPtrOutput struct{ *pulumi.OutputState }
+
+func (LogConfigurationSessionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**LogConfigurationSession)(nil)).Elem()
+}
+
+func (o LogConfigurationSessionPtrOutput) ToLogConfigurationSessionPtrOutput() LogConfigurationSessionPtrOutput {
+	return o
+}
+
+func (o LogConfigurationSessionPtrOutput) ToLogConfigurationSessionPtrOutputWithContext(ctx context.Context) LogConfigurationSessionPtrOutput {
+	return o
+}
+
+func (o LogConfigurationSessionPtrOutput) Elem() LogConfigurationSessionOutput {
+	return o.ApplyT(func(v *LogConfigurationSession) LogConfigurationSession {
+		if v != nil {
+			return *v
+		}
+		var ret LogConfigurationSession
+		return ret
+	}).(LogConfigurationSessionOutput)
+}
+
+// Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+func (o LogConfigurationSessionPtrOutput) PolicyEvalInputRetention() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LogConfigurationSession) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PolicyEvalInputRetention
+	}).(pulumi.StringPtrOutput)
+}
+
 type LogConfigurationStream struct {
 	// Whether to encrypt stream data.
 	Encrypt bool `pulumi:"encrypt"`
@@ -2443,8 +2462,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogSplunkPtrInput)(nil)).Elem(), IntegrationLogSplunkArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationMdmKandjiInput)(nil)).Elem(), IntegrationMdmKandjiArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationMdmKandjiPtrInput)(nil)).Elem(), IntegrationMdmKandjiArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationMfaDuoInput)(nil)).Elem(), IntegrationMfaDuoArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationMfaDuoPtrInput)(nil)).Elem(), IntegrationMfaDuoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationRequestInput)(nil)).Elem(), LogConfigurationRequestArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationRequestPtrInput)(nil)).Elem(), LogConfigurationRequestArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationRequestSqlInput)(nil)).Elem(), LogConfigurationRequestSqlArgs{})
@@ -2453,6 +2470,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationResponsePtrInput)(nil)).Elem(), LogConfigurationResponseArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationScopeInput)(nil)).Elem(), LogConfigurationScopeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationScopePtrInput)(nil)).Elem(), LogConfigurationScopeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationSessionInput)(nil)).Elem(), LogConfigurationSessionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationSessionPtrInput)(nil)).Elem(), LogConfigurationSessionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationStreamInput)(nil)).Elem(), LogConfigurationStreamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationStreamPtrInput)(nil)).Elem(), LogConfigurationStreamArgs{})
 	pulumi.RegisterOutputType(DataDomainOwnerOutput{})
@@ -2471,8 +2490,6 @@ func init() {
 	pulumi.RegisterOutputType(IntegrationLogSplunkPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationMdmKandjiOutput{})
 	pulumi.RegisterOutputType(IntegrationMdmKandjiPtrOutput{})
-	pulumi.RegisterOutputType(IntegrationMfaDuoOutput{})
-	pulumi.RegisterOutputType(IntegrationMfaDuoPtrOutput{})
 	pulumi.RegisterOutputType(LogConfigurationRequestOutput{})
 	pulumi.RegisterOutputType(LogConfigurationRequestPtrOutput{})
 	pulumi.RegisterOutputType(LogConfigurationRequestSqlOutput{})
@@ -2481,6 +2498,8 @@ func init() {
 	pulumi.RegisterOutputType(LogConfigurationResponsePtrOutput{})
 	pulumi.RegisterOutputType(LogConfigurationScopeOutput{})
 	pulumi.RegisterOutputType(LogConfigurationScopePtrOutput{})
+	pulumi.RegisterOutputType(LogConfigurationSessionOutput{})
+	pulumi.RegisterOutputType(LogConfigurationSessionPtrOutput{})
 	pulumi.RegisterOutputType(LogConfigurationStreamOutput{})
 	pulumi.RegisterOutputType(LogConfigurationStreamPtrOutput{})
 }

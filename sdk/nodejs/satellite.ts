@@ -44,6 +44,10 @@ export class Satellite extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+     */
+    public readonly satelliteType!: pulumi.Output<string>;
+    /**
      * The ID of the Space to create the Satellite in.
      */
     public readonly spaceId!: pulumi.Output<string | undefined>;
@@ -63,7 +67,7 @@ export class Satellite extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args?: SatelliteArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args: SatelliteArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: SatelliteArgs | SatelliteState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -71,12 +75,17 @@ export class Satellite extends pulumi.CustomResource {
             const state = argsOrState as SatelliteState | undefined;
             resourceInputs["apiKey"] = state ? state.apiKey : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["satelliteType"] = state ? state.satelliteType : undefined;
             resourceInputs["spaceId"] = state ? state.spaceId : undefined;
             resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
             resourceInputs["tlsCert"] = state ? state.tlsCert : undefined;
         } else {
             const args = argsOrState as SatelliteArgs | undefined;
+            if ((!args || args.satelliteType === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'satelliteType'");
+            }
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["satelliteType"] = args ? args.satelliteType : undefined;
             resourceInputs["spaceId"] = args ? args.spaceId : undefined;
             resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
             resourceInputs["apiKey"] = undefined /*out*/;
@@ -102,6 +111,10 @@ export interface SatelliteState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+     */
+    satelliteType?: pulumi.Input<string>;
+    /**
      * The ID of the Space to create the Satellite in.
      */
     spaceId?: pulumi.Input<string>;
@@ -123,6 +136,10 @@ export interface SatelliteArgs {
      * Friendly name for the Satellite.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+     */
+    satelliteType: pulumi.Input<string>;
     /**
      * The ID of the Space to create the Satellite in.
      */

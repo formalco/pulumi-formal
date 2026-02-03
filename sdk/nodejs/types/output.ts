@@ -12,17 +12,17 @@ export interface DataDomainOwner {
 
 export interface IntegrationBiMetabase {
     /**
-     * Hostname of the Metabase instance.
+     * Metabase server hostname. Required when `sync=true`.
      */
-    hostname: string;
+    hostname?: string;
     /**
-     * Password for the Metabase instance.
+     * Metabase admin password. Required when `sync=true`.
      */
-    password: string;
+    password?: string;
     /**
-     * Username for the Metabase instance.
+     * Metabase admin username. Required when `sync=true`.
      */
-    username: string;
+    username?: string;
 }
 
 export interface IntegrationCloudAws {
@@ -54,6 +54,10 @@ export interface IntegrationCloudAws {
      * Enables resource autodiscovery for Redshift clusters.
      */
     enableRedshiftAutodiscovery?: boolean;
+    /**
+     * Enables resource autodiscovery for S3 buckets.
+     */
+    enableS3Autodiscovery?: boolean;
     /**
      * The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
      */
@@ -135,21 +139,6 @@ export interface IntegrationMdmKandji {
     apiUrl: string;
 }
 
-export interface IntegrationMfaDuo {
-    /**
-     * Duo API Hostname.
-     */
-    apiHostname: string;
-    /**
-     * Duo Integration Key.
-     */
-    integrationKey: string;
-    /**
-     * Duo Secret Key.
-     */
-    secretKey: string;
-}
-
 export interface LogConfigurationRequest {
     /**
      * Whether to encrypt request payloads.
@@ -158,7 +147,11 @@ export interface LogConfigurationRequest {
     /**
      * Maximum size of request payloads to log.
      */
-    maxPayloadSize: number;
+    maxPayloadSize?: number;
+    /**
+     * Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+     */
+    policyEvalInputRetention?: string;
     /**
      * SQL logging configuration for requests.
      */
@@ -184,7 +177,11 @@ export interface LogConfigurationResponse {
     /**
      * Maximum size of response payloads to log.
      */
-    maxPayloadSize: number;
+    maxPayloadSize?: number;
+    /**
+     * Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+     */
+    policyEvalInputRetention?: string;
 }
 
 export interface LogConfigurationScope {
@@ -204,6 +201,13 @@ export interface LogConfigurationScope {
      * The type of scope (resource, connector, space, org).
      */
     type: string;
+}
+
+export interface LogConfigurationSession {
+    /**
+     * Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+     */
+    policyEvalInputRetention?: string;
 }
 
 export interface LogConfigurationStream {

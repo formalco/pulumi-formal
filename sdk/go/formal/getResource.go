@@ -11,7 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Data source for looking up a Resource by name.
+// Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.
 func LookupResource(ctx *pulumi.Context, args *LookupResourceArgs, opts ...pulumi.InvokeOption) (*LookupResourceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupResourceResult
@@ -24,8 +24,10 @@ func LookupResource(ctx *pulumi.Context, args *LookupResourceArgs, opts ...pulum
 
 // A collection of arguments for invoking getResource.
 type LookupResourceArgs struct {
-	// The name of the Resource.
-	Name string `pulumi:"name"`
+	// The ID of this Resource.
+	Id *string `pulumi:"id"`
+	// The name of the Resource to look up. Use this to fetch a resource by name.
+	Name *string `pulumi:"name"`
 }
 
 // A collection of values returned by getResource.
@@ -36,10 +38,10 @@ type LookupResourceResult struct {
 	Environment string `pulumi:"environment"`
 	// Hostname of the Resource.
 	Hostname string `pulumi:"hostname"`
-	// The provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	// The name of the Resource.
-	Name string `pulumi:"name"`
+	// The ID of this Resource.
+	Id *string `pulumi:"id"`
+	// The name of the Resource to look up. Use this to fetch a resource by name.
+	Name *string `pulumi:"name"`
 	// The port your Resource is listening on.
 	Port int `pulumi:"port"`
 	// The ID of the Space the Resource is in.
@@ -61,8 +63,10 @@ func LookupResourceOutput(ctx *pulumi.Context, args LookupResourceOutputArgs, op
 
 // A collection of arguments for invoking getResource.
 type LookupResourceOutputArgs struct {
-	// The name of the Resource.
-	Name pulumi.StringInput `pulumi:"name"`
+	// The ID of this Resource.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// The name of the Resource to look up. Use this to fetch a resource by name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
 }
 
 func (LookupResourceOutputArgs) ElementType() reflect.Type {
@@ -99,14 +103,14 @@ func (o LookupResourceResultOutput) Hostname() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupResourceResult) string { return v.Hostname }).(pulumi.StringOutput)
 }
 
-// The provider-assigned unique ID for this managed resource.
-func (o LookupResourceResultOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupResourceResult) string { return v.Id }).(pulumi.StringOutput)
+// The ID of this Resource.
+func (o LookupResourceResultOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupResourceResult) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
-// The name of the Resource.
-func (o LookupResourceResultOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupResourceResult) string { return v.Name }).(pulumi.StringOutput)
+// The name of the Resource to look up. Use this to fetch a resource by name.
+func (o LookupResourceResultOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupResourceResult) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
 // The port your Resource is listening on.

@@ -81,17 +81,17 @@ class GetResourceResult:
 
     @_builtins.property
     @pulumi.getter
-    def id(self) -> _builtins.str:
+    def id(self) -> Optional[_builtins.str]:
         """
-        The provider-assigned unique ID for this managed resource.
+        The ID of this Resource.
         """
         return pulumi.get(self, "id")
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> _builtins.str:
+    def name(self) -> Optional[_builtins.str]:
         """
-        The name of the Resource.
+        The name of the Resource to look up. Use this to fetch a resource by name.
         """
         return pulumi.get(self, "name")
 
@@ -145,15 +145,18 @@ class AwaitableGetResourceResult(GetResourceResult):
             termination_protection=self.termination_protection)
 
 
-def get_resource(name: Optional[_builtins.str] = None,
+def get_resource(id: Optional[_builtins.str] = None,
+                 name: Optional[_builtins.str] = None,
                  opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetResourceResult:
     """
-    Data source for looking up a Resource by name.
+    Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.
 
 
-    :param _builtins.str name: The name of the Resource.
+    :param _builtins.str id: The ID of this Resource.
+    :param _builtins.str name: The name of the Resource to look up. Use this to fetch a resource by name.
     """
     __args__ = dict()
+    __args__['id'] = id
     __args__['name'] = name
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('formal:index/getResource:getResource', __args__, opts=opts, typ=GetResourceResult).value
@@ -168,15 +171,18 @@ def get_resource(name: Optional[_builtins.str] = None,
         space_id=pulumi.get(__ret__, 'space_id'),
         technology=pulumi.get(__ret__, 'technology'),
         termination_protection=pulumi.get(__ret__, 'termination_protection'))
-def get_resource_output(name: Optional[pulumi.Input[_builtins.str]] = None,
+def get_resource_output(id: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
+                        name: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
                         opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetResourceResult]:
     """
-    Data source for looking up a Resource by name.
+    Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.
 
 
-    :param _builtins.str name: The name of the Resource.
+    :param _builtins.str id: The ID of this Resource.
+    :param _builtins.str name: The name of the Resource to look up. Use this to fetch a resource by name.
     """
     __args__ = dict()
+    __args__['id'] = id
     __args__['name'] = name
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('formal:index/getResource:getResource', __args__, opts=opts, typ=GetResourceResult)

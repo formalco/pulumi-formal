@@ -26,7 +26,7 @@ namespace Formal.Pulumi
         /// The ID of the encryption key to use for this log configuration.
         /// </summary>
         [Output("encryptionKeyId")]
-        public Output<string> EncryptionKeyId { get; private set; } = null!;
+        public Output<string?> EncryptionKeyId { get; private set; } = null!;
 
         /// <summary>
         /// The name of this log configuration.
@@ -51,6 +51,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Output("scope")]
         public Output<Outputs.LogConfigurationScope> Scope { get; private set; } = null!;
+
+        /// <summary>
+        /// Session logging configuration.
+        /// </summary>
+        [Output("session")]
+        public Output<Outputs.LogConfigurationSession?> Session { get; private set; } = null!;
 
         /// <summary>
         /// Stream logging configuration.
@@ -114,8 +120,8 @@ namespace Formal.Pulumi
         /// <summary>
         /// The ID of the encryption key to use for this log configuration.
         /// </summary>
-        [Input("encryptionKeyId", required: true)]
-        public Input<string> EncryptionKeyId { get; set; } = null!;
+        [Input("encryptionKeyId")]
+        public Input<string>? EncryptionKeyId { get; set; }
 
         /// <summary>
         /// The name of this log configuration.
@@ -140,6 +146,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("scope", required: true)]
         public Input<Inputs.LogConfigurationScopeArgs> Scope { get; set; } = null!;
+
+        /// <summary>
+        /// Session logging configuration.
+        /// </summary>
+        [Input("session")]
+        public Input<Inputs.LogConfigurationSessionArgs>? Session { get; set; }
 
         /// <summary>
         /// Stream logging configuration.
@@ -190,6 +202,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("scope")]
         public Input<Inputs.LogConfigurationScopeGetArgs>? Scope { get; set; }
+
+        /// <summary>
+        /// Session logging configuration.
+        /// </summary>
+        [Input("session")]
+        public Input<Inputs.LogConfigurationSessionGetArgs>? Session { get; set; }
 
         /// <summary>
         /// Stream logging configuration.

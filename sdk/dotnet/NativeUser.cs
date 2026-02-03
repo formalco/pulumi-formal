@@ -22,11 +22,14 @@ namespace Formal.Pulumi
         [Output("nativeUserId")]
         public Output<string> NativeUserId { get; private set; } = null!;
 
-        /// <summary>
-        /// The password of the Native User.
-        /// </summary>
         [Output("nativeUserSecret")]
-        public Output<string> NativeUserSecret { get; private set; } = null!;
+        public Output<string?> NativeUserSecret { get; private set; } = null!;
+
+        /// <summary>
+        /// Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
+        /// </summary>
+        [Output("nativeUserSecretWoVersion")]
+        public Output<int?> NativeUserSecretWoVersion { get; private set; } = null!;
 
         /// <summary>
         /// The Sidecar ID for the resource this Native User is for.
@@ -103,12 +106,8 @@ namespace Formal.Pulumi
         [Input("nativeUserId", required: true)]
         public Input<string> NativeUserId { get; set; } = null!;
 
-        [Input("nativeUserSecret", required: true)]
+        [Input("nativeUserSecret")]
         private Input<string>? _nativeUserSecret;
-
-        /// <summary>
-        /// The password of the Native User.
-        /// </summary>
         public Input<string>? NativeUserSecret
         {
             get => _nativeUserSecret;
@@ -118,6 +117,12 @@ namespace Formal.Pulumi
                 _nativeUserSecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
+
+        /// <summary>
+        /// Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
+        /// </summary>
+        [Input("nativeUserSecretWoVersion")]
+        public Input<int>? NativeUserSecretWoVersion { get; set; }
 
         /// <summary>
         /// The Sidecar ID for the resource this Native User is for.
@@ -153,10 +158,6 @@ namespace Formal.Pulumi
 
         [Input("nativeUserSecret")]
         private Input<string>? _nativeUserSecret;
-
-        /// <summary>
-        /// The password of the Native User.
-        /// </summary>
         public Input<string>? NativeUserSecret
         {
             get => _nativeUserSecret;
@@ -166,6 +167,12 @@ namespace Formal.Pulumi
                 _nativeUserSecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
+
+        /// <summary>
+        /// Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
+        /// </summary>
+        [Input("nativeUserSecretWoVersion")]
+        public Input<int>? NativeUserSecretWoVersion { get; set; }
 
         /// <summary>
         /// The Sidecar ID for the resource this Native User is for.

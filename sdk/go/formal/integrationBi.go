@@ -18,9 +18,9 @@ type IntegrationBi struct {
 
 	// Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
 	Metabase IntegrationBiMetabasePtrOutput `pulumi:"metabase"`
-	// Friendly name for the App.
+	// Friendly name for this app.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+	// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
 	Sync pulumi.BoolOutput `pulumi:"sync"`
 }
 
@@ -59,18 +59,18 @@ func GetIntegrationBi(ctx *pulumi.Context,
 type integrationBiState struct {
 	// Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
 	Metabase *IntegrationBiMetabase `pulumi:"metabase"`
-	// Friendly name for the App.
+	// Friendly name for this app.
 	Name *string `pulumi:"name"`
-	// Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+	// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
 	Sync *bool `pulumi:"sync"`
 }
 
 type IntegrationBiState struct {
 	// Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
 	Metabase IntegrationBiMetabasePtrInput
-	// Friendly name for the App.
+	// Friendly name for this app.
 	Name pulumi.StringPtrInput
-	// Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+	// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
 	Sync pulumi.BoolPtrInput
 }
 
@@ -81,9 +81,9 @@ func (IntegrationBiState) ElementType() reflect.Type {
 type integrationBiArgs struct {
 	// Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
 	Metabase *IntegrationBiMetabase `pulumi:"metabase"`
-	// Friendly name for the App.
+	// Friendly name for this app.
 	Name *string `pulumi:"name"`
-	// Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+	// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
 	Sync bool `pulumi:"sync"`
 }
 
@@ -91,9 +91,9 @@ type integrationBiArgs struct {
 type IntegrationBiArgs struct {
 	// Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
 	Metabase IntegrationBiMetabasePtrInput
-	// Friendly name for the App.
+	// Friendly name for this app.
 	Name pulumi.StringPtrInput
-	// Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+	// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
 	Sync pulumi.BoolInput
 }
 
@@ -189,12 +189,12 @@ func (o IntegrationBiOutput) Metabase() IntegrationBiMetabasePtrOutput {
 	return o.ApplyT(func(v *IntegrationBi) IntegrationBiMetabasePtrOutput { return v.Metabase }).(IntegrationBiMetabasePtrOutput)
 }
 
-// Friendly name for the App.
+// Friendly name for this app.
 func (o IntegrationBiOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationBi) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Auto synchronize users from Metabase to Formal (occurs every hour). Note that a lambda worker will need to be deployed in your infrastructure to synchronise users.
+// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
 func (o IntegrationBiOutput) Sync() pulumi.BoolOutput {
 	return o.ApplyT(func(v *IntegrationBi) pulumi.BoolOutput { return v.Sync }).(pulumi.BoolOutput)
 }

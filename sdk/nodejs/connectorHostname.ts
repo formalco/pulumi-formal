@@ -36,6 +36,10 @@ export class ConnectorHostname extends pulumi.CustomResource {
     }
 
     /**
+     * The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+     */
+    public readonly certificate!: pulumi.Output<string | undefined>;
+    /**
      * The ID of the Connector this hostname is linked to.
      */
     public readonly connectorId!: pulumi.Output<string>;
@@ -58,6 +62,10 @@ export class ConnectorHostname extends pulumi.CustomResource {
      */
     public readonly managedTls!: pulumi.Output<boolean | undefined>;
     /**
+     * The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+     */
+    public readonly privateKey!: pulumi.Output<string | undefined>;
+    /**
      * If set to true, this connector hostname cannot be deleted.
      */
     public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
@@ -79,11 +87,13 @@ export class ConnectorHostname extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConnectorHostnameState | undefined;
+            resourceInputs["certificate"] = state ? state.certificate : undefined;
             resourceInputs["connectorId"] = state ? state.connectorId : undefined;
             resourceInputs["dnsRecord"] = state ? state.dnsRecord : undefined;
             resourceInputs["dnsRecordStatus"] = state ? state.dnsRecordStatus : undefined;
             resourceInputs["hostname"] = state ? state.hostname : undefined;
             resourceInputs["managedTls"] = state ? state.managedTls : undefined;
+            resourceInputs["privateKey"] = state ? state.privateKey : undefined;
             resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
             resourceInputs["tlsCertificateStatus"] = state ? state.tlsCertificateStatus : undefined;
         } else {
@@ -94,15 +104,19 @@ export class ConnectorHostname extends pulumi.CustomResource {
             if ((!args || args.hostname === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'hostname'");
             }
+            resourceInputs["certificate"] = args?.certificate ? pulumi.secret(args.certificate) : undefined;
             resourceInputs["connectorId"] = args ? args.connectorId : undefined;
             resourceInputs["dnsRecord"] = args ? args.dnsRecord : undefined;
             resourceInputs["hostname"] = args ? args.hostname : undefined;
             resourceInputs["managedTls"] = args ? args.managedTls : undefined;
+            resourceInputs["privateKey"] = args?.privateKey ? pulumi.secret(args.privateKey) : undefined;
             resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
             resourceInputs["dnsRecordStatus"] = undefined /*out*/;
             resourceInputs["tlsCertificateStatus"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["certificate", "privateKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ConnectorHostname.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -111,6 +125,10 @@ export class ConnectorHostname extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ConnectorHostname resources.
  */
 export interface ConnectorHostnameState {
+    /**
+     * The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+     */
+    certificate?: pulumi.Input<string>;
     /**
      * The ID of the Connector this hostname is linked to.
      */
@@ -134,6 +152,10 @@ export interface ConnectorHostnameState {
      */
     managedTls?: pulumi.Input<boolean>;
     /**
+     * The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+     */
+    privateKey?: pulumi.Input<string>;
+    /**
      * If set to true, this connector hostname cannot be deleted.
      */
     terminationProtection?: pulumi.Input<boolean>;
@@ -147,6 +169,10 @@ export interface ConnectorHostnameState {
  * The set of arguments for constructing a ConnectorHostname resource.
  */
 export interface ConnectorHostnameArgs {
+    /**
+     * The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+     */
+    certificate?: pulumi.Input<string>;
     /**
      * The ID of the Connector this hostname is linked to.
      */
@@ -165,6 +191,10 @@ export interface ConnectorHostnameArgs {
      * @deprecated This field is deprecated and has no effect. It will be removed in a future release.
      */
     managedTls?: pulumi.Input<boolean>;
+    /**
+     * The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
+     */
+    privateKey?: pulumi.Input<string>;
     /**
      * If set to true, this connector hostname cannot be deleted.
      */

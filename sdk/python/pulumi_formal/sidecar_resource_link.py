@@ -169,7 +169,7 @@ class SidecarResourceLink(pulumi.CustomResource):
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
                  __props__=None):
         """
-        Linking a Resource to a Sidecar in Formal.
+        (Deprecated) Linking a Resource to a Sidecar in Formal.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -185,7 +185,7 @@ class SidecarResourceLink(pulumi.CustomResource):
                  args: SidecarResourceLinkArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Linking a Resource to a Sidecar in Formal.
+        (Deprecated) Linking a Resource to a Sidecar in Formal.
 
         :param str resource_name: The name of the resource.
         :param SidecarResourceLinkArgs args: The arguments to use to populate this resource's properties.

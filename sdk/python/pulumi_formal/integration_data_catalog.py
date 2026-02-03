@@ -172,7 +172,7 @@ class IntegrationDataCatalog(pulumi.CustomResource):
                  synced_entities: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
-        Registering a Data Catalog integration.
+        (Deprecated) Registering a Data Catalog integration.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -188,7 +188,7 @@ class IntegrationDataCatalog(pulumi.CustomResource):
                  args: IntegrationDataCatalogArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Registering a Data Catalog integration.
+        (Deprecated) Registering a Data Catalog integration.
 
         :param str resource_name: The name of the resource.
         :param IntegrationDataCatalogArgs args: The arguments to use to populate this resource's properties.

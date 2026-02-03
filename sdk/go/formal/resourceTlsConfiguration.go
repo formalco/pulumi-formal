@@ -20,7 +20,7 @@ type ResourceTlsConfiguration struct {
 	ResourceId pulumi.StringOutput `pulumi:"resourceId"`
 	// PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
 	TlsCaTruststore pulumi.StringPtrOutput `pulumi:"tlsCaTruststore"`
-	// Validation mode for the TLS configuration.
+	// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
 	TlsConfig pulumi.StringOutput `pulumi:"tlsConfig"`
 	// Minimum TLS version to be used for connections.
 	TlsMinVersion pulumi.StringPtrOutput `pulumi:"tlsMinVersion"`
@@ -66,7 +66,7 @@ type resourceTlsConfigurationState struct {
 	ResourceId *string `pulumi:"resourceId"`
 	// PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
 	TlsCaTruststore *string `pulumi:"tlsCaTruststore"`
-	// Validation mode for the TLS configuration.
+	// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
 	TlsConfig *string `pulumi:"tlsConfig"`
 	// Minimum TLS version to be used for connections.
 	TlsMinVersion *string `pulumi:"tlsMinVersion"`
@@ -77,7 +77,7 @@ type ResourceTlsConfigurationState struct {
 	ResourceId pulumi.StringPtrInput
 	// PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
 	TlsCaTruststore pulumi.StringPtrInput
-	// Validation mode for the TLS configuration.
+	// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
 	TlsConfig pulumi.StringPtrInput
 	// Minimum TLS version to be used for connections.
 	TlsMinVersion pulumi.StringPtrInput
@@ -92,7 +92,7 @@ type resourceTlsConfigurationArgs struct {
 	ResourceId string `pulumi:"resourceId"`
 	// PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
 	TlsCaTruststore *string `pulumi:"tlsCaTruststore"`
-	// Validation mode for the TLS configuration.
+	// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
 	TlsConfig string `pulumi:"tlsConfig"`
 	// Minimum TLS version to be used for connections.
 	TlsMinVersion *string `pulumi:"tlsMinVersion"`
@@ -104,7 +104,7 @@ type ResourceTlsConfigurationArgs struct {
 	ResourceId pulumi.StringInput
 	// PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
 	TlsCaTruststore pulumi.StringPtrInput
-	// Validation mode for the TLS configuration.
+	// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
 	TlsConfig pulumi.StringInput
 	// Minimum TLS version to be used for connections.
 	TlsMinVersion pulumi.StringPtrInput
@@ -207,7 +207,7 @@ func (o ResourceTlsConfigurationOutput) TlsCaTruststore() pulumi.StringPtrOutput
 	return o.ApplyT(func(v *ResourceTlsConfiguration) pulumi.StringPtrOutput { return v.TlsCaTruststore }).(pulumi.StringPtrOutput)
 }
 
-// Validation mode for the TLS configuration.
+// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
 func (o ResourceTlsConfigurationOutput) TlsConfig() pulumi.StringOutput {
 	return o.ApplyT(func(v *ResourceTlsConfiguration) pulumi.StringOutput { return v.TlsConfig }).(pulumi.StringOutput)
 }

@@ -16,6 +16,8 @@ import (
 type ConnectorListener struct {
 	pulumi.CustomResourceState
 
+	// The ID of the connector this listener is associated with.
+	ConnectorId pulumi.StringPtrOutput `pulumi:"connectorId"`
 	// The name of the connector listener.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The listening port for this connector listener.
@@ -57,6 +59,8 @@ func GetConnectorListener(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ConnectorListener resources.
 type connectorListenerState struct {
+	// The ID of the connector this listener is associated with.
+	ConnectorId *string `pulumi:"connectorId"`
 	// The name of the connector listener.
 	Name *string `pulumi:"name"`
 	// The listening port for this connector listener.
@@ -66,6 +70,8 @@ type connectorListenerState struct {
 }
 
 type ConnectorListenerState struct {
+	// The ID of the connector this listener is associated with.
+	ConnectorId pulumi.StringPtrInput
 	// The name of the connector listener.
 	Name pulumi.StringPtrInput
 	// The listening port for this connector listener.
@@ -79,6 +85,8 @@ func (ConnectorListenerState) ElementType() reflect.Type {
 }
 
 type connectorListenerArgs struct {
+	// The ID of the connector this listener is associated with.
+	ConnectorId *string `pulumi:"connectorId"`
 	// The name of the connector listener.
 	Name *string `pulumi:"name"`
 	// The listening port for this connector listener.
@@ -89,6 +97,8 @@ type connectorListenerArgs struct {
 
 // The set of arguments for constructing a ConnectorListener resource.
 type ConnectorListenerArgs struct {
+	// The ID of the connector this listener is associated with.
+	ConnectorId pulumi.StringPtrInput
 	// The name of the connector listener.
 	Name pulumi.StringPtrInput
 	// The listening port for this connector listener.
@@ -182,6 +192,11 @@ func (o ConnectorListenerOutput) ToConnectorListenerOutput() ConnectorListenerOu
 
 func (o ConnectorListenerOutput) ToConnectorListenerOutputWithContext(ctx context.Context) ConnectorListenerOutput {
 	return o
+}
+
+// The ID of the connector this listener is associated with.
+func (o ConnectorListenerOutput) ConnectorId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorListener) pulumi.StringPtrOutput { return v.ConnectorId }).(pulumi.StringPtrOutput)
 }
 
 // The name of the connector listener.

@@ -29,7 +29,7 @@ namespace Formal.Pulumi
         public Output<string?> TlsCaTruststore { get; private set; } = null!;
 
         /// <summary>
-        /// Validation mode for the TLS configuration.
+        /// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         /// </summary>
         [Output("tlsConfig")]
         public Output<string> TlsConfig { get; private set; } = null!;
@@ -100,7 +100,7 @@ namespace Formal.Pulumi
         public Input<string>? TlsCaTruststore { get; set; }
 
         /// <summary>
-        /// Validation mode for the TLS configuration.
+        /// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         /// </summary>
         [Input("tlsConfig", required: true)]
         public Input<string> TlsConfig { get; set; } = null!;
@@ -132,7 +132,7 @@ namespace Formal.Pulumi
         public Input<string>? TlsCaTruststore { get; set; }
 
         /// <summary>
-        /// Validation mode for the TLS configuration.
+        /// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         /// </summary>
         [Input("tlsConfig")]
         public Input<string>? TlsConfig { get; set; }

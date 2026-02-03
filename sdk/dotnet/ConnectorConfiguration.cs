@@ -23,16 +23,28 @@ namespace Formal.Pulumi
         public Output<string> ConnectorId { get; private set; } = null!;
 
         /// <summary>
-        /// The port to be used for this Connector's health check.
-        /// </summary>
-        [Output("healthCheckPort")]
-        public Output<int?> HealthCheckPort { get; private set; } = null!;
-
-        /// <summary>
         /// The log level to be configured for this Connector.
         /// </summary>
         [Output("logLevel")]
         public Output<string?> LogLevel { get; private set; } = null!;
+
+        /// <summary>
+        /// The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+        /// </summary>
+        [Output("otelEndpointHostname")]
+        public Output<string?> OtelEndpointHostname { get; private set; } = null!;
+
+        /// <summary>
+        /// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+        /// </summary>
+        [Output("otelEndpointPort")]
+        public Output<int?> OtelEndpointPort { get; private set; } = null!;
+
+        /// <summary>
+        /// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+        /// </summary>
+        [Output("resourcesHealthChecksFrequencySeconds")]
+        public Output<int?> ResourcesHealthChecksFrequencySeconds { get; private set; } = null!;
 
 
         /// <summary>
@@ -88,16 +100,28 @@ namespace Formal.Pulumi
         public Input<string> ConnectorId { get; set; } = null!;
 
         /// <summary>
-        /// The port to be used for this Connector's health check.
-        /// </summary>
-        [Input("healthCheckPort")]
-        public Input<int>? HealthCheckPort { get; set; }
-
-        /// <summary>
         /// The log level to be configured for this Connector.
         /// </summary>
         [Input("logLevel")]
         public Input<string>? LogLevel { get; set; }
+
+        /// <summary>
+        /// The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+        /// </summary>
+        [Input("otelEndpointHostname")]
+        public Input<string>? OtelEndpointHostname { get; set; }
+
+        /// <summary>
+        /// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+        /// </summary>
+        [Input("otelEndpointPort")]
+        public Input<int>? OtelEndpointPort { get; set; }
+
+        /// <summary>
+        /// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+        /// </summary>
+        [Input("resourcesHealthChecksFrequencySeconds")]
+        public Input<int>? ResourcesHealthChecksFrequencySeconds { get; set; }
 
         public ConnectorConfigurationArgs()
         {
@@ -114,16 +138,28 @@ namespace Formal.Pulumi
         public Input<string>? ConnectorId { get; set; }
 
         /// <summary>
-        /// The port to be used for this Connector's health check.
-        /// </summary>
-        [Input("healthCheckPort")]
-        public Input<int>? HealthCheckPort { get; set; }
-
-        /// <summary>
         /// The log level to be configured for this Connector.
         /// </summary>
         [Input("logLevel")]
         public Input<string>? LogLevel { get; set; }
+
+        /// <summary>
+        /// The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+        /// </summary>
+        [Input("otelEndpointHostname")]
+        public Input<string>? OtelEndpointHostname { get; set; }
+
+        /// <summary>
+        /// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+        /// </summary>
+        [Input("otelEndpointPort")]
+        public Input<int>? OtelEndpointPort { get; set; }
+
+        /// <summary>
+        /// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+        /// </summary>
+        [Input("resourcesHealthChecksFrequencySeconds")]
+        public Input<int>? ResourcesHealthChecksFrequencySeconds { get; set; }
 
         public ConnectorConfigurationState()
         {

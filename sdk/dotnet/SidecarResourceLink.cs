@@ -11,7 +11,7 @@ using Pulumi;
 namespace Formal.Pulumi
 {
     /// <summary>
-    /// Linking a Resource to a Sidecar in Formal.
+    /// (Deprecated) Linking a Resource to a Sidecar in Formal.
     /// </summary>
     [PulumiResourceType("formal:index/sidecarResourceLink:SidecarResourceLink")]
     public partial class SidecarResourceLink : global::Pulumi.CustomResource

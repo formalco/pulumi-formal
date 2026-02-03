@@ -17,10 +17,28 @@ namespace Formal.Pulumi
     public partial class ResourceClassifierConfiguration : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+        /// </summary>
+        [Output("aiAnalysisScope")]
+        public Output<string> AiAnalysisScope { get; private set; } = null!;
+
+        /// <summary>
+        /// The timeout for the AI analysis in seconds.
+        /// </summary>
+        [Output("aiAnalysisTimeoutSeconds")]
+        public Output<int> AiAnalysisTimeoutSeconds { get; private set; } = null!;
+
+        /// <summary>
         /// The timestamp of the Resource Classifier Preference creation.
         /// </summary>
         [Output("createdAt")]
         public Output<int> CreatedAt { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+        /// </summary>
+        [Output("enforceStrictClassifierResultCount")]
+        public Output<bool?> EnforceStrictClassifierResultCount { get; private set; } = null!;
 
         /// <summary>
         /// The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
@@ -88,6 +106,24 @@ namespace Formal.Pulumi
     public sealed class ResourceClassifierConfigurationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+        /// </summary>
+        [Input("aiAnalysisScope", required: true)]
+        public Input<string> AiAnalysisScope { get; set; } = null!;
+
+        /// <summary>
+        /// The timeout for the AI analysis in seconds.
+        /// </summary>
+        [Input("aiAnalysisTimeoutSeconds", required: true)]
+        public Input<int> AiAnalysisTimeoutSeconds { get; set; } = null!;
+
+        /// <summary>
+        /// Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+        /// </summary>
+        [Input("enforceStrictClassifierResultCount")]
+        public Input<bool>? EnforceStrictClassifierResultCount { get; set; }
+
+        /// <summary>
         /// The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
         /// </summary>
         [Input("preference", required: true)]
@@ -108,10 +144,28 @@ namespace Formal.Pulumi
     public sealed class ResourceClassifierConfigurationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+        /// </summary>
+        [Input("aiAnalysisScope")]
+        public Input<string>? AiAnalysisScope { get; set; }
+
+        /// <summary>
+        /// The timeout for the AI analysis in seconds.
+        /// </summary>
+        [Input("aiAnalysisTimeoutSeconds")]
+        public Input<int>? AiAnalysisTimeoutSeconds { get; set; }
+
+        /// <summary>
         /// The timestamp of the Resource Classifier Preference creation.
         /// </summary>
         [Input("createdAt")]
         public Input<int>? CreatedAt { get; set; }
+
+        /// <summary>
+        /// Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
+        /// </summary>
+        [Input("enforceStrictClassifierResultCount")]
+        public Input<bool>? EnforceStrictClassifierResultCount { get; set; }
 
         /// <summary>
         /// The preference. Supported values are `nlp`, `llm`, `both`, and `none`.

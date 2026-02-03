@@ -20,19 +20,27 @@ __all__ = ['ConnectorConfigurationArgs', 'ConnectorConfiguration']
 class ConnectorConfigurationArgs:
     def __init__(__self__, *,
                  connector_id: pulumi.Input[_builtins.str],
-                 health_check_port: Optional[pulumi.Input[_builtins.int]] = None,
-                 log_level: Optional[pulumi.Input[_builtins.str]] = None):
+                 log_level: Optional[pulumi.Input[_builtins.str]] = None,
+                 otel_endpoint_hostname: Optional[pulumi.Input[_builtins.str]] = None,
+                 otel_endpoint_port: Optional[pulumi.Input[_builtins.int]] = None,
+                 resources_health_checks_frequency_seconds: Optional[pulumi.Input[_builtins.int]] = None):
         """
         The set of arguments for constructing a ConnectorConfiguration resource.
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector this configuration is linked to.
-        :param pulumi.Input[_builtins.int] health_check_port: The port to be used for this Connector's health check.
         :param pulumi.Input[_builtins.str] log_level: The log level to be configured for this Connector.
+        :param pulumi.Input[_builtins.str] otel_endpoint_hostname: The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+        :param pulumi.Input[_builtins.int] otel_endpoint_port: The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+        :param pulumi.Input[_builtins.int] resources_health_checks_frequency_seconds: The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
         """
         pulumi.set(__self__, "connector_id", connector_id)
-        if health_check_port is not None:
-            pulumi.set(__self__, "health_check_port", health_check_port)
         if log_level is not None:
             pulumi.set(__self__, "log_level", log_level)
+        if otel_endpoint_hostname is not None:
+            pulumi.set(__self__, "otel_endpoint_hostname", otel_endpoint_hostname)
+        if otel_endpoint_port is not None:
+            pulumi.set(__self__, "otel_endpoint_port", otel_endpoint_port)
+        if resources_health_checks_frequency_seconds is not None:
+            pulumi.set(__self__, "resources_health_checks_frequency_seconds", resources_health_checks_frequency_seconds)
 
     @_builtins.property
     @pulumi.getter(name="connectorId")
@@ -47,18 +55,6 @@ class ConnectorConfigurationArgs:
         pulumi.set(self, "connector_id", value)
 
     @_builtins.property
-    @pulumi.getter(name="healthCheckPort")
-    def health_check_port(self) -> Optional[pulumi.Input[_builtins.int]]:
-        """
-        The port to be used for this Connector's health check.
-        """
-        return pulumi.get(self, "health_check_port")
-
-    @health_check_port.setter
-    def health_check_port(self, value: Optional[pulumi.Input[_builtins.int]]):
-        pulumi.set(self, "health_check_port", value)
-
-    @_builtins.property
     @pulumi.getter(name="logLevel")
     def log_level(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
@@ -70,25 +66,69 @@ class ConnectorConfigurationArgs:
     def log_level(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "log_level", value)
 
+    @_builtins.property
+    @pulumi.getter(name="otelEndpointHostname")
+    def otel_endpoint_hostname(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+        """
+        return pulumi.get(self, "otel_endpoint_hostname")
+
+    @otel_endpoint_hostname.setter
+    def otel_endpoint_hostname(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "otel_endpoint_hostname", value)
+
+    @_builtins.property
+    @pulumi.getter(name="otelEndpointPort")
+    def otel_endpoint_port(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+        """
+        return pulumi.get(self, "otel_endpoint_port")
+
+    @otel_endpoint_port.setter
+    def otel_endpoint_port(self, value: Optional[pulumi.Input[_builtins.int]]):
+        pulumi.set(self, "otel_endpoint_port", value)
+
+    @_builtins.property
+    @pulumi.getter(name="resourcesHealthChecksFrequencySeconds")
+    def resources_health_checks_frequency_seconds(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+        """
+        return pulumi.get(self, "resources_health_checks_frequency_seconds")
+
+    @resources_health_checks_frequency_seconds.setter
+    def resources_health_checks_frequency_seconds(self, value: Optional[pulumi.Input[_builtins.int]]):
+        pulumi.set(self, "resources_health_checks_frequency_seconds", value)
+
 
 @pulumi.input_type
 class _ConnectorConfigurationState:
     def __init__(__self__, *,
                  connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 health_check_port: Optional[pulumi.Input[_builtins.int]] = None,
-                 log_level: Optional[pulumi.Input[_builtins.str]] = None):
+                 log_level: Optional[pulumi.Input[_builtins.str]] = None,
+                 otel_endpoint_hostname: Optional[pulumi.Input[_builtins.str]] = None,
+                 otel_endpoint_port: Optional[pulumi.Input[_builtins.int]] = None,
+                 resources_health_checks_frequency_seconds: Optional[pulumi.Input[_builtins.int]] = None):
         """
         Input properties used for looking up and filtering ConnectorConfiguration resources.
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector this configuration is linked to.
-        :param pulumi.Input[_builtins.int] health_check_port: The port to be used for this Connector's health check.
         :param pulumi.Input[_builtins.str] log_level: The log level to be configured for this Connector.
+        :param pulumi.Input[_builtins.str] otel_endpoint_hostname: The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+        :param pulumi.Input[_builtins.int] otel_endpoint_port: The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+        :param pulumi.Input[_builtins.int] resources_health_checks_frequency_seconds: The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
         """
         if connector_id is not None:
             pulumi.set(__self__, "connector_id", connector_id)
-        if health_check_port is not None:
-            pulumi.set(__self__, "health_check_port", health_check_port)
         if log_level is not None:
             pulumi.set(__self__, "log_level", log_level)
+        if otel_endpoint_hostname is not None:
+            pulumi.set(__self__, "otel_endpoint_hostname", otel_endpoint_hostname)
+        if otel_endpoint_port is not None:
+            pulumi.set(__self__, "otel_endpoint_port", otel_endpoint_port)
+        if resources_health_checks_frequency_seconds is not None:
+            pulumi.set(__self__, "resources_health_checks_frequency_seconds", resources_health_checks_frequency_seconds)
 
     @_builtins.property
     @pulumi.getter(name="connectorId")
@@ -103,18 +143,6 @@ class _ConnectorConfigurationState:
         pulumi.set(self, "connector_id", value)
 
     @_builtins.property
-    @pulumi.getter(name="healthCheckPort")
-    def health_check_port(self) -> Optional[pulumi.Input[_builtins.int]]:
-        """
-        The port to be used for this Connector's health check.
-        """
-        return pulumi.get(self, "health_check_port")
-
-    @health_check_port.setter
-    def health_check_port(self, value: Optional[pulumi.Input[_builtins.int]]):
-        pulumi.set(self, "health_check_port", value)
-
-    @_builtins.property
     @pulumi.getter(name="logLevel")
     def log_level(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
@@ -126,6 +154,42 @@ class _ConnectorConfigurationState:
     def log_level(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "log_level", value)
 
+    @_builtins.property
+    @pulumi.getter(name="otelEndpointHostname")
+    def otel_endpoint_hostname(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+        """
+        return pulumi.get(self, "otel_endpoint_hostname")
+
+    @otel_endpoint_hostname.setter
+    def otel_endpoint_hostname(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "otel_endpoint_hostname", value)
+
+    @_builtins.property
+    @pulumi.getter(name="otelEndpointPort")
+    def otel_endpoint_port(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+        """
+        return pulumi.get(self, "otel_endpoint_port")
+
+    @otel_endpoint_port.setter
+    def otel_endpoint_port(self, value: Optional[pulumi.Input[_builtins.int]]):
+        pulumi.set(self, "otel_endpoint_port", value)
+
+    @_builtins.property
+    @pulumi.getter(name="resourcesHealthChecksFrequencySeconds")
+    def resources_health_checks_frequency_seconds(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+        """
+        return pulumi.get(self, "resources_health_checks_frequency_seconds")
+
+    @resources_health_checks_frequency_seconds.setter
+    def resources_health_checks_frequency_seconds(self, value: Optional[pulumi.Input[_builtins.int]]):
+        pulumi.set(self, "resources_health_checks_frequency_seconds", value)
+
 
 @pulumi.type_token("formal:index/connectorConfiguration:ConnectorConfiguration")
 class ConnectorConfiguration(pulumi.CustomResource):
@@ -134,8 +198,10 @@ class ConnectorConfiguration(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 health_check_port: Optional[pulumi.Input[_builtins.int]] = None,
                  log_level: Optional[pulumi.Input[_builtins.str]] = None,
+                 otel_endpoint_hostname: Optional[pulumi.Input[_builtins.str]] = None,
+                 otel_endpoint_port: Optional[pulumi.Input[_builtins.int]] = None,
+                 resources_health_checks_frequency_seconds: Optional[pulumi.Input[_builtins.int]] = None,
                  __props__=None):
         """
         Registering a Connector Configuration with Formal.
@@ -143,8 +209,10 @@ class ConnectorConfiguration(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector this configuration is linked to.
-        :param pulumi.Input[_builtins.int] health_check_port: The port to be used for this Connector's health check.
         :param pulumi.Input[_builtins.str] log_level: The log level to be configured for this Connector.
+        :param pulumi.Input[_builtins.str] otel_endpoint_hostname: The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+        :param pulumi.Input[_builtins.int] otel_endpoint_port: The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+        :param pulumi.Input[_builtins.int] resources_health_checks_frequency_seconds: The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
         """
         ...
     @overload
@@ -171,8 +239,10 @@ class ConnectorConfiguration(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 health_check_port: Optional[pulumi.Input[_builtins.int]] = None,
                  log_level: Optional[pulumi.Input[_builtins.str]] = None,
+                 otel_endpoint_hostname: Optional[pulumi.Input[_builtins.str]] = None,
+                 otel_endpoint_port: Optional[pulumi.Input[_builtins.int]] = None,
+                 resources_health_checks_frequency_seconds: Optional[pulumi.Input[_builtins.int]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -185,8 +255,10 @@ class ConnectorConfiguration(pulumi.CustomResource):
             if connector_id is None and not opts.urn:
                 raise TypeError("Missing required property 'connector_id'")
             __props__.__dict__["connector_id"] = connector_id
-            __props__.__dict__["health_check_port"] = health_check_port
             __props__.__dict__["log_level"] = log_level
+            __props__.__dict__["otel_endpoint_hostname"] = otel_endpoint_hostname
+            __props__.__dict__["otel_endpoint_port"] = otel_endpoint_port
+            __props__.__dict__["resources_health_checks_frequency_seconds"] = resources_health_checks_frequency_seconds
         super(ConnectorConfiguration, __self__).__init__(
             'formal:index/connectorConfiguration:ConnectorConfiguration',
             resource_name,
@@ -198,8 +270,10 @@ class ConnectorConfiguration(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-            health_check_port: Optional[pulumi.Input[_builtins.int]] = None,
-            log_level: Optional[pulumi.Input[_builtins.str]] = None) -> 'ConnectorConfiguration':
+            log_level: Optional[pulumi.Input[_builtins.str]] = None,
+            otel_endpoint_hostname: Optional[pulumi.Input[_builtins.str]] = None,
+            otel_endpoint_port: Optional[pulumi.Input[_builtins.int]] = None,
+            resources_health_checks_frequency_seconds: Optional[pulumi.Input[_builtins.int]] = None) -> 'ConnectorConfiguration':
         """
         Get an existing ConnectorConfiguration resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -208,16 +282,20 @@ class ConnectorConfiguration(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector this configuration is linked to.
-        :param pulumi.Input[_builtins.int] health_check_port: The port to be used for this Connector's health check.
         :param pulumi.Input[_builtins.str] log_level: The log level to be configured for this Connector.
+        :param pulumi.Input[_builtins.str] otel_endpoint_hostname: The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+        :param pulumi.Input[_builtins.int] otel_endpoint_port: The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+        :param pulumi.Input[_builtins.int] resources_health_checks_frequency_seconds: The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _ConnectorConfigurationState.__new__(_ConnectorConfigurationState)
 
         __props__.__dict__["connector_id"] = connector_id
-        __props__.__dict__["health_check_port"] = health_check_port
         __props__.__dict__["log_level"] = log_level
+        __props__.__dict__["otel_endpoint_hostname"] = otel_endpoint_hostname
+        __props__.__dict__["otel_endpoint_port"] = otel_endpoint_port
+        __props__.__dict__["resources_health_checks_frequency_seconds"] = resources_health_checks_frequency_seconds
         return ConnectorConfiguration(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
@@ -229,18 +307,34 @@ class ConnectorConfiguration(pulumi.CustomResource):
         return pulumi.get(self, "connector_id")
 
     @_builtins.property
-    @pulumi.getter(name="healthCheckPort")
-    def health_check_port(self) -> pulumi.Output[Optional[_builtins.int]]:
-        """
-        The port to be used for this Connector's health check.
-        """
-        return pulumi.get(self, "health_check_port")
-
-    @_builtins.property
     @pulumi.getter(name="logLevel")
     def log_level(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
         The log level to be configured for this Connector.
         """
         return pulumi.get(self, "log_level")
+
+    @_builtins.property
+    @pulumi.getter(name="otelEndpointHostname")
+    def otel_endpoint_hostname(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        The OpenTelemetry endpoint hostname for this Connector. Defaults to 'localhost'.
+        """
+        return pulumi.get(self, "otel_endpoint_hostname")
+
+    @_builtins.property
+    @pulumi.getter(name="otelEndpointPort")
+    def otel_endpoint_port(self) -> pulumi.Output[Optional[_builtins.int]]:
+        """
+        The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
+        """
+        return pulumi.get(self, "otel_endpoint_port")
+
+    @_builtins.property
+    @pulumi.getter(name="resourcesHealthChecksFrequencySeconds")
+    def resources_health_checks_frequency_seconds(self) -> pulumi.Output[Optional[_builtins.int]]:
+        """
+        The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
+        """
+        return pulumi.get(self, "resources_health_checks_frequency_seconds")
 
