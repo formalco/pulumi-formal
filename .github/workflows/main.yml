@@ -4,12 +4,16 @@ env:
   PULUMI_API: https://api.pulumi-staging.io
   PULUMI_GO_DEP_ROOT: ${{ github.workspace }}/..
   PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
+  PULUMI_PROVIDER_AUTOMATION_TOKEN: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN }}
+  PULUMI_PULUMI_ENABLE_JOURNALING: "true"
   TF_APPEND_USER_AGENT: pulumi
+
 jobs:
   prerequisites:
     permissions:
       contents: read
       pull-requests: write
+      id-token: write # For ESC secrets.
     uses: ./.github/workflows/prerequisites.yml
     secrets: inherit
     with:
@@ -21,6 +25,9 @@ jobs:
     uses: ./.github/workflows/build_provider.yml
     needs: prerequisites
     secrets: inherit
+    permissions:
+      contents: read
+      id-token: write # For ESC secrets.
     with:
       version: ${{ needs.prerequisites.outputs.version }}
 
@@ -29,6 +36,9 @@ jobs:
     needs: prerequisites
     uses: ./.github/workflows/build_sdk.yml
     secrets: inherit
+    permissions:
+      contents: write # For Renovate SDKs.
+      id-token: write # For ESC secrets.
     with:
       version: ${{ needs.prerequisites.outputs.version }}
 
@@ -37,6 +47,9 @@ jobs:
     needs: prerequisites
     uses: ./.github/workflows/main-post-build.yml
     secrets: inherit
+    permissions:
+      contents: write # For Renovate SDKs.
+      id-token: write # For ESC secrets.
     with:
       version: ${{ needs.prerequisites.outputs.version }}
 
@@ -64,6 +77,7 @@ jobs:
     with:
       version: ${{ needs.prerequisites.outputs.version }}
       isPrerelease: true
+      setLatestRelease: false
       skipGoSdk: true
       skipJavaSdk: true
 
@@ -71,7 +85,17 @@ jobs:
     name: Tag release if labeled as needs-release
     needs: publish
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # For ESC secrets.
     steps:
+    - name: Checkout Repo
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      with:
+        persist-credentials: false    
+    - id: esc-secrets
+      name: Map environment to ESC outputs
+      uses: ./.github/actions/esc-action
     - name: check if this commit needs release
       if: ${{ env.RELEASE_BOT_ENDPOINT != '' }}
       uses: pulumi/action-release-by-pr-label@main
@@ -79,10 +103,10 @@ jobs:
         command: "release-if-needed"
         repo: ${{ github.repository }}
         commit: ${{ github.sha }}
-        slack_channel: ${{ secrets.RELEASE_OPS_SLACK_CHANNEL }}
+        slack_channel: C02MGR8JVST
       env:
-        RELEASE_BOT_ENDPOINT: ${{ secrets.RELEASE_BOT_ENDPOINT }}
-        RELEASE_BOT_KEY: ${{ secrets.RELEASE_BOT_KEY }}
+        RELEASE_BOT_ENDPOINT: ${{ steps.esc-secrets.outputs.RELEASE_BOT_ENDPOINT }}
+        RELEASE_BOT_KEY: ${{ steps.esc-secrets.outputs.RELEASE_BOT_KEY }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   test:
