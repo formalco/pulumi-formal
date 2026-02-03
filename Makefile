@@ -221,7 +221,7 @@ test: export PATH := $(WORKING_DIR)/bin:$(PATH)
 test:
 	cd examples && go test -v -tags=all -parallel $(TESTPARALLELISM) -timeout 2h $(value GOTESTARGS)
 .PHONY: test
-test_provider_cmd = cd provider && go test -v -short \
+test_provider_cmd = cd provider && GOTOOLCHAIN=go1.25.0+auto go test -v -short \
 	-coverprofile="coverage.txt" \
 	-coverpkg="./...,github.com/hashicorp/terraform-provider-..." \
 	-parallel $(TESTPARALLELISM) \
