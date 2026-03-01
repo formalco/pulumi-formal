@@ -10,6 +10,10 @@ linters:
     - unconvert
   exclusions:
     generated: lax
+    rules:
+      - linters: [revive]
+        text: "var-naming: avoid package names that conflict with Go standard library"
+        path: pkg/version/version.go
     presets:
       - comments
       - common-false-positives
