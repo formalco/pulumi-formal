@@ -52,7 +52,7 @@ dotnet add package Formal.Pulumi
 ## Configuration
 
 The following configuration points are available:
-- `formal:apiKey` - (Required) The API key used to access the Formal control plane. For more information, see the [API keys documentation page.](https://docs.joinformal.com/tools/api-keys)
+- `formal:apiKey` - (Required) The API key used to access the Formal control plane. For more information, see the [API keys documentation page.](https://docs.formal.ai/docs/api/introduction#authentication)
 
 ## Reference
 
