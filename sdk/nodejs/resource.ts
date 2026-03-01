@@ -36,6 +36,10 @@ export class Resource extends pulumi.CustomResource {
     }
 
     /**
+     * Aliases to apply to the Resource.
+     */
+    public readonly aliases!: pulumi.Output<string[] | undefined>;
+    /**
      * Creation time of the Resource.
      */
     public /*out*/ readonly createdAt!: pulumi.Output<number>;
@@ -91,6 +95,7 @@ export class Resource extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ResourceState | undefined;
+            resourceInputs["aliases"] = state ? state.aliases : undefined;
             resourceInputs["createdAt"] = state ? state.createdAt : undefined;
             resourceInputs["environment"] = state ? state.environment : undefined;
             resourceInputs["hostname"] = state ? state.hostname : undefined;
@@ -112,6 +117,7 @@ export class Resource extends pulumi.CustomResource {
             if ((!args || args.technology === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'technology'");
             }
+            resourceInputs["aliases"] = args ? args.aliases : undefined;
             resourceInputs["environment"] = args ? args.environment : undefined;
             resourceInputs["hostname"] = args ? args.hostname : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
@@ -132,6 +138,10 @@ export class Resource extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Resource resources.
  */
 export interface ResourceState {
+    /**
+     * Aliases to apply to the Resource.
+     */
+    aliases?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Creation time of the Resource.
      */
@@ -180,6 +190,10 @@ export interface ResourceState {
  * The set of arguments for constructing a Resource resource.
  */
 export interface ResourceArgs {
+    /**
+     * Aliases to apply to the Resource.
+     */
+    aliases?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
      *

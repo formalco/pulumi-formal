@@ -16,6 +16,8 @@ import (
 type Resource struct {
 	pulumi.CustomResourceState
 
+	// Aliases to apply to the Resource.
+	Aliases pulumi.StringArrayOutput `pulumi:"aliases"`
 	// Creation time of the Resource.
 	CreatedAt pulumi.IntOutput `pulumi:"createdAt"`
 	// Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
@@ -79,6 +81,8 @@ func GetResource(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Resource resources.
 type resourceState struct {
+	// Aliases to apply to the Resource.
+	Aliases []string `pulumi:"aliases"`
 	// Creation time of the Resource.
 	CreatedAt *int `pulumi:"createdAt"`
 	// Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
@@ -104,6 +108,8 @@ type resourceState struct {
 }
 
 type ResourceState struct {
+	// Aliases to apply to the Resource.
+	Aliases pulumi.StringArrayInput
 	// Creation time of the Resource.
 	CreatedAt pulumi.IntPtrInput
 	// Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
@@ -133,6 +139,8 @@ func (ResourceState) ElementType() reflect.Type {
 }
 
 type resourceArgs struct {
+	// Aliases to apply to the Resource.
+	Aliases []string `pulumi:"aliases"`
 	// Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
 	//
 	// Deprecated: This field is deprecated and will be removed in a future release.
@@ -157,6 +165,8 @@ type resourceArgs struct {
 
 // The set of arguments for constructing a Resource resource.
 type ResourceArgs struct {
+	// Aliases to apply to the Resource.
+	Aliases pulumi.StringArrayInput
 	// Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
 	//
 	// Deprecated: This field is deprecated and will be removed in a future release.
@@ -264,6 +274,11 @@ func (o ResourceOutput) ToResourceOutput() ResourceOutput {
 
 func (o ResourceOutput) ToResourceOutputWithContext(ctx context.Context) ResourceOutput {
 	return o
+}
+
+// Aliases to apply to the Resource.
+func (o ResourceOutput) Aliases() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Resource) pulumi.StringArrayOutput { return v.Aliases }).(pulumi.StringArrayOutput)
 }
 
 // Creation time of the Resource.

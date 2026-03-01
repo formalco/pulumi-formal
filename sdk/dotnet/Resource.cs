@@ -17,6 +17,12 @@ namespace Formal.Pulumi
     public partial class Resource : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Aliases to apply to the Resource.
+        /// </summary>
+        [Output("aliases")]
+        public Output<ImmutableArray<string>> Aliases { get; private set; } = null!;
+
+        /// <summary>
         /// Creation time of the Resource.
         /// </summary>
         [Output("createdAt")]
@@ -123,6 +129,18 @@ namespace Formal.Pulumi
 
     public sealed class ResourceArgs : global::Pulumi.ResourceArgs
     {
+        [Input("aliases")]
+        private InputList<string>? _aliases;
+
+        /// <summary>
+        /// Aliases to apply to the Resource.
+        /// </summary>
+        public InputList<string> Aliases
+        {
+            get => _aliases ?? (_aliases = new InputList<string>());
+            set => _aliases = value;
+        }
+
         /// <summary>
         /// Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         /// </summary>
@@ -191,6 +209,18 @@ namespace Formal.Pulumi
 
     public sealed class ResourceState : global::Pulumi.ResourceArgs
     {
+        [Input("aliases")]
+        private InputList<string>? _aliases;
+
+        /// <summary>
+        /// Aliases to apply to the Resource.
+        /// </summary>
+        public InputList<string> Aliases
+        {
+            get => _aliases ?? (_aliases = new InputList<string>());
+            set => _aliases = value;
+        }
+
         /// <summary>
         /// Creation time of the Resource.
         /// </summary>

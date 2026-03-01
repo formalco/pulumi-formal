@@ -28,6 +28,12 @@ namespace Formal.Pulumi
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// The workflow status. Accepted values are `active` and `draft`.
+        /// </summary>
+        [Output("status")]
+        public Output<string?> Status { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Workflow resource with the given unique name, arguments, and options.
@@ -87,6 +93,12 @@ namespace Formal.Pulumi
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// The workflow status. Accepted values are `active` and `draft`.
+        /// </summary>
+        [Input("status")]
+        public Input<string>? Status { get; set; }
+
         public WorkflowArgs()
         {
         }
@@ -106,6 +118,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The workflow status. Accepted values are `active` and `draft`.
+        /// </summary>
+        [Input("status")]
+        public Input<string>? Status { get; set; }
 
         public WorkflowState()
         {

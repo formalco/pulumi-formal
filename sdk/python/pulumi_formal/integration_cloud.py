@@ -105,6 +105,7 @@ class _IntegrationCloudState:
                  aws_enable_redshift_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
                  aws_enable_s3_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
                  aws_formal_iam_role: Optional[pulumi.Input[_builtins.str]] = None,
+                 aws_formal_iam_role_arn: Optional[pulumi.Input[_builtins.str]] = None,
                  aws_formal_pingback_arn: Optional[pulumi.Input[_builtins.str]] = None,
                  aws_formal_stack_name: Optional[pulumi.Input[_builtins.str]] = None,
                  aws_s3_bucket_arn: Optional[pulumi.Input[_builtins.str]] = None,
@@ -123,6 +124,7 @@ class _IntegrationCloudState:
         :param pulumi.Input[_builtins.bool] aws_enable_redshift_autodiscovery: Whether AWS Redshift autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] aws_enable_s3_autodiscovery: Whether AWS S3 autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.str] aws_formal_iam_role: The IAM role ID Formal will use to access your resources.
+        :param pulumi.Input[_builtins.str] aws_formal_iam_role_arn: The ARN of the IAM role Formal will use to access your resources.
         :param pulumi.Input[_builtins.str] aws_formal_pingback_arn: The SNS topic ARN CloudFormation can use to send events to Formal.
         :param pulumi.Input[_builtins.str] aws_formal_stack_name: A generated name for your CloudFormation stack.
         :param pulumi.Input[_builtins.str] aws_s3_bucket_arn: The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
@@ -149,6 +151,8 @@ class _IntegrationCloudState:
             pulumi.set(__self__, "aws_enable_s3_autodiscovery", aws_enable_s3_autodiscovery)
         if aws_formal_iam_role is not None:
             pulumi.set(__self__, "aws_formal_iam_role", aws_formal_iam_role)
+        if aws_formal_iam_role_arn is not None:
+            pulumi.set(__self__, "aws_formal_iam_role_arn", aws_formal_iam_role_arn)
         if aws_formal_pingback_arn is not None:
             pulumi.set(__self__, "aws_formal_pingback_arn", aws_formal_pingback_arn)
         if aws_formal_stack_name is not None:
@@ -274,6 +278,18 @@ class _IntegrationCloudState:
     @aws_formal_iam_role.setter
     def aws_formal_iam_role(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "aws_formal_iam_role", value)
+
+    @_builtins.property
+    @pulumi.getter(name="awsFormalIamRoleArn")
+    def aws_formal_iam_role_arn(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The ARN of the IAM role Formal will use to access your resources.
+        """
+        return pulumi.get(self, "aws_formal_iam_role_arn")
+
+    @aws_formal_iam_role_arn.setter
+    def aws_formal_iam_role_arn(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "aws_formal_iam_role_arn", value)
 
     @_builtins.property
     @pulumi.getter(name="awsFormalPingbackArn")
@@ -433,6 +449,7 @@ class IntegrationCloud(pulumi.CustomResource):
             __props__.__dict__["aws_enable_redshift_autodiscovery"] = None
             __props__.__dict__["aws_enable_s3_autodiscovery"] = None
             __props__.__dict__["aws_formal_iam_role"] = None
+            __props__.__dict__["aws_formal_iam_role_arn"] = None
             __props__.__dict__["aws_formal_pingback_arn"] = None
             __props__.__dict__["aws_formal_stack_name"] = None
             __props__.__dict__["aws_s3_bucket_arn"] = None
@@ -456,6 +473,7 @@ class IntegrationCloud(pulumi.CustomResource):
             aws_enable_redshift_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
             aws_enable_s3_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
             aws_formal_iam_role: Optional[pulumi.Input[_builtins.str]] = None,
+            aws_formal_iam_role_arn: Optional[pulumi.Input[_builtins.str]] = None,
             aws_formal_pingback_arn: Optional[pulumi.Input[_builtins.str]] = None,
             aws_formal_stack_name: Optional[pulumi.Input[_builtins.str]] = None,
             aws_s3_bucket_arn: Optional[pulumi.Input[_builtins.str]] = None,
@@ -479,6 +497,7 @@ class IntegrationCloud(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] aws_enable_redshift_autodiscovery: Whether AWS Redshift autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] aws_enable_s3_autodiscovery: Whether AWS S3 autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.str] aws_formal_iam_role: The IAM role ID Formal will use to access your resources.
+        :param pulumi.Input[_builtins.str] aws_formal_iam_role_arn: The ARN of the IAM role Formal will use to access your resources.
         :param pulumi.Input[_builtins.str] aws_formal_pingback_arn: The SNS topic ARN CloudFormation can use to send events to Formal.
         :param pulumi.Input[_builtins.str] aws_formal_stack_name: A generated name for your CloudFormation stack.
         :param pulumi.Input[_builtins.str] aws_s3_bucket_arn: The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
@@ -500,6 +519,7 @@ class IntegrationCloud(pulumi.CustomResource):
         __props__.__dict__["aws_enable_redshift_autodiscovery"] = aws_enable_redshift_autodiscovery
         __props__.__dict__["aws_enable_s3_autodiscovery"] = aws_enable_s3_autodiscovery
         __props__.__dict__["aws_formal_iam_role"] = aws_formal_iam_role
+        __props__.__dict__["aws_formal_iam_role_arn"] = aws_formal_iam_role_arn
         __props__.__dict__["aws_formal_pingback_arn"] = aws_formal_pingback_arn
         __props__.__dict__["aws_formal_stack_name"] = aws_formal_stack_name
         __props__.__dict__["aws_s3_bucket_arn"] = aws_s3_bucket_arn
@@ -580,6 +600,14 @@ class IntegrationCloud(pulumi.CustomResource):
         The IAM role ID Formal will use to access your resources.
         """
         return pulumi.get(self, "aws_formal_iam_role")
+
+    @_builtins.property
+    @pulumi.getter(name="awsFormalIamRoleArn")
+    def aws_formal_iam_role_arn(self) -> pulumi.Output[_builtins.str]:
+        """
+        The ARN of the IAM role Formal will use to access your resources.
+        """
+        return pulumi.get(self, "aws_formal_iam_role_arn")
 
     @_builtins.property
     @pulumi.getter(name="awsFormalPingbackArn")

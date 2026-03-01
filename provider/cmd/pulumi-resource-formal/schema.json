@@ -900,7 +900,7 @@
                 },
                 "satelliteType": {
                     "type": "string",
-                    "description": "The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.\n"
+                    "description": "The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.\n"
                 },
                 "updatedAt": {
                     "type": "string",
@@ -927,7 +927,7 @@
                 },
                 "satelliteType": {
                     "type": "string",
-                    "description": "The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.\n",
+                    "description": "The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.\n",
                     "willReplaceOnChanges": true
                 }
             },
@@ -955,7 +955,7 @@
                     },
                     "satelliteType": {
                         "type": "string",
-                        "description": "The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.\n",
+                        "description": "The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.\n",
                         "willReplaceOnChanges": true
                     },
                     "updatedAt": {
@@ -1558,6 +1558,10 @@
                     "type": "string",
                     "description": "The IAM role ID Formal will use to access your resources.\n"
                 },
+                "awsFormalIamRoleArn": {
+                    "type": "string",
+                    "description": "The ARN of the IAM role Formal will use to access your resources.\n"
+                },
                 "awsFormalPingbackArn": {
                     "type": "string",
                     "description": "The SNS topic ARN CloudFormation can use to send events to Formal.\n"
@@ -1597,6 +1601,7 @@
                 "awsEnableRedshiftAutodiscovery",
                 "awsEnableS3Autodiscovery",
                 "awsFormalIamRole",
+                "awsFormalIamRoleArn",
                 "awsFormalPingbackArn",
                 "awsFormalStackName",
                 "awsS3BucketArn",
@@ -1666,6 +1671,10 @@
                     "awsFormalIamRole": {
                         "type": "string",
                         "description": "The IAM role ID Formal will use to access your resources.\n"
+                    },
+                    "awsFormalIamRoleArn": {
+                        "type": "string",
+                        "description": "The ARN of the IAM role Formal will use to access your resources.\n"
                     },
                     "awsFormalPingbackArn": {
                         "type": "string",
@@ -2640,6 +2649,13 @@
         "formal:index/resource:Resource": {
             "description": "Registering a Resource with Formal.\n",
             "properties": {
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Aliases to apply to the Resource.\n"
+                },
                 "createdAt": {
                     "type": "integer",
                     "description": "Creation time of the Resource.\n"
@@ -2693,6 +2709,13 @@
                 "technology"
             ],
             "inputProperties": {
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Aliases to apply to the Resource.\n"
+                },
                 "environment": {
                     "type": "string",
                     "description": "Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.\n",
@@ -2744,6 +2767,13 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Resource resources.\n",
                 "properties": {
+                    "aliases": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Aliases to apply to the Resource.\n"
+                    },
                     "createdAt": {
                         "type": "integer",
                         "description": "Creation time of the Resource.\n"
@@ -3738,6 +3768,10 @@
                 "name": {
                     "type": "string",
                     "description": "The name of the workflow. Must be unique within the organization.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The workflow status. Accepted values are `active` and `draft`.\n"
                 }
             },
             "required": [
@@ -3752,6 +3786,10 @@
                 "name": {
                     "type": "string",
                     "description": "The name of the workflow. Must be unique within the organization.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The workflow status. Accepted values are `active` and `draft`.\n"
                 }
             },
             "requiredInputs": [
@@ -3767,6 +3805,10 @@
                     "name": {
                         "type": "string",
                         "description": "The name of the workflow. Must be unique within the organization.\n"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "The workflow status. Accepted values are `active` and `draft`.\n"
                     }
                 },
                 "type": "object"

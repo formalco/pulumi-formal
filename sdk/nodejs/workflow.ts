@@ -43,6 +43,10 @@ export class Workflow extends pulumi.CustomResource {
      * The name of the workflow. Must be unique within the organization.
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * The workflow status. Accepted values are `active` and `draft`.
+     */
+    public readonly status!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Workflow resource with the given unique name, arguments, and options.
@@ -59,6 +63,7 @@ export class Workflow extends pulumi.CustomResource {
             const state = argsOrState as WorkflowState | undefined;
             resourceInputs["code"] = state ? state.code : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["status"] = state ? state.status : undefined;
         } else {
             const args = argsOrState as WorkflowArgs | undefined;
             if ((!args || args.code === undefined) && !opts.urn) {
@@ -66,6 +71,7 @@ export class Workflow extends pulumi.CustomResource {
             }
             resourceInputs["code"] = args ? args.code : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["status"] = args ? args.status : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Workflow.__pulumiType, name, resourceInputs, opts);
@@ -84,6 +90,10 @@ export interface WorkflowState {
      * The name of the workflow. Must be unique within the organization.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The workflow status. Accepted values are `active` and `draft`.
+     */
+    status?: pulumi.Input<string>;
 }
 
 /**
@@ -98,4 +108,8 @@ export interface WorkflowArgs {
      * The name of the workflow. Must be unique within the organization.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The workflow status. Accepted values are `active` and `draft`.
+     */
+    status?: pulumi.Input<string>;
 }

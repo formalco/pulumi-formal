@@ -20,6 +20,8 @@ type Workflow struct {
 	Code pulumi.StringOutput `pulumi:"code"`
 	// The name of the workflow. Must be unique within the organization.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The workflow status. Accepted values are `active` and `draft`.
+	Status pulumi.StringPtrOutput `pulumi:"status"`
 }
 
 // NewWorkflow registers a new resource with the given unique name, arguments, and options.
@@ -59,6 +61,8 @@ type workflowState struct {
 	Code *string `pulumi:"code"`
 	// The name of the workflow. Must be unique within the organization.
 	Name *string `pulumi:"name"`
+	// The workflow status. Accepted values are `active` and `draft`.
+	Status *string `pulumi:"status"`
 }
 
 type WorkflowState struct {
@@ -66,6 +70,8 @@ type WorkflowState struct {
 	Code pulumi.StringPtrInput
 	// The name of the workflow. Must be unique within the organization.
 	Name pulumi.StringPtrInput
+	// The workflow status. Accepted values are `active` and `draft`.
+	Status pulumi.StringPtrInput
 }
 
 func (WorkflowState) ElementType() reflect.Type {
@@ -77,6 +83,8 @@ type workflowArgs struct {
 	Code string `pulumi:"code"`
 	// The name of the workflow. Must be unique within the organization.
 	Name *string `pulumi:"name"`
+	// The workflow status. Accepted values are `active` and `draft`.
+	Status *string `pulumi:"status"`
 }
 
 // The set of arguments for constructing a Workflow resource.
@@ -85,6 +93,8 @@ type WorkflowArgs struct {
 	Code pulumi.StringInput
 	// The name of the workflow. Must be unique within the organization.
 	Name pulumi.StringPtrInput
+	// The workflow status. Accepted values are `active` and `draft`.
+	Status pulumi.StringPtrInput
 }
 
 func (WorkflowArgs) ElementType() reflect.Type {
@@ -182,6 +192,11 @@ func (o WorkflowOutput) Code() pulumi.StringOutput {
 // The name of the workflow. Must be unique within the organization.
 func (o WorkflowOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Workflow) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The workflow status. Accepted values are `active` and `draft`.
+func (o WorkflowOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Workflow) pulumi.StringPtrOutput { return v.Status }).(pulumi.StringPtrOutput)
 }
 
 type WorkflowArrayOutput struct{ *pulumi.OutputState }

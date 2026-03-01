@@ -74,6 +74,10 @@ export class IntegrationCloud extends pulumi.CustomResource {
      */
     public /*out*/ readonly awsFormalIamRole!: pulumi.Output<string>;
     /**
+     * The ARN of the IAM role Formal will use to access your resources.
+     */
+    public /*out*/ readonly awsFormalIamRoleArn!: pulumi.Output<string>;
+    /**
      * The SNS topic ARN CloudFormation can use to send events to Formal.
      */
     public /*out*/ readonly awsFormalPingbackArn!: pulumi.Output<string>;
@@ -126,6 +130,7 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["awsEnableRedshiftAutodiscovery"] = state ? state.awsEnableRedshiftAutodiscovery : undefined;
             resourceInputs["awsEnableS3Autodiscovery"] = state ? state.awsEnableS3Autodiscovery : undefined;
             resourceInputs["awsFormalIamRole"] = state ? state.awsFormalIamRole : undefined;
+            resourceInputs["awsFormalIamRoleArn"] = state ? state.awsFormalIamRoleArn : undefined;
             resourceInputs["awsFormalPingbackArn"] = state ? state.awsFormalPingbackArn : undefined;
             resourceInputs["awsFormalStackName"] = state ? state.awsFormalStackName : undefined;
             resourceInputs["awsS3BucketArn"] = state ? state.awsS3BucketArn : undefined;
@@ -150,6 +155,7 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["awsEnableRedshiftAutodiscovery"] = undefined /*out*/;
             resourceInputs["awsEnableS3Autodiscovery"] = undefined /*out*/;
             resourceInputs["awsFormalIamRole"] = undefined /*out*/;
+            resourceInputs["awsFormalIamRoleArn"] = undefined /*out*/;
             resourceInputs["awsFormalPingbackArn"] = undefined /*out*/;
             resourceInputs["awsFormalStackName"] = undefined /*out*/;
             resourceInputs["awsS3BucketArn"] = undefined /*out*/;
@@ -200,6 +206,10 @@ export interface IntegrationCloudState {
      * The IAM role ID Formal will use to access your resources.
      */
     awsFormalIamRole?: pulumi.Input<string>;
+    /**
+     * The ARN of the IAM role Formal will use to access your resources.
+     */
+    awsFormalIamRoleArn?: pulumi.Input<string>;
     /**
      * The SNS topic ARN CloudFormation can use to send events to Formal.
      */

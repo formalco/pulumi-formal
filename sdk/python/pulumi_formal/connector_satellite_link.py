@@ -26,7 +26,7 @@ class ConnectorSatelliteLinkArgs:
         The set of arguments for constructing a ConnectorSatelliteLink resource.
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector to link to the satellite.
         :param pulumi.Input[_builtins.str] satellite_id: The ID of the Satellite to link to the connector.
-        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
         """
         pulumi.set(__self__, "connector_id", connector_id)
         pulumi.set(__self__, "satellite_id", satellite_id)
@@ -60,7 +60,7 @@ class ConnectorSatelliteLinkArgs:
     @pulumi.getter(name="satelliteType")
     def satellite_type(self) -> pulumi.Input[_builtins.str]:
         """
-        The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.
+        The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
         """
         return pulumi.get(self, "satellite_type")
 
@@ -82,7 +82,7 @@ class _ConnectorSatelliteLinkState:
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector to link to the satellite.
         :param pulumi.Input[_builtins.str] created_at: The timestamp when the connector satellite link was created.
         :param pulumi.Input[_builtins.str] satellite_id: The ID of the Satellite to link to the connector.
-        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
         :param pulumi.Input[_builtins.str] updated_at: The timestamp when the connector satellite link was last updated.
         """
         if connector_id is not None:
@@ -136,7 +136,7 @@ class _ConnectorSatelliteLinkState:
     @pulumi.getter(name="satelliteType")
     def satellite_type(self) -> Optional[pulumi.Input[_builtins.str]]:
         """
-        The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.
+        The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
         """
         return pulumi.get(self, "satellite_type")
 
@@ -174,7 +174,7 @@ class ConnectorSatelliteLink(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector to link to the satellite.
         :param pulumi.Input[_builtins.str] satellite_id: The ID of the Satellite to link to the connector.
-        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
         """
         ...
     @overload
@@ -248,7 +248,7 @@ class ConnectorSatelliteLink(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector to link to the satellite.
         :param pulumi.Input[_builtins.str] created_at: The timestamp when the connector satellite link was created.
         :param pulumi.Input[_builtins.str] satellite_id: The ID of the Satellite to link to the connector.
-        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
         :param pulumi.Input[_builtins.str] updated_at: The timestamp when the connector satellite link was last updated.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -290,7 +290,7 @@ class ConnectorSatelliteLink(pulumi.CustomResource):
     @pulumi.getter(name="satelliteType")
     def satellite_type(self) -> pulumi.Output[_builtins.str]:
         """
-        The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.
+        The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
         """
         return pulumi.get(self, "satellite_type")
 

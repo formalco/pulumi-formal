@@ -20,15 +20,19 @@ __all__ = ['WorkflowArgs', 'Workflow']
 class WorkflowArgs:
     def __init__(__self__, *,
                  code: pulumi.Input[_builtins.str],
-                 name: Optional[pulumi.Input[_builtins.str]] = None):
+                 name: Optional[pulumi.Input[_builtins.str]] = None,
+                 status: Optional[pulumi.Input[_builtins.str]] = None):
         """
         The set of arguments for constructing a Workflow resource.
         :param pulumi.Input[_builtins.str] code: The workflow definition in YAML format. Defines the trigger and actions for the workflow.
         :param pulumi.Input[_builtins.str] name: The name of the workflow. Must be unique within the organization.
+        :param pulumi.Input[_builtins.str] status: The workflow status. Accepted values are `active` and `draft`.
         """
         pulumi.set(__self__, "code", code)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
 
     @_builtins.property
     @pulumi.getter
@@ -54,21 +58,37 @@ class WorkflowArgs:
     def name(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "name", value)
 
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The workflow status. Accepted values are `active` and `draft`.
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "status", value)
+
 
 @pulumi.input_type
 class _WorkflowState:
     def __init__(__self__, *,
                  code: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None):
+                 name: Optional[pulumi.Input[_builtins.str]] = None,
+                 status: Optional[pulumi.Input[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering Workflow resources.
         :param pulumi.Input[_builtins.str] code: The workflow definition in YAML format. Defines the trigger and actions for the workflow.
         :param pulumi.Input[_builtins.str] name: The name of the workflow. Must be unique within the organization.
+        :param pulumi.Input[_builtins.str] status: The workflow status. Accepted values are `active` and `draft`.
         """
         if code is not None:
             pulumi.set(__self__, "code", code)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
 
     @_builtins.property
     @pulumi.getter
@@ -94,6 +114,18 @@ class _WorkflowState:
     def name(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "name", value)
 
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The workflow status. Accepted values are `active` and `draft`.
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "status", value)
+
 
 @pulumi.type_token("formal:index/workflow:Workflow")
 class Workflow(pulumi.CustomResource):
@@ -103,6 +135,7 @@ class Workflow(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  code: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
+                 status: Optional[pulumi.Input[_builtins.str]] = None,
                  __props__=None):
         """
         Workflows enable automation of actions based on triggers. A workflow is defined using YAML code that specifies a trigger (what starts the workflow) and actions (what the workflow does).
@@ -111,6 +144,7 @@ class Workflow(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] code: The workflow definition in YAML format. Defines the trigger and actions for the workflow.
         :param pulumi.Input[_builtins.str] name: The name of the workflow. Must be unique within the organization.
+        :param pulumi.Input[_builtins.str] status: The workflow status. Accepted values are `active` and `draft`.
         """
         ...
     @overload
@@ -138,6 +172,7 @@ class Workflow(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  code: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
+                 status: Optional[pulumi.Input[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -151,6 +186,7 @@ class Workflow(pulumi.CustomResource):
                 raise TypeError("Missing required property 'code'")
             __props__.__dict__["code"] = code
             __props__.__dict__["name"] = name
+            __props__.__dict__["status"] = status
         super(Workflow, __self__).__init__(
             'formal:index/workflow:Workflow',
             resource_name,
@@ -162,7 +198,8 @@ class Workflow(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             code: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None) -> 'Workflow':
+            name: Optional[pulumi.Input[_builtins.str]] = None,
+            status: Optional[pulumi.Input[_builtins.str]] = None) -> 'Workflow':
         """
         Get an existing Workflow resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -172,6 +209,7 @@ class Workflow(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] code: The workflow definition in YAML format. Defines the trigger and actions for the workflow.
         :param pulumi.Input[_builtins.str] name: The name of the workflow. Must be unique within the organization.
+        :param pulumi.Input[_builtins.str] status: The workflow status. Accepted values are `active` and `draft`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -179,6 +217,7 @@ class Workflow(pulumi.CustomResource):
 
         __props__.__dict__["code"] = code
         __props__.__dict__["name"] = name
+        __props__.__dict__["status"] = status
         return Workflow(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
@@ -196,4 +235,12 @@ class Workflow(pulumi.CustomResource):
         The name of the workflow. Must be unique within the organization.
         """
         return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        The workflow status. Accepted values are `active` and `draft`.
+        """
+        return pulumi.get(self, "status")
 

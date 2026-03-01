@@ -71,6 +71,12 @@ namespace Formal.Pulumi
         public Output<string> AwsFormalIamRole { get; private set; } = null!;
 
         /// <summary>
+        /// The ARN of the IAM role Formal will use to access your resources.
+        /// </summary>
+        [Output("awsFormalIamRoleArn")]
+        public Output<string> AwsFormalIamRoleArn { get; private set; } = null!;
+
+        /// <summary>
         /// The SNS topic ARN CloudFormation can use to send events to Formal.
         /// </summary>
         [Output("awsFormalPingbackArn")]
@@ -244,6 +250,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("awsFormalIamRole")]
         public Input<string>? AwsFormalIamRole { get; set; }
+
+        /// <summary>
+        /// The ARN of the IAM role Formal will use to access your resources.
+        /// </summary>
+        [Input("awsFormalIamRoleArn")]
+        public Input<string>? AwsFormalIamRoleArn { get; set; }
 
         /// <summary>
         /// The SNS topic ARN CloudFormation can use to send events to Formal.
