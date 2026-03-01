@@ -34,6 +34,8 @@ type IntegrationCloud struct {
 	AwsEnableS3Autodiscovery pulumi.BoolOutput `pulumi:"awsEnableS3Autodiscovery"`
 	// The IAM role ID Formal will use to access your resources.
 	AwsFormalIamRole pulumi.StringOutput `pulumi:"awsFormalIamRole"`
+	// The ARN of the IAM role Formal will use to access your resources.
+	AwsFormalIamRoleArn pulumi.StringOutput `pulumi:"awsFormalIamRoleArn"`
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
 	AwsFormalPingbackArn pulumi.StringOutput `pulumi:"awsFormalPingbackArn"`
 	// A generated name for your CloudFormation stack.
@@ -103,6 +105,8 @@ type integrationCloudState struct {
 	AwsEnableS3Autodiscovery *bool `pulumi:"awsEnableS3Autodiscovery"`
 	// The IAM role ID Formal will use to access your resources.
 	AwsFormalIamRole *string `pulumi:"awsFormalIamRole"`
+	// The ARN of the IAM role Formal will use to access your resources.
+	AwsFormalIamRoleArn *string `pulumi:"awsFormalIamRoleArn"`
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
 	AwsFormalPingbackArn *string `pulumi:"awsFormalPingbackArn"`
 	// A generated name for your CloudFormation stack.
@@ -140,6 +144,8 @@ type IntegrationCloudState struct {
 	AwsEnableS3Autodiscovery pulumi.BoolPtrInput
 	// The IAM role ID Formal will use to access your resources.
 	AwsFormalIamRole pulumi.StringPtrInput
+	// The ARN of the IAM role Formal will use to access your resources.
+	AwsFormalIamRoleArn pulumi.StringPtrInput
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
 	AwsFormalPingbackArn pulumi.StringPtrInput
 	// A generated name for your CloudFormation stack.
@@ -319,6 +325,11 @@ func (o IntegrationCloudOutput) AwsEnableS3Autodiscovery() pulumi.BoolOutput {
 // The IAM role ID Formal will use to access your resources.
 func (o IntegrationCloudOutput) AwsFormalIamRole() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AwsFormalIamRole }).(pulumi.StringOutput)
+}
+
+// The ARN of the IAM role Formal will use to access your resources.
+func (o IntegrationCloudOutput) AwsFormalIamRoleArn() pulumi.StringOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AwsFormalIamRoleArn }).(pulumi.StringOutput)
 }
 
 // The SNS topic ARN CloudFormation can use to send events to Formal.

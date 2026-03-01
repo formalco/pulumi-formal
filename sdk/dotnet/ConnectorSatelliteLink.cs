@@ -35,7 +35,7 @@ namespace Formal.Pulumi
         public Output<string> SatelliteId { get; private set; } = null!;
 
         /// <summary>
-        /// The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.
+        /// The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
         /// </summary>
         [Output("satelliteType")]
         public Output<string> SatelliteType { get; private set; } = null!;
@@ -106,7 +106,7 @@ namespace Formal.Pulumi
         public Input<string> SatelliteId { get; set; } = null!;
 
         /// <summary>
-        /// The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.
+        /// The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
         /// </summary>
         [Input("satelliteType", required: true)]
         public Input<string> SatelliteType { get; set; } = null!;
@@ -138,7 +138,7 @@ namespace Formal.Pulumi
         public Input<string>? SatelliteId { get; set; }
 
         /// <summary>
-        /// The type of satellite being linked. Must be one of: `data_classifier` or `policy_data_loader`.
+        /// The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
         /// </summary>
         [Input("satelliteType")]
         public Input<string>? SatelliteType { get; set; }

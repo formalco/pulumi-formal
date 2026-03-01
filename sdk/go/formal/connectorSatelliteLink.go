@@ -22,7 +22,7 @@ type ConnectorSatelliteLink struct {
 	CreatedAt pulumi.StringOutput `pulumi:"createdAt"`
 	// The ID of the Satellite to link to the connector.
 	SatelliteId pulumi.StringOutput `pulumi:"satelliteId"`
-	// The type of satellite being linked. Must be one of: `dataClassifier` or `policyDataLoader`.
+	// The type of satellite being linked. Must be one of: `ai`, `dataClassifier` or `policyDataLoader`.
 	SatelliteType pulumi.StringOutput `pulumi:"satelliteType"`
 	// The timestamp when the connector satellite link was last updated.
 	UpdatedAt pulumi.StringOutput `pulumi:"updatedAt"`
@@ -73,7 +73,7 @@ type connectorSatelliteLinkState struct {
 	CreatedAt *string `pulumi:"createdAt"`
 	// The ID of the Satellite to link to the connector.
 	SatelliteId *string `pulumi:"satelliteId"`
-	// The type of satellite being linked. Must be one of: `dataClassifier` or `policyDataLoader`.
+	// The type of satellite being linked. Must be one of: `ai`, `dataClassifier` or `policyDataLoader`.
 	SatelliteType *string `pulumi:"satelliteType"`
 	// The timestamp when the connector satellite link was last updated.
 	UpdatedAt *string `pulumi:"updatedAt"`
@@ -86,7 +86,7 @@ type ConnectorSatelliteLinkState struct {
 	CreatedAt pulumi.StringPtrInput
 	// The ID of the Satellite to link to the connector.
 	SatelliteId pulumi.StringPtrInput
-	// The type of satellite being linked. Must be one of: `dataClassifier` or `policyDataLoader`.
+	// The type of satellite being linked. Must be one of: `ai`, `dataClassifier` or `policyDataLoader`.
 	SatelliteType pulumi.StringPtrInput
 	// The timestamp when the connector satellite link was last updated.
 	UpdatedAt pulumi.StringPtrInput
@@ -101,7 +101,7 @@ type connectorSatelliteLinkArgs struct {
 	ConnectorId string `pulumi:"connectorId"`
 	// The ID of the Satellite to link to the connector.
 	SatelliteId string `pulumi:"satelliteId"`
-	// The type of satellite being linked. Must be one of: `dataClassifier` or `policyDataLoader`.
+	// The type of satellite being linked. Must be one of: `ai`, `dataClassifier` or `policyDataLoader`.
 	SatelliteType string `pulumi:"satelliteType"`
 }
 
@@ -111,7 +111,7 @@ type ConnectorSatelliteLinkArgs struct {
 	ConnectorId pulumi.StringInput
 	// The ID of the Satellite to link to the connector.
 	SatelliteId pulumi.StringInput
-	// The type of satellite being linked. Must be one of: `dataClassifier` or `policyDataLoader`.
+	// The type of satellite being linked. Must be one of: `ai`, `dataClassifier` or `policyDataLoader`.
 	SatelliteType pulumi.StringInput
 }
 
@@ -217,7 +217,7 @@ func (o ConnectorSatelliteLinkOutput) SatelliteId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConnectorSatelliteLink) pulumi.StringOutput { return v.SatelliteId }).(pulumi.StringOutput)
 }
 
-// The type of satellite being linked. Must be one of: `dataClassifier` or `policyDataLoader`.
+// The type of satellite being linked. Must be one of: `ai`, `dataClassifier` or `policyDataLoader`.
 func (o ConnectorSatelliteLinkOutput) SatelliteType() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConnectorSatelliteLink) pulumi.StringOutput { return v.SatelliteType }).(pulumi.StringOutput)
 }

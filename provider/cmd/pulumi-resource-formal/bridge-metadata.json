@@ -172,7 +172,12 @@
             },
             "formal_resource": {
                 "current": "formal:index/resource:Resource",
-                "majorVersion": 1
+                "majorVersion": 1,
+                "fields": {
+                    "aliases": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "formal_resource_classifier_configuration": {
                 "current": "formal:index/resourceClassifierConfiguration:ResourceClassifierConfiguration",

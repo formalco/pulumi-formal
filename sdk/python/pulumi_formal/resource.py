@@ -22,6 +22,7 @@ class ResourceArgs:
                  hostname: pulumi.Input[_builtins.str],
                  port: pulumi.Input[_builtins.int],
                  technology: pulumi.Input[_builtins.str],
+                 aliases: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  environment: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  space_id: Optional[pulumi.Input[_builtins.str]] = None,
@@ -33,6 +34,7 @@ class ResourceArgs:
         :param pulumi.Input[_builtins.str] hostname: Hostname of the Resource.
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
         :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] aliases: Aliases to apply to the Resource.
         :param pulumi.Input[_builtins.str] environment: Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Resource.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
@@ -43,6 +45,8 @@ class ResourceArgs:
         pulumi.set(__self__, "hostname", hostname)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "technology", technology)
+        if aliases is not None:
+            pulumi.set(__self__, "aliases", aliases)
         if environment is not None:
             warnings.warn("""This field is deprecated and will be removed in a future release.""", DeprecationWarning)
             pulumi.log.warn("""environment is deprecated: This field is deprecated and will be removed in a future release.""")
@@ -94,6 +98,18 @@ class ResourceArgs:
     @technology.setter
     def technology(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "technology", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def aliases(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Aliases to apply to the Resource.
+        """
+        return pulumi.get(self, "aliases")
+
+    @aliases.setter
+    def aliases(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "aliases", value)
 
     @_builtins.property
     @pulumi.getter
@@ -172,6 +188,7 @@ class ResourceArgs:
 @pulumi.input_type
 class _ResourceState:
     def __init__(__self__, *,
+                 aliases: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  created_at: Optional[pulumi.Input[_builtins.int]] = None,
                  environment: Optional[pulumi.Input[_builtins.str]] = None,
                  hostname: Optional[pulumi.Input[_builtins.str]] = None,
@@ -184,6 +201,7 @@ class _ResourceState:
                  termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
         """
         Input properties used for looking up and filtering Resource resources.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] aliases: Aliases to apply to the Resource.
         :param pulumi.Input[_builtins.int] created_at: Creation time of the Resource.
         :param pulumi.Input[_builtins.str] environment: Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         :param pulumi.Input[_builtins.str] hostname: Hostname of the Resource.
@@ -195,6 +213,8 @@ class _ResourceState:
         :param pulumi.Input[_builtins.str] technology_provider: For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, the Resource cannot be deleted.
         """
+        if aliases is not None:
+            pulumi.set(__self__, "aliases", aliases)
         if created_at is not None:
             pulumi.set(__self__, "created_at", created_at)
         if environment is not None:
@@ -218,6 +238,18 @@ class _ResourceState:
             pulumi.set(__self__, "technology_provider", technology_provider)
         if termination_protection is not None:
             pulumi.set(__self__, "termination_protection", termination_protection)
+
+    @_builtins.property
+    @pulumi.getter
+    def aliases(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Aliases to apply to the Resource.
+        """
+        return pulumi.get(self, "aliases")
+
+    @aliases.setter
+    def aliases(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "aliases", value)
 
     @_builtins.property
     @pulumi.getter(name="createdAt")
@@ -347,6 +379,7 @@ class Resource(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 aliases: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  environment: Optional[pulumi.Input[_builtins.str]] = None,
                  hostname: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
@@ -362,6 +395,7 @@ class Resource(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] aliases: Aliases to apply to the Resource.
         :param pulumi.Input[_builtins.str] environment: Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         :param pulumi.Input[_builtins.str] hostname: Hostname of the Resource.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Resource.
@@ -396,6 +430,7 @@ class Resource(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 aliases: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  environment: Optional[pulumi.Input[_builtins.str]] = None,
                  hostname: Optional[pulumi.Input[_builtins.str]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
@@ -414,6 +449,7 @@ class Resource(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ResourceArgs.__new__(ResourceArgs)
 
+            __props__.__dict__["aliases"] = aliases
             __props__.__dict__["environment"] = environment
             if hostname is None and not opts.urn:
                 raise TypeError("Missing required property 'hostname'")
@@ -440,6 +476,7 @@ class Resource(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            aliases: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
             created_at: Optional[pulumi.Input[_builtins.int]] = None,
             environment: Optional[pulumi.Input[_builtins.str]] = None,
             hostname: Optional[pulumi.Input[_builtins.str]] = None,
@@ -457,6 +494,7 @@ class Resource(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] aliases: Aliases to apply to the Resource.
         :param pulumi.Input[_builtins.int] created_at: Creation time of the Resource.
         :param pulumi.Input[_builtins.str] environment: Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         :param pulumi.Input[_builtins.str] hostname: Hostname of the Resource.
@@ -472,6 +510,7 @@ class Resource(pulumi.CustomResource):
 
         __props__ = _ResourceState.__new__(_ResourceState)
 
+        __props__.__dict__["aliases"] = aliases
         __props__.__dict__["created_at"] = created_at
         __props__.__dict__["environment"] = environment
         __props__.__dict__["hostname"] = hostname
@@ -483,6 +522,14 @@ class Resource(pulumi.CustomResource):
         __props__.__dict__["technology_provider"] = technology_provider
         __props__.__dict__["termination_protection"] = termination_protection
         return Resource(resource_name, opts=opts, __props__=__props__)
+
+    @_builtins.property
+    @pulumi.getter
+    def aliases(self) -> pulumi.Output[Optional[Sequence[_builtins.str]]]:
+        """
+        Aliases to apply to the Resource.
+        """
+        return pulumi.get(self, "aliases")
 
     @_builtins.property
     @pulumi.getter(name="createdAt")
