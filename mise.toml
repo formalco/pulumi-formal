@@ -1,4 +1,0 @@
-[tools]
-# NOTE: If rerunning `make ci-mgmt`, the golangci.yml file will be overwritten
-# to an old syntax version. Use `golangci-lint migrate` to update it.
-golangci-lint = "2.10.1"
