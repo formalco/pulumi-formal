@@ -64,19 +64,222 @@
         }
     },
     "types": {
-        "formal:index/DataDomainOwner:DataDomainOwner": {
+        "formal:index/ConnectorAiProviderAnthropic:ConnectorAiProviderAnthropic": {
             "properties": {
-                "objectId": {
-                    "type": "string"
+                "apiKey": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nThe API key. This value is not stored in Terraform state.\n",
+                    "secret": true
                 },
-                "objectType": {
-                    "type": "string"
+                "apiKeyVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`apiKey`\" pulumi-lang-dotnet=\"`ApiKey`\" pulumi-lang-go=\"`apiKey`\" pulumi-lang-python=\"`api_key`\" pulumi-lang-yaml=\"`apiKey`\" pulumi-lang-java=\"`apiKey`\" pulumi-lang-hcl=\"`api_key`\"\u003e`apiKey`\u003c/span\u003e. Increment this value to update the key.\n"
                 }
             },
             "type": "object",
             "required": [
-                "objectId",
-                "objectType"
+                "apiKey",
+                "apiKeyVersion"
+            ]
+        },
+        "formal:index/ConnectorAiProviderAwsBedrock:ConnectorAiProviderAwsBedrock": {
+            "properties": {
+                "region": {
+                    "type": "string",
+                    "description": "The AWS region.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "region"
+            ]
+        },
+        "formal:index/ConnectorAiProviderAzureAi:ConnectorAiProviderAzureAi": {
+            "properties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nThe API key. This value is not stored in Terraform state.\n",
+                    "secret": true
+                },
+                "apiKeyVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`apiKey`\" pulumi-lang-dotnet=\"`ApiKey`\" pulumi-lang-go=\"`apiKey`\" pulumi-lang-python=\"`api_key`\" pulumi-lang-yaml=\"`apiKey`\" pulumi-lang-java=\"`apiKey`\" pulumi-lang-hcl=\"`api_key`\"\u003e`apiKey`\u003c/span\u003e. Increment this value to update the key.\n"
+                },
+                "endpoint": {
+                    "type": "string",
+                    "description": "The Azure AI Foundry endpoint URL.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "apiKey",
+                "apiKeyVersion",
+                "endpoint"
+            ]
+        },
+        "formal:index/ConnectorAiProviderFormalAiSatellite:ConnectorAiProviderFormalAiSatellite": {
+            "type": "object"
+        },
+        "formal:index/ConnectorAiProviderGemini:ConnectorAiProviderGemini": {
+            "properties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nThe API key. This value is not stored in Terraform state.\n",
+                    "secret": true
+                },
+                "apiKeyVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`apiKey`\" pulumi-lang-dotnet=\"`ApiKey`\" pulumi-lang-go=\"`apiKey`\" pulumi-lang-python=\"`api_key`\" pulumi-lang-yaml=\"`apiKey`\" pulumi-lang-java=\"`apiKey`\" pulumi-lang-hcl=\"`api_key`\"\u003e`apiKey`\u003c/span\u003e. Increment this value to update the key.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "apiKey",
+                "apiKeyVersion"
+            ]
+        },
+        "formal:index/ConnectorAiProviderGoogleVertexAi:ConnectorAiProviderGoogleVertexAi": {
+            "properties": {
+                "gcpProjectId": {
+                    "type": "string",
+                    "description": "The GCP project ID.\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "The GCP region.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "gcpProjectId",
+                "region"
+            ]
+        },
+        "formal:index/ConnectorAiProviderOpenai:ConnectorAiProviderOpenai": {
+            "properties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nThe API key. This value is not stored in Terraform state.\n",
+                    "secret": true
+                },
+                "apiKeyVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`apiKey`\" pulumi-lang-dotnet=\"`ApiKey`\" pulumi-lang-go=\"`apiKey`\" pulumi-lang-python=\"`api_key`\" pulumi-lang-yaml=\"`apiKey`\" pulumi-lang-java=\"`apiKey`\" pulumi-lang-hcl=\"`api_key`\"\u003e`apiKey`\u003c/span\u003e. Increment this value to update the key.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "apiKey",
+                "apiKeyVersion"
+            ]
+        },
+        "formal:index/FormField:FormField": {
+            "properties": {
+                "config": {
+                    "$ref": "#/types/formal:index/FormFieldConfig:FormFieldConfig",
+                    "description": "Optional field configuration for select-like field types.\n"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Unique field identifier.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Display name of the field.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Field type.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "type"
+            ]
+        },
+        "formal:index/FormFieldConfig:FormFieldConfig": {
+            "properties": {
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/formal:index/FormFieldConfigOption:FormFieldConfigOption"
+                    },
+                    "description": "Static options for select-like fields.\n"
+                },
+                "optionsSource": {
+                    "$ref": "#/types/formal:index/FormFieldConfigOptionsSource:FormFieldConfigOptionsSource",
+                    "description": "Dynamic source used to fetch options.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:index/FormFieldConfigOption:FormFieldConfigOption": {
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "description": "Option label.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Option value.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "label",
+                "value"
+            ]
+        },
+        "formal:index/FormFieldConfigOptionsSource:FormFieldConfigOptionsSource": {
+            "properties": {
+                "app": {
+                    "type": "string",
+                    "description": "Service/app name used to fetch options.\n"
+                },
+                "command": {
+                    "$ref": "#/types/formal:index/FormFieldConfigOptionsSourceCommand:FormFieldConfigOptionsSourceCommand",
+                    "description": "Command configuration for options retrieval.\n"
+                },
+                "input": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Optional payload for options retrieval.\n"
+                },
+                "inputJson": {
+                    "type": "string",
+                    "description": "Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.\n"
+                },
+                "machineUserId": {
+                    "type": "string",
+                    "description": "Machine user used to authenticate options retrieval.\n"
+                },
+                "transform": {
+                    "type": "string",
+                    "description": "CEL expression that transforms the response into options.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "app",
+                "command",
+                "machineUserId",
+                "transform"
+            ]
+        },
+        "formal:index/FormFieldConfigOptionsSourceCommand:FormFieldConfigOptionsSourceCommand": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Command name.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name"
             ]
         },
         "formal:index/IntegrationBiMetabase:IntegrationBiMetabase": {
@@ -104,6 +307,13 @@
                 "allowS3Access": {
                     "type": "boolean",
                     "description": "Allows the Cloud Integration to access S3 buckets for Log Integrations.\n"
+                },
+                "autodiscoveryRegions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The regions to enable resource autodiscovery for.\n"
                 },
                 "awsCustomerRoleArn": {
                     "type": "string",
@@ -139,38 +349,21 @@
                 },
                 "templateVersion": {
                     "type": "string",
-                    "description": "The template version of the CloudFormation stack. Use `latest` to stay in sync.\n"
+                    "description": "The template version of the CloudFormation stack. Use \u003cspan pulumi-lang-nodejs=\"`latest`\" pulumi-lang-dotnet=\"`Latest`\" pulumi-lang-go=\"`latest`\" pulumi-lang-python=\"`latest`\" pulumi-lang-yaml=\"`latest`\" pulumi-lang-java=\"`latest`\" pulumi-lang-hcl=\"`latest`\"\u003e`latest`\u003c/span\u003e to stay in sync.\n"
                 }
             },
             "type": "object",
             "required": [
                 "templateVersion"
-            ]
-        },
-        "formal:index/IntegrationDataCatalogDatahub:IntegrationDataCatalogDatahub": {
-            "properties": {
-                "apiKey": {
-                    "type": "string",
-                    "description": "Api Key for the Datahub instance.\n",
-                    "willReplaceOnChanges": true
-                },
-                "generalizedMetadataServiceUrl": {
-                    "type": "string",
-                    "description": "Generalized metadata service url for the Datahub instance.\n",
-                    "willReplaceOnChanges": true
-                },
-                "webhookSecret": {
-                    "type": "string",
-                    "description": "Webhook secret of the Datahub instance.\n",
-                    "willReplaceOnChanges": true
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "autodiscoveryRegions",
+                        "templateVersion"
+                    ]
                 }
-            },
-            "type": "object",
-            "required": [
-                "apiKey",
-                "generalizedMetadataServiceUrl",
-                "webhookSecret"
-            ]
+            }
         },
         "formal:index/IntegrationLogAwsS3:IntegrationLogAwsS3": {
             "properties": {
@@ -185,6 +378,11 @@
                 "s3BucketName": {
                     "type": "string",
                     "description": "AWS S3 Bucket Name.\n"
+                },
+                "s3BucketPrefix": {
+                    "type": "string",
+                    "description": "AWS S3 bucket prefix to write logs under. Defaults to the bucket root.\n",
+                    "willReplaceOnChanges": true
                 }
             },
             "type": "object",
@@ -456,6 +654,123 @@
                 "type": "object"
             }
         },
+        "formal:index/connectorAiProvider:ConnectorAiProvider": {
+            "description": "Configures the AI provider for a connector's session analyzer.\n",
+            "properties": {
+                "anthropic": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderAnthropic:ConnectorAiProviderAnthropic",
+                    "description": "Use Anthropic as the provider."
+                },
+                "awsBedrock": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderAwsBedrock:ConnectorAiProviderAwsBedrock",
+                    "description": "Use AWS Bedrock as the provider."
+                },
+                "azureAi": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderAzureAi:ConnectorAiProviderAzureAi",
+                    "description": "Use Azure AI Foundry as the provider."
+                },
+                "connectorId": {
+                    "type": "string",
+                    "description": "The ID of the connector this AI provider is linked to.\n"
+                },
+                "formalAiSatellite": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderFormalAiSatellite:ConnectorAiProviderFormalAiSatellite",
+                    "description": "Use the Formal AI satellite as the provider."
+                },
+                "gemini": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderGemini:ConnectorAiProviderGemini",
+                    "description": "Use Google Gemini as the provider."
+                },
+                "googleVertexAi": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderGoogleVertexAi:ConnectorAiProviderGoogleVertexAi",
+                    "description": "Use Google Vertex AI as the provider."
+                },
+                "openai": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderOpenai:ConnectorAiProviderOpenai",
+                    "description": "Use OpenAI as the provider."
+                }
+            },
+            "required": [
+                "connectorId"
+            ],
+            "inputProperties": {
+                "anthropic": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderAnthropic:ConnectorAiProviderAnthropic",
+                    "description": "Use Anthropic as the provider."
+                },
+                "awsBedrock": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderAwsBedrock:ConnectorAiProviderAwsBedrock",
+                    "description": "Use AWS Bedrock as the provider."
+                },
+                "azureAi": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderAzureAi:ConnectorAiProviderAzureAi",
+                    "description": "Use Azure AI Foundry as the provider."
+                },
+                "connectorId": {
+                    "type": "string",
+                    "description": "The ID of the connector this AI provider is linked to.\n",
+                    "willReplaceOnChanges": true
+                },
+                "formalAiSatellite": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderFormalAiSatellite:ConnectorAiProviderFormalAiSatellite",
+                    "description": "Use the Formal AI satellite as the provider."
+                },
+                "gemini": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderGemini:ConnectorAiProviderGemini",
+                    "description": "Use Google Gemini as the provider."
+                },
+                "googleVertexAi": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderGoogleVertexAi:ConnectorAiProviderGoogleVertexAi",
+                    "description": "Use Google Vertex AI as the provider."
+                },
+                "openai": {
+                    "$ref": "#/types/formal:index/ConnectorAiProviderOpenai:ConnectorAiProviderOpenai",
+                    "description": "Use OpenAI as the provider."
+                }
+            },
+            "requiredInputs": [
+                "connectorId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ConnectorAiProvider resources.\n",
+                "properties": {
+                    "anthropic": {
+                        "$ref": "#/types/formal:index/ConnectorAiProviderAnthropic:ConnectorAiProviderAnthropic",
+                        "description": "Use Anthropic as the provider."
+                    },
+                    "awsBedrock": {
+                        "$ref": "#/types/formal:index/ConnectorAiProviderAwsBedrock:ConnectorAiProviderAwsBedrock",
+                        "description": "Use AWS Bedrock as the provider."
+                    },
+                    "azureAi": {
+                        "$ref": "#/types/formal:index/ConnectorAiProviderAzureAi:ConnectorAiProviderAzureAi",
+                        "description": "Use Azure AI Foundry as the provider."
+                    },
+                    "connectorId": {
+                        "type": "string",
+                        "description": "The ID of the connector this AI provider is linked to.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "formalAiSatellite": {
+                        "$ref": "#/types/formal:index/ConnectorAiProviderFormalAiSatellite:ConnectorAiProviderFormalAiSatellite",
+                        "description": "Use the Formal AI satellite as the provider."
+                    },
+                    "gemini": {
+                        "$ref": "#/types/formal:index/ConnectorAiProviderGemini:ConnectorAiProviderGemini",
+                        "description": "Use Google Gemini as the provider."
+                    },
+                    "googleVertexAi": {
+                        "$ref": "#/types/formal:index/ConnectorAiProviderGoogleVertexAi:ConnectorAiProviderGoogleVertexAi",
+                        "description": "Use Google Vertex AI as the provider."
+                    },
+                    "openai": {
+                        "$ref": "#/types/formal:index/ConnectorAiProviderOpenai:ConnectorAiProviderOpenai",
+                        "description": "Use OpenAI as the provider."
+                    }
+                },
+                "type": "object"
+            }
+        },
         "formal:index/connectorConfiguration:ConnectorConfiguration": {
             "description": "Registering a Connector Configuration with Formal.\n",
             "properties": {
@@ -475,7 +790,7 @@
                     "type": "integer",
                     "description": "The OpenTelemetry endpoint port for this Connector. Defaults to 4317.\n"
                 },
-                "resourcesHealthChecksFrequencySeconds": {
+                "resourcesHealthChecksFrequency": {
                     "type": "integer",
                     "description": "The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.\n"
                 }
@@ -501,7 +816,7 @@
                     "type": "integer",
                     "description": "The OpenTelemetry endpoint port for this Connector. Defaults to 4317.\n"
                 },
-                "resourcesHealthChecksFrequencySeconds": {
+                "resourcesHealthChecksFrequency": {
                     "type": "integer",
                     "description": "The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.\n"
                 }
@@ -529,7 +844,7 @@
                         "type": "integer",
                         "description": "The OpenTelemetry endpoint port for this Connector. Defaults to 4317.\n"
                     },
-                    "resourcesHealthChecksFrequencySeconds": {
+                    "resourcesHealthChecksFrequency": {
                         "type": "integer",
                         "description": "The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.\n"
                     }
@@ -555,7 +870,7 @@
                 },
                 "dnsRecordStatus": {
                     "type": "string",
-                    "description": "The status of the DNS record for this hostname. Accepted values are `none`, `pending`, `success` and `failed`.\n"
+                    "description": "The status of the DNS record for this hostname. Accepted values are \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\" pulumi-lang-hcl=\"`none`\"\u003e`none`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`pending`\" pulumi-lang-dotnet=\"`Pending`\" pulumi-lang-go=\"`pending`\" pulumi-lang-python=\"`pending`\" pulumi-lang-yaml=\"`pending`\" pulumi-lang-java=\"`pending`\" pulumi-lang-hcl=\"`pending`\"\u003e`pending`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`success`\" pulumi-lang-dotnet=\"`Success`\" pulumi-lang-go=\"`success`\" pulumi-lang-python=\"`success`\" pulumi-lang-yaml=\"`success`\" pulumi-lang-java=\"`success`\" pulumi-lang-hcl=\"`success`\"\u003e`success`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`failed`\" pulumi-lang-dotnet=\"`Failed`\" pulumi-lang-go=\"`failed`\" pulumi-lang-python=\"`failed`\" pulumi-lang-yaml=\"`failed`\" pulumi-lang-java=\"`failed`\" pulumi-lang-hcl=\"`failed`\"\u003e`failed`\u003c/span\u003e.\n"
                 },
                 "hostname": {
                     "type": "string",
@@ -577,7 +892,7 @@
                 },
                 "tlsCertificateStatus": {
                     "type": "string",
-                    "description": "The status of the TLS certificate for this hostname. Accepted values are `none`, `issuing`, and `issued`.\n"
+                    "description": "The status of the TLS certificate for this hostname. Accepted values are \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\" pulumi-lang-hcl=\"`none`\"\u003e`none`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`issuing`\" pulumi-lang-dotnet=\"`Issuing`\" pulumi-lang-go=\"`issuing`\" pulumi-lang-python=\"`issuing`\" pulumi-lang-yaml=\"`issuing`\" pulumi-lang-java=\"`issuing`\" pulumi-lang-hcl=\"`issuing`\"\u003e`issuing`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`issued`\" pulumi-lang-dotnet=\"`Issued`\" pulumi-lang-go=\"`issued`\" pulumi-lang-python=\"`issued`\" pulumi-lang-yaml=\"`issued`\" pulumi-lang-java=\"`issued`\" pulumi-lang-hcl=\"`issued`\"\u003e`issued`\u003c/span\u003e.\n"
                 }
             },
             "required": [
@@ -644,7 +959,7 @@
                     },
                     "dnsRecordStatus": {
                         "type": "string",
-                        "description": "The status of the DNS record for this hostname. Accepted values are `none`, `pending`, `success` and `failed`.\n"
+                        "description": "The status of the DNS record for this hostname. Accepted values are \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\" pulumi-lang-hcl=\"`none`\"\u003e`none`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`pending`\" pulumi-lang-dotnet=\"`Pending`\" pulumi-lang-go=\"`pending`\" pulumi-lang-python=\"`pending`\" pulumi-lang-yaml=\"`pending`\" pulumi-lang-java=\"`pending`\" pulumi-lang-hcl=\"`pending`\"\u003e`pending`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`success`\" pulumi-lang-dotnet=\"`Success`\" pulumi-lang-go=\"`success`\" pulumi-lang-python=\"`success`\" pulumi-lang-yaml=\"`success`\" pulumi-lang-java=\"`success`\" pulumi-lang-hcl=\"`success`\"\u003e`success`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`failed`\" pulumi-lang-dotnet=\"`Failed`\" pulumi-lang-go=\"`failed`\" pulumi-lang-python=\"`failed`\" pulumi-lang-yaml=\"`failed`\" pulumi-lang-java=\"`failed`\" pulumi-lang-hcl=\"`failed`\"\u003e`failed`\u003c/span\u003e.\n"
                     },
                     "hostname": {
                         "type": "string",
@@ -667,7 +982,7 @@
                     },
                     "tlsCertificateStatus": {
                         "type": "string",
-                        "description": "The status of the TLS certificate for this hostname. Accepted values are `none`, `issuing`, and `issued`.\n"
+                        "description": "The status of the TLS certificate for this hostname. Accepted values are \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\" pulumi-lang-hcl=\"`none`\"\u003e`none`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`issuing`\" pulumi-lang-dotnet=\"`Issuing`\" pulumi-lang-go=\"`issuing`\" pulumi-lang-python=\"`issuing`\" pulumi-lang-yaml=\"`issuing`\" pulumi-lang-java=\"`issuing`\" pulumi-lang-hcl=\"`issuing`\"\u003e`issuing`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`issued`\" pulumi-lang-dotnet=\"`Issued`\" pulumi-lang-go=\"`issued`\" pulumi-lang-python=\"`issued`\" pulumi-lang-yaml=\"`issued`\" pulumi-lang-java=\"`issued`\" pulumi-lang-hcl=\"`issued`\"\u003e`issued`\u003c/span\u003e.\n"
                     }
                 },
                 "type": "object"
@@ -823,7 +1138,7 @@
                 },
                 "type": {
                     "type": "string",
-                    "description": "The type of the rule. It can be either `any`, `resource` or `technology`\n"
+                    "description": "The type of the rule. It can be either \u003cspan pulumi-lang-nodejs=\"`any`\" pulumi-lang-dotnet=\"`Any`\" pulumi-lang-go=\"`any`\" pulumi-lang-python=\"`any`\" pulumi-lang-yaml=\"`any`\" pulumi-lang-java=\"`any`\" pulumi-lang-hcl=\"`any`\"\u003e`any`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`resource`\" pulumi-lang-dotnet=\"`Resource`\" pulumi-lang-go=\"`resource`\" pulumi-lang-python=\"`resource`\" pulumi-lang-yaml=\"`resource`\" pulumi-lang-java=\"`resource`\" pulumi-lang-hcl=\"`resource`\"\u003e`resource`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`technology`\" pulumi-lang-dotnet=\"`Technology`\" pulumi-lang-go=\"`technology`\" pulumi-lang-python=\"`technology`\" pulumi-lang-yaml=\"`technology`\" pulumi-lang-java=\"`technology`\" pulumi-lang-hcl=\"`technology`\"\u003e`technology`\u003c/span\u003e\n"
                 }
             },
             "required": [
@@ -848,7 +1163,7 @@
                 },
                 "type": {
                     "type": "string",
-                    "description": "The type of the rule. It can be either `any`, `resource` or `technology`\n",
+                    "description": "The type of the rule. It can be either \u003cspan pulumi-lang-nodejs=\"`any`\" pulumi-lang-dotnet=\"`Any`\" pulumi-lang-go=\"`any`\" pulumi-lang-python=\"`any`\" pulumi-lang-yaml=\"`any`\" pulumi-lang-java=\"`any`\" pulumi-lang-hcl=\"`any`\"\u003e`any`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`resource`\" pulumi-lang-dotnet=\"`Resource`\" pulumi-lang-go=\"`resource`\" pulumi-lang-python=\"`resource`\" pulumi-lang-yaml=\"`resource`\" pulumi-lang-java=\"`resource`\" pulumi-lang-hcl=\"`resource`\"\u003e`resource`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`technology`\" pulumi-lang-dotnet=\"`Technology`\" pulumi-lang-go=\"`technology`\" pulumi-lang-python=\"`technology`\" pulumi-lang-yaml=\"`technology`\" pulumi-lang-java=\"`technology`\" pulumi-lang-hcl=\"`technology`\"\u003e`technology`\u003c/span\u003e\n",
                     "willReplaceOnChanges": true
                 }
             },
@@ -876,7 +1191,7 @@
                     },
                     "type": {
                         "type": "string",
-                        "description": "The type of the rule. It can be either `any`, `resource` or `technology`\n",
+                        "description": "The type of the rule. It can be either \u003cspan pulumi-lang-nodejs=\"`any`\" pulumi-lang-dotnet=\"`Any`\" pulumi-lang-go=\"`any`\" pulumi-lang-python=\"`any`\" pulumi-lang-yaml=\"`any`\" pulumi-lang-java=\"`any`\" pulumi-lang-hcl=\"`any`\"\u003e`any`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`resource`\" pulumi-lang-dotnet=\"`Resource`\" pulumi-lang-go=\"`resource`\" pulumi-lang-python=\"`resource`\" pulumi-lang-yaml=\"`resource`\" pulumi-lang-java=\"`resource`\" pulumi-lang-hcl=\"`resource`\"\u003e`resource`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`technology`\" pulumi-lang-dotnet=\"`Technology`\" pulumi-lang-go=\"`technology`\" pulumi-lang-python=\"`technology`\" pulumi-lang-yaml=\"`technology`\" pulumi-lang-java=\"`technology`\" pulumi-lang-hcl=\"`technology`\"\u003e`technology`\u003c/span\u003e\n",
                         "willReplaceOnChanges": true
                     }
                 },
@@ -900,7 +1215,7 @@
                 },
                 "satelliteType": {
                     "type": "string",
-                    "description": "The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.\n"
+                    "description": "The type of satellite being linked. Must be one of: \u003cspan pulumi-lang-nodejs=\"`ai`\" pulumi-lang-dotnet=\"`Ai`\" pulumi-lang-go=\"`ai`\" pulumi-lang-python=\"`ai`\" pulumi-lang-yaml=\"`ai`\" pulumi-lang-java=\"`ai`\" pulumi-lang-hcl=\"`ai`\"\u003e`ai`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dataClassifier`\" pulumi-lang-dotnet=\"`DataClassifier`\" pulumi-lang-go=\"`dataClassifier`\" pulumi-lang-python=\"`data_classifier`\" pulumi-lang-yaml=\"`dataClassifier`\" pulumi-lang-java=\"`dataClassifier`\" pulumi-lang-hcl=\"`data_classifier`\"\u003e`dataClassifier`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`policyDataLoader`\" pulumi-lang-dotnet=\"`PolicyDataLoader`\" pulumi-lang-go=\"`policyDataLoader`\" pulumi-lang-python=\"`policy_data_loader`\" pulumi-lang-yaml=\"`policyDataLoader`\" pulumi-lang-java=\"`policyDataLoader`\" pulumi-lang-hcl=\"`policy_data_loader`\"\u003e`policyDataLoader`\u003c/span\u003e.\n"
                 },
                 "updatedAt": {
                     "type": "string",
@@ -927,7 +1242,7 @@
                 },
                 "satelliteType": {
                     "type": "string",
-                    "description": "The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.\n",
+                    "description": "The type of satellite being linked. Must be one of: \u003cspan pulumi-lang-nodejs=\"`ai`\" pulumi-lang-dotnet=\"`Ai`\" pulumi-lang-go=\"`ai`\" pulumi-lang-python=\"`ai`\" pulumi-lang-yaml=\"`ai`\" pulumi-lang-java=\"`ai`\" pulumi-lang-hcl=\"`ai`\"\u003e`ai`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dataClassifier`\" pulumi-lang-dotnet=\"`DataClassifier`\" pulumi-lang-go=\"`dataClassifier`\" pulumi-lang-python=\"`data_classifier`\" pulumi-lang-yaml=\"`dataClassifier`\" pulumi-lang-java=\"`dataClassifier`\" pulumi-lang-hcl=\"`data_classifier`\"\u003e`dataClassifier`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`policyDataLoader`\" pulumi-lang-dotnet=\"`PolicyDataLoader`\" pulumi-lang-go=\"`policyDataLoader`\" pulumi-lang-python=\"`policy_data_loader`\" pulumi-lang-yaml=\"`policyDataLoader`\" pulumi-lang-java=\"`policyDataLoader`\" pulumi-lang-hcl=\"`policy_data_loader`\"\u003e`policyDataLoader`\u003c/span\u003e.\n",
                     "willReplaceOnChanges": true
                 }
             },
@@ -955,7 +1270,7 @@
                     },
                     "satelliteType": {
                         "type": "string",
-                        "description": "The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.\n",
+                        "description": "The type of satellite being linked. Must be one of: \u003cspan pulumi-lang-nodejs=\"`ai`\" pulumi-lang-dotnet=\"`Ai`\" pulumi-lang-go=\"`ai`\" pulumi-lang-python=\"`ai`\" pulumi-lang-yaml=\"`ai`\" pulumi-lang-java=\"`ai`\" pulumi-lang-hcl=\"`ai`\"\u003e`ai`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dataClassifier`\" pulumi-lang-dotnet=\"`DataClassifier`\" pulumi-lang-go=\"`dataClassifier`\" pulumi-lang-python=\"`data_classifier`\" pulumi-lang-yaml=\"`dataClassifier`\" pulumi-lang-java=\"`dataClassifier`\" pulumi-lang-hcl=\"`data_classifier`\"\u003e`dataClassifier`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`policyDataLoader`\" pulumi-lang-dotnet=\"`PolicyDataLoader`\" pulumi-lang-go=\"`policyDataLoader`\" pulumi-lang-python=\"`policy_data_loader`\" pulumi-lang-yaml=\"`policyDataLoader`\" pulumi-lang-java=\"`policyDataLoader`\" pulumi-lang-hcl=\"`policy_data_loader`\"\u003e`policyDataLoader`\u003c/span\u003e.\n",
                         "willReplaceOnChanges": true
                     },
                     "updatedAt": {
@@ -975,7 +1290,7 @@
                 },
                 "deletionPolicy": {
                     "type": "string",
-                    "description": "Deletion policy of the Data Discovery. Possible values: `delete`, `mark_for_deletion`.\n"
+                    "description": "Deletion policy of the Data Discovery. Possible values: \u003cspan pulumi-lang-nodejs=\"`delete`\" pulumi-lang-dotnet=\"`Delete`\" pulumi-lang-go=\"`delete`\" pulumi-lang-python=\"`delete`\" pulumi-lang-yaml=\"`delete`\" pulumi-lang-java=\"`delete`\" pulumi-lang-hcl=\"`delete`\"\u003e`delete`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`markForDeletion`\" pulumi-lang-dotnet=\"`MarkForDeletion`\" pulumi-lang-go=\"`markForDeletion`\" pulumi-lang-python=\"`mark_for_deletion`\" pulumi-lang-yaml=\"`markForDeletion`\" pulumi-lang-java=\"`markForDeletion`\" pulumi-lang-hcl=\"`mark_for_deletion`\"\u003e`markForDeletion`\u003c/span\u003e.\n"
                 },
                 "nativeUserId": {
                     "type": "string",
@@ -991,7 +1306,7 @@
                 },
                 "schedule": {
                     "type": "string",
-                    "description": "Schedule at which the Data Discovery will be executed. Possible values: `6h`, `12h`, `18h`, `24h` or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.\n"
+                    "description": "Schedule at which the Data Discovery will be executed. Possible values: \u003cspan pulumi-lang-nodejs=\"`6h`\" pulumi-lang-dotnet=\"`6h`\" pulumi-lang-go=\"`6h`\" pulumi-lang-python=\"`6h`\" pulumi-lang-yaml=\"`6h`\" pulumi-lang-java=\"`6h`\" pulumi-lang-hcl=\"`6h`\"\u003e`6h`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`12h`\" pulumi-lang-dotnet=\"`12h`\" pulumi-lang-go=\"`12h`\" pulumi-lang-python=\"`12h`\" pulumi-lang-yaml=\"`12h`\" pulumi-lang-java=\"`12h`\" pulumi-lang-hcl=\"`12h`\"\u003e`12h`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`18h`\" pulumi-lang-dotnet=\"`18h`\" pulumi-lang-go=\"`18h`\" pulumi-lang-python=\"`18h`\" pulumi-lang-yaml=\"`18h`\" pulumi-lang-java=\"`18h`\" pulumi-lang-hcl=\"`18h`\"\u003e`18h`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`24h`\" pulumi-lang-dotnet=\"`24h`\" pulumi-lang-go=\"`24h`\" pulumi-lang-python=\"`24h`\" pulumi-lang-yaml=\"`24h`\" pulumi-lang-java=\"`24h`\" pulumi-lang-hcl=\"`24h`\"\u003e`24h`\u003c/span\u003e or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.\n"
                 }
             },
             "required": [
@@ -1004,7 +1319,7 @@
             "inputProperties": {
                 "deletionPolicy": {
                     "type": "string",
-                    "description": "Deletion policy of the Data Discovery. Possible values: `delete`, `mark_for_deletion`.\n"
+                    "description": "Deletion policy of the Data Discovery. Possible values: \u003cspan pulumi-lang-nodejs=\"`delete`\" pulumi-lang-dotnet=\"`Delete`\" pulumi-lang-go=\"`delete`\" pulumi-lang-python=\"`delete`\" pulumi-lang-yaml=\"`delete`\" pulumi-lang-java=\"`delete`\" pulumi-lang-hcl=\"`delete`\"\u003e`delete`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`markForDeletion`\" pulumi-lang-dotnet=\"`MarkForDeletion`\" pulumi-lang-go=\"`markForDeletion`\" pulumi-lang-python=\"`mark_for_deletion`\" pulumi-lang-yaml=\"`markForDeletion`\" pulumi-lang-java=\"`markForDeletion`\" pulumi-lang-hcl=\"`mark_for_deletion`\"\u003e`markForDeletion`\u003c/span\u003e.\n"
                 },
                 "nativeUserId": {
                     "type": "string",
@@ -1022,7 +1337,7 @@
                 },
                 "schedule": {
                     "type": "string",
-                    "description": "Schedule at which the Data Discovery will be executed. Possible values: `6h`, `12h`, `18h`, `24h` or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.\n"
+                    "description": "Schedule at which the Data Discovery will be executed. Possible values: \u003cspan pulumi-lang-nodejs=\"`6h`\" pulumi-lang-dotnet=\"`6h`\" pulumi-lang-go=\"`6h`\" pulumi-lang-python=\"`6h`\" pulumi-lang-yaml=\"`6h`\" pulumi-lang-java=\"`6h`\" pulumi-lang-hcl=\"`6h`\"\u003e`6h`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`12h`\" pulumi-lang-dotnet=\"`12h`\" pulumi-lang-go=\"`12h`\" pulumi-lang-python=\"`12h`\" pulumi-lang-yaml=\"`12h`\" pulumi-lang-java=\"`12h`\" pulumi-lang-hcl=\"`12h`\"\u003e`12h`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`18h`\" pulumi-lang-dotnet=\"`18h`\" pulumi-lang-go=\"`18h`\" pulumi-lang-python=\"`18h`\" pulumi-lang-yaml=\"`18h`\" pulumi-lang-java=\"`18h`\" pulumi-lang-hcl=\"`18h`\"\u003e`18h`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`24h`\" pulumi-lang-dotnet=\"`24h`\" pulumi-lang-go=\"`24h`\" pulumi-lang-python=\"`24h`\" pulumi-lang-yaml=\"`24h`\" pulumi-lang-java=\"`24h`\" pulumi-lang-hcl=\"`24h`\"\u003e`24h`\u003c/span\u003e or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.\n"
                 }
             },
             "requiredInputs": [
@@ -1040,7 +1355,7 @@
                     },
                     "deletionPolicy": {
                         "type": "string",
-                        "description": "Deletion policy of the Data Discovery. Possible values: `delete`, `mark_for_deletion`.\n"
+                        "description": "Deletion policy of the Data Discovery. Possible values: \u003cspan pulumi-lang-nodejs=\"`delete`\" pulumi-lang-dotnet=\"`Delete`\" pulumi-lang-go=\"`delete`\" pulumi-lang-python=\"`delete`\" pulumi-lang-yaml=\"`delete`\" pulumi-lang-java=\"`delete`\" pulumi-lang-hcl=\"`delete`\"\u003e`delete`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`markForDeletion`\" pulumi-lang-dotnet=\"`MarkForDeletion`\" pulumi-lang-go=\"`markForDeletion`\" pulumi-lang-python=\"`mark_for_deletion`\" pulumi-lang-yaml=\"`markForDeletion`\" pulumi-lang-java=\"`markForDeletion`\" pulumi-lang-hcl=\"`mark_for_deletion`\"\u003e`markForDeletion`\u003c/span\u003e.\n"
                     },
                     "nativeUserId": {
                         "type": "string",
@@ -1058,136 +1373,7 @@
                     },
                     "schedule": {
                         "type": "string",
-                        "description": "Schedule at which the Data Discovery will be executed. Possible values: `6h`, `12h`, `18h`, `24h` or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.\n"
-                    }
-                },
-                "type": "object"
-            }
-        },
-        "formal:index/dataDomain:DataDomain": {
-            "description": "Registering a Data Domain with Formal.\n",
-            "properties": {
-                "createdAt": {
-                    "type": "string",
-                    "description": "When the policy was created.\n"
-                },
-                "description": {
-                    "type": "string",
-                    "description": "Description of the data domain.\n"
-                },
-                "excludedPaths": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "Excluded paths of this data domain.\n"
-                },
-                "includedPaths": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "Included paths of this data domain.\n"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Name of the data domain.\n"
-                },
-                "owners": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/formal:index/DataDomainOwner:DataDomainOwner"
-                    },
-                    "description": "Owners of this policy.\n"
-                },
-                "updatedAt": {
-                    "type": "string",
-                    "description": "Last update time.\n"
-                }
-            },
-            "required": [
-                "createdAt",
-                "excludedPaths",
-                "includedPaths",
-                "name",
-                "owners",
-                "updatedAt"
-            ],
-            "inputProperties": {
-                "description": {
-                    "type": "string",
-                    "description": "Description of the data domain.\n"
-                },
-                "excludedPaths": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "Excluded paths of this data domain.\n"
-                },
-                "includedPaths": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "Included paths of this data domain.\n"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Name of the data domain.\n"
-                },
-                "owners": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/formal:index/DataDomainOwner:DataDomainOwner"
-                    },
-                    "description": "Owners of this policy.\n"
-                }
-            },
-            "requiredInputs": [
-                "excludedPaths",
-                "includedPaths",
-                "owners"
-            ],
-            "stateInputs": {
-                "description": "Input properties used for looking up and filtering DataDomain resources.\n",
-                "properties": {
-                    "createdAt": {
-                        "type": "string",
-                        "description": "When the policy was created.\n"
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "Description of the data domain.\n"
-                    },
-                    "excludedPaths": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "description": "Excluded paths of this data domain.\n"
-                    },
-                    "includedPaths": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "description": "Included paths of this data domain.\n"
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Name of the data domain.\n"
-                    },
-                    "owners": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/types/formal:index/DataDomainOwner:DataDomainOwner"
-                        },
-                        "description": "Owners of this policy.\n"
-                    },
-                    "updatedAt": {
-                        "type": "string",
-                        "description": "Last update time.\n"
+                        "description": "Schedule at which the Data Discovery will be executed. Possible values: \u003cspan pulumi-lang-nodejs=\"`6h`\" pulumi-lang-dotnet=\"`6h`\" pulumi-lang-go=\"`6h`\" pulumi-lang-python=\"`6h`\" pulumi-lang-yaml=\"`6h`\" pulumi-lang-java=\"`6h`\" pulumi-lang-hcl=\"`6h`\"\u003e`6h`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`12h`\" pulumi-lang-dotnet=\"`12h`\" pulumi-lang-go=\"`12h`\" pulumi-lang-python=\"`12h`\" pulumi-lang-yaml=\"`12h`\" pulumi-lang-java=\"`12h`\" pulumi-lang-hcl=\"`12h`\"\u003e`12h`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`18h`\" pulumi-lang-dotnet=\"`18h`\" pulumi-lang-go=\"`18h`\" pulumi-lang-python=\"`18h`\" pulumi-lang-yaml=\"`18h`\" pulumi-lang-java=\"`18h`\" pulumi-lang-hcl=\"`18h`\"\u003e`18h`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`24h`\" pulumi-lang-dotnet=\"`24h`\" pulumi-lang-go=\"`24h`\" pulumi-lang-python=\"`24h`\" pulumi-lang-yaml=\"`24h`\" pulumi-lang-java=\"`24h`\" pulumi-lang-hcl=\"`24h`\"\u003e`24h`\u003c/span\u003e or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.\n"
                     }
                 },
                 "type": "object"
@@ -1256,7 +1442,7 @@
             "properties": {
                 "algorithm": {
                     "type": "string",
-                    "description": "The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.\n"
+                    "description": "The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).\n"
                 },
                 "createdAt": {
                     "type": "string",
@@ -1274,6 +1460,10 @@
                     "type": "string",
                     "description": "The provider of the encryption key. Currently only 'aws' is supported.\n"
                 },
+                "publicKeyPem": {
+                    "type": "string",
+                    "description": "PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.\u003cname\u003e.public_key_pem` for an asymmetric AWS KMS key.\n"
+                },
                 "updatedAt": {
                     "type": "string",
                     "description": "Last update time.\n"
@@ -1289,7 +1479,7 @@
             "inputProperties": {
                 "algorithm": {
                     "type": "string",
-                    "description": "The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.\n"
+                    "description": "The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).\n"
                 },
                 "decryptorUri": {
                     "type": "string",
@@ -1302,6 +1492,10 @@
                 "keyProvider": {
                     "type": "string",
                     "description": "The provider of the encryption key. Currently only 'aws' is supported.\n"
+                },
+                "publicKeyPem": {
+                    "type": "string",
+                    "description": "PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.\u003cname\u003e.public_key_pem` for an asymmetric AWS KMS key.\n"
                 }
             },
             "requiredInputs": [
@@ -1314,7 +1508,7 @@
                 "properties": {
                     "algorithm": {
                         "type": "string",
-                        "description": "The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.\n"
+                        "description": "The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).\n"
                     },
                     "createdAt": {
                         "type": "string",
@@ -1331,6 +1525,93 @@
                     "keyProvider": {
                         "type": "string",
                         "description": "The provider of the encryption key. Currently only 'aws' is supported.\n"
+                    },
+                    "publicKeyPem": {
+                        "type": "string",
+                        "description": "PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.\u003cname\u003e.public_key_pem` for an asymmetric AWS KMS key.\n"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "Last update time.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "formal:index/form:Form": {
+            "description": "Forms define reusable input schemas for workflows.\n",
+            "properties": {
+                "createdAt": {
+                    "type": "string",
+                    "description": "When the form was created.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The form description.\n"
+                },
+                "fields": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/formal:index/FormField:FormField"
+                    },
+                    "description": "List of fields that define the form schema.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the form. Must be unique within the organization.\n"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "Last update time.\n"
+                }
+            },
+            "required": [
+                "createdAt",
+                "fields",
+                "name",
+                "updatedAt"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The form description.\n"
+                },
+                "fields": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/formal:index/FormField:FormField"
+                    },
+                    "description": "List of fields that define the form schema.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the form. Must be unique within the organization.\n"
+                }
+            },
+            "requiredInputs": [
+                "fields"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Form resources.\n",
+                "properties": {
+                    "createdAt": {
+                        "type": "string",
+                        "description": "When the form was created.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The form description.\n"
+                    },
+                    "fields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/formal:index/FormField:FormField"
+                        },
+                        "description": "List of fields that define the form schema.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the form. Must be unique within the organization.\n"
                     },
                     "updatedAt": {
                         "type": "string",
@@ -1711,87 +1992,6 @@
                 "type": "object"
             }
         },
-        "formal:index/integrationDataCatalog:IntegrationDataCatalog": {
-            "description": "(Deprecated) Registering a Data Catalog integration.\n",
-            "properties": {
-                "datahub": {
-                    "$ref": "#/types/formal:index/IntegrationDataCatalogDatahub:IntegrationDataCatalogDatahub",
-                    "description": "Configuration block for Datahub integration. This block is optional and may be omitted if not configuring a Datahub integration.\n"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Name of the Integration\n"
-                },
-                "syncDirection": {
-                    "type": "string",
-                    "description": "Sync direction of the Integration: supported values are 'bidirectional', 'formal*to*datahub', 'datahub*to*formal'.\n"
-                },
-                "syncedEntities": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "Synced entities of the Integration: currently supported values are 'tags', 'data_labels'.\n"
-                }
-            },
-            "required": [
-                "name",
-                "syncDirection",
-                "syncedEntities"
-            ],
-            "inputProperties": {
-                "datahub": {
-                    "$ref": "#/types/formal:index/IntegrationDataCatalogDatahub:IntegrationDataCatalogDatahub",
-                    "description": "Configuration block for Datahub integration. This block is optional and may be omitted if not configuring a Datahub integration.\n",
-                    "willReplaceOnChanges": true
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Name of the Integration\n"
-                },
-                "syncDirection": {
-                    "type": "string",
-                    "description": "Sync direction of the Integration: supported values are 'bidirectional', 'formal*to*datahub', 'datahub*to*formal'.\n"
-                },
-                "syncedEntities": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "Synced entities of the Integration: currently supported values are 'tags', 'data_labels'.\n"
-                }
-            },
-            "requiredInputs": [
-                "syncDirection",
-                "syncedEntities"
-            ],
-            "stateInputs": {
-                "description": "Input properties used for looking up and filtering IntegrationDataCatalog resources.\n",
-                "properties": {
-                    "datahub": {
-                        "$ref": "#/types/formal:index/IntegrationDataCatalogDatahub:IntegrationDataCatalogDatahub",
-                        "description": "Configuration block for Datahub integration. This block is optional and may be omitted if not configuring a Datahub integration.\n",
-                        "willReplaceOnChanges": true
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Name of the Integration\n"
-                    },
-                    "syncDirection": {
-                        "type": "string",
-                        "description": "Sync direction of the Integration: supported values are 'bidirectional', 'formal*to*datahub', 'datahub*to*formal'.\n"
-                    },
-                    "syncedEntities": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "description": "Synced entities of the Integration: currently supported values are 'tags', 'data_labels'.\n"
-                    }
-                },
-                "type": "object"
-            }
-        },
         "formal:index/integrationLog:IntegrationLog": {
             "description": "Registering a Integration Logs app.\n",
             "properties": {
@@ -1902,6 +2102,100 @@
                     "name": {
                         "type": "string",
                         "description": "Friendly name for the Integration app.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "formal:index/inventoryObject:InventoryObject": {
+            "description": "Registering an inventory object (db, schema, table, column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.\n",
+            "properties": {
+                "dataType": {
+                    "type": "string",
+                    "description": "Column data type (e.g. \u003cspan pulumi-lang-nodejs=\"`varchar`\" pulumi-lang-dotnet=\"`Varchar`\" pulumi-lang-go=\"`varchar`\" pulumi-lang-python=\"`varchar`\" pulumi-lang-yaml=\"`varchar`\" pulumi-lang-java=\"`varchar`\" pulumi-lang-hcl=\"`varchar`\"\u003e`varchar`\u003c/span\u003e). Required when \u003cspan pulumi-lang-nodejs=\"`type`\" pulumi-lang-dotnet=\"`Type`\" pulumi-lang-go=\"`type`\" pulumi-lang-python=\"`type`\" pulumi-lang-yaml=\"`type`\" pulumi-lang-java=\"`type`\" pulumi-lang-hcl=\"`type`\"\u003e`type`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`column`\" pulumi-lang-dotnet=\"`Column`\" pulumi-lang-go=\"`column`\" pulumi-lang-python=\"`column`\" pulumi-lang-yaml=\"`column`\" pulumi-lang-java=\"`column`\" pulumi-lang-hcl=\"`column`\"\u003e`column`\u003c/span\u003e, ignored otherwise.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Last segment of the path (e.g. \u003cspan pulumi-lang-nodejs=\"`email`\" pulumi-lang-dotnet=\"`Email`\" pulumi-lang-go=\"`email`\" pulumi-lang-python=\"`email`\" pulumi-lang-yaml=\"`email`\" pulumi-lang-java=\"`email`\" pulumi-lang-hcl=\"`email`\"\u003e`email`\u003c/span\u003e).\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "Hierarchical path of the object (e.g. `mydb.public.users.email`).\n"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "Resource (datastore) ID this object belongs to.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Object type. One of \u003cspan pulumi-lang-nodejs=\"`db`\" pulumi-lang-dotnet=\"`Db`\" pulumi-lang-go=\"`db`\" pulumi-lang-python=\"`db`\" pulumi-lang-yaml=\"`db`\" pulumi-lang-java=\"`db`\" pulumi-lang-hcl=\"`db`\"\u003e`db`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`schema`\" pulumi-lang-dotnet=\"`Schema`\" pulumi-lang-go=\"`schema`\" pulumi-lang-python=\"`schema`\" pulumi-lang-yaml=\"`schema`\" pulumi-lang-java=\"`schema`\" pulumi-lang-hcl=\"`schema`\"\u003e`schema`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`table`\" pulumi-lang-dotnet=\"`Table`\" pulumi-lang-go=\"`table`\" pulumi-lang-python=\"`table`\" pulumi-lang-yaml=\"`table`\" pulumi-lang-java=\"`table`\" pulumi-lang-hcl=\"`table`\"\u003e`table`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`column`\" pulumi-lang-dotnet=\"`Column`\" pulumi-lang-go=\"`column`\" pulumi-lang-python=\"`column`\" pulumi-lang-yaml=\"`column`\" pulumi-lang-java=\"`column`\" pulumi-lang-hcl=\"`column`\"\u003e`column`\u003c/span\u003e.\n"
+                }
+            },
+            "required": [
+                "name",
+                "path",
+                "resourceId",
+                "type"
+            ],
+            "inputProperties": {
+                "dataType": {
+                    "type": "string",
+                    "description": "Column data type (e.g. \u003cspan pulumi-lang-nodejs=\"`varchar`\" pulumi-lang-dotnet=\"`Varchar`\" pulumi-lang-go=\"`varchar`\" pulumi-lang-python=\"`varchar`\" pulumi-lang-yaml=\"`varchar`\" pulumi-lang-java=\"`varchar`\" pulumi-lang-hcl=\"`varchar`\"\u003e`varchar`\u003c/span\u003e). Required when \u003cspan pulumi-lang-nodejs=\"`type`\" pulumi-lang-dotnet=\"`Type`\" pulumi-lang-go=\"`type`\" pulumi-lang-python=\"`type`\" pulumi-lang-yaml=\"`type`\" pulumi-lang-java=\"`type`\" pulumi-lang-hcl=\"`type`\"\u003e`type`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`column`\" pulumi-lang-dotnet=\"`Column`\" pulumi-lang-go=\"`column`\" pulumi-lang-python=\"`column`\" pulumi-lang-yaml=\"`column`\" pulumi-lang-java=\"`column`\" pulumi-lang-hcl=\"`column`\"\u003e`column`\u003c/span\u003e, ignored otherwise.\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Last segment of the path (e.g. \u003cspan pulumi-lang-nodejs=\"`email`\" pulumi-lang-dotnet=\"`Email`\" pulumi-lang-go=\"`email`\" pulumi-lang-python=\"`email`\" pulumi-lang-yaml=\"`email`\" pulumi-lang-java=\"`email`\" pulumi-lang-hcl=\"`email`\"\u003e`email`\u003c/span\u003e).\n",
+                    "willReplaceOnChanges": true
+                },
+                "path": {
+                    "type": "string",
+                    "description": "Hierarchical path of the object (e.g. `mydb.public.users.email`).\n",
+                    "willReplaceOnChanges": true
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "Resource (datastore) ID this object belongs to.\n",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Object type. One of \u003cspan pulumi-lang-nodejs=\"`db`\" pulumi-lang-dotnet=\"`Db`\" pulumi-lang-go=\"`db`\" pulumi-lang-python=\"`db`\" pulumi-lang-yaml=\"`db`\" pulumi-lang-java=\"`db`\" pulumi-lang-hcl=\"`db`\"\u003e`db`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`schema`\" pulumi-lang-dotnet=\"`Schema`\" pulumi-lang-go=\"`schema`\" pulumi-lang-python=\"`schema`\" pulumi-lang-yaml=\"`schema`\" pulumi-lang-java=\"`schema`\" pulumi-lang-hcl=\"`schema`\"\u003e`schema`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`table`\" pulumi-lang-dotnet=\"`Table`\" pulumi-lang-go=\"`table`\" pulumi-lang-python=\"`table`\" pulumi-lang-yaml=\"`table`\" pulumi-lang-java=\"`table`\" pulumi-lang-hcl=\"`table`\"\u003e`table`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`column`\" pulumi-lang-dotnet=\"`Column`\" pulumi-lang-go=\"`column`\" pulumi-lang-python=\"`column`\" pulumi-lang-yaml=\"`column`\" pulumi-lang-java=\"`column`\" pulumi-lang-hcl=\"`column`\"\u003e`column`\u003c/span\u003e.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "path",
+                "resourceId",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering InventoryObject resources.\n",
+                "properties": {
+                    "dataType": {
+                        "type": "string",
+                        "description": "Column data type (e.g. \u003cspan pulumi-lang-nodejs=\"`varchar`\" pulumi-lang-dotnet=\"`Varchar`\" pulumi-lang-go=\"`varchar`\" pulumi-lang-python=\"`varchar`\" pulumi-lang-yaml=\"`varchar`\" pulumi-lang-java=\"`varchar`\" pulumi-lang-hcl=\"`varchar`\"\u003e`varchar`\u003c/span\u003e). Required when \u003cspan pulumi-lang-nodejs=\"`type`\" pulumi-lang-dotnet=\"`Type`\" pulumi-lang-go=\"`type`\" pulumi-lang-python=\"`type`\" pulumi-lang-yaml=\"`type`\" pulumi-lang-java=\"`type`\" pulumi-lang-hcl=\"`type`\"\u003e`type`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`column`\" pulumi-lang-dotnet=\"`Column`\" pulumi-lang-go=\"`column`\" pulumi-lang-python=\"`column`\" pulumi-lang-yaml=\"`column`\" pulumi-lang-java=\"`column`\" pulumi-lang-hcl=\"`column`\"\u003e`column`\u003c/span\u003e, ignored otherwise.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Last segment of the path (e.g. \u003cspan pulumi-lang-nodejs=\"`email`\" pulumi-lang-dotnet=\"`Email`\" pulumi-lang-go=\"`email`\" pulumi-lang-python=\"`email`\" pulumi-lang-yaml=\"`email`\" pulumi-lang-java=\"`email`\" pulumi-lang-hcl=\"`email`\"\u003e`email`\u003c/span\u003e).\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "Hierarchical path of the object (e.g. `mydb.public.users.email`).\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "resourceId": {
+                        "type": "string",
+                        "description": "Resource (datastore) ID this object belongs to.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Object type. One of \u003cspan pulumi-lang-nodejs=\"`db`\" pulumi-lang-dotnet=\"`Db`\" pulumi-lang-go=\"`db`\" pulumi-lang-python=\"`db`\" pulumi-lang-yaml=\"`db`\" pulumi-lang-java=\"`db`\" pulumi-lang-hcl=\"`db`\"\u003e`db`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`schema`\" pulumi-lang-dotnet=\"`Schema`\" pulumi-lang-go=\"`schema`\" pulumi-lang-python=\"`schema`\" pulumi-lang-yaml=\"`schema`\" pulumi-lang-java=\"`schema`\" pulumi-lang-hcl=\"`schema`\"\u003e`schema`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`table`\" pulumi-lang-dotnet=\"`Table`\" pulumi-lang-go=\"`table`\" pulumi-lang-python=\"`table`\" pulumi-lang-yaml=\"`table`\" pulumi-lang-java=\"`table`\" pulumi-lang-hcl=\"`table`\"\u003e`table`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`column`\" pulumi-lang-dotnet=\"`Column`\" pulumi-lang-go=\"`column`\" pulumi-lang-python=\"`column`\" pulumi-lang-yaml=\"`column`\" pulumi-lang-java=\"`column`\" pulumi-lang-hcl=\"`column`\"\u003e`column`\u003c/span\u003e.\n",
                         "willReplaceOnChanges": true
                     }
                 },
@@ -2116,11 +2410,17 @@
                 },
                 "nativeUserSecret": {
                     "type": "string",
+                    "description": "The password of the Native User. Prefer using \u003cspan pulumi-lang-nodejs=\"`nativeUserSecretWo`\" pulumi-lang-dotnet=\"`NativeUserSecretWo`\" pulumi-lang-go=\"`nativeUserSecretWo`\" pulumi-lang-python=\"`native_user_secret_wo`\" pulumi-lang-yaml=\"`nativeUserSecretWo`\" pulumi-lang-java=\"`nativeUserSecretWo`\" pulumi-lang-hcl=\"`native_user_secret_wo`\"\u003e`nativeUserSecretWo`\u003c/span\u003e to avoid storing the secret in Terraform state.",
+                    "secret": true
+                },
+                "nativeUserSecretWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.",
                     "secret": true
                 },
                 "nativeUserSecretWoVersion": {
                     "type": "integer",
-                    "description": "Version trigger for `native_user_secret_wo`. Increment this value to update the secret.\n"
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`nativeUserSecretWo`\" pulumi-lang-dotnet=\"`NativeUserSecretWo`\" pulumi-lang-go=\"`nativeUserSecretWo`\" pulumi-lang-python=\"`native_user_secret_wo`\" pulumi-lang-yaml=\"`nativeUserSecretWo`\" pulumi-lang-java=\"`nativeUserSecretWo`\" pulumi-lang-hcl=\"`native_user_secret_wo`\"\u003e`nativeUserSecretWo`\u003c/span\u003e. Increment this value to update the secret."
                 },
                 "resourceId": {
                     "type": "string",
@@ -2128,11 +2428,11 @@
                 },
                 "terminationProtection": {
                     "type": "boolean",
-                    "description": "If set to true, this Native User cannot be deleted.\n"
+                    "description": "If set to true, this Native User cannot be deleted."
                 },
                 "useAsDefault": {
                     "type": "boolean",
-                    "description": "The password of the Native User.\n"
+                    "description": "The password of the Native User."
                 }
             },
             "required": [
@@ -2147,11 +2447,17 @@
                 },
                 "nativeUserSecret": {
                     "type": "string",
+                    "description": "The password of the Native User. Prefer using \u003cspan pulumi-lang-nodejs=\"`nativeUserSecretWo`\" pulumi-lang-dotnet=\"`NativeUserSecretWo`\" pulumi-lang-go=\"`nativeUserSecretWo`\" pulumi-lang-python=\"`native_user_secret_wo`\" pulumi-lang-yaml=\"`nativeUserSecretWo`\" pulumi-lang-java=\"`nativeUserSecretWo`\" pulumi-lang-hcl=\"`native_user_secret_wo`\"\u003e`nativeUserSecretWo`\u003c/span\u003e to avoid storing the secret in Terraform state.",
+                    "secret": true
+                },
+                "nativeUserSecretWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.",
                     "secret": true
                 },
                 "nativeUserSecretWoVersion": {
                     "type": "integer",
-                    "description": "Version trigger for `native_user_secret_wo`. Increment this value to update the secret.\n"
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`nativeUserSecretWo`\" pulumi-lang-dotnet=\"`NativeUserSecretWo`\" pulumi-lang-go=\"`nativeUserSecretWo`\" pulumi-lang-python=\"`native_user_secret_wo`\" pulumi-lang-yaml=\"`nativeUserSecretWo`\" pulumi-lang-java=\"`nativeUserSecretWo`\" pulumi-lang-hcl=\"`native_user_secret_wo`\"\u003e`nativeUserSecretWo`\u003c/span\u003e. Increment this value to update the secret."
                 },
                 "resourceId": {
                     "type": "string",
@@ -2160,11 +2466,11 @@
                 },
                 "terminationProtection": {
                     "type": "boolean",
-                    "description": "If set to true, this Native User cannot be deleted.\n"
+                    "description": "If set to true, this Native User cannot be deleted."
                 },
                 "useAsDefault": {
                     "type": "boolean",
-                    "description": "The password of the Native User.\n"
+                    "description": "The password of the Native User."
                 }
             },
             "requiredInputs": [
@@ -2181,11 +2487,17 @@
                     },
                     "nativeUserSecret": {
                         "type": "string",
+                        "description": "The password of the Native User. Prefer using \u003cspan pulumi-lang-nodejs=\"`nativeUserSecretWo`\" pulumi-lang-dotnet=\"`NativeUserSecretWo`\" pulumi-lang-go=\"`nativeUserSecretWo`\" pulumi-lang-python=\"`native_user_secret_wo`\" pulumi-lang-yaml=\"`nativeUserSecretWo`\" pulumi-lang-java=\"`nativeUserSecretWo`\" pulumi-lang-hcl=\"`native_user_secret_wo`\"\u003e`nativeUserSecretWo`\u003c/span\u003e to avoid storing the secret in Terraform state.",
+                        "secret": true
+                    },
+                    "nativeUserSecretWo": {
+                        "type": "string",
+                        "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.",
                         "secret": true
                     },
                     "nativeUserSecretWoVersion": {
                         "type": "integer",
-                        "description": "Version trigger for `native_user_secret_wo`. Increment this value to update the secret.\n"
+                        "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`nativeUserSecretWo`\" pulumi-lang-dotnet=\"`NativeUserSecretWo`\" pulumi-lang-go=\"`nativeUserSecretWo`\" pulumi-lang-python=\"`native_user_secret_wo`\" pulumi-lang-yaml=\"`nativeUserSecretWo`\" pulumi-lang-java=\"`nativeUserSecretWo`\" pulumi-lang-hcl=\"`native_user_secret_wo`\"\u003e`nativeUserSecretWo`\u003c/span\u003e. Increment this value to update the secret."
                     },
                     "resourceId": {
                         "type": "string",
@@ -2194,11 +2506,11 @@
                     },
                     "terminationProtection": {
                         "type": "boolean",
-                        "description": "If set to true, this Native User cannot be deleted.\n"
+                        "description": "If set to true, this Native User cannot be deleted."
                     },
                     "useAsDefault": {
                         "type": "boolean",
-                        "description": "The password of the Native User.\n"
+                        "description": "The password of the Native User."
                     }
                 },
                 "type": "object"
@@ -2213,7 +2525,7 @@
                 },
                 "formalIdentityType": {
                     "type": "string",
-                    "description": "The type of Formal Identity to be linked. Accepted values are `user`, `group`, and `resource_hostname`.\n"
+                    "description": "The type of Formal Identity to be linked. Accepted values are \u003cspan pulumi-lang-nodejs=\"`user`\" pulumi-lang-dotnet=\"`User`\" pulumi-lang-go=\"`user`\" pulumi-lang-python=\"`user`\" pulumi-lang-yaml=\"`user`\" pulumi-lang-java=\"`user`\" pulumi-lang-hcl=\"`user`\"\u003e`user`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`group`\" pulumi-lang-dotnet=\"`Group`\" pulumi-lang-go=\"`group`\" pulumi-lang-python=\"`group`\" pulumi-lang-yaml=\"`group`\" pulumi-lang-java=\"`group`\" pulumi-lang-hcl=\"`group`\"\u003e`group`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`resourceHostname`\" pulumi-lang-dotnet=\"`ResourceHostname`\" pulumi-lang-go=\"`resourceHostname`\" pulumi-lang-python=\"`resource_hostname`\" pulumi-lang-yaml=\"`resourceHostname`\" pulumi-lang-java=\"`resourceHostname`\" pulumi-lang-hcl=\"`resource_hostname`\"\u003e`resourceHostname`\u003c/span\u003e.\n"
                 },
                 "nativeUserId": {
                     "type": "string",
@@ -2241,7 +2553,7 @@
                 },
                 "formalIdentityType": {
                     "type": "string",
-                    "description": "The type of Formal Identity to be linked. Accepted values are `user`, `group`, and `resource_hostname`.\n",
+                    "description": "The type of Formal Identity to be linked. Accepted values are \u003cspan pulumi-lang-nodejs=\"`user`\" pulumi-lang-dotnet=\"`User`\" pulumi-lang-go=\"`user`\" pulumi-lang-python=\"`user`\" pulumi-lang-yaml=\"`user`\" pulumi-lang-java=\"`user`\" pulumi-lang-hcl=\"`user`\"\u003e`user`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`group`\" pulumi-lang-dotnet=\"`Group`\" pulumi-lang-go=\"`group`\" pulumi-lang-python=\"`group`\" pulumi-lang-yaml=\"`group`\" pulumi-lang-java=\"`group`\" pulumi-lang-hcl=\"`group`\"\u003e`group`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`resourceHostname`\" pulumi-lang-dotnet=\"`ResourceHostname`\" pulumi-lang-go=\"`resourceHostname`\" pulumi-lang-python=\"`resource_hostname`\" pulumi-lang-yaml=\"`resourceHostname`\" pulumi-lang-java=\"`resourceHostname`\" pulumi-lang-hcl=\"`resource_hostname`\"\u003e`resourceHostname`\u003c/span\u003e.\n",
                     "willReplaceOnChanges": true
                 },
                 "nativeUserId": {
@@ -2268,7 +2580,7 @@
                     },
                     "formalIdentityType": {
                         "type": "string",
-                        "description": "The type of Formal Identity to be linked. Accepted values are `user`, `group`, and `resource_hostname`.\n",
+                        "description": "The type of Formal Identity to be linked. Accepted values are \u003cspan pulumi-lang-nodejs=\"`user`\" pulumi-lang-dotnet=\"`User`\" pulumi-lang-go=\"`user`\" pulumi-lang-python=\"`user`\" pulumi-lang-yaml=\"`user`\" pulumi-lang-java=\"`user`\" pulumi-lang-hcl=\"`user`\"\u003e`user`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`group`\" pulumi-lang-dotnet=\"`Group`\" pulumi-lang-go=\"`group`\" pulumi-lang-python=\"`group`\" pulumi-lang-yaml=\"`group`\" pulumi-lang-java=\"`group`\" pulumi-lang-hcl=\"`group`\"\u003e`group`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`resourceHostname`\" pulumi-lang-dotnet=\"`ResourceHostname`\" pulumi-lang-go=\"`resourceHostname`\" pulumi-lang-python=\"`resource_hostname`\" pulumi-lang-yaml=\"`resourceHostname`\" pulumi-lang-java=\"`resourceHostname`\" pulumi-lang-hcl=\"`resource_hostname`\"\u003e`resourceHostname`\u003c/span\u003e.\n",
                         "willReplaceOnChanges": true
                     },
                     "nativeUserId": {
@@ -2283,6 +2595,104 @@
                     "terminationProtection": {
                         "type": "boolean",
                         "description": "If set to true, this Native User link cannot be deleted.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "formal:index/networkRule:NetworkRule": {
+            "description": "Creating a Network Rule in Formal.\n",
+            "properties": {
+                "celExpression": {
+                    "type": "string",
+                    "description": "The CEL expression describing how this Network Rule matches and routes traffic.\n"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "When the Network Rule was created.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Network Rule description.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Network Rule name.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Defines the current status of the Network Rule. It can be one of the following: 'draft' or 'active'.\n"
+                },
+                "terminationProtection": {
+                    "type": "boolean",
+                    "description": "If set to true, this Network Rule cannot be deleted.\n"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "Last update time.\n"
+                }
+            },
+            "required": [
+                "celExpression",
+                "createdAt",
+                "name",
+                "updatedAt"
+            ],
+            "inputProperties": {
+                "celExpression": {
+                    "type": "string",
+                    "description": "The CEL expression describing how this Network Rule matches and routes traffic.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Network Rule description.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Network Rule name.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Defines the current status of the Network Rule. It can be one of the following: 'draft' or 'active'.\n"
+                },
+                "terminationProtection": {
+                    "type": "boolean",
+                    "description": "If set to true, this Network Rule cannot be deleted.\n"
+                }
+            },
+            "requiredInputs": [
+                "celExpression"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering NetworkRule resources.\n",
+                "properties": {
+                    "celExpression": {
+                        "type": "string",
+                        "description": "The CEL expression describing how this Network Rule matches and routes traffic.\n"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "When the Network Rule was created.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Network Rule description.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Network Rule name.\n"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Defines the current status of the Network Rule. It can be one of the following: 'draft' or 'active'.\n"
+                    },
+                    "terminationProtection": {
+                        "type": "boolean",
+                        "description": "If set to true, this Network Rule cannot be deleted.\n"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "Last update time.\n"
                     }
                 },
                 "type": "object"
@@ -2391,14 +2801,6 @@
                     "type": "string",
                     "description": "Policy Name\n"
                 },
-                "notification": {
-                    "type": "string",
-                    "description": "Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.\n"
-                },
-                "owner": {
-                    "type": "string",
-                    "description": "Owner of this policy: it can be either a group name or a user email.\n"
-                },
                 "status": {
                     "type": "string",
                     "description": "Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.\n"
@@ -2417,8 +2819,6 @@
                 "description",
                 "module",
                 "name",
-                "notification",
-                "owner",
                 "status",
                 "updatedAt"
             ],
@@ -2435,14 +2835,6 @@
                     "type": "string",
                     "description": "Policy Name\n"
                 },
-                "notification": {
-                    "type": "string",
-                    "description": "Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.\n"
-                },
-                "owner": {
-                    "type": "string",
-                    "description": "Owner of this policy: it can be either a group name or a user email.\n"
-                },
                 "status": {
                     "type": "string",
                     "description": "Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.\n"
@@ -2455,8 +2847,6 @@
             "requiredInputs": [
                 "description",
                 "module",
-                "notification",
-                "owner",
                 "status"
             ],
             "stateInputs": {
@@ -2477,14 +2867,6 @@
                     "name": {
                         "type": "string",
                         "description": "Policy Name\n"
-                    },
-                    "notification": {
-                        "type": "string",
-                        "description": "Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.\n"
-                    },
-                    "owner": {
-                        "type": "string",
-                        "description": "Owner of this policy: it can be either a group name or a user email.\n"
                     },
                     "status": {
                         "type": "string",
@@ -2690,7 +3072,7 @@
                 },
                 "technology": {
                     "type": "string",
-                    "description": "Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.\n"
+                    "description": "Technology of the Resource: supported values are \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`rdp`\" pulumi-lang-dotnet=\"`Rdp`\" pulumi-lang-go=\"`rdp`\" pulumi-lang-python=\"`rdp`\" pulumi-lang-yaml=\"`rdp`\" pulumi-lang-java=\"`rdp`\" pulumi-lang-hcl=\"`rdp`\"\u003e`rdp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`clickhouse`\" pulumi-lang-dotnet=\"`Clickhouse`\" pulumi-lang-go=\"`clickhouse`\" pulumi-lang-python=\"`clickhouse`\" pulumi-lang-yaml=\"`clickhouse`\" pulumi-lang-java=\"`clickhouse`\" pulumi-lang-hcl=\"`clickhouse`\"\u003e`clickhouse`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redis`\" pulumi-lang-dotnet=\"`Redis`\" pulumi-lang-go=\"`redis`\" pulumi-lang-python=\"`redis`\" pulumi-lang-yaml=\"`redis`\" pulumi-lang-java=\"`redis`\" pulumi-lang-hcl=\"`redis`\"\u003e`redis`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`web`\" pulumi-lang-dotnet=\"`Web`\" pulumi-lang-go=\"`web`\" pulumi-lang-python=\"`web`\" pulumi-lang-yaml=\"`web`\" pulumi-lang-java=\"`web`\" pulumi-lang-hcl=\"`web`\"\u003e`web`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`grpc`\" pulumi-lang-dotnet=\"`Grpc`\" pulumi-lang-go=\"`grpc`\" pulumi-lang-python=\"`grpc`\" pulumi-lang-yaml=\"`grpc`\" pulumi-lang-java=\"`grpc`\" pulumi-lang-hcl=\"`grpc`\"\u003e`grpc`\u003c/span\u003e.\n"
                 },
                 "technologyProvider": {
                     "type": "string",
@@ -2747,7 +3129,7 @@
                 },
                 "technology": {
                     "type": "string",
-                    "description": "Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.\n",
+                    "description": "Technology of the Resource: supported values are \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`rdp`\" pulumi-lang-dotnet=\"`Rdp`\" pulumi-lang-go=\"`rdp`\" pulumi-lang-python=\"`rdp`\" pulumi-lang-yaml=\"`rdp`\" pulumi-lang-java=\"`rdp`\" pulumi-lang-hcl=\"`rdp`\"\u003e`rdp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`clickhouse`\" pulumi-lang-dotnet=\"`Clickhouse`\" pulumi-lang-go=\"`clickhouse`\" pulumi-lang-python=\"`clickhouse`\" pulumi-lang-yaml=\"`clickhouse`\" pulumi-lang-java=\"`clickhouse`\" pulumi-lang-hcl=\"`clickhouse`\"\u003e`clickhouse`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redis`\" pulumi-lang-dotnet=\"`Redis`\" pulumi-lang-go=\"`redis`\" pulumi-lang-python=\"`redis`\" pulumi-lang-yaml=\"`redis`\" pulumi-lang-java=\"`redis`\" pulumi-lang-hcl=\"`redis`\"\u003e`redis`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`web`\" pulumi-lang-dotnet=\"`Web`\" pulumi-lang-go=\"`web`\" pulumi-lang-python=\"`web`\" pulumi-lang-yaml=\"`web`\" pulumi-lang-java=\"`web`\" pulumi-lang-hcl=\"`web`\"\u003e`web`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`grpc`\" pulumi-lang-dotnet=\"`Grpc`\" pulumi-lang-go=\"`grpc`\" pulumi-lang-python=\"`grpc`\" pulumi-lang-yaml=\"`grpc`\" pulumi-lang-java=\"`grpc`\" pulumi-lang-hcl=\"`grpc`\"\u003e`grpc`\u003c/span\u003e.\n",
                     "willReplaceOnChanges": true
                 },
                 "technologyProvider": {
@@ -2809,7 +3191,7 @@
                     },
                     "technology": {
                         "type": "string",
-                        "description": "Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.\n",
+                        "description": "Technology of the Resource: supported values are \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`rdp`\" pulumi-lang-dotnet=\"`Rdp`\" pulumi-lang-go=\"`rdp`\" pulumi-lang-python=\"`rdp`\" pulumi-lang-yaml=\"`rdp`\" pulumi-lang-java=\"`rdp`\" pulumi-lang-hcl=\"`rdp`\"\u003e`rdp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`clickhouse`\" pulumi-lang-dotnet=\"`Clickhouse`\" pulumi-lang-go=\"`clickhouse`\" pulumi-lang-python=\"`clickhouse`\" pulumi-lang-yaml=\"`clickhouse`\" pulumi-lang-java=\"`clickhouse`\" pulumi-lang-hcl=\"`clickhouse`\"\u003e`clickhouse`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redis`\" pulumi-lang-dotnet=\"`Redis`\" pulumi-lang-go=\"`redis`\" pulumi-lang-python=\"`redis`\" pulumi-lang-yaml=\"`redis`\" pulumi-lang-java=\"`redis`\" pulumi-lang-hcl=\"`redis`\"\u003e`redis`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`web`\" pulumi-lang-dotnet=\"`Web`\" pulumi-lang-go=\"`web`\" pulumi-lang-python=\"`web`\" pulumi-lang-yaml=\"`web`\" pulumi-lang-java=\"`web`\" pulumi-lang-hcl=\"`web`\"\u003e`web`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`grpc`\" pulumi-lang-dotnet=\"`Grpc`\" pulumi-lang-go=\"`grpc`\" pulumi-lang-python=\"`grpc`\" pulumi-lang-yaml=\"`grpc`\" pulumi-lang-java=\"`grpc`\" pulumi-lang-hcl=\"`grpc`\"\u003e`grpc`\u003c/span\u003e.\n",
                         "willReplaceOnChanges": true
                     },
                     "technologyProvider": {
@@ -2829,7 +3211,7 @@
             "properties": {
                 "aiAnalysisScope": {
                     "type": "string",
-                    "description": "Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.\n"
+                    "description": "Which direction to apply AI analysis. Required. Supported values are \u003cspan pulumi-lang-nodejs=\"`request`\" pulumi-lang-dotnet=\"`Request`\" pulumi-lang-go=\"`request`\" pulumi-lang-python=\"`request`\" pulumi-lang-yaml=\"`request`\" pulumi-lang-java=\"`request`\" pulumi-lang-hcl=\"`request`\"\u003e`request`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`response`\" pulumi-lang-dotnet=\"`Response`\" pulumi-lang-go=\"`response`\" pulumi-lang-python=\"`response`\" pulumi-lang-yaml=\"`response`\" pulumi-lang-java=\"`response`\" pulumi-lang-hcl=\"`response`\"\u003e`response`\u003c/span\u003e. Use preference=none to disable AI analysis entirely.\n"
                 },
                 "aiAnalysisTimeoutSeconds": {
                     "type": "integer",
@@ -2845,7 +3227,7 @@
                 },
                 "preference": {
                     "type": "string",
-                    "description": "The preference. Supported values are `nlp`, `llm`, `both`, and `none`.\n"
+                    "description": "The preference. Supported values are \u003cspan pulumi-lang-nodejs=\"`nlp`\" pulumi-lang-dotnet=\"`Nlp`\" pulumi-lang-go=\"`nlp`\" pulumi-lang-python=\"`nlp`\" pulumi-lang-yaml=\"`nlp`\" pulumi-lang-java=\"`nlp`\" pulumi-lang-hcl=\"`nlp`\"\u003e`nlp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`llm`\" pulumi-lang-dotnet=\"`Llm`\" pulumi-lang-go=\"`llm`\" pulumi-lang-python=\"`llm`\" pulumi-lang-yaml=\"`llm`\" pulumi-lang-java=\"`llm`\" pulumi-lang-hcl=\"`llm`\"\u003e`llm`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`both`\" pulumi-lang-dotnet=\"`Both`\" pulumi-lang-go=\"`both`\" pulumi-lang-python=\"`both`\" pulumi-lang-yaml=\"`both`\" pulumi-lang-java=\"`both`\" pulumi-lang-hcl=\"`both`\"\u003e`both`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\" pulumi-lang-hcl=\"`none`\"\u003e`none`\u003c/span\u003e.\n"
                 },
                 "resourceId": {
                     "type": "string",
@@ -2867,7 +3249,7 @@
             "inputProperties": {
                 "aiAnalysisScope": {
                     "type": "string",
-                    "description": "Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.\n"
+                    "description": "Which direction to apply AI analysis. Required. Supported values are \u003cspan pulumi-lang-nodejs=\"`request`\" pulumi-lang-dotnet=\"`Request`\" pulumi-lang-go=\"`request`\" pulumi-lang-python=\"`request`\" pulumi-lang-yaml=\"`request`\" pulumi-lang-java=\"`request`\" pulumi-lang-hcl=\"`request`\"\u003e`request`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`response`\" pulumi-lang-dotnet=\"`Response`\" pulumi-lang-go=\"`response`\" pulumi-lang-python=\"`response`\" pulumi-lang-yaml=\"`response`\" pulumi-lang-java=\"`response`\" pulumi-lang-hcl=\"`response`\"\u003e`response`\u003c/span\u003e. Use preference=none to disable AI analysis entirely.\n"
                 },
                 "aiAnalysisTimeoutSeconds": {
                     "type": "integer",
@@ -2879,7 +3261,7 @@
                 },
                 "preference": {
                     "type": "string",
-                    "description": "The preference. Supported values are `nlp`, `llm`, `both`, and `none`.\n"
+                    "description": "The preference. Supported values are \u003cspan pulumi-lang-nodejs=\"`nlp`\" pulumi-lang-dotnet=\"`Nlp`\" pulumi-lang-go=\"`nlp`\" pulumi-lang-python=\"`nlp`\" pulumi-lang-yaml=\"`nlp`\" pulumi-lang-java=\"`nlp`\" pulumi-lang-hcl=\"`nlp`\"\u003e`nlp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`llm`\" pulumi-lang-dotnet=\"`Llm`\" pulumi-lang-go=\"`llm`\" pulumi-lang-python=\"`llm`\" pulumi-lang-yaml=\"`llm`\" pulumi-lang-java=\"`llm`\" pulumi-lang-hcl=\"`llm`\"\u003e`llm`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`both`\" pulumi-lang-dotnet=\"`Both`\" pulumi-lang-go=\"`both`\" pulumi-lang-python=\"`both`\" pulumi-lang-yaml=\"`both`\" pulumi-lang-java=\"`both`\" pulumi-lang-hcl=\"`both`\"\u003e`both`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\" pulumi-lang-hcl=\"`none`\"\u003e`none`\u003c/span\u003e.\n"
                 },
                 "resourceId": {
                     "type": "string",
@@ -2897,7 +3279,7 @@
                 "properties": {
                     "aiAnalysisScope": {
                         "type": "string",
-                        "description": "Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.\n"
+                        "description": "Which direction to apply AI analysis. Required. Supported values are \u003cspan pulumi-lang-nodejs=\"`request`\" pulumi-lang-dotnet=\"`Request`\" pulumi-lang-go=\"`request`\" pulumi-lang-python=\"`request`\" pulumi-lang-yaml=\"`request`\" pulumi-lang-java=\"`request`\" pulumi-lang-hcl=\"`request`\"\u003e`request`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`response`\" pulumi-lang-dotnet=\"`Response`\" pulumi-lang-go=\"`response`\" pulumi-lang-python=\"`response`\" pulumi-lang-yaml=\"`response`\" pulumi-lang-java=\"`response`\" pulumi-lang-hcl=\"`response`\"\u003e`response`\u003c/span\u003e. Use preference=none to disable AI analysis entirely.\n"
                     },
                     "aiAnalysisTimeoutSeconds": {
                         "type": "integer",
@@ -2913,7 +3295,7 @@
                     },
                     "preference": {
                         "type": "string",
-                        "description": "The preference. Supported values are `nlp`, `llm`, `both`, and `none`.\n"
+                        "description": "The preference. Supported values are \u003cspan pulumi-lang-nodejs=\"`nlp`\" pulumi-lang-dotnet=\"`Nlp`\" pulumi-lang-go=\"`nlp`\" pulumi-lang-python=\"`nlp`\" pulumi-lang-yaml=\"`nlp`\" pulumi-lang-java=\"`nlp`\" pulumi-lang-hcl=\"`nlp`\"\u003e`nlp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`llm`\" pulumi-lang-dotnet=\"`Llm`\" pulumi-lang-go=\"`llm`\" pulumi-lang-python=\"`llm`\" pulumi-lang-yaml=\"`llm`\" pulumi-lang-java=\"`llm`\" pulumi-lang-hcl=\"`llm`\"\u003e`llm`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`both`\" pulumi-lang-dotnet=\"`Both`\" pulumi-lang-go=\"`both`\" pulumi-lang-python=\"`both`\" pulumi-lang-yaml=\"`both`\" pulumi-lang-java=\"`both`\" pulumi-lang-hcl=\"`both`\"\u003e`both`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\" pulumi-lang-hcl=\"`none`\"\u003e`none`\u003c/span\u003e.\n"
                     },
                     "resourceId": {
                         "type": "string",
@@ -2922,6 +3304,65 @@
                     "updatedAt": {
                         "type": "integer",
                         "description": "The timestamp of the Resource Classifier Preference update.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "formal:index/resourceDialConfiguration:ResourceDialConfiguration": {
+            "description": "Creating a Dial Configuration of a Resource in Formal.\n",
+            "properties": {
+                "dialMethod": {
+                    "type": "string",
+                    "description": "How the connector dials this resource's upstream. Supported values are: \u003cspan pulumi-lang-nodejs=\"`tcp`\" pulumi-lang-dotnet=\"`Tcp`\" pulumi-lang-go=\"`tcp`\" pulumi-lang-python=\"`tcp`\" pulumi-lang-yaml=\"`tcp`\" pulumi-lang-java=\"`tcp`\" pulumi-lang-hcl=\"`tcp`\"\u003e`tcp`\u003c/span\u003e (direct TCP via the resource's hostname and port), \u003cspan pulumi-lang-nodejs=\"`gcpCloudsql`\" pulumi-lang-dotnet=\"`GcpCloudsql`\" pulumi-lang-go=\"`gcpCloudsql`\" pulumi-lang-python=\"`gcp_cloudsql`\" pulumi-lang-yaml=\"`gcpCloudsql`\" pulumi-lang-java=\"`gcpCloudsql`\" pulumi-lang-hcl=\"`gcp_cloudsql`\"\u003e`gcpCloudsql`\u003c/span\u003e (dial via the GCP Cloud SQL connector library — \u003cspan pulumi-lang-nodejs=\"`dialTarget`\" pulumi-lang-dotnet=\"`DialTarget`\" pulumi-lang-go=\"`dialTarget`\" pulumi-lang-python=\"`dial_target`\" pulumi-lang-yaml=\"`dialTarget`\" pulumi-lang-java=\"`dialTarget`\" pulumi-lang-hcl=\"`dial_target`\"\u003e`dialTarget`\u003c/span\u003e must be set to the `project:region:instance` connection name).\n"
+                },
+                "dialTarget": {
+                    "type": "string",
+                    "description": "Method-specific dial target. For \u003cspan pulumi-lang-nodejs=\"`gcpCloudsql`\" pulumi-lang-dotnet=\"`GcpCloudsql`\" pulumi-lang-go=\"`gcpCloudsql`\" pulumi-lang-python=\"`gcp_cloudsql`\" pulumi-lang-yaml=\"`gcpCloudsql`\" pulumi-lang-java=\"`gcpCloudsql`\" pulumi-lang-hcl=\"`gcp_cloudsql`\"\u003e`gcpCloudsql`\u003c/span\u003e, the `project:region:instance` connection name. Leave empty for \u003cspan pulumi-lang-nodejs=\"`tcp`\" pulumi-lang-dotnet=\"`Tcp`\" pulumi-lang-go=\"`tcp`\" pulumi-lang-python=\"`tcp`\" pulumi-lang-yaml=\"`tcp`\" pulumi-lang-java=\"`tcp`\" pulumi-lang-hcl=\"`tcp`\"\u003e`tcp`\u003c/span\u003e.\n"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "Resource ID for which the dial configuration is applied to.\n"
+                }
+            },
+            "required": [
+                "dialMethod",
+                "resourceId"
+            ],
+            "inputProperties": {
+                "dialMethod": {
+                    "type": "string",
+                    "description": "How the connector dials this resource's upstream. Supported values are: \u003cspan pulumi-lang-nodejs=\"`tcp`\" pulumi-lang-dotnet=\"`Tcp`\" pulumi-lang-go=\"`tcp`\" pulumi-lang-python=\"`tcp`\" pulumi-lang-yaml=\"`tcp`\" pulumi-lang-java=\"`tcp`\" pulumi-lang-hcl=\"`tcp`\"\u003e`tcp`\u003c/span\u003e (direct TCP via the resource's hostname and port), \u003cspan pulumi-lang-nodejs=\"`gcpCloudsql`\" pulumi-lang-dotnet=\"`GcpCloudsql`\" pulumi-lang-go=\"`gcpCloudsql`\" pulumi-lang-python=\"`gcp_cloudsql`\" pulumi-lang-yaml=\"`gcpCloudsql`\" pulumi-lang-java=\"`gcpCloudsql`\" pulumi-lang-hcl=\"`gcp_cloudsql`\"\u003e`gcpCloudsql`\u003c/span\u003e (dial via the GCP Cloud SQL connector library — \u003cspan pulumi-lang-nodejs=\"`dialTarget`\" pulumi-lang-dotnet=\"`DialTarget`\" pulumi-lang-go=\"`dialTarget`\" pulumi-lang-python=\"`dial_target`\" pulumi-lang-yaml=\"`dialTarget`\" pulumi-lang-java=\"`dialTarget`\" pulumi-lang-hcl=\"`dial_target`\"\u003e`dialTarget`\u003c/span\u003e must be set to the `project:region:instance` connection name).\n"
+                },
+                "dialTarget": {
+                    "type": "string",
+                    "description": "Method-specific dial target. For \u003cspan pulumi-lang-nodejs=\"`gcpCloudsql`\" pulumi-lang-dotnet=\"`GcpCloudsql`\" pulumi-lang-go=\"`gcpCloudsql`\" pulumi-lang-python=\"`gcp_cloudsql`\" pulumi-lang-yaml=\"`gcpCloudsql`\" pulumi-lang-java=\"`gcpCloudsql`\" pulumi-lang-hcl=\"`gcp_cloudsql`\"\u003e`gcpCloudsql`\u003c/span\u003e, the `project:region:instance` connection name. Leave empty for \u003cspan pulumi-lang-nodejs=\"`tcp`\" pulumi-lang-dotnet=\"`Tcp`\" pulumi-lang-go=\"`tcp`\" pulumi-lang-python=\"`tcp`\" pulumi-lang-yaml=\"`tcp`\" pulumi-lang-java=\"`tcp`\" pulumi-lang-hcl=\"`tcp`\"\u003e`tcp`\u003c/span\u003e.\n"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "Resource ID for which the dial configuration is applied to.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "dialMethod",
+                "resourceId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ResourceDialConfiguration resources.\n",
+                "properties": {
+                    "dialMethod": {
+                        "type": "string",
+                        "description": "How the connector dials this resource's upstream. Supported values are: \u003cspan pulumi-lang-nodejs=\"`tcp`\" pulumi-lang-dotnet=\"`Tcp`\" pulumi-lang-go=\"`tcp`\" pulumi-lang-python=\"`tcp`\" pulumi-lang-yaml=\"`tcp`\" pulumi-lang-java=\"`tcp`\" pulumi-lang-hcl=\"`tcp`\"\u003e`tcp`\u003c/span\u003e (direct TCP via the resource's hostname and port), \u003cspan pulumi-lang-nodejs=\"`gcpCloudsql`\" pulumi-lang-dotnet=\"`GcpCloudsql`\" pulumi-lang-go=\"`gcpCloudsql`\" pulumi-lang-python=\"`gcp_cloudsql`\" pulumi-lang-yaml=\"`gcpCloudsql`\" pulumi-lang-java=\"`gcpCloudsql`\" pulumi-lang-hcl=\"`gcp_cloudsql`\"\u003e`gcpCloudsql`\u003c/span\u003e (dial via the GCP Cloud SQL connector library — \u003cspan pulumi-lang-nodejs=\"`dialTarget`\" pulumi-lang-dotnet=\"`DialTarget`\" pulumi-lang-go=\"`dialTarget`\" pulumi-lang-python=\"`dial_target`\" pulumi-lang-yaml=\"`dialTarget`\" pulumi-lang-java=\"`dialTarget`\" pulumi-lang-hcl=\"`dial_target`\"\u003e`dialTarget`\u003c/span\u003e must be set to the `project:region:instance` connection name).\n"
+                    },
+                    "dialTarget": {
+                        "type": "string",
+                        "description": "Method-specific dial target. For \u003cspan pulumi-lang-nodejs=\"`gcpCloudsql`\" pulumi-lang-dotnet=\"`GcpCloudsql`\" pulumi-lang-go=\"`gcpCloudsql`\" pulumi-lang-python=\"`gcp_cloudsql`\" pulumi-lang-yaml=\"`gcpCloudsql`\" pulumi-lang-java=\"`gcpCloudsql`\" pulumi-lang-hcl=\"`gcp_cloudsql`\"\u003e`gcpCloudsql`\u003c/span\u003e, the `project:region:instance` connection name. Leave empty for \u003cspan pulumi-lang-nodejs=\"`tcp`\" pulumi-lang-dotnet=\"`Tcp`\" pulumi-lang-go=\"`tcp`\" pulumi-lang-python=\"`tcp`\" pulumi-lang-yaml=\"`tcp`\" pulumi-lang-java=\"`tcp`\" pulumi-lang-hcl=\"`tcp`\"\u003e`tcp`\u003c/span\u003e.\n"
+                    },
+                    "resourceId": {
+                        "type": "string",
+                        "description": "Resource ID for which the dial configuration is applied to.\n",
+                        "willReplaceOnChanges": true
                     }
                 },
                 "type": "object"
@@ -3071,7 +3512,7 @@
                 },
                 "tlsConfig": {
                     "type": "string",
-                    "description": "Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).\n"
+                    "description": "Validation mode for the TLS configuration. Supported values are: \u003cspan pulumi-lang-nodejs=\"`disable`\" pulumi-lang-dotnet=\"`Disable`\" pulumi-lang-go=\"`disable`\" pulumi-lang-python=\"`disable`\" pulumi-lang-yaml=\"`disable`\" pulumi-lang-java=\"`disable`\" pulumi-lang-hcl=\"`disable`\"\u003e`disable`\u003c/span\u003e (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).\n"
                 },
                 "tlsMinVersion": {
                     "type": "string",
@@ -3094,7 +3535,7 @@
                 },
                 "tlsConfig": {
                     "type": "string",
-                    "description": "Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).\n"
+                    "description": "Validation mode for the TLS configuration. Supported values are: \u003cspan pulumi-lang-nodejs=\"`disable`\" pulumi-lang-dotnet=\"`Disable`\" pulumi-lang-go=\"`disable`\" pulumi-lang-python=\"`disable`\" pulumi-lang-yaml=\"`disable`\" pulumi-lang-java=\"`disable`\" pulumi-lang-hcl=\"`disable`\"\u003e`disable`\u003c/span\u003e (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).\n"
                 },
                 "tlsMinVersion": {
                     "type": "string",
@@ -3119,7 +3560,7 @@
                     },
                     "tlsConfig": {
                         "type": "string",
-                        "description": "Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).\n"
+                        "description": "Validation mode for the TLS configuration. Supported values are: \u003cspan pulumi-lang-nodejs=\"`disable`\" pulumi-lang-dotnet=\"`Disable`\" pulumi-lang-go=\"`disable`\" pulumi-lang-python=\"`disable`\" pulumi-lang-yaml=\"`disable`\" pulumi-lang-java=\"`disable`\" pulumi-lang-hcl=\"`disable`\"\u003e`disable`\u003c/span\u003e (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).\n"
                     },
                     "tlsMinVersion": {
                         "type": "string",
@@ -3143,7 +3584,7 @@
                 },
                 "satelliteType": {
                     "type": "string",
-                    "description": "The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.\n"
+                    "description": "The type of satellite. Must be one of: \u003cspan pulumi-lang-nodejs=\"`ai`\" pulumi-lang-dotnet=\"`Ai`\" pulumi-lang-go=\"`ai`\" pulumi-lang-python=\"`ai`\" pulumi-lang-yaml=\"`ai`\" pulumi-lang-java=\"`ai`\" pulumi-lang-hcl=\"`ai`\"\u003e`ai`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dataDiscovery`\" pulumi-lang-dotnet=\"`DataDiscovery`\" pulumi-lang-go=\"`dataDiscovery`\" pulumi-lang-python=\"`data_discovery`\" pulumi-lang-yaml=\"`dataDiscovery`\" pulumi-lang-java=\"`dataDiscovery`\" pulumi-lang-hcl=\"`data_discovery`\"\u003e`dataDiscovery`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dataClassifier`\" pulumi-lang-dotnet=\"`DataClassifier`\" pulumi-lang-go=\"`dataClassifier`\" pulumi-lang-python=\"`data_classifier`\" pulumi-lang-yaml=\"`dataClassifier`\" pulumi-lang-java=\"`dataClassifier`\" pulumi-lang-hcl=\"`data_classifier`\"\u003e`dataClassifier`\u003c/span\u003e (deprecated), or \u003cspan pulumi-lang-nodejs=\"`policyDataLoader`\" pulumi-lang-dotnet=\"`PolicyDataLoader`\" pulumi-lang-go=\"`policyDataLoader`\" pulumi-lang-python=\"`policy_data_loader`\" pulumi-lang-yaml=\"`policyDataLoader`\" pulumi-lang-java=\"`policyDataLoader`\" pulumi-lang-hcl=\"`policy_data_loader`\"\u003e`policyDataLoader`\u003c/span\u003e.\n"
                 },
                 "spaceId": {
                     "type": "string",
@@ -3172,7 +3613,7 @@
                 },
                 "satelliteType": {
                     "type": "string",
-                    "description": "The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.\n",
+                    "description": "The type of satellite. Must be one of: \u003cspan pulumi-lang-nodejs=\"`ai`\" pulumi-lang-dotnet=\"`Ai`\" pulumi-lang-go=\"`ai`\" pulumi-lang-python=\"`ai`\" pulumi-lang-yaml=\"`ai`\" pulumi-lang-java=\"`ai`\" pulumi-lang-hcl=\"`ai`\"\u003e`ai`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dataDiscovery`\" pulumi-lang-dotnet=\"`DataDiscovery`\" pulumi-lang-go=\"`dataDiscovery`\" pulumi-lang-python=\"`data_discovery`\" pulumi-lang-yaml=\"`dataDiscovery`\" pulumi-lang-java=\"`dataDiscovery`\" pulumi-lang-hcl=\"`data_discovery`\"\u003e`dataDiscovery`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dataClassifier`\" pulumi-lang-dotnet=\"`DataClassifier`\" pulumi-lang-go=\"`dataClassifier`\" pulumi-lang-python=\"`data_classifier`\" pulumi-lang-yaml=\"`dataClassifier`\" pulumi-lang-java=\"`dataClassifier`\" pulumi-lang-hcl=\"`data_classifier`\"\u003e`dataClassifier`\u003c/span\u003e (deprecated), or \u003cspan pulumi-lang-nodejs=\"`policyDataLoader`\" pulumi-lang-dotnet=\"`PolicyDataLoader`\" pulumi-lang-go=\"`policyDataLoader`\" pulumi-lang-python=\"`policy_data_loader`\" pulumi-lang-yaml=\"`policyDataLoader`\" pulumi-lang-java=\"`policyDataLoader`\" pulumi-lang-hcl=\"`policy_data_loader`\"\u003e`policyDataLoader`\u003c/span\u003e.\n",
                     "willReplaceOnChanges": true
                 },
                 "spaceId": {
@@ -3202,7 +3643,7 @@
                     },
                     "satelliteType": {
                         "type": "string",
-                        "description": "The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.\n",
+                        "description": "The type of satellite. Must be one of: \u003cspan pulumi-lang-nodejs=\"`ai`\" pulumi-lang-dotnet=\"`Ai`\" pulumi-lang-go=\"`ai`\" pulumi-lang-python=\"`ai`\" pulumi-lang-yaml=\"`ai`\" pulumi-lang-java=\"`ai`\" pulumi-lang-hcl=\"`ai`\"\u003e`ai`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dataDiscovery`\" pulumi-lang-dotnet=\"`DataDiscovery`\" pulumi-lang-go=\"`dataDiscovery`\" pulumi-lang-python=\"`data_discovery`\" pulumi-lang-yaml=\"`dataDiscovery`\" pulumi-lang-java=\"`dataDiscovery`\" pulumi-lang-hcl=\"`data_discovery`\"\u003e`dataDiscovery`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dataClassifier`\" pulumi-lang-dotnet=\"`DataClassifier`\" pulumi-lang-go=\"`dataClassifier`\" pulumi-lang-python=\"`data_classifier`\" pulumi-lang-yaml=\"`dataClassifier`\" pulumi-lang-java=\"`dataClassifier`\" pulumi-lang-hcl=\"`data_classifier`\"\u003e`dataClassifier`\u003c/span\u003e (deprecated), or \u003cspan pulumi-lang-nodejs=\"`policyDataLoader`\" pulumi-lang-dotnet=\"`PolicyDataLoader`\" pulumi-lang-go=\"`policyDataLoader`\" pulumi-lang-python=\"`policy_data_loader`\" pulumi-lang-yaml=\"`policyDataLoader`\" pulumi-lang-java=\"`policyDataLoader`\" pulumi-lang-hcl=\"`policy_data_loader`\"\u003e`policyDataLoader`\u003c/span\u003e.\n",
                         "willReplaceOnChanges": true
                     },
                     "spaceId": {
@@ -3381,7 +3822,7 @@
                 },
                 "formalControlPlaneTlsCertificate": {
                     "type": "string",
-                    "description": "If deployment_type is onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.\n",
+                    "description": "If\u003cspan pulumi-lang-nodejs=\" deploymentType \" pulumi-lang-dotnet=\" DeploymentType \" pulumi-lang-go=\" deploymentType \" pulumi-lang-python=\" deployment_type \" pulumi-lang-yaml=\" deploymentType \" pulumi-lang-java=\" deploymentType \" pulumi-lang-hcl=\" deployment_type \"\u003e deploymentType \u003c/span\u003eis onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.\n",
                     "secret": true
                 },
                 "hostname": {
@@ -3394,7 +3835,7 @@
                 },
                 "technology": {
                     "type": "string",
-                    "description": "Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.\n"
+                    "description": "Technology of the Datastore: supported values are\u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e.\n"
                 },
                 "terminationProtection": {
                     "type": "boolean",
@@ -3402,7 +3843,7 @@
                 },
                 "version": {
                     "type": "string",
-                    "description": "Version of the Sidecar to deploy for `managed`.\n"
+                    "description": "Version of the Sidecar to deploy for \u003cspan pulumi-lang-nodejs=\"`managed`\" pulumi-lang-dotnet=\"`Managed`\" pulumi-lang-go=\"`managed`\" pulumi-lang-python=\"`managed`\" pulumi-lang-yaml=\"`managed`\" pulumi-lang-java=\"`managed`\" pulumi-lang-hcl=\"`managed`\"\u003e`managed`\u003c/span\u003e.\n"
                 }
             },
             "required": [
@@ -3424,7 +3865,7 @@
                 },
                 "technology": {
                     "type": "string",
-                    "description": "Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.\n",
+                    "description": "Technology of the Datastore: supported values are\u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e.\n",
                     "willReplaceOnChanges": true
                 },
                 "terminationProtection": {
@@ -3433,7 +3874,7 @@
                 },
                 "version": {
                     "type": "string",
-                    "description": "Version of the Sidecar to deploy for `managed`.\n"
+                    "description": "Version of the Sidecar to deploy for \u003cspan pulumi-lang-nodejs=\"`managed`\" pulumi-lang-dotnet=\"`Managed`\" pulumi-lang-go=\"`managed`\" pulumi-lang-python=\"`managed`\" pulumi-lang-yaml=\"`managed`\" pulumi-lang-java=\"`managed`\" pulumi-lang-hcl=\"`managed`\"\u003e`managed`\u003c/span\u003e.\n"
                 }
             },
             "requiredInputs": [
@@ -3454,7 +3895,7 @@
                     },
                     "formalControlPlaneTlsCertificate": {
                         "type": "string",
-                        "description": "If deployment_type is onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.\n",
+                        "description": "If\u003cspan pulumi-lang-nodejs=\" deploymentType \" pulumi-lang-dotnet=\" DeploymentType \" pulumi-lang-go=\" deploymentType \" pulumi-lang-python=\" deployment_type \" pulumi-lang-yaml=\" deploymentType \" pulumi-lang-java=\" deploymentType \" pulumi-lang-hcl=\" deployment_type \"\u003e deploymentType \u003c/span\u003eis onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.\n",
                         "secret": true
                     },
                     "hostname": {
@@ -3467,7 +3908,7 @@
                     },
                     "technology": {
                         "type": "string",
-                        "description": "Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.\n",
+                        "description": "Technology of the Datastore: supported values are\u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e.\n",
                         "willReplaceOnChanges": true
                     },
                     "terminationProtection": {
@@ -3476,7 +3917,7 @@
                     },
                     "version": {
                         "type": "string",
-                        "description": "Version of the Sidecar to deploy for `managed`.\n"
+                        "description": "Version of the Sidecar to deploy for \u003cspan pulumi-lang-nodejs=\"`managed`\" pulumi-lang-dotnet=\"`Managed`\" pulumi-lang-go=\"`managed`\" pulumi-lang-python=\"`managed`\" pulumi-lang-yaml=\"`managed`\" pulumi-lang-java=\"`managed`\" pulumi-lang-hcl=\"`managed`\"\u003e`managed`\u003c/span\u003e.\n"
                     }
                 },
                 "type": "object"
@@ -3623,7 +4064,7 @@
             "properties": {
                 "appType": {
                     "type": "string",
-                    "description": "If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.\n"
+                    "description": "If the user is of type \u003cspan pulumi-lang-nodejs=\"`machine`\" pulumi-lang-dotnet=\"`Machine`\" pulumi-lang-go=\"`machine`\" pulumi-lang-python=\"`machine`\" pulumi-lang-yaml=\"`machine`\" pulumi-lang-java=\"`machine`\" pulumi-lang-hcl=\"`machine`\"\u003e`machine`\u003c/span\u003e, this is an optional designation for the app that this user will be used for. Supported values are \u003cspan pulumi-lang-nodejs=\"`metabase`\" pulumi-lang-dotnet=\"`Metabase`\" pulumi-lang-go=\"`metabase`\" pulumi-lang-python=\"`metabase`\" pulumi-lang-yaml=\"`metabase`\" pulumi-lang-java=\"`metabase`\" pulumi-lang-hcl=\"`metabase`\"\u003e`metabase`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`tableau`\" pulumi-lang-dotnet=\"`Tableau`\" pulumi-lang-go=\"`tableau`\" pulumi-lang-python=\"`tableau`\" pulumi-lang-yaml=\"`tableau`\" pulumi-lang-java=\"`tableau`\" pulumi-lang-hcl=\"`tableau`\"\u003e`tableau`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`popsql`\" pulumi-lang-dotnet=\"`Popsql`\" pulumi-lang-go=\"`popsql`\" pulumi-lang-python=\"`popsql`\" pulumi-lang-yaml=\"`popsql`\" pulumi-lang-java=\"`popsql`\" pulumi-lang-hcl=\"`popsql`\"\u003e`popsql`\u003c/span\u003e.\n"
                 },
                 "dbUsername": {
                     "type": "string",
@@ -3647,7 +4088,7 @@
                 },
                 "machineUserAccessToken": {
                     "type": "string",
-                    "description": "If the user is of type `machine`, this is the access token (database password) of this user.\n",
+                    "description": "If the user is of type \u003cspan pulumi-lang-nodejs=\"`machine`\" pulumi-lang-dotnet=\"`Machine`\" pulumi-lang-go=\"`machine`\" pulumi-lang-python=\"`machine`\" pulumi-lang-yaml=\"`machine`\" pulumi-lang-java=\"`machine`\" pulumi-lang-hcl=\"`machine`\"\u003e`machine`\u003c/span\u003e, this is the access token (database password) of this user.\n",
                     "secret": true
                 },
                 "name": {
@@ -3672,7 +4113,7 @@
             "inputProperties": {
                 "appType": {
                     "type": "string",
-                    "description": "If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.\n"
+                    "description": "If the user is of type \u003cspan pulumi-lang-nodejs=\"`machine`\" pulumi-lang-dotnet=\"`Machine`\" pulumi-lang-go=\"`machine`\" pulumi-lang-python=\"`machine`\" pulumi-lang-yaml=\"`machine`\" pulumi-lang-java=\"`machine`\" pulumi-lang-hcl=\"`machine`\"\u003e`machine`\u003c/span\u003e, this is an optional designation for the app that this user will be used for. Supported values are \u003cspan pulumi-lang-nodejs=\"`metabase`\" pulumi-lang-dotnet=\"`Metabase`\" pulumi-lang-go=\"`metabase`\" pulumi-lang-python=\"`metabase`\" pulumi-lang-yaml=\"`metabase`\" pulumi-lang-java=\"`metabase`\" pulumi-lang-hcl=\"`metabase`\"\u003e`metabase`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`tableau`\" pulumi-lang-dotnet=\"`Tableau`\" pulumi-lang-go=\"`tableau`\" pulumi-lang-python=\"`tableau`\" pulumi-lang-yaml=\"`tableau`\" pulumi-lang-java=\"`tableau`\" pulumi-lang-hcl=\"`tableau`\"\u003e`tableau`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`popsql`\" pulumi-lang-dotnet=\"`Popsql`\" pulumi-lang-go=\"`popsql`\" pulumi-lang-python=\"`popsql`\" pulumi-lang-yaml=\"`popsql`\" pulumi-lang-java=\"`popsql`\" pulumi-lang-hcl=\"`popsql`\"\u003e`popsql`\u003c/span\u003e.\n"
                 },
                 "email": {
                     "type": "string",
@@ -3713,7 +4154,7 @@
                 "properties": {
                     "appType": {
                         "type": "string",
-                        "description": "If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.\n"
+                        "description": "If the user is of type \u003cspan pulumi-lang-nodejs=\"`machine`\" pulumi-lang-dotnet=\"`Machine`\" pulumi-lang-go=\"`machine`\" pulumi-lang-python=\"`machine`\" pulumi-lang-yaml=\"`machine`\" pulumi-lang-java=\"`machine`\" pulumi-lang-hcl=\"`machine`\"\u003e`machine`\u003c/span\u003e, this is an optional designation for the app that this user will be used for. Supported values are \u003cspan pulumi-lang-nodejs=\"`metabase`\" pulumi-lang-dotnet=\"`Metabase`\" pulumi-lang-go=\"`metabase`\" pulumi-lang-python=\"`metabase`\" pulumi-lang-yaml=\"`metabase`\" pulumi-lang-java=\"`metabase`\" pulumi-lang-hcl=\"`metabase`\"\u003e`metabase`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`tableau`\" pulumi-lang-dotnet=\"`Tableau`\" pulumi-lang-go=\"`tableau`\" pulumi-lang-python=\"`tableau`\" pulumi-lang-yaml=\"`tableau`\" pulumi-lang-java=\"`tableau`\" pulumi-lang-hcl=\"`tableau`\"\u003e`tableau`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`popsql`\" pulumi-lang-dotnet=\"`Popsql`\" pulumi-lang-go=\"`popsql`\" pulumi-lang-python=\"`popsql`\" pulumi-lang-yaml=\"`popsql`\" pulumi-lang-java=\"`popsql`\" pulumi-lang-hcl=\"`popsql`\"\u003e`popsql`\u003c/span\u003e.\n"
                     },
                     "dbUsername": {
                         "type": "string",
@@ -3739,7 +4180,7 @@
                     },
                     "machineUserAccessToken": {
                         "type": "string",
-                        "description": "If the user is of type `machine`, this is the access token (database password) of this user.\n",
+                        "description": "If the user is of type \u003cspan pulumi-lang-nodejs=\"`machine`\" pulumi-lang-dotnet=\"`Machine`\" pulumi-lang-go=\"`machine`\" pulumi-lang-python=\"`machine`\" pulumi-lang-yaml=\"`machine`\" pulumi-lang-java=\"`machine`\" pulumi-lang-hcl=\"`machine`\"\u003e`machine`\u003c/span\u003e, this is the access token (database password) of this user.\n",
                         "secret": true
                     },
                     "name": {
@@ -3771,7 +4212,7 @@
                 },
                 "status": {
                     "type": "string",
-                    "description": "The workflow status. Accepted values are `active` and `draft`.\n"
+                    "description": "The workflow status. Accepted values are \u003cspan pulumi-lang-nodejs=\"`active`\" pulumi-lang-dotnet=\"`Active`\" pulumi-lang-go=\"`active`\" pulumi-lang-python=\"`active`\" pulumi-lang-yaml=\"`active`\" pulumi-lang-java=\"`active`\" pulumi-lang-hcl=\"`active`\"\u003e`active`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`draft`\" pulumi-lang-dotnet=\"`Draft`\" pulumi-lang-go=\"`draft`\" pulumi-lang-python=\"`draft`\" pulumi-lang-yaml=\"`draft`\" pulumi-lang-java=\"`draft`\" pulumi-lang-hcl=\"`draft`\"\u003e`draft`\u003c/span\u003e.\n"
                 }
             },
             "required": [
@@ -3789,7 +4230,7 @@
                 },
                 "status": {
                     "type": "string",
-                    "description": "The workflow status. Accepted values are `active` and `draft`.\n"
+                    "description": "The workflow status. Accepted values are \u003cspan pulumi-lang-nodejs=\"`active`\" pulumi-lang-dotnet=\"`Active`\" pulumi-lang-go=\"`active`\" pulumi-lang-python=\"`active`\" pulumi-lang-yaml=\"`active`\" pulumi-lang-java=\"`active`\" pulumi-lang-hcl=\"`active`\"\u003e`active`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`draft`\" pulumi-lang-dotnet=\"`Draft`\" pulumi-lang-go=\"`draft`\" pulumi-lang-python=\"`draft`\" pulumi-lang-yaml=\"`draft`\" pulumi-lang-java=\"`draft`\" pulumi-lang-hcl=\"`draft`\"\u003e`draft`\u003c/span\u003e.\n"
                 }
             },
             "requiredInputs": [
@@ -3808,7 +4249,7 @@
                     },
                     "status": {
                         "type": "string",
-                        "description": "The workflow status. Accepted values are `active` and `draft`.\n"
+                        "description": "The workflow status. Accepted values are \u003cspan pulumi-lang-nodejs=\"`active`\" pulumi-lang-dotnet=\"`Active`\" pulumi-lang-go=\"`active`\" pulumi-lang-python=\"`active`\" pulumi-lang-yaml=\"`active`\" pulumi-lang-java=\"`active`\" pulumi-lang-hcl=\"`active`\"\u003e`active`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`draft`\" pulumi-lang-dotnet=\"`Draft`\" pulumi-lang-go=\"`draft`\" pulumi-lang-python=\"`draft`\" pulumi-lang-yaml=\"`draft`\" pulumi-lang-java=\"`draft`\" pulumi-lang-hcl=\"`draft`\"\u003e`draft`\u003c/span\u003e.\n"
                     }
                 },
                 "type": "object"
@@ -3817,7 +4258,7 @@
     },
     "functions": {
         "formal:index/getConnector:getConnector": {
-            "description": "Data source for looking up a Connector by name or by ID. Use either `name` or `id`, but not both.\n",
+            "description": "Data source for looking up a Connector by name or by ID. Use either \u003cspan pulumi-lang-nodejs=\"`name`\" pulumi-lang-dotnet=\"`Name`\" pulumi-lang-go=\"`name`\" pulumi-lang-python=\"`name`\" pulumi-lang-yaml=\"`name`\" pulumi-lang-java=\"`name`\" pulumi-lang-hcl=\"`name`\"\u003e`name`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`id`\" pulumi-lang-dotnet=\"`Id`\" pulumi-lang-go=\"`id`\" pulumi-lang-python=\"`id`\" pulumi-lang-yaml=\"`id`\" pulumi-lang-java=\"`id`\" pulumi-lang-hcl=\"`id`\"\u003e`id`\u003c/span\u003e, but not both.\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getConnector.\n",
                 "properties": {
@@ -3866,7 +4307,7 @@
             }
         },
         "formal:index/getGroup:getGroup": {
-            "description": "Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.\n",
+            "description": "Data source for looking up a Group by ID or by name. Use either \u003cspan pulumi-lang-nodejs=\"`id`\" pulumi-lang-dotnet=\"`Id`\" pulumi-lang-go=\"`id`\" pulumi-lang-python=\"`id`\" pulumi-lang-yaml=\"`id`\" pulumi-lang-java=\"`id`\" pulumi-lang-hcl=\"`id`\"\u003e`id`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`name`\" pulumi-lang-dotnet=\"`Name`\" pulumi-lang-go=\"`name`\" pulumi-lang-python=\"`name`\" pulumi-lang-yaml=\"`name`\" pulumi-lang-java=\"`name`\" pulumi-lang-hcl=\"`name`\"\u003e`name`\u003c/span\u003e, but not both.\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getGroup.\n",
                 "properties": {
@@ -3909,7 +4350,7 @@
             }
         },
         "formal:index/getResource:getResource": {
-            "description": "Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.\n",
+            "description": "Data source for looking up a Resource by ID or by name. Use either \u003cspan pulumi-lang-nodejs=\"`id`\" pulumi-lang-dotnet=\"`Id`\" pulumi-lang-go=\"`id`\" pulumi-lang-python=\"`id`\" pulumi-lang-yaml=\"`id`\" pulumi-lang-java=\"`id`\" pulumi-lang-hcl=\"`id`\"\u003e`id`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`name`\" pulumi-lang-dotnet=\"`Name`\" pulumi-lang-go=\"`name`\" pulumi-lang-python=\"`name`\" pulumi-lang-yaml=\"`name`\" pulumi-lang-java=\"`name`\" pulumi-lang-hcl=\"`name`\"\u003e`name`\u003c/span\u003e, but not both.\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getResource.\n",
                 "properties": {
@@ -3977,7 +4418,7 @@
             }
         },
         "formal:index/getSpace:getSpace": {
-            "description": "Data source for looking up a Space by ID or by name. Use either `id` or `name`, but not both.\n",
+            "description": "Data source for looking up a Space by ID or by name. Use either \u003cspan pulumi-lang-nodejs=\"`id`\" pulumi-lang-dotnet=\"`Id`\" pulumi-lang-go=\"`id`\" pulumi-lang-python=\"`id`\" pulumi-lang-yaml=\"`id`\" pulumi-lang-java=\"`id`\" pulumi-lang-hcl=\"`id`\"\u003e`id`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`name`\" pulumi-lang-dotnet=\"`Name`\" pulumi-lang-go=\"`name`\" pulumi-lang-python=\"`name`\" pulumi-lang-yaml=\"`name`\" pulumi-lang-java=\"`name`\" pulumi-lang-hcl=\"`name`\"\u003e`name`\u003c/span\u003e, but not both.\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getSpace.\n",
                 "properties": {
@@ -4030,7 +4471,7 @@
                 "properties": {
                     "__self__": {
                         "type": "ref",
-                        "$ref": "#/resources/pulumi:providers:formal"
+                        "$ref": "#/provider"
                     }
                 },
                 "type": "pulumi:providers:formal/terraformConfig",
