@@ -12,32 +12,33 @@ namespace Formal.Pulumi.Outputs
 {
 
     [OutputType]
-    public sealed class IntegrationDataCatalogDatahub
+    public sealed class ConnectorAiProviderAzureAi
     {
         /// <summary>
-        /// Api Key for the Datahub instance.
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// The API key. This value is not stored in Terraform state.
         /// </summary>
         public readonly string ApiKey;
         /// <summary>
-        /// Generalized metadata service url for the Datahub instance.
+        /// Version trigger for `ApiKey`. Increment this value to update the key.
         /// </summary>
-        public readonly string GeneralizedMetadataServiceUrl;
+        public readonly int ApiKeyVersion;
         /// <summary>
-        /// Webhook secret of the Datahub instance.
+        /// The Azure AI Foundry endpoint URL.
         /// </summary>
-        public readonly string WebhookSecret;
+        public readonly string Endpoint;
 
         [OutputConstructor]
-        private IntegrationDataCatalogDatahub(
+        private ConnectorAiProviderAzureAi(
             string apiKey,
 
-            string generalizedMetadataServiceUrl,
+            int apiKeyVersion,
 
-            string webhookSecret)
+            string endpoint)
         {
             ApiKey = apiKey;
-            GeneralizedMetadataServiceUrl = generalizedMetadataServiceUrl;
-            WebhookSecret = webhookSecret;
+            ApiKeyVersion = apiKeyVersion;
+            Endpoint = endpoint;
         }
     }
 }

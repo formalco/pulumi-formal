@@ -17,7 +17,7 @@ namespace Formal.Pulumi
     public partial class EncryptionKey : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.
+        /// The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).
         /// </summary>
         [Output("algorithm")]
         public Output<string> Algorithm { get; private set; } = null!;
@@ -45,6 +45,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Output("keyProvider")]
         public Output<string> KeyProvider { get; private set; } = null!;
+
+        /// <summary>
+        /// PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.&lt;name&gt;.public_key_pem` for an asymmetric AWS KMS key.
+        /// </summary>
+        [Output("publicKeyPem")]
+        public Output<string?> PublicKeyPem { get; private set; } = null!;
 
         /// <summary>
         /// Last update time.
@@ -100,7 +106,7 @@ namespace Formal.Pulumi
     public sealed class EncryptionKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.
+        /// The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).
         /// </summary>
         [Input("algorithm", required: true)]
         public Input<string> Algorithm { get; set; } = null!;
@@ -123,6 +129,12 @@ namespace Formal.Pulumi
         [Input("keyProvider", required: true)]
         public Input<string> KeyProvider { get; set; } = null!;
 
+        /// <summary>
+        /// PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.&lt;name&gt;.public_key_pem` for an asymmetric AWS KMS key.
+        /// </summary>
+        [Input("publicKeyPem")]
+        public Input<string>? PublicKeyPem { get; set; }
+
         public EncryptionKeyArgs()
         {
         }
@@ -132,7 +144,7 @@ namespace Formal.Pulumi
     public sealed class EncryptionKeyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.
+        /// The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).
         /// </summary>
         [Input("algorithm")]
         public Input<string>? Algorithm { get; set; }
@@ -160,6 +172,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("keyProvider")]
         public Input<string>? KeyProvider { get; set; }
+
+        /// <summary>
+        /// PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.&lt;name&gt;.public_key_pem` for an asymmetric AWS KMS key.
+        /// </summary>
+        [Input("publicKeyPem")]
+        public Input<string>? PublicKeyPem { get; set; }
 
         /// <summary>
         /// Last update time.

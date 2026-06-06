@@ -24,12 +24,13 @@ class LogConfigurationArgs:
                  request: pulumi.Input['LogConfigurationRequestArgs'],
                  response: pulumi.Input['LogConfigurationResponseArgs'],
                  scope: pulumi.Input['LogConfigurationScopeArgs'],
-                 encryption_key_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 session: Optional[pulumi.Input['LogConfigurationSessionArgs']] = None,
-                 stream: Optional[pulumi.Input['LogConfigurationStreamArgs']] = None):
+                 encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 session: pulumi.Input[Optional['LogConfigurationSessionArgs']] = None,
+                 stream: pulumi.Input[Optional['LogConfigurationStreamArgs']] = None):
         """
         The set of arguments for constructing a LogConfiguration resource.
+
         :param pulumi.Input['LogConfigurationRequestArgs'] request: Request logging configuration.
         :param pulumi.Input['LogConfigurationResponseArgs'] response: Response logging configuration.
         :param pulumi.Input['LogConfigurationScopeArgs'] scope: The scope configuration for this log configuration.
@@ -88,67 +89,68 @@ class LogConfigurationArgs:
 
     @_builtins.property
     @pulumi.getter(name="encryptionKeyId")
-    def encryption_key_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def encryption_key_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the encryption key to use for this log configuration.
         """
         return pulumi.get(self, "encryption_key_id")
 
     @encryption_key_id.setter
-    def encryption_key_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def encryption_key_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "encryption_key_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The name of this log configuration.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def session(self) -> Optional[pulumi.Input['LogConfigurationSessionArgs']]:
+    def session(self) -> pulumi.Input[Optional['LogConfigurationSessionArgs']]:
         """
         Session logging configuration.
         """
         return pulumi.get(self, "session")
 
     @session.setter
-    def session(self, value: Optional[pulumi.Input['LogConfigurationSessionArgs']]):
+    def session(self, value: pulumi.Input[Optional['LogConfigurationSessionArgs']]):
         pulumi.set(self, "session", value)
 
     @_builtins.property
     @pulumi.getter
-    def stream(self) -> Optional[pulumi.Input['LogConfigurationStreamArgs']]:
+    def stream(self) -> pulumi.Input[Optional['LogConfigurationStreamArgs']]:
         """
         Stream logging configuration.
         """
         return pulumi.get(self, "stream")
 
     @stream.setter
-    def stream(self, value: Optional[pulumi.Input['LogConfigurationStreamArgs']]):
+    def stream(self, value: pulumi.Input[Optional['LogConfigurationStreamArgs']]):
         pulumi.set(self, "stream", value)
 
 
 @pulumi.input_type
 class _LogConfigurationState:
     def __init__(__self__, *,
-                 created_at: Optional[pulumi.Input[_builtins.str]] = None,
-                 encryption_key_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 request: Optional[pulumi.Input['LogConfigurationRequestArgs']] = None,
-                 response: Optional[pulumi.Input['LogConfigurationResponseArgs']] = None,
-                 scope: Optional[pulumi.Input['LogConfigurationScopeArgs']] = None,
-                 session: Optional[pulumi.Input['LogConfigurationSessionArgs']] = None,
-                 stream: Optional[pulumi.Input['LogConfigurationStreamArgs']] = None,
-                 updated_at: Optional[pulumi.Input[_builtins.str]] = None):
+                 created_at: pulumi.Input[Optional[_builtins.str]] = None,
+                 encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 request: pulumi.Input[Optional['LogConfigurationRequestArgs']] = None,
+                 response: pulumi.Input[Optional['LogConfigurationResponseArgs']] = None,
+                 scope: pulumi.Input[Optional['LogConfigurationScopeArgs']] = None,
+                 session: pulumi.Input[Optional['LogConfigurationSessionArgs']] = None,
+                 stream: pulumi.Input[Optional['LogConfigurationStreamArgs']] = None,
+                 updated_at: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering LogConfiguration resources.
+
         :param pulumi.Input[_builtins.str] created_at: When the log configuration was created.
         :param pulumi.Input[_builtins.str] encryption_key_id: The ID of the encryption key to use for this log configuration.
         :param pulumi.Input[_builtins.str] name: The name of this log configuration.
@@ -180,110 +182,110 @@ class _LogConfigurationState:
 
     @_builtins.property
     @pulumi.getter(name="createdAt")
-    def created_at(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def created_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         When the log configuration was created.
         """
         return pulumi.get(self, "created_at")
 
     @created_at.setter
-    def created_at(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def created_at(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "created_at", value)
 
     @_builtins.property
     @pulumi.getter(name="encryptionKeyId")
-    def encryption_key_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def encryption_key_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the encryption key to use for this log configuration.
         """
         return pulumi.get(self, "encryption_key_id")
 
     @encryption_key_id.setter
-    def encryption_key_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def encryption_key_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "encryption_key_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The name of this log configuration.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def request(self) -> Optional[pulumi.Input['LogConfigurationRequestArgs']]:
+    def request(self) -> pulumi.Input[Optional['LogConfigurationRequestArgs']]:
         """
         Request logging configuration.
         """
         return pulumi.get(self, "request")
 
     @request.setter
-    def request(self, value: Optional[pulumi.Input['LogConfigurationRequestArgs']]):
+    def request(self, value: pulumi.Input[Optional['LogConfigurationRequestArgs']]):
         pulumi.set(self, "request", value)
 
     @_builtins.property
     @pulumi.getter
-    def response(self) -> Optional[pulumi.Input['LogConfigurationResponseArgs']]:
+    def response(self) -> pulumi.Input[Optional['LogConfigurationResponseArgs']]:
         """
         Response logging configuration.
         """
         return pulumi.get(self, "response")
 
     @response.setter
-    def response(self, value: Optional[pulumi.Input['LogConfigurationResponseArgs']]):
+    def response(self, value: pulumi.Input[Optional['LogConfigurationResponseArgs']]):
         pulumi.set(self, "response", value)
 
     @_builtins.property
     @pulumi.getter
-    def scope(self) -> Optional[pulumi.Input['LogConfigurationScopeArgs']]:
+    def scope(self) -> pulumi.Input[Optional['LogConfigurationScopeArgs']]:
         """
         The scope configuration for this log configuration.
         """
         return pulumi.get(self, "scope")
 
     @scope.setter
-    def scope(self, value: Optional[pulumi.Input['LogConfigurationScopeArgs']]):
+    def scope(self, value: pulumi.Input[Optional['LogConfigurationScopeArgs']]):
         pulumi.set(self, "scope", value)
 
     @_builtins.property
     @pulumi.getter
-    def session(self) -> Optional[pulumi.Input['LogConfigurationSessionArgs']]:
+    def session(self) -> pulumi.Input[Optional['LogConfigurationSessionArgs']]:
         """
         Session logging configuration.
         """
         return pulumi.get(self, "session")
 
     @session.setter
-    def session(self, value: Optional[pulumi.Input['LogConfigurationSessionArgs']]):
+    def session(self, value: pulumi.Input[Optional['LogConfigurationSessionArgs']]):
         pulumi.set(self, "session", value)
 
     @_builtins.property
     @pulumi.getter
-    def stream(self) -> Optional[pulumi.Input['LogConfigurationStreamArgs']]:
+    def stream(self) -> pulumi.Input[Optional['LogConfigurationStreamArgs']]:
         """
         Stream logging configuration.
         """
         return pulumi.get(self, "stream")
 
     @stream.setter
-    def stream(self, value: Optional[pulumi.Input['LogConfigurationStreamArgs']]):
+    def stream(self, value: pulumi.Input[Optional['LogConfigurationStreamArgs']]):
         pulumi.set(self, "stream", value)
 
     @_builtins.property
     @pulumi.getter(name="updatedAt")
-    def updated_at(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def updated_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Last update time.
         """
         return pulumi.get(self, "updated_at")
 
     @updated_at.setter
-    def updated_at(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def updated_at(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "updated_at", value)
 
 
@@ -293,16 +295,17 @@ class LogConfiguration(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 encryption_key_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 request: Optional[pulumi.Input[Union['LogConfigurationRequestArgs', 'LogConfigurationRequestArgsDict']]] = None,
-                 response: Optional[pulumi.Input[Union['LogConfigurationResponseArgs', 'LogConfigurationResponseArgsDict']]] = None,
-                 scope: Optional[pulumi.Input[Union['LogConfigurationScopeArgs', 'LogConfigurationScopeArgsDict']]] = None,
-                 session: Optional[pulumi.Input[Union['LogConfigurationSessionArgs', 'LogConfigurationSessionArgsDict']]] = None,
-                 stream: Optional[pulumi.Input[Union['LogConfigurationStreamArgs', 'LogConfigurationStreamArgsDict']]] = None,
+                 encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 request: pulumi.Input[Optional[Union['LogConfigurationRequestArgs', 'LogConfigurationRequestArgsDict']]] = None,
+                 response: pulumi.Input[Optional[Union['LogConfigurationResponseArgs', 'LogConfigurationResponseArgsDict']]] = None,
+                 scope: pulumi.Input[Optional[Union['LogConfigurationScopeArgs', 'LogConfigurationScopeArgsDict']]] = None,
+                 session: pulumi.Input[Optional[Union['LogConfigurationSessionArgs', 'LogConfigurationSessionArgsDict']]] = None,
+                 stream: pulumi.Input[Optional[Union['LogConfigurationStreamArgs', 'LogConfigurationStreamArgsDict']]] = None,
                  __props__=None):
         """
         Managing Log Configuration with Formal.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -323,6 +326,7 @@ class LogConfiguration(pulumi.CustomResource):
         """
         Managing Log Configuration with Formal.
 
+
         :param str resource_name: The name of the resource.
         :param LogConfigurationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -338,13 +342,13 @@ class LogConfiguration(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 encryption_key_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 request: Optional[pulumi.Input[Union['LogConfigurationRequestArgs', 'LogConfigurationRequestArgsDict']]] = None,
-                 response: Optional[pulumi.Input[Union['LogConfigurationResponseArgs', 'LogConfigurationResponseArgsDict']]] = None,
-                 scope: Optional[pulumi.Input[Union['LogConfigurationScopeArgs', 'LogConfigurationScopeArgsDict']]] = None,
-                 session: Optional[pulumi.Input[Union['LogConfigurationSessionArgs', 'LogConfigurationSessionArgsDict']]] = None,
-                 stream: Optional[pulumi.Input[Union['LogConfigurationStreamArgs', 'LogConfigurationStreamArgsDict']]] = None,
+                 encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 request: pulumi.Input[Optional[Union['LogConfigurationRequestArgs', 'LogConfigurationRequestArgsDict']]] = None,
+                 response: pulumi.Input[Optional[Union['LogConfigurationResponseArgs', 'LogConfigurationResponseArgsDict']]] = None,
+                 scope: pulumi.Input[Optional[Union['LogConfigurationScopeArgs', 'LogConfigurationScopeArgsDict']]] = None,
+                 session: pulumi.Input[Optional[Union['LogConfigurationSessionArgs', 'LogConfigurationSessionArgsDict']]] = None,
+                 stream: pulumi.Input[Optional[Union['LogConfigurationStreamArgs', 'LogConfigurationStreamArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -379,15 +383,15 @@ class LogConfiguration(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            created_at: Optional[pulumi.Input[_builtins.str]] = None,
-            encryption_key_id: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            request: Optional[pulumi.Input[Union['LogConfigurationRequestArgs', 'LogConfigurationRequestArgsDict']]] = None,
-            response: Optional[pulumi.Input[Union['LogConfigurationResponseArgs', 'LogConfigurationResponseArgsDict']]] = None,
-            scope: Optional[pulumi.Input[Union['LogConfigurationScopeArgs', 'LogConfigurationScopeArgsDict']]] = None,
-            session: Optional[pulumi.Input[Union['LogConfigurationSessionArgs', 'LogConfigurationSessionArgsDict']]] = None,
-            stream: Optional[pulumi.Input[Union['LogConfigurationStreamArgs', 'LogConfigurationStreamArgsDict']]] = None,
-            updated_at: Optional[pulumi.Input[_builtins.str]] = None) -> 'LogConfiguration':
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            request: pulumi.Input[Optional[Union['LogConfigurationRequestArgs', 'LogConfigurationRequestArgsDict']]] = None,
+            response: pulumi.Input[Optional[Union['LogConfigurationResponseArgs', 'LogConfigurationResponseArgsDict']]] = None,
+            scope: pulumi.Input[Optional[Union['LogConfigurationScopeArgs', 'LogConfigurationScopeArgsDict']]] = None,
+            session: pulumi.Input[Optional[Union['LogConfigurationSessionArgs', 'LogConfigurationSessionArgsDict']]] = None,
+            stream: pulumi.Input[Optional[Union['LogConfigurationStreamArgs', 'LogConfigurationStreamArgsDict']]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'LogConfiguration':
         """
         Get an existing LogConfiguration resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

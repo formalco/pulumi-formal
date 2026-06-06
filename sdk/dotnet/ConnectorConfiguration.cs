@@ -43,8 +43,8 @@ namespace Formal.Pulumi
         /// <summary>
         /// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
         /// </summary>
-        [Output("resourcesHealthChecksFrequencySeconds")]
-        public Output<int?> ResourcesHealthChecksFrequencySeconds { get; private set; } = null!;
+        [Output("resourcesHealthChecksFrequency")]
+        public Output<int?> ResourcesHealthChecksFrequency { get; private set; } = null!;
 
 
         /// <summary>
@@ -120,8 +120,8 @@ namespace Formal.Pulumi
         /// <summary>
         /// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
         /// </summary>
-        [Input("resourcesHealthChecksFrequencySeconds")]
-        public Input<int>? ResourcesHealthChecksFrequencySeconds { get; set; }
+        [Input("resourcesHealthChecksFrequency")]
+        public Input<int>? ResourcesHealthChecksFrequency { get; set; }
 
         public ConnectorConfigurationArgs()
         {
@@ -158,8 +158,8 @@ namespace Formal.Pulumi
         /// <summary>
         /// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
         /// </summary>
-        [Input("resourcesHealthChecksFrequencySeconds")]
-        public Input<int>? ResourcesHealthChecksFrequencySeconds { get; set; }
+        [Input("resourcesHealthChecksFrequency")]
+        public Input<int>? ResourcesHealthChecksFrequency { get; set; }
 
         public ConnectorConfigurationState()
         {

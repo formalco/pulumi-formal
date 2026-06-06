@@ -22,9 +22,10 @@ class NativeUserLinkArgs:
                  formal_identity_id: pulumi.Input[_builtins.str],
                  formal_identity_type: pulumi.Input[_builtins.str],
                  native_user_id: pulumi.Input[_builtins.str],
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a NativeUserLink resource.
+
         :param pulumi.Input[_builtins.str] formal_identity_id: The Formal ID for the User, Group, or Resource Hostname to be linked.
         :param pulumi.Input[_builtins.str] formal_identity_type: The type of Formal Identity to be linked. Accepted values are `user`, `group`, and `resource_hostname`.
         :param pulumi.Input[_builtins.str] native_user_id: The Native User ID of the Native User.
@@ -74,27 +75,28 @@ class NativeUserLinkArgs:
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this Native User link cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
 @pulumi.input_type
 class _NativeUserLinkState:
     def __init__(__self__, *,
-                 formal_identity_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 formal_identity_type: Optional[pulumi.Input[_builtins.str]] = None,
-                 native_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 formal_identity_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 formal_identity_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         Input properties used for looking up and filtering NativeUserLink resources.
+
         :param pulumi.Input[_builtins.str] formal_identity_id: The Formal ID for the User, Group, or Resource Hostname to be linked.
         :param pulumi.Input[_builtins.str] formal_identity_type: The type of Formal Identity to be linked. Accepted values are `user`, `group`, and `resource_hostname`.
         :param pulumi.Input[_builtins.str] native_user_id: The Native User ID of the Native User.
@@ -114,62 +116,62 @@ class _NativeUserLinkState:
 
     @_builtins.property
     @pulumi.getter(name="formalIdentityId")
-    def formal_identity_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def formal_identity_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The Formal ID for the User, Group, or Resource Hostname to be linked.
         """
         return pulumi.get(self, "formal_identity_id")
 
     @formal_identity_id.setter
-    def formal_identity_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def formal_identity_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "formal_identity_id", value)
 
     @_builtins.property
     @pulumi.getter(name="formalIdentityType")
-    def formal_identity_type(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def formal_identity_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The type of Formal Identity to be linked. Accepted values are `user`, `group`, and `resource_hostname`.
         """
         return pulumi.get(self, "formal_identity_type")
 
     @formal_identity_type.setter
-    def formal_identity_type(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def formal_identity_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "formal_identity_type", value)
 
     @_builtins.property
     @pulumi.getter(name="nativeUserId")
-    def native_user_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def native_user_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The Native User ID of the Native User.
         """
         return pulumi.get(self, "native_user_id")
 
     @native_user_id.setter
-    def native_user_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def native_user_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "native_user_id", value)
 
     @_builtins.property
     @pulumi.getter(name="resourceId")
-    def resource_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def resource_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The Resource ID of the Native User.
         """
         return pulumi.get(self, "resource_id")
 
     @resource_id.setter
-    def resource_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def resource_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "resource_id", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this Native User link cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
@@ -179,13 +181,14 @@ class NativeUserLink(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 formal_identity_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 formal_identity_type: Optional[pulumi.Input[_builtins.str]] = None,
-                 native_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 formal_identity_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 formal_identity_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         This resource creates assigns a Native User to a Formal Identity.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -203,6 +206,7 @@ class NativeUserLink(pulumi.CustomResource):
         """
         This resource creates assigns a Native User to a Formal Identity.
 
+
         :param str resource_name: The name of the resource.
         :param NativeUserLinkArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -218,10 +222,10 @@ class NativeUserLink(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 formal_identity_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 formal_identity_type: Optional[pulumi.Input[_builtins.str]] = None,
-                 native_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 formal_identity_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 formal_identity_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -252,11 +256,11 @@ class NativeUserLink(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            formal_identity_id: Optional[pulumi.Input[_builtins.str]] = None,
-            formal_identity_type: Optional[pulumi.Input[_builtins.str]] = None,
-            native_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-            resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-            termination_protection: Optional[pulumi.Input[_builtins.bool]] = None) -> 'NativeUserLink':
+            formal_identity_id: pulumi.Input[Optional[_builtins.str]] = None,
+            formal_identity_type: pulumi.Input[Optional[_builtins.str]] = None,
+            native_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None) -> 'NativeUserLink':
         """
         Get an existing NativeUserLink resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

@@ -13,104 +13,1829 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
-type DataDomainOwner struct {
-	ObjectId   string `pulumi:"objectId"`
-	ObjectType string `pulumi:"objectType"`
+type ConnectorAiProviderAnthropic struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The API key. This value is not stored in Terraform state.
+	ApiKey string `pulumi:"apiKey"`
+	// Version trigger for `apiKey`. Increment this value to update the key.
+	ApiKeyVersion int `pulumi:"apiKeyVersion"`
 }
 
-// DataDomainOwnerInput is an input type that accepts DataDomainOwnerArgs and DataDomainOwnerOutput values.
-// You can construct a concrete instance of `DataDomainOwnerInput` via:
+// ConnectorAiProviderAnthropicInput is an input type that accepts ConnectorAiProviderAnthropicArgs and ConnectorAiProviderAnthropicOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderAnthropicInput` via:
 //
-//	DataDomainOwnerArgs{...}
-type DataDomainOwnerInput interface {
+//	ConnectorAiProviderAnthropicArgs{...}
+type ConnectorAiProviderAnthropicInput interface {
 	pulumi.Input
 
-	ToDataDomainOwnerOutput() DataDomainOwnerOutput
-	ToDataDomainOwnerOutputWithContext(context.Context) DataDomainOwnerOutput
+	ToConnectorAiProviderAnthropicOutput() ConnectorAiProviderAnthropicOutput
+	ToConnectorAiProviderAnthropicOutputWithContext(context.Context) ConnectorAiProviderAnthropicOutput
 }
 
-type DataDomainOwnerArgs struct {
-	ObjectId   pulumi.StringInput `pulumi:"objectId"`
-	ObjectType pulumi.StringInput `pulumi:"objectType"`
+type ConnectorAiProviderAnthropicArgs struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The API key. This value is not stored in Terraform state.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// Version trigger for `apiKey`. Increment this value to update the key.
+	ApiKeyVersion pulumi.IntInput `pulumi:"apiKeyVersion"`
 }
 
-func (DataDomainOwnerArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DataDomainOwner)(nil)).Elem()
+func (ConnectorAiProviderAnthropicArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderAnthropic)(nil)).Elem()
 }
 
-func (i DataDomainOwnerArgs) ToDataDomainOwnerOutput() DataDomainOwnerOutput {
-	return i.ToDataDomainOwnerOutputWithContext(context.Background())
+func (i ConnectorAiProviderAnthropicArgs) ToConnectorAiProviderAnthropicOutput() ConnectorAiProviderAnthropicOutput {
+	return i.ToConnectorAiProviderAnthropicOutputWithContext(context.Background())
 }
 
-func (i DataDomainOwnerArgs) ToDataDomainOwnerOutputWithContext(ctx context.Context) DataDomainOwnerOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DataDomainOwnerOutput)
+func (i ConnectorAiProviderAnthropicArgs) ToConnectorAiProviderAnthropicOutputWithContext(ctx context.Context) ConnectorAiProviderAnthropicOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderAnthropicOutput)
 }
 
-// DataDomainOwnerArrayInput is an input type that accepts DataDomainOwnerArray and DataDomainOwnerArrayOutput values.
-// You can construct a concrete instance of `DataDomainOwnerArrayInput` via:
+func (i ConnectorAiProviderAnthropicArgs) ToConnectorAiProviderAnthropicPtrOutput() ConnectorAiProviderAnthropicPtrOutput {
+	return i.ToConnectorAiProviderAnthropicPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderAnthropicArgs) ToConnectorAiProviderAnthropicPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAnthropicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderAnthropicOutput).ToConnectorAiProviderAnthropicPtrOutputWithContext(ctx)
+}
+
+// ConnectorAiProviderAnthropicPtrInput is an input type that accepts ConnectorAiProviderAnthropicArgs, ConnectorAiProviderAnthropicPtr and ConnectorAiProviderAnthropicPtrOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderAnthropicPtrInput` via:
 //
-//	DataDomainOwnerArray{ DataDomainOwnerArgs{...} }
-type DataDomainOwnerArrayInput interface {
+//	        ConnectorAiProviderAnthropicArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConnectorAiProviderAnthropicPtrInput interface {
 	pulumi.Input
 
-	ToDataDomainOwnerArrayOutput() DataDomainOwnerArrayOutput
-	ToDataDomainOwnerArrayOutputWithContext(context.Context) DataDomainOwnerArrayOutput
+	ToConnectorAiProviderAnthropicPtrOutput() ConnectorAiProviderAnthropicPtrOutput
+	ToConnectorAiProviderAnthropicPtrOutputWithContext(context.Context) ConnectorAiProviderAnthropicPtrOutput
 }
 
-type DataDomainOwnerArray []DataDomainOwnerInput
+type connectorAiProviderAnthropicPtrType ConnectorAiProviderAnthropicArgs
 
-func (DataDomainOwnerArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DataDomainOwner)(nil)).Elem()
+func ConnectorAiProviderAnthropicPtr(v *ConnectorAiProviderAnthropicArgs) ConnectorAiProviderAnthropicPtrInput {
+	return (*connectorAiProviderAnthropicPtrType)(v)
 }
 
-func (i DataDomainOwnerArray) ToDataDomainOwnerArrayOutput() DataDomainOwnerArrayOutput {
-	return i.ToDataDomainOwnerArrayOutputWithContext(context.Background())
+func (*connectorAiProviderAnthropicPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderAnthropic)(nil)).Elem()
 }
 
-func (i DataDomainOwnerArray) ToDataDomainOwnerArrayOutputWithContext(ctx context.Context) DataDomainOwnerArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DataDomainOwnerArrayOutput)
+func (i *connectorAiProviderAnthropicPtrType) ToConnectorAiProviderAnthropicPtrOutput() ConnectorAiProviderAnthropicPtrOutput {
+	return i.ToConnectorAiProviderAnthropicPtrOutputWithContext(context.Background())
 }
 
-type DataDomainOwnerOutput struct{ *pulumi.OutputState }
-
-func (DataDomainOwnerOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DataDomainOwner)(nil)).Elem()
+func (i *connectorAiProviderAnthropicPtrType) ToConnectorAiProviderAnthropicPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAnthropicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderAnthropicPtrOutput)
 }
 
-func (o DataDomainOwnerOutput) ToDataDomainOwnerOutput() DataDomainOwnerOutput {
+type ConnectorAiProviderAnthropicOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderAnthropicOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderAnthropic)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderAnthropicOutput) ToConnectorAiProviderAnthropicOutput() ConnectorAiProviderAnthropicOutput {
 	return o
 }
 
-func (o DataDomainOwnerOutput) ToDataDomainOwnerOutputWithContext(ctx context.Context) DataDomainOwnerOutput {
+func (o ConnectorAiProviderAnthropicOutput) ToConnectorAiProviderAnthropicOutputWithContext(ctx context.Context) ConnectorAiProviderAnthropicOutput {
 	return o
 }
 
-func (o DataDomainOwnerOutput) ObjectId() pulumi.StringOutput {
-	return o.ApplyT(func(v DataDomainOwner) string { return v.ObjectId }).(pulumi.StringOutput)
+func (o ConnectorAiProviderAnthropicOutput) ToConnectorAiProviderAnthropicPtrOutput() ConnectorAiProviderAnthropicPtrOutput {
+	return o.ToConnectorAiProviderAnthropicPtrOutputWithContext(context.Background())
 }
 
-func (o DataDomainOwnerOutput) ObjectType() pulumi.StringOutput {
-	return o.ApplyT(func(v DataDomainOwner) string { return v.ObjectType }).(pulumi.StringOutput)
+func (o ConnectorAiProviderAnthropicOutput) ToConnectorAiProviderAnthropicPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAnthropicPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectorAiProviderAnthropic) *ConnectorAiProviderAnthropic {
+		return &v
+	}).(ConnectorAiProviderAnthropicPtrOutput)
 }
 
-type DataDomainOwnerArrayOutput struct{ *pulumi.OutputState }
-
-func (DataDomainOwnerArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DataDomainOwner)(nil)).Elem()
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The API key. This value is not stored in Terraform state.
+func (o ConnectorAiProviderAnthropicOutput) ApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectorAiProviderAnthropic) string { return v.ApiKey }).(pulumi.StringOutput)
 }
 
-func (o DataDomainOwnerArrayOutput) ToDataDomainOwnerArrayOutput() DataDomainOwnerArrayOutput {
+// Version trigger for `apiKey`. Increment this value to update the key.
+func (o ConnectorAiProviderAnthropicOutput) ApiKeyVersion() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectorAiProviderAnthropic) int { return v.ApiKeyVersion }).(pulumi.IntOutput)
+}
+
+type ConnectorAiProviderAnthropicPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderAnthropicPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderAnthropic)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderAnthropicPtrOutput) ToConnectorAiProviderAnthropicPtrOutput() ConnectorAiProviderAnthropicPtrOutput {
 	return o
 }
 
-func (o DataDomainOwnerArrayOutput) ToDataDomainOwnerArrayOutputWithContext(ctx context.Context) DataDomainOwnerArrayOutput {
+func (o ConnectorAiProviderAnthropicPtrOutput) ToConnectorAiProviderAnthropicPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAnthropicPtrOutput {
 	return o
 }
 
-func (o DataDomainOwnerArrayOutput) Index(i pulumi.IntInput) DataDomainOwnerOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataDomainOwner {
-		return vs[0].([]DataDomainOwner)[vs[1].(int)]
-	}).(DataDomainOwnerOutput)
+func (o ConnectorAiProviderAnthropicPtrOutput) Elem() ConnectorAiProviderAnthropicOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderAnthropic) ConnectorAiProviderAnthropic {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectorAiProviderAnthropic
+		return ret
+	}).(ConnectorAiProviderAnthropicOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The API key. This value is not stored in Terraform state.
+func (o ConnectorAiProviderAnthropicPtrOutput) ApiKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderAnthropic) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `apiKey`. Increment this value to update the key.
+func (o ConnectorAiProviderAnthropicPtrOutput) ApiKeyVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderAnthropic) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiKeyVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type ConnectorAiProviderAwsBedrock struct {
+	// The AWS region.
+	Region string `pulumi:"region"`
+}
+
+// ConnectorAiProviderAwsBedrockInput is an input type that accepts ConnectorAiProviderAwsBedrockArgs and ConnectorAiProviderAwsBedrockOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderAwsBedrockInput` via:
+//
+//	ConnectorAiProviderAwsBedrockArgs{...}
+type ConnectorAiProviderAwsBedrockInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderAwsBedrockOutput() ConnectorAiProviderAwsBedrockOutput
+	ToConnectorAiProviderAwsBedrockOutputWithContext(context.Context) ConnectorAiProviderAwsBedrockOutput
+}
+
+type ConnectorAiProviderAwsBedrockArgs struct {
+	// The AWS region.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (ConnectorAiProviderAwsBedrockArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderAwsBedrock)(nil)).Elem()
+}
+
+func (i ConnectorAiProviderAwsBedrockArgs) ToConnectorAiProviderAwsBedrockOutput() ConnectorAiProviderAwsBedrockOutput {
+	return i.ToConnectorAiProviderAwsBedrockOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderAwsBedrockArgs) ToConnectorAiProviderAwsBedrockOutputWithContext(ctx context.Context) ConnectorAiProviderAwsBedrockOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderAwsBedrockOutput)
+}
+
+func (i ConnectorAiProviderAwsBedrockArgs) ToConnectorAiProviderAwsBedrockPtrOutput() ConnectorAiProviderAwsBedrockPtrOutput {
+	return i.ToConnectorAiProviderAwsBedrockPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderAwsBedrockArgs) ToConnectorAiProviderAwsBedrockPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAwsBedrockPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderAwsBedrockOutput).ToConnectorAiProviderAwsBedrockPtrOutputWithContext(ctx)
+}
+
+// ConnectorAiProviderAwsBedrockPtrInput is an input type that accepts ConnectorAiProviderAwsBedrockArgs, ConnectorAiProviderAwsBedrockPtr and ConnectorAiProviderAwsBedrockPtrOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderAwsBedrockPtrInput` via:
+//
+//	        ConnectorAiProviderAwsBedrockArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConnectorAiProviderAwsBedrockPtrInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderAwsBedrockPtrOutput() ConnectorAiProviderAwsBedrockPtrOutput
+	ToConnectorAiProviderAwsBedrockPtrOutputWithContext(context.Context) ConnectorAiProviderAwsBedrockPtrOutput
+}
+
+type connectorAiProviderAwsBedrockPtrType ConnectorAiProviderAwsBedrockArgs
+
+func ConnectorAiProviderAwsBedrockPtr(v *ConnectorAiProviderAwsBedrockArgs) ConnectorAiProviderAwsBedrockPtrInput {
+	return (*connectorAiProviderAwsBedrockPtrType)(v)
+}
+
+func (*connectorAiProviderAwsBedrockPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderAwsBedrock)(nil)).Elem()
+}
+
+func (i *connectorAiProviderAwsBedrockPtrType) ToConnectorAiProviderAwsBedrockPtrOutput() ConnectorAiProviderAwsBedrockPtrOutput {
+	return i.ToConnectorAiProviderAwsBedrockPtrOutputWithContext(context.Background())
+}
+
+func (i *connectorAiProviderAwsBedrockPtrType) ToConnectorAiProviderAwsBedrockPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAwsBedrockPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderAwsBedrockPtrOutput)
+}
+
+type ConnectorAiProviderAwsBedrockOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderAwsBedrockOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderAwsBedrock)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderAwsBedrockOutput) ToConnectorAiProviderAwsBedrockOutput() ConnectorAiProviderAwsBedrockOutput {
+	return o
+}
+
+func (o ConnectorAiProviderAwsBedrockOutput) ToConnectorAiProviderAwsBedrockOutputWithContext(ctx context.Context) ConnectorAiProviderAwsBedrockOutput {
+	return o
+}
+
+func (o ConnectorAiProviderAwsBedrockOutput) ToConnectorAiProviderAwsBedrockPtrOutput() ConnectorAiProviderAwsBedrockPtrOutput {
+	return o.ToConnectorAiProviderAwsBedrockPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectorAiProviderAwsBedrockOutput) ToConnectorAiProviderAwsBedrockPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAwsBedrockPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectorAiProviderAwsBedrock) *ConnectorAiProviderAwsBedrock {
+		return &v
+	}).(ConnectorAiProviderAwsBedrockPtrOutput)
+}
+
+// The AWS region.
+func (o ConnectorAiProviderAwsBedrockOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectorAiProviderAwsBedrock) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type ConnectorAiProviderAwsBedrockPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderAwsBedrockPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderAwsBedrock)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderAwsBedrockPtrOutput) ToConnectorAiProviderAwsBedrockPtrOutput() ConnectorAiProviderAwsBedrockPtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderAwsBedrockPtrOutput) ToConnectorAiProviderAwsBedrockPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAwsBedrockPtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderAwsBedrockPtrOutput) Elem() ConnectorAiProviderAwsBedrockOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderAwsBedrock) ConnectorAiProviderAwsBedrock {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectorAiProviderAwsBedrock
+		return ret
+	}).(ConnectorAiProviderAwsBedrockOutput)
+}
+
+// The AWS region.
+func (o ConnectorAiProviderAwsBedrockPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderAwsBedrock) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectorAiProviderAzureAi struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The API key. This value is not stored in Terraform state.
+	ApiKey string `pulumi:"apiKey"`
+	// Version trigger for `apiKey`. Increment this value to update the key.
+	ApiKeyVersion int `pulumi:"apiKeyVersion"`
+	// The Azure AI Foundry endpoint URL.
+	Endpoint string `pulumi:"endpoint"`
+}
+
+// ConnectorAiProviderAzureAiInput is an input type that accepts ConnectorAiProviderAzureAiArgs and ConnectorAiProviderAzureAiOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderAzureAiInput` via:
+//
+//	ConnectorAiProviderAzureAiArgs{...}
+type ConnectorAiProviderAzureAiInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderAzureAiOutput() ConnectorAiProviderAzureAiOutput
+	ToConnectorAiProviderAzureAiOutputWithContext(context.Context) ConnectorAiProviderAzureAiOutput
+}
+
+type ConnectorAiProviderAzureAiArgs struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The API key. This value is not stored in Terraform state.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// Version trigger for `apiKey`. Increment this value to update the key.
+	ApiKeyVersion pulumi.IntInput `pulumi:"apiKeyVersion"`
+	// The Azure AI Foundry endpoint URL.
+	Endpoint pulumi.StringInput `pulumi:"endpoint"`
+}
+
+func (ConnectorAiProviderAzureAiArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderAzureAi)(nil)).Elem()
+}
+
+func (i ConnectorAiProviderAzureAiArgs) ToConnectorAiProviderAzureAiOutput() ConnectorAiProviderAzureAiOutput {
+	return i.ToConnectorAiProviderAzureAiOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderAzureAiArgs) ToConnectorAiProviderAzureAiOutputWithContext(ctx context.Context) ConnectorAiProviderAzureAiOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderAzureAiOutput)
+}
+
+func (i ConnectorAiProviderAzureAiArgs) ToConnectorAiProviderAzureAiPtrOutput() ConnectorAiProviderAzureAiPtrOutput {
+	return i.ToConnectorAiProviderAzureAiPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderAzureAiArgs) ToConnectorAiProviderAzureAiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAzureAiPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderAzureAiOutput).ToConnectorAiProviderAzureAiPtrOutputWithContext(ctx)
+}
+
+// ConnectorAiProviderAzureAiPtrInput is an input type that accepts ConnectorAiProviderAzureAiArgs, ConnectorAiProviderAzureAiPtr and ConnectorAiProviderAzureAiPtrOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderAzureAiPtrInput` via:
+//
+//	        ConnectorAiProviderAzureAiArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConnectorAiProviderAzureAiPtrInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderAzureAiPtrOutput() ConnectorAiProviderAzureAiPtrOutput
+	ToConnectorAiProviderAzureAiPtrOutputWithContext(context.Context) ConnectorAiProviderAzureAiPtrOutput
+}
+
+type connectorAiProviderAzureAiPtrType ConnectorAiProviderAzureAiArgs
+
+func ConnectorAiProviderAzureAiPtr(v *ConnectorAiProviderAzureAiArgs) ConnectorAiProviderAzureAiPtrInput {
+	return (*connectorAiProviderAzureAiPtrType)(v)
+}
+
+func (*connectorAiProviderAzureAiPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderAzureAi)(nil)).Elem()
+}
+
+func (i *connectorAiProviderAzureAiPtrType) ToConnectorAiProviderAzureAiPtrOutput() ConnectorAiProviderAzureAiPtrOutput {
+	return i.ToConnectorAiProviderAzureAiPtrOutputWithContext(context.Background())
+}
+
+func (i *connectorAiProviderAzureAiPtrType) ToConnectorAiProviderAzureAiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAzureAiPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderAzureAiPtrOutput)
+}
+
+type ConnectorAiProviderAzureAiOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderAzureAiOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderAzureAi)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderAzureAiOutput) ToConnectorAiProviderAzureAiOutput() ConnectorAiProviderAzureAiOutput {
+	return o
+}
+
+func (o ConnectorAiProviderAzureAiOutput) ToConnectorAiProviderAzureAiOutputWithContext(ctx context.Context) ConnectorAiProviderAzureAiOutput {
+	return o
+}
+
+func (o ConnectorAiProviderAzureAiOutput) ToConnectorAiProviderAzureAiPtrOutput() ConnectorAiProviderAzureAiPtrOutput {
+	return o.ToConnectorAiProviderAzureAiPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectorAiProviderAzureAiOutput) ToConnectorAiProviderAzureAiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAzureAiPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectorAiProviderAzureAi) *ConnectorAiProviderAzureAi {
+		return &v
+	}).(ConnectorAiProviderAzureAiPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The API key. This value is not stored in Terraform state.
+func (o ConnectorAiProviderAzureAiOutput) ApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectorAiProviderAzureAi) string { return v.ApiKey }).(pulumi.StringOutput)
+}
+
+// Version trigger for `apiKey`. Increment this value to update the key.
+func (o ConnectorAiProviderAzureAiOutput) ApiKeyVersion() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectorAiProviderAzureAi) int { return v.ApiKeyVersion }).(pulumi.IntOutput)
+}
+
+// The Azure AI Foundry endpoint URL.
+func (o ConnectorAiProviderAzureAiOutput) Endpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectorAiProviderAzureAi) string { return v.Endpoint }).(pulumi.StringOutput)
+}
+
+type ConnectorAiProviderAzureAiPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderAzureAiPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderAzureAi)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderAzureAiPtrOutput) ToConnectorAiProviderAzureAiPtrOutput() ConnectorAiProviderAzureAiPtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderAzureAiPtrOutput) ToConnectorAiProviderAzureAiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderAzureAiPtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderAzureAiPtrOutput) Elem() ConnectorAiProviderAzureAiOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderAzureAi) ConnectorAiProviderAzureAi {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectorAiProviderAzureAi
+		return ret
+	}).(ConnectorAiProviderAzureAiOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The API key. This value is not stored in Terraform state.
+func (o ConnectorAiProviderAzureAiPtrOutput) ApiKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderAzureAi) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `apiKey`. Increment this value to update the key.
+func (o ConnectorAiProviderAzureAiPtrOutput) ApiKeyVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderAzureAi) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiKeyVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+// The Azure AI Foundry endpoint URL.
+func (o ConnectorAiProviderAzureAiPtrOutput) Endpoint() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderAzureAi) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Endpoint
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectorAiProviderFormalAiSatellite struct {
+}
+
+// ConnectorAiProviderFormalAiSatelliteInput is an input type that accepts ConnectorAiProviderFormalAiSatelliteArgs and ConnectorAiProviderFormalAiSatelliteOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderFormalAiSatelliteInput` via:
+//
+//	ConnectorAiProviderFormalAiSatelliteArgs{...}
+type ConnectorAiProviderFormalAiSatelliteInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderFormalAiSatelliteOutput() ConnectorAiProviderFormalAiSatelliteOutput
+	ToConnectorAiProviderFormalAiSatelliteOutputWithContext(context.Context) ConnectorAiProviderFormalAiSatelliteOutput
+}
+
+type ConnectorAiProviderFormalAiSatelliteArgs struct {
+}
+
+func (ConnectorAiProviderFormalAiSatelliteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderFormalAiSatellite)(nil)).Elem()
+}
+
+func (i ConnectorAiProviderFormalAiSatelliteArgs) ToConnectorAiProviderFormalAiSatelliteOutput() ConnectorAiProviderFormalAiSatelliteOutput {
+	return i.ToConnectorAiProviderFormalAiSatelliteOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderFormalAiSatelliteArgs) ToConnectorAiProviderFormalAiSatelliteOutputWithContext(ctx context.Context) ConnectorAiProviderFormalAiSatelliteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderFormalAiSatelliteOutput)
+}
+
+func (i ConnectorAiProviderFormalAiSatelliteArgs) ToConnectorAiProviderFormalAiSatellitePtrOutput() ConnectorAiProviderFormalAiSatellitePtrOutput {
+	return i.ToConnectorAiProviderFormalAiSatellitePtrOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderFormalAiSatelliteArgs) ToConnectorAiProviderFormalAiSatellitePtrOutputWithContext(ctx context.Context) ConnectorAiProviderFormalAiSatellitePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderFormalAiSatelliteOutput).ToConnectorAiProviderFormalAiSatellitePtrOutputWithContext(ctx)
+}
+
+// ConnectorAiProviderFormalAiSatellitePtrInput is an input type that accepts ConnectorAiProviderFormalAiSatelliteArgs, ConnectorAiProviderFormalAiSatellitePtr and ConnectorAiProviderFormalAiSatellitePtrOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderFormalAiSatellitePtrInput` via:
+//
+//	        ConnectorAiProviderFormalAiSatelliteArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConnectorAiProviderFormalAiSatellitePtrInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderFormalAiSatellitePtrOutput() ConnectorAiProviderFormalAiSatellitePtrOutput
+	ToConnectorAiProviderFormalAiSatellitePtrOutputWithContext(context.Context) ConnectorAiProviderFormalAiSatellitePtrOutput
+}
+
+type connectorAiProviderFormalAiSatellitePtrType ConnectorAiProviderFormalAiSatelliteArgs
+
+func ConnectorAiProviderFormalAiSatellitePtr(v *ConnectorAiProviderFormalAiSatelliteArgs) ConnectorAiProviderFormalAiSatellitePtrInput {
+	return (*connectorAiProviderFormalAiSatellitePtrType)(v)
+}
+
+func (*connectorAiProviderFormalAiSatellitePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderFormalAiSatellite)(nil)).Elem()
+}
+
+func (i *connectorAiProviderFormalAiSatellitePtrType) ToConnectorAiProviderFormalAiSatellitePtrOutput() ConnectorAiProviderFormalAiSatellitePtrOutput {
+	return i.ToConnectorAiProviderFormalAiSatellitePtrOutputWithContext(context.Background())
+}
+
+func (i *connectorAiProviderFormalAiSatellitePtrType) ToConnectorAiProviderFormalAiSatellitePtrOutputWithContext(ctx context.Context) ConnectorAiProviderFormalAiSatellitePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderFormalAiSatellitePtrOutput)
+}
+
+type ConnectorAiProviderFormalAiSatelliteOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderFormalAiSatelliteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderFormalAiSatellite)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderFormalAiSatelliteOutput) ToConnectorAiProviderFormalAiSatelliteOutput() ConnectorAiProviderFormalAiSatelliteOutput {
+	return o
+}
+
+func (o ConnectorAiProviderFormalAiSatelliteOutput) ToConnectorAiProviderFormalAiSatelliteOutputWithContext(ctx context.Context) ConnectorAiProviderFormalAiSatelliteOutput {
+	return o
+}
+
+func (o ConnectorAiProviderFormalAiSatelliteOutput) ToConnectorAiProviderFormalAiSatellitePtrOutput() ConnectorAiProviderFormalAiSatellitePtrOutput {
+	return o.ToConnectorAiProviderFormalAiSatellitePtrOutputWithContext(context.Background())
+}
+
+func (o ConnectorAiProviderFormalAiSatelliteOutput) ToConnectorAiProviderFormalAiSatellitePtrOutputWithContext(ctx context.Context) ConnectorAiProviderFormalAiSatellitePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectorAiProviderFormalAiSatellite) *ConnectorAiProviderFormalAiSatellite {
+		return &v
+	}).(ConnectorAiProviderFormalAiSatellitePtrOutput)
+}
+
+type ConnectorAiProviderFormalAiSatellitePtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderFormalAiSatellitePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderFormalAiSatellite)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderFormalAiSatellitePtrOutput) ToConnectorAiProviderFormalAiSatellitePtrOutput() ConnectorAiProviderFormalAiSatellitePtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderFormalAiSatellitePtrOutput) ToConnectorAiProviderFormalAiSatellitePtrOutputWithContext(ctx context.Context) ConnectorAiProviderFormalAiSatellitePtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderFormalAiSatellitePtrOutput) Elem() ConnectorAiProviderFormalAiSatelliteOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderFormalAiSatellite) ConnectorAiProviderFormalAiSatellite {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectorAiProviderFormalAiSatellite
+		return ret
+	}).(ConnectorAiProviderFormalAiSatelliteOutput)
+}
+
+type ConnectorAiProviderGemini struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The API key. This value is not stored in Terraform state.
+	ApiKey string `pulumi:"apiKey"`
+	// Version trigger for `apiKey`. Increment this value to update the key.
+	ApiKeyVersion int `pulumi:"apiKeyVersion"`
+}
+
+// ConnectorAiProviderGeminiInput is an input type that accepts ConnectorAiProviderGeminiArgs and ConnectorAiProviderGeminiOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderGeminiInput` via:
+//
+//	ConnectorAiProviderGeminiArgs{...}
+type ConnectorAiProviderGeminiInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderGeminiOutput() ConnectorAiProviderGeminiOutput
+	ToConnectorAiProviderGeminiOutputWithContext(context.Context) ConnectorAiProviderGeminiOutput
+}
+
+type ConnectorAiProviderGeminiArgs struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The API key. This value is not stored in Terraform state.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// Version trigger for `apiKey`. Increment this value to update the key.
+	ApiKeyVersion pulumi.IntInput `pulumi:"apiKeyVersion"`
+}
+
+func (ConnectorAiProviderGeminiArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderGemini)(nil)).Elem()
+}
+
+func (i ConnectorAiProviderGeminiArgs) ToConnectorAiProviderGeminiOutput() ConnectorAiProviderGeminiOutput {
+	return i.ToConnectorAiProviderGeminiOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderGeminiArgs) ToConnectorAiProviderGeminiOutputWithContext(ctx context.Context) ConnectorAiProviderGeminiOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderGeminiOutput)
+}
+
+func (i ConnectorAiProviderGeminiArgs) ToConnectorAiProviderGeminiPtrOutput() ConnectorAiProviderGeminiPtrOutput {
+	return i.ToConnectorAiProviderGeminiPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderGeminiArgs) ToConnectorAiProviderGeminiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderGeminiPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderGeminiOutput).ToConnectorAiProviderGeminiPtrOutputWithContext(ctx)
+}
+
+// ConnectorAiProviderGeminiPtrInput is an input type that accepts ConnectorAiProviderGeminiArgs, ConnectorAiProviderGeminiPtr and ConnectorAiProviderGeminiPtrOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderGeminiPtrInput` via:
+//
+//	        ConnectorAiProviderGeminiArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConnectorAiProviderGeminiPtrInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderGeminiPtrOutput() ConnectorAiProviderGeminiPtrOutput
+	ToConnectorAiProviderGeminiPtrOutputWithContext(context.Context) ConnectorAiProviderGeminiPtrOutput
+}
+
+type connectorAiProviderGeminiPtrType ConnectorAiProviderGeminiArgs
+
+func ConnectorAiProviderGeminiPtr(v *ConnectorAiProviderGeminiArgs) ConnectorAiProviderGeminiPtrInput {
+	return (*connectorAiProviderGeminiPtrType)(v)
+}
+
+func (*connectorAiProviderGeminiPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderGemini)(nil)).Elem()
+}
+
+func (i *connectorAiProviderGeminiPtrType) ToConnectorAiProviderGeminiPtrOutput() ConnectorAiProviderGeminiPtrOutput {
+	return i.ToConnectorAiProviderGeminiPtrOutputWithContext(context.Background())
+}
+
+func (i *connectorAiProviderGeminiPtrType) ToConnectorAiProviderGeminiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderGeminiPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderGeminiPtrOutput)
+}
+
+type ConnectorAiProviderGeminiOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderGeminiOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderGemini)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderGeminiOutput) ToConnectorAiProviderGeminiOutput() ConnectorAiProviderGeminiOutput {
+	return o
+}
+
+func (o ConnectorAiProviderGeminiOutput) ToConnectorAiProviderGeminiOutputWithContext(ctx context.Context) ConnectorAiProviderGeminiOutput {
+	return o
+}
+
+func (o ConnectorAiProviderGeminiOutput) ToConnectorAiProviderGeminiPtrOutput() ConnectorAiProviderGeminiPtrOutput {
+	return o.ToConnectorAiProviderGeminiPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectorAiProviderGeminiOutput) ToConnectorAiProviderGeminiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderGeminiPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectorAiProviderGemini) *ConnectorAiProviderGemini {
+		return &v
+	}).(ConnectorAiProviderGeminiPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The API key. This value is not stored in Terraform state.
+func (o ConnectorAiProviderGeminiOutput) ApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectorAiProviderGemini) string { return v.ApiKey }).(pulumi.StringOutput)
+}
+
+// Version trigger for `apiKey`. Increment this value to update the key.
+func (o ConnectorAiProviderGeminiOutput) ApiKeyVersion() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectorAiProviderGemini) int { return v.ApiKeyVersion }).(pulumi.IntOutput)
+}
+
+type ConnectorAiProviderGeminiPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderGeminiPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderGemini)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderGeminiPtrOutput) ToConnectorAiProviderGeminiPtrOutput() ConnectorAiProviderGeminiPtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderGeminiPtrOutput) ToConnectorAiProviderGeminiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderGeminiPtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderGeminiPtrOutput) Elem() ConnectorAiProviderGeminiOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderGemini) ConnectorAiProviderGemini {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectorAiProviderGemini
+		return ret
+	}).(ConnectorAiProviderGeminiOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The API key. This value is not stored in Terraform state.
+func (o ConnectorAiProviderGeminiPtrOutput) ApiKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderGemini) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `apiKey`. Increment this value to update the key.
+func (o ConnectorAiProviderGeminiPtrOutput) ApiKeyVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderGemini) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiKeyVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type ConnectorAiProviderGoogleVertexAi struct {
+	// The GCP project ID.
+	GcpProjectId string `pulumi:"gcpProjectId"`
+	// The GCP region.
+	Region string `pulumi:"region"`
+}
+
+// ConnectorAiProviderGoogleVertexAiInput is an input type that accepts ConnectorAiProviderGoogleVertexAiArgs and ConnectorAiProviderGoogleVertexAiOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderGoogleVertexAiInput` via:
+//
+//	ConnectorAiProviderGoogleVertexAiArgs{...}
+type ConnectorAiProviderGoogleVertexAiInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderGoogleVertexAiOutput() ConnectorAiProviderGoogleVertexAiOutput
+	ToConnectorAiProviderGoogleVertexAiOutputWithContext(context.Context) ConnectorAiProviderGoogleVertexAiOutput
+}
+
+type ConnectorAiProviderGoogleVertexAiArgs struct {
+	// The GCP project ID.
+	GcpProjectId pulumi.StringInput `pulumi:"gcpProjectId"`
+	// The GCP region.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (ConnectorAiProviderGoogleVertexAiArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderGoogleVertexAi)(nil)).Elem()
+}
+
+func (i ConnectorAiProviderGoogleVertexAiArgs) ToConnectorAiProviderGoogleVertexAiOutput() ConnectorAiProviderGoogleVertexAiOutput {
+	return i.ToConnectorAiProviderGoogleVertexAiOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderGoogleVertexAiArgs) ToConnectorAiProviderGoogleVertexAiOutputWithContext(ctx context.Context) ConnectorAiProviderGoogleVertexAiOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderGoogleVertexAiOutput)
+}
+
+func (i ConnectorAiProviderGoogleVertexAiArgs) ToConnectorAiProviderGoogleVertexAiPtrOutput() ConnectorAiProviderGoogleVertexAiPtrOutput {
+	return i.ToConnectorAiProviderGoogleVertexAiPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderGoogleVertexAiArgs) ToConnectorAiProviderGoogleVertexAiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderGoogleVertexAiPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderGoogleVertexAiOutput).ToConnectorAiProviderGoogleVertexAiPtrOutputWithContext(ctx)
+}
+
+// ConnectorAiProviderGoogleVertexAiPtrInput is an input type that accepts ConnectorAiProviderGoogleVertexAiArgs, ConnectorAiProviderGoogleVertexAiPtr and ConnectorAiProviderGoogleVertexAiPtrOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderGoogleVertexAiPtrInput` via:
+//
+//	        ConnectorAiProviderGoogleVertexAiArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConnectorAiProviderGoogleVertexAiPtrInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderGoogleVertexAiPtrOutput() ConnectorAiProviderGoogleVertexAiPtrOutput
+	ToConnectorAiProviderGoogleVertexAiPtrOutputWithContext(context.Context) ConnectorAiProviderGoogleVertexAiPtrOutput
+}
+
+type connectorAiProviderGoogleVertexAiPtrType ConnectorAiProviderGoogleVertexAiArgs
+
+func ConnectorAiProviderGoogleVertexAiPtr(v *ConnectorAiProviderGoogleVertexAiArgs) ConnectorAiProviderGoogleVertexAiPtrInput {
+	return (*connectorAiProviderGoogleVertexAiPtrType)(v)
+}
+
+func (*connectorAiProviderGoogleVertexAiPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderGoogleVertexAi)(nil)).Elem()
+}
+
+func (i *connectorAiProviderGoogleVertexAiPtrType) ToConnectorAiProviderGoogleVertexAiPtrOutput() ConnectorAiProviderGoogleVertexAiPtrOutput {
+	return i.ToConnectorAiProviderGoogleVertexAiPtrOutputWithContext(context.Background())
+}
+
+func (i *connectorAiProviderGoogleVertexAiPtrType) ToConnectorAiProviderGoogleVertexAiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderGoogleVertexAiPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderGoogleVertexAiPtrOutput)
+}
+
+type ConnectorAiProviderGoogleVertexAiOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderGoogleVertexAiOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderGoogleVertexAi)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderGoogleVertexAiOutput) ToConnectorAiProviderGoogleVertexAiOutput() ConnectorAiProviderGoogleVertexAiOutput {
+	return o
+}
+
+func (o ConnectorAiProviderGoogleVertexAiOutput) ToConnectorAiProviderGoogleVertexAiOutputWithContext(ctx context.Context) ConnectorAiProviderGoogleVertexAiOutput {
+	return o
+}
+
+func (o ConnectorAiProviderGoogleVertexAiOutput) ToConnectorAiProviderGoogleVertexAiPtrOutput() ConnectorAiProviderGoogleVertexAiPtrOutput {
+	return o.ToConnectorAiProviderGoogleVertexAiPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectorAiProviderGoogleVertexAiOutput) ToConnectorAiProviderGoogleVertexAiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderGoogleVertexAiPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectorAiProviderGoogleVertexAi) *ConnectorAiProviderGoogleVertexAi {
+		return &v
+	}).(ConnectorAiProviderGoogleVertexAiPtrOutput)
+}
+
+// The GCP project ID.
+func (o ConnectorAiProviderGoogleVertexAiOutput) GcpProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectorAiProviderGoogleVertexAi) string { return v.GcpProjectId }).(pulumi.StringOutput)
+}
+
+// The GCP region.
+func (o ConnectorAiProviderGoogleVertexAiOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectorAiProviderGoogleVertexAi) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type ConnectorAiProviderGoogleVertexAiPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderGoogleVertexAiPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderGoogleVertexAi)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderGoogleVertexAiPtrOutput) ToConnectorAiProviderGoogleVertexAiPtrOutput() ConnectorAiProviderGoogleVertexAiPtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderGoogleVertexAiPtrOutput) ToConnectorAiProviderGoogleVertexAiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderGoogleVertexAiPtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderGoogleVertexAiPtrOutput) Elem() ConnectorAiProviderGoogleVertexAiOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderGoogleVertexAi) ConnectorAiProviderGoogleVertexAi {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectorAiProviderGoogleVertexAi
+		return ret
+	}).(ConnectorAiProviderGoogleVertexAiOutput)
+}
+
+// The GCP project ID.
+func (o ConnectorAiProviderGoogleVertexAiPtrOutput) GcpProjectId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderGoogleVertexAi) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.GcpProjectId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The GCP region.
+func (o ConnectorAiProviderGoogleVertexAiPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderGoogleVertexAi) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectorAiProviderOpenai struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The API key. This value is not stored in Terraform state.
+	ApiKey string `pulumi:"apiKey"`
+	// Version trigger for `apiKey`. Increment this value to update the key.
+	ApiKeyVersion int `pulumi:"apiKeyVersion"`
+}
+
+// ConnectorAiProviderOpenaiInput is an input type that accepts ConnectorAiProviderOpenaiArgs and ConnectorAiProviderOpenaiOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderOpenaiInput` via:
+//
+//	ConnectorAiProviderOpenaiArgs{...}
+type ConnectorAiProviderOpenaiInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderOpenaiOutput() ConnectorAiProviderOpenaiOutput
+	ToConnectorAiProviderOpenaiOutputWithContext(context.Context) ConnectorAiProviderOpenaiOutput
+}
+
+type ConnectorAiProviderOpenaiArgs struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// The API key. This value is not stored in Terraform state.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// Version trigger for `apiKey`. Increment this value to update the key.
+	ApiKeyVersion pulumi.IntInput `pulumi:"apiKeyVersion"`
+}
+
+func (ConnectorAiProviderOpenaiArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderOpenai)(nil)).Elem()
+}
+
+func (i ConnectorAiProviderOpenaiArgs) ToConnectorAiProviderOpenaiOutput() ConnectorAiProviderOpenaiOutput {
+	return i.ToConnectorAiProviderOpenaiOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderOpenaiArgs) ToConnectorAiProviderOpenaiOutputWithContext(ctx context.Context) ConnectorAiProviderOpenaiOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderOpenaiOutput)
+}
+
+func (i ConnectorAiProviderOpenaiArgs) ToConnectorAiProviderOpenaiPtrOutput() ConnectorAiProviderOpenaiPtrOutput {
+	return i.ToConnectorAiProviderOpenaiPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectorAiProviderOpenaiArgs) ToConnectorAiProviderOpenaiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderOpenaiPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderOpenaiOutput).ToConnectorAiProviderOpenaiPtrOutputWithContext(ctx)
+}
+
+// ConnectorAiProviderOpenaiPtrInput is an input type that accepts ConnectorAiProviderOpenaiArgs, ConnectorAiProviderOpenaiPtr and ConnectorAiProviderOpenaiPtrOutput values.
+// You can construct a concrete instance of `ConnectorAiProviderOpenaiPtrInput` via:
+//
+//	        ConnectorAiProviderOpenaiArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConnectorAiProviderOpenaiPtrInput interface {
+	pulumi.Input
+
+	ToConnectorAiProviderOpenaiPtrOutput() ConnectorAiProviderOpenaiPtrOutput
+	ToConnectorAiProviderOpenaiPtrOutputWithContext(context.Context) ConnectorAiProviderOpenaiPtrOutput
+}
+
+type connectorAiProviderOpenaiPtrType ConnectorAiProviderOpenaiArgs
+
+func ConnectorAiProviderOpenaiPtr(v *ConnectorAiProviderOpenaiArgs) ConnectorAiProviderOpenaiPtrInput {
+	return (*connectorAiProviderOpenaiPtrType)(v)
+}
+
+func (*connectorAiProviderOpenaiPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderOpenai)(nil)).Elem()
+}
+
+func (i *connectorAiProviderOpenaiPtrType) ToConnectorAiProviderOpenaiPtrOutput() ConnectorAiProviderOpenaiPtrOutput {
+	return i.ToConnectorAiProviderOpenaiPtrOutputWithContext(context.Background())
+}
+
+func (i *connectorAiProviderOpenaiPtrType) ToConnectorAiProviderOpenaiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderOpenaiPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectorAiProviderOpenaiPtrOutput)
+}
+
+type ConnectorAiProviderOpenaiOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderOpenaiOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectorAiProviderOpenai)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderOpenaiOutput) ToConnectorAiProviderOpenaiOutput() ConnectorAiProviderOpenaiOutput {
+	return o
+}
+
+func (o ConnectorAiProviderOpenaiOutput) ToConnectorAiProviderOpenaiOutputWithContext(ctx context.Context) ConnectorAiProviderOpenaiOutput {
+	return o
+}
+
+func (o ConnectorAiProviderOpenaiOutput) ToConnectorAiProviderOpenaiPtrOutput() ConnectorAiProviderOpenaiPtrOutput {
+	return o.ToConnectorAiProviderOpenaiPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectorAiProviderOpenaiOutput) ToConnectorAiProviderOpenaiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderOpenaiPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectorAiProviderOpenai) *ConnectorAiProviderOpenai {
+		return &v
+	}).(ConnectorAiProviderOpenaiPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The API key. This value is not stored in Terraform state.
+func (o ConnectorAiProviderOpenaiOutput) ApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectorAiProviderOpenai) string { return v.ApiKey }).(pulumi.StringOutput)
+}
+
+// Version trigger for `apiKey`. Increment this value to update the key.
+func (o ConnectorAiProviderOpenaiOutput) ApiKeyVersion() pulumi.IntOutput {
+	return o.ApplyT(func(v ConnectorAiProviderOpenai) int { return v.ApiKeyVersion }).(pulumi.IntOutput)
+}
+
+type ConnectorAiProviderOpenaiPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectorAiProviderOpenaiPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectorAiProviderOpenai)(nil)).Elem()
+}
+
+func (o ConnectorAiProviderOpenaiPtrOutput) ToConnectorAiProviderOpenaiPtrOutput() ConnectorAiProviderOpenaiPtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderOpenaiPtrOutput) ToConnectorAiProviderOpenaiPtrOutputWithContext(ctx context.Context) ConnectorAiProviderOpenaiPtrOutput {
+	return o
+}
+
+func (o ConnectorAiProviderOpenaiPtrOutput) Elem() ConnectorAiProviderOpenaiOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderOpenai) ConnectorAiProviderOpenai {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectorAiProviderOpenai
+		return ret
+	}).(ConnectorAiProviderOpenaiOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// The API key. This value is not stored in Terraform state.
+func (o ConnectorAiProviderOpenaiPtrOutput) ApiKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderOpenai) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `apiKey`. Increment this value to update the key.
+func (o ConnectorAiProviderOpenaiPtrOutput) ApiKeyVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectorAiProviderOpenai) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiKeyVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type FormField struct {
+	// Optional field configuration for select-like field types.
+	Config *FormFieldConfig `pulumi:"config"`
+	// Unique field identifier.
+	Id string `pulumi:"id"`
+	// Display name of the field.
+	Name string `pulumi:"name"`
+	// Field type.
+	Type string `pulumi:"type"`
+}
+
+// FormFieldInput is an input type that accepts FormFieldArgs and FormFieldOutput values.
+// You can construct a concrete instance of `FormFieldInput` via:
+//
+//	FormFieldArgs{...}
+type FormFieldInput interface {
+	pulumi.Input
+
+	ToFormFieldOutput() FormFieldOutput
+	ToFormFieldOutputWithContext(context.Context) FormFieldOutput
+}
+
+type FormFieldArgs struct {
+	// Optional field configuration for select-like field types.
+	Config FormFieldConfigPtrInput `pulumi:"config"`
+	// Unique field identifier.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Display name of the field.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Field type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (FormFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormField)(nil)).Elem()
+}
+
+func (i FormFieldArgs) ToFormFieldOutput() FormFieldOutput {
+	return i.ToFormFieldOutputWithContext(context.Background())
+}
+
+func (i FormFieldArgs) ToFormFieldOutputWithContext(ctx context.Context) FormFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldOutput)
+}
+
+// FormFieldArrayInput is an input type that accepts FormFieldArray and FormFieldArrayOutput values.
+// You can construct a concrete instance of `FormFieldArrayInput` via:
+//
+//	FormFieldArray{ FormFieldArgs{...} }
+type FormFieldArrayInput interface {
+	pulumi.Input
+
+	ToFormFieldArrayOutput() FormFieldArrayOutput
+	ToFormFieldArrayOutputWithContext(context.Context) FormFieldArrayOutput
+}
+
+type FormFieldArray []FormFieldInput
+
+func (FormFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FormField)(nil)).Elem()
+}
+
+func (i FormFieldArray) ToFormFieldArrayOutput() FormFieldArrayOutput {
+	return i.ToFormFieldArrayOutputWithContext(context.Background())
+}
+
+func (i FormFieldArray) ToFormFieldArrayOutputWithContext(ctx context.Context) FormFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldArrayOutput)
+}
+
+type FormFieldOutput struct{ *pulumi.OutputState }
+
+func (FormFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormField)(nil)).Elem()
+}
+
+func (o FormFieldOutput) ToFormFieldOutput() FormFieldOutput {
+	return o
+}
+
+func (o FormFieldOutput) ToFormFieldOutputWithContext(ctx context.Context) FormFieldOutput {
+	return o
+}
+
+// Optional field configuration for select-like field types.
+func (o FormFieldOutput) Config() FormFieldConfigPtrOutput {
+	return o.ApplyT(func(v FormField) *FormFieldConfig { return v.Config }).(FormFieldConfigPtrOutput)
+}
+
+// Unique field identifier.
+func (o FormFieldOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v FormField) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Display name of the field.
+func (o FormFieldOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v FormField) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Field type.
+func (o FormFieldOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v FormField) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type FormFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (FormFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FormField)(nil)).Elem()
+}
+
+func (o FormFieldArrayOutput) ToFormFieldArrayOutput() FormFieldArrayOutput {
+	return o
+}
+
+func (o FormFieldArrayOutput) ToFormFieldArrayOutputWithContext(ctx context.Context) FormFieldArrayOutput {
+	return o
+}
+
+func (o FormFieldArrayOutput) Index(i pulumi.IntInput) FormFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FormField {
+		return vs[0].([]FormField)[vs[1].(int)]
+	}).(FormFieldOutput)
+}
+
+type FormFieldConfig struct {
+	// Static options for select-like fields.
+	Options []FormFieldConfigOption `pulumi:"options"`
+	// Dynamic source used to fetch options.
+	OptionsSource *FormFieldConfigOptionsSource `pulumi:"optionsSource"`
+}
+
+// FormFieldConfigInput is an input type that accepts FormFieldConfigArgs and FormFieldConfigOutput values.
+// You can construct a concrete instance of `FormFieldConfigInput` via:
+//
+//	FormFieldConfigArgs{...}
+type FormFieldConfigInput interface {
+	pulumi.Input
+
+	ToFormFieldConfigOutput() FormFieldConfigOutput
+	ToFormFieldConfigOutputWithContext(context.Context) FormFieldConfigOutput
+}
+
+type FormFieldConfigArgs struct {
+	// Static options for select-like fields.
+	Options FormFieldConfigOptionArrayInput `pulumi:"options"`
+	// Dynamic source used to fetch options.
+	OptionsSource FormFieldConfigOptionsSourcePtrInput `pulumi:"optionsSource"`
+}
+
+func (FormFieldConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormFieldConfig)(nil)).Elem()
+}
+
+func (i FormFieldConfigArgs) ToFormFieldConfigOutput() FormFieldConfigOutput {
+	return i.ToFormFieldConfigOutputWithContext(context.Background())
+}
+
+func (i FormFieldConfigArgs) ToFormFieldConfigOutputWithContext(ctx context.Context) FormFieldConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldConfigOutput)
+}
+
+func (i FormFieldConfigArgs) ToFormFieldConfigPtrOutput() FormFieldConfigPtrOutput {
+	return i.ToFormFieldConfigPtrOutputWithContext(context.Background())
+}
+
+func (i FormFieldConfigArgs) ToFormFieldConfigPtrOutputWithContext(ctx context.Context) FormFieldConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldConfigOutput).ToFormFieldConfigPtrOutputWithContext(ctx)
+}
+
+// FormFieldConfigPtrInput is an input type that accepts FormFieldConfigArgs, FormFieldConfigPtr and FormFieldConfigPtrOutput values.
+// You can construct a concrete instance of `FormFieldConfigPtrInput` via:
+//
+//	        FormFieldConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type FormFieldConfigPtrInput interface {
+	pulumi.Input
+
+	ToFormFieldConfigPtrOutput() FormFieldConfigPtrOutput
+	ToFormFieldConfigPtrOutputWithContext(context.Context) FormFieldConfigPtrOutput
+}
+
+type formFieldConfigPtrType FormFieldConfigArgs
+
+func FormFieldConfigPtr(v *FormFieldConfigArgs) FormFieldConfigPtrInput {
+	return (*formFieldConfigPtrType)(v)
+}
+
+func (*formFieldConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FormFieldConfig)(nil)).Elem()
+}
+
+func (i *formFieldConfigPtrType) ToFormFieldConfigPtrOutput() FormFieldConfigPtrOutput {
+	return i.ToFormFieldConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *formFieldConfigPtrType) ToFormFieldConfigPtrOutputWithContext(ctx context.Context) FormFieldConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldConfigPtrOutput)
+}
+
+type FormFieldConfigOutput struct{ *pulumi.OutputState }
+
+func (FormFieldConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormFieldConfig)(nil)).Elem()
+}
+
+func (o FormFieldConfigOutput) ToFormFieldConfigOutput() FormFieldConfigOutput {
+	return o
+}
+
+func (o FormFieldConfigOutput) ToFormFieldConfigOutputWithContext(ctx context.Context) FormFieldConfigOutput {
+	return o
+}
+
+func (o FormFieldConfigOutput) ToFormFieldConfigPtrOutput() FormFieldConfigPtrOutput {
+	return o.ToFormFieldConfigPtrOutputWithContext(context.Background())
+}
+
+func (o FormFieldConfigOutput) ToFormFieldConfigPtrOutputWithContext(ctx context.Context) FormFieldConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FormFieldConfig) *FormFieldConfig {
+		return &v
+	}).(FormFieldConfigPtrOutput)
+}
+
+// Static options for select-like fields.
+func (o FormFieldConfigOutput) Options() FormFieldConfigOptionArrayOutput {
+	return o.ApplyT(func(v FormFieldConfig) []FormFieldConfigOption { return v.Options }).(FormFieldConfigOptionArrayOutput)
+}
+
+// Dynamic source used to fetch options.
+func (o FormFieldConfigOutput) OptionsSource() FormFieldConfigOptionsSourcePtrOutput {
+	return o.ApplyT(func(v FormFieldConfig) *FormFieldConfigOptionsSource { return v.OptionsSource }).(FormFieldConfigOptionsSourcePtrOutput)
+}
+
+type FormFieldConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (FormFieldConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FormFieldConfig)(nil)).Elem()
+}
+
+func (o FormFieldConfigPtrOutput) ToFormFieldConfigPtrOutput() FormFieldConfigPtrOutput {
+	return o
+}
+
+func (o FormFieldConfigPtrOutput) ToFormFieldConfigPtrOutputWithContext(ctx context.Context) FormFieldConfigPtrOutput {
+	return o
+}
+
+func (o FormFieldConfigPtrOutput) Elem() FormFieldConfigOutput {
+	return o.ApplyT(func(v *FormFieldConfig) FormFieldConfig {
+		if v != nil {
+			return *v
+		}
+		var ret FormFieldConfig
+		return ret
+	}).(FormFieldConfigOutput)
+}
+
+// Static options for select-like fields.
+func (o FormFieldConfigPtrOutput) Options() FormFieldConfigOptionArrayOutput {
+	return o.ApplyT(func(v *FormFieldConfig) []FormFieldConfigOption {
+		if v == nil {
+			return nil
+		}
+		return v.Options
+	}).(FormFieldConfigOptionArrayOutput)
+}
+
+// Dynamic source used to fetch options.
+func (o FormFieldConfigPtrOutput) OptionsSource() FormFieldConfigOptionsSourcePtrOutput {
+	return o.ApplyT(func(v *FormFieldConfig) *FormFieldConfigOptionsSource {
+		if v == nil {
+			return nil
+		}
+		return v.OptionsSource
+	}).(FormFieldConfigOptionsSourcePtrOutput)
+}
+
+type FormFieldConfigOption struct {
+	// Option label.
+	Label string `pulumi:"label"`
+	// Option value.
+	Value string `pulumi:"value"`
+}
+
+// FormFieldConfigOptionInput is an input type that accepts FormFieldConfigOptionArgs and FormFieldConfigOptionOutput values.
+// You can construct a concrete instance of `FormFieldConfigOptionInput` via:
+//
+//	FormFieldConfigOptionArgs{...}
+type FormFieldConfigOptionInput interface {
+	pulumi.Input
+
+	ToFormFieldConfigOptionOutput() FormFieldConfigOptionOutput
+	ToFormFieldConfigOptionOutputWithContext(context.Context) FormFieldConfigOptionOutput
+}
+
+type FormFieldConfigOptionArgs struct {
+	// Option label.
+	Label pulumi.StringInput `pulumi:"label"`
+	// Option value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (FormFieldConfigOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormFieldConfigOption)(nil)).Elem()
+}
+
+func (i FormFieldConfigOptionArgs) ToFormFieldConfigOptionOutput() FormFieldConfigOptionOutput {
+	return i.ToFormFieldConfigOptionOutputWithContext(context.Background())
+}
+
+func (i FormFieldConfigOptionArgs) ToFormFieldConfigOptionOutputWithContext(ctx context.Context) FormFieldConfigOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldConfigOptionOutput)
+}
+
+// FormFieldConfigOptionArrayInput is an input type that accepts FormFieldConfigOptionArray and FormFieldConfigOptionArrayOutput values.
+// You can construct a concrete instance of `FormFieldConfigOptionArrayInput` via:
+//
+//	FormFieldConfigOptionArray{ FormFieldConfigOptionArgs{...} }
+type FormFieldConfigOptionArrayInput interface {
+	pulumi.Input
+
+	ToFormFieldConfigOptionArrayOutput() FormFieldConfigOptionArrayOutput
+	ToFormFieldConfigOptionArrayOutputWithContext(context.Context) FormFieldConfigOptionArrayOutput
+}
+
+type FormFieldConfigOptionArray []FormFieldConfigOptionInput
+
+func (FormFieldConfigOptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FormFieldConfigOption)(nil)).Elem()
+}
+
+func (i FormFieldConfigOptionArray) ToFormFieldConfigOptionArrayOutput() FormFieldConfigOptionArrayOutput {
+	return i.ToFormFieldConfigOptionArrayOutputWithContext(context.Background())
+}
+
+func (i FormFieldConfigOptionArray) ToFormFieldConfigOptionArrayOutputWithContext(ctx context.Context) FormFieldConfigOptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldConfigOptionArrayOutput)
+}
+
+type FormFieldConfigOptionOutput struct{ *pulumi.OutputState }
+
+func (FormFieldConfigOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormFieldConfigOption)(nil)).Elem()
+}
+
+func (o FormFieldConfigOptionOutput) ToFormFieldConfigOptionOutput() FormFieldConfigOptionOutput {
+	return o
+}
+
+func (o FormFieldConfigOptionOutput) ToFormFieldConfigOptionOutputWithContext(ctx context.Context) FormFieldConfigOptionOutput {
+	return o
+}
+
+// Option label.
+func (o FormFieldConfigOptionOutput) Label() pulumi.StringOutput {
+	return o.ApplyT(func(v FormFieldConfigOption) string { return v.Label }).(pulumi.StringOutput)
+}
+
+// Option value.
+func (o FormFieldConfigOptionOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v FormFieldConfigOption) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type FormFieldConfigOptionArrayOutput struct{ *pulumi.OutputState }
+
+func (FormFieldConfigOptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FormFieldConfigOption)(nil)).Elem()
+}
+
+func (o FormFieldConfigOptionArrayOutput) ToFormFieldConfigOptionArrayOutput() FormFieldConfigOptionArrayOutput {
+	return o
+}
+
+func (o FormFieldConfigOptionArrayOutput) ToFormFieldConfigOptionArrayOutputWithContext(ctx context.Context) FormFieldConfigOptionArrayOutput {
+	return o
+}
+
+func (o FormFieldConfigOptionArrayOutput) Index(i pulumi.IntInput) FormFieldConfigOptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FormFieldConfigOption {
+		return vs[0].([]FormFieldConfigOption)[vs[1].(int)]
+	}).(FormFieldConfigOptionOutput)
+}
+
+type FormFieldConfigOptionsSource struct {
+	// Service/app name used to fetch options.
+	App string `pulumi:"app"`
+	// Command configuration for options retrieval.
+	Command FormFieldConfigOptionsSourceCommand `pulumi:"command"`
+	// Optional payload for options retrieval.
+	Input map[string]string `pulumi:"input"`
+	// Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
+	InputJson *string `pulumi:"inputJson"`
+	// Machine user used to authenticate options retrieval.
+	MachineUserId string `pulumi:"machineUserId"`
+	// CEL expression that transforms the response into options.
+	Transform string `pulumi:"transform"`
+}
+
+// FormFieldConfigOptionsSourceInput is an input type that accepts FormFieldConfigOptionsSourceArgs and FormFieldConfigOptionsSourceOutput values.
+// You can construct a concrete instance of `FormFieldConfigOptionsSourceInput` via:
+//
+//	FormFieldConfigOptionsSourceArgs{...}
+type FormFieldConfigOptionsSourceInput interface {
+	pulumi.Input
+
+	ToFormFieldConfigOptionsSourceOutput() FormFieldConfigOptionsSourceOutput
+	ToFormFieldConfigOptionsSourceOutputWithContext(context.Context) FormFieldConfigOptionsSourceOutput
+}
+
+type FormFieldConfigOptionsSourceArgs struct {
+	// Service/app name used to fetch options.
+	App pulumi.StringInput `pulumi:"app"`
+	// Command configuration for options retrieval.
+	Command FormFieldConfigOptionsSourceCommandInput `pulumi:"command"`
+	// Optional payload for options retrieval.
+	Input pulumi.StringMapInput `pulumi:"input"`
+	// Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
+	InputJson pulumi.StringPtrInput `pulumi:"inputJson"`
+	// Machine user used to authenticate options retrieval.
+	MachineUserId pulumi.StringInput `pulumi:"machineUserId"`
+	// CEL expression that transforms the response into options.
+	Transform pulumi.StringInput `pulumi:"transform"`
+}
+
+func (FormFieldConfigOptionsSourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormFieldConfigOptionsSource)(nil)).Elem()
+}
+
+func (i FormFieldConfigOptionsSourceArgs) ToFormFieldConfigOptionsSourceOutput() FormFieldConfigOptionsSourceOutput {
+	return i.ToFormFieldConfigOptionsSourceOutputWithContext(context.Background())
+}
+
+func (i FormFieldConfigOptionsSourceArgs) ToFormFieldConfigOptionsSourceOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldConfigOptionsSourceOutput)
+}
+
+func (i FormFieldConfigOptionsSourceArgs) ToFormFieldConfigOptionsSourcePtrOutput() FormFieldConfigOptionsSourcePtrOutput {
+	return i.ToFormFieldConfigOptionsSourcePtrOutputWithContext(context.Background())
+}
+
+func (i FormFieldConfigOptionsSourceArgs) ToFormFieldConfigOptionsSourcePtrOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldConfigOptionsSourceOutput).ToFormFieldConfigOptionsSourcePtrOutputWithContext(ctx)
+}
+
+// FormFieldConfigOptionsSourcePtrInput is an input type that accepts FormFieldConfigOptionsSourceArgs, FormFieldConfigOptionsSourcePtr and FormFieldConfigOptionsSourcePtrOutput values.
+// You can construct a concrete instance of `FormFieldConfigOptionsSourcePtrInput` via:
+//
+//	        FormFieldConfigOptionsSourceArgs{...}
+//
+//	or:
+//
+//	        nil
+type FormFieldConfigOptionsSourcePtrInput interface {
+	pulumi.Input
+
+	ToFormFieldConfigOptionsSourcePtrOutput() FormFieldConfigOptionsSourcePtrOutput
+	ToFormFieldConfigOptionsSourcePtrOutputWithContext(context.Context) FormFieldConfigOptionsSourcePtrOutput
+}
+
+type formFieldConfigOptionsSourcePtrType FormFieldConfigOptionsSourceArgs
+
+func FormFieldConfigOptionsSourcePtr(v *FormFieldConfigOptionsSourceArgs) FormFieldConfigOptionsSourcePtrInput {
+	return (*formFieldConfigOptionsSourcePtrType)(v)
+}
+
+func (*formFieldConfigOptionsSourcePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FormFieldConfigOptionsSource)(nil)).Elem()
+}
+
+func (i *formFieldConfigOptionsSourcePtrType) ToFormFieldConfigOptionsSourcePtrOutput() FormFieldConfigOptionsSourcePtrOutput {
+	return i.ToFormFieldConfigOptionsSourcePtrOutputWithContext(context.Background())
+}
+
+func (i *formFieldConfigOptionsSourcePtrType) ToFormFieldConfigOptionsSourcePtrOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldConfigOptionsSourcePtrOutput)
+}
+
+type FormFieldConfigOptionsSourceOutput struct{ *pulumi.OutputState }
+
+func (FormFieldConfigOptionsSourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormFieldConfigOptionsSource)(nil)).Elem()
+}
+
+func (o FormFieldConfigOptionsSourceOutput) ToFormFieldConfigOptionsSourceOutput() FormFieldConfigOptionsSourceOutput {
+	return o
+}
+
+func (o FormFieldConfigOptionsSourceOutput) ToFormFieldConfigOptionsSourceOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourceOutput {
+	return o
+}
+
+func (o FormFieldConfigOptionsSourceOutput) ToFormFieldConfigOptionsSourcePtrOutput() FormFieldConfigOptionsSourcePtrOutput {
+	return o.ToFormFieldConfigOptionsSourcePtrOutputWithContext(context.Background())
+}
+
+func (o FormFieldConfigOptionsSourceOutput) ToFormFieldConfigOptionsSourcePtrOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourcePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FormFieldConfigOptionsSource) *FormFieldConfigOptionsSource {
+		return &v
+	}).(FormFieldConfigOptionsSourcePtrOutput)
+}
+
+// Service/app name used to fetch options.
+func (o FormFieldConfigOptionsSourceOutput) App() pulumi.StringOutput {
+	return o.ApplyT(func(v FormFieldConfigOptionsSource) string { return v.App }).(pulumi.StringOutput)
+}
+
+// Command configuration for options retrieval.
+func (o FormFieldConfigOptionsSourceOutput) Command() FormFieldConfigOptionsSourceCommandOutput {
+	return o.ApplyT(func(v FormFieldConfigOptionsSource) FormFieldConfigOptionsSourceCommand { return v.Command }).(FormFieldConfigOptionsSourceCommandOutput)
+}
+
+// Optional payload for options retrieval.
+func (o FormFieldConfigOptionsSourceOutput) Input() pulumi.StringMapOutput {
+	return o.ApplyT(func(v FormFieldConfigOptionsSource) map[string]string { return v.Input }).(pulumi.StringMapOutput)
+}
+
+// Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
+func (o FormFieldConfigOptionsSourceOutput) InputJson() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FormFieldConfigOptionsSource) *string { return v.InputJson }).(pulumi.StringPtrOutput)
+}
+
+// Machine user used to authenticate options retrieval.
+func (o FormFieldConfigOptionsSourceOutput) MachineUserId() pulumi.StringOutput {
+	return o.ApplyT(func(v FormFieldConfigOptionsSource) string { return v.MachineUserId }).(pulumi.StringOutput)
+}
+
+// CEL expression that transforms the response into options.
+func (o FormFieldConfigOptionsSourceOutput) Transform() pulumi.StringOutput {
+	return o.ApplyT(func(v FormFieldConfigOptionsSource) string { return v.Transform }).(pulumi.StringOutput)
+}
+
+type FormFieldConfigOptionsSourcePtrOutput struct{ *pulumi.OutputState }
+
+func (FormFieldConfigOptionsSourcePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FormFieldConfigOptionsSource)(nil)).Elem()
+}
+
+func (o FormFieldConfigOptionsSourcePtrOutput) ToFormFieldConfigOptionsSourcePtrOutput() FormFieldConfigOptionsSourcePtrOutput {
+	return o
+}
+
+func (o FormFieldConfigOptionsSourcePtrOutput) ToFormFieldConfigOptionsSourcePtrOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourcePtrOutput {
+	return o
+}
+
+func (o FormFieldConfigOptionsSourcePtrOutput) Elem() FormFieldConfigOptionsSourceOutput {
+	return o.ApplyT(func(v *FormFieldConfigOptionsSource) FormFieldConfigOptionsSource {
+		if v != nil {
+			return *v
+		}
+		var ret FormFieldConfigOptionsSource
+		return ret
+	}).(FormFieldConfigOptionsSourceOutput)
+}
+
+// Service/app name used to fetch options.
+func (o FormFieldConfigOptionsSourcePtrOutput) App() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FormFieldConfigOptionsSource) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.App
+	}).(pulumi.StringPtrOutput)
+}
+
+// Command configuration for options retrieval.
+func (o FormFieldConfigOptionsSourcePtrOutput) Command() FormFieldConfigOptionsSourceCommandPtrOutput {
+	return o.ApplyT(func(v *FormFieldConfigOptionsSource) *FormFieldConfigOptionsSourceCommand {
+		if v == nil {
+			return nil
+		}
+		return &v.Command
+	}).(FormFieldConfigOptionsSourceCommandPtrOutput)
+}
+
+// Optional payload for options retrieval.
+func (o FormFieldConfigOptionsSourcePtrOutput) Input() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *FormFieldConfigOptionsSource) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.Input
+	}).(pulumi.StringMapOutput)
+}
+
+// Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
+func (o FormFieldConfigOptionsSourcePtrOutput) InputJson() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FormFieldConfigOptionsSource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InputJson
+	}).(pulumi.StringPtrOutput)
+}
+
+// Machine user used to authenticate options retrieval.
+func (o FormFieldConfigOptionsSourcePtrOutput) MachineUserId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FormFieldConfigOptionsSource) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.MachineUserId
+	}).(pulumi.StringPtrOutput)
+}
+
+// CEL expression that transforms the response into options.
+func (o FormFieldConfigOptionsSourcePtrOutput) Transform() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FormFieldConfigOptionsSource) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Transform
+	}).(pulumi.StringPtrOutput)
+}
+
+type FormFieldConfigOptionsSourceCommand struct {
+	// Command name.
+	Name string `pulumi:"name"`
+}
+
+// FormFieldConfigOptionsSourceCommandInput is an input type that accepts FormFieldConfigOptionsSourceCommandArgs and FormFieldConfigOptionsSourceCommandOutput values.
+// You can construct a concrete instance of `FormFieldConfigOptionsSourceCommandInput` via:
+//
+//	FormFieldConfigOptionsSourceCommandArgs{...}
+type FormFieldConfigOptionsSourceCommandInput interface {
+	pulumi.Input
+
+	ToFormFieldConfigOptionsSourceCommandOutput() FormFieldConfigOptionsSourceCommandOutput
+	ToFormFieldConfigOptionsSourceCommandOutputWithContext(context.Context) FormFieldConfigOptionsSourceCommandOutput
+}
+
+type FormFieldConfigOptionsSourceCommandArgs struct {
+	// Command name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (FormFieldConfigOptionsSourceCommandArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormFieldConfigOptionsSourceCommand)(nil)).Elem()
+}
+
+func (i FormFieldConfigOptionsSourceCommandArgs) ToFormFieldConfigOptionsSourceCommandOutput() FormFieldConfigOptionsSourceCommandOutput {
+	return i.ToFormFieldConfigOptionsSourceCommandOutputWithContext(context.Background())
+}
+
+func (i FormFieldConfigOptionsSourceCommandArgs) ToFormFieldConfigOptionsSourceCommandOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourceCommandOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldConfigOptionsSourceCommandOutput)
+}
+
+func (i FormFieldConfigOptionsSourceCommandArgs) ToFormFieldConfigOptionsSourceCommandPtrOutput() FormFieldConfigOptionsSourceCommandPtrOutput {
+	return i.ToFormFieldConfigOptionsSourceCommandPtrOutputWithContext(context.Background())
+}
+
+func (i FormFieldConfigOptionsSourceCommandArgs) ToFormFieldConfigOptionsSourceCommandPtrOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourceCommandPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldConfigOptionsSourceCommandOutput).ToFormFieldConfigOptionsSourceCommandPtrOutputWithContext(ctx)
+}
+
+// FormFieldConfigOptionsSourceCommandPtrInput is an input type that accepts FormFieldConfigOptionsSourceCommandArgs, FormFieldConfigOptionsSourceCommandPtr and FormFieldConfigOptionsSourceCommandPtrOutput values.
+// You can construct a concrete instance of `FormFieldConfigOptionsSourceCommandPtrInput` via:
+//
+//	        FormFieldConfigOptionsSourceCommandArgs{...}
+//
+//	or:
+//
+//	        nil
+type FormFieldConfigOptionsSourceCommandPtrInput interface {
+	pulumi.Input
+
+	ToFormFieldConfigOptionsSourceCommandPtrOutput() FormFieldConfigOptionsSourceCommandPtrOutput
+	ToFormFieldConfigOptionsSourceCommandPtrOutputWithContext(context.Context) FormFieldConfigOptionsSourceCommandPtrOutput
+}
+
+type formFieldConfigOptionsSourceCommandPtrType FormFieldConfigOptionsSourceCommandArgs
+
+func FormFieldConfigOptionsSourceCommandPtr(v *FormFieldConfigOptionsSourceCommandArgs) FormFieldConfigOptionsSourceCommandPtrInput {
+	return (*formFieldConfigOptionsSourceCommandPtrType)(v)
+}
+
+func (*formFieldConfigOptionsSourceCommandPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FormFieldConfigOptionsSourceCommand)(nil)).Elem()
+}
+
+func (i *formFieldConfigOptionsSourceCommandPtrType) ToFormFieldConfigOptionsSourceCommandPtrOutput() FormFieldConfigOptionsSourceCommandPtrOutput {
+	return i.ToFormFieldConfigOptionsSourceCommandPtrOutputWithContext(context.Background())
+}
+
+func (i *formFieldConfigOptionsSourceCommandPtrType) ToFormFieldConfigOptionsSourceCommandPtrOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourceCommandPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldConfigOptionsSourceCommandPtrOutput)
+}
+
+type FormFieldConfigOptionsSourceCommandOutput struct{ *pulumi.OutputState }
+
+func (FormFieldConfigOptionsSourceCommandOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormFieldConfigOptionsSourceCommand)(nil)).Elem()
+}
+
+func (o FormFieldConfigOptionsSourceCommandOutput) ToFormFieldConfigOptionsSourceCommandOutput() FormFieldConfigOptionsSourceCommandOutput {
+	return o
+}
+
+func (o FormFieldConfigOptionsSourceCommandOutput) ToFormFieldConfigOptionsSourceCommandOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourceCommandOutput {
+	return o
+}
+
+func (o FormFieldConfigOptionsSourceCommandOutput) ToFormFieldConfigOptionsSourceCommandPtrOutput() FormFieldConfigOptionsSourceCommandPtrOutput {
+	return o.ToFormFieldConfigOptionsSourceCommandPtrOutputWithContext(context.Background())
+}
+
+func (o FormFieldConfigOptionsSourceCommandOutput) ToFormFieldConfigOptionsSourceCommandPtrOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourceCommandPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FormFieldConfigOptionsSourceCommand) *FormFieldConfigOptionsSourceCommand {
+		return &v
+	}).(FormFieldConfigOptionsSourceCommandPtrOutput)
+}
+
+// Command name.
+func (o FormFieldConfigOptionsSourceCommandOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v FormFieldConfigOptionsSourceCommand) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type FormFieldConfigOptionsSourceCommandPtrOutput struct{ *pulumi.OutputState }
+
+func (FormFieldConfigOptionsSourceCommandPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FormFieldConfigOptionsSourceCommand)(nil)).Elem()
+}
+
+func (o FormFieldConfigOptionsSourceCommandPtrOutput) ToFormFieldConfigOptionsSourceCommandPtrOutput() FormFieldConfigOptionsSourceCommandPtrOutput {
+	return o
+}
+
+func (o FormFieldConfigOptionsSourceCommandPtrOutput) ToFormFieldConfigOptionsSourceCommandPtrOutputWithContext(ctx context.Context) FormFieldConfigOptionsSourceCommandPtrOutput {
+	return o
+}
+
+func (o FormFieldConfigOptionsSourceCommandPtrOutput) Elem() FormFieldConfigOptionsSourceCommandOutput {
+	return o.ApplyT(func(v *FormFieldConfigOptionsSourceCommand) FormFieldConfigOptionsSourceCommand {
+		if v != nil {
+			return *v
+		}
+		var ret FormFieldConfigOptionsSourceCommand
+		return ret
+	}).(FormFieldConfigOptionsSourceCommandOutput)
+}
+
+// Command name.
+func (o FormFieldConfigOptionsSourceCommandPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FormFieldConfigOptionsSourceCommand) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
 }
 
 type IntegrationBiMetabase struct {
@@ -291,6 +2016,8 @@ func (o IntegrationBiMetabasePtrOutput) Username() pulumi.StringPtrOutput {
 type IntegrationCloudAws struct {
 	// Allows the Cloud Integration to access S3 buckets for Log Integrations.
 	AllowS3Access *bool `pulumi:"allowS3Access"`
+	// The regions to enable resource autodiscovery for.
+	AutodiscoveryRegions []string `pulumi:"autodiscoveryRegions"`
 	// The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
 	AwsCustomerRoleArn *string `pulumi:"awsCustomerRoleArn"`
 	// Enables resource autodiscovery for EC2 instances.
@@ -325,6 +2052,8 @@ type IntegrationCloudAwsInput interface {
 type IntegrationCloudAwsArgs struct {
 	// Allows the Cloud Integration to access S3 buckets for Log Integrations.
 	AllowS3Access pulumi.BoolPtrInput `pulumi:"allowS3Access"`
+	// The regions to enable resource autodiscovery for.
+	AutodiscoveryRegions pulumi.StringArrayInput `pulumi:"autodiscoveryRegions"`
 	// The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
 	AwsCustomerRoleArn pulumi.StringPtrInput `pulumi:"awsCustomerRoleArn"`
 	// Enables resource autodiscovery for EC2 instances.
@@ -427,6 +2156,11 @@ func (o IntegrationCloudAwsOutput) AllowS3Access() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v IntegrationCloudAws) *bool { return v.AllowS3Access }).(pulumi.BoolPtrOutput)
 }
 
+// The regions to enable resource autodiscovery for.
+func (o IntegrationCloudAwsOutput) AutodiscoveryRegions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v IntegrationCloudAws) []string { return v.AutodiscoveryRegions }).(pulumi.StringArrayOutput)
+}
+
 // The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
 func (o IntegrationCloudAwsOutput) AwsCustomerRoleArn() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v IntegrationCloudAws) *string { return v.AwsCustomerRoleArn }).(pulumi.StringPtrOutput)
@@ -504,6 +2238,16 @@ func (o IntegrationCloudAwsPtrOutput) AllowS3Access() pulumi.BoolPtrOutput {
 		}
 		return v.AllowS3Access
 	}).(pulumi.BoolPtrOutput)
+}
+
+// The regions to enable resource autodiscovery for.
+func (o IntegrationCloudAwsPtrOutput) AutodiscoveryRegions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloudAws) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AutodiscoveryRegions
+	}).(pulumi.StringArrayOutput)
 }
 
 // The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
@@ -596,181 +2340,6 @@ func (o IntegrationCloudAwsPtrOutput) TemplateVersion() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type IntegrationDataCatalogDatahub struct {
-	// Api Key for the Datahub instance.
-	ApiKey string `pulumi:"apiKey"`
-	// Generalized metadata service url for the Datahub instance.
-	GeneralizedMetadataServiceUrl string `pulumi:"generalizedMetadataServiceUrl"`
-	// Webhook secret of the Datahub instance.
-	WebhookSecret string `pulumi:"webhookSecret"`
-}
-
-// IntegrationDataCatalogDatahubInput is an input type that accepts IntegrationDataCatalogDatahubArgs and IntegrationDataCatalogDatahubOutput values.
-// You can construct a concrete instance of `IntegrationDataCatalogDatahubInput` via:
-//
-//	IntegrationDataCatalogDatahubArgs{...}
-type IntegrationDataCatalogDatahubInput interface {
-	pulumi.Input
-
-	ToIntegrationDataCatalogDatahubOutput() IntegrationDataCatalogDatahubOutput
-	ToIntegrationDataCatalogDatahubOutputWithContext(context.Context) IntegrationDataCatalogDatahubOutput
-}
-
-type IntegrationDataCatalogDatahubArgs struct {
-	// Api Key for the Datahub instance.
-	ApiKey pulumi.StringInput `pulumi:"apiKey"`
-	// Generalized metadata service url for the Datahub instance.
-	GeneralizedMetadataServiceUrl pulumi.StringInput `pulumi:"generalizedMetadataServiceUrl"`
-	// Webhook secret of the Datahub instance.
-	WebhookSecret pulumi.StringInput `pulumi:"webhookSecret"`
-}
-
-func (IntegrationDataCatalogDatahubArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*IntegrationDataCatalogDatahub)(nil)).Elem()
-}
-
-func (i IntegrationDataCatalogDatahubArgs) ToIntegrationDataCatalogDatahubOutput() IntegrationDataCatalogDatahubOutput {
-	return i.ToIntegrationDataCatalogDatahubOutputWithContext(context.Background())
-}
-
-func (i IntegrationDataCatalogDatahubArgs) ToIntegrationDataCatalogDatahubOutputWithContext(ctx context.Context) IntegrationDataCatalogDatahubOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(IntegrationDataCatalogDatahubOutput)
-}
-
-func (i IntegrationDataCatalogDatahubArgs) ToIntegrationDataCatalogDatahubPtrOutput() IntegrationDataCatalogDatahubPtrOutput {
-	return i.ToIntegrationDataCatalogDatahubPtrOutputWithContext(context.Background())
-}
-
-func (i IntegrationDataCatalogDatahubArgs) ToIntegrationDataCatalogDatahubPtrOutputWithContext(ctx context.Context) IntegrationDataCatalogDatahubPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(IntegrationDataCatalogDatahubOutput).ToIntegrationDataCatalogDatahubPtrOutputWithContext(ctx)
-}
-
-// IntegrationDataCatalogDatahubPtrInput is an input type that accepts IntegrationDataCatalogDatahubArgs, IntegrationDataCatalogDatahubPtr and IntegrationDataCatalogDatahubPtrOutput values.
-// You can construct a concrete instance of `IntegrationDataCatalogDatahubPtrInput` via:
-//
-//	        IntegrationDataCatalogDatahubArgs{...}
-//
-//	or:
-//
-//	        nil
-type IntegrationDataCatalogDatahubPtrInput interface {
-	pulumi.Input
-
-	ToIntegrationDataCatalogDatahubPtrOutput() IntegrationDataCatalogDatahubPtrOutput
-	ToIntegrationDataCatalogDatahubPtrOutputWithContext(context.Context) IntegrationDataCatalogDatahubPtrOutput
-}
-
-type integrationDataCatalogDatahubPtrType IntegrationDataCatalogDatahubArgs
-
-func IntegrationDataCatalogDatahubPtr(v *IntegrationDataCatalogDatahubArgs) IntegrationDataCatalogDatahubPtrInput {
-	return (*integrationDataCatalogDatahubPtrType)(v)
-}
-
-func (*integrationDataCatalogDatahubPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**IntegrationDataCatalogDatahub)(nil)).Elem()
-}
-
-func (i *integrationDataCatalogDatahubPtrType) ToIntegrationDataCatalogDatahubPtrOutput() IntegrationDataCatalogDatahubPtrOutput {
-	return i.ToIntegrationDataCatalogDatahubPtrOutputWithContext(context.Background())
-}
-
-func (i *integrationDataCatalogDatahubPtrType) ToIntegrationDataCatalogDatahubPtrOutputWithContext(ctx context.Context) IntegrationDataCatalogDatahubPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(IntegrationDataCatalogDatahubPtrOutput)
-}
-
-type IntegrationDataCatalogDatahubOutput struct{ *pulumi.OutputState }
-
-func (IntegrationDataCatalogDatahubOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*IntegrationDataCatalogDatahub)(nil)).Elem()
-}
-
-func (o IntegrationDataCatalogDatahubOutput) ToIntegrationDataCatalogDatahubOutput() IntegrationDataCatalogDatahubOutput {
-	return o
-}
-
-func (o IntegrationDataCatalogDatahubOutput) ToIntegrationDataCatalogDatahubOutputWithContext(ctx context.Context) IntegrationDataCatalogDatahubOutput {
-	return o
-}
-
-func (o IntegrationDataCatalogDatahubOutput) ToIntegrationDataCatalogDatahubPtrOutput() IntegrationDataCatalogDatahubPtrOutput {
-	return o.ToIntegrationDataCatalogDatahubPtrOutputWithContext(context.Background())
-}
-
-func (o IntegrationDataCatalogDatahubOutput) ToIntegrationDataCatalogDatahubPtrOutputWithContext(ctx context.Context) IntegrationDataCatalogDatahubPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v IntegrationDataCatalogDatahub) *IntegrationDataCatalogDatahub {
-		return &v
-	}).(IntegrationDataCatalogDatahubPtrOutput)
-}
-
-// Api Key for the Datahub instance.
-func (o IntegrationDataCatalogDatahubOutput) ApiKey() pulumi.StringOutput {
-	return o.ApplyT(func(v IntegrationDataCatalogDatahub) string { return v.ApiKey }).(pulumi.StringOutput)
-}
-
-// Generalized metadata service url for the Datahub instance.
-func (o IntegrationDataCatalogDatahubOutput) GeneralizedMetadataServiceUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v IntegrationDataCatalogDatahub) string { return v.GeneralizedMetadataServiceUrl }).(pulumi.StringOutput)
-}
-
-// Webhook secret of the Datahub instance.
-func (o IntegrationDataCatalogDatahubOutput) WebhookSecret() pulumi.StringOutput {
-	return o.ApplyT(func(v IntegrationDataCatalogDatahub) string { return v.WebhookSecret }).(pulumi.StringOutput)
-}
-
-type IntegrationDataCatalogDatahubPtrOutput struct{ *pulumi.OutputState }
-
-func (IntegrationDataCatalogDatahubPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**IntegrationDataCatalogDatahub)(nil)).Elem()
-}
-
-func (o IntegrationDataCatalogDatahubPtrOutput) ToIntegrationDataCatalogDatahubPtrOutput() IntegrationDataCatalogDatahubPtrOutput {
-	return o
-}
-
-func (o IntegrationDataCatalogDatahubPtrOutput) ToIntegrationDataCatalogDatahubPtrOutputWithContext(ctx context.Context) IntegrationDataCatalogDatahubPtrOutput {
-	return o
-}
-
-func (o IntegrationDataCatalogDatahubPtrOutput) Elem() IntegrationDataCatalogDatahubOutput {
-	return o.ApplyT(func(v *IntegrationDataCatalogDatahub) IntegrationDataCatalogDatahub {
-		if v != nil {
-			return *v
-		}
-		var ret IntegrationDataCatalogDatahub
-		return ret
-	}).(IntegrationDataCatalogDatahubOutput)
-}
-
-// Api Key for the Datahub instance.
-func (o IntegrationDataCatalogDatahubPtrOutput) ApiKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *IntegrationDataCatalogDatahub) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.ApiKey
-	}).(pulumi.StringPtrOutput)
-}
-
-// Generalized metadata service url for the Datahub instance.
-func (o IntegrationDataCatalogDatahubPtrOutput) GeneralizedMetadataServiceUrl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *IntegrationDataCatalogDatahub) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.GeneralizedMetadataServiceUrl
-	}).(pulumi.StringPtrOutput)
-}
-
-// Webhook secret of the Datahub instance.
-func (o IntegrationDataCatalogDatahubPtrOutput) WebhookSecret() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *IntegrationDataCatalogDatahub) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.WebhookSecret
-	}).(pulumi.StringPtrOutput)
-}
-
 type IntegrationLogAwsS3 struct {
 	// Cloud Integration ID.
 	CloudIntegrationId string `pulumi:"cloudIntegrationId"`
@@ -778,6 +2347,8 @@ type IntegrationLogAwsS3 struct {
 	Region *string `pulumi:"region"`
 	// AWS S3 Bucket Name.
 	S3BucketName string `pulumi:"s3BucketName"`
+	// AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
+	S3BucketPrefix *string `pulumi:"s3BucketPrefix"`
 }
 
 // IntegrationLogAwsS3Input is an input type that accepts IntegrationLogAwsS3Args and IntegrationLogAwsS3Output values.
@@ -798,6 +2369,8 @@ type IntegrationLogAwsS3Args struct {
 	Region pulumi.StringPtrInput `pulumi:"region"`
 	// AWS S3 Bucket Name.
 	S3BucketName pulumi.StringInput `pulumi:"s3BucketName"`
+	// AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
+	S3BucketPrefix pulumi.StringPtrInput `pulumi:"s3BucketPrefix"`
 }
 
 func (IntegrationLogAwsS3Args) ElementType() reflect.Type {
@@ -892,6 +2465,11 @@ func (o IntegrationLogAwsS3Output) S3BucketName() pulumi.StringOutput {
 	return o.ApplyT(func(v IntegrationLogAwsS3) string { return v.S3BucketName }).(pulumi.StringOutput)
 }
 
+// AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
+func (o IntegrationLogAwsS3Output) S3BucketPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IntegrationLogAwsS3) *string { return v.S3BucketPrefix }).(pulumi.StringPtrOutput)
+}
+
 type IntegrationLogAwsS3PtrOutput struct{ *pulumi.OutputState }
 
 func (IntegrationLogAwsS3PtrOutput) ElementType() reflect.Type {
@@ -943,6 +2521,16 @@ func (o IntegrationLogAwsS3PtrOutput) S3BucketName() pulumi.StringPtrOutput {
 			return nil
 		}
 		return &v.S3BucketName
+	}).(pulumi.StringPtrOutput)
+}
+
+// AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
+func (o IntegrationLogAwsS3PtrOutput) S3BucketPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogAwsS3) *string {
+		if v == nil {
+			return nil
+		}
+		return v.S3BucketPrefix
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -2446,14 +4034,34 @@ func (o LogConfigurationStreamPtrOutput) Encrypt() pulumi.BoolPtrOutput {
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*DataDomainOwnerInput)(nil)).Elem(), DataDomainOwnerArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DataDomainOwnerArrayInput)(nil)).Elem(), DataDomainOwnerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderAnthropicInput)(nil)).Elem(), ConnectorAiProviderAnthropicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderAnthropicPtrInput)(nil)).Elem(), ConnectorAiProviderAnthropicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderAwsBedrockInput)(nil)).Elem(), ConnectorAiProviderAwsBedrockArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderAwsBedrockPtrInput)(nil)).Elem(), ConnectorAiProviderAwsBedrockArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderAzureAiInput)(nil)).Elem(), ConnectorAiProviderAzureAiArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderAzureAiPtrInput)(nil)).Elem(), ConnectorAiProviderAzureAiArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderFormalAiSatelliteInput)(nil)).Elem(), ConnectorAiProviderFormalAiSatelliteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderFormalAiSatellitePtrInput)(nil)).Elem(), ConnectorAiProviderFormalAiSatelliteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderGeminiInput)(nil)).Elem(), ConnectorAiProviderGeminiArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderGeminiPtrInput)(nil)).Elem(), ConnectorAiProviderGeminiArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderGoogleVertexAiInput)(nil)).Elem(), ConnectorAiProviderGoogleVertexAiArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderGoogleVertexAiPtrInput)(nil)).Elem(), ConnectorAiProviderGoogleVertexAiArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderOpenaiInput)(nil)).Elem(), ConnectorAiProviderOpenaiArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderOpenaiPtrInput)(nil)).Elem(), ConnectorAiProviderOpenaiArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldInput)(nil)).Elem(), FormFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldArrayInput)(nil)).Elem(), FormFieldArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldConfigInput)(nil)).Elem(), FormFieldConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldConfigPtrInput)(nil)).Elem(), FormFieldConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldConfigOptionInput)(nil)).Elem(), FormFieldConfigOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldConfigOptionArrayInput)(nil)).Elem(), FormFieldConfigOptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldConfigOptionsSourceInput)(nil)).Elem(), FormFieldConfigOptionsSourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldConfigOptionsSourcePtrInput)(nil)).Elem(), FormFieldConfigOptionsSourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldConfigOptionsSourceCommandInput)(nil)).Elem(), FormFieldConfigOptionsSourceCommandArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldConfigOptionsSourceCommandPtrInput)(nil)).Elem(), FormFieldConfigOptionsSourceCommandArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationBiMetabaseInput)(nil)).Elem(), IntegrationBiMetabaseArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationBiMetabasePtrInput)(nil)).Elem(), IntegrationBiMetabaseArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudAwsInput)(nil)).Elem(), IntegrationCloudAwsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudAwsPtrInput)(nil)).Elem(), IntegrationCloudAwsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationDataCatalogDatahubInput)(nil)).Elem(), IntegrationDataCatalogDatahubArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationDataCatalogDatahubPtrInput)(nil)).Elem(), IntegrationDataCatalogDatahubArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogAwsS3Input)(nil)).Elem(), IntegrationLogAwsS3Args{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogAwsS3PtrInput)(nil)).Elem(), IntegrationLogAwsS3Args{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogDatadogInput)(nil)).Elem(), IntegrationLogDatadogArgs{})
@@ -2474,14 +4082,34 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationSessionPtrInput)(nil)).Elem(), LogConfigurationSessionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationStreamInput)(nil)).Elem(), LogConfigurationStreamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationStreamPtrInput)(nil)).Elem(), LogConfigurationStreamArgs{})
-	pulumi.RegisterOutputType(DataDomainOwnerOutput{})
-	pulumi.RegisterOutputType(DataDomainOwnerArrayOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderAnthropicOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderAnthropicPtrOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderAwsBedrockOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderAwsBedrockPtrOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderAzureAiOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderAzureAiPtrOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderFormalAiSatelliteOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderFormalAiSatellitePtrOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderGeminiOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderGeminiPtrOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderGoogleVertexAiOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderGoogleVertexAiPtrOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderOpenaiOutput{})
+	pulumi.RegisterOutputType(ConnectorAiProviderOpenaiPtrOutput{})
+	pulumi.RegisterOutputType(FormFieldOutput{})
+	pulumi.RegisterOutputType(FormFieldArrayOutput{})
+	pulumi.RegisterOutputType(FormFieldConfigOutput{})
+	pulumi.RegisterOutputType(FormFieldConfigPtrOutput{})
+	pulumi.RegisterOutputType(FormFieldConfigOptionOutput{})
+	pulumi.RegisterOutputType(FormFieldConfigOptionArrayOutput{})
+	pulumi.RegisterOutputType(FormFieldConfigOptionsSourceOutput{})
+	pulumi.RegisterOutputType(FormFieldConfigOptionsSourcePtrOutput{})
+	pulumi.RegisterOutputType(FormFieldConfigOptionsSourceCommandOutput{})
+	pulumi.RegisterOutputType(FormFieldConfigOptionsSourceCommandPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationBiMetabaseOutput{})
 	pulumi.RegisterOutputType(IntegrationBiMetabasePtrOutput{})
 	pulumi.RegisterOutputType(IntegrationCloudAwsOutput{})
 	pulumi.RegisterOutputType(IntegrationCloudAwsPtrOutput{})
-	pulumi.RegisterOutputType(IntegrationDataCatalogDatahubOutput{})
-	pulumi.RegisterOutputType(IntegrationDataCatalogDatahubPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogAwsS3Output{})
 	pulumi.RegisterOutputType(IntegrationLogAwsS3PtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogDatadogOutput{})

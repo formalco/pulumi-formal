@@ -40,19 +40,19 @@ export class IntegrationLog extends pulumi.CustomResource {
     /**
      * Configuration block for AWS S3 integration.
      */
-    public readonly awsS3!: pulumi.Output<outputs.IntegrationLogAwsS3 | undefined>;
+    declare public readonly awsS3: pulumi.Output<outputs.IntegrationLogAwsS3 | undefined>;
     /**
      * Configuration block for Datadog integration.
      */
-    public readonly datadog!: pulumi.Output<outputs.IntegrationLogDatadog | undefined>;
+    declare public readonly datadog: pulumi.Output<outputs.IntegrationLogDatadog | undefined>;
     /**
      * Friendly name for the Integration app.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * Configuration block for Splunk integration.
      */
-    public readonly splunk!: pulumi.Output<outputs.IntegrationLogSplunk | undefined>;
+    declare public readonly splunk: pulumi.Output<outputs.IntegrationLogSplunk | undefined>;
 
     /**
      * Create a IntegrationLog resource with the given unique name, arguments, and options.
@@ -67,16 +67,16 @@ export class IntegrationLog extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as IntegrationLogState | undefined;
-            resourceInputs["awsS3"] = state ? state.awsS3 : undefined;
-            resourceInputs["datadog"] = state ? state.datadog : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["splunk"] = state ? state.splunk : undefined;
+            resourceInputs["awsS3"] = state?.awsS3;
+            resourceInputs["datadog"] = state?.datadog;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["splunk"] = state?.splunk;
         } else {
             const args = argsOrState as IntegrationLogArgs | undefined;
-            resourceInputs["awsS3"] = args ? args.awsS3 : undefined;
-            resourceInputs["datadog"] = args ? args.datadog : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["splunk"] = args ? args.splunk : undefined;
+            resourceInputs["awsS3"] = args?.awsS3;
+            resourceInputs["datadog"] = args?.datadog;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["splunk"] = args?.splunk;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(IntegrationLog.__pulumiType, name, resourceInputs, opts);
@@ -90,19 +90,19 @@ export interface IntegrationLogState {
     /**
      * Configuration block for AWS S3 integration.
      */
-    awsS3?: pulumi.Input<inputs.IntegrationLogAwsS3>;
+    awsS3?: pulumi.Input<inputs.IntegrationLogAwsS3 | undefined>;
     /**
      * Configuration block for Datadog integration.
      */
-    datadog?: pulumi.Input<inputs.IntegrationLogDatadog>;
+    datadog?: pulumi.Input<inputs.IntegrationLogDatadog | undefined>;
     /**
      * Friendly name for the Integration app.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Configuration block for Splunk integration.
      */
-    splunk?: pulumi.Input<inputs.IntegrationLogSplunk>;
+    splunk?: pulumi.Input<inputs.IntegrationLogSplunk | undefined>;
 }
 
 /**
@@ -112,17 +112,17 @@ export interface IntegrationLogArgs {
     /**
      * Configuration block for AWS S3 integration.
      */
-    awsS3?: pulumi.Input<inputs.IntegrationLogAwsS3>;
+    awsS3?: pulumi.Input<inputs.IntegrationLogAwsS3 | undefined>;
     /**
      * Configuration block for Datadog integration.
      */
-    datadog?: pulumi.Input<inputs.IntegrationLogDatadog>;
+    datadog?: pulumi.Input<inputs.IntegrationLogDatadog | undefined>;
     /**
      * Friendly name for the Integration app.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Configuration block for Splunk integration.
      */
-    splunk?: pulumi.Input<inputs.IntegrationLogSplunk>;
+    splunk?: pulumi.Input<inputs.IntegrationLogSplunk | undefined>;
 }

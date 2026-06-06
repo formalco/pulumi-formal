@@ -17,8 +17,12 @@ type NativeUser struct {
 	pulumi.CustomResourceState
 
 	// The username of the Native User.
-	NativeUserId     pulumi.StringOutput    `pulumi:"nativeUserId"`
+	NativeUserId pulumi.StringOutput `pulumi:"nativeUserId"`
+	// The password of the Native User. Prefer using `nativeUserSecretWo` to avoid storing the secret in Terraform state.
 	NativeUserSecret pulumi.StringPtrOutput `pulumi:"nativeUserSecret"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+	NativeUserSecretWo pulumi.StringPtrOutput `pulumi:"nativeUserSecretWo"`
 	// Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
 	NativeUserSecretWoVersion pulumi.IntPtrOutput `pulumi:"nativeUserSecretWoVersion"`
 	// The Sidecar ID for the resource this Native User is for.
@@ -45,8 +49,12 @@ func NewNativeUser(ctx *pulumi.Context,
 	if args.NativeUserSecret != nil {
 		args.NativeUserSecret = pulumi.ToSecret(args.NativeUserSecret).(pulumi.StringPtrInput)
 	}
+	if args.NativeUserSecretWo != nil {
+		args.NativeUserSecretWo = pulumi.ToSecret(args.NativeUserSecretWo).(pulumi.StringPtrInput)
+	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
 		"nativeUserSecret",
+		"nativeUserSecretWo",
 	})
 	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
@@ -73,8 +81,12 @@ func GetNativeUser(ctx *pulumi.Context,
 // Input properties used for looking up and filtering NativeUser resources.
 type nativeUserState struct {
 	// The username of the Native User.
-	NativeUserId     *string `pulumi:"nativeUserId"`
+	NativeUserId *string `pulumi:"nativeUserId"`
+	// The password of the Native User. Prefer using `nativeUserSecretWo` to avoid storing the secret in Terraform state.
 	NativeUserSecret *string `pulumi:"nativeUserSecret"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+	NativeUserSecretWo *string `pulumi:"nativeUserSecretWo"`
 	// Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
 	NativeUserSecretWoVersion *int `pulumi:"nativeUserSecretWoVersion"`
 	// The Sidecar ID for the resource this Native User is for.
@@ -87,8 +99,12 @@ type nativeUserState struct {
 
 type NativeUserState struct {
 	// The username of the Native User.
-	NativeUserId     pulumi.StringPtrInput
+	NativeUserId pulumi.StringPtrInput
+	// The password of the Native User. Prefer using `nativeUserSecretWo` to avoid storing the secret in Terraform state.
 	NativeUserSecret pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+	NativeUserSecretWo pulumi.StringPtrInput
 	// Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
 	NativeUserSecretWoVersion pulumi.IntPtrInput
 	// The Sidecar ID for the resource this Native User is for.
@@ -105,8 +121,12 @@ func (NativeUserState) ElementType() reflect.Type {
 
 type nativeUserArgs struct {
 	// The username of the Native User.
-	NativeUserId     string  `pulumi:"nativeUserId"`
+	NativeUserId string `pulumi:"nativeUserId"`
+	// The password of the Native User. Prefer using `nativeUserSecretWo` to avoid storing the secret in Terraform state.
 	NativeUserSecret *string `pulumi:"nativeUserSecret"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+	NativeUserSecretWo *string `pulumi:"nativeUserSecretWo"`
 	// Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
 	NativeUserSecretWoVersion *int `pulumi:"nativeUserSecretWoVersion"`
 	// The Sidecar ID for the resource this Native User is for.
@@ -120,8 +140,12 @@ type nativeUserArgs struct {
 // The set of arguments for constructing a NativeUser resource.
 type NativeUserArgs struct {
 	// The username of the Native User.
-	NativeUserId     pulumi.StringInput
+	NativeUserId pulumi.StringInput
+	// The password of the Native User. Prefer using `nativeUserSecretWo` to avoid storing the secret in Terraform state.
 	NativeUserSecret pulumi.StringPtrInput
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+	NativeUserSecretWo pulumi.StringPtrInput
 	// Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
 	NativeUserSecretWoVersion pulumi.IntPtrInput
 	// The Sidecar ID for the resource this Native User is for.
@@ -224,8 +248,15 @@ func (o NativeUserOutput) NativeUserId() pulumi.StringOutput {
 	return o.ApplyT(func(v *NativeUser) pulumi.StringOutput { return v.NativeUserId }).(pulumi.StringOutput)
 }
 
+// The password of the Native User. Prefer using `nativeUserSecretWo` to avoid storing the secret in Terraform state.
 func (o NativeUserOutput) NativeUserSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *NativeUser) pulumi.StringPtrOutput { return v.NativeUserSecret }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+func (o NativeUserOutput) NativeUserSecretWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUser) pulumi.StringPtrOutput { return v.NativeUserSecretWo }).(pulumi.StringPtrOutput)
 }
 
 // Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.

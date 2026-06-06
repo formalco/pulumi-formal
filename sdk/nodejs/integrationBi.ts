@@ -40,15 +40,15 @@ export class IntegrationBi extends pulumi.CustomResource {
     /**
      * Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
      */
-    public readonly metabase!: pulumi.Output<outputs.IntegrationBiMetabase | undefined>;
+    declare public readonly metabase: pulumi.Output<outputs.IntegrationBiMetabase | undefined>;
     /**
      * Friendly name for this app.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
      */
-    public readonly sync!: pulumi.Output<boolean>;
+    declare public readonly sync: pulumi.Output<boolean>;
 
     /**
      * Create a IntegrationBi resource with the given unique name, arguments, and options.
@@ -63,17 +63,17 @@ export class IntegrationBi extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as IntegrationBiState | undefined;
-            resourceInputs["metabase"] = state ? state.metabase : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["sync"] = state ? state.sync : undefined;
+            resourceInputs["metabase"] = state?.metabase;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["sync"] = state?.sync;
         } else {
             const args = argsOrState as IntegrationBiArgs | undefined;
-            if ((!args || args.sync === undefined) && !opts.urn) {
+            if (args?.sync === undefined && !opts.urn) {
                 throw new Error("Missing required property 'sync'");
             }
-            resourceInputs["metabase"] = args ? args.metabase : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["sync"] = args ? args.sync : undefined;
+            resourceInputs["metabase"] = args?.metabase;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["sync"] = args?.sync;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(IntegrationBi.__pulumiType, name, resourceInputs, opts);
@@ -87,15 +87,15 @@ export interface IntegrationBiState {
     /**
      * Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
      */
-    metabase?: pulumi.Input<inputs.IntegrationBiMetabase>;
+    metabase?: pulumi.Input<inputs.IntegrationBiMetabase | undefined>;
     /**
      * Friendly name for this app.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
      */
-    sync?: pulumi.Input<boolean>;
+    sync?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -105,11 +105,11 @@ export interface IntegrationBiArgs {
     /**
      * Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
      */
-    metabase?: pulumi.Input<inputs.IntegrationBiMetabase>;
+    metabase?: pulumi.Input<inputs.IntegrationBiMetabase | undefined>;
     /**
      * Friendly name for this app.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
      */

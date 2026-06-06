@@ -12,19 +12,11 @@ namespace Formal.Pulumi.Outputs
 {
 
     [OutputType]
-    public sealed class DataDomainOwner
+    public sealed class ConnectorAiProviderFormalAiSatellite
     {
-        public readonly string ObjectId;
-        public readonly string ObjectType;
-
         [OutputConstructor]
-        private DataDomainOwner(
-            string objectId,
-
-            string objectType)
+        private ConnectorAiProviderFormalAiSatellite()
         {
-            ObjectId = objectId;
-            ObjectType = objectType;
         }
     }
 }

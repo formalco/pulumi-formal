@@ -13,19 +13,19 @@ namespace Formal.Pulumi
     public static class GetResource
     {
         /// <summary>
-        /// Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.
+        /// Data source for looking up a Resource by ID or by name. Use either `Id` or `Name`, but not both.
         /// </summary>
         public static Task<GetResourceResult> InvokeAsync(GetResourceArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourceResult>("formal:index/getResource:getResource", args ?? new GetResourceArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.
+        /// Data source for looking up a Resource by ID or by name. Use either `Id` or `Name`, but not both.
         /// </summary>
         public static Output<GetResourceResult> Invoke(GetResourceInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceResult>("formal:index/getResource:getResource", args ?? new GetResourceInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Resource by ID or by name. Use either `id` or `name`, but not both.
+        /// Data source for looking up a Resource by ID or by name. Use either `Id` or `Name`, but not both.
         /// </summary>
         public static Output<GetResourceResult> Invoke(GetResourceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceResult>("formal:index/getResource:getResource", args ?? new GetResourceInvokeArgs(), options.WithDefaults());

@@ -21,13 +21,14 @@ class ConnectorHostnameArgs:
     def __init__(__self__, *,
                  connector_id: pulumi.Input[_builtins.str],
                  hostname: pulumi.Input[_builtins.str],
-                 certificate: Optional[pulumi.Input[_builtins.str]] = None,
-                 dns_record: Optional[pulumi.Input[_builtins.str]] = None,
-                 managed_tls: Optional[pulumi.Input[_builtins.bool]] = None,
-                 private_key: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 certificate: pulumi.Input[Optional[_builtins.str]] = None,
+                 dns_record: pulumi.Input[Optional[_builtins.str]] = None,
+                 managed_tls: pulumi.Input[Optional[_builtins.bool]] = None,
+                 private_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a ConnectorHostname resource.
+
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector this hostname is linked to.
         :param pulumi.Input[_builtins.str] hostname: The hostname for this Connector hostname.
         :param pulumi.Input[_builtins.str] certificate: The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
@@ -78,80 +79,81 @@ class ConnectorHostnameArgs:
 
     @_builtins.property
     @pulumi.getter
-    def certificate(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def certificate(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
         """
         return pulumi.get(self, "certificate")
 
     @certificate.setter
-    def certificate(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def certificate(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "certificate", value)
 
     @_builtins.property
     @pulumi.getter(name="dnsRecord")
-    def dns_record(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def dns_record(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The DNS record for this hostname.
         """
         return pulumi.get(self, "dns_record")
 
     @dns_record.setter
-    def dns_record(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def dns_record(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "dns_record", value)
 
     @_builtins.property
     @pulumi.getter(name="managedTls")
     @_utilities.deprecated("""This field is deprecated and has no effect. It will be removed in a future release.""")
-    def managed_tls(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def managed_tls(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Deprecated: If set to true, Formal will manage the TLS certificate for this hostname.
         """
         return pulumi.get(self, "managed_tls")
 
     @managed_tls.setter
-    def managed_tls(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def managed_tls(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "managed_tls", value)
 
     @_builtins.property
     @pulumi.getter(name="privateKey")
-    def private_key(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def private_key(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
         """
         return pulumi.get(self, "private_key")
 
     @private_key.setter
-    def private_key(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def private_key(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "private_key", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this connector hostname cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
 @pulumi.input_type
 class _ConnectorHostnameState:
     def __init__(__self__, *,
-                 certificate: Optional[pulumi.Input[_builtins.str]] = None,
-                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 dns_record: Optional[pulumi.Input[_builtins.str]] = None,
-                 dns_record_status: Optional[pulumi.Input[_builtins.str]] = None,
-                 hostname: Optional[pulumi.Input[_builtins.str]] = None,
-                 managed_tls: Optional[pulumi.Input[_builtins.bool]] = None,
-                 private_key: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 tls_certificate_status: Optional[pulumi.Input[_builtins.str]] = None):
+                 certificate: pulumi.Input[Optional[_builtins.str]] = None,
+                 connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 dns_record: pulumi.Input[Optional[_builtins.str]] = None,
+                 dns_record_status: pulumi.Input[Optional[_builtins.str]] = None,
+                 hostname: pulumi.Input[Optional[_builtins.str]] = None,
+                 managed_tls: pulumi.Input[Optional[_builtins.bool]] = None,
+                 private_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_certificate_status: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering ConnectorHostname resources.
+
         :param pulumi.Input[_builtins.str] certificate: The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector this hostname is linked to.
         :param pulumi.Input[_builtins.str] dns_record: The DNS record for this hostname.
@@ -186,111 +188,111 @@ class _ConnectorHostnameState:
 
     @_builtins.property
     @pulumi.getter
-    def certificate(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def certificate(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
         """
         return pulumi.get(self, "certificate")
 
     @certificate.setter
-    def certificate(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def certificate(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "certificate", value)
 
     @_builtins.property
     @pulumi.getter(name="connectorId")
-    def connector_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def connector_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the Connector this hostname is linked to.
         """
         return pulumi.get(self, "connector_id")
 
     @connector_id.setter
-    def connector_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def connector_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "connector_id", value)
 
     @_builtins.property
     @pulumi.getter(name="dnsRecord")
-    def dns_record(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def dns_record(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The DNS record for this hostname.
         """
         return pulumi.get(self, "dns_record")
 
     @dns_record.setter
-    def dns_record(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def dns_record(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "dns_record", value)
 
     @_builtins.property
     @pulumi.getter(name="dnsRecordStatus")
-    def dns_record_status(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def dns_record_status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The status of the DNS record for this hostname. Accepted values are `none`, `pending`, `success` and `failed`.
         """
         return pulumi.get(self, "dns_record_status")
 
     @dns_record_status.setter
-    def dns_record_status(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def dns_record_status(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "dns_record_status", value)
 
     @_builtins.property
     @pulumi.getter
-    def hostname(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hostname(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The hostname for this Connector hostname.
         """
         return pulumi.get(self, "hostname")
 
     @hostname.setter
-    def hostname(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hostname(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hostname", value)
 
     @_builtins.property
     @pulumi.getter(name="managedTls")
     @_utilities.deprecated("""This field is deprecated and has no effect. It will be removed in a future release.""")
-    def managed_tls(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def managed_tls(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Deprecated: If set to true, Formal will manage the TLS certificate for this hostname.
         """
         return pulumi.get(self, "managed_tls")
 
     @managed_tls.setter
-    def managed_tls(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def managed_tls(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "managed_tls", value)
 
     @_builtins.property
     @pulumi.getter(name="privateKey")
-    def private_key(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def private_key(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The TLS private key for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
         """
         return pulumi.get(self, "private_key")
 
     @private_key.setter
-    def private_key(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def private_key(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "private_key", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this connector hostname cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
     @_builtins.property
     @pulumi.getter(name="tlsCertificateStatus")
-    def tls_certificate_status(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def tls_certificate_status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The status of the TLS certificate for this hostname. Accepted values are `none`, `issuing`, and `issued`.
         """
         return pulumi.get(self, "tls_certificate_status")
 
     @tls_certificate_status.setter
-    def tls_certificate_status(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def tls_certificate_status(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "tls_certificate_status", value)
 
 
@@ -300,16 +302,17 @@ class ConnectorHostname(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 certificate: Optional[pulumi.Input[_builtins.str]] = None,
-                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 dns_record: Optional[pulumi.Input[_builtins.str]] = None,
-                 hostname: Optional[pulumi.Input[_builtins.str]] = None,
-                 managed_tls: Optional[pulumi.Input[_builtins.bool]] = None,
-                 private_key: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 certificate: pulumi.Input[Optional[_builtins.str]] = None,
+                 connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 dns_record: pulumi.Input[Optional[_builtins.str]] = None,
+                 hostname: pulumi.Input[Optional[_builtins.str]] = None,
+                 managed_tls: pulumi.Input[Optional[_builtins.bool]] = None,
+                 private_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         Registering a Connector Hostname with Formal.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -330,6 +333,7 @@ class ConnectorHostname(pulumi.CustomResource):
         """
         Registering a Connector Hostname with Formal.
 
+
         :param str resource_name: The name of the resource.
         :param ConnectorHostnameArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -345,13 +349,13 @@ class ConnectorHostname(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 certificate: Optional[pulumi.Input[_builtins.str]] = None,
-                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 dns_record: Optional[pulumi.Input[_builtins.str]] = None,
-                 hostname: Optional[pulumi.Input[_builtins.str]] = None,
-                 managed_tls: Optional[pulumi.Input[_builtins.bool]] = None,
-                 private_key: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 certificate: pulumi.Input[Optional[_builtins.str]] = None,
+                 connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 dns_record: pulumi.Input[Optional[_builtins.str]] = None,
+                 hostname: pulumi.Input[Optional[_builtins.str]] = None,
+                 managed_tls: pulumi.Input[Optional[_builtins.bool]] = None,
+                 private_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -386,15 +390,15 @@ class ConnectorHostname(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            certificate: Optional[pulumi.Input[_builtins.str]] = None,
-            connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-            dns_record: Optional[pulumi.Input[_builtins.str]] = None,
-            dns_record_status: Optional[pulumi.Input[_builtins.str]] = None,
-            hostname: Optional[pulumi.Input[_builtins.str]] = None,
-            managed_tls: Optional[pulumi.Input[_builtins.bool]] = None,
-            private_key: Optional[pulumi.Input[_builtins.str]] = None,
-            termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-            tls_certificate_status: Optional[pulumi.Input[_builtins.str]] = None) -> 'ConnectorHostname':
+            certificate: pulumi.Input[Optional[_builtins.str]] = None,
+            connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+            dns_record: pulumi.Input[Optional[_builtins.str]] = None,
+            dns_record_status: pulumi.Input[Optional[_builtins.str]] = None,
+            hostname: pulumi.Input[Optional[_builtins.str]] = None,
+            managed_tls: pulumi.Input[Optional[_builtins.bool]] = None,
+            private_key: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+            tls_certificate_status: pulumi.Input[Optional[_builtins.str]] = None) -> 'ConnectorHostname':
         """
         Get an existing ConnectorHostname resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

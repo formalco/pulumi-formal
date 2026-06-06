@@ -17,7 +17,7 @@ namespace Formal.Pulumi
     public partial class ResourceClassifierConfiguration : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+        /// Which direction to apply AI analysis. Required. Supported values are `Request` or `Response`. Use preference=none to disable AI analysis entirely.
         /// </summary>
         [Output("aiAnalysisScope")]
         public Output<string> AiAnalysisScope { get; private set; } = null!;
@@ -41,7 +41,7 @@ namespace Formal.Pulumi
         public Output<bool?> EnforceStrictClassifierResultCount { get; private set; } = null!;
 
         /// <summary>
-        /// The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
+        /// The preference. Supported values are `Nlp`, `Llm`, `Both`, and `None`.
         /// </summary>
         [Output("preference")]
         public Output<string> Preference { get; private set; } = null!;
@@ -106,7 +106,7 @@ namespace Formal.Pulumi
     public sealed class ResourceClassifierConfigurationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+        /// Which direction to apply AI analysis. Required. Supported values are `Request` or `Response`. Use preference=none to disable AI analysis entirely.
         /// </summary>
         [Input("aiAnalysisScope", required: true)]
         public Input<string> AiAnalysisScope { get; set; } = null!;
@@ -124,7 +124,7 @@ namespace Formal.Pulumi
         public Input<bool>? EnforceStrictClassifierResultCount { get; set; }
 
         /// <summary>
-        /// The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
+        /// The preference. Supported values are `Nlp`, `Llm`, `Both`, and `None`.
         /// </summary>
         [Input("preference", required: true)]
         public Input<string> Preference { get; set; } = null!;
@@ -144,7 +144,7 @@ namespace Formal.Pulumi
     public sealed class ResourceClassifierConfigurationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
+        /// Which direction to apply AI analysis. Required. Supported values are `Request` or `Response`. Use preference=none to disable AI analysis entirely.
         /// </summary>
         [Input("aiAnalysisScope")]
         public Input<string>? AiAnalysisScope { get; set; }
@@ -168,7 +168,7 @@ namespace Formal.Pulumi
         public Input<bool>? EnforceStrictClassifierResultCount { get; set; }
 
         /// <summary>
-        /// The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
+        /// The preference. Supported values are `Nlp`, `Llm`, `Both`, and `None`.
         /// </summary>
         [Input("preference")]
         public Input<string>? Preference { get; set; }

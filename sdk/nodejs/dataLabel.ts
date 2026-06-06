@@ -38,15 +38,15 @@ export class DataLabel extends pulumi.CustomResource {
     /**
      * Data for the classifier (pattern for regex or label name for prompt).
      */
-    public readonly classifierData!: pulumi.Output<string>;
+    declare public readonly classifierData: pulumi.Output<string>;
     /**
      * Type of classifier for the data label (regex or prompt)
      */
-    public readonly classifierType!: pulumi.Output<string>;
+    declare public readonly classifierType: pulumi.Output<string>;
     /**
      * Friendly name for this data label.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
 
     /**
      * Create a DataLabel resource with the given unique name, arguments, and options.
@@ -61,20 +61,20 @@ export class DataLabel extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as DataLabelState | undefined;
-            resourceInputs["classifierData"] = state ? state.classifierData : undefined;
-            resourceInputs["classifierType"] = state ? state.classifierType : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["classifierData"] = state?.classifierData;
+            resourceInputs["classifierType"] = state?.classifierType;
+            resourceInputs["name"] = state?.name;
         } else {
             const args = argsOrState as DataLabelArgs | undefined;
-            if ((!args || args.classifierData === undefined) && !opts.urn) {
+            if (args?.classifierData === undefined && !opts.urn) {
                 throw new Error("Missing required property 'classifierData'");
             }
-            if ((!args || args.classifierType === undefined) && !opts.urn) {
+            if (args?.classifierType === undefined && !opts.urn) {
                 throw new Error("Missing required property 'classifierType'");
             }
-            resourceInputs["classifierData"] = args ? args.classifierData : undefined;
-            resourceInputs["classifierType"] = args ? args.classifierType : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["classifierData"] = args?.classifierData;
+            resourceInputs["classifierType"] = args?.classifierType;
+            resourceInputs["name"] = args?.name;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(DataLabel.__pulumiType, name, resourceInputs, opts);
@@ -88,15 +88,15 @@ export interface DataLabelState {
     /**
      * Data for the classifier (pattern for regex or label name for prompt).
      */
-    classifierData?: pulumi.Input<string>;
+    classifierData?: pulumi.Input<string | undefined>;
     /**
      * Type of classifier for the data label (regex or prompt)
      */
-    classifierType?: pulumi.Input<string>;
+    classifierType?: pulumi.Input<string | undefined>;
     /**
      * Friendly name for this data label.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -114,5 +114,5 @@ export interface DataLabelArgs {
     /**
      * Friendly name for this data label.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

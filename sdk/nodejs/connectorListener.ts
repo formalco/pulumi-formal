@@ -38,19 +38,19 @@ export class ConnectorListener extends pulumi.CustomResource {
     /**
      * The ID of the connector this listener is associated with.
      */
-    public readonly connectorId!: pulumi.Output<string | undefined>;
+    declare public readonly connectorId: pulumi.Output<string | undefined>;
     /**
      * The name of the connector listener.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * The listening port for this connector listener.
      */
-    public readonly port!: pulumi.Output<number>;
+    declare public readonly port: pulumi.Output<number>;
     /**
      * If set to true, this connector listener cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
 
     /**
      * Create a ConnectorListener resource with the given unique name, arguments, and options.
@@ -65,19 +65,19 @@ export class ConnectorListener extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConnectorListenerState | undefined;
-            resourceInputs["connectorId"] = state ? state.connectorId : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["port"] = state ? state.port : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
+            resourceInputs["connectorId"] = state?.connectorId;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["port"] = state?.port;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
         } else {
             const args = argsOrState as ConnectorListenerArgs | undefined;
-            if ((!args || args.port === undefined) && !opts.urn) {
+            if (args?.port === undefined && !opts.urn) {
                 throw new Error("Missing required property 'port'");
             }
-            resourceInputs["connectorId"] = args ? args.connectorId : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["port"] = args ? args.port : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
+            resourceInputs["connectorId"] = args?.connectorId;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["port"] = args?.port;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ConnectorListener.__pulumiType, name, resourceInputs, opts);
@@ -91,19 +91,19 @@ export interface ConnectorListenerState {
     /**
      * The ID of the connector this listener is associated with.
      */
-    connectorId?: pulumi.Input<string>;
+    connectorId?: pulumi.Input<string | undefined>;
     /**
      * The name of the connector listener.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The listening port for this connector listener.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * If set to true, this connector listener cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -113,11 +113,11 @@ export interface ConnectorListenerArgs {
     /**
      * The ID of the connector this listener is associated with.
      */
-    connectorId?: pulumi.Input<string>;
+    connectorId?: pulumi.Input<string | undefined>;
     /**
      * The name of the connector listener.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The listening port for this connector listener.
      */
@@ -125,5 +125,5 @@ export interface ConnectorListenerArgs {
     /**
      * If set to true, this connector listener cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }

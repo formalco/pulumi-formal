@@ -25,7 +25,7 @@ export class Provider extends pulumi.ProviderResource {
         return obj['__pulumiType'] === "pulumi:providers:" + Provider.__pulumiType;
     }
 
-    public readonly apiKey!: pulumi.Output<string | undefined>;
+    declare public readonly apiKey: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -38,8 +38,8 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            resourceInputs["apiKey"] = args ? args.apiKey : undefined;
-            resourceInputs["retrieveSensitiveValues"] = pulumi.output(args ? args.retrieveSensitiveValues : undefined).apply(JSON.stringify);
+            resourceInputs["apiKey"] = args?.apiKey;
+            resourceInputs["retrieveSensitiveValues"] = pulumi.output(args?.retrieveSensitiveValues).apply(JSON.stringify);
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
@@ -59,8 +59,8 @@ export class Provider extends pulumi.ProviderResource {
  * The set of arguments for constructing a Provider resource.
  */
 export interface ProviderArgs {
-    apiKey?: pulumi.Input<string>;
-    retrieveSensitiveValues?: pulumi.Input<boolean>;
+    apiKey?: pulumi.Input<string | undefined>;
+    retrieveSensitiveValues?: pulumi.Input<boolean | undefined>;
 }
 
 export namespace Provider {

@@ -15,14 +15,34 @@ else:
 from . import _utilities
 
 __all__ = [
-    'DataDomainOwnerArgs',
-    'DataDomainOwnerArgsDict',
+    'ConnectorAiProviderAnthropicArgs',
+    'ConnectorAiProviderAnthropicArgsDict',
+    'ConnectorAiProviderAwsBedrockArgs',
+    'ConnectorAiProviderAwsBedrockArgsDict',
+    'ConnectorAiProviderAzureAiArgs',
+    'ConnectorAiProviderAzureAiArgsDict',
+    'ConnectorAiProviderFormalAiSatelliteArgs',
+    'ConnectorAiProviderFormalAiSatelliteArgsDict',
+    'ConnectorAiProviderGeminiArgs',
+    'ConnectorAiProviderGeminiArgsDict',
+    'ConnectorAiProviderGoogleVertexAiArgs',
+    'ConnectorAiProviderGoogleVertexAiArgsDict',
+    'ConnectorAiProviderOpenaiArgs',
+    'ConnectorAiProviderOpenaiArgsDict',
+    'FormFieldArgs',
+    'FormFieldArgsDict',
+    'FormFieldConfigArgs',
+    'FormFieldConfigArgsDict',
+    'FormFieldConfigOptionArgs',
+    'FormFieldConfigOptionArgsDict',
+    'FormFieldConfigOptionsSourceArgs',
+    'FormFieldConfigOptionsSourceArgsDict',
+    'FormFieldConfigOptionsSourceCommandArgs',
+    'FormFieldConfigOptionsSourceCommandArgsDict',
     'IntegrationBiMetabaseArgs',
     'IntegrationBiMetabaseArgsDict',
     'IntegrationCloudAwsArgs',
     'IntegrationCloudAwsArgsDict',
-    'IntegrationDataCatalogDatahubArgs',
-    'IntegrationDataCatalogDatahubArgsDict',
     'IntegrationLogAwsS3Args',
     'IntegrationLogAwsS3ArgsDict',
     'IntegrationLogDatadogArgs',
@@ -45,65 +65,664 @@ __all__ = [
     'LogConfigurationStreamArgsDict',
 ]
 
-MYPY = False
-
-if not MYPY:
-    class DataDomainOwnerArgsDict(TypedDict):
-        object_id: pulumi.Input[_builtins.str]
-        object_type: pulumi.Input[_builtins.str]
-elif False:
-    DataDomainOwnerArgsDict: TypeAlias = Mapping[str, Any]
+class ConnectorAiProviderAnthropicArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    The API key. This value is not stored in Terraform state.
+    """
+    api_key_version: pulumi.Input[_builtins.int]
+    """
+    Version trigger for `api_key`. Increment this value to update the key.
+    """
 
 @pulumi.input_type
-class DataDomainOwnerArgs:
+class ConnectorAiProviderAnthropicArgs:
     def __init__(__self__, *,
-                 object_id: pulumi.Input[_builtins.str],
-                 object_type: pulumi.Input[_builtins.str]):
-        pulumi.set(__self__, "object_id", object_id)
-        pulumi.set(__self__, "object_type", object_type)
+                 api_key: pulumi.Input[_builtins.str],
+                 api_key_version: pulumi.Input[_builtins.int]):
+        """
+        :param pulumi.Input[_builtins.str] api_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The API key. This value is not stored in Terraform state.
+        :param pulumi.Input[_builtins.int] api_key_version: Version trigger for `api_key`. Increment this value to update the key.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_key_version", api_key_version)
 
     @_builtins.property
-    @pulumi.getter(name="objectId")
-    def object_id(self) -> pulumi.Input[_builtins.str]:
-        return pulumi.get(self, "object_id")
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The API key. This value is not stored in Terraform state.
+        """
+        return pulumi.get(self, "api_key")
 
-    @object_id.setter
-    def object_id(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "object_id", value)
+    @api_key.setter
+    def api_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "api_key", value)
 
     @_builtins.property
-    @pulumi.getter(name="objectType")
-    def object_type(self) -> pulumi.Input[_builtins.str]:
-        return pulumi.get(self, "object_type")
+    @pulumi.getter(name="apiKeyVersion")
+    def api_key_version(self) -> pulumi.Input[_builtins.int]:
+        """
+        Version trigger for `api_key`. Increment this value to update the key.
+        """
+        return pulumi.get(self, "api_key_version")
 
-    @object_type.setter
-    def object_type(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "object_type", value)
+    @api_key_version.setter
+    def api_key_version(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "api_key_version", value)
 
 
-if not MYPY:
-    class IntegrationBiMetabaseArgsDict(TypedDict):
-        hostname: NotRequired[pulumi.Input[_builtins.str]]
+class ConnectorAiProviderAwsBedrockArgsDict(TypedDict):
+    region: pulumi.Input[_builtins.str]
+    """
+    The AWS region.
+    """
+
+@pulumi.input_type
+class ConnectorAiProviderAwsBedrockArgs:
+    def __init__(__self__, *,
+                 region: pulumi.Input[_builtins.str]):
         """
-        Metabase server hostname. Required when `sync=true`.
+        :param pulumi.Input[_builtins.str] region: The AWS region.
         """
-        password: NotRequired[pulumi.Input[_builtins.str]]
+        pulumi.set(__self__, "region", region)
+
+    @_builtins.property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[_builtins.str]:
         """
-        Metabase admin password. Required when `sync=true`.
+        The AWS region.
         """
-        username: NotRequired[pulumi.Input[_builtins.str]]
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "region", value)
+
+
+class ConnectorAiProviderAzureAiArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    The API key. This value is not stored in Terraform state.
+    """
+    api_key_version: pulumi.Input[_builtins.int]
+    """
+    Version trigger for `api_key`. Increment this value to update the key.
+    """
+    endpoint: pulumi.Input[_builtins.str]
+    """
+    The Azure AI Foundry endpoint URL.
+    """
+
+@pulumi.input_type
+class ConnectorAiProviderAzureAiArgs:
+    def __init__(__self__, *,
+                 api_key: pulumi.Input[_builtins.str],
+                 api_key_version: pulumi.Input[_builtins.int],
+                 endpoint: pulumi.Input[_builtins.str]):
         """
-        Metabase admin username. Required when `sync=true`.
+        :param pulumi.Input[_builtins.str] api_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The API key. This value is not stored in Terraform state.
+        :param pulumi.Input[_builtins.int] api_key_version: Version trigger for `api_key`. Increment this value to update the key.
+        :param pulumi.Input[_builtins.str] endpoint: The Azure AI Foundry endpoint URL.
         """
-elif False:
-    IntegrationBiMetabaseArgsDict: TypeAlias = Mapping[str, Any]
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_key_version", api_key_version)
+        pulumi.set(__self__, "endpoint", endpoint)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The API key. This value is not stored in Terraform state.
+        """
+        return pulumi.get(self, "api_key")
+
+    @api_key.setter
+    def api_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "api_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKeyVersion")
+    def api_key_version(self) -> pulumi.Input[_builtins.int]:
+        """
+        Version trigger for `api_key`. Increment this value to update the key.
+        """
+        return pulumi.get(self, "api_key_version")
+
+    @api_key_version.setter
+    def api_key_version(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "api_key_version", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def endpoint(self) -> pulumi.Input[_builtins.str]:
+        """
+        The Azure AI Foundry endpoint URL.
+        """
+        return pulumi.get(self, "endpoint")
+
+    @endpoint.setter
+    def endpoint(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "endpoint", value)
+
+
+class ConnectorAiProviderFormalAiSatelliteArgsDict(TypedDict):
+    pass
+
+@pulumi.input_type
+class ConnectorAiProviderFormalAiSatelliteArgs:
+    def __init__(__self__):
+        pass
+
+
+class ConnectorAiProviderGeminiArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    The API key. This value is not stored in Terraform state.
+    """
+    api_key_version: pulumi.Input[_builtins.int]
+    """
+    Version trigger for `api_key`. Increment this value to update the key.
+    """
+
+@pulumi.input_type
+class ConnectorAiProviderGeminiArgs:
+    def __init__(__self__, *,
+                 api_key: pulumi.Input[_builtins.str],
+                 api_key_version: pulumi.Input[_builtins.int]):
+        """
+        :param pulumi.Input[_builtins.str] api_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The API key. This value is not stored in Terraform state.
+        :param pulumi.Input[_builtins.int] api_key_version: Version trigger for `api_key`. Increment this value to update the key.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_key_version", api_key_version)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The API key. This value is not stored in Terraform state.
+        """
+        return pulumi.get(self, "api_key")
+
+    @api_key.setter
+    def api_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "api_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKeyVersion")
+    def api_key_version(self) -> pulumi.Input[_builtins.int]:
+        """
+        Version trigger for `api_key`. Increment this value to update the key.
+        """
+        return pulumi.get(self, "api_key_version")
+
+    @api_key_version.setter
+    def api_key_version(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "api_key_version", value)
+
+
+class ConnectorAiProviderGoogleVertexAiArgsDict(TypedDict):
+    gcp_project_id: pulumi.Input[_builtins.str]
+    """
+    The GCP project ID.
+    """
+    region: pulumi.Input[_builtins.str]
+    """
+    The GCP region.
+    """
+
+@pulumi.input_type
+class ConnectorAiProviderGoogleVertexAiArgs:
+    def __init__(__self__, *,
+                 gcp_project_id: pulumi.Input[_builtins.str],
+                 region: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] gcp_project_id: The GCP project ID.
+        :param pulumi.Input[_builtins.str] region: The GCP region.
+        """
+        pulumi.set(__self__, "gcp_project_id", gcp_project_id)
+        pulumi.set(__self__, "region", region)
+
+    @_builtins.property
+    @pulumi.getter(name="gcpProjectId")
+    def gcp_project_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The GCP project ID.
+        """
+        return pulumi.get(self, "gcp_project_id")
+
+    @gcp_project_id.setter
+    def gcp_project_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "gcp_project_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[_builtins.str]:
+        """
+        The GCP region.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "region", value)
+
+
+class ConnectorAiProviderOpenaiArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    The API key. This value is not stored in Terraform state.
+    """
+    api_key_version: pulumi.Input[_builtins.int]
+    """
+    Version trigger for `api_key`. Increment this value to update the key.
+    """
+
+@pulumi.input_type
+class ConnectorAiProviderOpenaiArgs:
+    def __init__(__self__, *,
+                 api_key: pulumi.Input[_builtins.str],
+                 api_key_version: pulumi.Input[_builtins.int]):
+        """
+        :param pulumi.Input[_builtins.str] api_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The API key. This value is not stored in Terraform state.
+        :param pulumi.Input[_builtins.int] api_key_version: Version trigger for `api_key`. Increment this value to update the key.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_key_version", api_key_version)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The API key. This value is not stored in Terraform state.
+        """
+        return pulumi.get(self, "api_key")
+
+    @api_key.setter
+    def api_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "api_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKeyVersion")
+    def api_key_version(self) -> pulumi.Input[_builtins.int]:
+        """
+        Version trigger for `api_key`. Increment this value to update the key.
+        """
+        return pulumi.get(self, "api_key_version")
+
+    @api_key_version.setter
+    def api_key_version(self, value: pulumi.Input[_builtins.int]):
+        pulumi.set(self, "api_key_version", value)
+
+
+class FormFieldArgsDict(TypedDict):
+    id: pulumi.Input[_builtins.str]
+    """
+    Unique field identifier.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    Display name of the field.
+    """
+    type: pulumi.Input[_builtins.str]
+    """
+    Field type.
+    """
+    config: NotRequired[pulumi.Input[Optional['FormFieldConfigArgsDict']]]
+    """
+    Optional field configuration for select-like field types.
+    """
+
+@pulumi.input_type
+class FormFieldArgs:
+    def __init__(__self__, *,
+                 id: pulumi.Input[_builtins.str],
+                 name: pulumi.Input[_builtins.str],
+                 type: pulumi.Input[_builtins.str],
+                 config: pulumi.Input[Optional['FormFieldConfigArgs']] = None):
+        """
+        :param pulumi.Input[_builtins.str] id: Unique field identifier.
+        :param pulumi.Input[_builtins.str] name: Display name of the field.
+        :param pulumi.Input[_builtins.str] type: Field type.
+        :param pulumi.Input['FormFieldConfigArgs'] config: Optional field configuration for select-like field types.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        if config is not None:
+            pulumi.set(__self__, "config", config)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> pulumi.Input[_builtins.str]:
+        """
+        Unique field identifier.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[_builtins.str]:
+        """
+        Display name of the field.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[_builtins.str]:
+        """
+        Field type.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def config(self) -> pulumi.Input[Optional['FormFieldConfigArgs']]:
+        """
+        Optional field configuration for select-like field types.
+        """
+        return pulumi.get(self, "config")
+
+    @config.setter
+    def config(self, value: pulumi.Input[Optional['FormFieldConfigArgs']]):
+        pulumi.set(self, "config", value)
+
+
+class FormFieldConfigArgsDict(TypedDict):
+    options: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['FormFieldConfigOptionArgsDict']]]]]
+    """
+    Static options for select-like fields.
+    """
+    options_source: NotRequired[pulumi.Input[Optional['FormFieldConfigOptionsSourceArgsDict']]]
+    """
+    Dynamic source used to fetch options.
+    """
+
+@pulumi.input_type
+class FormFieldConfigArgs:
+    def __init__(__self__, *,
+                 options: pulumi.Input[Optional[Sequence[pulumi.Input['FormFieldConfigOptionArgs']]]] = None,
+                 options_source: pulumi.Input[Optional['FormFieldConfigOptionsSourceArgs']] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['FormFieldConfigOptionArgs']]] options: Static options for select-like fields.
+        :param pulumi.Input['FormFieldConfigOptionsSourceArgs'] options_source: Dynamic source used to fetch options.
+        """
+        if options is not None:
+            pulumi.set(__self__, "options", options)
+        if options_source is not None:
+            pulumi.set(__self__, "options_source", options_source)
+
+    @_builtins.property
+    @pulumi.getter
+    def options(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['FormFieldConfigOptionArgs']]]]:
+        """
+        Static options for select-like fields.
+        """
+        return pulumi.get(self, "options")
+
+    @options.setter
+    def options(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['FormFieldConfigOptionArgs']]]]):
+        pulumi.set(self, "options", value)
+
+    @_builtins.property
+    @pulumi.getter(name="optionsSource")
+    def options_source(self) -> pulumi.Input[Optional['FormFieldConfigOptionsSourceArgs']]:
+        """
+        Dynamic source used to fetch options.
+        """
+        return pulumi.get(self, "options_source")
+
+    @options_source.setter
+    def options_source(self, value: pulumi.Input[Optional['FormFieldConfigOptionsSourceArgs']]):
+        pulumi.set(self, "options_source", value)
+
+
+class FormFieldConfigOptionArgsDict(TypedDict):
+    label: pulumi.Input[_builtins.str]
+    """
+    Option label.
+    """
+    value: pulumi.Input[_builtins.str]
+    """
+    Option value.
+    """
+
+@pulumi.input_type
+class FormFieldConfigOptionArgs:
+    def __init__(__self__, *,
+                 label: pulumi.Input[_builtins.str],
+                 value: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] label: Option label.
+        :param pulumi.Input[_builtins.str] value: Option value.
+        """
+        pulumi.set(__self__, "label", label)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def label(self) -> pulumi.Input[_builtins.str]:
+        """
+        Option label.
+        """
+        return pulumi.get(self, "label")
+
+    @label.setter
+    def label(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "label", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[_builtins.str]:
+        """
+        Option value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "value", value)
+
+
+class FormFieldConfigOptionsSourceArgsDict(TypedDict):
+    app: pulumi.Input[_builtins.str]
+    """
+    Service/app name used to fetch options.
+    """
+    command: pulumi.Input['FormFieldConfigOptionsSourceCommandArgsDict']
+    """
+    Command configuration for options retrieval.
+    """
+    machine_user_id: pulumi.Input[_builtins.str]
+    """
+    Machine user used to authenticate options retrieval.
+    """
+    transform: pulumi.Input[_builtins.str]
+    """
+    CEL expression that transforms the response into options.
+    """
+    input: NotRequired[pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]]
+    """
+    Optional payload for options retrieval.
+    """
+    input_json: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
+    """
+
+@pulumi.input_type
+class FormFieldConfigOptionsSourceArgs:
+    def __init__(__self__, *,
+                 app: pulumi.Input[_builtins.str],
+                 command: pulumi.Input['FormFieldConfigOptionsSourceCommandArgs'],
+                 machine_user_id: pulumi.Input[_builtins.str],
+                 transform: pulumi.Input[_builtins.str],
+                 input: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 input_json: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] app: Service/app name used to fetch options.
+        :param pulumi.Input['FormFieldConfigOptionsSourceCommandArgs'] command: Command configuration for options retrieval.
+        :param pulumi.Input[_builtins.str] machine_user_id: Machine user used to authenticate options retrieval.
+        :param pulumi.Input[_builtins.str] transform: CEL expression that transforms the response into options.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] input: Optional payload for options retrieval.
+        :param pulumi.Input[_builtins.str] input_json: Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
+        """
+        pulumi.set(__self__, "app", app)
+        pulumi.set(__self__, "command", command)
+        pulumi.set(__self__, "machine_user_id", machine_user_id)
+        pulumi.set(__self__, "transform", transform)
+        if input is not None:
+            pulumi.set(__self__, "input", input)
+        if input_json is not None:
+            pulumi.set(__self__, "input_json", input_json)
+
+    @_builtins.property
+    @pulumi.getter
+    def app(self) -> pulumi.Input[_builtins.str]:
+        """
+        Service/app name used to fetch options.
+        """
+        return pulumi.get(self, "app")
+
+    @app.setter
+    def app(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "app", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def command(self) -> pulumi.Input['FormFieldConfigOptionsSourceCommandArgs']:
+        """
+        Command configuration for options retrieval.
+        """
+        return pulumi.get(self, "command")
+
+    @command.setter
+    def command(self, value: pulumi.Input['FormFieldConfigOptionsSourceCommandArgs']):
+        pulumi.set(self, "command", value)
+
+    @_builtins.property
+    @pulumi.getter(name="machineUserId")
+    def machine_user_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        Machine user used to authenticate options retrieval.
+        """
+        return pulumi.get(self, "machine_user_id")
+
+    @machine_user_id.setter
+    def machine_user_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "machine_user_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def transform(self) -> pulumi.Input[_builtins.str]:
+        """
+        CEL expression that transforms the response into options.
+        """
+        return pulumi.get(self, "transform")
+
+    @transform.setter
+    def transform(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "transform", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def input(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
+        """
+        Optional payload for options retrieval.
+        """
+        return pulumi.get(self, "input")
+
+    @input.setter
+    def input(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "input", value)
+
+    @_builtins.property
+    @pulumi.getter(name="inputJson")
+    def input_json(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
+        """
+        return pulumi.get(self, "input_json")
+
+    @input_json.setter
+    def input_json(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "input_json", value)
+
+
+class FormFieldConfigOptionsSourceCommandArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    Command name.
+    """
+
+@pulumi.input_type
+class FormFieldConfigOptionsSourceCommandArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] name: Command name.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[_builtins.str]:
+        """
+        Command name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "name", value)
+
+
+class IntegrationBiMetabaseArgsDict(TypedDict):
+    hostname: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Metabase server hostname. Required when `sync=true`.
+    """
+    password: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Metabase admin password. Required when `sync=true`.
+    """
+    username: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Metabase admin username. Required when `sync=true`.
+    """
 
 @pulumi.input_type
 class IntegrationBiMetabaseArgs:
     def __init__(__self__, *,
-                 hostname: Optional[pulumi.Input[_builtins.str]] = None,
-                 password: Optional[pulumi.Input[_builtins.str]] = None,
-                 username: Optional[pulumi.Input[_builtins.str]] = None):
+                 hostname: pulumi.Input[Optional[_builtins.str]] = None,
+                 password: pulumi.Input[Optional[_builtins.str]] = None,
+                 username: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] hostname: Metabase server hostname. Required when `sync=true`.
         :param pulumi.Input[_builtins.str] password: Metabase admin password. Required when `sync=true`.
@@ -118,102 +737,105 @@ class IntegrationBiMetabaseArgs:
 
     @_builtins.property
     @pulumi.getter
-    def hostname(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hostname(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Metabase server hostname. Required when `sync=true`.
         """
         return pulumi.get(self, "hostname")
 
     @hostname.setter
-    def hostname(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hostname(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hostname", value)
 
     @_builtins.property
     @pulumi.getter
-    def password(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def password(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Metabase admin password. Required when `sync=true`.
         """
         return pulumi.get(self, "password")
 
     @password.setter
-    def password(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def password(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "password", value)
 
     @_builtins.property
     @pulumi.getter
-    def username(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def username(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Metabase admin username. Required when `sync=true`.
         """
         return pulumi.get(self, "username")
 
     @username.setter
-    def username(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def username(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "username", value)
 
 
-if not MYPY:
-    class IntegrationCloudAwsArgsDict(TypedDict):
-        template_version: pulumi.Input[_builtins.str]
-        """
-        The template version of the CloudFormation stack. Use `latest` to stay in sync.
-        """
-        allow_s3_access: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Allows the Cloud Integration to access S3 buckets for Log Integrations.
-        """
-        aws_customer_role_arn: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
-        """
-        enable_ec2_autodiscovery: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Enables resource autodiscovery for EC2 instances.
-        """
-        enable_ecs_autodiscovery: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Enables resource autodiscovery for ECS clusters.
-        """
-        enable_eks_autodiscovery: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Enables resource autodiscovery for EKS clusters.
-        """
-        enable_rds_autodiscovery: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Enables resource autodiscovery for RDS instances (PostgreSQL, MySQL, MongoDB).
-        """
-        enable_redshift_autodiscovery: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Enables resource autodiscovery for Redshift clusters.
-        """
-        enable_s3_autodiscovery: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Enables resource autodiscovery for S3 buckets.
-        """
-        s3_bucket_arn: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
-        """
-elif False:
-    IntegrationCloudAwsArgsDict: TypeAlias = Mapping[str, Any]
+class IntegrationCloudAwsArgsDict(TypedDict):
+    template_version: pulumi.Input[_builtins.str]
+    """
+    The template version of the CloudFormation stack. Use `latest` to stay in sync.
+    """
+    allow_s3_access: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Allows the Cloud Integration to access S3 buckets for Log Integrations.
+    """
+    autodiscovery_regions: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    The regions to enable resource autodiscovery for.
+    """
+    aws_customer_role_arn: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+    """
+    enable_ec2_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for EC2 instances.
+    """
+    enable_ecs_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for ECS clusters.
+    """
+    enable_eks_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for EKS clusters.
+    """
+    enable_rds_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for RDS instances (PostgreSQL, MySQL, MongoDB).
+    """
+    enable_redshift_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for Redshift clusters.
+    """
+    enable_s3_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for S3 buckets.
+    """
+    s3_bucket_arn: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
+    """
 
 @pulumi.input_type
 class IntegrationCloudAwsArgs:
     def __init__(__self__, *,
                  template_version: pulumi.Input[_builtins.str],
-                 allow_s3_access: Optional[pulumi.Input[_builtins.bool]] = None,
-                 aws_customer_role_arn: Optional[pulumi.Input[_builtins.str]] = None,
-                 enable_ec2_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 enable_ecs_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 enable_eks_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 enable_rds_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 enable_redshift_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 enable_s3_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 s3_bucket_arn: Optional[pulumi.Input[_builtins.str]] = None):
+                 allow_s3_access: pulumi.Input[Optional[_builtins.bool]] = None,
+                 autodiscovery_regions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 aws_customer_role_arn: pulumi.Input[Optional[_builtins.str]] = None,
+                 enable_ec2_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 enable_ecs_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 enable_eks_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 enable_rds_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 enable_redshift_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 enable_s3_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] template_version: The template version of the CloudFormation stack. Use `latest` to stay in sync.
         :param pulumi.Input[_builtins.bool] allow_s3_access: Allows the Cloud Integration to access S3 buckets for Log Integrations.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] autodiscovery_regions: The regions to enable resource autodiscovery for.
         :param pulumi.Input[_builtins.str] aws_customer_role_arn: The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
         :param pulumi.Input[_builtins.bool] enable_ec2_autodiscovery: Enables resource autodiscovery for EC2 instances.
         :param pulumi.Input[_builtins.bool] enable_ecs_autodiscovery: Enables resource autodiscovery for ECS clusters.
@@ -226,6 +848,8 @@ class IntegrationCloudAwsArgs:
         pulumi.set(__self__, "template_version", template_version)
         if allow_s3_access is not None:
             pulumi.set(__self__, "allow_s3_access", allow_s3_access)
+        if autodiscovery_regions is not None:
+            pulumi.set(__self__, "autodiscovery_regions", autodiscovery_regions)
         if aws_customer_role_arn is not None:
             pulumi.set(__self__, "aws_customer_role_arn", aws_customer_role_arn)
         if enable_ec2_autodiscovery is not None:
@@ -257,214 +881,162 @@ class IntegrationCloudAwsArgs:
 
     @_builtins.property
     @pulumi.getter(name="allowS3Access")
-    def allow_s3_access(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def allow_s3_access(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Allows the Cloud Integration to access S3 buckets for Log Integrations.
         """
         return pulumi.get(self, "allow_s3_access")
 
     @allow_s3_access.setter
-    def allow_s3_access(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def allow_s3_access(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "allow_s3_access", value)
 
     @_builtins.property
+    @pulumi.getter(name="autodiscoveryRegions")
+    def autodiscovery_regions(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        The regions to enable resource autodiscovery for.
+        """
+        return pulumi.get(self, "autodiscovery_regions")
+
+    @autodiscovery_regions.setter
+    def autodiscovery_regions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "autodiscovery_regions", value)
+
+    @_builtins.property
     @pulumi.getter(name="awsCustomerRoleArn")
-    def aws_customer_role_arn(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def aws_customer_role_arn(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
         """
         return pulumi.get(self, "aws_customer_role_arn")
 
     @aws_customer_role_arn.setter
-    def aws_customer_role_arn(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def aws_customer_role_arn(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "aws_customer_role_arn", value)
 
     @_builtins.property
     @pulumi.getter(name="enableEc2Autodiscovery")
-    def enable_ec2_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def enable_ec2_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Enables resource autodiscovery for EC2 instances.
         """
         return pulumi.get(self, "enable_ec2_autodiscovery")
 
     @enable_ec2_autodiscovery.setter
-    def enable_ec2_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def enable_ec2_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "enable_ec2_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="enableEcsAutodiscovery")
-    def enable_ecs_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def enable_ecs_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Enables resource autodiscovery for ECS clusters.
         """
         return pulumi.get(self, "enable_ecs_autodiscovery")
 
     @enable_ecs_autodiscovery.setter
-    def enable_ecs_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def enable_ecs_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "enable_ecs_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="enableEksAutodiscovery")
-    def enable_eks_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def enable_eks_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Enables resource autodiscovery for EKS clusters.
         """
         return pulumi.get(self, "enable_eks_autodiscovery")
 
     @enable_eks_autodiscovery.setter
-    def enable_eks_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def enable_eks_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "enable_eks_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="enableRdsAutodiscovery")
-    def enable_rds_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def enable_rds_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Enables resource autodiscovery for RDS instances (PostgreSQL, MySQL, MongoDB).
         """
         return pulumi.get(self, "enable_rds_autodiscovery")
 
     @enable_rds_autodiscovery.setter
-    def enable_rds_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def enable_rds_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "enable_rds_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="enableRedshiftAutodiscovery")
-    def enable_redshift_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def enable_redshift_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Enables resource autodiscovery for Redshift clusters.
         """
         return pulumi.get(self, "enable_redshift_autodiscovery")
 
     @enable_redshift_autodiscovery.setter
-    def enable_redshift_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def enable_redshift_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "enable_redshift_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="enableS3Autodiscovery")
-    def enable_s3_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def enable_s3_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Enables resource autodiscovery for S3 buckets.
         """
         return pulumi.get(self, "enable_s3_autodiscovery")
 
     @enable_s3_autodiscovery.setter
-    def enable_s3_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def enable_s3_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "enable_s3_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="s3BucketArn")
-    def s3_bucket_arn(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def s3_bucket_arn(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
         """
         return pulumi.get(self, "s3_bucket_arn")
 
     @s3_bucket_arn.setter
-    def s3_bucket_arn(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def s3_bucket_arn(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "s3_bucket_arn", value)
 
 
-if not MYPY:
-    class IntegrationDataCatalogDatahubArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        Api Key for the Datahub instance.
-        """
-        generalized_metadata_service_url: pulumi.Input[_builtins.str]
-        """
-        Generalized metadata service url for the Datahub instance.
-        """
-        webhook_secret: pulumi.Input[_builtins.str]
-        """
-        Webhook secret of the Datahub instance.
-        """
-elif False:
-    IntegrationDataCatalogDatahubArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class IntegrationDataCatalogDatahubArgs:
-    def __init__(__self__, *,
-                 api_key: pulumi.Input[_builtins.str],
-                 generalized_metadata_service_url: pulumi.Input[_builtins.str],
-                 webhook_secret: pulumi.Input[_builtins.str]):
-        """
-        :param pulumi.Input[_builtins.str] api_key: Api Key for the Datahub instance.
-        :param pulumi.Input[_builtins.str] generalized_metadata_service_url: Generalized metadata service url for the Datahub instance.
-        :param pulumi.Input[_builtins.str] webhook_secret: Webhook secret of the Datahub instance.
-        """
-        pulumi.set(__self__, "api_key", api_key)
-        pulumi.set(__self__, "generalized_metadata_service_url", generalized_metadata_service_url)
-        pulumi.set(__self__, "webhook_secret", webhook_secret)
-
-    @_builtins.property
-    @pulumi.getter(name="apiKey")
-    def api_key(self) -> pulumi.Input[_builtins.str]:
-        """
-        Api Key for the Datahub instance.
-        """
-        return pulumi.get(self, "api_key")
-
-    @api_key.setter
-    def api_key(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "api_key", value)
-
-    @_builtins.property
-    @pulumi.getter(name="generalizedMetadataServiceUrl")
-    def generalized_metadata_service_url(self) -> pulumi.Input[_builtins.str]:
-        """
-        Generalized metadata service url for the Datahub instance.
-        """
-        return pulumi.get(self, "generalized_metadata_service_url")
-
-    @generalized_metadata_service_url.setter
-    def generalized_metadata_service_url(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "generalized_metadata_service_url", value)
-
-    @_builtins.property
-    @pulumi.getter(name="webhookSecret")
-    def webhook_secret(self) -> pulumi.Input[_builtins.str]:
-        """
-        Webhook secret of the Datahub instance.
-        """
-        return pulumi.get(self, "webhook_secret")
-
-    @webhook_secret.setter
-    def webhook_secret(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "webhook_secret", value)
-
-
-if not MYPY:
-    class IntegrationLogAwsS3ArgsDict(TypedDict):
-        cloud_integration_id: pulumi.Input[_builtins.str]
-        """
-        Cloud Integration ID.
-        """
-        s3_bucket_name: pulumi.Input[_builtins.str]
-        """
-        AWS S3 Bucket Name.
-        """
-        region: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        AWS Region.
-        """
-elif False:
-    IntegrationLogAwsS3ArgsDict: TypeAlias = Mapping[str, Any]
+class IntegrationLogAwsS3ArgsDict(TypedDict):
+    cloud_integration_id: pulumi.Input[_builtins.str]
+    """
+    Cloud Integration ID.
+    """
+    s3_bucket_name: pulumi.Input[_builtins.str]
+    """
+    AWS S3 Bucket Name.
+    """
+    region: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    AWS Region.
+    """
+    s3_bucket_prefix: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
+    """
 
 @pulumi.input_type
 class IntegrationLogAwsS3Args:
     def __init__(__self__, *,
                  cloud_integration_id: pulumi.Input[_builtins.str],
                  s3_bucket_name: pulumi.Input[_builtins.str],
-                 region: Optional[pulumi.Input[_builtins.str]] = None):
+                 region: pulumi.Input[Optional[_builtins.str]] = None,
+                 s3_bucket_prefix: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] cloud_integration_id: Cloud Integration ID.
         :param pulumi.Input[_builtins.str] s3_bucket_name: AWS S3 Bucket Name.
         :param pulumi.Input[_builtins.str] region: AWS Region.
+        :param pulumi.Input[_builtins.str] s3_bucket_prefix: AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
         """
         pulumi.set(__self__, "cloud_integration_id", cloud_integration_id)
         pulumi.set(__self__, "s3_bucket_name", s3_bucket_name)
         if region is not None:
             pulumi.set(__self__, "region", region)
+        if s3_bucket_prefix is not None:
+            pulumi.set(__self__, "s3_bucket_prefix", s3_bucket_prefix)
 
     @_builtins.property
     @pulumi.getter(name="cloudIntegrationId")
@@ -492,33 +1064,42 @@ class IntegrationLogAwsS3Args:
 
     @_builtins.property
     @pulumi.getter
-    def region(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def region(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         AWS Region.
         """
         return pulumi.get(self, "region")
 
     @region.setter
-    def region(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def region(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "region", value)
 
+    @_builtins.property
+    @pulumi.getter(name="s3BucketPrefix")
+    def s3_bucket_prefix(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
+        """
+        return pulumi.get(self, "s3_bucket_prefix")
 
-if not MYPY:
-    class IntegrationLogDatadogArgsDict(TypedDict):
-        account_id: pulumi.Input[_builtins.str]
-        """
-        Account ID of Datadog.
-        """
-        api_key: pulumi.Input[_builtins.str]
-        """
-        API Key of Datadog.
-        """
-        site: pulumi.Input[_builtins.str]
-        """
-        URL of your Datadog app.
-        """
-elif False:
-    IntegrationLogDatadogArgsDict: TypeAlias = Mapping[str, Any]
+    @s3_bucket_prefix.setter
+    def s3_bucket_prefix(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "s3_bucket_prefix", value)
+
+
+class IntegrationLogDatadogArgsDict(TypedDict):
+    account_id: pulumi.Input[_builtins.str]
+    """
+    Account ID of Datadog.
+    """
+    api_key: pulumi.Input[_builtins.str]
+    """
+    API Key of Datadog.
+    """
+    site: pulumi.Input[_builtins.str]
+    """
+    URL of your Datadog app.
+    """
 
 @pulumi.input_type
 class IntegrationLogDatadogArgs:
@@ -572,22 +1153,19 @@ class IntegrationLogDatadogArgs:
         pulumi.set(self, "site", value)
 
 
-if not MYPY:
-    class IntegrationLogSplunkArgsDict(TypedDict):
-        access_token: pulumi.Input[_builtins.str]
-        """
-        Access Token of Splunk.
-        """
-        host: pulumi.Input[_builtins.str]
-        """
-        URL of your Splunk app.
-        """
-        port: pulumi.Input[_builtins.int]
-        """
-        Port of your Splunk app.
-        """
-elif False:
-    IntegrationLogSplunkArgsDict: TypeAlias = Mapping[str, Any]
+class IntegrationLogSplunkArgsDict(TypedDict):
+    access_token: pulumi.Input[_builtins.str]
+    """
+    Access Token of Splunk.
+    """
+    host: pulumi.Input[_builtins.str]
+    """
+    URL of your Splunk app.
+    """
+    port: pulumi.Input[_builtins.int]
+    """
+    Port of your Splunk app.
+    """
 
 @pulumi.input_type
 class IntegrationLogSplunkArgs:
@@ -641,18 +1219,15 @@ class IntegrationLogSplunkArgs:
         pulumi.set(self, "port", value)
 
 
-if not MYPY:
-    class IntegrationMdmKandjiArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        API Key of your Kandji organization.
-        """
-        api_url: pulumi.Input[_builtins.str]
-        """
-        API URL of your Kandji organization.
-        """
-elif False:
-    IntegrationMdmKandjiArgsDict: TypeAlias = Mapping[str, Any]
+class IntegrationMdmKandjiArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    API Key of your Kandji organization.
+    """
+    api_url: pulumi.Input[_builtins.str]
+    """
+    API URL of your Kandji organization.
+    """
 
 @pulumi.input_type
 class IntegrationMdmKandjiArgs:
@@ -691,34 +1266,31 @@ class IntegrationMdmKandjiArgs:
         pulumi.set(self, "api_url", value)
 
 
-if not MYPY:
-    class LogConfigurationRequestArgsDict(TypedDict):
-        encrypt: pulumi.Input[_builtins.bool]
-        """
-        Whether to encrypt request payloads.
-        """
-        max_payload_size: NotRequired[pulumi.Input[_builtins.int]]
-        """
-        Maximum size of request payloads to log.
-        """
-        policy_eval_input_retention: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
-        """
-        sql: NotRequired[pulumi.Input['LogConfigurationRequestSqlArgsDict']]
-        """
-        SQL logging configuration for requests.
-        """
-elif False:
-    LogConfigurationRequestArgsDict: TypeAlias = Mapping[str, Any]
+class LogConfigurationRequestArgsDict(TypedDict):
+    encrypt: pulumi.Input[_builtins.bool]
+    """
+    Whether to encrypt request payloads.
+    """
+    max_payload_size: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Maximum size of request payloads to log.
+    """
+    policy_eval_input_retention: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+    """
+    sql: NotRequired[pulumi.Input[Optional['LogConfigurationRequestSqlArgsDict']]]
+    """
+    SQL logging configuration for requests.
+    """
 
 @pulumi.input_type
 class LogConfigurationRequestArgs:
     def __init__(__self__, *,
                  encrypt: pulumi.Input[_builtins.bool],
-                 max_payload_size: Optional[pulumi.Input[_builtins.int]] = None,
-                 policy_eval_input_retention: Optional[pulumi.Input[_builtins.str]] = None,
-                 sql: Optional[pulumi.Input['LogConfigurationRequestSqlArgs']] = None):
+                 max_payload_size: pulumi.Input[Optional[_builtins.int]] = None,
+                 policy_eval_input_retention: pulumi.Input[Optional[_builtins.str]] = None,
+                 sql: pulumi.Input[Optional['LogConfigurationRequestSqlArgs']] = None):
         """
         :param pulumi.Input[_builtins.bool] encrypt: Whether to encrypt request payloads.
         :param pulumi.Input[_builtins.int] max_payload_size: Maximum size of request payloads to log.
@@ -747,53 +1319,50 @@ class LogConfigurationRequestArgs:
 
     @_builtins.property
     @pulumi.getter(name="maxPayloadSize")
-    def max_payload_size(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def max_payload_size(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Maximum size of request payloads to log.
         """
         return pulumi.get(self, "max_payload_size")
 
     @max_payload_size.setter
-    def max_payload_size(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def max_payload_size(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "max_payload_size", value)
 
     @_builtins.property
     @pulumi.getter(name="policyEvalInputRetention")
-    def policy_eval_input_retention(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def policy_eval_input_retention(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         """
         return pulumi.get(self, "policy_eval_input_retention")
 
     @policy_eval_input_retention.setter
-    def policy_eval_input_retention(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def policy_eval_input_retention(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "policy_eval_input_retention", value)
 
     @_builtins.property
     @pulumi.getter
-    def sql(self) -> Optional[pulumi.Input['LogConfigurationRequestSqlArgs']]:
+    def sql(self) -> pulumi.Input[Optional['LogConfigurationRequestSqlArgs']]:
         """
         SQL logging configuration for requests.
         """
         return pulumi.get(self, "sql")
 
     @sql.setter
-    def sql(self, value: Optional[pulumi.Input['LogConfigurationRequestSqlArgs']]):
+    def sql(self, value: pulumi.Input[Optional['LogConfigurationRequestSqlArgs']]):
         pulumi.set(self, "sql", value)
 
 
-if not MYPY:
-    class LogConfigurationRequestSqlArgsDict(TypedDict):
-        encrypt: pulumi.Input[_builtins.bool]
-        """
-        Whether to encrypt SQL queries in logs.
-        """
-        strip_values: pulumi.Input[_builtins.bool]
-        """
-        Whether to obfuscate SQL queries in logs.
-        """
-elif False:
-    LogConfigurationRequestSqlArgsDict: TypeAlias = Mapping[str, Any]
+class LogConfigurationRequestSqlArgsDict(TypedDict):
+    encrypt: pulumi.Input[_builtins.bool]
+    """
+    Whether to encrypt SQL queries in logs.
+    """
+    strip_values: pulumi.Input[_builtins.bool]
+    """
+    Whether to obfuscate SQL queries in logs.
+    """
 
 @pulumi.input_type
 class LogConfigurationRequestSqlArgs:
@@ -832,29 +1401,26 @@ class LogConfigurationRequestSqlArgs:
         pulumi.set(self, "strip_values", value)
 
 
-if not MYPY:
-    class LogConfigurationResponseArgsDict(TypedDict):
-        encrypt: pulumi.Input[_builtins.bool]
-        """
-        Whether to encrypt response payloads.
-        """
-        max_payload_size: NotRequired[pulumi.Input[_builtins.int]]
-        """
-        Maximum size of response payloads to log.
-        """
-        policy_eval_input_retention: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
-        """
-elif False:
-    LogConfigurationResponseArgsDict: TypeAlias = Mapping[str, Any]
+class LogConfigurationResponseArgsDict(TypedDict):
+    encrypt: pulumi.Input[_builtins.bool]
+    """
+    Whether to encrypt response payloads.
+    """
+    max_payload_size: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Maximum size of response payloads to log.
+    """
+    policy_eval_input_retention: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+    """
 
 @pulumi.input_type
 class LogConfigurationResponseArgs:
     def __init__(__self__, *,
                  encrypt: pulumi.Input[_builtins.bool],
-                 max_payload_size: Optional[pulumi.Input[_builtins.int]] = None,
-                 policy_eval_input_retention: Optional[pulumi.Input[_builtins.str]] = None):
+                 max_payload_size: pulumi.Input[Optional[_builtins.int]] = None,
+                 policy_eval_input_retention: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.bool] encrypt: Whether to encrypt response payloads.
         :param pulumi.Input[_builtins.int] max_payload_size: Maximum size of response payloads to log.
@@ -880,57 +1446,54 @@ class LogConfigurationResponseArgs:
 
     @_builtins.property
     @pulumi.getter(name="maxPayloadSize")
-    def max_payload_size(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def max_payload_size(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Maximum size of response payloads to log.
         """
         return pulumi.get(self, "max_payload_size")
 
     @max_payload_size.setter
-    def max_payload_size(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def max_payload_size(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "max_payload_size", value)
 
     @_builtins.property
     @pulumi.getter(name="policyEvalInputRetention")
-    def policy_eval_input_retention(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def policy_eval_input_retention(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         """
         return pulumi.get(self, "policy_eval_input_retention")
 
     @policy_eval_input_retention.setter
-    def policy_eval_input_retention(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def policy_eval_input_retention(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "policy_eval_input_retention", value)
 
 
-if not MYPY:
-    class LogConfigurationScopeArgsDict(TypedDict):
-        type: pulumi.Input[_builtins.str]
-        """
-        The type of scope (resource, connector, space, org).
-        """
-        connector_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The ID of the connector (required when type is connector).
-        """
-        resource_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The ID of the resource (required when type is resource).
-        """
-        space_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The ID of the space (required when type is space).
-        """
-elif False:
-    LogConfigurationScopeArgsDict: TypeAlias = Mapping[str, Any]
+class LogConfigurationScopeArgsDict(TypedDict):
+    type: pulumi.Input[_builtins.str]
+    """
+    The type of scope (resource, connector, space, org).
+    """
+    connector_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The ID of the connector (required when type is connector).
+    """
+    resource_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The ID of the resource (required when type is resource).
+    """
+    space_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The ID of the space (required when type is space).
+    """
 
 @pulumi.input_type
 class LogConfigurationScopeArgs:
     def __init__(__self__, *,
                  type: pulumi.Input[_builtins.str],
-                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 space_id: Optional[pulumi.Input[_builtins.str]] = None):
+                 connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 space_id: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] type: The type of scope (resource, connector, space, org).
         :param pulumi.Input[_builtins.str] connector_id: The ID of the connector (required when type is connector).
@@ -959,54 +1522,51 @@ class LogConfigurationScopeArgs:
 
     @_builtins.property
     @pulumi.getter(name="connectorId")
-    def connector_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def connector_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the connector (required when type is connector).
         """
         return pulumi.get(self, "connector_id")
 
     @connector_id.setter
-    def connector_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def connector_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "connector_id", value)
 
     @_builtins.property
     @pulumi.getter(name="resourceId")
-    def resource_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def resource_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the resource (required when type is resource).
         """
         return pulumi.get(self, "resource_id")
 
     @resource_id.setter
-    def resource_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def resource_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "resource_id", value)
 
     @_builtins.property
     @pulumi.getter(name="spaceId")
-    def space_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def space_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the space (required when type is space).
         """
         return pulumi.get(self, "space_id")
 
     @space_id.setter
-    def space_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def space_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "space_id", value)
 
 
-if not MYPY:
-    class LogConfigurationSessionArgsDict(TypedDict):
-        policy_eval_input_retention: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
-        """
-elif False:
-    LogConfigurationSessionArgsDict: TypeAlias = Mapping[str, Any]
+class LogConfigurationSessionArgsDict(TypedDict):
+    policy_eval_input_retention: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
+    """
 
 @pulumi.input_type
 class LogConfigurationSessionArgs:
     def __init__(__self__, *,
-                 policy_eval_input_retention: Optional[pulumi.Input[_builtins.str]] = None):
+                 policy_eval_input_retention: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] policy_eval_input_retention: Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         """
@@ -1015,25 +1575,22 @@ class LogConfigurationSessionArgs:
 
     @_builtins.property
     @pulumi.getter(name="policyEvalInputRetention")
-    def policy_eval_input_retention(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def policy_eval_input_retention(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         """
         return pulumi.get(self, "policy_eval_input_retention")
 
     @policy_eval_input_retention.setter
-    def policy_eval_input_retention(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def policy_eval_input_retention(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "policy_eval_input_retention", value)
 
 
-if not MYPY:
-    class LogConfigurationStreamArgsDict(TypedDict):
-        encrypt: pulumi.Input[_builtins.bool]
-        """
-        Whether to encrypt stream data.
-        """
-elif False:
-    LogConfigurationStreamArgsDict: TypeAlias = Mapping[str, Any]
+class LogConfigurationStreamArgsDict(TypedDict):
+    encrypt: pulumi.Input[_builtins.bool]
+    """
+    Whether to encrypt stream data.
+    """
 
 @pulumi.input_type
 class LogConfigurationStreamArgs:

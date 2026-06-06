@@ -25,10 +25,11 @@ class PolicyDataLoaderArgs:
                  worker_code: pulumi.Input[_builtins.str],
                  worker_runtime: pulumi.Input[_builtins.str],
                  worker_schedule: pulumi.Input[_builtins.str],
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a PolicyDataLoader resource.
+
         :param pulumi.Input[_builtins.str] description: Policy data loader description.
         :param pulumi.Input[_builtins.str] key: The key to access the output data of this policy data loader.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy data loader. It can be one of the following: 'draft' or 'active'.
@@ -123,44 +124,45 @@ class PolicyDataLoaderArgs:
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for this policy data loader.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this policy data loader cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
 @pulumi.input_type
 class _PolicyDataLoaderState:
     def __init__(__self__, *,
-                 created_at: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 key: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 updated_at: Optional[pulumi.Input[_builtins.str]] = None,
-                 worker_code: Optional[pulumi.Input[_builtins.str]] = None,
-                 worker_runtime: Optional[pulumi.Input[_builtins.str]] = None,
-                 worker_schedule: Optional[pulumi.Input[_builtins.str]] = None):
+                 created_at: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 key: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+                 worker_code: pulumi.Input[Optional[_builtins.str]] = None,
+                 worker_runtime: pulumi.Input[Optional[_builtins.str]] = None,
+                 worker_schedule: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering PolicyDataLoader resources.
+
         :param pulumi.Input[_builtins.str] created_at: When the policy data loader was created.
         :param pulumi.Input[_builtins.str] description: Policy data loader description.
         :param pulumi.Input[_builtins.str] key: The key to access the output data of this policy data loader.
@@ -195,122 +197,122 @@ class _PolicyDataLoaderState:
 
     @_builtins.property
     @pulumi.getter(name="createdAt")
-    def created_at(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def created_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         When the policy data loader was created.
         """
         return pulumi.get(self, "created_at")
 
     @created_at.setter
-    def created_at(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def created_at(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "created_at", value)
 
     @_builtins.property
     @pulumi.getter
-    def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Policy data loader description.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
 
     @_builtins.property
     @pulumi.getter
-    def key(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def key(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The key to access the output data of this policy data loader.
         """
         return pulumi.get(self, "key")
 
     @key.setter
-    def key(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def key(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "key", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for this policy data loader.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def status(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Defines the current status of the policy data loader. It can be one of the following: 'draft' or 'active'.
         """
         return pulumi.get(self, "status")
 
     @status.setter
-    def status(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def status(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "status", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this policy data loader cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
     @_builtins.property
     @pulumi.getter(name="updatedAt")
-    def updated_at(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def updated_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Last update time.
         """
         return pulumi.get(self, "updated_at")
 
     @updated_at.setter
-    def updated_at(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def updated_at(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "updated_at", value)
 
     @_builtins.property
     @pulumi.getter(name="workerCode")
-    def worker_code(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def worker_code(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The code that will be executed to fetch and output the data.
         """
         return pulumi.get(self, "worker_code")
 
     @worker_code.setter
-    def worker_code(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def worker_code(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "worker_code", value)
 
     @_builtins.property
     @pulumi.getter(name="workerRuntime")
-    def worker_runtime(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def worker_runtime(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
         """
         return pulumi.get(self, "worker_runtime")
 
     @worker_runtime.setter
-    def worker_runtime(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def worker_runtime(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "worker_runtime", value)
 
     @_builtins.property
     @pulumi.getter(name="workerSchedule")
-    def worker_schedule(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def worker_schedule(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Second-based 'cron' expression specifying when the data should be fetched. For example, use '*/10 * * * * *' to run the code every 10 seconds.
         """
         return pulumi.get(self, "worker_schedule")
 
     @worker_schedule.setter
-    def worker_schedule(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def worker_schedule(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "worker_schedule", value)
 
 
@@ -320,17 +322,18 @@ class PolicyDataLoader(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 key: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 worker_code: Optional[pulumi.Input[_builtins.str]] = None,
-                 worker_runtime: Optional[pulumi.Input[_builtins.str]] = None,
-                 worker_schedule: Optional[pulumi.Input[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 key: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 worker_code: pulumi.Input[Optional[_builtins.str]] = None,
+                 worker_runtime: pulumi.Input[Optional[_builtins.str]] = None,
+                 worker_schedule: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Registering a policy data loader with Formal.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -352,6 +355,7 @@ class PolicyDataLoader(pulumi.CustomResource):
         """
         Registering a policy data loader with Formal.
 
+
         :param str resource_name: The name of the resource.
         :param PolicyDataLoaderArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -367,14 +371,14 @@ class PolicyDataLoader(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 key: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 worker_code: Optional[pulumi.Input[_builtins.str]] = None,
-                 worker_runtime: Optional[pulumi.Input[_builtins.str]] = None,
-                 worker_schedule: Optional[pulumi.Input[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 key: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 worker_code: pulumi.Input[Optional[_builtins.str]] = None,
+                 worker_runtime: pulumi.Input[Optional[_builtins.str]] = None,
+                 worker_schedule: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -416,16 +420,16 @@ class PolicyDataLoader(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            created_at: Optional[pulumi.Input[_builtins.str]] = None,
-            description: Optional[pulumi.Input[_builtins.str]] = None,
-            key: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            status: Optional[pulumi.Input[_builtins.str]] = None,
-            termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-            updated_at: Optional[pulumi.Input[_builtins.str]] = None,
-            worker_code: Optional[pulumi.Input[_builtins.str]] = None,
-            worker_runtime: Optional[pulumi.Input[_builtins.str]] = None,
-            worker_schedule: Optional[pulumi.Input[_builtins.str]] = None) -> 'PolicyDataLoader':
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            key: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            status: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+            worker_code: pulumi.Input[Optional[_builtins.str]] = None,
+            worker_runtime: pulumi.Input[Optional[_builtins.str]] = None,
+            worker_schedule: pulumi.Input[Optional[_builtins.str]] = None) -> 'PolicyDataLoader':
         """
         Get an existing PolicyDataLoader resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

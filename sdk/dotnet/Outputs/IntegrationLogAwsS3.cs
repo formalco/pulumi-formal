@@ -26,6 +26,10 @@ namespace Formal.Pulumi.Outputs
         /// AWS S3 Bucket Name.
         /// </summary>
         public readonly string S3BucketName;
+        /// <summary>
+        /// AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
+        /// </summary>
+        public readonly string? S3BucketPrefix;
 
         [OutputConstructor]
         private IntegrationLogAwsS3(
@@ -33,11 +37,14 @@ namespace Formal.Pulumi.Outputs
 
             string? region,
 
-            string s3BucketName)
+            string s3BucketName,
+
+            string? s3BucketPrefix)
         {
             CloudIntegrationId = cloudIntegrationId;
             Region = region;
             S3BucketName = s3BucketName;
+            S3BucketPrefix = s3BucketPrefix;
         }
     }
 }

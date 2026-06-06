@@ -21,9 +21,10 @@ class ConnectorListenerLinkArgs:
     def __init__(__self__, *,
                  connector_id: pulumi.Input[_builtins.str],
                  connector_listener_id: pulumi.Input[_builtins.str],
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a ConnectorListenerLink resource.
+
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector Listener you want to link to a connector.
         :param pulumi.Input[_builtins.str] connector_listener_id: The ID of the Connector Listener you want to link to a connector.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this connector cannot be deleted.
@@ -59,25 +60,26 @@ class ConnectorListenerLinkArgs:
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this connector cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
 @pulumi.input_type
 class _ConnectorListenerLinkState:
     def __init__(__self__, *,
-                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 connector_listener_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 connector_listener_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         Input properties used for looking up and filtering ConnectorListenerLink resources.
+
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector Listener you want to link to a connector.
         :param pulumi.Input[_builtins.str] connector_listener_id: The ID of the Connector Listener you want to link to a connector.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this connector cannot be deleted.
@@ -91,38 +93,38 @@ class _ConnectorListenerLinkState:
 
     @_builtins.property
     @pulumi.getter(name="connectorId")
-    def connector_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def connector_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the Connector Listener you want to link to a connector.
         """
         return pulumi.get(self, "connector_id")
 
     @connector_id.setter
-    def connector_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def connector_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "connector_id", value)
 
     @_builtins.property
     @pulumi.getter(name="connectorListenerId")
-    def connector_listener_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def connector_listener_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the Connector Listener you want to link to a connector.
         """
         return pulumi.get(self, "connector_listener_id")
 
     @connector_listener_id.setter
-    def connector_listener_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def connector_listener_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "connector_listener_id", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this connector cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
@@ -132,12 +134,13 @@ class ConnectorListenerLink(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 connector_listener_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 connector_listener_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         Registering a Connector Listener Link with Formal.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -154,6 +157,7 @@ class ConnectorListenerLink(pulumi.CustomResource):
         """
         Registering a Connector Listener Link with Formal.
 
+
         :param str resource_name: The name of the resource.
         :param ConnectorListenerLinkArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -169,9 +173,9 @@ class ConnectorListenerLink(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 connector_listener_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 connector_listener_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -198,9 +202,9 @@ class ConnectorListenerLink(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-            connector_listener_id: Optional[pulumi.Input[_builtins.str]] = None,
-            termination_protection: Optional[pulumi.Input[_builtins.bool]] = None) -> 'ConnectorListenerLink':
+            connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+            connector_listener_id: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None) -> 'ConnectorListenerLink':
         """
         Get an existing ConnectorListenerLink resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

@@ -29,7 +29,7 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The workflow status. Accepted values are `active` and `draft`.
+        /// The workflow status. Accepted values are `Active` and `Draft`.
         /// </summary>
         [Output("status")]
         public Output<string?> Status { get; private set; } = null!;
@@ -94,7 +94,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The workflow status. Accepted values are `active` and `draft`.
+        /// The workflow status. Accepted values are `Active` and `Draft`.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
@@ -120,7 +120,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The workflow status. Accepted values are `active` and `draft`.
+        /// The workflow status. Accepted values are `Active` and `Draft`.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }

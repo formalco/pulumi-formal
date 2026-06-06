@@ -40,39 +40,39 @@ export class LogConfiguration extends pulumi.CustomResource {
     /**
      * When the log configuration was created.
      */
-    public /*out*/ readonly createdAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly createdAt: pulumi.Output<string>;
     /**
      * The ID of the encryption key to use for this log configuration.
      */
-    public readonly encryptionKeyId!: pulumi.Output<string | undefined>;
+    declare public readonly encryptionKeyId: pulumi.Output<string | undefined>;
     /**
      * The name of this log configuration.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * Request logging configuration.
      */
-    public readonly request!: pulumi.Output<outputs.LogConfigurationRequest>;
+    declare public readonly request: pulumi.Output<outputs.LogConfigurationRequest>;
     /**
      * Response logging configuration.
      */
-    public readonly response!: pulumi.Output<outputs.LogConfigurationResponse>;
+    declare public readonly response: pulumi.Output<outputs.LogConfigurationResponse>;
     /**
      * The scope configuration for this log configuration.
      */
-    public readonly scope!: pulumi.Output<outputs.LogConfigurationScope>;
+    declare public readonly scope: pulumi.Output<outputs.LogConfigurationScope>;
     /**
      * Session logging configuration.
      */
-    public readonly session!: pulumi.Output<outputs.LogConfigurationSession | undefined>;
+    declare public readonly session: pulumi.Output<outputs.LogConfigurationSession | undefined>;
     /**
      * Stream logging configuration.
      */
-    public readonly stream!: pulumi.Output<outputs.LogConfigurationStream | undefined>;
+    declare public readonly stream: pulumi.Output<outputs.LogConfigurationStream | undefined>;
     /**
      * Last update time.
      */
-    public /*out*/ readonly updatedAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
 
     /**
      * Create a LogConfiguration resource with the given unique name, arguments, and options.
@@ -87,33 +87,33 @@ export class LogConfiguration extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as LogConfigurationState | undefined;
-            resourceInputs["createdAt"] = state ? state.createdAt : undefined;
-            resourceInputs["encryptionKeyId"] = state ? state.encryptionKeyId : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["request"] = state ? state.request : undefined;
-            resourceInputs["response"] = state ? state.response : undefined;
-            resourceInputs["scope"] = state ? state.scope : undefined;
-            resourceInputs["session"] = state ? state.session : undefined;
-            resourceInputs["stream"] = state ? state.stream : undefined;
-            resourceInputs["updatedAt"] = state ? state.updatedAt : undefined;
+            resourceInputs["createdAt"] = state?.createdAt;
+            resourceInputs["encryptionKeyId"] = state?.encryptionKeyId;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["request"] = state?.request;
+            resourceInputs["response"] = state?.response;
+            resourceInputs["scope"] = state?.scope;
+            resourceInputs["session"] = state?.session;
+            resourceInputs["stream"] = state?.stream;
+            resourceInputs["updatedAt"] = state?.updatedAt;
         } else {
             const args = argsOrState as LogConfigurationArgs | undefined;
-            if ((!args || args.request === undefined) && !opts.urn) {
+            if (args?.request === undefined && !opts.urn) {
                 throw new Error("Missing required property 'request'");
             }
-            if ((!args || args.response === undefined) && !opts.urn) {
+            if (args?.response === undefined && !opts.urn) {
                 throw new Error("Missing required property 'response'");
             }
-            if ((!args || args.scope === undefined) && !opts.urn) {
+            if (args?.scope === undefined && !opts.urn) {
                 throw new Error("Missing required property 'scope'");
             }
-            resourceInputs["encryptionKeyId"] = args ? args.encryptionKeyId : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["request"] = args ? args.request : undefined;
-            resourceInputs["response"] = args ? args.response : undefined;
-            resourceInputs["scope"] = args ? args.scope : undefined;
-            resourceInputs["session"] = args ? args.session : undefined;
-            resourceInputs["stream"] = args ? args.stream : undefined;
+            resourceInputs["encryptionKeyId"] = args?.encryptionKeyId;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["request"] = args?.request;
+            resourceInputs["response"] = args?.response;
+            resourceInputs["scope"] = args?.scope;
+            resourceInputs["session"] = args?.session;
+            resourceInputs["stream"] = args?.stream;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
@@ -129,39 +129,39 @@ export interface LogConfigurationState {
     /**
      * When the log configuration was created.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * The ID of the encryption key to use for this log configuration.
      */
-    encryptionKeyId?: pulumi.Input<string>;
+    encryptionKeyId?: pulumi.Input<string | undefined>;
     /**
      * The name of this log configuration.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Request logging configuration.
      */
-    request?: pulumi.Input<inputs.LogConfigurationRequest>;
+    request?: pulumi.Input<inputs.LogConfigurationRequest | undefined>;
     /**
      * Response logging configuration.
      */
-    response?: pulumi.Input<inputs.LogConfigurationResponse>;
+    response?: pulumi.Input<inputs.LogConfigurationResponse | undefined>;
     /**
      * The scope configuration for this log configuration.
      */
-    scope?: pulumi.Input<inputs.LogConfigurationScope>;
+    scope?: pulumi.Input<inputs.LogConfigurationScope | undefined>;
     /**
      * Session logging configuration.
      */
-    session?: pulumi.Input<inputs.LogConfigurationSession>;
+    session?: pulumi.Input<inputs.LogConfigurationSession | undefined>;
     /**
      * Stream logging configuration.
      */
-    stream?: pulumi.Input<inputs.LogConfigurationStream>;
+    stream?: pulumi.Input<inputs.LogConfigurationStream | undefined>;
     /**
      * Last update time.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -171,11 +171,11 @@ export interface LogConfigurationArgs {
     /**
      * The ID of the encryption key to use for this log configuration.
      */
-    encryptionKeyId?: pulumi.Input<string>;
+    encryptionKeyId?: pulumi.Input<string | undefined>;
     /**
      * The name of this log configuration.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Request logging configuration.
      */
@@ -191,9 +191,9 @@ export interface LogConfigurationArgs {
     /**
      * Session logging configuration.
      */
-    session?: pulumi.Input<inputs.LogConfigurationSession>;
+    session?: pulumi.Input<inputs.LogConfigurationSession | undefined>;
     /**
      * Stream logging configuration.
      */
-    stream?: pulumi.Input<inputs.LogConfigurationStream>;
+    stream?: pulumi.Input<inputs.LogConfigurationStream | undefined>;
 }

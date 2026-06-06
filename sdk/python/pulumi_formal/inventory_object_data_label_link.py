@@ -25,6 +25,7 @@ class InventoryObjectDataLabelLinkArgs:
                  resource_id: pulumi.Input[_builtins.str]):
         """
         The set of arguments for constructing a InventoryObjectDataLabelLink resource.
+
         :param pulumi.Input[_builtins.str] data_label: Data label to link to the inventory object.
         :param pulumi.Input[_builtins.bool] locked: Whether the inventory object is locked.
         :param pulumi.Input[_builtins.str] path: Path of the inventory object.
@@ -87,12 +88,13 @@ class InventoryObjectDataLabelLinkArgs:
 @pulumi.input_type
 class _InventoryObjectDataLabelLinkState:
     def __init__(__self__, *,
-                 data_label: Optional[pulumi.Input[_builtins.str]] = None,
-                 locked: Optional[pulumi.Input[_builtins.bool]] = None,
-                 path: Optional[pulumi.Input[_builtins.str]] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None):
+                 data_label: pulumi.Input[Optional[_builtins.str]] = None,
+                 locked: pulumi.Input[Optional[_builtins.bool]] = None,
+                 path: pulumi.Input[Optional[_builtins.str]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering InventoryObjectDataLabelLink resources.
+
         :param pulumi.Input[_builtins.str] data_label: Data label to link to the inventory object.
         :param pulumi.Input[_builtins.bool] locked: Whether the inventory object is locked.
         :param pulumi.Input[_builtins.str] path: Path of the inventory object.
@@ -109,50 +111,50 @@ class _InventoryObjectDataLabelLinkState:
 
     @_builtins.property
     @pulumi.getter(name="dataLabel")
-    def data_label(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def data_label(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Data label to link to the inventory object.
         """
         return pulumi.get(self, "data_label")
 
     @data_label.setter
-    def data_label(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def data_label(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "data_label", value)
 
     @_builtins.property
     @pulumi.getter
-    def locked(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def locked(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether the inventory object is locked.
         """
         return pulumi.get(self, "locked")
 
     @locked.setter
-    def locked(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def locked(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "locked", value)
 
     @_builtins.property
     @pulumi.getter
-    def path(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def path(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Path of the inventory object.
         """
         return pulumi.get(self, "path")
 
     @path.setter
-    def path(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def path(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "path", value)
 
     @_builtins.property
     @pulumi.getter(name="resourceId")
-    def resource_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def resource_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Resource ID to which the inventory object belongs.
         """
         return pulumi.get(self, "resource_id")
 
     @resource_id.setter
-    def resource_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def resource_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "resource_id", value)
 
 
@@ -162,13 +164,14 @@ class InventoryObjectDataLabelLink(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 data_label: Optional[pulumi.Input[_builtins.str]] = None,
-                 locked: Optional[pulumi.Input[_builtins.bool]] = None,
-                 path: Optional[pulumi.Input[_builtins.str]] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 data_label: pulumi.Input[Optional[_builtins.str]] = None,
+                 locked: pulumi.Input[Optional[_builtins.bool]] = None,
+                 path: pulumi.Input[Optional[_builtins.str]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Registering a Data Label with Formal.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -186,6 +189,7 @@ class InventoryObjectDataLabelLink(pulumi.CustomResource):
         """
         Registering a Data Label with Formal.
 
+
         :param str resource_name: The name of the resource.
         :param InventoryObjectDataLabelLinkArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -201,10 +205,10 @@ class InventoryObjectDataLabelLink(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 data_label: Optional[pulumi.Input[_builtins.str]] = None,
-                 locked: Optional[pulumi.Input[_builtins.bool]] = None,
-                 path: Optional[pulumi.Input[_builtins.str]] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 data_label: pulumi.Input[Optional[_builtins.str]] = None,
+                 locked: pulumi.Input[Optional[_builtins.bool]] = None,
+                 path: pulumi.Input[Optional[_builtins.str]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -236,10 +240,10 @@ class InventoryObjectDataLabelLink(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            data_label: Optional[pulumi.Input[_builtins.str]] = None,
-            locked: Optional[pulumi.Input[_builtins.bool]] = None,
-            path: Optional[pulumi.Input[_builtins.str]] = None,
-            resource_id: Optional[pulumi.Input[_builtins.str]] = None) -> 'InventoryObjectDataLabelLink':
+            data_label: pulumi.Input[Optional[_builtins.str]] = None,
+            locked: pulumi.Input[Optional[_builtins.bool]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None) -> 'InventoryObjectDataLabelLink':
         """
         Get an existing InventoryObjectDataLabelLink resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

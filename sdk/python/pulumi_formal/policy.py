@@ -21,25 +21,20 @@ class PolicyArgs:
     def __init__(__self__, *,
                  description: pulumi.Input[_builtins.str],
                  module: pulumi.Input[_builtins.str],
-                 notification: pulumi.Input[_builtins.str],
-                 owner: pulumi.Input[_builtins.str],
                  status: pulumi.Input[_builtins.str],
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Policy resource.
+
         :param pulumi.Input[_builtins.str] description: Policy Description.
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
-        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-        :param pulumi.Input[_builtins.str] owner: Owner of this policy: it can be either a group name or a user email.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         :param pulumi.Input[_builtins.str] name: Policy Name
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Policy cannot be deleted.
         """
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "module", module)
-        pulumi.set(__self__, "notification", notification)
-        pulumi.set(__self__, "owner", owner)
         pulumi.set(__self__, "status", status)
         if name is not None:
             pulumi.set(__self__, "name", name)
@@ -72,30 +67,6 @@ class PolicyArgs:
 
     @_builtins.property
     @pulumi.getter
-    def notification(self) -> pulumi.Input[_builtins.str]:
-        """
-        Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-        """
-        return pulumi.get(self, "notification")
-
-    @notification.setter
-    def notification(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "notification", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def owner(self) -> pulumi.Input[_builtins.str]:
-        """
-        Owner of this policy: it can be either a group name or a user email.
-        """
-        return pulumi.get(self, "owner")
-
-    @owner.setter
-    def owner(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "owner", value)
-
-    @_builtins.property
-    @pulumi.getter
     def status(self) -> pulumi.Input[_builtins.str]:
         """
         Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
@@ -108,49 +79,46 @@ class PolicyArgs:
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Policy Name
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this Policy cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
 @pulumi.input_type
 class _PolicyState:
     def __init__(__self__, *,
-                 created_at: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 module: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 notification: Optional[pulumi.Input[_builtins.str]] = None,
-                 owner: Optional[pulumi.Input[_builtins.str]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 updated_at: Optional[pulumi.Input[_builtins.str]] = None):
+                 created_at: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 module: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 updated_at: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering Policy resources.
+
         :param pulumi.Input[_builtins.str] created_at: When the policy was created.
         :param pulumi.Input[_builtins.str] description: Policy Description.
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] name: Policy Name
-        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-        :param pulumi.Input[_builtins.str] owner: Owner of this policy: it can be either a group name or a user email.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Policy cannot be deleted.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
@@ -163,10 +131,6 @@ class _PolicyState:
             pulumi.set(__self__, "module", module)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if notification is not None:
-            pulumi.set(__self__, "notification", notification)
-        if owner is not None:
-            pulumi.set(__self__, "owner", owner)
         if status is not None:
             pulumi.set(__self__, "status", status)
         if termination_protection is not None:
@@ -176,110 +140,86 @@ class _PolicyState:
 
     @_builtins.property
     @pulumi.getter(name="createdAt")
-    def created_at(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def created_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         When the policy was created.
         """
         return pulumi.get(self, "created_at")
 
     @created_at.setter
-    def created_at(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def created_at(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "created_at", value)
 
     @_builtins.property
     @pulumi.getter
-    def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Policy Description.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
 
     @_builtins.property
     @pulumi.getter
-    def module(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def module(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The module describing how the policy works. Create one in the Formal Console.
         """
         return pulumi.get(self, "module")
 
     @module.setter
-    def module(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def module(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "module", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Policy Name
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def notification(self) -> Optional[pulumi.Input[_builtins.str]]:
-        """
-        Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-        """
-        return pulumi.get(self, "notification")
-
-    @notification.setter
-    def notification(self, value: Optional[pulumi.Input[_builtins.str]]):
-        pulumi.set(self, "notification", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def owner(self) -> Optional[pulumi.Input[_builtins.str]]:
-        """
-        Owner of this policy: it can be either a group name or a user email.
-        """
-        return pulumi.get(self, "owner")
-
-    @owner.setter
-    def owner(self, value: Optional[pulumi.Input[_builtins.str]]):
-        pulumi.set(self, "owner", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def status(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         """
         return pulumi.get(self, "status")
 
     @status.setter
-    def status(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def status(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "status", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this Policy cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
     @_builtins.property
     @pulumi.getter(name="updatedAt")
-    def updated_at(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def updated_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Last update time.
         """
         return pulumi.get(self, "updated_at")
 
     @updated_at.setter
-    def updated_at(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def updated_at(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "updated_at", value)
 
 
@@ -289,24 +229,21 @@ class Policy(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 module: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 notification: Optional[pulumi.Input[_builtins.str]] = None,
-                 owner: Optional[pulumi.Input[_builtins.str]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 module: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         Creating a Policy in Formal.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] description: Policy Description.
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] name: Policy Name
-        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-        :param pulumi.Input[_builtins.str] owner: Owner of this policy: it can be either a group name or a user email.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Policy cannot be deleted.
         """
@@ -318,6 +255,7 @@ class Policy(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Creating a Policy in Formal.
+
 
         :param str resource_name: The name of the resource.
         :param PolicyArgs args: The arguments to use to populate this resource's properties.
@@ -334,13 +272,11 @@ class Policy(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 module: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 notification: Optional[pulumi.Input[_builtins.str]] = None,
-                 owner: Optional[pulumi.Input[_builtins.str]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 module: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -357,12 +293,6 @@ class Policy(pulumi.CustomResource):
                 raise TypeError("Missing required property 'module'")
             __props__.__dict__["module"] = module
             __props__.__dict__["name"] = name
-            if notification is None and not opts.urn:
-                raise TypeError("Missing required property 'notification'")
-            __props__.__dict__["notification"] = notification
-            if owner is None and not opts.urn:
-                raise TypeError("Missing required property 'owner'")
-            __props__.__dict__["owner"] = owner
             if status is None and not opts.urn:
                 raise TypeError("Missing required property 'status'")
             __props__.__dict__["status"] = status
@@ -379,15 +309,13 @@ class Policy(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            created_at: Optional[pulumi.Input[_builtins.str]] = None,
-            description: Optional[pulumi.Input[_builtins.str]] = None,
-            module: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            notification: Optional[pulumi.Input[_builtins.str]] = None,
-            owner: Optional[pulumi.Input[_builtins.str]] = None,
-            status: Optional[pulumi.Input[_builtins.str]] = None,
-            termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-            updated_at: Optional[pulumi.Input[_builtins.str]] = None) -> 'Policy':
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            module: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            status: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'Policy':
         """
         Get an existing Policy resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -399,8 +327,6 @@ class Policy(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] description: Policy Description.
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] name: Policy Name
-        :param pulumi.Input[_builtins.str] notification: Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-        :param pulumi.Input[_builtins.str] owner: Owner of this policy: it can be either a group name or a user email.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Policy cannot be deleted.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
@@ -413,8 +339,6 @@ class Policy(pulumi.CustomResource):
         __props__.__dict__["description"] = description
         __props__.__dict__["module"] = module
         __props__.__dict__["name"] = name
-        __props__.__dict__["notification"] = notification
-        __props__.__dict__["owner"] = owner
         __props__.__dict__["status"] = status
         __props__.__dict__["termination_protection"] = termination_protection
         __props__.__dict__["updated_at"] = updated_at
@@ -451,22 +375,6 @@ class Policy(pulumi.CustomResource):
         Policy Name
         """
         return pulumi.get(self, "name")
-
-    @_builtins.property
-    @pulumi.getter
-    def notification(self) -> pulumi.Output[_builtins.str]:
-        """
-        Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-        """
-        return pulumi.get(self, "notification")
-
-    @_builtins.property
-    @pulumi.getter
-    def owner(self) -> pulumi.Output[_builtins.str]:
-        """
-        Owner of this policy: it can be either a group name or a user email.
-        """
-        return pulumi.get(self, "owner")
 
     @_builtins.property
     @pulumi.getter

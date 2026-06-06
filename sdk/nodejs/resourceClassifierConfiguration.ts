@@ -38,31 +38,31 @@ export class ResourceClassifierConfiguration extends pulumi.CustomResource {
     /**
      * Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
      */
-    public readonly aiAnalysisScope!: pulumi.Output<string>;
+    declare public readonly aiAnalysisScope: pulumi.Output<string>;
     /**
      * The timeout for the AI analysis in seconds.
      */
-    public readonly aiAnalysisTimeoutSeconds!: pulumi.Output<number>;
+    declare public readonly aiAnalysisTimeoutSeconds: pulumi.Output<number>;
     /**
      * The timestamp of the Resource Classifier Preference creation.
      */
-    public /*out*/ readonly createdAt!: pulumi.Output<number>;
+    declare public /*out*/ readonly createdAt: pulumi.Output<number>;
     /**
      * Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
      */
-    public readonly enforceStrictClassifierResultCount!: pulumi.Output<boolean | undefined>;
+    declare public readonly enforceStrictClassifierResultCount: pulumi.Output<boolean | undefined>;
     /**
      * The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
      */
-    public readonly preference!: pulumi.Output<string>;
+    declare public readonly preference: pulumi.Output<string>;
     /**
      * The ID of the Resource.
      */
-    public readonly resourceId!: pulumi.Output<string>;
+    declare public readonly resourceId: pulumi.Output<string>;
     /**
      * The timestamp of the Resource Classifier Preference update.
      */
-    public /*out*/ readonly updatedAt!: pulumi.Output<number>;
+    declare public /*out*/ readonly updatedAt: pulumi.Output<number>;
 
     /**
      * Create a ResourceClassifierConfiguration resource with the given unique name, arguments, and options.
@@ -77,32 +77,32 @@ export class ResourceClassifierConfiguration extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ResourceClassifierConfigurationState | undefined;
-            resourceInputs["aiAnalysisScope"] = state ? state.aiAnalysisScope : undefined;
-            resourceInputs["aiAnalysisTimeoutSeconds"] = state ? state.aiAnalysisTimeoutSeconds : undefined;
-            resourceInputs["createdAt"] = state ? state.createdAt : undefined;
-            resourceInputs["enforceStrictClassifierResultCount"] = state ? state.enforceStrictClassifierResultCount : undefined;
-            resourceInputs["preference"] = state ? state.preference : undefined;
-            resourceInputs["resourceId"] = state ? state.resourceId : undefined;
-            resourceInputs["updatedAt"] = state ? state.updatedAt : undefined;
+            resourceInputs["aiAnalysisScope"] = state?.aiAnalysisScope;
+            resourceInputs["aiAnalysisTimeoutSeconds"] = state?.aiAnalysisTimeoutSeconds;
+            resourceInputs["createdAt"] = state?.createdAt;
+            resourceInputs["enforceStrictClassifierResultCount"] = state?.enforceStrictClassifierResultCount;
+            resourceInputs["preference"] = state?.preference;
+            resourceInputs["resourceId"] = state?.resourceId;
+            resourceInputs["updatedAt"] = state?.updatedAt;
         } else {
             const args = argsOrState as ResourceClassifierConfigurationArgs | undefined;
-            if ((!args || args.aiAnalysisScope === undefined) && !opts.urn) {
+            if (args?.aiAnalysisScope === undefined && !opts.urn) {
                 throw new Error("Missing required property 'aiAnalysisScope'");
             }
-            if ((!args || args.aiAnalysisTimeoutSeconds === undefined) && !opts.urn) {
+            if (args?.aiAnalysisTimeoutSeconds === undefined && !opts.urn) {
                 throw new Error("Missing required property 'aiAnalysisTimeoutSeconds'");
             }
-            if ((!args || args.preference === undefined) && !opts.urn) {
+            if (args?.preference === undefined && !opts.urn) {
                 throw new Error("Missing required property 'preference'");
             }
-            if ((!args || args.resourceId === undefined) && !opts.urn) {
+            if (args?.resourceId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'resourceId'");
             }
-            resourceInputs["aiAnalysisScope"] = args ? args.aiAnalysisScope : undefined;
-            resourceInputs["aiAnalysisTimeoutSeconds"] = args ? args.aiAnalysisTimeoutSeconds : undefined;
-            resourceInputs["enforceStrictClassifierResultCount"] = args ? args.enforceStrictClassifierResultCount : undefined;
-            resourceInputs["preference"] = args ? args.preference : undefined;
-            resourceInputs["resourceId"] = args ? args.resourceId : undefined;
+            resourceInputs["aiAnalysisScope"] = args?.aiAnalysisScope;
+            resourceInputs["aiAnalysisTimeoutSeconds"] = args?.aiAnalysisTimeoutSeconds;
+            resourceInputs["enforceStrictClassifierResultCount"] = args?.enforceStrictClassifierResultCount;
+            resourceInputs["preference"] = args?.preference;
+            resourceInputs["resourceId"] = args?.resourceId;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
@@ -118,31 +118,31 @@ export interface ResourceClassifierConfigurationState {
     /**
      * Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
      */
-    aiAnalysisScope?: pulumi.Input<string>;
+    aiAnalysisScope?: pulumi.Input<string | undefined>;
     /**
      * The timeout for the AI analysis in seconds.
      */
-    aiAnalysisTimeoutSeconds?: pulumi.Input<number>;
+    aiAnalysisTimeoutSeconds?: pulumi.Input<number | undefined>;
     /**
      * The timestamp of the Resource Classifier Preference creation.
      */
-    createdAt?: pulumi.Input<number>;
+    createdAt?: pulumi.Input<number | undefined>;
     /**
      * Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
      */
-    enforceStrictClassifierResultCount?: pulumi.Input<boolean>;
+    enforceStrictClassifierResultCount?: pulumi.Input<boolean | undefined>;
     /**
      * The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
      */
-    preference?: pulumi.Input<string>;
+    preference?: pulumi.Input<string | undefined>;
     /**
      * The ID of the Resource.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * The timestamp of the Resource Classifier Preference update.
      */
-    updatedAt?: pulumi.Input<number>;
+    updatedAt?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -160,7 +160,7 @@ export interface ResourceClassifierConfigurationArgs {
     /**
      * Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
      */
-    enforceStrictClassifierResultCount?: pulumi.Input<boolean>;
+    enforceStrictClassifierResultCount?: pulumi.Input<boolean | undefined>;
     /**
      * The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
      */

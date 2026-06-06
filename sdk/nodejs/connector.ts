@@ -38,19 +38,19 @@ export class Connector extends pulumi.CustomResource {
     /**
      * Api key for the deployed Connector.
      */
-    public /*out*/ readonly apiKey!: pulumi.Output<string>;
+    declare public /*out*/ readonly apiKey: pulumi.Output<string>;
     /**
      * Friendly name for this Connector.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * The ID of the Space to create the Connector in.
      */
-    public readonly spaceId!: pulumi.Output<string | undefined>;
+    declare public readonly spaceId: pulumi.Output<string | undefined>;
     /**
      * If set to true, this Connector cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
 
     /**
      * Create a Connector resource with the given unique name, arguments, and options.
@@ -65,15 +65,15 @@ export class Connector extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConnectorState | undefined;
-            resourceInputs["apiKey"] = state ? state.apiKey : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["spaceId"] = state ? state.spaceId : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
+            resourceInputs["apiKey"] = state?.apiKey;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["spaceId"] = state?.spaceId;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
         } else {
             const args = argsOrState as ConnectorArgs | undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["spaceId"] = args ? args.spaceId : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["spaceId"] = args?.spaceId;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
             resourceInputs["apiKey"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -90,19 +90,19 @@ export interface ConnectorState {
     /**
      * Api key for the deployed Connector.
      */
-    apiKey?: pulumi.Input<string>;
+    apiKey?: pulumi.Input<string | undefined>;
     /**
      * Friendly name for this Connector.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The ID of the Space to create the Connector in.
      */
-    spaceId?: pulumi.Input<string>;
+    spaceId?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this Connector cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -112,13 +112,13 @@ export interface ConnectorArgs {
     /**
      * Friendly name for this Connector.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The ID of the Space to create the Connector in.
      */
-    spaceId?: pulumi.Input<string>;
+    spaceId?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this Connector cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }

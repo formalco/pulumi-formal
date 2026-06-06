@@ -21,9 +21,10 @@ class DataLabelArgs:
     def __init__(__self__, *,
                  classifier_data: pulumi.Input[_builtins.str],
                  classifier_type: pulumi.Input[_builtins.str],
-                 name: Optional[pulumi.Input[_builtins.str]] = None):
+                 name: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a DataLabel resource.
+
         :param pulumi.Input[_builtins.str] classifier_data: Data for the classifier (pattern for regex or label name for prompt).
         :param pulumi.Input[_builtins.str] classifier_type: Type of classifier for the data label (regex or prompt)
         :param pulumi.Input[_builtins.str] name: Friendly name for this data label.
@@ -59,25 +60,26 @@ class DataLabelArgs:
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for this data label.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
 
 @pulumi.input_type
 class _DataLabelState:
     def __init__(__self__, *,
-                 classifier_data: Optional[pulumi.Input[_builtins.str]] = None,
-                 classifier_type: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None):
+                 classifier_data: pulumi.Input[Optional[_builtins.str]] = None,
+                 classifier_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering DataLabel resources.
+
         :param pulumi.Input[_builtins.str] classifier_data: Data for the classifier (pattern for regex or label name for prompt).
         :param pulumi.Input[_builtins.str] classifier_type: Type of classifier for the data label (regex or prompt)
         :param pulumi.Input[_builtins.str] name: Friendly name for this data label.
@@ -91,38 +93,38 @@ class _DataLabelState:
 
     @_builtins.property
     @pulumi.getter(name="classifierData")
-    def classifier_data(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def classifier_data(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Data for the classifier (pattern for regex or label name for prompt).
         """
         return pulumi.get(self, "classifier_data")
 
     @classifier_data.setter
-    def classifier_data(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def classifier_data(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "classifier_data", value)
 
     @_builtins.property
     @pulumi.getter(name="classifierType")
-    def classifier_type(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def classifier_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Type of classifier for the data label (regex or prompt)
         """
         return pulumi.get(self, "classifier_type")
 
     @classifier_type.setter
-    def classifier_type(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def classifier_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "classifier_type", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for this data label.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
 
@@ -132,12 +134,13 @@ class DataLabel(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 classifier_data: Optional[pulumi.Input[_builtins.str]] = None,
-                 classifier_type: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
+                 classifier_data: pulumi.Input[Optional[_builtins.str]] = None,
+                 classifier_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Registering a Data Label with Formal.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -154,6 +157,7 @@ class DataLabel(pulumi.CustomResource):
         """
         Registering a Data Label with Formal.
 
+
         :param str resource_name: The name of the resource.
         :param DataLabelArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -169,9 +173,9 @@ class DataLabel(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 classifier_data: Optional[pulumi.Input[_builtins.str]] = None,
-                 classifier_type: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
+                 classifier_data: pulumi.Input[Optional[_builtins.str]] = None,
+                 classifier_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -198,9 +202,9 @@ class DataLabel(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            classifier_data: Optional[pulumi.Input[_builtins.str]] = None,
-            classifier_type: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None) -> 'DataLabel':
+            classifier_data: pulumi.Input[Optional[_builtins.str]] = None,
+            classifier_type: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None) -> 'DataLabel':
         """
         Get an existing DataLabel resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

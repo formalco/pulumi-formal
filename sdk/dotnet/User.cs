@@ -17,7 +17,7 @@ namespace Formal.Pulumi
     public partial class User : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.
+        /// If the user is of type `Machine`, this is an optional designation for the app that this user will be used for. Supported values are `Metabase`, `Tableau`, and `Popsql`.
         /// </summary>
         [Output("appType")]
         public Output<string?> AppType { get; private set; } = null!;
@@ -53,7 +53,7 @@ namespace Formal.Pulumi
         public Output<string?> LastName { get; private set; } = null!;
 
         /// <summary>
-        /// If the user is of type `machine`, this is the access token (database password) of this user.
+        /// If the user is of type `Machine`, this is the access token (database password) of this user.
         /// </summary>
         [Output("machineUserAccessToken")]
         public Output<string> MachineUserAccessToken { get; private set; } = null!;
@@ -128,7 +128,7 @@ namespace Formal.Pulumi
     public sealed class UserArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.
+        /// If the user is of type `Machine`, this is an optional designation for the app that this user will be used for. Supported values are `Metabase`, `Tableau`, and `Popsql`.
         /// </summary>
         [Input("appType")]
         public Input<string>? AppType { get; set; }
@@ -184,7 +184,7 @@ namespace Formal.Pulumi
     public sealed class UserState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.
+        /// If the user is of type `Machine`, this is an optional designation for the app that this user will be used for. Supported values are `Metabase`, `Tableau`, and `Popsql`.
         /// </summary>
         [Input("appType")]
         public Input<string>? AppType { get; set; }
@@ -223,7 +223,7 @@ namespace Formal.Pulumi
         private Input<string>? _machineUserAccessToken;
 
         /// <summary>
-        /// If the user is of type `machine`, this is the access token (database password) of this user.
+        /// If the user is of type `Machine`, this is the access token (database password) of this user.
         /// </summary>
         public Input<string>? MachineUserAccessToken
         {

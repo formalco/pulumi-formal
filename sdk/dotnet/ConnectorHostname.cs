@@ -35,7 +35,7 @@ namespace Formal.Pulumi
         public Output<string?> DnsRecord { get; private set; } = null!;
 
         /// <summary>
-        /// The status of the DNS record for this hostname. Accepted values are `none`, `pending`, `success` and `failed`.
+        /// The status of the DNS record for this hostname. Accepted values are `None`, `Pending`, `Success` and `Failed`.
         /// </summary>
         [Output("dnsRecordStatus")]
         public Output<string> DnsRecordStatus { get; private set; } = null!;
@@ -65,7 +65,7 @@ namespace Formal.Pulumi
         public Output<bool?> TerminationProtection { get; private set; } = null!;
 
         /// <summary>
-        /// The status of the TLS certificate for this hostname. Accepted values are `none`, `issuing`, and `issued`.
+        /// The status of the TLS certificate for this hostname. Accepted values are `None`, `Issuing`, and `Issued`.
         /// </summary>
         [Output("tlsCertificateStatus")]
         public Output<string> TlsCertificateStatus { get; private set; } = null!;
@@ -221,7 +221,7 @@ namespace Formal.Pulumi
         public Input<string>? DnsRecord { get; set; }
 
         /// <summary>
-        /// The status of the DNS record for this hostname. Accepted values are `none`, `pending`, `success` and `failed`.
+        /// The status of the DNS record for this hostname. Accepted values are `None`, `Pending`, `Success` and `Failed`.
         /// </summary>
         [Input("dnsRecordStatus")]
         public Input<string>? DnsRecordStatus { get; set; }
@@ -261,7 +261,7 @@ namespace Formal.Pulumi
         public Input<bool>? TerminationProtection { get; set; }
 
         /// <summary>
-        /// The status of the TLS certificate for this hostname. Accepted values are `none`, `issuing`, and `issued`.
+        /// The status of the TLS certificate for this hostname. Accepted values are `None`, `Issuing`, and `Issued`.
         /// </summary>
         [Input("tlsCertificateStatus")]
         public Input<string>? TlsCertificateStatus { get; set; }

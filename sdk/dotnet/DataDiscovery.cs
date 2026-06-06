@@ -23,7 +23,7 @@ namespace Formal.Pulumi
         public Output<int> CreatedAt { get; private set; } = null!;
 
         /// <summary>
-        /// Deletion policy of the Data Discovery. Possible values: `delete`, `mark_for_deletion`.
+        /// Deletion policy of the Data Discovery. Possible values: `Delete`, `MarkForDeletion`.
         /// </summary>
         [Output("deletionPolicy")]
         public Output<string> DeletionPolicy { get; private set; } = null!;
@@ -100,7 +100,7 @@ namespace Formal.Pulumi
     public sealed class DataDiscoveryArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Deletion policy of the Data Discovery. Possible values: `delete`, `mark_for_deletion`.
+        /// Deletion policy of the Data Discovery. Possible values: `Delete`, `MarkForDeletion`.
         /// </summary>
         [Input("deletionPolicy", required: true)]
         public Input<string> DeletionPolicy { get; set; } = null!;
@@ -144,7 +144,7 @@ namespace Formal.Pulumi
         public Input<int>? CreatedAt { get; set; }
 
         /// <summary>
-        /// Deletion policy of the Data Discovery. Possible values: `delete`, `mark_for_deletion`.
+        /// Deletion policy of the Data Discovery. Possible values: `Delete`, `MarkForDeletion`.
         /// </summary>
         [Input("deletionPolicy")]
         public Input<string>? DeletionPolicy { get; set; }

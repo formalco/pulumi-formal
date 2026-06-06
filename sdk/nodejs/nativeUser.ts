@@ -38,24 +38,32 @@ export class NativeUser extends pulumi.CustomResource {
     /**
      * The username of the Native User.
      */
-    public readonly nativeUserId!: pulumi.Output<string>;
-    public readonly nativeUserSecret!: pulumi.Output<string | undefined>;
+    declare public readonly nativeUserId: pulumi.Output<string>;
+    /**
+     * The password of the Native User. Prefer using `nativeUserSecretWo` to avoid storing the secret in Terraform state.
+     */
+    declare public readonly nativeUserSecret: pulumi.Output<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+     */
+    declare public readonly nativeUserSecretWo: pulumi.Output<string | undefined>;
     /**
      * Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
      */
-    public readonly nativeUserSecretWoVersion!: pulumi.Output<number | undefined>;
+    declare public readonly nativeUserSecretWoVersion: pulumi.Output<number | undefined>;
     /**
      * The Sidecar ID for the resource this Native User is for.
      */
-    public readonly resourceId!: pulumi.Output<string>;
+    declare public readonly resourceId: pulumi.Output<string>;
     /**
      * If set to true, this Native User cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
     /**
      * The password of the Native User.
      */
-    public readonly useAsDefault!: pulumi.Output<boolean | undefined>;
+    declare public readonly useAsDefault: pulumi.Output<boolean | undefined>;
 
     /**
      * Create a NativeUser resource with the given unique name, arguments, and options.
@@ -70,29 +78,31 @@ export class NativeUser extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as NativeUserState | undefined;
-            resourceInputs["nativeUserId"] = state ? state.nativeUserId : undefined;
-            resourceInputs["nativeUserSecret"] = state ? state.nativeUserSecret : undefined;
-            resourceInputs["nativeUserSecretWoVersion"] = state ? state.nativeUserSecretWoVersion : undefined;
-            resourceInputs["resourceId"] = state ? state.resourceId : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
-            resourceInputs["useAsDefault"] = state ? state.useAsDefault : undefined;
+            resourceInputs["nativeUserId"] = state?.nativeUserId;
+            resourceInputs["nativeUserSecret"] = state?.nativeUserSecret;
+            resourceInputs["nativeUserSecretWo"] = state?.nativeUserSecretWo;
+            resourceInputs["nativeUserSecretWoVersion"] = state?.nativeUserSecretWoVersion;
+            resourceInputs["resourceId"] = state?.resourceId;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
+            resourceInputs["useAsDefault"] = state?.useAsDefault;
         } else {
             const args = argsOrState as NativeUserArgs | undefined;
-            if ((!args || args.nativeUserId === undefined) && !opts.urn) {
+            if (args?.nativeUserId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'nativeUserId'");
             }
-            if ((!args || args.resourceId === undefined) && !opts.urn) {
+            if (args?.resourceId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'resourceId'");
             }
-            resourceInputs["nativeUserId"] = args ? args.nativeUserId : undefined;
+            resourceInputs["nativeUserId"] = args?.nativeUserId;
             resourceInputs["nativeUserSecret"] = args?.nativeUserSecret ? pulumi.secret(args.nativeUserSecret) : undefined;
-            resourceInputs["nativeUserSecretWoVersion"] = args ? args.nativeUserSecretWoVersion : undefined;
-            resourceInputs["resourceId"] = args ? args.resourceId : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
-            resourceInputs["useAsDefault"] = args ? args.useAsDefault : undefined;
+            resourceInputs["nativeUserSecretWo"] = args?.nativeUserSecretWo ? pulumi.secret(args.nativeUserSecretWo) : undefined;
+            resourceInputs["nativeUserSecretWoVersion"] = args?.nativeUserSecretWoVersion;
+            resourceInputs["resourceId"] = args?.resourceId;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
+            resourceInputs["useAsDefault"] = args?.useAsDefault;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["nativeUserSecret"] };
+        const secretOpts = { additionalSecretOutputs: ["nativeUserSecret", "nativeUserSecretWo"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(NativeUser.__pulumiType, name, resourceInputs, opts);
     }
@@ -105,24 +115,32 @@ export interface NativeUserState {
     /**
      * The username of the Native User.
      */
-    nativeUserId?: pulumi.Input<string>;
-    nativeUserSecret?: pulumi.Input<string>;
+    nativeUserId?: pulumi.Input<string | undefined>;
+    /**
+     * The password of the Native User. Prefer using `nativeUserSecretWo` to avoid storing the secret in Terraform state.
+     */
+    nativeUserSecret?: pulumi.Input<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+     */
+    nativeUserSecretWo?: pulumi.Input<string | undefined>;
     /**
      * Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
      */
-    nativeUserSecretWoVersion?: pulumi.Input<number>;
+    nativeUserSecretWoVersion?: pulumi.Input<number | undefined>;
     /**
      * The Sidecar ID for the resource this Native User is for.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this Native User cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * The password of the Native User.
      */
-    useAsDefault?: pulumi.Input<boolean>;
+    useAsDefault?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -133,11 +151,19 @@ export interface NativeUserArgs {
      * The username of the Native User.
      */
     nativeUserId: pulumi.Input<string>;
-    nativeUserSecret?: pulumi.Input<string>;
+    /**
+     * The password of the Native User. Prefer using `nativeUserSecretWo` to avoid storing the secret in Terraform state.
+     */
+    nativeUserSecret?: pulumi.Input<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+     */
+    nativeUserSecretWo?: pulumi.Input<string | undefined>;
     /**
      * Version trigger for `nativeUserSecretWo`. Increment this value to update the secret.
      */
-    nativeUserSecretWoVersion?: pulumi.Input<number>;
+    nativeUserSecretWoVersion?: pulumi.Input<number | undefined>;
     /**
      * The Sidecar ID for the resource this Native User is for.
      */
@@ -145,9 +171,9 @@ export interface NativeUserArgs {
     /**
      * If set to true, this Native User cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * The password of the Native User.
      */
-    useAsDefault?: pulumi.Input<boolean>;
+    useAsDefault?: pulumi.Input<boolean | undefined>;
 }

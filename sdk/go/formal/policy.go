@@ -24,10 +24,6 @@ type Policy struct {
 	Module pulumi.StringOutput `pulumi:"module"`
 	// Policy Name
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-	Notification pulumi.StringOutput `pulumi:"notification"`
-	// Owner of this policy: it can be either a group name or a user email.
-	Owner pulumi.StringOutput `pulumi:"owner"`
 	// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
 	Status pulumi.StringOutput `pulumi:"status"`
 	// If set to true, this Policy cannot be deleted.
@@ -48,12 +44,6 @@ func NewPolicy(ctx *pulumi.Context,
 	}
 	if args.Module == nil {
 		return nil, errors.New("invalid value for required argument 'Module'")
-	}
-	if args.Notification == nil {
-		return nil, errors.New("invalid value for required argument 'Notification'")
-	}
-	if args.Owner == nil {
-		return nil, errors.New("invalid value for required argument 'Owner'")
 	}
 	if args.Status == nil {
 		return nil, errors.New("invalid value for required argument 'Status'")
@@ -89,10 +79,6 @@ type policyState struct {
 	Module *string `pulumi:"module"`
 	// Policy Name
 	Name *string `pulumi:"name"`
-	// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-	Notification *string `pulumi:"notification"`
-	// Owner of this policy: it can be either a group name or a user email.
-	Owner *string `pulumi:"owner"`
 	// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
 	Status *string `pulumi:"status"`
 	// If set to true, this Policy cannot be deleted.
@@ -110,10 +96,6 @@ type PolicyState struct {
 	Module pulumi.StringPtrInput
 	// Policy Name
 	Name pulumi.StringPtrInput
-	// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-	Notification pulumi.StringPtrInput
-	// Owner of this policy: it can be either a group name or a user email.
-	Owner pulumi.StringPtrInput
 	// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
 	Status pulumi.StringPtrInput
 	// If set to true, this Policy cannot be deleted.
@@ -133,10 +115,6 @@ type policyArgs struct {
 	Module string `pulumi:"module"`
 	// Policy Name
 	Name *string `pulumi:"name"`
-	// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-	Notification string `pulumi:"notification"`
-	// Owner of this policy: it can be either a group name or a user email.
-	Owner string `pulumi:"owner"`
 	// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
 	Status string `pulumi:"status"`
 	// If set to true, this Policy cannot be deleted.
@@ -151,10 +129,6 @@ type PolicyArgs struct {
 	Module pulumi.StringInput
 	// Policy Name
 	Name pulumi.StringPtrInput
-	// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-	Notification pulumi.StringInput
-	// Owner of this policy: it can be either a group name or a user email.
-	Owner pulumi.StringInput
 	// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
 	Status pulumi.StringInput
 	// If set to true, this Policy cannot be deleted.
@@ -266,16 +240,6 @@ func (o PolicyOutput) Module() pulumi.StringOutput {
 // Policy Name
 func (o PolicyOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Policy) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
-}
-
-// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-func (o PolicyOutput) Notification() pulumi.StringOutput {
-	return o.ApplyT(func(v *Policy) pulumi.StringOutput { return v.Notification }).(pulumi.StringOutput)
-}
-
-// Owner of this policy: it can be either a group name or a user email.
-func (o PolicyOutput) Owner() pulumi.StringOutput {
-	return o.ApplyT(func(v *Policy) pulumi.StringOutput { return v.Owner }).(pulumi.StringOutput)
 }
 
 // Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.

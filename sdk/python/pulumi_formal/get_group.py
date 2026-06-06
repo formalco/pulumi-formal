@@ -106,8 +106,8 @@ def get_group(id: Optional[_builtins.str] = None,
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'),
         termination_protection=pulumi.get(__ret__, 'termination_protection'))
-def get_group_output(id: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                     name: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
+def get_group_output(id: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                     name: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
                      opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetGroupResult]:
     """
     Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.

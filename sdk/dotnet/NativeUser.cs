@@ -22,11 +22,21 @@ namespace Formal.Pulumi
         [Output("nativeUserId")]
         public Output<string> NativeUserId { get; private set; } = null!;
 
+        /// <summary>
+        /// The password of the Native User. Prefer using `NativeUserSecretWo` to avoid storing the secret in Terraform state.
+        /// </summary>
         [Output("nativeUserSecret")]
         public Output<string?> NativeUserSecret { get; private set; } = null!;
 
         /// <summary>
-        /// Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+        /// </summary>
+        [Output("nativeUserSecretWo")]
+        public Output<string?> NativeUserSecretWo { get; private set; } = null!;
+
+        /// <summary>
+        /// Version trigger for `NativeUserSecretWo`. Increment this value to update the secret.
         /// </summary>
         [Output("nativeUserSecretWoVersion")]
         public Output<int?> NativeUserSecretWoVersion { get; private set; } = null!;
@@ -76,6 +86,7 @@ namespace Formal.Pulumi
                 AdditionalSecretOutputs =
                 {
                     "nativeUserSecret",
+                    "nativeUserSecretWo",
                 },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
@@ -108,6 +119,10 @@ namespace Formal.Pulumi
 
         [Input("nativeUserSecret")]
         private Input<string>? _nativeUserSecret;
+
+        /// <summary>
+        /// The password of the Native User. Prefer using `NativeUserSecretWo` to avoid storing the secret in Terraform state.
+        /// </summary>
         public Input<string>? NativeUserSecret
         {
             get => _nativeUserSecret;
@@ -118,8 +133,25 @@ namespace Formal.Pulumi
             }
         }
 
+        [Input("nativeUserSecretWo")]
+        private Input<string>? _nativeUserSecretWo;
+
         /// <summary>
-        /// Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+        /// </summary>
+        public Input<string>? NativeUserSecretWo
+        {
+            get => _nativeUserSecretWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _nativeUserSecretWo = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Version trigger for `NativeUserSecretWo`. Increment this value to update the secret.
         /// </summary>
         [Input("nativeUserSecretWoVersion")]
         public Input<int>? NativeUserSecretWoVersion { get; set; }
@@ -158,6 +190,10 @@ namespace Formal.Pulumi
 
         [Input("nativeUserSecret")]
         private Input<string>? _nativeUserSecret;
+
+        /// <summary>
+        /// The password of the Native User. Prefer using `NativeUserSecretWo` to avoid storing the secret in Terraform state.
+        /// </summary>
         public Input<string>? NativeUserSecret
         {
             get => _nativeUserSecret;
@@ -168,8 +204,25 @@ namespace Formal.Pulumi
             }
         }
 
+        [Input("nativeUserSecretWo")]
+        private Input<string>? _nativeUserSecretWo;
+
         /// <summary>
-        /// Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+        /// </summary>
+        public Input<string>? NativeUserSecretWo
+        {
+            get => _nativeUserSecretWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _nativeUserSecretWo = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Version trigger for `NativeUserSecretWo`. Increment this value to update the secret.
         /// </summary>
         [Input("nativeUserSecretWoVersion")]
         public Input<int>? NativeUserSecretWoVersion { get; set; }

@@ -38,27 +38,27 @@ export class DataDiscovery extends pulumi.CustomResource {
     /**
      * Creation time of the Data Discovery.
      */
-    public /*out*/ readonly createdAt!: pulumi.Output<number>;
+    declare public /*out*/ readonly createdAt: pulumi.Output<number>;
     /**
      * Deletion policy of the Data Discovery. Possible values: `delete`, `markForDeletion`.
      */
-    public readonly deletionPolicy!: pulumi.Output<string>;
+    declare public readonly deletionPolicy: pulumi.Output<string>;
     /**
      * Native user ID linked to this Data Discovery.
      */
-    public readonly nativeUserId!: pulumi.Output<string>;
+    declare public readonly nativeUserId: pulumi.Output<string>;
     /**
      * Path of the inventory object.
      */
-    public readonly path!: pulumi.Output<string | undefined>;
+    declare public readonly path: pulumi.Output<string | undefined>;
     /**
      * Resource ID linked to this Data Discovery.
      */
-    public readonly resourceId!: pulumi.Output<string>;
+    declare public readonly resourceId: pulumi.Output<string>;
     /**
      * Schedule at which the Data Discovery will be executed. Possible values: `6h`, `12h`, `18h`, `24h` or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.
      */
-    public readonly schedule!: pulumi.Output<string>;
+    declare public readonly schedule: pulumi.Output<string>;
 
     /**
      * Create a DataDiscovery resource with the given unique name, arguments, and options.
@@ -73,31 +73,31 @@ export class DataDiscovery extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as DataDiscoveryState | undefined;
-            resourceInputs["createdAt"] = state ? state.createdAt : undefined;
-            resourceInputs["deletionPolicy"] = state ? state.deletionPolicy : undefined;
-            resourceInputs["nativeUserId"] = state ? state.nativeUserId : undefined;
-            resourceInputs["path"] = state ? state.path : undefined;
-            resourceInputs["resourceId"] = state ? state.resourceId : undefined;
-            resourceInputs["schedule"] = state ? state.schedule : undefined;
+            resourceInputs["createdAt"] = state?.createdAt;
+            resourceInputs["deletionPolicy"] = state?.deletionPolicy;
+            resourceInputs["nativeUserId"] = state?.nativeUserId;
+            resourceInputs["path"] = state?.path;
+            resourceInputs["resourceId"] = state?.resourceId;
+            resourceInputs["schedule"] = state?.schedule;
         } else {
             const args = argsOrState as DataDiscoveryArgs | undefined;
-            if ((!args || args.deletionPolicy === undefined) && !opts.urn) {
+            if (args?.deletionPolicy === undefined && !opts.urn) {
                 throw new Error("Missing required property 'deletionPolicy'");
             }
-            if ((!args || args.nativeUserId === undefined) && !opts.urn) {
+            if (args?.nativeUserId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'nativeUserId'");
             }
-            if ((!args || args.resourceId === undefined) && !opts.urn) {
+            if (args?.resourceId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'resourceId'");
             }
-            if ((!args || args.schedule === undefined) && !opts.urn) {
+            if (args?.schedule === undefined && !opts.urn) {
                 throw new Error("Missing required property 'schedule'");
             }
-            resourceInputs["deletionPolicy"] = args ? args.deletionPolicy : undefined;
-            resourceInputs["nativeUserId"] = args ? args.nativeUserId : undefined;
-            resourceInputs["path"] = args ? args.path : undefined;
-            resourceInputs["resourceId"] = args ? args.resourceId : undefined;
-            resourceInputs["schedule"] = args ? args.schedule : undefined;
+            resourceInputs["deletionPolicy"] = args?.deletionPolicy;
+            resourceInputs["nativeUserId"] = args?.nativeUserId;
+            resourceInputs["path"] = args?.path;
+            resourceInputs["resourceId"] = args?.resourceId;
+            resourceInputs["schedule"] = args?.schedule;
             resourceInputs["createdAt"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -112,27 +112,27 @@ export interface DataDiscoveryState {
     /**
      * Creation time of the Data Discovery.
      */
-    createdAt?: pulumi.Input<number>;
+    createdAt?: pulumi.Input<number | undefined>;
     /**
      * Deletion policy of the Data Discovery. Possible values: `delete`, `markForDeletion`.
      */
-    deletionPolicy?: pulumi.Input<string>;
+    deletionPolicy?: pulumi.Input<string | undefined>;
     /**
      * Native user ID linked to this Data Discovery.
      */
-    nativeUserId?: pulumi.Input<string>;
+    nativeUserId?: pulumi.Input<string | undefined>;
     /**
      * Path of the inventory object.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Resource ID linked to this Data Discovery.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Schedule at which the Data Discovery will be executed. Possible values: `6h`, `12h`, `18h`, `24h` or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.
      */
-    schedule?: pulumi.Input<string>;
+    schedule?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -150,7 +150,7 @@ export interface DataDiscoveryArgs {
     /**
      * Path of the inventory object.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Resource ID linked to this Data Discovery.
      */

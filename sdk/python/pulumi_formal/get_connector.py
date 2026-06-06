@@ -119,8 +119,8 @@ def get_connector(id: Optional[_builtins.str] = None,
         name=pulumi.get(__ret__, 'name'),
         space_id=pulumi.get(__ret__, 'space_id'),
         termination_protection=pulumi.get(__ret__, 'termination_protection'))
-def get_connector_output(id: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                         name: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
+def get_connector_output(id: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                         name: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
                          opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetConnectorResult]:
     """
     Data source for looking up a Connector by name or by ID. Use either `name` or `id`, but not both.

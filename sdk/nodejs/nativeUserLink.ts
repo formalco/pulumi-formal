@@ -38,23 +38,23 @@ export class NativeUserLink extends pulumi.CustomResource {
     /**
      * The Formal ID for the User, Group, or Resource Hostname to be linked.
      */
-    public readonly formalIdentityId!: pulumi.Output<string>;
+    declare public readonly formalIdentityId: pulumi.Output<string>;
     /**
      * The type of Formal Identity to be linked. Accepted values are `user`, `group`, and `resourceHostname`.
      */
-    public readonly formalIdentityType!: pulumi.Output<string>;
+    declare public readonly formalIdentityType: pulumi.Output<string>;
     /**
      * The Native User ID of the Native User.
      */
-    public readonly nativeUserId!: pulumi.Output<string>;
+    declare public readonly nativeUserId: pulumi.Output<string>;
     /**
      * The Resource ID of the Native User.
      */
-    public /*out*/ readonly resourceId!: pulumi.Output<string>;
+    declare public /*out*/ readonly resourceId: pulumi.Output<string>;
     /**
      * If set to true, this Native User link cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
 
     /**
      * Create a NativeUserLink resource with the given unique name, arguments, and options.
@@ -69,26 +69,26 @@ export class NativeUserLink extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as NativeUserLinkState | undefined;
-            resourceInputs["formalIdentityId"] = state ? state.formalIdentityId : undefined;
-            resourceInputs["formalIdentityType"] = state ? state.formalIdentityType : undefined;
-            resourceInputs["nativeUserId"] = state ? state.nativeUserId : undefined;
-            resourceInputs["resourceId"] = state ? state.resourceId : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
+            resourceInputs["formalIdentityId"] = state?.formalIdentityId;
+            resourceInputs["formalIdentityType"] = state?.formalIdentityType;
+            resourceInputs["nativeUserId"] = state?.nativeUserId;
+            resourceInputs["resourceId"] = state?.resourceId;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
         } else {
             const args = argsOrState as NativeUserLinkArgs | undefined;
-            if ((!args || args.formalIdentityId === undefined) && !opts.urn) {
+            if (args?.formalIdentityId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'formalIdentityId'");
             }
-            if ((!args || args.formalIdentityType === undefined) && !opts.urn) {
+            if (args?.formalIdentityType === undefined && !opts.urn) {
                 throw new Error("Missing required property 'formalIdentityType'");
             }
-            if ((!args || args.nativeUserId === undefined) && !opts.urn) {
+            if (args?.nativeUserId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'nativeUserId'");
             }
-            resourceInputs["formalIdentityId"] = args ? args.formalIdentityId : undefined;
-            resourceInputs["formalIdentityType"] = args ? args.formalIdentityType : undefined;
-            resourceInputs["nativeUserId"] = args ? args.nativeUserId : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
+            resourceInputs["formalIdentityId"] = args?.formalIdentityId;
+            resourceInputs["formalIdentityType"] = args?.formalIdentityType;
+            resourceInputs["nativeUserId"] = args?.nativeUserId;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
             resourceInputs["resourceId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -103,23 +103,23 @@ export interface NativeUserLinkState {
     /**
      * The Formal ID for the User, Group, or Resource Hostname to be linked.
      */
-    formalIdentityId?: pulumi.Input<string>;
+    formalIdentityId?: pulumi.Input<string | undefined>;
     /**
      * The type of Formal Identity to be linked. Accepted values are `user`, `group`, and `resourceHostname`.
      */
-    formalIdentityType?: pulumi.Input<string>;
+    formalIdentityType?: pulumi.Input<string | undefined>;
     /**
      * The Native User ID of the Native User.
      */
-    nativeUserId?: pulumi.Input<string>;
+    nativeUserId?: pulumi.Input<string | undefined>;
     /**
      * The Resource ID of the Native User.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this Native User link cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -141,5 +141,5 @@ export interface NativeUserLinkArgs {
     /**
      * If set to true, this Native User link cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }

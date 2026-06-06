@@ -24,6 +24,7 @@ class ConnectorSatelliteLinkArgs:
                  satellite_type: pulumi.Input[_builtins.str]):
         """
         The set of arguments for constructing a ConnectorSatelliteLink resource.
+
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector to link to the satellite.
         :param pulumi.Input[_builtins.str] satellite_id: The ID of the Satellite to link to the connector.
         :param pulumi.Input[_builtins.str] satellite_type: The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
@@ -72,13 +73,14 @@ class ConnectorSatelliteLinkArgs:
 @pulumi.input_type
 class _ConnectorSatelliteLinkState:
     def __init__(__self__, *,
-                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 created_at: Optional[pulumi.Input[_builtins.str]] = None,
-                 satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 satellite_type: Optional[pulumi.Input[_builtins.str]] = None,
-                 updated_at: Optional[pulumi.Input[_builtins.str]] = None):
+                 connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 created_at: pulumi.Input[Optional[_builtins.str]] = None,
+                 satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 satellite_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 updated_at: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering ConnectorSatelliteLink resources.
+
         :param pulumi.Input[_builtins.str] connector_id: The ID of the Connector to link to the satellite.
         :param pulumi.Input[_builtins.str] created_at: The timestamp when the connector satellite link was created.
         :param pulumi.Input[_builtins.str] satellite_id: The ID of the Satellite to link to the connector.
@@ -98,62 +100,62 @@ class _ConnectorSatelliteLinkState:
 
     @_builtins.property
     @pulumi.getter(name="connectorId")
-    def connector_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def connector_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the Connector to link to the satellite.
         """
         return pulumi.get(self, "connector_id")
 
     @connector_id.setter
-    def connector_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def connector_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "connector_id", value)
 
     @_builtins.property
     @pulumi.getter(name="createdAt")
-    def created_at(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def created_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The timestamp when the connector satellite link was created.
         """
         return pulumi.get(self, "created_at")
 
     @created_at.setter
-    def created_at(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def created_at(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "created_at", value)
 
     @_builtins.property
     @pulumi.getter(name="satelliteId")
-    def satellite_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def satellite_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the Satellite to link to the connector.
         """
         return pulumi.get(self, "satellite_id")
 
     @satellite_id.setter
-    def satellite_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def satellite_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "satellite_id", value)
 
     @_builtins.property
     @pulumi.getter(name="satelliteType")
-    def satellite_type(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def satellite_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The type of satellite being linked. Must be one of: `ai`, `data_classifier` or `policy_data_loader`.
         """
         return pulumi.get(self, "satellite_type")
 
     @satellite_type.setter
-    def satellite_type(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def satellite_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "satellite_type", value)
 
     @_builtins.property
     @pulumi.getter(name="updatedAt")
-    def updated_at(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def updated_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The timestamp when the connector satellite link was last updated.
         """
         return pulumi.get(self, "updated_at")
 
     @updated_at.setter
-    def updated_at(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def updated_at(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "updated_at", value)
 
 
@@ -163,12 +165,13 @@ class ConnectorSatelliteLink(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 satellite_type: Optional[pulumi.Input[_builtins.str]] = None,
+                 connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 satellite_type: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Link a Connector to a Satellite.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -185,6 +188,7 @@ class ConnectorSatelliteLink(pulumi.CustomResource):
         """
         Link a Connector to a Satellite.
 
+
         :param str resource_name: The name of the resource.
         :param ConnectorSatelliteLinkArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -200,9 +204,9 @@ class ConnectorSatelliteLink(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 satellite_type: Optional[pulumi.Input[_builtins.str]] = None,
+                 connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 satellite_type: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -233,11 +237,11 @@ class ConnectorSatelliteLink(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            connector_id: Optional[pulumi.Input[_builtins.str]] = None,
-            created_at: Optional[pulumi.Input[_builtins.str]] = None,
-            satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
-            satellite_type: Optional[pulumi.Input[_builtins.str]] = None,
-            updated_at: Optional[pulumi.Input[_builtins.str]] = None) -> 'ConnectorSatelliteLink':
+            connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
+            satellite_type: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'ConnectorSatelliteLink':
         """
         Get an existing ConnectorSatelliteLink resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

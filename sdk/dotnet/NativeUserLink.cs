@@ -23,7 +23,7 @@ namespace Formal.Pulumi
         public Output<string> FormalIdentityId { get; private set; } = null!;
 
         /// <summary>
-        /// The type of Formal Identity to be linked. Accepted values are `user`, `group`, and `resource_hostname`.
+        /// The type of Formal Identity to be linked. Accepted values are `User`, `Group`, and `ResourceHostname`.
         /// </summary>
         [Output("formalIdentityType")]
         public Output<string> FormalIdentityType { get; private set; } = null!;
@@ -100,7 +100,7 @@ namespace Formal.Pulumi
         public Input<string> FormalIdentityId { get; set; } = null!;
 
         /// <summary>
-        /// The type of Formal Identity to be linked. Accepted values are `user`, `group`, and `resource_hostname`.
+        /// The type of Formal Identity to be linked. Accepted values are `User`, `Group`, and `ResourceHostname`.
         /// </summary>
         [Input("formalIdentityType", required: true)]
         public Input<string> FormalIdentityType { get; set; } = null!;
@@ -132,7 +132,7 @@ namespace Formal.Pulumi
         public Input<string>? FormalIdentityId { get; set; }
 
         /// <summary>
-        /// The type of Formal Identity to be linked. Accepted values are `user`, `group`, and `resource_hostname`.
+        /// The type of Formal Identity to be linked. Accepted values are `User`, `Group`, and `ResourceHostname`.
         /// </summary>
         [Input("formalIdentityType")]
         public Input<string>? FormalIdentityType { get; set; }

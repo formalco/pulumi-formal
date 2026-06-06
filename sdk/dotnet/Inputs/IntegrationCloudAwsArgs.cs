@@ -19,6 +19,18 @@ namespace Formal.Pulumi.Inputs
         [Input("allowS3Access")]
         public Input<bool>? AllowS3Access { get; set; }
 
+        [Input("autodiscoveryRegions")]
+        private InputList<string>? _autodiscoveryRegions;
+
+        /// <summary>
+        /// The regions to enable resource autodiscovery for.
+        /// </summary>
+        public InputList<string> AutodiscoveryRegions
+        {
+            get => _autodiscoveryRegions ?? (_autodiscoveryRegions = new InputList<string>());
+            set => _autodiscoveryRegions = value;
+        }
+
         /// <summary>
         /// The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
         /// </summary>
@@ -68,7 +80,7 @@ namespace Formal.Pulumi.Inputs
         public Input<string>? S3BucketArn { get; set; }
 
         /// <summary>
-        /// The template version of the CloudFormation stack. Use `latest` to stay in sync.
+        /// The template version of the CloudFormation stack. Use `Latest` to stay in sync.
         /// </summary>
         [Input("templateVersion", required: true)]
         public Input<string> TemplateVersion { get; set; } = null!;

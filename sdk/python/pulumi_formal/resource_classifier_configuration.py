@@ -23,9 +23,10 @@ class ResourceClassifierConfigurationArgs:
                  ai_analysis_timeout_seconds: pulumi.Input[_builtins.int],
                  preference: pulumi.Input[_builtins.str],
                  resource_id: pulumi.Input[_builtins.str],
-                 enforce_strict_classifier_result_count: Optional[pulumi.Input[_builtins.bool]] = None):
+                 enforce_strict_classifier_result_count: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a ResourceClassifierConfiguration resource.
+
         :param pulumi.Input[_builtins.str] ai_analysis_scope: Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
         :param pulumi.Input[_builtins.int] ai_analysis_timeout_seconds: The timeout for the AI analysis in seconds.
         :param pulumi.Input[_builtins.str] preference: The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
@@ -89,29 +90,30 @@ class ResourceClassifierConfigurationArgs:
 
     @_builtins.property
     @pulumi.getter(name="enforceStrictClassifierResultCount")
-    def enforce_strict_classifier_result_count(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def enforce_strict_classifier_result_count(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
         """
         return pulumi.get(self, "enforce_strict_classifier_result_count")
 
     @enforce_strict_classifier_result_count.setter
-    def enforce_strict_classifier_result_count(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def enforce_strict_classifier_result_count(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "enforce_strict_classifier_result_count", value)
 
 
 @pulumi.input_type
 class _ResourceClassifierConfigurationState:
     def __init__(__self__, *,
-                 ai_analysis_scope: Optional[pulumi.Input[_builtins.str]] = None,
-                 ai_analysis_timeout_seconds: Optional[pulumi.Input[_builtins.int]] = None,
-                 created_at: Optional[pulumi.Input[_builtins.int]] = None,
-                 enforce_strict_classifier_result_count: Optional[pulumi.Input[_builtins.bool]] = None,
-                 preference: Optional[pulumi.Input[_builtins.str]] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 updated_at: Optional[pulumi.Input[_builtins.int]] = None):
+                 ai_analysis_scope: pulumi.Input[Optional[_builtins.str]] = None,
+                 ai_analysis_timeout_seconds: pulumi.Input[Optional[_builtins.int]] = None,
+                 created_at: pulumi.Input[Optional[_builtins.int]] = None,
+                 enforce_strict_classifier_result_count: pulumi.Input[Optional[_builtins.bool]] = None,
+                 preference: pulumi.Input[Optional[_builtins.str]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 updated_at: pulumi.Input[Optional[_builtins.int]] = None):
         """
         Input properties used for looking up and filtering ResourceClassifierConfiguration resources.
+
         :param pulumi.Input[_builtins.str] ai_analysis_scope: Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
         :param pulumi.Input[_builtins.int] ai_analysis_timeout_seconds: The timeout for the AI analysis in seconds.
         :param pulumi.Input[_builtins.int] created_at: The timestamp of the Resource Classifier Preference creation.
@@ -137,86 +139,86 @@ class _ResourceClassifierConfigurationState:
 
     @_builtins.property
     @pulumi.getter(name="aiAnalysisScope")
-    def ai_analysis_scope(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def ai_analysis_scope(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
         """
         return pulumi.get(self, "ai_analysis_scope")
 
     @ai_analysis_scope.setter
-    def ai_analysis_scope(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def ai_analysis_scope(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "ai_analysis_scope", value)
 
     @_builtins.property
     @pulumi.getter(name="aiAnalysisTimeoutSeconds")
-    def ai_analysis_timeout_seconds(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def ai_analysis_timeout_seconds(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The timeout for the AI analysis in seconds.
         """
         return pulumi.get(self, "ai_analysis_timeout_seconds")
 
     @ai_analysis_timeout_seconds.setter
-    def ai_analysis_timeout_seconds(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def ai_analysis_timeout_seconds(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "ai_analysis_timeout_seconds", value)
 
     @_builtins.property
     @pulumi.getter(name="createdAt")
-    def created_at(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def created_at(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The timestamp of the Resource Classifier Preference creation.
         """
         return pulumi.get(self, "created_at")
 
     @created_at.setter
-    def created_at(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def created_at(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "created_at", value)
 
     @_builtins.property
     @pulumi.getter(name="enforceStrictClassifierResultCount")
-    def enforce_strict_classifier_result_count(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def enforce_strict_classifier_result_count(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to fail requests if the number of results from the classifier is not equal to the number of key-value pairs sent to it.
         """
         return pulumi.get(self, "enforce_strict_classifier_result_count")
 
     @enforce_strict_classifier_result_count.setter
-    def enforce_strict_classifier_result_count(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def enforce_strict_classifier_result_count(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "enforce_strict_classifier_result_count", value)
 
     @_builtins.property
     @pulumi.getter
-    def preference(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def preference(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The preference. Supported values are `nlp`, `llm`, `both`, and `none`.
         """
         return pulumi.get(self, "preference")
 
     @preference.setter
-    def preference(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def preference(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "preference", value)
 
     @_builtins.property
     @pulumi.getter(name="resourceId")
-    def resource_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def resource_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the Resource.
         """
         return pulumi.get(self, "resource_id")
 
     @resource_id.setter
-    def resource_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def resource_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "resource_id", value)
 
     @_builtins.property
     @pulumi.getter(name="updatedAt")
-    def updated_at(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def updated_at(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The timestamp of the Resource Classifier Preference update.
         """
         return pulumi.get(self, "updated_at")
 
     @updated_at.setter
-    def updated_at(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def updated_at(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "updated_at", value)
 
 
@@ -226,14 +228,15 @@ class ResourceClassifierConfiguration(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 ai_analysis_scope: Optional[pulumi.Input[_builtins.str]] = None,
-                 ai_analysis_timeout_seconds: Optional[pulumi.Input[_builtins.int]] = None,
-                 enforce_strict_classifier_result_count: Optional[pulumi.Input[_builtins.bool]] = None,
-                 preference: Optional[pulumi.Input[_builtins.str]] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 ai_analysis_scope: pulumi.Input[Optional[_builtins.str]] = None,
+                 ai_analysis_timeout_seconds: pulumi.Input[Optional[_builtins.int]] = None,
+                 enforce_strict_classifier_result_count: pulumi.Input[Optional[_builtins.bool]] = None,
+                 preference: pulumi.Input[Optional[_builtins.str]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         A Resource Classifier Configuration is a configuration for a resource classifier.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -252,6 +255,7 @@ class ResourceClassifierConfiguration(pulumi.CustomResource):
         """
         A Resource Classifier Configuration is a configuration for a resource classifier.
 
+
         :param str resource_name: The name of the resource.
         :param ResourceClassifierConfigurationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -267,11 +271,11 @@ class ResourceClassifierConfiguration(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 ai_analysis_scope: Optional[pulumi.Input[_builtins.str]] = None,
-                 ai_analysis_timeout_seconds: Optional[pulumi.Input[_builtins.int]] = None,
-                 enforce_strict_classifier_result_count: Optional[pulumi.Input[_builtins.bool]] = None,
-                 preference: Optional[pulumi.Input[_builtins.str]] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 ai_analysis_scope: pulumi.Input[Optional[_builtins.str]] = None,
+                 ai_analysis_timeout_seconds: pulumi.Input[Optional[_builtins.int]] = None,
+                 enforce_strict_classifier_result_count: pulumi.Input[Optional[_builtins.bool]] = None,
+                 preference: pulumi.Input[Optional[_builtins.str]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -306,13 +310,13 @@ class ResourceClassifierConfiguration(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            ai_analysis_scope: Optional[pulumi.Input[_builtins.str]] = None,
-            ai_analysis_timeout_seconds: Optional[pulumi.Input[_builtins.int]] = None,
-            created_at: Optional[pulumi.Input[_builtins.int]] = None,
-            enforce_strict_classifier_result_count: Optional[pulumi.Input[_builtins.bool]] = None,
-            preference: Optional[pulumi.Input[_builtins.str]] = None,
-            resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-            updated_at: Optional[pulumi.Input[_builtins.int]] = None) -> 'ResourceClassifierConfiguration':
+            ai_analysis_scope: pulumi.Input[Optional[_builtins.str]] = None,
+            ai_analysis_timeout_seconds: pulumi.Input[Optional[_builtins.int]] = None,
+            created_at: pulumi.Input[Optional[_builtins.int]] = None,
+            enforce_strict_classifier_result_count: pulumi.Input[Optional[_builtins.bool]] = None,
+            preference: pulumi.Input[Optional[_builtins.str]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.int]] = None) -> 'ResourceClassifierConfiguration':
         """
         Get an existing ResourceClassifierConfiguration resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

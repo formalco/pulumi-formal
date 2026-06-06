@@ -23,6 +23,7 @@ class SatelliteLinkArgs:
                  target_satellite_id: pulumi.Input[_builtins.str]):
         """
         The set of arguments for constructing a SatelliteLink resource.
+
         :param pulumi.Input[_builtins.str] source_satellite_id: The ID of the source Satellite (e.g., Data Discovery Satellite).
         :param pulumi.Input[_builtins.str] target_satellite_id: The ID of the target Satellite (e.g., AI Satellite).
         """
@@ -57,12 +58,13 @@ class SatelliteLinkArgs:
 @pulumi.input_type
 class _SatelliteLinkState:
     def __init__(__self__, *,
-                 created_at: Optional[pulumi.Input[_builtins.str]] = None,
-                 source_satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 target_satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 updated_at: Optional[pulumi.Input[_builtins.str]] = None):
+                 created_at: pulumi.Input[Optional[_builtins.str]] = None,
+                 source_satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 target_satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 updated_at: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering SatelliteLink resources.
+
         :param pulumi.Input[_builtins.str] created_at: The timestamp when the satellite link was created.
         :param pulumi.Input[_builtins.str] source_satellite_id: The ID of the source Satellite (e.g., Data Discovery Satellite).
         :param pulumi.Input[_builtins.str] target_satellite_id: The ID of the target Satellite (e.g., AI Satellite).
@@ -79,50 +81,50 @@ class _SatelliteLinkState:
 
     @_builtins.property
     @pulumi.getter(name="createdAt")
-    def created_at(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def created_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The timestamp when the satellite link was created.
         """
         return pulumi.get(self, "created_at")
 
     @created_at.setter
-    def created_at(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def created_at(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "created_at", value)
 
     @_builtins.property
     @pulumi.getter(name="sourceSatelliteId")
-    def source_satellite_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def source_satellite_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the source Satellite (e.g., Data Discovery Satellite).
         """
         return pulumi.get(self, "source_satellite_id")
 
     @source_satellite_id.setter
-    def source_satellite_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def source_satellite_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "source_satellite_id", value)
 
     @_builtins.property
     @pulumi.getter(name="targetSatelliteId")
-    def target_satellite_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def target_satellite_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the target Satellite (e.g., AI Satellite).
         """
         return pulumi.get(self, "target_satellite_id")
 
     @target_satellite_id.setter
-    def target_satellite_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def target_satellite_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "target_satellite_id", value)
 
     @_builtins.property
     @pulumi.getter(name="updatedAt")
-    def updated_at(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def updated_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The timestamp when the satellite link was last updated.
         """
         return pulumi.get(self, "updated_at")
 
     @updated_at.setter
-    def updated_at(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def updated_at(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "updated_at", value)
 
 
@@ -132,11 +134,12 @@ class SatelliteLink(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 source_satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 target_satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 source_satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 target_satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Link a Satellite to another Satellite. For example, link a Data Discovery Satellite to an AI Satellite for column classification.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -151,6 +154,7 @@ class SatelliteLink(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Link a Satellite to another Satellite. For example, link a Data Discovery Satellite to an AI Satellite for column classification.
+
 
         :param str resource_name: The name of the resource.
         :param SatelliteLinkArgs args: The arguments to use to populate this resource's properties.
@@ -167,8 +171,8 @@ class SatelliteLink(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 source_satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 target_satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 source_satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 target_satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -196,10 +200,10 @@ class SatelliteLink(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            created_at: Optional[pulumi.Input[_builtins.str]] = None,
-            source_satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
-            target_satellite_id: Optional[pulumi.Input[_builtins.str]] = None,
-            updated_at: Optional[pulumi.Input[_builtins.str]] = None) -> 'SatelliteLink':
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            source_satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
+            target_satellite_id: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'SatelliteLink':
         """
         Get an existing SatelliteLink resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

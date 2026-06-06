@@ -38,19 +38,19 @@ export class InventoryObjectDataLabelLink extends pulumi.CustomResource {
     /**
      * Data label to link to the inventory object.
      */
-    public readonly dataLabel!: pulumi.Output<string>;
+    declare public readonly dataLabel: pulumi.Output<string>;
     /**
      * Whether the inventory object is locked.
      */
-    public readonly locked!: pulumi.Output<boolean>;
+    declare public readonly locked: pulumi.Output<boolean>;
     /**
      * Path of the inventory object.
      */
-    public readonly path!: pulumi.Output<string>;
+    declare public readonly path: pulumi.Output<string>;
     /**
      * Resource ID to which the inventory object belongs.
      */
-    public readonly resourceId!: pulumi.Output<string>;
+    declare public readonly resourceId: pulumi.Output<string>;
 
     /**
      * Create a InventoryObjectDataLabelLink resource with the given unique name, arguments, and options.
@@ -65,28 +65,28 @@ export class InventoryObjectDataLabelLink extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as InventoryObjectDataLabelLinkState | undefined;
-            resourceInputs["dataLabel"] = state ? state.dataLabel : undefined;
-            resourceInputs["locked"] = state ? state.locked : undefined;
-            resourceInputs["path"] = state ? state.path : undefined;
-            resourceInputs["resourceId"] = state ? state.resourceId : undefined;
+            resourceInputs["dataLabel"] = state?.dataLabel;
+            resourceInputs["locked"] = state?.locked;
+            resourceInputs["path"] = state?.path;
+            resourceInputs["resourceId"] = state?.resourceId;
         } else {
             const args = argsOrState as InventoryObjectDataLabelLinkArgs | undefined;
-            if ((!args || args.dataLabel === undefined) && !opts.urn) {
+            if (args?.dataLabel === undefined && !opts.urn) {
                 throw new Error("Missing required property 'dataLabel'");
             }
-            if ((!args || args.locked === undefined) && !opts.urn) {
+            if (args?.locked === undefined && !opts.urn) {
                 throw new Error("Missing required property 'locked'");
             }
-            if ((!args || args.path === undefined) && !opts.urn) {
+            if (args?.path === undefined && !opts.urn) {
                 throw new Error("Missing required property 'path'");
             }
-            if ((!args || args.resourceId === undefined) && !opts.urn) {
+            if (args?.resourceId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'resourceId'");
             }
-            resourceInputs["dataLabel"] = args ? args.dataLabel : undefined;
-            resourceInputs["locked"] = args ? args.locked : undefined;
-            resourceInputs["path"] = args ? args.path : undefined;
-            resourceInputs["resourceId"] = args ? args.resourceId : undefined;
+            resourceInputs["dataLabel"] = args?.dataLabel;
+            resourceInputs["locked"] = args?.locked;
+            resourceInputs["path"] = args?.path;
+            resourceInputs["resourceId"] = args?.resourceId;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(InventoryObjectDataLabelLink.__pulumiType, name, resourceInputs, opts);
@@ -100,19 +100,19 @@ export interface InventoryObjectDataLabelLinkState {
     /**
      * Data label to link to the inventory object.
      */
-    dataLabel?: pulumi.Input<string>;
+    dataLabel?: pulumi.Input<string | undefined>;
     /**
      * Whether the inventory object is locked.
      */
-    locked?: pulumi.Input<boolean>;
+    locked?: pulumi.Input<boolean | undefined>;
     /**
      * Path of the inventory object.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Resource ID to which the inventory object belongs.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
 }
 
 /**

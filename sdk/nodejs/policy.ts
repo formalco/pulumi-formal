@@ -38,39 +38,31 @@ export class Policy extends pulumi.CustomResource {
     /**
      * When the policy was created.
      */
-    public /*out*/ readonly createdAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly createdAt: pulumi.Output<string>;
     /**
      * Policy Description.
      */
-    public readonly description!: pulumi.Output<string>;
+    declare public readonly description: pulumi.Output<string>;
     /**
      * The module describing how the policy works. Create one in the Formal Console.
      */
-    public readonly module!: pulumi.Output<string>;
+    declare public readonly module: pulumi.Output<string>;
     /**
      * Policy Name
      */
-    public readonly name!: pulumi.Output<string>;
-    /**
-     * Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-     */
-    public readonly notification!: pulumi.Output<string>;
-    /**
-     * Owner of this policy: it can be either a group name or a user email.
-     */
-    public readonly owner!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
      */
-    public readonly status!: pulumi.Output<string>;
+    declare public readonly status: pulumi.Output<string>;
     /**
      * If set to true, this Policy cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
     /**
      * Last update time.
      */
-    public /*out*/ readonly updatedAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
 
     /**
      * Create a Policy resource with the given unique name, arguments, and options.
@@ -85,39 +77,29 @@ export class Policy extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as PolicyState | undefined;
-            resourceInputs["createdAt"] = state ? state.createdAt : undefined;
-            resourceInputs["description"] = state ? state.description : undefined;
-            resourceInputs["module"] = state ? state.module : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["notification"] = state ? state.notification : undefined;
-            resourceInputs["owner"] = state ? state.owner : undefined;
-            resourceInputs["status"] = state ? state.status : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
-            resourceInputs["updatedAt"] = state ? state.updatedAt : undefined;
+            resourceInputs["createdAt"] = state?.createdAt;
+            resourceInputs["description"] = state?.description;
+            resourceInputs["module"] = state?.module;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["status"] = state?.status;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
+            resourceInputs["updatedAt"] = state?.updatedAt;
         } else {
             const args = argsOrState as PolicyArgs | undefined;
-            if ((!args || args.description === undefined) && !opts.urn) {
+            if (args?.description === undefined && !opts.urn) {
                 throw new Error("Missing required property 'description'");
             }
-            if ((!args || args.module === undefined) && !opts.urn) {
+            if (args?.module === undefined && !opts.urn) {
                 throw new Error("Missing required property 'module'");
             }
-            if ((!args || args.notification === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'notification'");
-            }
-            if ((!args || args.owner === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'owner'");
-            }
-            if ((!args || args.status === undefined) && !opts.urn) {
+            if (args?.status === undefined && !opts.urn) {
                 throw new Error("Missing required property 'status'");
             }
-            resourceInputs["description"] = args ? args.description : undefined;
-            resourceInputs["module"] = args ? args.module : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["notification"] = args ? args.notification : undefined;
-            resourceInputs["owner"] = args ? args.owner : undefined;
-            resourceInputs["status"] = args ? args.status : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
+            resourceInputs["description"] = args?.description;
+            resourceInputs["module"] = args?.module;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["status"] = args?.status;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
@@ -133,39 +115,31 @@ export interface PolicyState {
     /**
      * When the policy was created.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * Policy Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The module describing how the policy works. Create one in the Formal Console.
      */
-    module?: pulumi.Input<string>;
+    module?: pulumi.Input<string | undefined>;
     /**
      * Policy Name
      */
-    name?: pulumi.Input<string>;
-    /**
-     * Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-     */
-    notification?: pulumi.Input<string>;
-    /**
-     * Owner of this policy: it can be either a group name or a user email.
-     */
-    owner?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this Policy cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Last update time.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -183,15 +157,7 @@ export interface PolicyArgs {
     /**
      * Policy Name
      */
-    name?: pulumi.Input<string>;
-    /**
-     * Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-     */
-    notification: pulumi.Input<string>;
-    /**
-     * Owner of this policy: it can be either a group name or a user email.
-     */
-    owner: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
      */
@@ -199,5 +165,5 @@ export interface PolicyArgs {
     /**
      * If set to true, this Policy cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }

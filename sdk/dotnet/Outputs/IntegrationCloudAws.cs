@@ -19,6 +19,10 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly bool? AllowS3Access;
         /// <summary>
+        /// The regions to enable resource autodiscovery for.
+        /// </summary>
+        public readonly ImmutableArray<string> AutodiscoveryRegions;
+        /// <summary>
         /// The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
         /// </summary>
         public readonly string? AwsCustomerRoleArn;
@@ -51,13 +55,15 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly string? S3BucketArn;
         /// <summary>
-        /// The template version of the CloudFormation stack. Use `latest` to stay in sync.
+        /// The template version of the CloudFormation stack. Use `Latest` to stay in sync.
         /// </summary>
         public readonly string TemplateVersion;
 
         [OutputConstructor]
         private IntegrationCloudAws(
             bool? allowS3Access,
+
+            ImmutableArray<string> autodiscoveryRegions,
 
             string? awsCustomerRoleArn,
 
@@ -78,6 +84,7 @@ namespace Formal.Pulumi.Outputs
             string templateVersion)
         {
             AllowS3Access = allowS3Access;
+            AutodiscoveryRegions = autodiscoveryRegions;
             AwsCustomerRoleArn = awsCustomerRoleArn;
             EnableEc2Autodiscovery = enableEc2Autodiscovery;
             EnableEcsAutodiscovery = enableEcsAutodiscovery;

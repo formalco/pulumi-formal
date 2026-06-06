@@ -13,19 +13,19 @@ namespace Formal.Pulumi
     public static class GetGroup
     {
         /// <summary>
-        /// Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.
+        /// Data source for looking up a Group by ID or by name. Use either `Id` or `Name`, but not both.
         /// </summary>
         public static Task<GetGroupResult> InvokeAsync(GetGroupArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupResult>("formal:index/getGroup:getGroup", args ?? new GetGroupArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.
+        /// Data source for looking up a Group by ID or by name. Use either `Id` or `Name`, but not both.
         /// </summary>
         public static Output<GetGroupResult> Invoke(GetGroupInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupResult>("formal:index/getGroup:getGroup", args ?? new GetGroupInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Group by ID or by name. Use either `id` or `name`, but not both.
+        /// Data source for looking up a Group by ID or by name. Use either `Id` or `Name`, but not both.
         /// </summary>
         public static Output<GetGroupResult> Invoke(GetGroupInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupResult>("formal:index/getGroup:getGroup", args ?? new GetGroupInvokeArgs(), options.WithDefaults());

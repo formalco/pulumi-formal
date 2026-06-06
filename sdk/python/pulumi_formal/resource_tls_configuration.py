@@ -21,10 +21,11 @@ class ResourceTlsConfigurationArgs:
     def __init__(__self__, *,
                  resource_id: pulumi.Input[_builtins.str],
                  tls_config: pulumi.Input[_builtins.str],
-                 tls_ca_truststore: Optional[pulumi.Input[_builtins.str]] = None,
-                 tls_min_version: Optional[pulumi.Input[_builtins.str]] = None):
+                 tls_ca_truststore: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_min_version: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a ResourceTlsConfiguration resource.
+
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the TLS configuration is applied to.
         :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         :param pulumi.Input[_builtins.str] tls_ca_truststore: PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
@@ -63,38 +64,39 @@ class ResourceTlsConfigurationArgs:
 
     @_builtins.property
     @pulumi.getter(name="tlsCaTruststore")
-    def tls_ca_truststore(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def tls_ca_truststore(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
         """
         return pulumi.get(self, "tls_ca_truststore")
 
     @tls_ca_truststore.setter
-    def tls_ca_truststore(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def tls_ca_truststore(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "tls_ca_truststore", value)
 
     @_builtins.property
     @pulumi.getter(name="tlsMinVersion")
-    def tls_min_version(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def tls_min_version(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Minimum TLS version to be used for connections.
         """
         return pulumi.get(self, "tls_min_version")
 
     @tls_min_version.setter
-    def tls_min_version(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def tls_min_version(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "tls_min_version", value)
 
 
 @pulumi.input_type
 class _ResourceTlsConfigurationState:
     def __init__(__self__, *,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 tls_ca_truststore: Optional[pulumi.Input[_builtins.str]] = None,
-                 tls_config: Optional[pulumi.Input[_builtins.str]] = None,
-                 tls_min_version: Optional[pulumi.Input[_builtins.str]] = None):
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_ca_truststore: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_config: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_min_version: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering ResourceTlsConfiguration resources.
+
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the TLS configuration is applied to.
         :param pulumi.Input[_builtins.str] tls_ca_truststore: PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
         :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
@@ -111,50 +113,50 @@ class _ResourceTlsConfigurationState:
 
     @_builtins.property
     @pulumi.getter(name="resourceId")
-    def resource_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def resource_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Resource ID for which the TLS configuration is applied to.
         """
         return pulumi.get(self, "resource_id")
 
     @resource_id.setter
-    def resource_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def resource_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "resource_id", value)
 
     @_builtins.property
     @pulumi.getter(name="tlsCaTruststore")
-    def tls_ca_truststore(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def tls_ca_truststore(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
         """
         return pulumi.get(self, "tls_ca_truststore")
 
     @tls_ca_truststore.setter
-    def tls_ca_truststore(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def tls_ca_truststore(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "tls_ca_truststore", value)
 
     @_builtins.property
     @pulumi.getter(name="tlsConfig")
-    def tls_config(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def tls_config(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         """
         return pulumi.get(self, "tls_config")
 
     @tls_config.setter
-    def tls_config(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def tls_config(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "tls_config", value)
 
     @_builtins.property
     @pulumi.getter(name="tlsMinVersion")
-    def tls_min_version(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def tls_min_version(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Minimum TLS version to be used for connections.
         """
         return pulumi.get(self, "tls_min_version")
 
     @tls_min_version.setter
-    def tls_min_version(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def tls_min_version(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "tls_min_version", value)
 
 
@@ -164,13 +166,14 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 tls_ca_truststore: Optional[pulumi.Input[_builtins.str]] = None,
-                 tls_config: Optional[pulumi.Input[_builtins.str]] = None,
-                 tls_min_version: Optional[pulumi.Input[_builtins.str]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_ca_truststore: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_config: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_min_version: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Creating a TLS Configuration of a Resource in Formal.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -188,6 +191,7 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
         """
         Creating a TLS Configuration of a Resource in Formal.
 
+
         :param str resource_name: The name of the resource.
         :param ResourceTlsConfigurationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -203,10 +207,10 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 tls_ca_truststore: Optional[pulumi.Input[_builtins.str]] = None,
-                 tls_config: Optional[pulumi.Input[_builtins.str]] = None,
-                 tls_min_version: Optional[pulumi.Input[_builtins.str]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_ca_truststore: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_config: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_min_version: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -234,10 +238,10 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-            tls_ca_truststore: Optional[pulumi.Input[_builtins.str]] = None,
-            tls_config: Optional[pulumi.Input[_builtins.str]] = None,
-            tls_min_version: Optional[pulumi.Input[_builtins.str]] = None) -> 'ResourceTlsConfiguration':
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            tls_ca_truststore: pulumi.Input[Optional[_builtins.str]] = None,
+            tls_config: pulumi.Input[Optional[_builtins.str]] = None,
+            tls_min_version: pulumi.Input[Optional[_builtins.str]] = None) -> 'ResourceTlsConfiguration':
         """
         Get an existing ResourceTlsConfiguration resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
