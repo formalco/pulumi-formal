@@ -38,19 +38,19 @@ export class SidecarResourceLink extends pulumi.CustomResource {
     /**
      * Port.
      */
-    public readonly port!: pulumi.Output<number>;
+    declare public readonly port: pulumi.Output<number>;
     /**
      * Resource ID to be linked.
      */
-    public readonly resourceId!: pulumi.Output<string>;
+    declare public readonly resourceId: pulumi.Output<string>;
     /**
      * Sidecar ID that should be linked.
      */
-    public readonly sidecarId!: pulumi.Output<string>;
+    declare public readonly sidecarId: pulumi.Output<string>;
     /**
      * If set to true, this Sidecar Datastore Link cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
 
     /**
      * Create a SidecarResourceLink resource with the given unique name, arguments, and options.
@@ -65,25 +65,25 @@ export class SidecarResourceLink extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SidecarResourceLinkState | undefined;
-            resourceInputs["port"] = state ? state.port : undefined;
-            resourceInputs["resourceId"] = state ? state.resourceId : undefined;
-            resourceInputs["sidecarId"] = state ? state.sidecarId : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
+            resourceInputs["port"] = state?.port;
+            resourceInputs["resourceId"] = state?.resourceId;
+            resourceInputs["sidecarId"] = state?.sidecarId;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
         } else {
             const args = argsOrState as SidecarResourceLinkArgs | undefined;
-            if ((!args || args.port === undefined) && !opts.urn) {
+            if (args?.port === undefined && !opts.urn) {
                 throw new Error("Missing required property 'port'");
             }
-            if ((!args || args.resourceId === undefined) && !opts.urn) {
+            if (args?.resourceId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'resourceId'");
             }
-            if ((!args || args.sidecarId === undefined) && !opts.urn) {
+            if (args?.sidecarId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'sidecarId'");
             }
-            resourceInputs["port"] = args ? args.port : undefined;
-            resourceInputs["resourceId"] = args ? args.resourceId : undefined;
-            resourceInputs["sidecarId"] = args ? args.sidecarId : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
+            resourceInputs["port"] = args?.port;
+            resourceInputs["resourceId"] = args?.resourceId;
+            resourceInputs["sidecarId"] = args?.sidecarId;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(SidecarResourceLink.__pulumiType, name, resourceInputs, opts);
@@ -97,19 +97,19 @@ export interface SidecarResourceLinkState {
     /**
      * Port.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * Resource ID to be linked.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Sidecar ID that should be linked.
      */
-    sidecarId?: pulumi.Input<string>;
+    sidecarId?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this Sidecar Datastore Link cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -131,5 +131,5 @@ export interface SidecarResourceLinkArgs {
     /**
      * If set to true, this Sidecar Datastore Link cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }

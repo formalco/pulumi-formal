@@ -38,19 +38,19 @@ export class SatelliteLink extends pulumi.CustomResource {
     /**
      * The timestamp when the satellite link was created.
      */
-    public /*out*/ readonly createdAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly createdAt: pulumi.Output<string>;
     /**
      * The ID of the source Satellite (e.g., Data Discovery Satellite).
      */
-    public readonly sourceSatelliteId!: pulumi.Output<string>;
+    declare public readonly sourceSatelliteId: pulumi.Output<string>;
     /**
      * The ID of the target Satellite (e.g., AI Satellite).
      */
-    public readonly targetSatelliteId!: pulumi.Output<string>;
+    declare public readonly targetSatelliteId: pulumi.Output<string>;
     /**
      * The timestamp when the satellite link was last updated.
      */
-    public /*out*/ readonly updatedAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
 
     /**
      * Create a SatelliteLink resource with the given unique name, arguments, and options.
@@ -65,20 +65,20 @@ export class SatelliteLink extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SatelliteLinkState | undefined;
-            resourceInputs["createdAt"] = state ? state.createdAt : undefined;
-            resourceInputs["sourceSatelliteId"] = state ? state.sourceSatelliteId : undefined;
-            resourceInputs["targetSatelliteId"] = state ? state.targetSatelliteId : undefined;
-            resourceInputs["updatedAt"] = state ? state.updatedAt : undefined;
+            resourceInputs["createdAt"] = state?.createdAt;
+            resourceInputs["sourceSatelliteId"] = state?.sourceSatelliteId;
+            resourceInputs["targetSatelliteId"] = state?.targetSatelliteId;
+            resourceInputs["updatedAt"] = state?.updatedAt;
         } else {
             const args = argsOrState as SatelliteLinkArgs | undefined;
-            if ((!args || args.sourceSatelliteId === undefined) && !opts.urn) {
+            if (args?.sourceSatelliteId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'sourceSatelliteId'");
             }
-            if ((!args || args.targetSatelliteId === undefined) && !opts.urn) {
+            if (args?.targetSatelliteId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'targetSatelliteId'");
             }
-            resourceInputs["sourceSatelliteId"] = args ? args.sourceSatelliteId : undefined;
-            resourceInputs["targetSatelliteId"] = args ? args.targetSatelliteId : undefined;
+            resourceInputs["sourceSatelliteId"] = args?.sourceSatelliteId;
+            resourceInputs["targetSatelliteId"] = args?.targetSatelliteId;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
@@ -94,19 +94,19 @@ export interface SatelliteLinkState {
     /**
      * The timestamp when the satellite link was created.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * The ID of the source Satellite (e.g., Data Discovery Satellite).
      */
-    sourceSatelliteId?: pulumi.Input<string>;
+    sourceSatelliteId?: pulumi.Input<string | undefined>;
     /**
      * The ID of the target Satellite (e.g., AI Satellite).
      */
-    targetSatelliteId?: pulumi.Input<string>;
+    targetSatelliteId?: pulumi.Input<string | undefined>;
     /**
      * The timestamp when the satellite link was last updated.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**

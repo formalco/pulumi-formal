@@ -38,23 +38,23 @@ export class ConnectorSatelliteLink extends pulumi.CustomResource {
     /**
      * The ID of the Connector to link to the satellite.
      */
-    public readonly connectorId!: pulumi.Output<string>;
+    declare public readonly connectorId: pulumi.Output<string>;
     /**
      * The timestamp when the connector satellite link was created.
      */
-    public /*out*/ readonly createdAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly createdAt: pulumi.Output<string>;
     /**
      * The ID of the Satellite to link to the connector.
      */
-    public readonly satelliteId!: pulumi.Output<string>;
+    declare public readonly satelliteId: pulumi.Output<string>;
     /**
      * The type of satellite being linked. Must be one of: `ai`, `dataClassifier` or `policyDataLoader`.
      */
-    public readonly satelliteType!: pulumi.Output<string>;
+    declare public readonly satelliteType: pulumi.Output<string>;
     /**
      * The timestamp when the connector satellite link was last updated.
      */
-    public /*out*/ readonly updatedAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
 
     /**
      * Create a ConnectorSatelliteLink resource with the given unique name, arguments, and options.
@@ -69,25 +69,25 @@ export class ConnectorSatelliteLink extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConnectorSatelliteLinkState | undefined;
-            resourceInputs["connectorId"] = state ? state.connectorId : undefined;
-            resourceInputs["createdAt"] = state ? state.createdAt : undefined;
-            resourceInputs["satelliteId"] = state ? state.satelliteId : undefined;
-            resourceInputs["satelliteType"] = state ? state.satelliteType : undefined;
-            resourceInputs["updatedAt"] = state ? state.updatedAt : undefined;
+            resourceInputs["connectorId"] = state?.connectorId;
+            resourceInputs["createdAt"] = state?.createdAt;
+            resourceInputs["satelliteId"] = state?.satelliteId;
+            resourceInputs["satelliteType"] = state?.satelliteType;
+            resourceInputs["updatedAt"] = state?.updatedAt;
         } else {
             const args = argsOrState as ConnectorSatelliteLinkArgs | undefined;
-            if ((!args || args.connectorId === undefined) && !opts.urn) {
+            if (args?.connectorId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'connectorId'");
             }
-            if ((!args || args.satelliteId === undefined) && !opts.urn) {
+            if (args?.satelliteId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'satelliteId'");
             }
-            if ((!args || args.satelliteType === undefined) && !opts.urn) {
+            if (args?.satelliteType === undefined && !opts.urn) {
                 throw new Error("Missing required property 'satelliteType'");
             }
-            resourceInputs["connectorId"] = args ? args.connectorId : undefined;
-            resourceInputs["satelliteId"] = args ? args.satelliteId : undefined;
-            resourceInputs["satelliteType"] = args ? args.satelliteType : undefined;
+            resourceInputs["connectorId"] = args?.connectorId;
+            resourceInputs["satelliteId"] = args?.satelliteId;
+            resourceInputs["satelliteType"] = args?.satelliteType;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
@@ -103,23 +103,23 @@ export interface ConnectorSatelliteLinkState {
     /**
      * The ID of the Connector to link to the satellite.
      */
-    connectorId?: pulumi.Input<string>;
+    connectorId?: pulumi.Input<string | undefined>;
     /**
      * The timestamp when the connector satellite link was created.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * The ID of the Satellite to link to the connector.
      */
-    satelliteId?: pulumi.Input<string>;
+    satelliteId?: pulumi.Input<string | undefined>;
     /**
      * The type of satellite being linked. Must be one of: `ai`, `dataClassifier` or `policyDataLoader`.
      */
-    satelliteType?: pulumi.Input<string>;
+    satelliteType?: pulumi.Input<string | undefined>;
     /**
      * The timestamp when the connector satellite link was last updated.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**

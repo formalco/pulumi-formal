@@ -22,15 +22,16 @@ class ResourceArgs:
                  hostname: pulumi.Input[_builtins.str],
                  port: pulumi.Input[_builtins.int],
                  technology: pulumi.Input[_builtins.str],
-                 aliases: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 environment: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 space_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
-                 technology_provider: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 aliases: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 environment: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 space_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 technology_provider: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Resource resource.
+
         :param pulumi.Input[_builtins.str] hostname: Hostname of the Resource.
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
         :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
@@ -101,106 +102,107 @@ class ResourceArgs:
 
     @_builtins.property
     @pulumi.getter
-    def aliases(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def aliases(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         Aliases to apply to the Resource.
         """
         return pulumi.get(self, "aliases")
 
     @aliases.setter
-    def aliases(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def aliases(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "aliases", value)
 
     @_builtins.property
     @pulumi.getter
     @_utilities.deprecated("""This field is deprecated and will be removed in a future release.""")
-    def environment(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def environment(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         """
         return pulumi.get(self, "environment")
 
     @environment.setter
-    def environment(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def environment(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "environment", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for the Resource.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="spaceId")
-    def space_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def space_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the Space to create the Resource in.
         """
         return pulumi.get(self, "space_id")
 
     @space_id.setter
-    def space_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def space_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "space_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
         """
         Tags to apply to the Resource.
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
     @_builtins.property
     @pulumi.getter(name="technologyProvider")
-    def technology_provider(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def technology_provider(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
         """
         return pulumi.get(self, "technology_provider")
 
     @technology_provider.setter
-    def technology_provider(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def technology_provider(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "technology_provider", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, the Resource cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
 @pulumi.input_type
 class _ResourceState:
     def __init__(__self__, *,
-                 aliases: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 created_at: Optional[pulumi.Input[_builtins.int]] = None,
-                 environment: Optional[pulumi.Input[_builtins.str]] = None,
-                 hostname: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 port: Optional[pulumi.Input[_builtins.int]] = None,
-                 space_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
-                 technology: Optional[pulumi.Input[_builtins.str]] = None,
-                 technology_provider: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 aliases: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 created_at: pulumi.Input[Optional[_builtins.int]] = None,
+                 environment: pulumi.Input[Optional[_builtins.str]] = None,
+                 hostname: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 port: pulumi.Input[Optional[_builtins.int]] = None,
+                 space_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 technology: pulumi.Input[Optional[_builtins.str]] = None,
+                 technology_provider: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         Input properties used for looking up and filtering Resource resources.
+
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] aliases: Aliases to apply to the Resource.
         :param pulumi.Input[_builtins.int] created_at: Creation time of the Resource.
         :param pulumi.Input[_builtins.str] environment: Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
@@ -241,135 +243,135 @@ class _ResourceState:
 
     @_builtins.property
     @pulumi.getter
-    def aliases(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def aliases(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         Aliases to apply to the Resource.
         """
         return pulumi.get(self, "aliases")
 
     @aliases.setter
-    def aliases(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def aliases(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "aliases", value)
 
     @_builtins.property
     @pulumi.getter(name="createdAt")
-    def created_at(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def created_at(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Creation time of the Resource.
         """
         return pulumi.get(self, "created_at")
 
     @created_at.setter
-    def created_at(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def created_at(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "created_at", value)
 
     @_builtins.property
     @pulumi.getter
     @_utilities.deprecated("""This field is deprecated and will be removed in a future release.""")
-    def environment(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def environment(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         """
         return pulumi.get(self, "environment")
 
     @environment.setter
-    def environment(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def environment(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "environment", value)
 
     @_builtins.property
     @pulumi.getter
-    def hostname(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def hostname(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Hostname of the Resource.
         """
         return pulumi.get(self, "hostname")
 
     @hostname.setter
-    def hostname(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def hostname(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "hostname", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for the Resource.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def port(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def port(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The port your Resource is listening on.
         """
         return pulumi.get(self, "port")
 
     @port.setter
-    def port(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def port(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "port", value)
 
     @_builtins.property
     @pulumi.getter(name="spaceId")
-    def space_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def space_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the Space to create the Resource in.
         """
         return pulumi.get(self, "space_id")
 
     @space_id.setter
-    def space_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def space_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "space_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
         """
         Tags to apply to the Resource.
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
     @_builtins.property
     @pulumi.getter
-    def technology(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def technology(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
         """
         return pulumi.get(self, "technology")
 
     @technology.setter
-    def technology(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def technology(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "technology", value)
 
     @_builtins.property
     @pulumi.getter(name="technologyProvider")
-    def technology_provider(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def technology_provider(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
         """
         return pulumi.get(self, "technology_provider")
 
     @technology_provider.setter
-    def technology_provider(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def technology_provider(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "technology_provider", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, the Resource cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
@@ -379,19 +381,20 @@ class Resource(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aliases: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 environment: Optional[pulumi.Input[_builtins.str]] = None,
-                 hostname: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 port: Optional[pulumi.Input[_builtins.int]] = None,
-                 space_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
-                 technology: Optional[pulumi.Input[_builtins.str]] = None,
-                 technology_provider: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 aliases: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 environment: pulumi.Input[Optional[_builtins.str]] = None,
+                 hostname: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 port: pulumi.Input[Optional[_builtins.int]] = None,
+                 space_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 technology: pulumi.Input[Optional[_builtins.str]] = None,
+                 technology_provider: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         Registering a Resource with Formal.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -415,6 +418,7 @@ class Resource(pulumi.CustomResource):
         """
         Registering a Resource with Formal.
 
+
         :param str resource_name: The name of the resource.
         :param ResourceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -430,16 +434,16 @@ class Resource(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aliases: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 environment: Optional[pulumi.Input[_builtins.str]] = None,
-                 hostname: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 port: Optional[pulumi.Input[_builtins.int]] = None,
-                 space_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
-                 technology: Optional[pulumi.Input[_builtins.str]] = None,
-                 technology_provider: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 aliases: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 environment: pulumi.Input[Optional[_builtins.str]] = None,
+                 hostname: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 port: pulumi.Input[Optional[_builtins.int]] = None,
+                 space_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 technology: pulumi.Input[Optional[_builtins.str]] = None,
+                 technology_provider: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -476,17 +480,17 @@ class Resource(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            aliases: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            created_at: Optional[pulumi.Input[_builtins.int]] = None,
-            environment: Optional[pulumi.Input[_builtins.str]] = None,
-            hostname: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            port: Optional[pulumi.Input[_builtins.int]] = None,
-            space_id: Optional[pulumi.Input[_builtins.str]] = None,
-            tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
-            technology: Optional[pulumi.Input[_builtins.str]] = None,
-            technology_provider: Optional[pulumi.Input[_builtins.str]] = None,
-            termination_protection: Optional[pulumi.Input[_builtins.bool]] = None) -> 'Resource':
+            aliases: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            created_at: pulumi.Input[Optional[_builtins.int]] = None,
+            environment: pulumi.Input[Optional[_builtins.str]] = None,
+            hostname: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            port: pulumi.Input[Optional[_builtins.int]] = None,
+            space_id: pulumi.Input[Optional[_builtins.str]] = None,
+            tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+            technology: pulumi.Input[Optional[_builtins.str]] = None,
+            technology_provider: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None) -> 'Resource':
         """
         Get an existing Resource resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

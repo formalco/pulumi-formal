@@ -38,15 +38,15 @@ export class Workflow extends pulumi.CustomResource {
     /**
      * The workflow definition in YAML format. Defines the trigger and actions for the workflow.
      */
-    public readonly code!: pulumi.Output<string>;
+    declare public readonly code: pulumi.Output<string>;
     /**
      * The name of the workflow. Must be unique within the organization.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * The workflow status. Accepted values are `active` and `draft`.
      */
-    public readonly status!: pulumi.Output<string | undefined>;
+    declare public readonly status: pulumi.Output<string | undefined>;
 
     /**
      * Create a Workflow resource with the given unique name, arguments, and options.
@@ -61,17 +61,17 @@ export class Workflow extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as WorkflowState | undefined;
-            resourceInputs["code"] = state ? state.code : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["status"] = state ? state.status : undefined;
+            resourceInputs["code"] = state?.code;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["status"] = state?.status;
         } else {
             const args = argsOrState as WorkflowArgs | undefined;
-            if ((!args || args.code === undefined) && !opts.urn) {
+            if (args?.code === undefined && !opts.urn) {
                 throw new Error("Missing required property 'code'");
             }
-            resourceInputs["code"] = args ? args.code : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["status"] = args ? args.status : undefined;
+            resourceInputs["code"] = args?.code;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["status"] = args?.status;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Workflow.__pulumiType, name, resourceInputs, opts);
@@ -85,15 +85,15 @@ export interface WorkflowState {
     /**
      * The workflow definition in YAML format. Defines the trigger and actions for the workflow.
      */
-    code?: pulumi.Input<string>;
+    code?: pulumi.Input<string | undefined>;
     /**
      * The name of the workflow. Must be unique within the organization.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The workflow status. Accepted values are `active` and `draft`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -107,9 +107,9 @@ export interface WorkflowArgs {
     /**
      * The name of the workflow. Must be unique within the organization.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The workflow status. Accepted values are `active` and `draft`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

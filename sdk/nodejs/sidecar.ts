@@ -38,35 +38,35 @@ export class Sidecar extends pulumi.CustomResource {
     /**
      * Api key for the deployed Sidecar.
      */
-    public /*out*/ readonly apiKey!: pulumi.Output<string>;
+    declare public /*out*/ readonly apiKey: pulumi.Output<string>;
     /**
      * Creation time of the sidecar.
      */
-    public /*out*/ readonly createdAt!: pulumi.Output<number>;
+    declare public /*out*/ readonly createdAt: pulumi.Output<number>;
     /**
      * If deploymentType is onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.
      */
-    public /*out*/ readonly formalControlPlaneTlsCertificate!: pulumi.Output<string>;
+    declare public /*out*/ readonly formalControlPlaneTlsCertificate: pulumi.Output<string>;
     /**
      * The hostname of the created sidecar.
      */
-    public readonly hostname!: pulumi.Output<string>;
+    declare public readonly hostname: pulumi.Output<string>;
     /**
      * Friendly name for this Sidecar.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
      */
-    public readonly technology!: pulumi.Output<string>;
+    declare public readonly technology: pulumi.Output<string>;
     /**
      * If set to true, this Sidecar cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
     /**
      * Version of the Sidecar to deploy for `managed`.
      */
-    public readonly version!: pulumi.Output<string | undefined>;
+    declare public readonly version: pulumi.Output<string | undefined>;
 
     /**
      * Create a Sidecar resource with the given unique name, arguments, and options.
@@ -81,27 +81,27 @@ export class Sidecar extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SidecarState | undefined;
-            resourceInputs["apiKey"] = state ? state.apiKey : undefined;
-            resourceInputs["createdAt"] = state ? state.createdAt : undefined;
-            resourceInputs["formalControlPlaneTlsCertificate"] = state ? state.formalControlPlaneTlsCertificate : undefined;
-            resourceInputs["hostname"] = state ? state.hostname : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["technology"] = state ? state.technology : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
-            resourceInputs["version"] = state ? state.version : undefined;
+            resourceInputs["apiKey"] = state?.apiKey;
+            resourceInputs["createdAt"] = state?.createdAt;
+            resourceInputs["formalControlPlaneTlsCertificate"] = state?.formalControlPlaneTlsCertificate;
+            resourceInputs["hostname"] = state?.hostname;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["technology"] = state?.technology;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
+            resourceInputs["version"] = state?.version;
         } else {
             const args = argsOrState as SidecarArgs | undefined;
-            if ((!args || args.hostname === undefined) && !opts.urn) {
+            if (args?.hostname === undefined && !opts.urn) {
                 throw new Error("Missing required property 'hostname'");
             }
-            if ((!args || args.technology === undefined) && !opts.urn) {
+            if (args?.technology === undefined && !opts.urn) {
                 throw new Error("Missing required property 'technology'");
             }
-            resourceInputs["hostname"] = args ? args.hostname : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["technology"] = args ? args.technology : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
-            resourceInputs["version"] = args ? args.version : undefined;
+            resourceInputs["hostname"] = args?.hostname;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["technology"] = args?.technology;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
+            resourceInputs["version"] = args?.version;
             resourceInputs["apiKey"] = undefined /*out*/;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["formalControlPlaneTlsCertificate"] = undefined /*out*/;
@@ -120,35 +120,35 @@ export interface SidecarState {
     /**
      * Api key for the deployed Sidecar.
      */
-    apiKey?: pulumi.Input<string>;
+    apiKey?: pulumi.Input<string | undefined>;
     /**
      * Creation time of the sidecar.
      */
-    createdAt?: pulumi.Input<number>;
+    createdAt?: pulumi.Input<number | undefined>;
     /**
      * If deploymentType is onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.
      */
-    formalControlPlaneTlsCertificate?: pulumi.Input<string>;
+    formalControlPlaneTlsCertificate?: pulumi.Input<string | undefined>;
     /**
      * The hostname of the created sidecar.
      */
-    hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string | undefined>;
     /**
      * Friendly name for this Sidecar.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
      */
-    technology?: pulumi.Input<string>;
+    technology?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this Sidecar cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Version of the Sidecar to deploy for `managed`.
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -162,7 +162,7 @@ export interface SidecarArgs {
     /**
      * Friendly name for this Sidecar.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
      */
@@ -170,9 +170,9 @@ export interface SidecarArgs {
     /**
      * If set to true, this Sidecar cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Version of the Sidecar to deploy for `managed`.
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
 }

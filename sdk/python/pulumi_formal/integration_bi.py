@@ -22,10 +22,11 @@ __all__ = ['IntegrationBiArgs', 'IntegrationBi']
 class IntegrationBiArgs:
     def __init__(__self__, *,
                  sync: pulumi.Input[_builtins.bool],
-                 metabase: Optional[pulumi.Input['IntegrationBiMetabaseArgs']] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None):
+                 metabase: pulumi.Input[Optional['IntegrationBiMetabaseArgs']] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a IntegrationBi resource.
+
         :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         :param pulumi.Input['IntegrationBiMetabaseArgs'] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for this app.
@@ -50,37 +51,38 @@ class IntegrationBiArgs:
 
     @_builtins.property
     @pulumi.getter
-    def metabase(self) -> Optional[pulumi.Input['IntegrationBiMetabaseArgs']]:
+    def metabase(self) -> pulumi.Input[Optional['IntegrationBiMetabaseArgs']]:
         """
         Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
         """
         return pulumi.get(self, "metabase")
 
     @metabase.setter
-    def metabase(self, value: Optional[pulumi.Input['IntegrationBiMetabaseArgs']]):
+    def metabase(self, value: pulumi.Input[Optional['IntegrationBiMetabaseArgs']]):
         pulumi.set(self, "metabase", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for this app.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
 
 @pulumi.input_type
 class _IntegrationBiState:
     def __init__(__self__, *,
-                 metabase: Optional[pulumi.Input['IntegrationBiMetabaseArgs']] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 sync: Optional[pulumi.Input[_builtins.bool]] = None):
+                 metabase: pulumi.Input[Optional['IntegrationBiMetabaseArgs']] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 sync: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         Input properties used for looking up and filtering IntegrationBi resources.
+
         :param pulumi.Input['IntegrationBiMetabaseArgs'] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for this app.
         :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
@@ -94,38 +96,38 @@ class _IntegrationBiState:
 
     @_builtins.property
     @pulumi.getter
-    def metabase(self) -> Optional[pulumi.Input['IntegrationBiMetabaseArgs']]:
+    def metabase(self) -> pulumi.Input[Optional['IntegrationBiMetabaseArgs']]:
         """
         Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
         """
         return pulumi.get(self, "metabase")
 
     @metabase.setter
-    def metabase(self, value: Optional[pulumi.Input['IntegrationBiMetabaseArgs']]):
+    def metabase(self, value: pulumi.Input[Optional['IntegrationBiMetabaseArgs']]):
         pulumi.set(self, "metabase", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for this app.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def sync(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def sync(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
         """
         return pulumi.get(self, "sync")
 
     @sync.setter
-    def sync(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def sync(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "sync", value)
 
 
@@ -135,12 +137,13 @@ class IntegrationBi(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 metabase: Optional[pulumi.Input[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 sync: Optional[pulumi.Input[_builtins.bool]] = None,
+                 metabase: pulumi.Input[Optional[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 sync: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         Registering a BI App.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -157,6 +160,7 @@ class IntegrationBi(pulumi.CustomResource):
         """
         Registering a BI App.
 
+
         :param str resource_name: The name of the resource.
         :param IntegrationBiArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -172,9 +176,9 @@ class IntegrationBi(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 metabase: Optional[pulumi.Input[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 sync: Optional[pulumi.Input[_builtins.bool]] = None,
+                 metabase: pulumi.Input[Optional[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 sync: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -199,9 +203,9 @@ class IntegrationBi(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            metabase: Optional[pulumi.Input[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            sync: Optional[pulumi.Input[_builtins.bool]] = None) -> 'IntegrationBi':
+            metabase: pulumi.Input[Optional[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            sync: pulumi.Input[Optional[_builtins.bool]] = None) -> 'IntegrationBi':
         """
         Get an existing IntegrationBi resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

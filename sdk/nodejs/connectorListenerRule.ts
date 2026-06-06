@@ -38,19 +38,19 @@ export class ConnectorListenerRule extends pulumi.CustomResource {
     /**
      * The ID of the listener this rule is associated with.
      */
-    public readonly connectorListenerId!: pulumi.Output<string>;
+    declare public readonly connectorListenerId: pulumi.Output<string>;
     /**
      * The rule to apply to the listener. It should be either the id of the resource or the name of the technology.
      */
-    public readonly rule!: pulumi.Output<string>;
+    declare public readonly rule: pulumi.Output<string>;
     /**
      * If set to true, this connector listener rule cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
     /**
      * The type of the rule. It can be either `any`, `resource` or `technology`
      */
-    public readonly type!: pulumi.Output<string>;
+    declare public readonly type: pulumi.Output<string>;
 
     /**
      * Create a ConnectorListenerRule resource with the given unique name, arguments, and options.
@@ -65,25 +65,25 @@ export class ConnectorListenerRule extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConnectorListenerRuleState | undefined;
-            resourceInputs["connectorListenerId"] = state ? state.connectorListenerId : undefined;
-            resourceInputs["rule"] = state ? state.rule : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
-            resourceInputs["type"] = state ? state.type : undefined;
+            resourceInputs["connectorListenerId"] = state?.connectorListenerId;
+            resourceInputs["rule"] = state?.rule;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
+            resourceInputs["type"] = state?.type;
         } else {
             const args = argsOrState as ConnectorListenerRuleArgs | undefined;
-            if ((!args || args.connectorListenerId === undefined) && !opts.urn) {
+            if (args?.connectorListenerId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'connectorListenerId'");
             }
-            if ((!args || args.rule === undefined) && !opts.urn) {
+            if (args?.rule === undefined && !opts.urn) {
                 throw new Error("Missing required property 'rule'");
             }
-            if ((!args || args.type === undefined) && !opts.urn) {
+            if (args?.type === undefined && !opts.urn) {
                 throw new Error("Missing required property 'type'");
             }
-            resourceInputs["connectorListenerId"] = args ? args.connectorListenerId : undefined;
-            resourceInputs["rule"] = args ? args.rule : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
-            resourceInputs["type"] = args ? args.type : undefined;
+            resourceInputs["connectorListenerId"] = args?.connectorListenerId;
+            resourceInputs["rule"] = args?.rule;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
+            resourceInputs["type"] = args?.type;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ConnectorListenerRule.__pulumiType, name, resourceInputs, opts);
@@ -97,19 +97,19 @@ export interface ConnectorListenerRuleState {
     /**
      * The ID of the listener this rule is associated with.
      */
-    connectorListenerId?: pulumi.Input<string>;
+    connectorListenerId?: pulumi.Input<string | undefined>;
     /**
      * The rule to apply to the listener. It should be either the id of the resource or the name of the technology.
      */
-    rule?: pulumi.Input<string>;
+    rule?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this connector listener rule cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * The type of the rule. It can be either `any`, `resource` or `technology`
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -127,7 +127,7 @@ export interface ConnectorListenerRuleArgs {
     /**
      * If set to true, this connector listener rule cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * The type of the rule. It can be either `any`, `resource` or `technology`
      */

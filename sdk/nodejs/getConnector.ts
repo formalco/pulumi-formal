@@ -74,9 +74,9 @@ export interface GetConnectorOutputArgs {
     /**
      * The ID of the Connector to look up.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * The name of the Connector to look up. Use this to fetch a connector by name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

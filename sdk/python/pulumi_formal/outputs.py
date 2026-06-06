@@ -16,10 +16,20 @@ from . import _utilities
 from . import outputs
 
 __all__ = [
-    'DataDomainOwner',
+    'ConnectorAiProviderAnthropic',
+    'ConnectorAiProviderAwsBedrock',
+    'ConnectorAiProviderAzureAi',
+    'ConnectorAiProviderFormalAiSatellite',
+    'ConnectorAiProviderGemini',
+    'ConnectorAiProviderGoogleVertexAi',
+    'ConnectorAiProviderOpenai',
+    'FormField',
+    'FormFieldConfig',
+    'FormFieldConfigOption',
+    'FormFieldConfigOptionsSource',
+    'FormFieldConfigOptionsSourceCommand',
     'IntegrationBiMetabase',
     'IntegrationCloudAws',
-    'IntegrationDataCatalogDatahub',
     'IntegrationLogAwsS3',
     'IntegrationLogDatadog',
     'IntegrationLogSplunk',
@@ -33,41 +43,525 @@ __all__ = [
 ]
 
 @pulumi.output_type
-class DataDomainOwner(dict):
+class ConnectorAiProviderAnthropic(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "objectId":
-            suggest = "object_id"
-        elif key == "objectType":
-            suggest = "object_type"
+        if key == "apiKey":
+            suggest = "api_key"
+        elif key == "apiKeyVersion":
+            suggest = "api_key_version"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in DataDomainOwner. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in ConnectorAiProviderAnthropic. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        DataDomainOwner.__key_warning(key)
+        ConnectorAiProviderAnthropic.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        DataDomainOwner.__key_warning(key)
+        ConnectorAiProviderAnthropic.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 object_id: _builtins.str,
-                 object_type: _builtins.str):
-        pulumi.set(__self__, "object_id", object_id)
-        pulumi.set(__self__, "object_type", object_type)
+                 api_key: _builtins.str,
+                 api_key_version: _builtins.int):
+        """
+        :param _builtins.str api_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The API key. This value is not stored in Terraform state.
+        :param _builtins.int api_key_version: Version trigger for `api_key`. Increment this value to update the key.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_key_version", api_key_version)
 
     @_builtins.property
-    @pulumi.getter(name="objectId")
-    def object_id(self) -> _builtins.str:
-        return pulumi.get(self, "object_id")
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> _builtins.str:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The API key. This value is not stored in Terraform state.
+        """
+        return pulumi.get(self, "api_key")
 
     @_builtins.property
-    @pulumi.getter(name="objectType")
-    def object_type(self) -> _builtins.str:
-        return pulumi.get(self, "object_type")
+    @pulumi.getter(name="apiKeyVersion")
+    def api_key_version(self) -> _builtins.int:
+        """
+        Version trigger for `api_key`. Increment this value to update the key.
+        """
+        return pulumi.get(self, "api_key_version")
+
+
+@pulumi.output_type
+class ConnectorAiProviderAwsBedrock(dict):
+    def __init__(__self__, *,
+                 region: _builtins.str):
+        """
+        :param _builtins.str region: The AWS region.
+        """
+        pulumi.set(__self__, "region", region)
+
+    @_builtins.property
+    @pulumi.getter
+    def region(self) -> _builtins.str:
+        """
+        The AWS region.
+        """
+        return pulumi.get(self, "region")
+
+
+@pulumi.output_type
+class ConnectorAiProviderAzureAi(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "apiKey":
+            suggest = "api_key"
+        elif key == "apiKeyVersion":
+            suggest = "api_key_version"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectorAiProviderAzureAi. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectorAiProviderAzureAi.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectorAiProviderAzureAi.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 api_key: _builtins.str,
+                 api_key_version: _builtins.int,
+                 endpoint: _builtins.str):
+        """
+        :param _builtins.str api_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The API key. This value is not stored in Terraform state.
+        :param _builtins.int api_key_version: Version trigger for `api_key`. Increment this value to update the key.
+        :param _builtins.str endpoint: The Azure AI Foundry endpoint URL.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_key_version", api_key_version)
+        pulumi.set(__self__, "endpoint", endpoint)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> _builtins.str:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The API key. This value is not stored in Terraform state.
+        """
+        return pulumi.get(self, "api_key")
+
+    @_builtins.property
+    @pulumi.getter(name="apiKeyVersion")
+    def api_key_version(self) -> _builtins.int:
+        """
+        Version trigger for `api_key`. Increment this value to update the key.
+        """
+        return pulumi.get(self, "api_key_version")
+
+    @_builtins.property
+    @pulumi.getter
+    def endpoint(self) -> _builtins.str:
+        """
+        The Azure AI Foundry endpoint URL.
+        """
+        return pulumi.get(self, "endpoint")
+
+
+@pulumi.output_type
+class ConnectorAiProviderFormalAiSatellite(dict):
+    def __init__(__self__):
+        pass
+
+
+@pulumi.output_type
+class ConnectorAiProviderGemini(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "apiKey":
+            suggest = "api_key"
+        elif key == "apiKeyVersion":
+            suggest = "api_key_version"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectorAiProviderGemini. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectorAiProviderGemini.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectorAiProviderGemini.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 api_key: _builtins.str,
+                 api_key_version: _builtins.int):
+        """
+        :param _builtins.str api_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The API key. This value is not stored in Terraform state.
+        :param _builtins.int api_key_version: Version trigger for `api_key`. Increment this value to update the key.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_key_version", api_key_version)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> _builtins.str:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The API key. This value is not stored in Terraform state.
+        """
+        return pulumi.get(self, "api_key")
+
+    @_builtins.property
+    @pulumi.getter(name="apiKeyVersion")
+    def api_key_version(self) -> _builtins.int:
+        """
+        Version trigger for `api_key`. Increment this value to update the key.
+        """
+        return pulumi.get(self, "api_key_version")
+
+
+@pulumi.output_type
+class ConnectorAiProviderGoogleVertexAi(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "gcpProjectId":
+            suggest = "gcp_project_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectorAiProviderGoogleVertexAi. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectorAiProviderGoogleVertexAi.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectorAiProviderGoogleVertexAi.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 gcp_project_id: _builtins.str,
+                 region: _builtins.str):
+        """
+        :param _builtins.str gcp_project_id: The GCP project ID.
+        :param _builtins.str region: The GCP region.
+        """
+        pulumi.set(__self__, "gcp_project_id", gcp_project_id)
+        pulumi.set(__self__, "region", region)
+
+    @_builtins.property
+    @pulumi.getter(name="gcpProjectId")
+    def gcp_project_id(self) -> _builtins.str:
+        """
+        The GCP project ID.
+        """
+        return pulumi.get(self, "gcp_project_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def region(self) -> _builtins.str:
+        """
+        The GCP region.
+        """
+        return pulumi.get(self, "region")
+
+
+@pulumi.output_type
+class ConnectorAiProviderOpenai(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "apiKey":
+            suggest = "api_key"
+        elif key == "apiKeyVersion":
+            suggest = "api_key_version"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectorAiProviderOpenai. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectorAiProviderOpenai.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectorAiProviderOpenai.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 api_key: _builtins.str,
+                 api_key_version: _builtins.int):
+        """
+        :param _builtins.str api_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               The API key. This value is not stored in Terraform state.
+        :param _builtins.int api_key_version: Version trigger for `api_key`. Increment this value to update the key.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_key_version", api_key_version)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> _builtins.str:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        The API key. This value is not stored in Terraform state.
+        """
+        return pulumi.get(self, "api_key")
+
+    @_builtins.property
+    @pulumi.getter(name="apiKeyVersion")
+    def api_key_version(self) -> _builtins.int:
+        """
+        Version trigger for `api_key`. Increment this value to update the key.
+        """
+        return pulumi.get(self, "api_key_version")
+
+
+@pulumi.output_type
+class FormField(dict):
+    def __init__(__self__, *,
+                 id: _builtins.str,
+                 name: _builtins.str,
+                 type: _builtins.str,
+                 config: Optional['outputs.FormFieldConfig'] = None):
+        """
+        :param _builtins.str id: Unique field identifier.
+        :param _builtins.str name: Display name of the field.
+        :param _builtins.str type: Field type.
+        :param 'FormFieldConfigArgs' config: Optional field configuration for select-like field types.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        if config is not None:
+            pulumi.set(__self__, "config", config)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Unique field identifier.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Display name of the field.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> _builtins.str:
+        """
+        Field type.
+        """
+        return pulumi.get(self, "type")
+
+    @_builtins.property
+    @pulumi.getter
+    def config(self) -> Optional['outputs.FormFieldConfig']:
+        """
+        Optional field configuration for select-like field types.
+        """
+        return pulumi.get(self, "config")
+
+
+@pulumi.output_type
+class FormFieldConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "optionsSource":
+            suggest = "options_source"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FormFieldConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FormFieldConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FormFieldConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 options: Optional[Sequence['outputs.FormFieldConfigOption']] = None,
+                 options_source: Optional['outputs.FormFieldConfigOptionsSource'] = None):
+        """
+        :param Sequence['FormFieldConfigOptionArgs'] options: Static options for select-like fields.
+        :param 'FormFieldConfigOptionsSourceArgs' options_source: Dynamic source used to fetch options.
+        """
+        if options is not None:
+            pulumi.set(__self__, "options", options)
+        if options_source is not None:
+            pulumi.set(__self__, "options_source", options_source)
+
+    @_builtins.property
+    @pulumi.getter
+    def options(self) -> Optional[Sequence['outputs.FormFieldConfigOption']]:
+        """
+        Static options for select-like fields.
+        """
+        return pulumi.get(self, "options")
+
+    @_builtins.property
+    @pulumi.getter(name="optionsSource")
+    def options_source(self) -> Optional['outputs.FormFieldConfigOptionsSource']:
+        """
+        Dynamic source used to fetch options.
+        """
+        return pulumi.get(self, "options_source")
+
+
+@pulumi.output_type
+class FormFieldConfigOption(dict):
+    def __init__(__self__, *,
+                 label: _builtins.str,
+                 value: _builtins.str):
+        """
+        :param _builtins.str label: Option label.
+        :param _builtins.str value: Option value.
+        """
+        pulumi.set(__self__, "label", label)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def label(self) -> _builtins.str:
+        """
+        Option label.
+        """
+        return pulumi.get(self, "label")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> _builtins.str:
+        """
+        Option value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class FormFieldConfigOptionsSource(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "machineUserId":
+            suggest = "machine_user_id"
+        elif key == "inputJson":
+            suggest = "input_json"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FormFieldConfigOptionsSource. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FormFieldConfigOptionsSource.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FormFieldConfigOptionsSource.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 app: _builtins.str,
+                 command: 'outputs.FormFieldConfigOptionsSourceCommand',
+                 machine_user_id: _builtins.str,
+                 transform: _builtins.str,
+                 input: Optional[Mapping[str, _builtins.str]] = None,
+                 input_json: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str app: Service/app name used to fetch options.
+        :param 'FormFieldConfigOptionsSourceCommandArgs' command: Command configuration for options retrieval.
+        :param _builtins.str machine_user_id: Machine user used to authenticate options retrieval.
+        :param _builtins.str transform: CEL expression that transforms the response into options.
+        :param Mapping[str, _builtins.str] input: Optional payload for options retrieval.
+        :param _builtins.str input_json: Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
+        """
+        pulumi.set(__self__, "app", app)
+        pulumi.set(__self__, "command", command)
+        pulumi.set(__self__, "machine_user_id", machine_user_id)
+        pulumi.set(__self__, "transform", transform)
+        if input is not None:
+            pulumi.set(__self__, "input", input)
+        if input_json is not None:
+            pulumi.set(__self__, "input_json", input_json)
+
+    @_builtins.property
+    @pulumi.getter
+    def app(self) -> _builtins.str:
+        """
+        Service/app name used to fetch options.
+        """
+        return pulumi.get(self, "app")
+
+    @_builtins.property
+    @pulumi.getter
+    def command(self) -> 'outputs.FormFieldConfigOptionsSourceCommand':
+        """
+        Command configuration for options retrieval.
+        """
+        return pulumi.get(self, "command")
+
+    @_builtins.property
+    @pulumi.getter(name="machineUserId")
+    def machine_user_id(self) -> _builtins.str:
+        """
+        Machine user used to authenticate options retrieval.
+        """
+        return pulumi.get(self, "machine_user_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def transform(self) -> _builtins.str:
+        """
+        CEL expression that transforms the response into options.
+        """
+        return pulumi.get(self, "transform")
+
+    @_builtins.property
+    @pulumi.getter
+    def input(self) -> Optional[Mapping[str, _builtins.str]]:
+        """
+        Optional payload for options retrieval.
+        """
+        return pulumi.get(self, "input")
+
+    @_builtins.property
+    @pulumi.getter(name="inputJson")
+    def input_json(self) -> Optional[_builtins.str]:
+        """
+        Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
+        """
+        return pulumi.get(self, "input_json")
+
+
+@pulumi.output_type
+class FormFieldConfigOptionsSourceCommand(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: Command name.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Command name.
+        """
+        return pulumi.get(self, "name")
 
 
 @pulumi.output_type
@@ -122,6 +616,8 @@ class IntegrationCloudAws(dict):
             suggest = "template_version"
         elif key == "allowS3Access":
             suggest = "allow_s3_access"
+        elif key == "autodiscoveryRegions":
+            suggest = "autodiscovery_regions"
         elif key == "awsCustomerRoleArn":
             suggest = "aws_customer_role_arn"
         elif key == "enableEc2Autodiscovery":
@@ -153,6 +649,7 @@ class IntegrationCloudAws(dict):
     def __init__(__self__, *,
                  template_version: _builtins.str,
                  allow_s3_access: Optional[_builtins.bool] = None,
+                 autodiscovery_regions: Optional[Sequence[_builtins.str]] = None,
                  aws_customer_role_arn: Optional[_builtins.str] = None,
                  enable_ec2_autodiscovery: Optional[_builtins.bool] = None,
                  enable_ecs_autodiscovery: Optional[_builtins.bool] = None,
@@ -164,6 +661,7 @@ class IntegrationCloudAws(dict):
         """
         :param _builtins.str template_version: The template version of the CloudFormation stack. Use `latest` to stay in sync.
         :param _builtins.bool allow_s3_access: Allows the Cloud Integration to access S3 buckets for Log Integrations.
+        :param Sequence[_builtins.str] autodiscovery_regions: The regions to enable resource autodiscovery for.
         :param _builtins.str aws_customer_role_arn: The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
         :param _builtins.bool enable_ec2_autodiscovery: Enables resource autodiscovery for EC2 instances.
         :param _builtins.bool enable_ecs_autodiscovery: Enables resource autodiscovery for ECS clusters.
@@ -176,6 +674,8 @@ class IntegrationCloudAws(dict):
         pulumi.set(__self__, "template_version", template_version)
         if allow_s3_access is not None:
             pulumi.set(__self__, "allow_s3_access", allow_s3_access)
+        if autodiscovery_regions is not None:
+            pulumi.set(__self__, "autodiscovery_regions", autodiscovery_regions)
         if aws_customer_role_arn is not None:
             pulumi.set(__self__, "aws_customer_role_arn", aws_customer_role_arn)
         if enable_ec2_autodiscovery is not None:
@@ -208,6 +708,14 @@ class IntegrationCloudAws(dict):
         Allows the Cloud Integration to access S3 buckets for Log Integrations.
         """
         return pulumi.get(self, "allow_s3_access")
+
+    @_builtins.property
+    @pulumi.getter(name="autodiscoveryRegions")
+    def autodiscovery_regions(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        The regions to enable resource autodiscovery for.
+        """
+        return pulumi.get(self, "autodiscovery_regions")
 
     @_builtins.property
     @pulumi.getter(name="awsCustomerRoleArn")
@@ -275,67 +783,6 @@ class IntegrationCloudAws(dict):
 
 
 @pulumi.output_type
-class IntegrationDataCatalogDatahub(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "apiKey":
-            suggest = "api_key"
-        elif key == "generalizedMetadataServiceUrl":
-            suggest = "generalized_metadata_service_url"
-        elif key == "webhookSecret":
-            suggest = "webhook_secret"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in IntegrationDataCatalogDatahub. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        IntegrationDataCatalogDatahub.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        IntegrationDataCatalogDatahub.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 api_key: _builtins.str,
-                 generalized_metadata_service_url: _builtins.str,
-                 webhook_secret: _builtins.str):
-        """
-        :param _builtins.str api_key: Api Key for the Datahub instance.
-        :param _builtins.str generalized_metadata_service_url: Generalized metadata service url for the Datahub instance.
-        :param _builtins.str webhook_secret: Webhook secret of the Datahub instance.
-        """
-        pulumi.set(__self__, "api_key", api_key)
-        pulumi.set(__self__, "generalized_metadata_service_url", generalized_metadata_service_url)
-        pulumi.set(__self__, "webhook_secret", webhook_secret)
-
-    @_builtins.property
-    @pulumi.getter(name="apiKey")
-    def api_key(self) -> _builtins.str:
-        """
-        Api Key for the Datahub instance.
-        """
-        return pulumi.get(self, "api_key")
-
-    @_builtins.property
-    @pulumi.getter(name="generalizedMetadataServiceUrl")
-    def generalized_metadata_service_url(self) -> _builtins.str:
-        """
-        Generalized metadata service url for the Datahub instance.
-        """
-        return pulumi.get(self, "generalized_metadata_service_url")
-
-    @_builtins.property
-    @pulumi.getter(name="webhookSecret")
-    def webhook_secret(self) -> _builtins.str:
-        """
-        Webhook secret of the Datahub instance.
-        """
-        return pulumi.get(self, "webhook_secret")
-
-
-@pulumi.output_type
 class IntegrationLogAwsS3(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -344,6 +791,8 @@ class IntegrationLogAwsS3(dict):
             suggest = "cloud_integration_id"
         elif key == "s3BucketName":
             suggest = "s3_bucket_name"
+        elif key == "s3BucketPrefix":
+            suggest = "s3_bucket_prefix"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in IntegrationLogAwsS3. Access the value via the '{suggest}' property getter instead.")
@@ -359,16 +808,20 @@ class IntegrationLogAwsS3(dict):
     def __init__(__self__, *,
                  cloud_integration_id: _builtins.str,
                  s3_bucket_name: _builtins.str,
-                 region: Optional[_builtins.str] = None):
+                 region: Optional[_builtins.str] = None,
+                 s3_bucket_prefix: Optional[_builtins.str] = None):
         """
         :param _builtins.str cloud_integration_id: Cloud Integration ID.
         :param _builtins.str s3_bucket_name: AWS S3 Bucket Name.
         :param _builtins.str region: AWS Region.
+        :param _builtins.str s3_bucket_prefix: AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
         """
         pulumi.set(__self__, "cloud_integration_id", cloud_integration_id)
         pulumi.set(__self__, "s3_bucket_name", s3_bucket_name)
         if region is not None:
             pulumi.set(__self__, "region", region)
+        if s3_bucket_prefix is not None:
+            pulumi.set(__self__, "s3_bucket_prefix", s3_bucket_prefix)
 
     @_builtins.property
     @pulumi.getter(name="cloudIntegrationId")
@@ -393,6 +846,14 @@ class IntegrationLogAwsS3(dict):
         AWS Region.
         """
         return pulumi.get(self, "region")
+
+    @_builtins.property
+    @pulumi.getter(name="s3BucketPrefix")
+    def s3_bucket_prefix(self) -> Optional[_builtins.str]:
+        """
+        AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
+        """
+        return pulumi.get(self, "s3_bucket_prefix")
 
 
 @pulumi.output_type

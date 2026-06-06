@@ -38,15 +38,15 @@ export class ConnectorListenerLink extends pulumi.CustomResource {
     /**
      * The ID of the Connector Listener you want to link to a connector.
      */
-    public readonly connectorId!: pulumi.Output<string>;
+    declare public readonly connectorId: pulumi.Output<string>;
     /**
      * The ID of the Connector Listener you want to link to a connector.
      */
-    public readonly connectorListenerId!: pulumi.Output<string>;
+    declare public readonly connectorListenerId: pulumi.Output<string>;
     /**
      * If set to true, this connector cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
 
     /**
      * Create a ConnectorListenerLink resource with the given unique name, arguments, and options.
@@ -61,20 +61,20 @@ export class ConnectorListenerLink extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConnectorListenerLinkState | undefined;
-            resourceInputs["connectorId"] = state ? state.connectorId : undefined;
-            resourceInputs["connectorListenerId"] = state ? state.connectorListenerId : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
+            resourceInputs["connectorId"] = state?.connectorId;
+            resourceInputs["connectorListenerId"] = state?.connectorListenerId;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
         } else {
             const args = argsOrState as ConnectorListenerLinkArgs | undefined;
-            if ((!args || args.connectorId === undefined) && !opts.urn) {
+            if (args?.connectorId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'connectorId'");
             }
-            if ((!args || args.connectorListenerId === undefined) && !opts.urn) {
+            if (args?.connectorListenerId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'connectorListenerId'");
             }
-            resourceInputs["connectorId"] = args ? args.connectorId : undefined;
-            resourceInputs["connectorListenerId"] = args ? args.connectorListenerId : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
+            resourceInputs["connectorId"] = args?.connectorId;
+            resourceInputs["connectorListenerId"] = args?.connectorListenerId;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ConnectorListenerLink.__pulumiType, name, resourceInputs, opts);
@@ -88,15 +88,15 @@ export interface ConnectorListenerLinkState {
     /**
      * The ID of the Connector Listener you want to link to a connector.
      */
-    connectorId?: pulumi.Input<string>;
+    connectorId?: pulumi.Input<string | undefined>;
     /**
      * The ID of the Connector Listener you want to link to a connector.
      */
-    connectorListenerId?: pulumi.Input<string>;
+    connectorListenerId?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this connector cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -114,5 +114,5 @@ export interface ConnectorListenerLinkArgs {
     /**
      * If set to true, this connector cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }

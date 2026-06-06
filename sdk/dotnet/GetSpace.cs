@@ -13,19 +13,19 @@ namespace Formal.Pulumi
     public static class GetSpace
     {
         /// <summary>
-        /// Data source for looking up a Space by ID or by name. Use either `id` or `name`, but not both.
+        /// Data source for looking up a Space by ID or by name. Use either `Id` or `Name`, but not both.
         /// </summary>
         public static Task<GetSpaceResult> InvokeAsync(GetSpaceArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSpaceResult>("formal:index/getSpace:getSpace", args ?? new GetSpaceArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Space by ID or by name. Use either `id` or `name`, but not both.
+        /// Data source for looking up a Space by ID or by name. Use either `Id` or `Name`, but not both.
         /// </summary>
         public static Output<GetSpaceResult> Invoke(GetSpaceInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSpaceResult>("formal:index/getSpace:getSpace", args ?? new GetSpaceInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Space by ID or by name. Use either `id` or `name`, but not both.
+        /// Data source for looking up a Space by ID or by name. Use either `Id` or `Name`, but not both.
         /// </summary>
         public static Output<GetSpaceResult> Invoke(GetSpaceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSpaceResult>("formal:index/getSpace:getSpace", args ?? new GetSpaceInvokeArgs(), options.WithDefaults());

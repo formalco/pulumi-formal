@@ -38,15 +38,15 @@ export class GroupUserLink extends pulumi.CustomResource {
     /**
      * The Formal ID for the group to be linked.
      */
-    public readonly groupId!: pulumi.Output<string>;
+    declare public readonly groupId: pulumi.Output<string>;
     /**
      * If set to true, this Link cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
     /**
      * The Formal ID of the user to be linked.
      */
-    public readonly userId!: pulumi.Output<string>;
+    declare public readonly userId: pulumi.Output<string>;
 
     /**
      * Create a GroupUserLink resource with the given unique name, arguments, and options.
@@ -61,20 +61,20 @@ export class GroupUserLink extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as GroupUserLinkState | undefined;
-            resourceInputs["groupId"] = state ? state.groupId : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
-            resourceInputs["userId"] = state ? state.userId : undefined;
+            resourceInputs["groupId"] = state?.groupId;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
+            resourceInputs["userId"] = state?.userId;
         } else {
             const args = argsOrState as GroupUserLinkArgs | undefined;
-            if ((!args || args.groupId === undefined) && !opts.urn) {
+            if (args?.groupId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'groupId'");
             }
-            if ((!args || args.userId === undefined) && !opts.urn) {
+            if (args?.userId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'userId'");
             }
-            resourceInputs["groupId"] = args ? args.groupId : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
-            resourceInputs["userId"] = args ? args.userId : undefined;
+            resourceInputs["groupId"] = args?.groupId;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
+            resourceInputs["userId"] = args?.userId;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(GroupUserLink.__pulumiType, name, resourceInputs, opts);
@@ -88,15 +88,15 @@ export interface GroupUserLinkState {
     /**
      * The Formal ID for the group to be linked.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this Link cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * The Formal ID of the user to be linked.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -110,7 +110,7 @@ export interface GroupUserLinkArgs {
     /**
      * If set to true, this Link cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * The Formal ID of the user to be linked.
      */

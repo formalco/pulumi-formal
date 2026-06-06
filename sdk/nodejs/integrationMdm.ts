@@ -40,11 +40,11 @@ export class IntegrationMdm extends pulumi.CustomResource {
     /**
      * Configuration block for Kandji integration.
      */
-    public readonly kandji!: pulumi.Output<outputs.IntegrationMdmKandji | undefined>;
+    declare public readonly kandji: pulumi.Output<outputs.IntegrationMdmKandji | undefined>;
     /**
      * Friendly name for the Integration app.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
 
     /**
      * Create a IntegrationMdm resource with the given unique name, arguments, and options.
@@ -59,12 +59,12 @@ export class IntegrationMdm extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as IntegrationMdmState | undefined;
-            resourceInputs["kandji"] = state ? state.kandji : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["kandji"] = state?.kandji;
+            resourceInputs["name"] = state?.name;
         } else {
             const args = argsOrState as IntegrationMdmArgs | undefined;
-            resourceInputs["kandji"] = args ? args.kandji : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["kandji"] = args?.kandji;
+            resourceInputs["name"] = args?.name;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(IntegrationMdm.__pulumiType, name, resourceInputs, opts);
@@ -78,11 +78,11 @@ export interface IntegrationMdmState {
     /**
      * Configuration block for Kandji integration.
      */
-    kandji?: pulumi.Input<inputs.IntegrationMdmKandji>;
+    kandji?: pulumi.Input<inputs.IntegrationMdmKandji | undefined>;
     /**
      * Friendly name for the Integration app.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -92,9 +92,9 @@ export interface IntegrationMdmArgs {
     /**
      * Configuration block for Kandji integration.
      */
-    kandji?: pulumi.Input<inputs.IntegrationMdmKandji>;
+    kandji?: pulumi.Input<inputs.IntegrationMdmKandji | undefined>;
     /**
      * Friendly name for the Integration app.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

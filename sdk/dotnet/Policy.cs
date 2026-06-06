@@ -41,18 +41,6 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-        /// </summary>
-        [Output("notification")]
-        public Output<string> Notification { get; private set; } = null!;
-
-        /// <summary>
-        /// Owner of this policy: it can be either a group name or a user email.
-        /// </summary>
-        [Output("owner")]
-        public Output<string> Owner { get; private set; } = null!;
-
-        /// <summary>
         /// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         /// </summary>
         [Output("status")]
@@ -136,18 +124,6 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-        /// </summary>
-        [Input("notification", required: true)]
-        public Input<string> Notification { get; set; } = null!;
-
-        /// <summary>
-        /// Owner of this policy: it can be either a group name or a user email.
-        /// </summary>
-        [Input("owner", required: true)]
-        public Input<string> Owner { get; set; } = null!;
-
-        /// <summary>
         /// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         /// </summary>
         [Input("status", required: true)]
@@ -190,18 +166,6 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
-
-        /// <summary>
-        /// Notification settings for this policy. It can be one of the following: 'all', 'consumer', 'owners', or 'none'.
-        /// </summary>
-        [Input("notification")]
-        public Input<string>? Notification { get; set; }
-
-        /// <summary>
-        /// Owner of this policy: it can be either a group name or a user email.
-        /// </summary>
-        [Input("owner")]
-        public Input<string>? Owner { get; set; }
 
         /// <summary>
         /// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.

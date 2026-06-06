@@ -38,49 +38,49 @@ export class Resource extends pulumi.CustomResource {
     /**
      * Aliases to apply to the Resource.
      */
-    public readonly aliases!: pulumi.Output<string[] | undefined>;
+    declare public readonly aliases: pulumi.Output<string[] | undefined>;
     /**
      * Creation time of the Resource.
      */
-    public /*out*/ readonly createdAt!: pulumi.Output<number>;
+    declare public /*out*/ readonly createdAt: pulumi.Output<number>;
     /**
      * Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
      *
      * @deprecated This field is deprecated and will be removed in a future release.
      */
-    public readonly environment!: pulumi.Output<string | undefined>;
+    declare public readonly environment: pulumi.Output<string | undefined>;
     /**
      * Hostname of the Resource.
      */
-    public readonly hostname!: pulumi.Output<string>;
+    declare public readonly hostname: pulumi.Output<string>;
     /**
      * Friendly name for the Resource.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * The port your Resource is listening on.
      */
-    public readonly port!: pulumi.Output<number>;
+    declare public readonly port: pulumi.Output<number>;
     /**
      * The ID of the Space to create the Resource in.
      */
-    public readonly spaceId!: pulumi.Output<string | undefined>;
+    declare public readonly spaceId: pulumi.Output<string | undefined>;
     /**
      * Tags to apply to the Resource.
      */
-    public readonly tags!: pulumi.Output<{[key: string]: string} | undefined>;
+    declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
     /**
      * Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
      */
-    public readonly technology!: pulumi.Output<string>;
+    declare public readonly technology: pulumi.Output<string>;
     /**
      * For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
      */
-    public readonly technologyProvider!: pulumi.Output<string | undefined>;
+    declare public readonly technologyProvider: pulumi.Output<string | undefined>;
     /**
      * If set to true, the Resource cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
 
     /**
      * Create a Resource resource with the given unique name, arguments, and options.
@@ -95,38 +95,38 @@ export class Resource extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ResourceState | undefined;
-            resourceInputs["aliases"] = state ? state.aliases : undefined;
-            resourceInputs["createdAt"] = state ? state.createdAt : undefined;
-            resourceInputs["environment"] = state ? state.environment : undefined;
-            resourceInputs["hostname"] = state ? state.hostname : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["port"] = state ? state.port : undefined;
-            resourceInputs["spaceId"] = state ? state.spaceId : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
-            resourceInputs["technology"] = state ? state.technology : undefined;
-            resourceInputs["technologyProvider"] = state ? state.technologyProvider : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
+            resourceInputs["aliases"] = state?.aliases;
+            resourceInputs["createdAt"] = state?.createdAt;
+            resourceInputs["environment"] = state?.environment;
+            resourceInputs["hostname"] = state?.hostname;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["port"] = state?.port;
+            resourceInputs["spaceId"] = state?.spaceId;
+            resourceInputs["tags"] = state?.tags;
+            resourceInputs["technology"] = state?.technology;
+            resourceInputs["technologyProvider"] = state?.technologyProvider;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
         } else {
             const args = argsOrState as ResourceArgs | undefined;
-            if ((!args || args.hostname === undefined) && !opts.urn) {
+            if (args?.hostname === undefined && !opts.urn) {
                 throw new Error("Missing required property 'hostname'");
             }
-            if ((!args || args.port === undefined) && !opts.urn) {
+            if (args?.port === undefined && !opts.urn) {
                 throw new Error("Missing required property 'port'");
             }
-            if ((!args || args.technology === undefined) && !opts.urn) {
+            if (args?.technology === undefined && !opts.urn) {
                 throw new Error("Missing required property 'technology'");
             }
-            resourceInputs["aliases"] = args ? args.aliases : undefined;
-            resourceInputs["environment"] = args ? args.environment : undefined;
-            resourceInputs["hostname"] = args ? args.hostname : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["port"] = args ? args.port : undefined;
-            resourceInputs["spaceId"] = args ? args.spaceId : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
-            resourceInputs["technology"] = args ? args.technology : undefined;
-            resourceInputs["technologyProvider"] = args ? args.technologyProvider : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
+            resourceInputs["aliases"] = args?.aliases;
+            resourceInputs["environment"] = args?.environment;
+            resourceInputs["hostname"] = args?.hostname;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["port"] = args?.port;
+            resourceInputs["spaceId"] = args?.spaceId;
+            resourceInputs["tags"] = args?.tags;
+            resourceInputs["technology"] = args?.technology;
+            resourceInputs["technologyProvider"] = args?.technologyProvider;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
             resourceInputs["createdAt"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -141,49 +141,49 @@ export interface ResourceState {
     /**
      * Aliases to apply to the Resource.
      */
-    aliases?: pulumi.Input<pulumi.Input<string>[]>;
+    aliases?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Creation time of the Resource.
      */
-    createdAt?: pulumi.Input<number>;
+    createdAt?: pulumi.Input<number | undefined>;
     /**
      * Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
      *
      * @deprecated This field is deprecated and will be removed in a future release.
      */
-    environment?: pulumi.Input<string>;
+    environment?: pulumi.Input<string | undefined>;
     /**
      * Hostname of the Resource.
      */
-    hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string | undefined>;
     /**
      * Friendly name for the Resource.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The port your Resource is listening on.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * The ID of the Space to create the Resource in.
      */
-    spaceId?: pulumi.Input<string>;
+    spaceId?: pulumi.Input<string | undefined>;
     /**
      * Tags to apply to the Resource.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
      */
-    technology?: pulumi.Input<string>;
+    technology?: pulumi.Input<string | undefined>;
     /**
      * For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
      */
-    technologyProvider?: pulumi.Input<string>;
+    technologyProvider?: pulumi.Input<string | undefined>;
     /**
      * If set to true, the Resource cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -193,13 +193,13 @@ export interface ResourceArgs {
     /**
      * Aliases to apply to the Resource.
      */
-    aliases?: pulumi.Input<pulumi.Input<string>[]>;
+    aliases?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
      *
      * @deprecated This field is deprecated and will be removed in a future release.
      */
-    environment?: pulumi.Input<string>;
+    environment?: pulumi.Input<string | undefined>;
     /**
      * Hostname of the Resource.
      */
@@ -207,7 +207,7 @@ export interface ResourceArgs {
     /**
      * Friendly name for the Resource.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The port your Resource is listening on.
      */
@@ -215,11 +215,11 @@ export interface ResourceArgs {
     /**
      * The ID of the Space to create the Resource in.
      */
-    spaceId?: pulumi.Input<string>;
+    spaceId?: pulumi.Input<string | undefined>;
     /**
      * Tags to apply to the Resource.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
      */
@@ -227,9 +227,9 @@ export interface ResourceArgs {
     /**
      * For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
      */
-    technologyProvider?: pulumi.Input<string>;
+    technologyProvider?: pulumi.Input<string | undefined>;
     /**
      * If set to true, the Resource cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }

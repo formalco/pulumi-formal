@@ -21,14 +21,19 @@ class NativeUserArgs:
     def __init__(__self__, *,
                  native_user_id: pulumi.Input[_builtins.str],
                  resource_id: pulumi.Input[_builtins.str],
-                 native_user_secret: Optional[pulumi.Input[_builtins.str]] = None,
-                 native_user_secret_wo_version: Optional[pulumi.Input[_builtins.int]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 use_as_default: Optional[pulumi.Input[_builtins.bool]] = None):
+                 native_user_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_secret_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_secret_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 use_as_default: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a NativeUser resource.
+
         :param pulumi.Input[_builtins.str] native_user_id: The username of the Native User.
         :param pulumi.Input[_builtins.str] resource_id: The Sidecar ID for the resource this Native User is for.
+        :param pulumi.Input[_builtins.str] native_user_secret: The password of the Native User. Prefer using `native_user_secret_wo` to avoid storing the secret in Terraform state.
+        :param pulumi.Input[_builtins.str] native_user_secret_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
         :param pulumi.Input[_builtins.int] native_user_secret_wo_version: Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Native User cannot be deleted.
         :param pulumi.Input[_builtins.bool] use_as_default: The password of the Native User.
@@ -37,6 +42,8 @@ class NativeUserArgs:
         pulumi.set(__self__, "resource_id", resource_id)
         if native_user_secret is not None:
             pulumi.set(__self__, "native_user_secret", native_user_secret)
+        if native_user_secret_wo is not None:
+            pulumi.set(__self__, "native_user_secret_wo", native_user_secret_wo)
         if native_user_secret_wo_version is not None:
             pulumi.set(__self__, "native_user_secret_wo_version", native_user_secret_wo_version)
         if termination_protection is not None:
@@ -70,62 +77,83 @@ class NativeUserArgs:
 
     @_builtins.property
     @pulumi.getter(name="nativeUserSecret")
-    def native_user_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def native_user_secret(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The password of the Native User. Prefer using `native_user_secret_wo` to avoid storing the secret in Terraform state.
+        """
         return pulumi.get(self, "native_user_secret")
 
     @native_user_secret.setter
-    def native_user_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def native_user_secret(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "native_user_secret", value)
 
     @_builtins.property
+    @pulumi.getter(name="nativeUserSecretWo")
+    def native_user_secret_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+        """
+        return pulumi.get(self, "native_user_secret_wo")
+
+    @native_user_secret_wo.setter
+    def native_user_secret_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "native_user_secret_wo", value)
+
+    @_builtins.property
     @pulumi.getter(name="nativeUserSecretWoVersion")
-    def native_user_secret_wo_version(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def native_user_secret_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
         """
         return pulumi.get(self, "native_user_secret_wo_version")
 
     @native_user_secret_wo_version.setter
-    def native_user_secret_wo_version(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def native_user_secret_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "native_user_secret_wo_version", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this Native User cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
     @_builtins.property
     @pulumi.getter(name="useAsDefault")
-    def use_as_default(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def use_as_default(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         The password of the Native User.
         """
         return pulumi.get(self, "use_as_default")
 
     @use_as_default.setter
-    def use_as_default(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def use_as_default(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "use_as_default", value)
 
 
 @pulumi.input_type
 class _NativeUserState:
     def __init__(__self__, *,
-                 native_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 native_user_secret: Optional[pulumi.Input[_builtins.str]] = None,
-                 native_user_secret_wo_version: Optional[pulumi.Input[_builtins.int]] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 use_as_default: Optional[pulumi.Input[_builtins.bool]] = None):
+                 native_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_secret_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_secret_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 use_as_default: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         Input properties used for looking up and filtering NativeUser resources.
+
         :param pulumi.Input[_builtins.str] native_user_id: The username of the Native User.
+        :param pulumi.Input[_builtins.str] native_user_secret: The password of the Native User. Prefer using `native_user_secret_wo` to avoid storing the secret in Terraform state.
+        :param pulumi.Input[_builtins.str] native_user_secret_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
         :param pulumi.Input[_builtins.int] native_user_secret_wo_version: Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
         :param pulumi.Input[_builtins.str] resource_id: The Sidecar ID for the resource this Native User is for.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Native User cannot be deleted.
@@ -135,6 +163,8 @@ class _NativeUserState:
             pulumi.set(__self__, "native_user_id", native_user_id)
         if native_user_secret is not None:
             pulumi.set(__self__, "native_user_secret", native_user_secret)
+        if native_user_secret_wo is not None:
+            pulumi.set(__self__, "native_user_secret_wo", native_user_secret_wo)
         if native_user_secret_wo_version is not None:
             pulumi.set(__self__, "native_user_secret_wo_version", native_user_secret_wo_version)
         if resource_id is not None:
@@ -146,71 +176,87 @@ class _NativeUserState:
 
     @_builtins.property
     @pulumi.getter(name="nativeUserId")
-    def native_user_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def native_user_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The username of the Native User.
         """
         return pulumi.get(self, "native_user_id")
 
     @native_user_id.setter
-    def native_user_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def native_user_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "native_user_id", value)
 
     @_builtins.property
     @pulumi.getter(name="nativeUserSecret")
-    def native_user_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def native_user_secret(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The password of the Native User. Prefer using `native_user_secret_wo` to avoid storing the secret in Terraform state.
+        """
         return pulumi.get(self, "native_user_secret")
 
     @native_user_secret.setter
-    def native_user_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def native_user_secret(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "native_user_secret", value)
 
     @_builtins.property
+    @pulumi.getter(name="nativeUserSecretWo")
+    def native_user_secret_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+        """
+        return pulumi.get(self, "native_user_secret_wo")
+
+    @native_user_secret_wo.setter
+    def native_user_secret_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "native_user_secret_wo", value)
+
+    @_builtins.property
     @pulumi.getter(name="nativeUserSecretWoVersion")
-    def native_user_secret_wo_version(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def native_user_secret_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
         """
         return pulumi.get(self, "native_user_secret_wo_version")
 
     @native_user_secret_wo_version.setter
-    def native_user_secret_wo_version(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def native_user_secret_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "native_user_secret_wo_version", value)
 
     @_builtins.property
     @pulumi.getter(name="resourceId")
-    def resource_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def resource_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The Sidecar ID for the resource this Native User is for.
         """
         return pulumi.get(self, "resource_id")
 
     @resource_id.setter
-    def resource_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def resource_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "resource_id", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this Native User cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
     @_builtins.property
     @pulumi.getter(name="useAsDefault")
-    def use_as_default(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def use_as_default(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         The password of the Native User.
         """
         return pulumi.get(self, "use_as_default")
 
     @use_as_default.setter
-    def use_as_default(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def use_as_default(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "use_as_default", value)
 
 
@@ -220,19 +266,24 @@ class NativeUser(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 native_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 native_user_secret: Optional[pulumi.Input[_builtins.str]] = None,
-                 native_user_secret_wo_version: Optional[pulumi.Input[_builtins.int]] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 use_as_default: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_secret_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_secret_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 use_as_default: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         This resource creates a Native User.
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] native_user_id: The username of the Native User.
+        :param pulumi.Input[_builtins.str] native_user_secret: The password of the Native User. Prefer using `native_user_secret_wo` to avoid storing the secret in Terraform state.
+        :param pulumi.Input[_builtins.str] native_user_secret_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
         :param pulumi.Input[_builtins.int] native_user_secret_wo_version: Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
         :param pulumi.Input[_builtins.str] resource_id: The Sidecar ID for the resource this Native User is for.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Native User cannot be deleted.
@@ -246,6 +297,7 @@ class NativeUser(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         This resource creates a Native User.
+
 
         :param str resource_name: The name of the resource.
         :param NativeUserArgs args: The arguments to use to populate this resource's properties.
@@ -262,12 +314,13 @@ class NativeUser(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 native_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 native_user_secret: Optional[pulumi.Input[_builtins.str]] = None,
-                 native_user_secret_wo_version: Optional[pulumi.Input[_builtins.int]] = None,
-                 resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 use_as_default: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_secret_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_secret_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
+                 resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 use_as_default: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -281,13 +334,14 @@ class NativeUser(pulumi.CustomResource):
                 raise TypeError("Missing required property 'native_user_id'")
             __props__.__dict__["native_user_id"] = native_user_id
             __props__.__dict__["native_user_secret"] = None if native_user_secret is None else pulumi.Output.secret(native_user_secret)
+            __props__.__dict__["native_user_secret_wo"] = None if native_user_secret_wo is None else pulumi.Output.secret(native_user_secret_wo)
             __props__.__dict__["native_user_secret_wo_version"] = native_user_secret_wo_version
             if resource_id is None and not opts.urn:
                 raise TypeError("Missing required property 'resource_id'")
             __props__.__dict__["resource_id"] = resource_id
             __props__.__dict__["termination_protection"] = termination_protection
             __props__.__dict__["use_as_default"] = use_as_default
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["nativeUserSecret"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["nativeUserSecret", "nativeUserSecretWo"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(NativeUser, __self__).__init__(
             'formal:index/nativeUser:NativeUser',
@@ -299,12 +353,13 @@ class NativeUser(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            native_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-            native_user_secret: Optional[pulumi.Input[_builtins.str]] = None,
-            native_user_secret_wo_version: Optional[pulumi.Input[_builtins.int]] = None,
-            resource_id: Optional[pulumi.Input[_builtins.str]] = None,
-            termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-            use_as_default: Optional[pulumi.Input[_builtins.bool]] = None) -> 'NativeUser':
+            native_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+            native_user_secret: pulumi.Input[Optional[_builtins.str]] = None,
+            native_user_secret_wo: pulumi.Input[Optional[_builtins.str]] = None,
+            native_user_secret_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+            use_as_default: pulumi.Input[Optional[_builtins.bool]] = None) -> 'NativeUser':
         """
         Get an existing NativeUser resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -313,6 +368,9 @@ class NativeUser(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] native_user_id: The username of the Native User.
+        :param pulumi.Input[_builtins.str] native_user_secret: The password of the Native User. Prefer using `native_user_secret_wo` to avoid storing the secret in Terraform state.
+        :param pulumi.Input[_builtins.str] native_user_secret_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
         :param pulumi.Input[_builtins.int] native_user_secret_wo_version: Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
         :param pulumi.Input[_builtins.str] resource_id: The Sidecar ID for the resource this Native User is for.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Native User cannot be deleted.
@@ -324,6 +382,7 @@ class NativeUser(pulumi.CustomResource):
 
         __props__.__dict__["native_user_id"] = native_user_id
         __props__.__dict__["native_user_secret"] = native_user_secret
+        __props__.__dict__["native_user_secret_wo"] = native_user_secret_wo
         __props__.__dict__["native_user_secret_wo_version"] = native_user_secret_wo_version
         __props__.__dict__["resource_id"] = resource_id
         __props__.__dict__["termination_protection"] = termination_protection
@@ -341,7 +400,19 @@ class NativeUser(pulumi.CustomResource):
     @_builtins.property
     @pulumi.getter(name="nativeUserSecret")
     def native_user_secret(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        The password of the Native User. Prefer using `native_user_secret_wo` to avoid storing the secret in Terraform state.
+        """
         return pulumi.get(self, "native_user_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="nativeUserSecretWo")
+    def native_user_secret_wo(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
+        """
+        return pulumi.get(self, "native_user_secret_wo")
 
     @_builtins.property
     @pulumi.getter(name="nativeUserSecretWoVersion")

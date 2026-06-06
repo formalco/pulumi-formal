@@ -74,9 +74,9 @@ export interface GetSpaceOutputArgs {
     /**
      * The Formal ID for this Space.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * The name of the Space to look up. Use this to fetch a space by name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

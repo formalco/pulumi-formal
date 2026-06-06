@@ -38,19 +38,19 @@ export class ResourceTlsConfiguration extends pulumi.CustomResource {
     /**
      * Resource ID for which the TLS configuration is applied to.
      */
-    public readonly resourceId!: pulumi.Output<string>;
+    declare public readonly resourceId: pulumi.Output<string>;
     /**
      * PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
      */
-    public readonly tlsCaTruststore!: pulumi.Output<string | undefined>;
+    declare public readonly tlsCaTruststore: pulumi.Output<string | undefined>;
     /**
      * Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
      */
-    public readonly tlsConfig!: pulumi.Output<string>;
+    declare public readonly tlsConfig: pulumi.Output<string>;
     /**
      * Minimum TLS version to be used for connections.
      */
-    public readonly tlsMinVersion!: pulumi.Output<string | undefined>;
+    declare public readonly tlsMinVersion: pulumi.Output<string | undefined>;
 
     /**
      * Create a ResourceTlsConfiguration resource with the given unique name, arguments, and options.
@@ -65,22 +65,22 @@ export class ResourceTlsConfiguration extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ResourceTlsConfigurationState | undefined;
-            resourceInputs["resourceId"] = state ? state.resourceId : undefined;
-            resourceInputs["tlsCaTruststore"] = state ? state.tlsCaTruststore : undefined;
-            resourceInputs["tlsConfig"] = state ? state.tlsConfig : undefined;
-            resourceInputs["tlsMinVersion"] = state ? state.tlsMinVersion : undefined;
+            resourceInputs["resourceId"] = state?.resourceId;
+            resourceInputs["tlsCaTruststore"] = state?.tlsCaTruststore;
+            resourceInputs["tlsConfig"] = state?.tlsConfig;
+            resourceInputs["tlsMinVersion"] = state?.tlsMinVersion;
         } else {
             const args = argsOrState as ResourceTlsConfigurationArgs | undefined;
-            if ((!args || args.resourceId === undefined) && !opts.urn) {
+            if (args?.resourceId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'resourceId'");
             }
-            if ((!args || args.tlsConfig === undefined) && !opts.urn) {
+            if (args?.tlsConfig === undefined && !opts.urn) {
                 throw new Error("Missing required property 'tlsConfig'");
             }
-            resourceInputs["resourceId"] = args ? args.resourceId : undefined;
-            resourceInputs["tlsCaTruststore"] = args ? args.tlsCaTruststore : undefined;
-            resourceInputs["tlsConfig"] = args ? args.tlsConfig : undefined;
-            resourceInputs["tlsMinVersion"] = args ? args.tlsMinVersion : undefined;
+            resourceInputs["resourceId"] = args?.resourceId;
+            resourceInputs["tlsCaTruststore"] = args?.tlsCaTruststore;
+            resourceInputs["tlsConfig"] = args?.tlsConfig;
+            resourceInputs["tlsMinVersion"] = args?.tlsMinVersion;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ResourceTlsConfiguration.__pulumiType, name, resourceInputs, opts);
@@ -94,19 +94,19 @@ export interface ResourceTlsConfigurationState {
     /**
      * Resource ID for which the TLS configuration is applied to.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
      */
-    tlsCaTruststore?: pulumi.Input<string>;
+    tlsCaTruststore?: pulumi.Input<string | undefined>;
     /**
      * Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
      */
-    tlsConfig?: pulumi.Input<string>;
+    tlsConfig?: pulumi.Input<string | undefined>;
     /**
      * Minimum TLS version to be used for connections.
      */
-    tlsMinVersion?: pulumi.Input<string>;
+    tlsMinVersion?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -120,7 +120,7 @@ export interface ResourceTlsConfigurationArgs {
     /**
      * PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
      */
-    tlsCaTruststore?: pulumi.Input<string>;
+    tlsCaTruststore?: pulumi.Input<string | undefined>;
     /**
      * Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
      */
@@ -128,5 +128,5 @@ export interface ResourceTlsConfigurationArgs {
     /**
      * Minimum TLS version to be used for connections.
      */
-    tlsMinVersion?: pulumi.Input<string>;
+    tlsMinVersion?: pulumi.Input<string | undefined>;
 }

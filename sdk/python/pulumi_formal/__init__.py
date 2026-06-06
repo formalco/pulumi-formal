@@ -7,6 +7,7 @@ from . import _utilities
 import typing
 # Export this package's modules as members:
 from .connector import *
+from .connector_ai_provider import *
 from .connector_configuration import *
 from .connector_hostname import *
 from .connector_listener import *
@@ -14,9 +15,9 @@ from .connector_listener_link import *
 from .connector_listener_rule import *
 from .connector_satellite_link import *
 from .data_discovery import *
-from .data_domain import *
 from .data_label import *
 from .encryption_key import *
+from .form import *
 from .get_connector import *
 from .get_group import *
 from .get_resource import *
@@ -25,19 +26,21 @@ from .group import *
 from .group_user_link import *
 from .integration_bi import *
 from .integration_cloud import *
-from .integration_data_catalog import *
 from .integration_log import *
 from .integration_mdm import *
+from .inventory_object import *
 from .inventory_object_data_label_link import *
 from .log_configuration import *
 from .native_user import *
 from .native_user_link import *
+from .network_rule import *
 from .permission import *
 from .policy import *
 from .policy_data_loader import *
 from .provider import *
 from .resource import *
 from .resource_classifier_configuration import *
+from .resource_dial_configuration import *
 from .resource_health_check import *
 from .resource_hostname import *
 from .resource_tls_configuration import *
@@ -68,6 +71,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/connector:Connector": "Connector"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/connectorAiProvider",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/connectorAiProvider:ConnectorAiProvider": "ConnectorAiProvider"
   }
  },
  {
@@ -128,14 +139,6 @@ _utilities.register(
  },
  {
   "pkg": "formal",
-  "mod": "index/dataDomain",
-  "fqn": "pulumi_formal",
-  "classes": {
-   "formal:index/dataDomain:DataDomain": "DataDomain"
-  }
- },
- {
-  "pkg": "formal",
   "mod": "index/dataLabel",
   "fqn": "pulumi_formal",
   "classes": {
@@ -148,6 +151,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/encryptionKey:EncryptionKey": "EncryptionKey"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/form",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/form:Form": "Form"
   }
  },
  {
@@ -184,14 +195,6 @@ _utilities.register(
  },
  {
   "pkg": "formal",
-  "mod": "index/integrationDataCatalog",
-  "fqn": "pulumi_formal",
-  "classes": {
-   "formal:index/integrationDataCatalog:IntegrationDataCatalog": "IntegrationDataCatalog"
-  }
- },
- {
-  "pkg": "formal",
   "mod": "index/integrationLog",
   "fqn": "pulumi_formal",
   "classes": {
@@ -204,6 +207,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/integrationMdm:IntegrationMdm": "IntegrationMdm"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/inventoryObject",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/inventoryObject:InventoryObject": "InventoryObject"
   }
  },
  {
@@ -236,6 +247,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/nativeUserLink:NativeUserLink": "NativeUserLink"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/networkRule",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/networkRule:NetworkRule": "NetworkRule"
   }
  },
  {
@@ -276,6 +295,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/resourceClassifierConfiguration:ResourceClassifierConfiguration": "ResourceClassifierConfiguration"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/resourceDialConfiguration",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/resourceDialConfiguration:ResourceDialConfiguration": "ResourceDialConfiguration"
   }
  },
  {

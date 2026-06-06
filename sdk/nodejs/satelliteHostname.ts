@@ -38,23 +38,23 @@ export class SatelliteHostname extends pulumi.CustomResource {
     /**
      * The timestamp when the satellite hostname was created.
      */
-    public /*out*/ readonly createdAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly createdAt: pulumi.Output<string>;
     /**
      * The hostname for the satellite.
      */
-    public readonly hostname!: pulumi.Output<string>;
+    declare public readonly hostname: pulumi.Output<string>;
     /**
      * The ID of the Satellite to create the hostname for.
      */
-    public readonly satelliteId!: pulumi.Output<string>;
+    declare public readonly satelliteId: pulumi.Output<string>;
     /**
      * If set to true, this satellite hostname cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
     /**
      * The timestamp when the satellite hostname was last updated.
      */
-    public /*out*/ readonly updatedAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
 
     /**
      * Create a SatelliteHostname resource with the given unique name, arguments, and options.
@@ -69,22 +69,22 @@ export class SatelliteHostname extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SatelliteHostnameState | undefined;
-            resourceInputs["createdAt"] = state ? state.createdAt : undefined;
-            resourceInputs["hostname"] = state ? state.hostname : undefined;
-            resourceInputs["satelliteId"] = state ? state.satelliteId : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
-            resourceInputs["updatedAt"] = state ? state.updatedAt : undefined;
+            resourceInputs["createdAt"] = state?.createdAt;
+            resourceInputs["hostname"] = state?.hostname;
+            resourceInputs["satelliteId"] = state?.satelliteId;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
+            resourceInputs["updatedAt"] = state?.updatedAt;
         } else {
             const args = argsOrState as SatelliteHostnameArgs | undefined;
-            if ((!args || args.hostname === undefined) && !opts.urn) {
+            if (args?.hostname === undefined && !opts.urn) {
                 throw new Error("Missing required property 'hostname'");
             }
-            if ((!args || args.satelliteId === undefined) && !opts.urn) {
+            if (args?.satelliteId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'satelliteId'");
             }
-            resourceInputs["hostname"] = args ? args.hostname : undefined;
-            resourceInputs["satelliteId"] = args ? args.satelliteId : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
+            resourceInputs["hostname"] = args?.hostname;
+            resourceInputs["satelliteId"] = args?.satelliteId;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
@@ -100,23 +100,23 @@ export interface SatelliteHostnameState {
     /**
      * The timestamp when the satellite hostname was created.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * The hostname for the satellite.
      */
-    hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string | undefined>;
     /**
      * The ID of the Satellite to create the hostname for.
      */
-    satelliteId?: pulumi.Input<string>;
+    satelliteId?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this satellite hostname cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * The timestamp when the satellite hostname was last updated.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -134,5 +134,5 @@ export interface SatelliteHostnameArgs {
     /**
      * If set to true, this satellite hostname cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }

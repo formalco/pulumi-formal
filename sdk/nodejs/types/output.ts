@@ -5,9 +5,152 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
-export interface DataDomainOwner {
-    objectId: string;
-    objectType: string;
+export interface ConnectorAiProviderAnthropic {
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * The API key. This value is not stored in Terraform state.
+     */
+    apiKey: string;
+    /**
+     * Version trigger for `apiKey`. Increment this value to update the key.
+     */
+    apiKeyVersion: number;
+}
+
+export interface ConnectorAiProviderAwsBedrock {
+    /**
+     * The AWS region.
+     */
+    region: string;
+}
+
+export interface ConnectorAiProviderAzureAi {
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * The API key. This value is not stored in Terraform state.
+     */
+    apiKey: string;
+    /**
+     * Version trigger for `apiKey`. Increment this value to update the key.
+     */
+    apiKeyVersion: number;
+    /**
+     * The Azure AI Foundry endpoint URL.
+     */
+    endpoint: string;
+}
+
+export interface ConnectorAiProviderFormalAiSatellite {
+}
+
+export interface ConnectorAiProviderGemini {
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * The API key. This value is not stored in Terraform state.
+     */
+    apiKey: string;
+    /**
+     * Version trigger for `apiKey`. Increment this value to update the key.
+     */
+    apiKeyVersion: number;
+}
+
+export interface ConnectorAiProviderGoogleVertexAi {
+    /**
+     * The GCP project ID.
+     */
+    gcpProjectId: string;
+    /**
+     * The GCP region.
+     */
+    region: string;
+}
+
+export interface ConnectorAiProviderOpenai {
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * The API key. This value is not stored in Terraform state.
+     */
+    apiKey: string;
+    /**
+     * Version trigger for `apiKey`. Increment this value to update the key.
+     */
+    apiKeyVersion: number;
+}
+
+export interface FormField {
+    /**
+     * Optional field configuration for select-like field types.
+     */
+    config?: outputs.FormFieldConfig;
+    /**
+     * Unique field identifier.
+     */
+    id: string;
+    /**
+     * Display name of the field.
+     */
+    name: string;
+    /**
+     * Field type.
+     */
+    type: string;
+}
+
+export interface FormFieldConfig {
+    /**
+     * Static options for select-like fields.
+     */
+    options?: outputs.FormFieldConfigOption[];
+    /**
+     * Dynamic source used to fetch options.
+     */
+    optionsSource?: outputs.FormFieldConfigOptionsSource;
+}
+
+export interface FormFieldConfigOption {
+    /**
+     * Option label.
+     */
+    label: string;
+    /**
+     * Option value.
+     */
+    value: string;
+}
+
+export interface FormFieldConfigOptionsSource {
+    /**
+     * Service/app name used to fetch options.
+     */
+    app: string;
+    /**
+     * Command configuration for options retrieval.
+     */
+    command: outputs.FormFieldConfigOptionsSourceCommand;
+    /**
+     * Optional payload for options retrieval.
+     */
+    input?: {[key: string]: string};
+    /**
+     * Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
+     */
+    inputJson?: string;
+    /**
+     * Machine user used to authenticate options retrieval.
+     */
+    machineUserId: string;
+    /**
+     * CEL expression that transforms the response into options.
+     */
+    transform: string;
+}
+
+export interface FormFieldConfigOptionsSourceCommand {
+    /**
+     * Command name.
+     */
+    name: string;
 }
 
 export interface IntegrationBiMetabase {
@@ -30,6 +173,10 @@ export interface IntegrationCloudAws {
      * Allows the Cloud Integration to access S3 buckets for Log Integrations.
      */
     allowS3Access?: boolean;
+    /**
+     * The regions to enable resource autodiscovery for.
+     */
+    autodiscoveryRegions: string[];
     /**
      * The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
      */
@@ -68,21 +215,6 @@ export interface IntegrationCloudAws {
     templateVersion: string;
 }
 
-export interface IntegrationDataCatalogDatahub {
-    /**
-     * Api Key for the Datahub instance.
-     */
-    apiKey: string;
-    /**
-     * Generalized metadata service url for the Datahub instance.
-     */
-    generalizedMetadataServiceUrl: string;
-    /**
-     * Webhook secret of the Datahub instance.
-     */
-    webhookSecret: string;
-}
-
 export interface IntegrationLogAwsS3 {
     /**
      * Cloud Integration ID.
@@ -96,6 +228,10 @@ export interface IntegrationLogAwsS3 {
      * AWS S3 Bucket Name.
      */
     s3BucketName: string;
+    /**
+     * AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
+     */
+    s3BucketPrefix?: string;
 }
 
 export interface IntegrationLogDatadog {

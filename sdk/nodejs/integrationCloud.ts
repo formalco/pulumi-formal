@@ -40,73 +40,73 @@ export class IntegrationCloud extends pulumi.CustomResource {
     /**
      * Configuration block for AWS integration.
      */
-    public readonly aws!: pulumi.Output<outputs.IntegrationCloudAws | undefined>;
+    declare public readonly aws: pulumi.Output<outputs.IntegrationCloudAws | undefined>;
     /**
      * Whether AWS S3 access is allowed or not.
      */
-    public /*out*/ readonly awsAllowS3Access!: pulumi.Output<boolean>;
+    declare public /*out*/ readonly awsAllowS3Access: pulumi.Output<boolean>;
     /**
      * Whether AWS EC2 autodiscovery is enabled or not.
      */
-    public /*out*/ readonly awsEnableEc2Autodiscovery!: pulumi.Output<boolean>;
+    declare public /*out*/ readonly awsEnableEc2Autodiscovery: pulumi.Output<boolean>;
     /**
      * Whether AWS ECS autodiscovery is enabled or not.
      */
-    public /*out*/ readonly awsEnableEcsAutodiscovery!: pulumi.Output<boolean>;
+    declare public /*out*/ readonly awsEnableEcsAutodiscovery: pulumi.Output<boolean>;
     /**
      * Whether AWS EKS autodiscovery is enabled or not.
      */
-    public /*out*/ readonly awsEnableEksAutodiscovery!: pulumi.Output<boolean>;
+    declare public /*out*/ readonly awsEnableEksAutodiscovery: pulumi.Output<boolean>;
     /**
      * Whether AWS RDS autodiscovery is enabled or not.
      */
-    public /*out*/ readonly awsEnableRdsAutodiscovery!: pulumi.Output<boolean>;
+    declare public /*out*/ readonly awsEnableRdsAutodiscovery: pulumi.Output<boolean>;
     /**
      * Whether AWS Redshift autodiscovery is enabled or not.
      */
-    public /*out*/ readonly awsEnableRedshiftAutodiscovery!: pulumi.Output<boolean>;
+    declare public /*out*/ readonly awsEnableRedshiftAutodiscovery: pulumi.Output<boolean>;
     /**
      * Whether AWS S3 autodiscovery is enabled or not.
      */
-    public /*out*/ readonly awsEnableS3Autodiscovery!: pulumi.Output<boolean>;
+    declare public /*out*/ readonly awsEnableS3Autodiscovery: pulumi.Output<boolean>;
     /**
      * The IAM role ID Formal will use to access your resources.
      */
-    public /*out*/ readonly awsFormalIamRole!: pulumi.Output<string>;
+    declare public /*out*/ readonly awsFormalIamRole: pulumi.Output<string>;
     /**
      * The ARN of the IAM role Formal will use to access your resources.
      */
-    public /*out*/ readonly awsFormalIamRoleArn!: pulumi.Output<string>;
+    declare public /*out*/ readonly awsFormalIamRoleArn: pulumi.Output<string>;
     /**
      * The SNS topic ARN CloudFormation can use to send events to Formal.
      */
-    public /*out*/ readonly awsFormalPingbackArn!: pulumi.Output<string>;
+    declare public /*out*/ readonly awsFormalPingbackArn: pulumi.Output<string>;
     /**
      * A generated name for your CloudFormation stack.
      */
-    public /*out*/ readonly awsFormalStackName!: pulumi.Output<string>;
+    declare public /*out*/ readonly awsFormalStackName: pulumi.Output<string>;
     /**
      * The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
      */
-    public /*out*/ readonly awsS3BucketArn!: pulumi.Output<string>;
+    declare public /*out*/ readonly awsS3BucketArn: pulumi.Output<string>;
     /**
      * The template body of the CloudFormation stack.
      */
-    public /*out*/ readonly awsTemplateBody!: pulumi.Output<string>;
+    declare public /*out*/ readonly awsTemplateBody: pulumi.Output<string>;
     /**
      * Region of the cloud provider.
      */
-    public readonly cloudRegion!: pulumi.Output<string>;
+    declare public readonly cloudRegion: pulumi.Output<string>;
     /**
      * Name of the Integration.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * Type of the Integration. (Supported: aws)
      *
      * @deprecated This field is deprecated and will be removed in a future version.
      */
-    public readonly type!: pulumi.Output<string | undefined>;
+    declare public readonly type: pulumi.Output<string | undefined>;
 
     /**
      * Create a IntegrationCloud resource with the given unique name, arguments, and options.
@@ -121,32 +121,32 @@ export class IntegrationCloud extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as IntegrationCloudState | undefined;
-            resourceInputs["aws"] = state ? state.aws : undefined;
-            resourceInputs["awsAllowS3Access"] = state ? state.awsAllowS3Access : undefined;
-            resourceInputs["awsEnableEc2Autodiscovery"] = state ? state.awsEnableEc2Autodiscovery : undefined;
-            resourceInputs["awsEnableEcsAutodiscovery"] = state ? state.awsEnableEcsAutodiscovery : undefined;
-            resourceInputs["awsEnableEksAutodiscovery"] = state ? state.awsEnableEksAutodiscovery : undefined;
-            resourceInputs["awsEnableRdsAutodiscovery"] = state ? state.awsEnableRdsAutodiscovery : undefined;
-            resourceInputs["awsEnableRedshiftAutodiscovery"] = state ? state.awsEnableRedshiftAutodiscovery : undefined;
-            resourceInputs["awsEnableS3Autodiscovery"] = state ? state.awsEnableS3Autodiscovery : undefined;
-            resourceInputs["awsFormalIamRole"] = state ? state.awsFormalIamRole : undefined;
-            resourceInputs["awsFormalIamRoleArn"] = state ? state.awsFormalIamRoleArn : undefined;
-            resourceInputs["awsFormalPingbackArn"] = state ? state.awsFormalPingbackArn : undefined;
-            resourceInputs["awsFormalStackName"] = state ? state.awsFormalStackName : undefined;
-            resourceInputs["awsS3BucketArn"] = state ? state.awsS3BucketArn : undefined;
-            resourceInputs["awsTemplateBody"] = state ? state.awsTemplateBody : undefined;
-            resourceInputs["cloudRegion"] = state ? state.cloudRegion : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["type"] = state ? state.type : undefined;
+            resourceInputs["aws"] = state?.aws;
+            resourceInputs["awsAllowS3Access"] = state?.awsAllowS3Access;
+            resourceInputs["awsEnableEc2Autodiscovery"] = state?.awsEnableEc2Autodiscovery;
+            resourceInputs["awsEnableEcsAutodiscovery"] = state?.awsEnableEcsAutodiscovery;
+            resourceInputs["awsEnableEksAutodiscovery"] = state?.awsEnableEksAutodiscovery;
+            resourceInputs["awsEnableRdsAutodiscovery"] = state?.awsEnableRdsAutodiscovery;
+            resourceInputs["awsEnableRedshiftAutodiscovery"] = state?.awsEnableRedshiftAutodiscovery;
+            resourceInputs["awsEnableS3Autodiscovery"] = state?.awsEnableS3Autodiscovery;
+            resourceInputs["awsFormalIamRole"] = state?.awsFormalIamRole;
+            resourceInputs["awsFormalIamRoleArn"] = state?.awsFormalIamRoleArn;
+            resourceInputs["awsFormalPingbackArn"] = state?.awsFormalPingbackArn;
+            resourceInputs["awsFormalStackName"] = state?.awsFormalStackName;
+            resourceInputs["awsS3BucketArn"] = state?.awsS3BucketArn;
+            resourceInputs["awsTemplateBody"] = state?.awsTemplateBody;
+            resourceInputs["cloudRegion"] = state?.cloudRegion;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["type"] = state?.type;
         } else {
             const args = argsOrState as IntegrationCloudArgs | undefined;
-            if ((!args || args.cloudRegion === undefined) && !opts.urn) {
+            if (args?.cloudRegion === undefined && !opts.urn) {
                 throw new Error("Missing required property 'cloudRegion'");
             }
-            resourceInputs["aws"] = args ? args.aws : undefined;
-            resourceInputs["cloudRegion"] = args ? args.cloudRegion : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["type"] = args ? args.type : undefined;
+            resourceInputs["aws"] = args?.aws;
+            resourceInputs["cloudRegion"] = args?.cloudRegion;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["type"] = args?.type;
             resourceInputs["awsAllowS3Access"] = undefined /*out*/;
             resourceInputs["awsEnableEc2Autodiscovery"] = undefined /*out*/;
             resourceInputs["awsEnableEcsAutodiscovery"] = undefined /*out*/;
@@ -173,73 +173,73 @@ export interface IntegrationCloudState {
     /**
      * Configuration block for AWS integration.
      */
-    aws?: pulumi.Input<inputs.IntegrationCloudAws>;
+    aws?: pulumi.Input<inputs.IntegrationCloudAws | undefined>;
     /**
      * Whether AWS S3 access is allowed or not.
      */
-    awsAllowS3Access?: pulumi.Input<boolean>;
+    awsAllowS3Access?: pulumi.Input<boolean | undefined>;
     /**
      * Whether AWS EC2 autodiscovery is enabled or not.
      */
-    awsEnableEc2Autodiscovery?: pulumi.Input<boolean>;
+    awsEnableEc2Autodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * Whether AWS ECS autodiscovery is enabled or not.
      */
-    awsEnableEcsAutodiscovery?: pulumi.Input<boolean>;
+    awsEnableEcsAutodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * Whether AWS EKS autodiscovery is enabled or not.
      */
-    awsEnableEksAutodiscovery?: pulumi.Input<boolean>;
+    awsEnableEksAutodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * Whether AWS RDS autodiscovery is enabled or not.
      */
-    awsEnableRdsAutodiscovery?: pulumi.Input<boolean>;
+    awsEnableRdsAutodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * Whether AWS Redshift autodiscovery is enabled or not.
      */
-    awsEnableRedshiftAutodiscovery?: pulumi.Input<boolean>;
+    awsEnableRedshiftAutodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * Whether AWS S3 autodiscovery is enabled or not.
      */
-    awsEnableS3Autodiscovery?: pulumi.Input<boolean>;
+    awsEnableS3Autodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * The IAM role ID Formal will use to access your resources.
      */
-    awsFormalIamRole?: pulumi.Input<string>;
+    awsFormalIamRole?: pulumi.Input<string | undefined>;
     /**
      * The ARN of the IAM role Formal will use to access your resources.
      */
-    awsFormalIamRoleArn?: pulumi.Input<string>;
+    awsFormalIamRoleArn?: pulumi.Input<string | undefined>;
     /**
      * The SNS topic ARN CloudFormation can use to send events to Formal.
      */
-    awsFormalPingbackArn?: pulumi.Input<string>;
+    awsFormalPingbackArn?: pulumi.Input<string | undefined>;
     /**
      * A generated name for your CloudFormation stack.
      */
-    awsFormalStackName?: pulumi.Input<string>;
+    awsFormalStackName?: pulumi.Input<string | undefined>;
     /**
      * The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
      */
-    awsS3BucketArn?: pulumi.Input<string>;
+    awsS3BucketArn?: pulumi.Input<string | undefined>;
     /**
      * The template body of the CloudFormation stack.
      */
-    awsTemplateBody?: pulumi.Input<string>;
+    awsTemplateBody?: pulumi.Input<string | undefined>;
     /**
      * Region of the cloud provider.
      */
-    cloudRegion?: pulumi.Input<string>;
+    cloudRegion?: pulumi.Input<string | undefined>;
     /**
      * Name of the Integration.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Type of the Integration. (Supported: aws)
      *
      * @deprecated This field is deprecated and will be removed in a future version.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -249,7 +249,7 @@ export interface IntegrationCloudArgs {
     /**
      * Configuration block for AWS integration.
      */
-    aws?: pulumi.Input<inputs.IntegrationCloudAws>;
+    aws?: pulumi.Input<inputs.IntegrationCloudAws | undefined>;
     /**
      * Region of the cloud provider.
      */
@@ -257,11 +257,11 @@ export interface IntegrationCloudArgs {
     /**
      * Name of the Integration.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Type of the Integration. (Supported: aws)
      *
      * @deprecated This field is deprecated and will be removed in a future version.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

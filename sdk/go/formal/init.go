@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "formal:index/connector:Connector":
 		r = &Connector{}
+	case "formal:index/connectorAiProvider:ConnectorAiProvider":
+		r = &ConnectorAiProvider{}
 	case "formal:index/connectorConfiguration:ConnectorConfiguration":
 		r = &ConnectorConfiguration{}
 	case "formal:index/connectorHostname:ConnectorHostname":
@@ -37,12 +39,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ConnectorSatelliteLink{}
 	case "formal:index/dataDiscovery:DataDiscovery":
 		r = &DataDiscovery{}
-	case "formal:index/dataDomain:DataDomain":
-		r = &DataDomain{}
 	case "formal:index/dataLabel:DataLabel":
 		r = &DataLabel{}
 	case "formal:index/encryptionKey:EncryptionKey":
 		r = &EncryptionKey{}
+	case "formal:index/form:Form":
+		r = &Form{}
 	case "formal:index/group:Group":
 		r = &Group{}
 	case "formal:index/groupUserLink:GroupUserLink":
@@ -51,12 +53,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &IntegrationBi{}
 	case "formal:index/integrationCloud:IntegrationCloud":
 		r = &IntegrationCloud{}
-	case "formal:index/integrationDataCatalog:IntegrationDataCatalog":
-		r = &IntegrationDataCatalog{}
 	case "formal:index/integrationLog:IntegrationLog":
 		r = &IntegrationLog{}
 	case "formal:index/integrationMdm:IntegrationMdm":
 		r = &IntegrationMdm{}
+	case "formal:index/inventoryObject:InventoryObject":
+		r = &InventoryObject{}
 	case "formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink":
 		r = &InventoryObjectDataLabelLink{}
 	case "formal:index/logConfiguration:LogConfiguration":
@@ -65,6 +67,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &NativeUser{}
 	case "formal:index/nativeUserLink:NativeUserLink":
 		r = &NativeUserLink{}
+	case "formal:index/networkRule:NetworkRule":
+		r = &NetworkRule{}
 	case "formal:index/permission:Permission":
 		r = &Permission{}
 	case "formal:index/policy:Policy":
@@ -75,6 +79,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Resource{}
 	case "formal:index/resourceClassifierConfiguration:ResourceClassifierConfiguration":
 		r = &ResourceClassifierConfiguration{}
+	case "formal:index/resourceDialConfiguration:ResourceDialConfiguration":
+		r = &ResourceDialConfiguration{}
 	case "formal:index/resourceHealthCheck:ResourceHealthCheck":
 		r = &ResourceHealthCheck{}
 	case "formal:index/resourceHostname:ResourceHostname":
@@ -135,6 +141,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
+		"index/connectorAiProvider",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
 		"index/connectorConfiguration",
 		&module{version},
 	)
@@ -170,17 +181,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
-		"index/dataDomain",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"formal",
 		"index/dataLabel",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/encryptionKey",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/form",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -205,17 +216,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
-		"index/integrationDataCatalog",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"formal",
 		"index/integrationLog",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/integrationMdm",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/inventoryObject",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -236,6 +247,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/nativeUserLink",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/networkRule",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -261,6 +277,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/resourceClassifierConfiguration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/resourceDialConfiguration",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

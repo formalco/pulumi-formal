@@ -38,43 +38,43 @@ export class User extends pulumi.CustomResource {
     /**
      * If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.
      */
-    public readonly appType!: pulumi.Output<string | undefined>;
+    declare public readonly appType: pulumi.Output<string | undefined>;
     /**
      * The username that the user will use to access the sidecar.
      */
-    public /*out*/ readonly dbUsername!: pulumi.Output<string>;
+    declare public /*out*/ readonly dbUsername: pulumi.Output<string>;
     /**
      * For human users, their email.
      */
-    public readonly email!: pulumi.Output<string | undefined>;
+    declare public readonly email: pulumi.Output<string | undefined>;
     /**
      * When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
      */
-    public readonly expireAt!: pulumi.Output<number | undefined>;
+    declare public readonly expireAt: pulumi.Output<number | undefined>;
     /**
      * For human users, their first name.
      */
-    public readonly firstName!: pulumi.Output<string | undefined>;
+    declare public readonly firstName: pulumi.Output<string | undefined>;
     /**
      * For human users, their last name.
      */
-    public readonly lastName!: pulumi.Output<string | undefined>;
+    declare public readonly lastName: pulumi.Output<string | undefined>;
     /**
      * If the user is of type `machine`, this is the access token (database password) of this user.
      */
-    public /*out*/ readonly machineUserAccessToken!: pulumi.Output<string>;
+    declare public /*out*/ readonly machineUserAccessToken: pulumi.Output<string>;
     /**
      * For machine users, the name of the user.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * If set to true, this User cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
     /**
      * Either 'human' or 'machine'.
      */
-    public readonly type!: pulumi.Output<string>;
+    declare public readonly type: pulumi.Output<string>;
 
     /**
      * Create a User resource with the given unique name, arguments, and options.
@@ -89,29 +89,29 @@ export class User extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as UserState | undefined;
-            resourceInputs["appType"] = state ? state.appType : undefined;
-            resourceInputs["dbUsername"] = state ? state.dbUsername : undefined;
-            resourceInputs["email"] = state ? state.email : undefined;
-            resourceInputs["expireAt"] = state ? state.expireAt : undefined;
-            resourceInputs["firstName"] = state ? state.firstName : undefined;
-            resourceInputs["lastName"] = state ? state.lastName : undefined;
-            resourceInputs["machineUserAccessToken"] = state ? state.machineUserAccessToken : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
-            resourceInputs["type"] = state ? state.type : undefined;
+            resourceInputs["appType"] = state?.appType;
+            resourceInputs["dbUsername"] = state?.dbUsername;
+            resourceInputs["email"] = state?.email;
+            resourceInputs["expireAt"] = state?.expireAt;
+            resourceInputs["firstName"] = state?.firstName;
+            resourceInputs["lastName"] = state?.lastName;
+            resourceInputs["machineUserAccessToken"] = state?.machineUserAccessToken;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
+            resourceInputs["type"] = state?.type;
         } else {
             const args = argsOrState as UserArgs | undefined;
-            if ((!args || args.type === undefined) && !opts.urn) {
+            if (args?.type === undefined && !opts.urn) {
                 throw new Error("Missing required property 'type'");
             }
-            resourceInputs["appType"] = args ? args.appType : undefined;
-            resourceInputs["email"] = args ? args.email : undefined;
-            resourceInputs["expireAt"] = args ? args.expireAt : undefined;
-            resourceInputs["firstName"] = args ? args.firstName : undefined;
-            resourceInputs["lastName"] = args ? args.lastName : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
-            resourceInputs["type"] = args ? args.type : undefined;
+            resourceInputs["appType"] = args?.appType;
+            resourceInputs["email"] = args?.email;
+            resourceInputs["expireAt"] = args?.expireAt;
+            resourceInputs["firstName"] = args?.firstName;
+            resourceInputs["lastName"] = args?.lastName;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
+            resourceInputs["type"] = args?.type;
             resourceInputs["dbUsername"] = undefined /*out*/;
             resourceInputs["machineUserAccessToken"] = undefined /*out*/;
         }
@@ -129,43 +129,43 @@ export interface UserState {
     /**
      * If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.
      */
-    appType?: pulumi.Input<string>;
+    appType?: pulumi.Input<string | undefined>;
     /**
      * The username that the user will use to access the sidecar.
      */
-    dbUsername?: pulumi.Input<string>;
+    dbUsername?: pulumi.Input<string | undefined>;
     /**
      * For human users, their email.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
      */
-    expireAt?: pulumi.Input<number>;
+    expireAt?: pulumi.Input<number | undefined>;
     /**
      * For human users, their first name.
      */
-    firstName?: pulumi.Input<string>;
+    firstName?: pulumi.Input<string | undefined>;
     /**
      * For human users, their last name.
      */
-    lastName?: pulumi.Input<string>;
+    lastName?: pulumi.Input<string | undefined>;
     /**
      * If the user is of type `machine`, this is the access token (database password) of this user.
      */
-    machineUserAccessToken?: pulumi.Input<string>;
+    machineUserAccessToken?: pulumi.Input<string | undefined>;
     /**
      * For machine users, the name of the user.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this User cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Either 'human' or 'machine'.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -175,31 +175,31 @@ export interface UserArgs {
     /**
      * If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.
      */
-    appType?: pulumi.Input<string>;
+    appType?: pulumi.Input<string | undefined>;
     /**
      * For human users, their email.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
      */
-    expireAt?: pulumi.Input<number>;
+    expireAt?: pulumi.Input<number | undefined>;
     /**
      * For human users, their first name.
      */
-    firstName?: pulumi.Input<string>;
+    firstName?: pulumi.Input<string | undefined>;
     /**
      * For human users, their last name.
      */
-    lastName?: pulumi.Input<string>;
+    lastName?: pulumi.Input<string | undefined>;
     /**
      * For machine users, the name of the user.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this User cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Either 'human' or 'machine'.
      */

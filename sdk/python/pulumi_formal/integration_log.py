@@ -21,12 +21,13 @@ __all__ = ['IntegrationLogArgs', 'IntegrationLog']
 @pulumi.input_type
 class IntegrationLogArgs:
     def __init__(__self__, *,
-                 aws_s3: Optional[pulumi.Input['IntegrationLogAwsS3Args']] = None,
-                 datadog: Optional[pulumi.Input['IntegrationLogDatadogArgs']] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 splunk: Optional[pulumi.Input['IntegrationLogSplunkArgs']] = None):
+                 aws_s3: pulumi.Input[Optional['IntegrationLogAwsS3Args']] = None,
+                 datadog: pulumi.Input[Optional['IntegrationLogDatadogArgs']] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 splunk: pulumi.Input[Optional['IntegrationLogSplunkArgs']] = None):
         """
         The set of arguments for constructing a IntegrationLog resource.
+
         :param pulumi.Input['IntegrationLogAwsS3Args'] aws_s3: Configuration block for AWS S3 integration.
         :param pulumi.Input['IntegrationLogDatadogArgs'] datadog: Configuration block for Datadog integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
@@ -43,62 +44,63 @@ class IntegrationLogArgs:
 
     @_builtins.property
     @pulumi.getter(name="awsS3")
-    def aws_s3(self) -> Optional[pulumi.Input['IntegrationLogAwsS3Args']]:
+    def aws_s3(self) -> pulumi.Input[Optional['IntegrationLogAwsS3Args']]:
         """
         Configuration block for AWS S3 integration.
         """
         return pulumi.get(self, "aws_s3")
 
     @aws_s3.setter
-    def aws_s3(self, value: Optional[pulumi.Input['IntegrationLogAwsS3Args']]):
+    def aws_s3(self, value: pulumi.Input[Optional['IntegrationLogAwsS3Args']]):
         pulumi.set(self, "aws_s3", value)
 
     @_builtins.property
     @pulumi.getter
-    def datadog(self) -> Optional[pulumi.Input['IntegrationLogDatadogArgs']]:
+    def datadog(self) -> pulumi.Input[Optional['IntegrationLogDatadogArgs']]:
         """
         Configuration block for Datadog integration.
         """
         return pulumi.get(self, "datadog")
 
     @datadog.setter
-    def datadog(self, value: Optional[pulumi.Input['IntegrationLogDatadogArgs']]):
+    def datadog(self, value: pulumi.Input[Optional['IntegrationLogDatadogArgs']]):
         pulumi.set(self, "datadog", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for the Integration app.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def splunk(self) -> Optional[pulumi.Input['IntegrationLogSplunkArgs']]:
+    def splunk(self) -> pulumi.Input[Optional['IntegrationLogSplunkArgs']]:
         """
         Configuration block for Splunk integration.
         """
         return pulumi.get(self, "splunk")
 
     @splunk.setter
-    def splunk(self, value: Optional[pulumi.Input['IntegrationLogSplunkArgs']]):
+    def splunk(self, value: pulumi.Input[Optional['IntegrationLogSplunkArgs']]):
         pulumi.set(self, "splunk", value)
 
 
 @pulumi.input_type
 class _IntegrationLogState:
     def __init__(__self__, *,
-                 aws_s3: Optional[pulumi.Input['IntegrationLogAwsS3Args']] = None,
-                 datadog: Optional[pulumi.Input['IntegrationLogDatadogArgs']] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 splunk: Optional[pulumi.Input['IntegrationLogSplunkArgs']] = None):
+                 aws_s3: pulumi.Input[Optional['IntegrationLogAwsS3Args']] = None,
+                 datadog: pulumi.Input[Optional['IntegrationLogDatadogArgs']] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 splunk: pulumi.Input[Optional['IntegrationLogSplunkArgs']] = None):
         """
         Input properties used for looking up and filtering IntegrationLog resources.
+
         :param pulumi.Input['IntegrationLogAwsS3Args'] aws_s3: Configuration block for AWS S3 integration.
         :param pulumi.Input['IntegrationLogDatadogArgs'] datadog: Configuration block for Datadog integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
@@ -115,50 +117,50 @@ class _IntegrationLogState:
 
     @_builtins.property
     @pulumi.getter(name="awsS3")
-    def aws_s3(self) -> Optional[pulumi.Input['IntegrationLogAwsS3Args']]:
+    def aws_s3(self) -> pulumi.Input[Optional['IntegrationLogAwsS3Args']]:
         """
         Configuration block for AWS S3 integration.
         """
         return pulumi.get(self, "aws_s3")
 
     @aws_s3.setter
-    def aws_s3(self, value: Optional[pulumi.Input['IntegrationLogAwsS3Args']]):
+    def aws_s3(self, value: pulumi.Input[Optional['IntegrationLogAwsS3Args']]):
         pulumi.set(self, "aws_s3", value)
 
     @_builtins.property
     @pulumi.getter
-    def datadog(self) -> Optional[pulumi.Input['IntegrationLogDatadogArgs']]:
+    def datadog(self) -> pulumi.Input[Optional['IntegrationLogDatadogArgs']]:
         """
         Configuration block for Datadog integration.
         """
         return pulumi.get(self, "datadog")
 
     @datadog.setter
-    def datadog(self, value: Optional[pulumi.Input['IntegrationLogDatadogArgs']]):
+    def datadog(self, value: pulumi.Input[Optional['IntegrationLogDatadogArgs']]):
         pulumi.set(self, "datadog", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for the Integration app.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def splunk(self) -> Optional[pulumi.Input['IntegrationLogSplunkArgs']]:
+    def splunk(self) -> pulumi.Input[Optional['IntegrationLogSplunkArgs']]:
         """
         Configuration block for Splunk integration.
         """
         return pulumi.get(self, "splunk")
 
     @splunk.setter
-    def splunk(self, value: Optional[pulumi.Input['IntegrationLogSplunkArgs']]):
+    def splunk(self, value: pulumi.Input[Optional['IntegrationLogSplunkArgs']]):
         pulumi.set(self, "splunk", value)
 
 
@@ -168,13 +170,14 @@ class IntegrationLog(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aws_s3: Optional[pulumi.Input[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
-                 datadog: Optional[pulumi.Input[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 splunk: Optional[pulumi.Input[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None,
+                 aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
+                 datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None,
                  __props__=None):
         """
         Registering a Integration Logs app.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -192,6 +195,7 @@ class IntegrationLog(pulumi.CustomResource):
         """
         Registering a Integration Logs app.
 
+
         :param str resource_name: The name of the resource.
         :param IntegrationLogArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -207,10 +211,10 @@ class IntegrationLog(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aws_s3: Optional[pulumi.Input[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
-                 datadog: Optional[pulumi.Input[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 splunk: Optional[pulumi.Input[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None,
+                 aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
+                 datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -234,10 +238,10 @@ class IntegrationLog(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            aws_s3: Optional[pulumi.Input[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
-            datadog: Optional[pulumi.Input[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            splunk: Optional[pulumi.Input[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None) -> 'IntegrationLog':
+            aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
+            datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None) -> 'IntegrationLog':
         """
         Get an existing IntegrationLog resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

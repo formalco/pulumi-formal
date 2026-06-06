@@ -38,43 +38,43 @@ export class PolicyDataLoader extends pulumi.CustomResource {
     /**
      * When the policy data loader was created.
      */
-    public /*out*/ readonly createdAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly createdAt: pulumi.Output<string>;
     /**
      * Policy data loader description.
      */
-    public readonly description!: pulumi.Output<string>;
+    declare public readonly description: pulumi.Output<string>;
     /**
      * The key to access the output data of this policy data loader.
      */
-    public readonly key!: pulumi.Output<string>;
+    declare public readonly key: pulumi.Output<string>;
     /**
      * Friendly name for this policy data loader.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * Defines the current status of the policy data loader. It can be one of the following: 'draft' or 'active'.
      */
-    public readonly status!: pulumi.Output<string>;
+    declare public readonly status: pulumi.Output<string>;
     /**
      * If set to true, this policy data loader cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
     /**
      * Last update time.
      */
-    public /*out*/ readonly updatedAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
     /**
      * The code that will be executed to fetch and output the data.
      */
-    public readonly workerCode!: pulumi.Output<string>;
+    declare public readonly workerCode: pulumi.Output<string>;
     /**
      * The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
      */
-    public readonly workerRuntime!: pulumi.Output<string>;
+    declare public readonly workerRuntime: pulumi.Output<string>;
     /**
      * Second-based 'cron' expression specifying when the data should be fetched. For example, use '*&#47;10 * * * * *' to run the code every 10 seconds.
      */
-    public readonly workerSchedule!: pulumi.Output<string>;
+    declare public readonly workerSchedule: pulumi.Output<string>;
 
     /**
      * Create a PolicyDataLoader resource with the given unique name, arguments, and options.
@@ -89,44 +89,44 @@ export class PolicyDataLoader extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as PolicyDataLoaderState | undefined;
-            resourceInputs["createdAt"] = state ? state.createdAt : undefined;
-            resourceInputs["description"] = state ? state.description : undefined;
-            resourceInputs["key"] = state ? state.key : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["status"] = state ? state.status : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
-            resourceInputs["updatedAt"] = state ? state.updatedAt : undefined;
-            resourceInputs["workerCode"] = state ? state.workerCode : undefined;
-            resourceInputs["workerRuntime"] = state ? state.workerRuntime : undefined;
-            resourceInputs["workerSchedule"] = state ? state.workerSchedule : undefined;
+            resourceInputs["createdAt"] = state?.createdAt;
+            resourceInputs["description"] = state?.description;
+            resourceInputs["key"] = state?.key;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["status"] = state?.status;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
+            resourceInputs["updatedAt"] = state?.updatedAt;
+            resourceInputs["workerCode"] = state?.workerCode;
+            resourceInputs["workerRuntime"] = state?.workerRuntime;
+            resourceInputs["workerSchedule"] = state?.workerSchedule;
         } else {
             const args = argsOrState as PolicyDataLoaderArgs | undefined;
-            if ((!args || args.description === undefined) && !opts.urn) {
+            if (args?.description === undefined && !opts.urn) {
                 throw new Error("Missing required property 'description'");
             }
-            if ((!args || args.key === undefined) && !opts.urn) {
+            if (args?.key === undefined && !opts.urn) {
                 throw new Error("Missing required property 'key'");
             }
-            if ((!args || args.status === undefined) && !opts.urn) {
+            if (args?.status === undefined && !opts.urn) {
                 throw new Error("Missing required property 'status'");
             }
-            if ((!args || args.workerCode === undefined) && !opts.urn) {
+            if (args?.workerCode === undefined && !opts.urn) {
                 throw new Error("Missing required property 'workerCode'");
             }
-            if ((!args || args.workerRuntime === undefined) && !opts.urn) {
+            if (args?.workerRuntime === undefined && !opts.urn) {
                 throw new Error("Missing required property 'workerRuntime'");
             }
-            if ((!args || args.workerSchedule === undefined) && !opts.urn) {
+            if (args?.workerSchedule === undefined && !opts.urn) {
                 throw new Error("Missing required property 'workerSchedule'");
             }
-            resourceInputs["description"] = args ? args.description : undefined;
-            resourceInputs["key"] = args ? args.key : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["status"] = args ? args.status : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
-            resourceInputs["workerCode"] = args ? args.workerCode : undefined;
-            resourceInputs["workerRuntime"] = args ? args.workerRuntime : undefined;
-            resourceInputs["workerSchedule"] = args ? args.workerSchedule : undefined;
+            resourceInputs["description"] = args?.description;
+            resourceInputs["key"] = args?.key;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["status"] = args?.status;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
+            resourceInputs["workerCode"] = args?.workerCode;
+            resourceInputs["workerRuntime"] = args?.workerRuntime;
+            resourceInputs["workerSchedule"] = args?.workerSchedule;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
@@ -142,43 +142,43 @@ export interface PolicyDataLoaderState {
     /**
      * When the policy data loader was created.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * Policy data loader description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The key to access the output data of this policy data loader.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Friendly name for this policy data loader.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Defines the current status of the policy data loader. It can be one of the following: 'draft' or 'active'.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this policy data loader cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Last update time.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
     /**
      * The code that will be executed to fetch and output the data.
      */
-    workerCode?: pulumi.Input<string>;
+    workerCode?: pulumi.Input<string | undefined>;
     /**
      * The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
      */
-    workerRuntime?: pulumi.Input<string>;
+    workerRuntime?: pulumi.Input<string | undefined>;
     /**
      * Second-based 'cron' expression specifying when the data should be fetched. For example, use '*&#47;10 * * * * *' to run the code every 10 seconds.
      */
-    workerSchedule?: pulumi.Input<string>;
+    workerSchedule?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -196,7 +196,7 @@ export interface PolicyDataLoaderArgs {
     /**
      * Friendly name for this policy data loader.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Defines the current status of the policy data loader. It can be one of the following: 'draft' or 'active'.
      */
@@ -204,7 +204,7 @@ export interface PolicyDataLoaderArgs {
     /**
      * If set to true, this policy data loader cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * The code that will be executed to fetch and output the data.
      */

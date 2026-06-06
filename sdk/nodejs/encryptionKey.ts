@@ -36,29 +36,33 @@ export class EncryptionKey extends pulumi.CustomResource {
     }
 
     /**
-     * The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.
+     * The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).
      */
-    public readonly algorithm!: pulumi.Output<string>;
+    declare public readonly algorithm: pulumi.Output<string>;
     /**
      * When the encryption key was created.
      */
-    public /*out*/ readonly createdAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly createdAt: pulumi.Output<string>;
     /**
      * The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
      */
-    public readonly decryptorUri!: pulumi.Output<string | undefined>;
+    declare public readonly decryptorUri: pulumi.Output<string | undefined>;
     /**
      * The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
      */
-    public readonly keyId!: pulumi.Output<string>;
+    declare public readonly keyId: pulumi.Output<string>;
     /**
      * The provider of the encryption key. Currently only 'aws' is supported.
      */
-    public readonly keyProvider!: pulumi.Output<string>;
+    declare public readonly keyProvider: pulumi.Output<string>;
+    /**
+     * PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
+     */
+    declare public readonly publicKeyPem: pulumi.Output<string | undefined>;
     /**
      * Last update time.
      */
-    public /*out*/ readonly updatedAt!: pulumi.Output<string>;
+    declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
 
     /**
      * Create a EncryptionKey resource with the given unique name, arguments, and options.
@@ -73,27 +77,29 @@ export class EncryptionKey extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as EncryptionKeyState | undefined;
-            resourceInputs["algorithm"] = state ? state.algorithm : undefined;
-            resourceInputs["createdAt"] = state ? state.createdAt : undefined;
-            resourceInputs["decryptorUri"] = state ? state.decryptorUri : undefined;
-            resourceInputs["keyId"] = state ? state.keyId : undefined;
-            resourceInputs["keyProvider"] = state ? state.keyProvider : undefined;
-            resourceInputs["updatedAt"] = state ? state.updatedAt : undefined;
+            resourceInputs["algorithm"] = state?.algorithm;
+            resourceInputs["createdAt"] = state?.createdAt;
+            resourceInputs["decryptorUri"] = state?.decryptorUri;
+            resourceInputs["keyId"] = state?.keyId;
+            resourceInputs["keyProvider"] = state?.keyProvider;
+            resourceInputs["publicKeyPem"] = state?.publicKeyPem;
+            resourceInputs["updatedAt"] = state?.updatedAt;
         } else {
             const args = argsOrState as EncryptionKeyArgs | undefined;
-            if ((!args || args.algorithm === undefined) && !opts.urn) {
+            if (args?.algorithm === undefined && !opts.urn) {
                 throw new Error("Missing required property 'algorithm'");
             }
-            if ((!args || args.keyId === undefined) && !opts.urn) {
+            if (args?.keyId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'keyId'");
             }
-            if ((!args || args.keyProvider === undefined) && !opts.urn) {
+            if (args?.keyProvider === undefined && !opts.urn) {
                 throw new Error("Missing required property 'keyProvider'");
             }
-            resourceInputs["algorithm"] = args ? args.algorithm : undefined;
-            resourceInputs["decryptorUri"] = args ? args.decryptorUri : undefined;
-            resourceInputs["keyId"] = args ? args.keyId : undefined;
-            resourceInputs["keyProvider"] = args ? args.keyProvider : undefined;
+            resourceInputs["algorithm"] = args?.algorithm;
+            resourceInputs["decryptorUri"] = args?.decryptorUri;
+            resourceInputs["keyId"] = args?.keyId;
+            resourceInputs["keyProvider"] = args?.keyProvider;
+            resourceInputs["publicKeyPem"] = args?.publicKeyPem;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
@@ -107,29 +113,33 @@ export class EncryptionKey extends pulumi.CustomResource {
  */
 export interface EncryptionKeyState {
     /**
-     * The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.
+     * The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).
      */
-    algorithm?: pulumi.Input<string>;
+    algorithm?: pulumi.Input<string | undefined>;
     /**
      * When the encryption key was created.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
      */
-    decryptorUri?: pulumi.Input<string>;
+    decryptorUri?: pulumi.Input<string | undefined>;
     /**
      * The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
      */
-    keyId?: pulumi.Input<string>;
+    keyId?: pulumi.Input<string | undefined>;
     /**
      * The provider of the encryption key. Currently only 'aws' is supported.
      */
-    keyProvider?: pulumi.Input<string>;
+    keyProvider?: pulumi.Input<string | undefined>;
+    /**
+     * PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
+     */
+    publicKeyPem?: pulumi.Input<string | undefined>;
     /**
      * Last update time.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -137,13 +147,13 @@ export interface EncryptionKeyState {
  */
 export interface EncryptionKeyArgs {
     /**
-     * The algorithm used for encryption. Can be either 'aes*random' or 'aes*deterministic'.
+     * The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).
      */
     algorithm: pulumi.Input<string>;
     /**
      * The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
      */
-    decryptorUri?: pulumi.Input<string>;
+    decryptorUri?: pulumi.Input<string | undefined>;
     /**
      * The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
      */
@@ -152,4 +162,8 @@ export interface EncryptionKeyArgs {
      * The provider of the encryption key. Currently only 'aws' is supported.
      */
     keyProvider: pulumi.Input<string>;
+    /**
+     * PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
+     */
+    publicKeyPem?: pulumi.Input<string | undefined>;
 }

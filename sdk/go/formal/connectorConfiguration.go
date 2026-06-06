@@ -25,7 +25,7 @@ type ConnectorConfiguration struct {
 	// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
 	OtelEndpointPort pulumi.IntPtrOutput `pulumi:"otelEndpointPort"`
 	// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
-	ResourcesHealthChecksFrequencySeconds pulumi.IntPtrOutput `pulumi:"resourcesHealthChecksFrequencySeconds"`
+	ResourcesHealthChecksFrequency pulumi.IntPtrOutput `pulumi:"resourcesHealthChecksFrequency"`
 }
 
 // NewConnectorConfiguration registers a new resource with the given unique name, arguments, and options.
@@ -70,7 +70,7 @@ type connectorConfigurationState struct {
 	// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
 	OtelEndpointPort *int `pulumi:"otelEndpointPort"`
 	// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
-	ResourcesHealthChecksFrequencySeconds *int `pulumi:"resourcesHealthChecksFrequencySeconds"`
+	ResourcesHealthChecksFrequency *int `pulumi:"resourcesHealthChecksFrequency"`
 }
 
 type ConnectorConfigurationState struct {
@@ -83,7 +83,7 @@ type ConnectorConfigurationState struct {
 	// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
 	OtelEndpointPort pulumi.IntPtrInput
 	// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
-	ResourcesHealthChecksFrequencySeconds pulumi.IntPtrInput
+	ResourcesHealthChecksFrequency pulumi.IntPtrInput
 }
 
 func (ConnectorConfigurationState) ElementType() reflect.Type {
@@ -100,7 +100,7 @@ type connectorConfigurationArgs struct {
 	// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
 	OtelEndpointPort *int `pulumi:"otelEndpointPort"`
 	// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
-	ResourcesHealthChecksFrequencySeconds *int `pulumi:"resourcesHealthChecksFrequencySeconds"`
+	ResourcesHealthChecksFrequency *int `pulumi:"resourcesHealthChecksFrequency"`
 }
 
 // The set of arguments for constructing a ConnectorConfiguration resource.
@@ -114,7 +114,7 @@ type ConnectorConfigurationArgs struct {
 	// The OpenTelemetry endpoint port for this Connector. Defaults to 4317.
 	OtelEndpointPort pulumi.IntPtrInput
 	// The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
-	ResourcesHealthChecksFrequencySeconds pulumi.IntPtrInput
+	ResourcesHealthChecksFrequency pulumi.IntPtrInput
 }
 
 func (ConnectorConfigurationArgs) ElementType() reflect.Type {
@@ -225,8 +225,8 @@ func (o ConnectorConfigurationOutput) OtelEndpointPort() pulumi.IntPtrOutput {
 }
 
 // The frequency in seconds for resource health checks. Must be between 10 and 3600 seconds. Defaults to 60.
-func (o ConnectorConfigurationOutput) ResourcesHealthChecksFrequencySeconds() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *ConnectorConfiguration) pulumi.IntPtrOutput { return v.ResourcesHealthChecksFrequencySeconds }).(pulumi.IntPtrOutput)
+func (o ConnectorConfigurationOutput) ResourcesHealthChecksFrequency() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectorConfiguration) pulumi.IntPtrOutput { return v.ResourcesHealthChecksFrequency }).(pulumi.IntPtrOutput)
 }
 
 type ConnectorConfigurationArrayOutput struct{ *pulumi.OutputState }

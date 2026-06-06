@@ -35,7 +35,7 @@ namespace Formal.Pulumi
         public Output<bool?> TerminationProtection { get; private set; } = null!;
 
         /// <summary>
-        /// The type of the rule. It can be either `any`, `resource` or `technology`
+        /// The type of the rule. It can be either `Any`, `Resource` or `Technology`
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
@@ -106,7 +106,7 @@ namespace Formal.Pulumi
         public Input<bool>? TerminationProtection { get; set; }
 
         /// <summary>
-        /// The type of the rule. It can be either `any`, `resource` or `technology`
+        /// The type of the rule. It can be either `Any`, `Resource` or `Technology`
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
@@ -138,7 +138,7 @@ namespace Formal.Pulumi
         public Input<bool>? TerminationProtection { get; set; }
 
         /// <summary>
-        /// The type of the rule. It can be either `any`, `resource` or `technology`
+        /// The type of the rule. It can be either `Any`, `Resource` or `Technology`
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

@@ -22,10 +22,11 @@ class PermissionArgs:
                  code: pulumi.Input[_builtins.str],
                  description: pulumi.Input[_builtins.str],
                  status: pulumi.Input[_builtins.str],
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Permission resource.
+
         :param pulumi.Input[_builtins.str] code: The code describing how the permission works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] description: Permission Description.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the permission. It can be one of the following: 'draft', 'dry-run', or 'active'.
@@ -78,39 +79,40 @@ class PermissionArgs:
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Permission Name
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this Permission cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
 @pulumi.input_type
 class _PermissionState:
     def __init__(__self__, *,
-                 code: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 code: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         Input properties used for looking up and filtering Permission resources.
+
         :param pulumi.Input[_builtins.str] code: The code describing how the permission works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] description: Permission Description.
         :param pulumi.Input[_builtins.str] name: Permission Name
@@ -130,62 +132,62 @@ class _PermissionState:
 
     @_builtins.property
     @pulumi.getter
-    def code(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def code(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The code describing how the permission works. Create one in the Formal Console.
         """
         return pulumi.get(self, "code")
 
     @code.setter
-    def code(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def code(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "code", value)
 
     @_builtins.property
     @pulumi.getter
-    def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Permission Description.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Permission Name
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def status(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Defines the current status of the permission. It can be one of the following: 'draft', 'dry-run', or 'active'.
         """
         return pulumi.get(self, "status")
 
     @status.setter
-    def status(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def status(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "status", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this Permission cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
@@ -195,14 +197,15 @@ class Permission(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 code: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 code: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         Creating a Permission in Formal.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -221,6 +224,7 @@ class Permission(pulumi.CustomResource):
         """
         Creating a Permission in Formal.
 
+
         :param str resource_name: The name of the resource.
         :param PermissionArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -236,11 +240,11 @@ class Permission(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 code: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
+                 code: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -271,11 +275,11 @@ class Permission(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            code: Optional[pulumi.Input[_builtins.str]] = None,
-            description: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            status: Optional[pulumi.Input[_builtins.str]] = None,
-            termination_protection: Optional[pulumi.Input[_builtins.bool]] = None) -> 'Permission':
+            code: pulumi.Input[Optional[_builtins.str]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            status: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None) -> 'Permission':
         """
         Get an existing Permission resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

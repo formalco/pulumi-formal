@@ -21,9 +21,10 @@ class GroupUserLinkArgs:
     def __init__(__self__, *,
                  group_id: pulumi.Input[_builtins.str],
                  user_id: pulumi.Input[_builtins.str],
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None):
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a GroupUserLink resource.
+
         :param pulumi.Input[_builtins.str] group_id: The Formal ID for the group to be linked.
         :param pulumi.Input[_builtins.str] user_id: The Formal ID of the user to be linked.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Link cannot be deleted.
@@ -59,25 +60,26 @@ class GroupUserLinkArgs:
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this Link cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
 
 @pulumi.input_type
 class _GroupUserLinkState:
     def __init__(__self__, *,
-                 group_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 user_id: Optional[pulumi.Input[_builtins.str]] = None):
+                 group_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 user_id: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering GroupUserLink resources.
+
         :param pulumi.Input[_builtins.str] group_id: The Formal ID for the group to be linked.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Link cannot be deleted.
         :param pulumi.Input[_builtins.str] user_id: The Formal ID of the user to be linked.
@@ -91,38 +93,38 @@ class _GroupUserLinkState:
 
     @_builtins.property
     @pulumi.getter(name="groupId")
-    def group_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def group_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The Formal ID for the group to be linked.
         """
         return pulumi.get(self, "group_id")
 
     @group_id.setter
-    def group_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def group_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "group_id", value)
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")
-    def termination_protection(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         If set to true, this Link cannot be deleted.
         """
         return pulumi.get(self, "termination_protection")
 
     @termination_protection.setter
-    def termination_protection(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def termination_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "termination_protection", value)
 
     @_builtins.property
     @pulumi.getter(name="userId")
-    def user_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def user_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The Formal ID of the user to be linked.
         """
         return pulumi.get(self, "user_id")
 
     @user_id.setter
-    def user_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def user_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "user_id", value)
 
 
@@ -132,12 +134,13 @@ class GroupUserLink(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 group_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 user_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 group_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 user_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Linking a User to a Group in Formal.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -154,6 +157,7 @@ class GroupUserLink(pulumi.CustomResource):
         """
         Linking a User to a Group in Formal.
 
+
         :param str resource_name: The name of the resource.
         :param GroupUserLinkArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -169,9 +173,9 @@ class GroupUserLink(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 group_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-                 user_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 group_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+                 user_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -198,9 +202,9 @@ class GroupUserLink(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            group_id: Optional[pulumi.Input[_builtins.str]] = None,
-            termination_protection: Optional[pulumi.Input[_builtins.bool]] = None,
-            user_id: Optional[pulumi.Input[_builtins.str]] = None) -> 'GroupUserLink':
+            group_id: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+            user_id: pulumi.Input[Optional[_builtins.str]] = None) -> 'GroupUserLink':
         """
         Get an existing GroupUserLink resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

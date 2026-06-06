@@ -22,11 +22,12 @@ __all__ = ['IntegrationCloudArgs', 'IntegrationCloud']
 class IntegrationCloudArgs:
     def __init__(__self__, *,
                  cloud_region: pulumi.Input[_builtins.str],
-                 aws: Optional[pulumi.Input['IntegrationCloudAwsArgs']] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 type: Optional[pulumi.Input[_builtins.str]] = None):
+                 aws: pulumi.Input[Optional['IntegrationCloudAwsArgs']] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 type: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a IntegrationCloud resource.
+
         :param pulumi.Input[_builtins.str] cloud_region: Region of the cloud provider.
         :param pulumi.Input['IntegrationCloudAwsArgs'] aws: Configuration block for AWS integration.
         :param pulumi.Input[_builtins.str] name: Name of the Integration.
@@ -57,64 +58,65 @@ class IntegrationCloudArgs:
 
     @_builtins.property
     @pulumi.getter
-    def aws(self) -> Optional[pulumi.Input['IntegrationCloudAwsArgs']]:
+    def aws(self) -> pulumi.Input[Optional['IntegrationCloudAwsArgs']]:
         """
         Configuration block for AWS integration.
         """
         return pulumi.get(self, "aws")
 
     @aws.setter
-    def aws(self, value: Optional[pulumi.Input['IntegrationCloudAwsArgs']]):
+    def aws(self, value: pulumi.Input[Optional['IntegrationCloudAwsArgs']]):
         pulumi.set(self, "aws", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Name of the Integration.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
     @_utilities.deprecated("""This field is deprecated and will be removed in a future version.""")
-    def type(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Type of the Integration. (Supported: aws)
         """
         return pulumi.get(self, "type")
 
     @type.setter
-    def type(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "type", value)
 
 
 @pulumi.input_type
 class _IntegrationCloudState:
     def __init__(__self__, *,
-                 aws: Optional[pulumi.Input['IntegrationCloudAwsArgs']] = None,
-                 aws_allow_s3_access: Optional[pulumi.Input[_builtins.bool]] = None,
-                 aws_enable_ec2_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 aws_enable_ecs_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 aws_enable_eks_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 aws_enable_rds_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 aws_enable_redshift_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 aws_enable_s3_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-                 aws_formal_iam_role: Optional[pulumi.Input[_builtins.str]] = None,
-                 aws_formal_iam_role_arn: Optional[pulumi.Input[_builtins.str]] = None,
-                 aws_formal_pingback_arn: Optional[pulumi.Input[_builtins.str]] = None,
-                 aws_formal_stack_name: Optional[pulumi.Input[_builtins.str]] = None,
-                 aws_s3_bucket_arn: Optional[pulumi.Input[_builtins.str]] = None,
-                 aws_template_body: Optional[pulumi.Input[_builtins.str]] = None,
-                 cloud_region: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 type: Optional[pulumi.Input[_builtins.str]] = None):
+                 aws: pulumi.Input[Optional['IntegrationCloudAwsArgs']] = None,
+                 aws_allow_s3_access: pulumi.Input[Optional[_builtins.bool]] = None,
+                 aws_enable_ec2_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 aws_enable_ecs_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 aws_enable_eks_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 aws_enable_rds_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 aws_enable_redshift_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 aws_enable_s3_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 aws_formal_iam_role: pulumi.Input[Optional[_builtins.str]] = None,
+                 aws_formal_iam_role_arn: pulumi.Input[Optional[_builtins.str]] = None,
+                 aws_formal_pingback_arn: pulumi.Input[Optional[_builtins.str]] = None,
+                 aws_formal_stack_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 aws_s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None,
+                 aws_template_body: pulumi.Input[Optional[_builtins.str]] = None,
+                 cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 type: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering IntegrationCloud resources.
+
         :param pulumi.Input['IntegrationCloudAwsArgs'] aws: Configuration block for AWS integration.
         :param pulumi.Input[_builtins.bool] aws_allow_s3_access: Whether AWS S3 access is allowed or not.
         :param pulumi.Input[_builtins.bool] aws_enable_ec2_autodiscovery: Whether AWS EC2 autodiscovery is enabled or not.
@@ -173,207 +175,207 @@ class _IntegrationCloudState:
 
     @_builtins.property
     @pulumi.getter
-    def aws(self) -> Optional[pulumi.Input['IntegrationCloudAwsArgs']]:
+    def aws(self) -> pulumi.Input[Optional['IntegrationCloudAwsArgs']]:
         """
         Configuration block for AWS integration.
         """
         return pulumi.get(self, "aws")
 
     @aws.setter
-    def aws(self, value: Optional[pulumi.Input['IntegrationCloudAwsArgs']]):
+    def aws(self, value: pulumi.Input[Optional['IntegrationCloudAwsArgs']]):
         pulumi.set(self, "aws", value)
 
     @_builtins.property
     @pulumi.getter(name="awsAllowS3Access")
-    def aws_allow_s3_access(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def aws_allow_s3_access(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether AWS S3 access is allowed or not.
         """
         return pulumi.get(self, "aws_allow_s3_access")
 
     @aws_allow_s3_access.setter
-    def aws_allow_s3_access(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def aws_allow_s3_access(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "aws_allow_s3_access", value)
 
     @_builtins.property
     @pulumi.getter(name="awsEnableEc2Autodiscovery")
-    def aws_enable_ec2_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def aws_enable_ec2_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether AWS EC2 autodiscovery is enabled or not.
         """
         return pulumi.get(self, "aws_enable_ec2_autodiscovery")
 
     @aws_enable_ec2_autodiscovery.setter
-    def aws_enable_ec2_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def aws_enable_ec2_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "aws_enable_ec2_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="awsEnableEcsAutodiscovery")
-    def aws_enable_ecs_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def aws_enable_ecs_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether AWS ECS autodiscovery is enabled or not.
         """
         return pulumi.get(self, "aws_enable_ecs_autodiscovery")
 
     @aws_enable_ecs_autodiscovery.setter
-    def aws_enable_ecs_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def aws_enable_ecs_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "aws_enable_ecs_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="awsEnableEksAutodiscovery")
-    def aws_enable_eks_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def aws_enable_eks_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether AWS EKS autodiscovery is enabled or not.
         """
         return pulumi.get(self, "aws_enable_eks_autodiscovery")
 
     @aws_enable_eks_autodiscovery.setter
-    def aws_enable_eks_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def aws_enable_eks_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "aws_enable_eks_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="awsEnableRdsAutodiscovery")
-    def aws_enable_rds_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def aws_enable_rds_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether AWS RDS autodiscovery is enabled or not.
         """
         return pulumi.get(self, "aws_enable_rds_autodiscovery")
 
     @aws_enable_rds_autodiscovery.setter
-    def aws_enable_rds_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def aws_enable_rds_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "aws_enable_rds_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="awsEnableRedshiftAutodiscovery")
-    def aws_enable_redshift_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def aws_enable_redshift_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether AWS Redshift autodiscovery is enabled or not.
         """
         return pulumi.get(self, "aws_enable_redshift_autodiscovery")
 
     @aws_enable_redshift_autodiscovery.setter
-    def aws_enable_redshift_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def aws_enable_redshift_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "aws_enable_redshift_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="awsEnableS3Autodiscovery")
-    def aws_enable_s3_autodiscovery(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def aws_enable_s3_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether AWS S3 autodiscovery is enabled or not.
         """
         return pulumi.get(self, "aws_enable_s3_autodiscovery")
 
     @aws_enable_s3_autodiscovery.setter
-    def aws_enable_s3_autodiscovery(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def aws_enable_s3_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "aws_enable_s3_autodiscovery", value)
 
     @_builtins.property
     @pulumi.getter(name="awsFormalIamRole")
-    def aws_formal_iam_role(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def aws_formal_iam_role(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The IAM role ID Formal will use to access your resources.
         """
         return pulumi.get(self, "aws_formal_iam_role")
 
     @aws_formal_iam_role.setter
-    def aws_formal_iam_role(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def aws_formal_iam_role(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "aws_formal_iam_role", value)
 
     @_builtins.property
     @pulumi.getter(name="awsFormalIamRoleArn")
-    def aws_formal_iam_role_arn(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def aws_formal_iam_role_arn(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ARN of the IAM role Formal will use to access your resources.
         """
         return pulumi.get(self, "aws_formal_iam_role_arn")
 
     @aws_formal_iam_role_arn.setter
-    def aws_formal_iam_role_arn(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def aws_formal_iam_role_arn(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "aws_formal_iam_role_arn", value)
 
     @_builtins.property
     @pulumi.getter(name="awsFormalPingbackArn")
-    def aws_formal_pingback_arn(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def aws_formal_pingback_arn(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The SNS topic ARN CloudFormation can use to send events to Formal.
         """
         return pulumi.get(self, "aws_formal_pingback_arn")
 
     @aws_formal_pingback_arn.setter
-    def aws_formal_pingback_arn(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def aws_formal_pingback_arn(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "aws_formal_pingback_arn", value)
 
     @_builtins.property
     @pulumi.getter(name="awsFormalStackName")
-    def aws_formal_stack_name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def aws_formal_stack_name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A generated name for your CloudFormation stack.
         """
         return pulumi.get(self, "aws_formal_stack_name")
 
     @aws_formal_stack_name.setter
-    def aws_formal_stack_name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def aws_formal_stack_name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "aws_formal_stack_name", value)
 
     @_builtins.property
     @pulumi.getter(name="awsS3BucketArn")
-    def aws_s3_bucket_arn(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def aws_s3_bucket_arn(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
         """
         return pulumi.get(self, "aws_s3_bucket_arn")
 
     @aws_s3_bucket_arn.setter
-    def aws_s3_bucket_arn(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def aws_s3_bucket_arn(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "aws_s3_bucket_arn", value)
 
     @_builtins.property
     @pulumi.getter(name="awsTemplateBody")
-    def aws_template_body(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def aws_template_body(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The template body of the CloudFormation stack.
         """
         return pulumi.get(self, "aws_template_body")
 
     @aws_template_body.setter
-    def aws_template_body(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def aws_template_body(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "aws_template_body", value)
 
     @_builtins.property
     @pulumi.getter(name="cloudRegion")
-    def cloud_region(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def cloud_region(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Region of the cloud provider.
         """
         return pulumi.get(self, "cloud_region")
 
     @cloud_region.setter
-    def cloud_region(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def cloud_region(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "cloud_region", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Name of the Integration.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
     @_utilities.deprecated("""This field is deprecated and will be removed in a future version.""")
-    def type(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Type of the Integration. (Supported: aws)
         """
         return pulumi.get(self, "type")
 
     @type.setter
-    def type(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "type", value)
 
 
@@ -383,13 +385,14 @@ class IntegrationCloud(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aws: Optional[pulumi.Input[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']]] = None,
-                 cloud_region: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 type: Optional[pulumi.Input[_builtins.str]] = None,
+                 aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']]] = None,
+                 cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 type: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Registering a Cloud integration.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -407,6 +410,7 @@ class IntegrationCloud(pulumi.CustomResource):
         """
         Registering a Cloud integration.
 
+
         :param str resource_name: The name of the resource.
         :param IntegrationCloudArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -422,10 +426,10 @@ class IntegrationCloud(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aws: Optional[pulumi.Input[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']]] = None,
-                 cloud_region: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 type: Optional[pulumi.Input[_builtins.str]] = None,
+                 aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']]] = None,
+                 cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 type: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -464,23 +468,23 @@ class IntegrationCloud(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            aws: Optional[pulumi.Input[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']]] = None,
-            aws_allow_s3_access: Optional[pulumi.Input[_builtins.bool]] = None,
-            aws_enable_ec2_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-            aws_enable_ecs_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-            aws_enable_eks_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-            aws_enable_rds_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-            aws_enable_redshift_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-            aws_enable_s3_autodiscovery: Optional[pulumi.Input[_builtins.bool]] = None,
-            aws_formal_iam_role: Optional[pulumi.Input[_builtins.str]] = None,
-            aws_formal_iam_role_arn: Optional[pulumi.Input[_builtins.str]] = None,
-            aws_formal_pingback_arn: Optional[pulumi.Input[_builtins.str]] = None,
-            aws_formal_stack_name: Optional[pulumi.Input[_builtins.str]] = None,
-            aws_s3_bucket_arn: Optional[pulumi.Input[_builtins.str]] = None,
-            aws_template_body: Optional[pulumi.Input[_builtins.str]] = None,
-            cloud_region: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            type: Optional[pulumi.Input[_builtins.str]] = None) -> 'IntegrationCloud':
+            aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']]] = None,
+            aws_allow_s3_access: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_ec2_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_ecs_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_eks_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_rds_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_redshift_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_s3_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_formal_iam_role: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_formal_iam_role_arn: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_formal_pingback_arn: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_formal_stack_name: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_template_body: pulumi.Input[Optional[_builtins.str]] = None,
+            cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            type: pulumi.Input[Optional[_builtins.str]] = None) -> 'IntegrationCloud':
         """
         Get an existing IntegrationCloud resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

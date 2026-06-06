@@ -10,6 +10,11 @@ export type Connector = import("./connector").Connector;
 export const Connector: typeof import("./connector").Connector = null as any;
 utilities.lazyLoad(exports, ["Connector"], () => require("./connector"));
 
+export { ConnectorAiProviderArgs, ConnectorAiProviderState } from "./connectorAiProvider";
+export type ConnectorAiProvider = import("./connectorAiProvider").ConnectorAiProvider;
+export const ConnectorAiProvider: typeof import("./connectorAiProvider").ConnectorAiProvider = null as any;
+utilities.lazyLoad(exports, ["ConnectorAiProvider"], () => require("./connectorAiProvider"));
+
 export { ConnectorConfigurationArgs, ConnectorConfigurationState } from "./connectorConfiguration";
 export type ConnectorConfiguration = import("./connectorConfiguration").ConnectorConfiguration;
 export const ConnectorConfiguration: typeof import("./connectorConfiguration").ConnectorConfiguration = null as any;
@@ -45,11 +50,6 @@ export type DataDiscovery = import("./dataDiscovery").DataDiscovery;
 export const DataDiscovery: typeof import("./dataDiscovery").DataDiscovery = null as any;
 utilities.lazyLoad(exports, ["DataDiscovery"], () => require("./dataDiscovery"));
 
-export { DataDomainArgs, DataDomainState } from "./dataDomain";
-export type DataDomain = import("./dataDomain").DataDomain;
-export const DataDomain: typeof import("./dataDomain").DataDomain = null as any;
-utilities.lazyLoad(exports, ["DataDomain"], () => require("./dataDomain"));
-
 export { DataLabelArgs, DataLabelState } from "./dataLabel";
 export type DataLabel = import("./dataLabel").DataLabel;
 export const DataLabel: typeof import("./dataLabel").DataLabel = null as any;
@@ -59,6 +59,11 @@ export { EncryptionKeyArgs, EncryptionKeyState } from "./encryptionKey";
 export type EncryptionKey = import("./encryptionKey").EncryptionKey;
 export const EncryptionKey: typeof import("./encryptionKey").EncryptionKey = null as any;
 utilities.lazyLoad(exports, ["EncryptionKey"], () => require("./encryptionKey"));
+
+export { FormArgs, FormState } from "./form";
+export type Form = import("./form").Form;
+export const Form: typeof import("./form").Form = null as any;
+utilities.lazyLoad(exports, ["Form"], () => require("./form"));
 
 export { GetConnectorArgs, GetConnectorResult, GetConnectorOutputArgs } from "./getConnector";
 export const getConnector: typeof import("./getConnector").getConnector = null as any;
@@ -100,11 +105,6 @@ export type IntegrationCloud = import("./integrationCloud").IntegrationCloud;
 export const IntegrationCloud: typeof import("./integrationCloud").IntegrationCloud = null as any;
 utilities.lazyLoad(exports, ["IntegrationCloud"], () => require("./integrationCloud"));
 
-export { IntegrationDataCatalogArgs, IntegrationDataCatalogState } from "./integrationDataCatalog";
-export type IntegrationDataCatalog = import("./integrationDataCatalog").IntegrationDataCatalog;
-export const IntegrationDataCatalog: typeof import("./integrationDataCatalog").IntegrationDataCatalog = null as any;
-utilities.lazyLoad(exports, ["IntegrationDataCatalog"], () => require("./integrationDataCatalog"));
-
 export { IntegrationLogArgs, IntegrationLogState } from "./integrationLog";
 export type IntegrationLog = import("./integrationLog").IntegrationLog;
 export const IntegrationLog: typeof import("./integrationLog").IntegrationLog = null as any;
@@ -114,6 +114,11 @@ export { IntegrationMdmArgs, IntegrationMdmState } from "./integrationMdm";
 export type IntegrationMdm = import("./integrationMdm").IntegrationMdm;
 export const IntegrationMdm: typeof import("./integrationMdm").IntegrationMdm = null as any;
 utilities.lazyLoad(exports, ["IntegrationMdm"], () => require("./integrationMdm"));
+
+export { InventoryObjectArgs, InventoryObjectState } from "./inventoryObject";
+export type InventoryObject = import("./inventoryObject").InventoryObject;
+export const InventoryObject: typeof import("./inventoryObject").InventoryObject = null as any;
+utilities.lazyLoad(exports, ["InventoryObject"], () => require("./inventoryObject"));
 
 export { InventoryObjectDataLabelLinkArgs, InventoryObjectDataLabelLinkState } from "./inventoryObjectDataLabelLink";
 export type InventoryObjectDataLabelLink = import("./inventoryObjectDataLabelLink").InventoryObjectDataLabelLink;
@@ -134,6 +139,11 @@ export { NativeUserLinkArgs, NativeUserLinkState } from "./nativeUserLink";
 export type NativeUserLink = import("./nativeUserLink").NativeUserLink;
 export const NativeUserLink: typeof import("./nativeUserLink").NativeUserLink = null as any;
 utilities.lazyLoad(exports, ["NativeUserLink"], () => require("./nativeUserLink"));
+
+export { NetworkRuleArgs, NetworkRuleState } from "./networkRule";
+export type NetworkRule = import("./networkRule").NetworkRule;
+export const NetworkRule: typeof import("./networkRule").NetworkRule = null as any;
+utilities.lazyLoad(exports, ["NetworkRule"], () => require("./networkRule"));
 
 export { PermissionArgs, PermissionState } from "./permission";
 export type Permission = import("./permission").Permission;
@@ -162,6 +172,11 @@ export { ResourceClassifierConfigurationArgs, ResourceClassifierConfigurationSta
 export type ResourceClassifierConfiguration = import("./resourceClassifierConfiguration").ResourceClassifierConfiguration;
 export const ResourceClassifierConfiguration: typeof import("./resourceClassifierConfiguration").ResourceClassifierConfiguration = null as any;
 utilities.lazyLoad(exports, ["ResourceClassifierConfiguration"], () => require("./resourceClassifierConfiguration"));
+
+export { ResourceDialConfigurationArgs, ResourceDialConfigurationState } from "./resourceDialConfiguration";
+export type ResourceDialConfiguration = import("./resourceDialConfiguration").ResourceDialConfiguration;
+export const ResourceDialConfiguration: typeof import("./resourceDialConfiguration").ResourceDialConfiguration = null as any;
+utilities.lazyLoad(exports, ["ResourceDialConfiguration"], () => require("./resourceDialConfiguration"));
 
 export { ResourceHealthCheckArgs, ResourceHealthCheckState } from "./resourceHealthCheck";
 export type ResourceHealthCheck = import("./resourceHealthCheck").ResourceHealthCheck;
@@ -234,6 +249,8 @@ const _module = {
         switch (type) {
             case "formal:index/connector:Connector":
                 return new Connector(name, <any>undefined, { urn })
+            case "formal:index/connectorAiProvider:ConnectorAiProvider":
+                return new ConnectorAiProvider(name, <any>undefined, { urn })
             case "formal:index/connectorConfiguration:ConnectorConfiguration":
                 return new ConnectorConfiguration(name, <any>undefined, { urn })
             case "formal:index/connectorHostname:ConnectorHostname":
@@ -248,12 +265,12 @@ const _module = {
                 return new ConnectorSatelliteLink(name, <any>undefined, { urn })
             case "formal:index/dataDiscovery:DataDiscovery":
                 return new DataDiscovery(name, <any>undefined, { urn })
-            case "formal:index/dataDomain:DataDomain":
-                return new DataDomain(name, <any>undefined, { urn })
             case "formal:index/dataLabel:DataLabel":
                 return new DataLabel(name, <any>undefined, { urn })
             case "formal:index/encryptionKey:EncryptionKey":
                 return new EncryptionKey(name, <any>undefined, { urn })
+            case "formal:index/form:Form":
+                return new Form(name, <any>undefined, { urn })
             case "formal:index/group:Group":
                 return new Group(name, <any>undefined, { urn })
             case "formal:index/groupUserLink:GroupUserLink":
@@ -262,12 +279,12 @@ const _module = {
                 return new IntegrationBi(name, <any>undefined, { urn })
             case "formal:index/integrationCloud:IntegrationCloud":
                 return new IntegrationCloud(name, <any>undefined, { urn })
-            case "formal:index/integrationDataCatalog:IntegrationDataCatalog":
-                return new IntegrationDataCatalog(name, <any>undefined, { urn })
             case "formal:index/integrationLog:IntegrationLog":
                 return new IntegrationLog(name, <any>undefined, { urn })
             case "formal:index/integrationMdm:IntegrationMdm":
                 return new IntegrationMdm(name, <any>undefined, { urn })
+            case "formal:index/inventoryObject:InventoryObject":
+                return new InventoryObject(name, <any>undefined, { urn })
             case "formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink":
                 return new InventoryObjectDataLabelLink(name, <any>undefined, { urn })
             case "formal:index/logConfiguration:LogConfiguration":
@@ -276,6 +293,8 @@ const _module = {
                 return new NativeUser(name, <any>undefined, { urn })
             case "formal:index/nativeUserLink:NativeUserLink":
                 return new NativeUserLink(name, <any>undefined, { urn })
+            case "formal:index/networkRule:NetworkRule":
+                return new NetworkRule(name, <any>undefined, { urn })
             case "formal:index/permission:Permission":
                 return new Permission(name, <any>undefined, { urn })
             case "formal:index/policy:Policy":
@@ -286,6 +305,8 @@ const _module = {
                 return new Resource(name, <any>undefined, { urn })
             case "formal:index/resourceClassifierConfiguration:ResourceClassifierConfiguration":
                 return new ResourceClassifierConfiguration(name, <any>undefined, { urn })
+            case "formal:index/resourceDialConfiguration:ResourceDialConfiguration":
+                return new ResourceDialConfiguration(name, <any>undefined, { urn })
             case "formal:index/resourceHealthCheck:ResourceHealthCheck":
                 return new ResourceHealthCheck(name, <any>undefined, { urn })
             case "formal:index/resourceHostname:ResourceHostname":
@@ -314,6 +335,7 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("formal", "index/connector", _module)
+pulumi.runtime.registerResourceModule("formal", "index/connectorAiProvider", _module)
 pulumi.runtime.registerResourceModule("formal", "index/connectorConfiguration", _module)
 pulumi.runtime.registerResourceModule("formal", "index/connectorHostname", _module)
 pulumi.runtime.registerResourceModule("formal", "index/connectorListener", _module)
@@ -321,25 +343,27 @@ pulumi.runtime.registerResourceModule("formal", "index/connectorListenerLink", _
 pulumi.runtime.registerResourceModule("formal", "index/connectorListenerRule", _module)
 pulumi.runtime.registerResourceModule("formal", "index/connectorSatelliteLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/dataDiscovery", _module)
-pulumi.runtime.registerResourceModule("formal", "index/dataDomain", _module)
 pulumi.runtime.registerResourceModule("formal", "index/dataLabel", _module)
 pulumi.runtime.registerResourceModule("formal", "index/encryptionKey", _module)
+pulumi.runtime.registerResourceModule("formal", "index/form", _module)
 pulumi.runtime.registerResourceModule("formal", "index/group", _module)
 pulumi.runtime.registerResourceModule("formal", "index/groupUserLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationBi", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationCloud", _module)
-pulumi.runtime.registerResourceModule("formal", "index/integrationDataCatalog", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationLog", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationMdm", _module)
+pulumi.runtime.registerResourceModule("formal", "index/inventoryObject", _module)
 pulumi.runtime.registerResourceModule("formal", "index/inventoryObjectDataLabelLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/logConfiguration", _module)
 pulumi.runtime.registerResourceModule("formal", "index/nativeUser", _module)
 pulumi.runtime.registerResourceModule("formal", "index/nativeUserLink", _module)
+pulumi.runtime.registerResourceModule("formal", "index/networkRule", _module)
 pulumi.runtime.registerResourceModule("formal", "index/permission", _module)
 pulumi.runtime.registerResourceModule("formal", "index/policy", _module)
 pulumi.runtime.registerResourceModule("formal", "index/policyDataLoader", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resource", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceClassifierConfiguration", _module)
+pulumi.runtime.registerResourceModule("formal", "index/resourceDialConfiguration", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceHealthCheck", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceHostname", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceTlsConfiguration", _module)

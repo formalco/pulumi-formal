@@ -90,9 +90,9 @@ export interface GetResourceOutputArgs {
     /**
      * The ID of this Resource.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * The name of the Resource to look up. Use this to fetch a resource by name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

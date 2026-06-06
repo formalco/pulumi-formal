@@ -38,27 +38,27 @@ export class Satellite extends pulumi.CustomResource {
     /**
      * Api key of the Satellite.
      */
-    public /*out*/ readonly apiKey!: pulumi.Output<string>;
+    declare public /*out*/ readonly apiKey: pulumi.Output<string>;
     /**
      * Friendly name for the Satellite.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
      */
-    public readonly satelliteType!: pulumi.Output<string>;
+    declare public readonly satelliteType: pulumi.Output<string>;
     /**
      * The ID of the Space to create the Satellite in.
      */
-    public readonly spaceId!: pulumi.Output<string | undefined>;
+    declare public readonly spaceId: pulumi.Output<string | undefined>;
     /**
      * If set to true, this Satellite cannot be deleted.
      */
-    public readonly terminationProtection!: pulumi.Output<boolean | undefined>;
+    declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
     /**
      * TLS certificate of the Satellite.
      */
-    public /*out*/ readonly tlsCert!: pulumi.Output<string>;
+    declare public /*out*/ readonly tlsCert: pulumi.Output<string>;
 
     /**
      * Create a Satellite resource with the given unique name, arguments, and options.
@@ -73,21 +73,21 @@ export class Satellite extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SatelliteState | undefined;
-            resourceInputs["apiKey"] = state ? state.apiKey : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["satelliteType"] = state ? state.satelliteType : undefined;
-            resourceInputs["spaceId"] = state ? state.spaceId : undefined;
-            resourceInputs["terminationProtection"] = state ? state.terminationProtection : undefined;
-            resourceInputs["tlsCert"] = state ? state.tlsCert : undefined;
+            resourceInputs["apiKey"] = state?.apiKey;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["satelliteType"] = state?.satelliteType;
+            resourceInputs["spaceId"] = state?.spaceId;
+            resourceInputs["terminationProtection"] = state?.terminationProtection;
+            resourceInputs["tlsCert"] = state?.tlsCert;
         } else {
             const args = argsOrState as SatelliteArgs | undefined;
-            if ((!args || args.satelliteType === undefined) && !opts.urn) {
+            if (args?.satelliteType === undefined && !opts.urn) {
                 throw new Error("Missing required property 'satelliteType'");
             }
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["satelliteType"] = args ? args.satelliteType : undefined;
-            resourceInputs["spaceId"] = args ? args.spaceId : undefined;
-            resourceInputs["terminationProtection"] = args ? args.terminationProtection : undefined;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["satelliteType"] = args?.satelliteType;
+            resourceInputs["spaceId"] = args?.spaceId;
+            resourceInputs["terminationProtection"] = args?.terminationProtection;
             resourceInputs["apiKey"] = undefined /*out*/;
             resourceInputs["tlsCert"] = undefined /*out*/;
         }
@@ -105,27 +105,27 @@ export interface SatelliteState {
     /**
      * Api key of the Satellite.
      */
-    apiKey?: pulumi.Input<string>;
+    apiKey?: pulumi.Input<string | undefined>;
     /**
      * Friendly name for the Satellite.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
      */
-    satelliteType?: pulumi.Input<string>;
+    satelliteType?: pulumi.Input<string | undefined>;
     /**
      * The ID of the Space to create the Satellite in.
      */
-    spaceId?: pulumi.Input<string>;
+    spaceId?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this Satellite cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
      * TLS certificate of the Satellite.
      */
-    tlsCert?: pulumi.Input<string>;
+    tlsCert?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -135,7 +135,7 @@ export interface SatelliteArgs {
     /**
      * Friendly name for the Satellite.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
      */
@@ -143,9 +143,9 @@ export interface SatelliteArgs {
     /**
      * The ID of the Space to create the Satellite in.
      */
-    spaceId?: pulumi.Input<string>;
+    spaceId?: pulumi.Input<string | undefined>;
     /**
      * If set to true, this Satellite cannot be deleted.
      */
-    terminationProtection?: pulumi.Input<boolean>;
+    terminationProtection?: pulumi.Input<boolean | undefined>;
 }

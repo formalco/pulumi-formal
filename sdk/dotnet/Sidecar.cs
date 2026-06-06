@@ -29,7 +29,7 @@ namespace Formal.Pulumi
         public Output<int> CreatedAt { get; private set; } = null!;
 
         /// <summary>
-        /// If deployment_type is onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.
+        /// If DeploymentType is onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.
         /// </summary>
         [Output("formalControlPlaneTlsCertificate")]
         public Output<string> FormalControlPlaneTlsCertificate { get; private set; } = null!;
@@ -47,7 +47,7 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+        /// Technology of the Datastore: supported values are`Snowflake`, `Postgres`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http` and `Ssh`.
         /// </summary>
         [Output("technology")]
         public Output<string> Technology { get; private set; } = null!;
@@ -59,7 +59,7 @@ namespace Formal.Pulumi
         public Output<bool?> TerminationProtection { get; private set; } = null!;
 
         /// <summary>
-        /// Version of the Sidecar to deploy for `managed`.
+        /// Version of the Sidecar to deploy for `Managed`.
         /// </summary>
         [Output("version")]
         public Output<string?> Version { get; private set; } = null!;
@@ -129,7 +129,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+        /// Technology of the Datastore: supported values are`Snowflake`, `Postgres`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http` and `Ssh`.
         /// </summary>
         [Input("technology", required: true)]
         public Input<string> Technology { get; set; } = null!;
@@ -141,7 +141,7 @@ namespace Formal.Pulumi
         public Input<bool>? TerminationProtection { get; set; }
 
         /// <summary>
-        /// Version of the Sidecar to deploy for `managed`.
+        /// Version of the Sidecar to deploy for `Managed`.
         /// </summary>
         [Input("version")]
         public Input<string>? Version { get; set; }
@@ -180,7 +180,7 @@ namespace Formal.Pulumi
         private Input<string>? _formalControlPlaneTlsCertificate;
 
         /// <summary>
-        /// If deployment_type is onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.
+        /// If DeploymentType is onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.
         /// </summary>
         public Input<string>? FormalControlPlaneTlsCertificate
         {
@@ -205,7 +205,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+        /// Technology of the Datastore: supported values are`Snowflake`, `Postgres`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http` and `Ssh`.
         /// </summary>
         [Input("technology")]
         public Input<string>? Technology { get; set; }
@@ -217,7 +217,7 @@ namespace Formal.Pulumi
         public Input<bool>? TerminationProtection { get; set; }
 
         /// <summary>
-        /// Version of the Sidecar to deploy for `managed`.
+        /// Version of the Sidecar to deploy for `Managed`.
         /// </summary>
         [Input("version")]
         public Input<string>? Version { get; set; }

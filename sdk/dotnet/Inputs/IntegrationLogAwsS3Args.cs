@@ -31,6 +31,12 @@ namespace Formal.Pulumi.Inputs
         [Input("s3BucketName", required: true)]
         public Input<string> S3BucketName { get; set; } = null!;
 
+        /// <summary>
+        /// AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
+        /// </summary>
+        [Input("s3BucketPrefix")]
+        public Input<string>? S3BucketPrefix { get; set; }
+
         public IntegrationLogAwsS3Args()
         {
         }

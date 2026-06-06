@@ -21,10 +21,11 @@ __all__ = ['IntegrationMdmArgs', 'IntegrationMdm']
 @pulumi.input_type
 class IntegrationMdmArgs:
     def __init__(__self__, *,
-                 kandji: Optional[pulumi.Input['IntegrationMdmKandjiArgs']] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None):
+                 kandji: pulumi.Input[Optional['IntegrationMdmKandjiArgs']] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a IntegrationMdm resource.
+
         :param pulumi.Input['IntegrationMdmKandjiArgs'] kandji: Configuration block for Kandji integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         """
@@ -35,36 +36,37 @@ class IntegrationMdmArgs:
 
     @_builtins.property
     @pulumi.getter
-    def kandji(self) -> Optional[pulumi.Input['IntegrationMdmKandjiArgs']]:
+    def kandji(self) -> pulumi.Input[Optional['IntegrationMdmKandjiArgs']]:
         """
         Configuration block for Kandji integration.
         """
         return pulumi.get(self, "kandji")
 
     @kandji.setter
-    def kandji(self, value: Optional[pulumi.Input['IntegrationMdmKandjiArgs']]):
+    def kandji(self, value: pulumi.Input[Optional['IntegrationMdmKandjiArgs']]):
         pulumi.set(self, "kandji", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for the Integration app.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
 
 @pulumi.input_type
 class _IntegrationMdmState:
     def __init__(__self__, *,
-                 kandji: Optional[pulumi.Input['IntegrationMdmKandjiArgs']] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None):
+                 kandji: pulumi.Input[Optional['IntegrationMdmKandjiArgs']] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering IntegrationMdm resources.
+
         :param pulumi.Input['IntegrationMdmKandjiArgs'] kandji: Configuration block for Kandji integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         """
@@ -75,26 +77,26 @@ class _IntegrationMdmState:
 
     @_builtins.property
     @pulumi.getter
-    def kandji(self) -> Optional[pulumi.Input['IntegrationMdmKandjiArgs']]:
+    def kandji(self) -> pulumi.Input[Optional['IntegrationMdmKandjiArgs']]:
         """
         Configuration block for Kandji integration.
         """
         return pulumi.get(self, "kandji")
 
     @kandji.setter
-    def kandji(self, value: Optional[pulumi.Input['IntegrationMdmKandjiArgs']]):
+    def kandji(self, value: pulumi.Input[Optional['IntegrationMdmKandjiArgs']]):
         pulumi.set(self, "kandji", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Friendly name for the Integration app.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
 
@@ -104,11 +106,12 @@ class IntegrationMdm(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 kandji: Optional[pulumi.Input[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict']]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
+                 kandji: pulumi.Input[Optional[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict']]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Registering a Integration MDM app.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -123,6 +126,7 @@ class IntegrationMdm(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Registering a Integration MDM app.
+
 
         :param str resource_name: The name of the resource.
         :param IntegrationMdmArgs args: The arguments to use to populate this resource's properties.
@@ -139,8 +143,8 @@ class IntegrationMdm(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 kandji: Optional[pulumi.Input[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict']]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
+                 kandji: pulumi.Input[Optional[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict']]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -162,8 +166,8 @@ class IntegrationMdm(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            kandji: Optional[pulumi.Input[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict']]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None) -> 'IntegrationMdm':
+            kandji: pulumi.Input[Optional[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict']]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None) -> 'IntegrationMdm':
         """
         Get an existing IntegrationMdm resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

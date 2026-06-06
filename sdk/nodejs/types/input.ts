@@ -5,82 +5,214 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
-export interface DataDomainOwner {
-    objectId: pulumi.Input<string>;
-    objectType: pulumi.Input<string>;
+export interface ConnectorAiProviderAnthropic {
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * The API key. This value is not stored in Terraform state.
+     */
+    apiKey: pulumi.Input<string>;
+    /**
+     * Version trigger for `apiKey`. Increment this value to update the key.
+     */
+    apiKeyVersion: pulumi.Input<number>;
+}
+
+export interface ConnectorAiProviderAwsBedrock {
+    /**
+     * The AWS region.
+     */
+    region: pulumi.Input<string>;
+}
+
+export interface ConnectorAiProviderAzureAi {
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * The API key. This value is not stored in Terraform state.
+     */
+    apiKey: pulumi.Input<string>;
+    /**
+     * Version trigger for `apiKey`. Increment this value to update the key.
+     */
+    apiKeyVersion: pulumi.Input<number>;
+    /**
+     * The Azure AI Foundry endpoint URL.
+     */
+    endpoint: pulumi.Input<string>;
+}
+
+export interface ConnectorAiProviderFormalAiSatellite {
+}
+
+export interface ConnectorAiProviderGemini {
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * The API key. This value is not stored in Terraform state.
+     */
+    apiKey: pulumi.Input<string>;
+    /**
+     * Version trigger for `apiKey`. Increment this value to update the key.
+     */
+    apiKeyVersion: pulumi.Input<number>;
+}
+
+export interface ConnectorAiProviderGoogleVertexAi {
+    /**
+     * The GCP project ID.
+     */
+    gcpProjectId: pulumi.Input<string>;
+    /**
+     * The GCP region.
+     */
+    region: pulumi.Input<string>;
+}
+
+export interface ConnectorAiProviderOpenai {
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * The API key. This value is not stored in Terraform state.
+     */
+    apiKey: pulumi.Input<string>;
+    /**
+     * Version trigger for `apiKey`. Increment this value to update the key.
+     */
+    apiKeyVersion: pulumi.Input<number>;
+}
+
+export interface FormField {
+    /**
+     * Optional field configuration for select-like field types.
+     */
+    config?: pulumi.Input<inputs.FormFieldConfig | undefined>;
+    /**
+     * Unique field identifier.
+     */
+    id: pulumi.Input<string>;
+    /**
+     * Display name of the field.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Field type.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface FormFieldConfig {
+    /**
+     * Static options for select-like fields.
+     */
+    options?: pulumi.Input<pulumi.Input<inputs.FormFieldConfigOption>[] | undefined>;
+    /**
+     * Dynamic source used to fetch options.
+     */
+    optionsSource?: pulumi.Input<inputs.FormFieldConfigOptionsSource | undefined>;
+}
+
+export interface FormFieldConfigOption {
+    /**
+     * Option label.
+     */
+    label: pulumi.Input<string>;
+    /**
+     * Option value.
+     */
+    value: pulumi.Input<string>;
+}
+
+export interface FormFieldConfigOptionsSource {
+    /**
+     * Service/app name used to fetch options.
+     */
+    app: pulumi.Input<string>;
+    /**
+     * Command configuration for options retrieval.
+     */
+    command: pulumi.Input<inputs.FormFieldConfigOptionsSourceCommand>;
+    /**
+     * Optional payload for options retrieval.
+     */
+    input?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
+     */
+    inputJson?: pulumi.Input<string | undefined>;
+    /**
+     * Machine user used to authenticate options retrieval.
+     */
+    machineUserId: pulumi.Input<string>;
+    /**
+     * CEL expression that transforms the response into options.
+     */
+    transform: pulumi.Input<string>;
+}
+
+export interface FormFieldConfigOptionsSourceCommand {
+    /**
+     * Command name.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface IntegrationBiMetabase {
     /**
      * Metabase server hostname. Required when `sync=true`.
      */
-    hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string | undefined>;
     /**
      * Metabase admin password. Required when `sync=true`.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Metabase admin username. Required when `sync=true`.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }
 
 export interface IntegrationCloudAws {
     /**
      * Allows the Cloud Integration to access S3 buckets for Log Integrations.
      */
-    allowS3Access?: pulumi.Input<boolean>;
+    allowS3Access?: pulumi.Input<boolean | undefined>;
+    /**
+     * The regions to enable resource autodiscovery for.
+     */
+    autodiscoveryRegions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
      */
-    awsCustomerRoleArn?: pulumi.Input<string>;
+    awsCustomerRoleArn?: pulumi.Input<string | undefined>;
     /**
      * Enables resource autodiscovery for EC2 instances.
      */
-    enableEc2Autodiscovery?: pulumi.Input<boolean>;
+    enableEc2Autodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * Enables resource autodiscovery for ECS clusters.
      */
-    enableEcsAutodiscovery?: pulumi.Input<boolean>;
+    enableEcsAutodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * Enables resource autodiscovery for EKS clusters.
      */
-    enableEksAutodiscovery?: pulumi.Input<boolean>;
+    enableEksAutodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * Enables resource autodiscovery for RDS instances (PostgreSQL, MySQL, MongoDB).
      */
-    enableRdsAutodiscovery?: pulumi.Input<boolean>;
+    enableRdsAutodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * Enables resource autodiscovery for Redshift clusters.
      */
-    enableRedshiftAutodiscovery?: pulumi.Input<boolean>;
+    enableRedshiftAutodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * Enables resource autodiscovery for S3 buckets.
      */
-    enableS3Autodiscovery?: pulumi.Input<boolean>;
+    enableS3Autodiscovery?: pulumi.Input<boolean | undefined>;
     /**
      * The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
      */
-    s3BucketArn?: pulumi.Input<string>;
+    s3BucketArn?: pulumi.Input<string | undefined>;
     /**
      * The template version of the CloudFormation stack. Use `latest` to stay in sync.
      */
     templateVersion: pulumi.Input<string>;
-}
-
-export interface IntegrationDataCatalogDatahub {
-    /**
-     * Api Key for the Datahub instance.
-     */
-    apiKey: pulumi.Input<string>;
-    /**
-     * Generalized metadata service url for the Datahub instance.
-     */
-    generalizedMetadataServiceUrl: pulumi.Input<string>;
-    /**
-     * Webhook secret of the Datahub instance.
-     */
-    webhookSecret: pulumi.Input<string>;
 }
 
 export interface IntegrationLogAwsS3 {
@@ -91,11 +223,15 @@ export interface IntegrationLogAwsS3 {
     /**
      * AWS Region.
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
     /**
      * AWS S3 Bucket Name.
      */
     s3BucketName: pulumi.Input<string>;
+    /**
+     * AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
+     */
+    s3BucketPrefix?: pulumi.Input<string | undefined>;
 }
 
 export interface IntegrationLogDatadog {
@@ -147,15 +283,15 @@ export interface LogConfigurationRequest {
     /**
      * Maximum size of request payloads to log.
      */
-    maxPayloadSize?: pulumi.Input<number>;
+    maxPayloadSize?: pulumi.Input<number | undefined>;
     /**
      * Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
      */
-    policyEvalInputRetention?: pulumi.Input<string>;
+    policyEvalInputRetention?: pulumi.Input<string | undefined>;
     /**
      * SQL logging configuration for requests.
      */
-    sql?: pulumi.Input<inputs.LogConfigurationRequestSql>;
+    sql?: pulumi.Input<inputs.LogConfigurationRequestSql | undefined>;
 }
 
 export interface LogConfigurationRequestSql {
@@ -177,26 +313,26 @@ export interface LogConfigurationResponse {
     /**
      * Maximum size of response payloads to log.
      */
-    maxPayloadSize?: pulumi.Input<number>;
+    maxPayloadSize?: pulumi.Input<number | undefined>;
     /**
      * Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
      */
-    policyEvalInputRetention?: pulumi.Input<string>;
+    policyEvalInputRetention?: pulumi.Input<string | undefined>;
 }
 
 export interface LogConfigurationScope {
     /**
      * The ID of the connector (required when type is connector).
      */
-    connectorId?: pulumi.Input<string>;
+    connectorId?: pulumi.Input<string | undefined>;
     /**
      * The ID of the resource (required when type is resource).
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * The ID of the space (required when type is space).
      */
-    spaceId?: pulumi.Input<string>;
+    spaceId?: pulumi.Input<string | undefined>;
     /**
      * The type of scope (resource, connector, space, org).
      */
@@ -207,7 +343,7 @@ export interface LogConfigurationSession {
     /**
      * Duration to retain policy evaluation inputs for sessions. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
      */
-    policyEvalInputRetention?: pulumi.Input<string>;
+    policyEvalInputRetention?: pulumi.Input<string | undefined>;
 }
 
 export interface LogConfigurationStream {

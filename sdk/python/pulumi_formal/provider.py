@@ -19,8 +19,8 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
-                 api_key: Optional[pulumi.Input[_builtins.str]] = None,
-                 retrieve_sensitive_values: Optional[pulumi.Input[_builtins.bool]] = None):
+                 api_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 retrieve_sensitive_values: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Provider resource.
         """
@@ -31,20 +31,20 @@ class ProviderArgs:
 
     @_builtins.property
     @pulumi.getter(name="apiKey")
-    def api_key(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def api_key(self) -> pulumi.Input[Optional[_builtins.str]]:
         return pulumi.get(self, "api_key")
 
     @api_key.setter
-    def api_key(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def api_key(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "api_key", value)
 
     @_builtins.property
     @pulumi.getter(name="retrieveSensitiveValues")
-    def retrieve_sensitive_values(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def retrieve_sensitive_values(self) -> pulumi.Input[Optional[_builtins.bool]]:
         return pulumi.get(self, "retrieve_sensitive_values")
 
     @retrieve_sensitive_values.setter
-    def retrieve_sensitive_values(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def retrieve_sensitive_values(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "retrieve_sensitive_values", value)
 
 
@@ -54,14 +54,15 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 api_key: Optional[pulumi.Input[_builtins.str]] = None,
-                 retrieve_sensitive_values: Optional[pulumi.Input[_builtins.bool]] = None,
+                 api_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 retrieve_sensitive_values: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         The provider type for the formal package. By default, resources use package-wide configuration
         settings, however an explicit `Provider` instance may be created and passed during resource
         construction to achieve fine-grained programmatic control over provider settings. See the
         [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -78,6 +79,7 @@ class Provider(pulumi.ProviderResource):
         construction to achieve fine-grained programmatic control over provider settings. See the
         [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
 
+
         :param str resource_name: The name of the resource.
         :param ProviderArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -93,8 +95,8 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 api_key: Optional[pulumi.Input[_builtins.str]] = None,
-                 retrieve_sensitive_values: Optional[pulumi.Input[_builtins.bool]] = None,
+                 api_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 retrieve_sensitive_values: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):

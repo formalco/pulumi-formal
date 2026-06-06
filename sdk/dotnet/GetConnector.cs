@@ -13,19 +13,19 @@ namespace Formal.Pulumi
     public static class GetConnector
     {
         /// <summary>
-        /// Data source for looking up a Connector by name or by ID. Use either `name` or `id`, but not both.
+        /// Data source for looking up a Connector by name or by ID. Use either `Name` or `Id`, but not both.
         /// </summary>
         public static Task<GetConnectorResult> InvokeAsync(GetConnectorArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConnectorResult>("formal:index/getConnector:getConnector", args ?? new GetConnectorArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Connector by name or by ID. Use either `name` or `id`, but not both.
+        /// Data source for looking up a Connector by name or by ID. Use either `Name` or `Id`, but not both.
         /// </summary>
         public static Output<GetConnectorResult> Invoke(GetConnectorInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConnectorResult>("formal:index/getConnector:getConnector", args ?? new GetConnectorInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Data source for looking up a Connector by name or by ID. Use either `name` or `id`, but not both.
+        /// Data source for looking up a Connector by name or by ID. Use either `Name` or `Id`, but not both.
         /// </summary>
         public static Output<GetConnectorResult> Invoke(GetConnectorInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetConnectorResult>("formal:index/getConnector:getConnector", args ?? new GetConnectorInvokeArgs(), options.WithDefaults());
