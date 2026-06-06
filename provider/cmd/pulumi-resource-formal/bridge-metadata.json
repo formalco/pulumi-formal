@@ -5,6 +5,33 @@
                 "current": "formal:index/connector:Connector",
                 "majorVersion": 1
             },
+            "formal_connector_ai_provider": {
+                "current": "formal:index/connectorAiProvider:ConnectorAiProvider",
+                "majorVersion": 1,
+                "fields": {
+                    "anthropic": {
+                        "maxItemsOne": true
+                    },
+                    "aws_bedrock": {
+                        "maxItemsOne": true
+                    },
+                    "azure_ai": {
+                        "maxItemsOne": true
+                    },
+                    "formal_ai_satellite": {
+                        "maxItemsOne": true
+                    },
+                    "gemini": {
+                        "maxItemsOne": true
+                    },
+                    "google_vertex_ai": {
+                        "maxItemsOne": true
+                    },
+                    "openai": {
+                        "maxItemsOne": true
+                    }
+                }
+            },
             "formal_connector_configuration": {
                 "current": "formal:index/connectorConfiguration:ConnectorConfiguration",
                 "majorVersion": 1
@@ -33,21 +60,6 @@
                 "current": "formal:index/dataDiscovery:DataDiscovery",
                 "majorVersion": 1
             },
-            "formal_data_domain": {
-                "current": "formal:index/dataDomain:DataDomain",
-                "majorVersion": 1,
-                "fields": {
-                    "excluded_paths": {
-                        "maxItemsOne": false
-                    },
-                    "included_paths": {
-                        "maxItemsOne": false
-                    },
-                    "owners": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
             "formal_data_label": {
                 "current": "formal:index/dataLabel:DataLabel",
                 "majorVersion": 1
@@ -55,6 +67,39 @@
             "formal_encryption_key": {
                 "current": "formal:index/encryptionKey:EncryptionKey",
                 "majorVersion": 1
+            },
+            "formal_form": {
+                "current": "formal:index/form:Form",
+                "majorVersion": 1,
+                "fields": {
+                    "field": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "config": {
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "option": {
+                                                "maxItemsOne": false
+                                            },
+                                            "options_source": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "command": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "formal_group": {
                 "current": "formal:index/group:Group",
@@ -78,19 +123,14 @@
                 "majorVersion": 1,
                 "fields": {
                     "aws": {
-                        "maxItemsOne": true
-                    }
-                }
-            },
-            "formal_integration_data_catalog": {
-                "current": "formal:index/integrationDataCatalog:IntegrationDataCatalog",
-                "majorVersion": 1,
-                "fields": {
-                    "datahub": {
-                        "maxItemsOne": true
-                    },
-                    "synced_entities": {
-                        "maxItemsOne": false
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "autodiscovery_regions": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -117,6 +157,10 @@
                         "maxItemsOne": true
                     }
                 }
+            },
+            "formal_inventory_object": {
+                "current": "formal:index/inventoryObject:InventoryObject",
+                "majorVersion": 1
             },
             "formal_inventory_object_data_label_link": {
                 "current": "formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink",
@@ -158,6 +202,10 @@
                 "current": "formal:index/nativeUserLink:NativeUserLink",
                 "majorVersion": 1
             },
+            "formal_network_rule": {
+                "current": "formal:index/networkRule:NetworkRule",
+                "majorVersion": 1
+            },
             "formal_permission": {
                 "current": "formal:index/permission:Permission",
                 "majorVersion": 1
@@ -181,6 +229,10 @@
             },
             "formal_resource_classifier_configuration": {
                 "current": "formal:index/resourceClassifierConfiguration:ResourceClassifierConfiguration",
+                "majorVersion": 1
+            },
+            "formal_resource_dial_configuration": {
+                "current": "formal:index/resourceDialConfiguration:ResourceDialConfiguration",
                 "majorVersion": 1
             },
             "formal_resource_health_check": {
