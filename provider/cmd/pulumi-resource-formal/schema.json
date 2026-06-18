@@ -3113,8 +3113,7 @@
                 },
                 "port": {
                     "type": "integer",
-                    "description": "The port your Resource is listening on.\n",
-                    "willReplaceOnChanges": true
+                    "description": "The port your Resource is listening on.\n"
                 },
                 "spaceId": {
                     "type": "string",
@@ -3175,8 +3174,7 @@
                     },
                     "port": {
                         "type": "integer",
-                        "description": "The port your Resource is listening on.\n",
-                        "willReplaceOnChanges": true
+                        "description": "The port your Resource is listening on.\n"
                     },
                     "spaceId": {
                         "type": "string",
