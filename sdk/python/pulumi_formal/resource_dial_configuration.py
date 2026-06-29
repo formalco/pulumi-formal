@@ -25,9 +25,9 @@ class ResourceDialConfigurationArgs:
         """
         The set of arguments for constructing a ResourceDialConfiguration resource.
 
-        :param pulumi.Input[_builtins.str] dial_method: How the connector dials this resource's upstream. Supported values are: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library — `dial_target` must be set to the `project:region:instance` connection name).
+        :param pulumi.Input[_builtins.str] dial_method: How the connector dials this resource's upstream. Supported values: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library; set `dial_target` to the `project:region:instance` connection name), `aws_ssm` (dial via AWS Systems Manager; set `dial_target` to the target instance or cluster ARN).
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the dial configuration is applied to.
-        :param pulumi.Input[_builtins.str] dial_target: Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. Leave empty for `tcp`.
+        :param pulumi.Input[_builtins.str] dial_target: Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. For `aws_ssm`, the target instance or cluster ARN. Leave empty for `tcp`.
         """
         pulumi.set(__self__, "dial_method", dial_method)
         pulumi.set(__self__, "resource_id", resource_id)
@@ -38,7 +38,7 @@ class ResourceDialConfigurationArgs:
     @pulumi.getter(name="dialMethod")
     def dial_method(self) -> pulumi.Input[_builtins.str]:
         """
-        How the connector dials this resource's upstream. Supported values are: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library — `dial_target` must be set to the `project:region:instance` connection name).
+        How the connector dials this resource's upstream. Supported values: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library; set `dial_target` to the `project:region:instance` connection name), `aws_ssm` (dial via AWS Systems Manager; set `dial_target` to the target instance or cluster ARN).
         """
         return pulumi.get(self, "dial_method")
 
@@ -62,7 +62,7 @@ class ResourceDialConfigurationArgs:
     @pulumi.getter(name="dialTarget")
     def dial_target(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. Leave empty for `tcp`.
+        Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. For `aws_ssm`, the target instance or cluster ARN. Leave empty for `tcp`.
         """
         return pulumi.get(self, "dial_target")
 
@@ -80,8 +80,8 @@ class _ResourceDialConfigurationState:
         """
         Input properties used for looking up and filtering ResourceDialConfiguration resources.
 
-        :param pulumi.Input[_builtins.str] dial_method: How the connector dials this resource's upstream. Supported values are: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library — `dial_target` must be set to the `project:region:instance` connection name).
-        :param pulumi.Input[_builtins.str] dial_target: Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. Leave empty for `tcp`.
+        :param pulumi.Input[_builtins.str] dial_method: How the connector dials this resource's upstream. Supported values: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library; set `dial_target` to the `project:region:instance` connection name), `aws_ssm` (dial via AWS Systems Manager; set `dial_target` to the target instance or cluster ARN).
+        :param pulumi.Input[_builtins.str] dial_target: Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. For `aws_ssm`, the target instance or cluster ARN. Leave empty for `tcp`.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the dial configuration is applied to.
         """
         if dial_method is not None:
@@ -95,7 +95,7 @@ class _ResourceDialConfigurationState:
     @pulumi.getter(name="dialMethod")
     def dial_method(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        How the connector dials this resource's upstream. Supported values are: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library — `dial_target` must be set to the `project:region:instance` connection name).
+        How the connector dials this resource's upstream. Supported values: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library; set `dial_target` to the `project:region:instance` connection name), `aws_ssm` (dial via AWS Systems Manager; set `dial_target` to the target instance or cluster ARN).
         """
         return pulumi.get(self, "dial_method")
 
@@ -107,7 +107,7 @@ class _ResourceDialConfigurationState:
     @pulumi.getter(name="dialTarget")
     def dial_target(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. Leave empty for `tcp`.
+        Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. For `aws_ssm`, the target instance or cluster ARN. Leave empty for `tcp`.
         """
         return pulumi.get(self, "dial_target")
 
@@ -144,8 +144,8 @@ class ResourceDialConfiguration(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] dial_method: How the connector dials this resource's upstream. Supported values are: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library — `dial_target` must be set to the `project:region:instance` connection name).
-        :param pulumi.Input[_builtins.str] dial_target: Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. Leave empty for `tcp`.
+        :param pulumi.Input[_builtins.str] dial_method: How the connector dials this resource's upstream. Supported values: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library; set `dial_target` to the `project:region:instance` connection name), `aws_ssm` (dial via AWS Systems Manager; set `dial_target` to the target instance or cluster ARN).
+        :param pulumi.Input[_builtins.str] dial_target: Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. For `aws_ssm`, the target instance or cluster ARN. Leave empty for `tcp`.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the dial configuration is applied to.
         """
         ...
@@ -212,8 +212,8 @@ class ResourceDialConfiguration(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] dial_method: How the connector dials this resource's upstream. Supported values are: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library — `dial_target` must be set to the `project:region:instance` connection name).
-        :param pulumi.Input[_builtins.str] dial_target: Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. Leave empty for `tcp`.
+        :param pulumi.Input[_builtins.str] dial_method: How the connector dials this resource's upstream. Supported values: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library; set `dial_target` to the `project:region:instance` connection name), `aws_ssm` (dial via AWS Systems Manager; set `dial_target` to the target instance or cluster ARN).
+        :param pulumi.Input[_builtins.str] dial_target: Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. For `aws_ssm`, the target instance or cluster ARN. Leave empty for `tcp`.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the dial configuration is applied to.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -229,7 +229,7 @@ class ResourceDialConfiguration(pulumi.CustomResource):
     @pulumi.getter(name="dialMethod")
     def dial_method(self) -> pulumi.Output[_builtins.str]:
         """
-        How the connector dials this resource's upstream. Supported values are: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library — `dial_target` must be set to the `project:region:instance` connection name).
+        How the connector dials this resource's upstream. Supported values: `tcp` (direct TCP via the resource's hostname and port), `gcp_cloudsql` (dial via the GCP Cloud SQL connector library; set `dial_target` to the `project:region:instance` connection name), `aws_ssm` (dial via AWS Systems Manager; set `dial_target` to the target instance or cluster ARN).
         """
         return pulumi.get(self, "dial_method")
 
@@ -237,7 +237,7 @@ class ResourceDialConfiguration(pulumi.CustomResource):
     @pulumi.getter(name="dialTarget")
     def dial_target(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. Leave empty for `tcp`.
+        Method-specific dial target. For `gcp_cloudsql`, the `project:region:instance` connection name. For `aws_ssm`, the target instance or cluster ARN. Leave empty for `tcp`.
         """
         return pulumi.get(self, "dial_target")
 
