@@ -17,13 +17,13 @@ namespace Formal.Pulumi
     public partial class ResourceDialConfiguration : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// How the connector dials this resource's upstream. Supported values are: `Tcp` (direct TCP via the resource's hostname and port), `GcpCloudsql` (dial via the GCP Cloud SQL connector library — `DialTarget` must be set to the `project:region:instance` connection name).
+        /// How the connector dials this resource's upstream. Supported values: `Tcp` (direct TCP via the resource's hostname and port), `GcpCloudsql` (dial via the GCP Cloud SQL connector library; set `DialTarget` to the `project:region:instance` connection name), `AwsSsm` (dial via AWS Systems Manager; set `DialTarget` to the target instance or cluster ARN).
         /// </summary>
         [Output("dialMethod")]
         public Output<string> DialMethod { get; private set; } = null!;
 
         /// <summary>
-        /// Method-specific dial target. For `GcpCloudsql`, the `project:region:instance` connection name. Leave empty for `Tcp`.
+        /// Method-specific dial target. For `GcpCloudsql`, the `project:region:instance` connection name. For `AwsSsm`, the target instance or cluster ARN. Leave empty for `Tcp`.
         /// </summary>
         [Output("dialTarget")]
         public Output<string?> DialTarget { get; private set; } = null!;
@@ -82,13 +82,13 @@ namespace Formal.Pulumi
     public sealed class ResourceDialConfigurationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// How the connector dials this resource's upstream. Supported values are: `Tcp` (direct TCP via the resource's hostname and port), `GcpCloudsql` (dial via the GCP Cloud SQL connector library — `DialTarget` must be set to the `project:region:instance` connection name).
+        /// How the connector dials this resource's upstream. Supported values: `Tcp` (direct TCP via the resource's hostname and port), `GcpCloudsql` (dial via the GCP Cloud SQL connector library; set `DialTarget` to the `project:region:instance` connection name), `AwsSsm` (dial via AWS Systems Manager; set `DialTarget` to the target instance or cluster ARN).
         /// </summary>
         [Input("dialMethod", required: true)]
         public Input<string> DialMethod { get; set; } = null!;
 
         /// <summary>
-        /// Method-specific dial target. For `GcpCloudsql`, the `project:region:instance` connection name. Leave empty for `Tcp`.
+        /// Method-specific dial target. For `GcpCloudsql`, the `project:region:instance` connection name. For `AwsSsm`, the target instance or cluster ARN. Leave empty for `Tcp`.
         /// </summary>
         [Input("dialTarget")]
         public Input<string>? DialTarget { get; set; }
@@ -108,13 +108,13 @@ namespace Formal.Pulumi
     public sealed class ResourceDialConfigurationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// How the connector dials this resource's upstream. Supported values are: `Tcp` (direct TCP via the resource's hostname and port), `GcpCloudsql` (dial via the GCP Cloud SQL connector library — `DialTarget` must be set to the `project:region:instance` connection name).
+        /// How the connector dials this resource's upstream. Supported values: `Tcp` (direct TCP via the resource's hostname and port), `GcpCloudsql` (dial via the GCP Cloud SQL connector library; set `DialTarget` to the `project:region:instance` connection name), `AwsSsm` (dial via AWS Systems Manager; set `DialTarget` to the target instance or cluster ARN).
         /// </summary>
         [Input("dialMethod")]
         public Input<string>? DialMethod { get; set; }
 
         /// <summary>
-        /// Method-specific dial target. For `GcpCloudsql`, the `project:region:instance` connection name. Leave empty for `Tcp`.
+        /// Method-specific dial target. For `GcpCloudsql`, the `project:region:instance` connection name. For `AwsSsm`, the target instance or cluster ARN. Leave empty for `Tcp`.
         /// </summary>
         [Input("dialTarget")]
         public Input<string>? DialTarget { get; set; }

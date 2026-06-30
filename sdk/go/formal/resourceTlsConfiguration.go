@@ -20,6 +20,14 @@ type ResourceTlsConfiguration struct {
 	ResourceId pulumi.StringOutput `pulumi:"resourceId"`
 	// PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
 	TlsCaTruststore pulumi.StringPtrOutput `pulumi:"tlsCaTruststore"`
+	// Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tlsClientCertIsEnv` is set.
+	TlsClientCert pulumi.StringPtrOutput `pulumi:"tlsClientCert"`
+	// When true, `tlsClientCert` is the name of an environment variable read on the connector rather than the literal PEM.
+	TlsClientCertIsEnv pulumi.BoolPtrOutput `pulumi:"tlsClientCertIsEnv"`
+	// Private key paired with `tlsClientCert`. Either the PEM, or the name of an environment variable read on the connector when `tlsClientKeyIsEnv` is set.
+	TlsClientKey pulumi.StringPtrOutput `pulumi:"tlsClientKey"`
+	// When true, `tlsClientKey` is the name of an environment variable read on the connector rather than the literal PEM.
+	TlsClientKeyIsEnv pulumi.BoolPtrOutput `pulumi:"tlsClientKeyIsEnv"`
 	// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
 	TlsConfig pulumi.StringOutput `pulumi:"tlsConfig"`
 	// Minimum TLS version to be used for connections.
@@ -39,6 +47,13 @@ func NewResourceTlsConfiguration(ctx *pulumi.Context,
 	if args.TlsConfig == nil {
 		return nil, errors.New("invalid value for required argument 'TlsConfig'")
 	}
+	if args.TlsClientKey != nil {
+		args.TlsClientKey = pulumi.ToSecret(args.TlsClientKey).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"tlsClientKey",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ResourceTlsConfiguration
 	err := ctx.RegisterResource("formal:index/resourceTlsConfiguration:ResourceTlsConfiguration", name, args, &resource, opts...)
@@ -66,6 +81,14 @@ type resourceTlsConfigurationState struct {
 	ResourceId *string `pulumi:"resourceId"`
 	// PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
 	TlsCaTruststore *string `pulumi:"tlsCaTruststore"`
+	// Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tlsClientCertIsEnv` is set.
+	TlsClientCert *string `pulumi:"tlsClientCert"`
+	// When true, `tlsClientCert` is the name of an environment variable read on the connector rather than the literal PEM.
+	TlsClientCertIsEnv *bool `pulumi:"tlsClientCertIsEnv"`
+	// Private key paired with `tlsClientCert`. Either the PEM, or the name of an environment variable read on the connector when `tlsClientKeyIsEnv` is set.
+	TlsClientKey *string `pulumi:"tlsClientKey"`
+	// When true, `tlsClientKey` is the name of an environment variable read on the connector rather than the literal PEM.
+	TlsClientKeyIsEnv *bool `pulumi:"tlsClientKeyIsEnv"`
 	// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
 	TlsConfig *string `pulumi:"tlsConfig"`
 	// Minimum TLS version to be used for connections.
@@ -77,6 +100,14 @@ type ResourceTlsConfigurationState struct {
 	ResourceId pulumi.StringPtrInput
 	// PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
 	TlsCaTruststore pulumi.StringPtrInput
+	// Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tlsClientCertIsEnv` is set.
+	TlsClientCert pulumi.StringPtrInput
+	// When true, `tlsClientCert` is the name of an environment variable read on the connector rather than the literal PEM.
+	TlsClientCertIsEnv pulumi.BoolPtrInput
+	// Private key paired with `tlsClientCert`. Either the PEM, or the name of an environment variable read on the connector when `tlsClientKeyIsEnv` is set.
+	TlsClientKey pulumi.StringPtrInput
+	// When true, `tlsClientKey` is the name of an environment variable read on the connector rather than the literal PEM.
+	TlsClientKeyIsEnv pulumi.BoolPtrInput
 	// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
 	TlsConfig pulumi.StringPtrInput
 	// Minimum TLS version to be used for connections.
@@ -92,6 +123,14 @@ type resourceTlsConfigurationArgs struct {
 	ResourceId string `pulumi:"resourceId"`
 	// PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
 	TlsCaTruststore *string `pulumi:"tlsCaTruststore"`
+	// Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tlsClientCertIsEnv` is set.
+	TlsClientCert *string `pulumi:"tlsClientCert"`
+	// When true, `tlsClientCert` is the name of an environment variable read on the connector rather than the literal PEM.
+	TlsClientCertIsEnv *bool `pulumi:"tlsClientCertIsEnv"`
+	// Private key paired with `tlsClientCert`. Either the PEM, or the name of an environment variable read on the connector when `tlsClientKeyIsEnv` is set.
+	TlsClientKey *string `pulumi:"tlsClientKey"`
+	// When true, `tlsClientKey` is the name of an environment variable read on the connector rather than the literal PEM.
+	TlsClientKeyIsEnv *bool `pulumi:"tlsClientKeyIsEnv"`
 	// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
 	TlsConfig string `pulumi:"tlsConfig"`
 	// Minimum TLS version to be used for connections.
@@ -104,6 +143,14 @@ type ResourceTlsConfigurationArgs struct {
 	ResourceId pulumi.StringInput
 	// PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
 	TlsCaTruststore pulumi.StringPtrInput
+	// Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tlsClientCertIsEnv` is set.
+	TlsClientCert pulumi.StringPtrInput
+	// When true, `tlsClientCert` is the name of an environment variable read on the connector rather than the literal PEM.
+	TlsClientCertIsEnv pulumi.BoolPtrInput
+	// Private key paired with `tlsClientCert`. Either the PEM, or the name of an environment variable read on the connector when `tlsClientKeyIsEnv` is set.
+	TlsClientKey pulumi.StringPtrInput
+	// When true, `tlsClientKey` is the name of an environment variable read on the connector rather than the literal PEM.
+	TlsClientKeyIsEnv pulumi.BoolPtrInput
 	// Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
 	TlsConfig pulumi.StringInput
 	// Minimum TLS version to be used for connections.
@@ -205,6 +252,26 @@ func (o ResourceTlsConfigurationOutput) ResourceId() pulumi.StringOutput {
 // PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
 func (o ResourceTlsConfigurationOutput) TlsCaTruststore() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ResourceTlsConfiguration) pulumi.StringPtrOutput { return v.TlsCaTruststore }).(pulumi.StringPtrOutput)
+}
+
+// Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tlsClientCertIsEnv` is set.
+func (o ResourceTlsConfigurationOutput) TlsClientCert() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ResourceTlsConfiguration) pulumi.StringPtrOutput { return v.TlsClientCert }).(pulumi.StringPtrOutput)
+}
+
+// When true, `tlsClientCert` is the name of an environment variable read on the connector rather than the literal PEM.
+func (o ResourceTlsConfigurationOutput) TlsClientCertIsEnv() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ResourceTlsConfiguration) pulumi.BoolPtrOutput { return v.TlsClientCertIsEnv }).(pulumi.BoolPtrOutput)
+}
+
+// Private key paired with `tlsClientCert`. Either the PEM, or the name of an environment variable read on the connector when `tlsClientKeyIsEnv` is set.
+func (o ResourceTlsConfigurationOutput) TlsClientKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ResourceTlsConfiguration) pulumi.StringPtrOutput { return v.TlsClientKey }).(pulumi.StringPtrOutput)
+}
+
+// When true, `tlsClientKey` is the name of an environment variable read on the connector rather than the literal PEM.
+func (o ResourceTlsConfigurationOutput) TlsClientKeyIsEnv() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ResourceTlsConfiguration) pulumi.BoolPtrOutput { return v.TlsClientKeyIsEnv }).(pulumi.BoolPtrOutput)
 }
 
 // Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).

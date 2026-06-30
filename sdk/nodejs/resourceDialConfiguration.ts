@@ -36,11 +36,11 @@ export class ResourceDialConfiguration extends pulumi.CustomResource {
     }
 
     /**
-     * How the connector dials this resource's upstream. Supported values are: `tcp` (direct TCP via the resource's hostname and port), `gcpCloudsql` (dial via the GCP Cloud SQL connector library — `dialTarget` must be set to the `project:region:instance` connection name).
+     * How the connector dials this resource's upstream. Supported values: `tcp` (direct TCP via the resource's hostname and port), `gcpCloudsql` (dial via the GCP Cloud SQL connector library; set `dialTarget` to the `project:region:instance` connection name), `awsSsm` (dial via AWS Systems Manager; set `dialTarget` to the target instance or cluster ARN).
      */
     declare public readonly dialMethod: pulumi.Output<string>;
     /**
-     * Method-specific dial target. For `gcpCloudsql`, the `project:region:instance` connection name. Leave empty for `tcp`.
+     * Method-specific dial target. For `gcpCloudsql`, the `project:region:instance` connection name. For `awsSsm`, the target instance or cluster ARN. Leave empty for `tcp`.
      */
     declare public readonly dialTarget: pulumi.Output<string | undefined>;
     /**
@@ -86,11 +86,11 @@ export class ResourceDialConfiguration extends pulumi.CustomResource {
  */
 export interface ResourceDialConfigurationState {
     /**
-     * How the connector dials this resource's upstream. Supported values are: `tcp` (direct TCP via the resource's hostname and port), `gcpCloudsql` (dial via the GCP Cloud SQL connector library — `dialTarget` must be set to the `project:region:instance` connection name).
+     * How the connector dials this resource's upstream. Supported values: `tcp` (direct TCP via the resource's hostname and port), `gcpCloudsql` (dial via the GCP Cloud SQL connector library; set `dialTarget` to the `project:region:instance` connection name), `awsSsm` (dial via AWS Systems Manager; set `dialTarget` to the target instance or cluster ARN).
      */
     dialMethod?: pulumi.Input<string | undefined>;
     /**
-     * Method-specific dial target. For `gcpCloudsql`, the `project:region:instance` connection name. Leave empty for `tcp`.
+     * Method-specific dial target. For `gcpCloudsql`, the `project:region:instance` connection name. For `awsSsm`, the target instance or cluster ARN. Leave empty for `tcp`.
      */
     dialTarget?: pulumi.Input<string | undefined>;
     /**
@@ -104,11 +104,11 @@ export interface ResourceDialConfigurationState {
  */
 export interface ResourceDialConfigurationArgs {
     /**
-     * How the connector dials this resource's upstream. Supported values are: `tcp` (direct TCP via the resource's hostname and port), `gcpCloudsql` (dial via the GCP Cloud SQL connector library — `dialTarget` must be set to the `project:region:instance` connection name).
+     * How the connector dials this resource's upstream. Supported values: `tcp` (direct TCP via the resource's hostname and port), `gcpCloudsql` (dial via the GCP Cloud SQL connector library; set `dialTarget` to the `project:region:instance` connection name), `awsSsm` (dial via AWS Systems Manager; set `dialTarget` to the target instance or cluster ARN).
      */
     dialMethod: pulumi.Input<string>;
     /**
-     * Method-specific dial target. For `gcpCloudsql`, the `project:region:instance` connection name. Leave empty for `tcp`.
+     * Method-specific dial target. For `gcpCloudsql`, the `project:region:instance` connection name. For `awsSsm`, the target instance or cluster ARN. Leave empty for `tcp`.
      */
     dialTarget?: pulumi.Input<string | undefined>;
     /**

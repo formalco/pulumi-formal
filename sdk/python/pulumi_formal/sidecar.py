@@ -28,7 +28,7 @@ class SidecarArgs:
         The set of arguments for constructing a Sidecar resource.
 
         :param pulumi.Input[_builtins.str] hostname: The hostname of the created sidecar.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
         :param pulumi.Input[_builtins.str] name: Friendly name for this Sidecar.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Sidecar cannot be deleted.
         :param pulumi.Input[_builtins.str] version: Version of the Sidecar to deploy for `managed`.
@@ -58,7 +58,7 @@ class SidecarArgs:
     @pulumi.getter
     def technology(self) -> pulumi.Input[_builtins.str]:
         """
-        Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+        Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
         """
         return pulumi.get(self, "technology")
 
@@ -122,7 +122,7 @@ class _SidecarState:
         :param pulumi.Input[_builtins.str] formal_control_plane_tls_certificate: If deployment_type is onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.
         :param pulumi.Input[_builtins.str] hostname: The hostname of the created sidecar.
         :param pulumi.Input[_builtins.str] name: Friendly name for this Sidecar.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Sidecar cannot be deleted.
         :param pulumi.Input[_builtins.str] version: Version of the Sidecar to deploy for `managed`.
         """
@@ -207,7 +207,7 @@ class _SidecarState:
     @pulumi.getter
     def technology(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+        Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
         """
         return pulumi.get(self, "technology")
 
@@ -260,7 +260,7 @@ class Sidecar(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] hostname: The hostname of the created sidecar.
         :param pulumi.Input[_builtins.str] name: Friendly name for this Sidecar.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Sidecar cannot be deleted.
         :param pulumi.Input[_builtins.str] version: Version of the Sidecar to deploy for `managed`.
         """
@@ -347,7 +347,7 @@ class Sidecar(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] formal_control_plane_tls_certificate: If deployment_type is onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.
         :param pulumi.Input[_builtins.str] hostname: The hostname of the created sidecar.
         :param pulumi.Input[_builtins.str] name: Friendly name for this Sidecar.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Sidecar cannot be deleted.
         :param pulumi.Input[_builtins.str] version: Version of the Sidecar to deploy for `managed`.
         """
@@ -409,7 +409,7 @@ class Sidecar(pulumi.CustomResource):
     @pulumi.getter
     def technology(self) -> pulumi.Output[_builtins.str]:
         """
-        Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+        Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
         """
         return pulumi.get(self, "technology")
 

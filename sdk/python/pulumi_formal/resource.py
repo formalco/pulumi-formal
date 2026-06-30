@@ -34,7 +34,7 @@ class ResourceArgs:
 
         :param pulumi.Input[_builtins.str] hostname: Hostname of the Resource.
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh`, `grpc`, `aws`, and `gcp`.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] aliases: Aliases to apply to the Resource.
         :param pulumi.Input[_builtins.str] environment: Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Resource.
@@ -92,7 +92,7 @@ class ResourceArgs:
     @pulumi.getter
     def technology(self) -> pulumi.Input[_builtins.str]:
         """
-        Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
+        Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh`, `grpc`, `aws`, and `gcp`.
         """
         return pulumi.get(self, "technology")
 
@@ -211,7 +211,7 @@ class _ResourceState:
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags to apply to the Resource.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh`, `grpc`, `aws`, and `gcp`.
         :param pulumi.Input[_builtins.str] technology_provider: For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, the Resource cannot be deleted.
         """
@@ -342,7 +342,7 @@ class _ResourceState:
     @pulumi.getter
     def technology(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
+        Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh`, `grpc`, `aws`, and `gcp`.
         """
         return pulumi.get(self, "technology")
 
@@ -405,7 +405,7 @@ class Resource(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags to apply to the Resource.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh`, `grpc`, `aws`, and `gcp`.
         :param pulumi.Input[_builtins.str] technology_provider: For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, the Resource cannot be deleted.
         """
@@ -506,7 +506,7 @@ class Resource(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags to apply to the Resource.
-        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
+        :param pulumi.Input[_builtins.str] technology: Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh`, `grpc`, `aws`, and `gcp`.
         :param pulumi.Input[_builtins.str] technology_provider: For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, the Resource cannot be deleted.
         """
@@ -596,7 +596,7 @@ class Resource(pulumi.CustomResource):
     @pulumi.getter
     def technology(self) -> pulumi.Output[_builtins.str]:
         """
-        Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh` and `grpc`.
+        Technology of the Resource: supported values are `snowflake`, `postgres`, `rdp`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `clickhouse`, `redis`, `web`, `ssh`, `grpc`, `aws`, and `gcp`.
         """
         return pulumi.get(self, "technology")
 
