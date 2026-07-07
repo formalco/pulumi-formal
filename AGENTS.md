@@ -78,6 +78,17 @@ build, then open the PR yourself.
 > GitHub App, which aren't available to this repo. Running the CLI locally is the equivalent
 > that actually works for us.
 
+#### Automatic upgrade PRs (cron)
+
+`upgrade-provider.yml` also runs on a **daily cron (3 AM UTC)**: it checks for a new upstream
+Formal release and, if there is one, runs the `upgrade-provider` CLI and **opens a PR** with the
+regenerated schema/SDKs for you to review and merge. You can also trigger it on-demand from the
+Actions tab ("Run workflow"), optionally pinning a `version`.
+
+`automerge` is set to `false` (matching the upstream `terraform-provider-formal`, where upgrade
+PRs are merged manually). Note that `upgrade-provider.yml` is ci-mgmt-generated, so `make ci-mgmt`
+resets `automerge` back to `true` — re-set it to `false` afterward.
+
 #### Doing it manually
 
 If `upgrade-provider` is broken or unavailable, do the upstream-provider bump by hand:

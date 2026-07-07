@@ -89,7 +89,9 @@ jobs:
           kind: provider
           email: bot@pulumi.com
           username: pulumi-bot
-          automerge: true
+          # Disabled to match the upstream terraform-provider-formal, where
+          # automerge is off and upgrade PRs are merged manually.
+          automerge: false
           target-version: ${{ steps.target_version.outputs.version }}
           allow-missing-docs: true
         env:
