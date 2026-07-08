@@ -22,6 +22,7 @@ from .get_connector import *
 from .get_group import *
 from .get_resource import *
 from .get_space import *
+from .get_user import *
 from .group import *
 from .group_user_link import *
 from .integration_bi import *

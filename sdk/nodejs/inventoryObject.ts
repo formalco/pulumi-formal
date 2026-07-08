@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Registering an inventory object (db, schema, table, column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.
+ * Registering an inventory object (db, schema, table, column, sub-column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.
  */
 export class InventoryObject extends pulumi.CustomResource {
     /**
@@ -52,7 +52,11 @@ export class InventoryObject extends pulumi.CustomResource {
      */
     declare public readonly resourceId: pulumi.Output<string>;
     /**
-     * Object type. One of `db`, `schema`, `table`, `column`.
+     * Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+     */
+    declare public readonly subType: pulumi.Output<string | undefined>;
+    /**
+     * Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
      */
     declare public readonly type: pulumi.Output<string>;
 
@@ -73,6 +77,7 @@ export class InventoryObject extends pulumi.CustomResource {
             resourceInputs["name"] = state?.name;
             resourceInputs["path"] = state?.path;
             resourceInputs["resourceId"] = state?.resourceId;
+            resourceInputs["subType"] = state?.subType;
             resourceInputs["type"] = state?.type;
         } else {
             const args = argsOrState as InventoryObjectArgs | undefined;
@@ -89,6 +94,7 @@ export class InventoryObject extends pulumi.CustomResource {
             resourceInputs["name"] = args?.name;
             resourceInputs["path"] = args?.path;
             resourceInputs["resourceId"] = args?.resourceId;
+            resourceInputs["subType"] = args?.subType;
             resourceInputs["type"] = args?.type;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -117,7 +123,11 @@ export interface InventoryObjectState {
      */
     resourceId?: pulumi.Input<string | undefined>;
     /**
-     * Object type. One of `db`, `schema`, `table`, `column`.
+     * Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+     */
+    subType?: pulumi.Input<string | undefined>;
+    /**
+     * Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
      */
     type?: pulumi.Input<string | undefined>;
 }
@@ -143,7 +153,11 @@ export interface InventoryObjectArgs {
      */
     resourceId: pulumi.Input<string>;
     /**
-     * Object type. One of `db`, `schema`, `table`, `column`.
+     * Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+     */
+    subType?: pulumi.Input<string | undefined>;
+    /**
+     * Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
      */
     type: pulumi.Input<string>;
 }
