@@ -23,15 +23,17 @@ class InventoryObjectArgs:
                  resource_id: pulumi.Input[_builtins.str],
                  type: pulumi.Input[_builtins.str],
                  data_type: pulumi.Input[Optional[_builtins.str]] = None,
-                 name: pulumi.Input[Optional[_builtins.str]] = None):
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 sub_type: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a InventoryObject resource.
 
         :param pulumi.Input[_builtins.str] path: Hierarchical path of the object (e.g. `mydb.public.users.email`).
         :param pulumi.Input[_builtins.str] resource_id: Resource (datastore) ID this object belongs to.
-        :param pulumi.Input[_builtins.str] type: Object type. One of `db`, `schema`, `table`, `column`.
+        :param pulumi.Input[_builtins.str] type: Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
         :param pulumi.Input[_builtins.str] data_type: Column data type (e.g. `varchar`). Required when `type` is `column`, ignored otherwise.
         :param pulumi.Input[_builtins.str] name: Last segment of the path (e.g. `email`).
+        :param pulumi.Input[_builtins.str] sub_type: Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
         """
         pulumi.set(__self__, "path", path)
         pulumi.set(__self__, "resource_id", resource_id)
@@ -40,6 +42,8 @@ class InventoryObjectArgs:
             pulumi.set(__self__, "data_type", data_type)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if sub_type is not None:
+            pulumi.set(__self__, "sub_type", sub_type)
 
     @_builtins.property
     @pulumi.getter
@@ -69,7 +73,7 @@ class InventoryObjectArgs:
     @pulumi.getter
     def type(self) -> pulumi.Input[_builtins.str]:
         """
-        Object type. One of `db`, `schema`, `table`, `column`.
+        Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
         """
         return pulumi.get(self, "type")
 
@@ -101,6 +105,18 @@ class InventoryObjectArgs:
     def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
+    @_builtins.property
+    @pulumi.getter(name="subType")
+    def sub_type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+        """
+        return pulumi.get(self, "sub_type")
+
+    @sub_type.setter
+    def sub_type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "sub_type", value)
+
 
 @pulumi.input_type
 class _InventoryObjectState:
@@ -109,6 +125,7 @@ class _InventoryObjectState:
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 sub_type: pulumi.Input[Optional[_builtins.str]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering InventoryObject resources.
@@ -117,7 +134,8 @@ class _InventoryObjectState:
         :param pulumi.Input[_builtins.str] name: Last segment of the path (e.g. `email`).
         :param pulumi.Input[_builtins.str] path: Hierarchical path of the object (e.g. `mydb.public.users.email`).
         :param pulumi.Input[_builtins.str] resource_id: Resource (datastore) ID this object belongs to.
-        :param pulumi.Input[_builtins.str] type: Object type. One of `db`, `schema`, `table`, `column`.
+        :param pulumi.Input[_builtins.str] sub_type: Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+        :param pulumi.Input[_builtins.str] type: Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
         """
         if data_type is not None:
             pulumi.set(__self__, "data_type", data_type)
@@ -127,6 +145,8 @@ class _InventoryObjectState:
             pulumi.set(__self__, "path", path)
         if resource_id is not None:
             pulumi.set(__self__, "resource_id", resource_id)
+        if sub_type is not None:
+            pulumi.set(__self__, "sub_type", sub_type)
         if type is not None:
             pulumi.set(__self__, "type", type)
 
@@ -179,10 +199,22 @@ class _InventoryObjectState:
         pulumi.set(self, "resource_id", value)
 
     @_builtins.property
+    @pulumi.getter(name="subType")
+    def sub_type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+        """
+        return pulumi.get(self, "sub_type")
+
+    @sub_type.setter
+    def sub_type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "sub_type", value)
+
+    @_builtins.property
     @pulumi.getter
     def type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Object type. One of `db`, `schema`, `table`, `column`.
+        Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
         """
         return pulumi.get(self, "type")
 
@@ -201,10 +233,11 @@ class InventoryObject(pulumi.CustomResource):
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 sub_type: pulumi.Input[Optional[_builtins.str]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        Registering an inventory object (db, schema, table, column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.
+        Registering an inventory object (db, schema, table, column, sub-column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.
 
 
         :param str resource_name: The name of the resource.
@@ -213,7 +246,8 @@ class InventoryObject(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: Last segment of the path (e.g. `email`).
         :param pulumi.Input[_builtins.str] path: Hierarchical path of the object (e.g. `mydb.public.users.email`).
         :param pulumi.Input[_builtins.str] resource_id: Resource (datastore) ID this object belongs to.
-        :param pulumi.Input[_builtins.str] type: Object type. One of `db`, `schema`, `table`, `column`.
+        :param pulumi.Input[_builtins.str] sub_type: Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+        :param pulumi.Input[_builtins.str] type: Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
         """
         ...
     @overload
@@ -222,7 +256,7 @@ class InventoryObject(pulumi.CustomResource):
                  args: InventoryObjectArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Registering an inventory object (db, schema, table, column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.
+        Registering an inventory object (db, schema, table, column, sub-column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.
 
 
         :param str resource_name: The name of the resource.
@@ -244,6 +278,7 @@ class InventoryObject(pulumi.CustomResource):
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 sub_type: pulumi.Input[Optional[_builtins.str]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -262,6 +297,7 @@ class InventoryObject(pulumi.CustomResource):
             if resource_id is None and not opts.urn:
                 raise TypeError("Missing required property 'resource_id'")
             __props__.__dict__["resource_id"] = resource_id
+            __props__.__dict__["sub_type"] = sub_type
             if type is None and not opts.urn:
                 raise TypeError("Missing required property 'type'")
             __props__.__dict__["type"] = type
@@ -279,6 +315,7 @@ class InventoryObject(pulumi.CustomResource):
             name: pulumi.Input[Optional[_builtins.str]] = None,
             path: pulumi.Input[Optional[_builtins.str]] = None,
             resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            sub_type: pulumi.Input[Optional[_builtins.str]] = None,
             type: pulumi.Input[Optional[_builtins.str]] = None) -> 'InventoryObject':
         """
         Get an existing InventoryObject resource's state with the given name, id, and optional extra
@@ -291,7 +328,8 @@ class InventoryObject(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: Last segment of the path (e.g. `email`).
         :param pulumi.Input[_builtins.str] path: Hierarchical path of the object (e.g. `mydb.public.users.email`).
         :param pulumi.Input[_builtins.str] resource_id: Resource (datastore) ID this object belongs to.
-        :param pulumi.Input[_builtins.str] type: Object type. One of `db`, `schema`, `table`, `column`.
+        :param pulumi.Input[_builtins.str] sub_type: Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+        :param pulumi.Input[_builtins.str] type: Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -301,6 +339,7 @@ class InventoryObject(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["path"] = path
         __props__.__dict__["resource_id"] = resource_id
+        __props__.__dict__["sub_type"] = sub_type
         __props__.__dict__["type"] = type
         return InventoryObject(resource_name, opts=opts, __props__=__props__)
 
@@ -337,10 +376,18 @@ class InventoryObject(pulumi.CustomResource):
         return pulumi.get(self, "resource_id")
 
     @_builtins.property
+    @pulumi.getter(name="subType")
+    def sub_type(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+        """
+        return pulumi.get(self, "sub_type")
+
+    @_builtins.property
     @pulumi.getter
     def type(self) -> pulumi.Output[_builtins.str]:
         """
-        Object type. One of `db`, `schema`, `table`, `column`.
+        Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
         """
         return pulumi.get(self, "type")
 

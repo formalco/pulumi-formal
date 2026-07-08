@@ -26,7 +26,7 @@ type Sidecar struct {
 	Hostname pulumi.StringOutput `pulumi:"hostname"`
 	// Friendly name for this Sidecar.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+	// Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
 	Technology pulumi.StringOutput `pulumi:"technology"`
 	// If set to true, this Sidecar cannot be deleted.
 	TerminationProtection pulumi.BoolPtrOutput `pulumi:"terminationProtection"`
@@ -85,7 +85,7 @@ type sidecarState struct {
 	Hostname *string `pulumi:"hostname"`
 	// Friendly name for this Sidecar.
 	Name *string `pulumi:"name"`
-	// Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+	// Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
 	Technology *string `pulumi:"technology"`
 	// If set to true, this Sidecar cannot be deleted.
 	TerminationProtection *bool `pulumi:"terminationProtection"`
@@ -104,7 +104,7 @@ type SidecarState struct {
 	Hostname pulumi.StringPtrInput
 	// Friendly name for this Sidecar.
 	Name pulumi.StringPtrInput
-	// Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+	// Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
 	Technology pulumi.StringPtrInput
 	// If set to true, this Sidecar cannot be deleted.
 	TerminationProtection pulumi.BoolPtrInput
@@ -121,7 +121,7 @@ type sidecarArgs struct {
 	Hostname string `pulumi:"hostname"`
 	// Friendly name for this Sidecar.
 	Name *string `pulumi:"name"`
-	// Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+	// Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
 	Technology string `pulumi:"technology"`
 	// If set to true, this Sidecar cannot be deleted.
 	TerminationProtection *bool `pulumi:"terminationProtection"`
@@ -135,7 +135,7 @@ type SidecarArgs struct {
 	Hostname pulumi.StringInput
 	// Friendly name for this Sidecar.
 	Name pulumi.StringPtrInput
-	// Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+	// Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
 	Technology pulumi.StringInput
 	// If set to true, this Sidecar cannot be deleted.
 	TerminationProtection pulumi.BoolPtrInput
@@ -255,7 +255,7 @@ func (o SidecarOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Sidecar) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+// Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
 func (o SidecarOutput) Technology() pulumi.StringOutput {
 	return o.ApplyT(func(v *Sidecar) pulumi.StringOutput { return v.Technology }).(pulumi.StringOutput)
 }

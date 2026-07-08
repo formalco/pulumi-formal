@@ -12,7 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Registering an inventory object (db, schema, table, column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.
+// Registering an inventory object (db, schema, table, column, sub-column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.
 type InventoryObject struct {
 	pulumi.CustomResourceState
 
@@ -24,7 +24,9 @@ type InventoryObject struct {
 	Path pulumi.StringOutput `pulumi:"path"`
 	// Resource (datastore) ID this object belongs to.
 	ResourceId pulumi.StringOutput `pulumi:"resourceId"`
-	// Object type. One of `db`, `schema`, `table`, `column`.
+	// Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+	SubType pulumi.StringPtrOutput `pulumi:"subType"`
+	// Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
 	Type pulumi.StringOutput `pulumi:"type"`
 }
 
@@ -75,7 +77,9 @@ type inventoryObjectState struct {
 	Path *string `pulumi:"path"`
 	// Resource (datastore) ID this object belongs to.
 	ResourceId *string `pulumi:"resourceId"`
-	// Object type. One of `db`, `schema`, `table`, `column`.
+	// Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+	SubType *string `pulumi:"subType"`
+	// Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
 	Type *string `pulumi:"type"`
 }
 
@@ -88,7 +92,9 @@ type InventoryObjectState struct {
 	Path pulumi.StringPtrInput
 	// Resource (datastore) ID this object belongs to.
 	ResourceId pulumi.StringPtrInput
-	// Object type. One of `db`, `schema`, `table`, `column`.
+	// Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+	SubType pulumi.StringPtrInput
+	// Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
 	Type pulumi.StringPtrInput
 }
 
@@ -105,7 +111,9 @@ type inventoryObjectArgs struct {
 	Path string `pulumi:"path"`
 	// Resource (datastore) ID this object belongs to.
 	ResourceId string `pulumi:"resourceId"`
-	// Object type. One of `db`, `schema`, `table`, `column`.
+	// Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+	SubType *string `pulumi:"subType"`
+	// Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
 	Type string `pulumi:"type"`
 }
 
@@ -119,7 +127,9 @@ type InventoryObjectArgs struct {
 	Path pulumi.StringInput
 	// Resource (datastore) ID this object belongs to.
 	ResourceId pulumi.StringInput
-	// Object type. One of `db`, `schema`, `table`, `column`.
+	// Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+	SubType pulumi.StringPtrInput
+	// Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
 	Type pulumi.StringInput
 }
 
@@ -230,7 +240,12 @@ func (o InventoryObjectOutput) ResourceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *InventoryObject) pulumi.StringOutput { return v.ResourceId }).(pulumi.StringOutput)
 }
 
-// Object type. One of `db`, `schema`, `table`, `column`.
+// Sub-column type. One of `json`, `hstore`. Required when `type` is `sub-column`, ignored otherwise.
+func (o InventoryObjectOutput) SubType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *InventoryObject) pulumi.StringPtrOutput { return v.SubType }).(pulumi.StringPtrOutput)
+}
+
+// Object type. One of `db`, `schema`, `table`, `column`, `sub-column`.
 func (o InventoryObjectOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *InventoryObject) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }

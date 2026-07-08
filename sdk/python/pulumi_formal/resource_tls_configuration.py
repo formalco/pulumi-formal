@@ -22,6 +22,10 @@ class ResourceTlsConfigurationArgs:
                  resource_id: pulumi.Input[_builtins.str],
                  tls_config: pulumi.Input[_builtins.str],
                  tls_ca_truststore: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_cert: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_cert_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_client_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_key_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
                  tls_min_version: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a ResourceTlsConfiguration resource.
@@ -29,12 +33,24 @@ class ResourceTlsConfigurationArgs:
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the TLS configuration is applied to.
         :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         :param pulumi.Input[_builtins.str] tls_ca_truststore: PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
+        :param pulumi.Input[_builtins.str] tls_client_cert: Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tls_client_cert_is_env` is set.
+        :param pulumi.Input[_builtins.bool] tls_client_cert_is_env: When true, `tls_client_cert` is the name of an environment variable read on the connector rather than the literal PEM.
+        :param pulumi.Input[_builtins.str] tls_client_key: Private key paired with `tls_client_cert`. Either the PEM, or the name of an environment variable read on the connector when `tls_client_key_is_env` is set.
+        :param pulumi.Input[_builtins.bool] tls_client_key_is_env: When true, `tls_client_key` is the name of an environment variable read on the connector rather than the literal PEM.
         :param pulumi.Input[_builtins.str] tls_min_version: Minimum TLS version to be used for connections.
         """
         pulumi.set(__self__, "resource_id", resource_id)
         pulumi.set(__self__, "tls_config", tls_config)
         if tls_ca_truststore is not None:
             pulumi.set(__self__, "tls_ca_truststore", tls_ca_truststore)
+        if tls_client_cert is not None:
+            pulumi.set(__self__, "tls_client_cert", tls_client_cert)
+        if tls_client_cert_is_env is not None:
+            pulumi.set(__self__, "tls_client_cert_is_env", tls_client_cert_is_env)
+        if tls_client_key is not None:
+            pulumi.set(__self__, "tls_client_key", tls_client_key)
+        if tls_client_key_is_env is not None:
+            pulumi.set(__self__, "tls_client_key_is_env", tls_client_key_is_env)
         if tls_min_version is not None:
             pulumi.set(__self__, "tls_min_version", tls_min_version)
 
@@ -75,6 +91,54 @@ class ResourceTlsConfigurationArgs:
         pulumi.set(self, "tls_ca_truststore", value)
 
     @_builtins.property
+    @pulumi.getter(name="tlsClientCert")
+    def tls_client_cert(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tls_client_cert_is_env` is set.
+        """
+        return pulumi.get(self, "tls_client_cert")
+
+    @tls_client_cert.setter
+    def tls_client_cert(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "tls_client_cert", value)
+
+    @_builtins.property
+    @pulumi.getter(name="tlsClientCertIsEnv")
+    def tls_client_cert_is_env(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        When true, `tls_client_cert` is the name of an environment variable read on the connector rather than the literal PEM.
+        """
+        return pulumi.get(self, "tls_client_cert_is_env")
+
+    @tls_client_cert_is_env.setter
+    def tls_client_cert_is_env(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "tls_client_cert_is_env", value)
+
+    @_builtins.property
+    @pulumi.getter(name="tlsClientKey")
+    def tls_client_key(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Private key paired with `tls_client_cert`. Either the PEM, or the name of an environment variable read on the connector when `tls_client_key_is_env` is set.
+        """
+        return pulumi.get(self, "tls_client_key")
+
+    @tls_client_key.setter
+    def tls_client_key(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "tls_client_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="tlsClientKeyIsEnv")
+    def tls_client_key_is_env(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        When true, `tls_client_key` is the name of an environment variable read on the connector rather than the literal PEM.
+        """
+        return pulumi.get(self, "tls_client_key_is_env")
+
+    @tls_client_key_is_env.setter
+    def tls_client_key_is_env(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "tls_client_key_is_env", value)
+
+    @_builtins.property
     @pulumi.getter(name="tlsMinVersion")
     def tls_min_version(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -92,6 +156,10 @@ class _ResourceTlsConfigurationState:
     def __init__(__self__, *,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tls_ca_truststore: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_cert: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_cert_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_client_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_key_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
                  tls_config: pulumi.Input[Optional[_builtins.str]] = None,
                  tls_min_version: pulumi.Input[Optional[_builtins.str]] = None):
         """
@@ -99,6 +167,10 @@ class _ResourceTlsConfigurationState:
 
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the TLS configuration is applied to.
         :param pulumi.Input[_builtins.str] tls_ca_truststore: PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
+        :param pulumi.Input[_builtins.str] tls_client_cert: Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tls_client_cert_is_env` is set.
+        :param pulumi.Input[_builtins.bool] tls_client_cert_is_env: When true, `tls_client_cert` is the name of an environment variable read on the connector rather than the literal PEM.
+        :param pulumi.Input[_builtins.str] tls_client_key: Private key paired with `tls_client_cert`. Either the PEM, or the name of an environment variable read on the connector when `tls_client_key_is_env` is set.
+        :param pulumi.Input[_builtins.bool] tls_client_key_is_env: When true, `tls_client_key` is the name of an environment variable read on the connector rather than the literal PEM.
         :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         :param pulumi.Input[_builtins.str] tls_min_version: Minimum TLS version to be used for connections.
         """
@@ -106,6 +178,14 @@ class _ResourceTlsConfigurationState:
             pulumi.set(__self__, "resource_id", resource_id)
         if tls_ca_truststore is not None:
             pulumi.set(__self__, "tls_ca_truststore", tls_ca_truststore)
+        if tls_client_cert is not None:
+            pulumi.set(__self__, "tls_client_cert", tls_client_cert)
+        if tls_client_cert_is_env is not None:
+            pulumi.set(__self__, "tls_client_cert_is_env", tls_client_cert_is_env)
+        if tls_client_key is not None:
+            pulumi.set(__self__, "tls_client_key", tls_client_key)
+        if tls_client_key_is_env is not None:
+            pulumi.set(__self__, "tls_client_key_is_env", tls_client_key_is_env)
         if tls_config is not None:
             pulumi.set(__self__, "tls_config", tls_config)
         if tls_min_version is not None:
@@ -134,6 +214,54 @@ class _ResourceTlsConfigurationState:
     @tls_ca_truststore.setter
     def tls_ca_truststore(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "tls_ca_truststore", value)
+
+    @_builtins.property
+    @pulumi.getter(name="tlsClientCert")
+    def tls_client_cert(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tls_client_cert_is_env` is set.
+        """
+        return pulumi.get(self, "tls_client_cert")
+
+    @tls_client_cert.setter
+    def tls_client_cert(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "tls_client_cert", value)
+
+    @_builtins.property
+    @pulumi.getter(name="tlsClientCertIsEnv")
+    def tls_client_cert_is_env(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        When true, `tls_client_cert` is the name of an environment variable read on the connector rather than the literal PEM.
+        """
+        return pulumi.get(self, "tls_client_cert_is_env")
+
+    @tls_client_cert_is_env.setter
+    def tls_client_cert_is_env(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "tls_client_cert_is_env", value)
+
+    @_builtins.property
+    @pulumi.getter(name="tlsClientKey")
+    def tls_client_key(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Private key paired with `tls_client_cert`. Either the PEM, or the name of an environment variable read on the connector when `tls_client_key_is_env` is set.
+        """
+        return pulumi.get(self, "tls_client_key")
+
+    @tls_client_key.setter
+    def tls_client_key(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "tls_client_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="tlsClientKeyIsEnv")
+    def tls_client_key_is_env(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        When true, `tls_client_key` is the name of an environment variable read on the connector rather than the literal PEM.
+        """
+        return pulumi.get(self, "tls_client_key_is_env")
+
+    @tls_client_key_is_env.setter
+    def tls_client_key_is_env(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "tls_client_key_is_env", value)
 
     @_builtins.property
     @pulumi.getter(name="tlsConfig")
@@ -168,6 +296,10 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tls_ca_truststore: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_cert: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_cert_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_client_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_key_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
                  tls_config: pulumi.Input[Optional[_builtins.str]] = None,
                  tls_min_version: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -179,6 +311,10 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the TLS configuration is applied to.
         :param pulumi.Input[_builtins.str] tls_ca_truststore: PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
+        :param pulumi.Input[_builtins.str] tls_client_cert: Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tls_client_cert_is_env` is set.
+        :param pulumi.Input[_builtins.bool] tls_client_cert_is_env: When true, `tls_client_cert` is the name of an environment variable read on the connector rather than the literal PEM.
+        :param pulumi.Input[_builtins.str] tls_client_key: Private key paired with `tls_client_cert`. Either the PEM, or the name of an environment variable read on the connector when `tls_client_key_is_env` is set.
+        :param pulumi.Input[_builtins.bool] tls_client_key_is_env: When true, `tls_client_key` is the name of an environment variable read on the connector rather than the literal PEM.
         :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         :param pulumi.Input[_builtins.str] tls_min_version: Minimum TLS version to be used for connections.
         """
@@ -209,6 +345,10 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tls_ca_truststore: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_cert: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_cert_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
+                 tls_client_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 tls_client_key_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
                  tls_config: pulumi.Input[Optional[_builtins.str]] = None,
                  tls_min_version: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -224,10 +364,16 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
                 raise TypeError("Missing required property 'resource_id'")
             __props__.__dict__["resource_id"] = resource_id
             __props__.__dict__["tls_ca_truststore"] = tls_ca_truststore
+            __props__.__dict__["tls_client_cert"] = tls_client_cert
+            __props__.__dict__["tls_client_cert_is_env"] = tls_client_cert_is_env
+            __props__.__dict__["tls_client_key"] = None if tls_client_key is None else pulumi.Output.secret(tls_client_key)
+            __props__.__dict__["tls_client_key_is_env"] = tls_client_key_is_env
             if tls_config is None and not opts.urn:
                 raise TypeError("Missing required property 'tls_config'")
             __props__.__dict__["tls_config"] = tls_config
             __props__.__dict__["tls_min_version"] = tls_min_version
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["tlsClientKey"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ResourceTlsConfiguration, __self__).__init__(
             'formal:index/resourceTlsConfiguration:ResourceTlsConfiguration',
             resource_name,
@@ -240,6 +386,10 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             resource_id: pulumi.Input[Optional[_builtins.str]] = None,
             tls_ca_truststore: pulumi.Input[Optional[_builtins.str]] = None,
+            tls_client_cert: pulumi.Input[Optional[_builtins.str]] = None,
+            tls_client_cert_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
+            tls_client_key: pulumi.Input[Optional[_builtins.str]] = None,
+            tls_client_key_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
             tls_config: pulumi.Input[Optional[_builtins.str]] = None,
             tls_min_version: pulumi.Input[Optional[_builtins.str]] = None) -> 'ResourceTlsConfiguration':
         """
@@ -251,6 +401,10 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID for which the TLS configuration is applied to.
         :param pulumi.Input[_builtins.str] tls_ca_truststore: PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
+        :param pulumi.Input[_builtins.str] tls_client_cert: Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tls_client_cert_is_env` is set.
+        :param pulumi.Input[_builtins.bool] tls_client_cert_is_env: When true, `tls_client_cert` is the name of an environment variable read on the connector rather than the literal PEM.
+        :param pulumi.Input[_builtins.str] tls_client_key: Private key paired with `tls_client_cert`. Either the PEM, or the name of an environment variable read on the connector when `tls_client_key_is_env` is set.
+        :param pulumi.Input[_builtins.bool] tls_client_key_is_env: When true, `tls_client_key` is the name of an environment variable read on the connector rather than the literal PEM.
         :param pulumi.Input[_builtins.str] tls_config: Validation mode for the TLS configuration. Supported values are: `disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         :param pulumi.Input[_builtins.str] tls_min_version: Minimum TLS version to be used for connections.
         """
@@ -260,6 +414,10 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
 
         __props__.__dict__["resource_id"] = resource_id
         __props__.__dict__["tls_ca_truststore"] = tls_ca_truststore
+        __props__.__dict__["tls_client_cert"] = tls_client_cert
+        __props__.__dict__["tls_client_cert_is_env"] = tls_client_cert_is_env
+        __props__.__dict__["tls_client_key"] = tls_client_key
+        __props__.__dict__["tls_client_key_is_env"] = tls_client_key_is_env
         __props__.__dict__["tls_config"] = tls_config
         __props__.__dict__["tls_min_version"] = tls_min_version
         return ResourceTlsConfiguration(resource_name, opts=opts, __props__=__props__)
@@ -279,6 +437,38 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
         PEM encoded CA certificate to verify resource certificates. Only required if resource certificates are not trusted by the root CA truststore.
         """
         return pulumi.get(self, "tls_ca_truststore")
+
+    @_builtins.property
+    @pulumi.getter(name="tlsClientCert")
+    def tls_client_cert(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `tls_client_cert_is_env` is set.
+        """
+        return pulumi.get(self, "tls_client_cert")
+
+    @_builtins.property
+    @pulumi.getter(name="tlsClientCertIsEnv")
+    def tls_client_cert_is_env(self) -> pulumi.Output[Optional[_builtins.bool]]:
+        """
+        When true, `tls_client_cert` is the name of an environment variable read on the connector rather than the literal PEM.
+        """
+        return pulumi.get(self, "tls_client_cert_is_env")
+
+    @_builtins.property
+    @pulumi.getter(name="tlsClientKey")
+    def tls_client_key(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        Private key paired with `tls_client_cert`. Either the PEM, or the name of an environment variable read on the connector when `tls_client_key_is_env` is set.
+        """
+        return pulumi.get(self, "tls_client_key")
+
+    @_builtins.property
+    @pulumi.getter(name="tlsClientKeyIsEnv")
+    def tls_client_key_is_env(self) -> pulumi.Output[Optional[_builtins.bool]]:
+        """
+        When true, `tls_client_key` is the name of an environment variable read on the connector rather than the literal PEM.
+        """
+        return pulumi.get(self, "tls_client_key_is_env")
 
     @_builtins.property
     @pulumi.getter(name="tlsConfig")

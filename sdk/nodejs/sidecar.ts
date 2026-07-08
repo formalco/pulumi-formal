@@ -56,7 +56,7 @@ export class Sidecar extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
-     * Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+     * Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
      */
     declare public readonly technology: pulumi.Output<string>;
     /**
@@ -138,7 +138,7 @@ export interface SidecarState {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+     * Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
      */
     technology?: pulumi.Input<string | undefined>;
     /**
@@ -164,7 +164,7 @@ export interface SidecarArgs {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * Technology of the Datastore: supported values are`snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http` and `ssh`.
+     * Technology of the Datastore: supported values are `snowflake`, `postgres`, `redshift`, `mysql`, `mariadb`, `s3`, `dynamodb`, `mongodb`, `documentdb`, `http`, `ssh`, `aws`, and `gcp`.
      */
     technology: pulumi.Input<string>;
     /**

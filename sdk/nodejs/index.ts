@@ -85,6 +85,11 @@ export const getSpace: typeof import("./getSpace").getSpace = null as any;
 export const getSpaceOutput: typeof import("./getSpace").getSpaceOutput = null as any;
 utilities.lazyLoad(exports, ["getSpace","getSpaceOutput"], () => require("./getSpace"));
 
+export { GetUserArgs, GetUserResult, GetUserOutputArgs } from "./getUser";
+export const getUser: typeof import("./getUser").getUser = null as any;
+export const getUserOutput: typeof import("./getUser").getUserOutput = null as any;
+utilities.lazyLoad(exports, ["getUser","getUserOutput"], () => require("./getUser"));
+
 export { GroupArgs, GroupState } from "./group";
 export type Group = import("./group").Group;
 export const Group: typeof import("./group").Group = null as any;

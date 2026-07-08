@@ -11,7 +11,7 @@ using Pulumi;
 namespace Formal.Pulumi
 {
     /// <summary>
-    /// Registering an inventory object (db, schema, table, column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.
+    /// Registering an inventory object (db, schema, table, column, sub-column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.
     /// </summary>
     [PulumiResourceType("formal:index/inventoryObject:InventoryObject")]
     public partial class InventoryObject : global::Pulumi.CustomResource
@@ -41,7 +41,13 @@ namespace Formal.Pulumi
         public Output<string> ResourceId { get; private set; } = null!;
 
         /// <summary>
-        /// Object type. One of `Db`, `Schema`, `Table`, `Column`.
+        /// Sub-column type. One of `Json`, `Hstore`. Required when `Type` is `sub-column`, ignored otherwise.
+        /// </summary>
+        [Output("subType")]
+        public Output<string?> SubType { get; private set; } = null!;
+
+        /// <summary>
+        /// Object type. One of `Db`, `Schema`, `Table`, `Column`, `sub-column`.
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
@@ -118,7 +124,13 @@ namespace Formal.Pulumi
         public Input<string> ResourceId { get; set; } = null!;
 
         /// <summary>
-        /// Object type. One of `Db`, `Schema`, `Table`, `Column`.
+        /// Sub-column type. One of `Json`, `Hstore`. Required when `Type` is `sub-column`, ignored otherwise.
+        /// </summary>
+        [Input("subType")]
+        public Input<string>? SubType { get; set; }
+
+        /// <summary>
+        /// Object type. One of `Db`, `Schema`, `Table`, `Column`, `sub-column`.
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
@@ -156,7 +168,13 @@ namespace Formal.Pulumi
         public Input<string>? ResourceId { get; set; }
 
         /// <summary>
-        /// Object type. One of `Db`, `Schema`, `Table`, `Column`.
+        /// Sub-column type. One of `Json`, `Hstore`. Required when `Type` is `sub-column`, ignored otherwise.
+        /// </summary>
+        [Input("subType")]
+        public Input<string>? SubType { get; set; }
+
+        /// <summary>
+        /// Object type. One of `Db`, `Schema`, `Table`, `Column`, `sub-column`.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

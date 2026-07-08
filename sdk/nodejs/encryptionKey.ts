@@ -36,7 +36,9 @@ export class EncryptionKey extends pulumi.CustomResource {
     }
 
     /**
-     * The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).
+     * Deprecated. Symmetric and deterministic algorithms ('aes*random', 'aes*deterministic') are no longer supported. Encryption keys use asymmetric RSA ('rsaes*oaep*sha256'), which is the default.
+     *
+     * @deprecated Symmetric and deterministic algorithms are no longer supported. Encryption keys now use asymmetric RSA (rsaes_oaep_sha256) by default; this field can be removed.
      */
     declare public readonly algorithm: pulumi.Output<string>;
     /**
@@ -48,15 +50,15 @@ export class EncryptionKey extends pulumi.CustomResource {
      */
     declare public readonly decryptorUri: pulumi.Output<string | undefined>;
     /**
-     * The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
+     * The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
      */
     declare public readonly keyId: pulumi.Output<string>;
     /**
-     * The provider of the encryption key. Currently only 'aws' is supported.
+     * The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
      */
     declare public readonly keyProvider: pulumi.Output<string>;
     /**
-     * PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
+     * PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
      */
     declare public readonly publicKeyPem: pulumi.Output<string | undefined>;
     /**
@@ -86,9 +88,6 @@ export class EncryptionKey extends pulumi.CustomResource {
             resourceInputs["updatedAt"] = state?.updatedAt;
         } else {
             const args = argsOrState as EncryptionKeyArgs | undefined;
-            if (args?.algorithm === undefined && !opts.urn) {
-                throw new Error("Missing required property 'algorithm'");
-            }
             if (args?.keyId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'keyId'");
             }
@@ -113,7 +112,9 @@ export class EncryptionKey extends pulumi.CustomResource {
  */
 export interface EncryptionKeyState {
     /**
-     * The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).
+     * Deprecated. Symmetric and deterministic algorithms ('aes*random', 'aes*deterministic') are no longer supported. Encryption keys use asymmetric RSA ('rsaes*oaep*sha256'), which is the default.
+     *
+     * @deprecated Symmetric and deterministic algorithms are no longer supported. Encryption keys now use asymmetric RSA (rsaes_oaep_sha256) by default; this field can be removed.
      */
     algorithm?: pulumi.Input<string | undefined>;
     /**
@@ -125,15 +126,15 @@ export interface EncryptionKeyState {
      */
     decryptorUri?: pulumi.Input<string | undefined>;
     /**
-     * The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
+     * The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
      */
     keyId?: pulumi.Input<string | undefined>;
     /**
-     * The provider of the encryption key. Currently only 'aws' is supported.
+     * The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
      */
     keyProvider?: pulumi.Input<string | undefined>;
     /**
-     * PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
+     * PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
      */
     publicKeyPem?: pulumi.Input<string | undefined>;
     /**
@@ -147,23 +148,25 @@ export interface EncryptionKeyState {
  */
 export interface EncryptionKeyArgs {
     /**
-     * The algorithm used for encryption. One of 'aes*random', 'aes*deterministic' (symmetric), or 'rsaes*oaep*sha256' (asymmetric).
+     * Deprecated. Symmetric and deterministic algorithms ('aes*random', 'aes*deterministic') are no longer supported. Encryption keys use asymmetric RSA ('rsaes*oaep*sha256'), which is the default.
+     *
+     * @deprecated Symmetric and deterministic algorithms are no longer supported. Encryption keys now use asymmetric RSA (rsaes_oaep_sha256) by default; this field can be removed.
      */
-    algorithm: pulumi.Input<string>;
+    algorithm?: pulumi.Input<string | undefined>;
     /**
      * The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
      */
     decryptorUri?: pulumi.Input<string | undefined>;
     /**
-     * The ID of the key in the provider's system (e.g., key ARN for AWS KMS).
+     * The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
      */
     keyId: pulumi.Input<string>;
     /**
-     * The provider of the encryption key. Currently only 'aws' is supported.
+     * The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
      */
     keyProvider: pulumi.Input<string>;
     /**
-     * PEM-encoded RSA public key for client-side encryption. Required when 'algorithm' is 'rsaes*oaep*sha256'. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
+     * PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
      */
     publicKeyPem?: pulumi.Input<string | undefined>;
 }

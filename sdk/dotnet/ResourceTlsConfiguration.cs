@@ -29,6 +29,30 @@ namespace Formal.Pulumi
         public Output<string?> TlsCaTruststore { get; private set; } = null!;
 
         /// <summary>
+        /// Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `TlsClientCertIsEnv` is set.
+        /// </summary>
+        [Output("tlsClientCert")]
+        public Output<string?> TlsClientCert { get; private set; } = null!;
+
+        /// <summary>
+        /// When true, `TlsClientCert` is the name of an environment variable read on the connector rather than the literal PEM.
+        /// </summary>
+        [Output("tlsClientCertIsEnv")]
+        public Output<bool?> TlsClientCertIsEnv { get; private set; } = null!;
+
+        /// <summary>
+        /// Private key paired with `TlsClientCert`. Either the PEM, or the name of an environment variable read on the connector when `TlsClientKeyIsEnv` is set.
+        /// </summary>
+        [Output("tlsClientKey")]
+        public Output<string?> TlsClientKey { get; private set; } = null!;
+
+        /// <summary>
+        /// When true, `TlsClientKey` is the name of an environment variable read on the connector rather than the literal PEM.
+        /// </summary>
+        [Output("tlsClientKeyIsEnv")]
+        public Output<bool?> TlsClientKeyIsEnv { get; private set; } = null!;
+
+        /// <summary>
         /// Validation mode for the TLS configuration. Supported values are: `Disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         /// </summary>
         [Output("tlsConfig")]
@@ -64,6 +88,10 @@ namespace Formal.Pulumi
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/formalco",
+                AdditionalSecretOutputs =
+                {
+                    "tlsClientKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -100,6 +128,40 @@ namespace Formal.Pulumi
         public Input<string>? TlsCaTruststore { get; set; }
 
         /// <summary>
+        /// Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `TlsClientCertIsEnv` is set.
+        /// </summary>
+        [Input("tlsClientCert")]
+        public Input<string>? TlsClientCert { get; set; }
+
+        /// <summary>
+        /// When true, `TlsClientCert` is the name of an environment variable read on the connector rather than the literal PEM.
+        /// </summary>
+        [Input("tlsClientCertIsEnv")]
+        public Input<bool>? TlsClientCertIsEnv { get; set; }
+
+        [Input("tlsClientKey")]
+        private Input<string>? _tlsClientKey;
+
+        /// <summary>
+        /// Private key paired with `TlsClientCert`. Either the PEM, or the name of an environment variable read on the connector when `TlsClientKeyIsEnv` is set.
+        /// </summary>
+        public Input<string>? TlsClientKey
+        {
+            get => _tlsClientKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _tlsClientKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// When true, `TlsClientKey` is the name of an environment variable read on the connector rather than the literal PEM.
+        /// </summary>
+        [Input("tlsClientKeyIsEnv")]
+        public Input<bool>? TlsClientKeyIsEnv { get; set; }
+
+        /// <summary>
         /// Validation mode for the TLS configuration. Supported values are: `Disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).
         /// </summary>
         [Input("tlsConfig", required: true)]
@@ -130,6 +192,40 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("tlsCaTruststore")]
         public Input<string>? TlsCaTruststore { get; set; }
+
+        /// <summary>
+        /// Client certificate the connector presents to the resource for mutual TLS. Either the PEM, or the name of an environment variable read on the connector when `TlsClientCertIsEnv` is set.
+        /// </summary>
+        [Input("tlsClientCert")]
+        public Input<string>? TlsClientCert { get; set; }
+
+        /// <summary>
+        /// When true, `TlsClientCert` is the name of an environment variable read on the connector rather than the literal PEM.
+        /// </summary>
+        [Input("tlsClientCertIsEnv")]
+        public Input<bool>? TlsClientCertIsEnv { get; set; }
+
+        [Input("tlsClientKey")]
+        private Input<string>? _tlsClientKey;
+
+        /// <summary>
+        /// Private key paired with `TlsClientCert`. Either the PEM, or the name of an environment variable read on the connector when `TlsClientKeyIsEnv` is set.
+        /// </summary>
+        public Input<string>? TlsClientKey
+        {
+            get => _tlsClientKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _tlsClientKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// When true, `TlsClientKey` is the name of an environment variable read on the connector rather than the literal PEM.
+        /// </summary>
+        [Input("tlsClientKeyIsEnv")]
+        public Input<bool>? TlsClientKeyIsEnv { get; set; }
 
         /// <summary>
         /// Validation mode for the TLS configuration. Supported values are: `Disable` (no TLS), `insecure-skip-verify` (TLS without verification), `insecure-verify-ca-only` (verify CA only), `verify-full` (full certificate verification).

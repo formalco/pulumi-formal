@@ -47,7 +47,7 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Technology of the Datastore: supported values are`Snowflake`, `Postgres`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http` and `Ssh`.
+        /// Technology of the Datastore: supported values are `Snowflake`, `Postgres`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http`, `Ssh`, `Aws`, and `Gcp`.
         /// </summary>
         [Output("technology")]
         public Output<string> Technology { get; private set; } = null!;
@@ -129,7 +129,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Technology of the Datastore: supported values are`Snowflake`, `Postgres`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http` and `Ssh`.
+        /// Technology of the Datastore: supported values are `Snowflake`, `Postgres`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http`, `Ssh`, `Aws`, and `Gcp`.
         /// </summary>
         [Input("technology", required: true)]
         public Input<string> Technology { get; set; } = null!;
@@ -205,7 +205,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Technology of the Datastore: supported values are`Snowflake`, `Postgres`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http` and `Ssh`.
+        /// Technology of the Datastore: supported values are `Snowflake`, `Postgres`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http`, `Ssh`, `Aws`, and `Gcp`.
         /// </summary>
         [Input("technology")]
         public Input<string>? Technology { get; set; }
