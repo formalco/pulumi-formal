@@ -61,6 +61,10 @@ jobs:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
+          # Scope the token to just this repo, not every repo the app can access.
+          # Hardcoded (not github.event.repository.name) because that context is
+          # empty on the `schedule` trigger, which would fall back to all repos.
+          repositories: pulumi-formal
       - name: Setup mise
         uses: blampe/mise-action@blampe/plugins
         env:
@@ -102,9 +106,7 @@ jobs:
           kind: provider
           email: bot@pulumi.com
           username: pulumi-bot
-          # Disabled to match the upstream terraform-provider-formal, where
-          # automerge is off and upgrade PRs are merged manually.
-          automerge: false
+          automerge: true
           target-version: ${{ steps.target_version.outputs.version }}
           allow-missing-docs: true
         env:
