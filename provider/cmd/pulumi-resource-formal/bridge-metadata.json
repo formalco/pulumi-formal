@@ -296,6 +296,15 @@
             "formal_space": {
                 "current": "formal:index/getSpace:getSpace",
                 "majorVersion": 1
+            },
+            "formal_user": {
+                "current": "formal:index/getUser:getUser",
+                "majorVersion": 1,
+                "fields": {
+                    "group_ids": {
+                        "maxItemsOne": false
+                    }
+                }
             }
         }
     },
