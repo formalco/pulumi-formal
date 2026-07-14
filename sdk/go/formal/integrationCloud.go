@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"errors"
 	"github.com/formalco/pulumi-formal/sdk/go/formal/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
@@ -38,17 +37,39 @@ type IntegrationCloud struct {
 	AwsFormalIamRoleArn pulumi.StringOutput `pulumi:"awsFormalIamRoleArn"`
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
 	AwsFormalPingbackArn pulumi.StringOutput `pulumi:"awsFormalPingbackArn"`
+	// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+	AwsFormalRoleArn pulumi.StringOutput `pulumi:"awsFormalRoleArn"`
 	// A generated name for your CloudFormation stack.
 	AwsFormalStackName pulumi.StringOutput `pulumi:"awsFormalStackName"`
 	// The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
 	AwsS3BucketArn pulumi.StringOutput `pulumi:"awsS3BucketArn"`
 	// The template body of the CloudFormation stack.
 	AwsTemplateBody pulumi.StringOutput `pulumi:"awsTemplateBody"`
-	// Region of the cloud provider.
-	CloudRegion pulumi.StringOutput `pulumi:"cloudRegion"`
+	// Region of the cloud provider. (AWS only)
+	CloudRegion pulumi.StringPtrOutput `pulumi:"cloudRegion"`
+	// Configuration block for GCP integration.
+	Gcp IntegrationCloudGcpPtrOutput `pulumi:"gcp"`
+	// Whether the Cloud Integration is allowed to write logs to GCS.
+	GcpAllowGcsAccess pulumi.BoolOutput `pulumi:"gcpAllowGcsAccess"`
+	// Whether GCP Cloud SQL instances autodiscovery is enabled or not.
+	GcpEnableCloudsqlInstancesAutodiscovery pulumi.BoolOutput `pulumi:"gcpEnableCloudsqlInstancesAutodiscovery"`
+	// Whether GCP Compute Engine instances autodiscovery is enabled or not.
+	GcpEnableComputeInstancesAutodiscovery pulumi.BoolOutput `pulumi:"gcpEnableComputeInstancesAutodiscovery"`
+	// Whether GCP GKE clusters autodiscovery is enabled or not.
+	GcpEnableGkeClustersAutodiscovery pulumi.BoolOutput `pulumi:"gcpEnableGkeClustersAutodiscovery"`
+	// The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
+	GcpGcsBuckets pulumi.StringArrayOutput `pulumi:"gcpGcsBuckets"`
+	// The GCP project ID this integration grants Formal access to.
+	GcpProjectId pulumi.StringOutput `pulumi:"gcpProjectId"`
+	// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+	GcpRoles pulumi.StringArrayOutput `pulumi:"gcpRoles"`
+	// The GCP service account email created for this integration.
+	GcpServiceAccountEmail pulumi.StringOutput `pulumi:"gcpServiceAccountEmail"`
+	// The GCP workload identity pool provider created for this integration.
+	GcpWorkloadIdentityPoolProvider pulumi.StringOutput `pulumi:"gcpWorkloadIdentityPoolProvider"`
 	// Name of the Integration.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Type of the Integration. (Supported: aws)
+	// Type of the Integration. (Supported: aws, gcp)
 	//
 	// Deprecated: This field is deprecated and will be removed in a future version.
 	Type pulumi.StringPtrOutput `pulumi:"type"`
@@ -58,12 +79,9 @@ type IntegrationCloud struct {
 func NewIntegrationCloud(ctx *pulumi.Context,
 	name string, args *IntegrationCloudArgs, opts ...pulumi.ResourceOption) (*IntegrationCloud, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &IntegrationCloudArgs{}
 	}
 
-	if args.CloudRegion == nil {
-		return nil, errors.New("invalid value for required argument 'CloudRegion'")
-	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IntegrationCloud
 	err := ctx.RegisterResource("formal:index/integrationCloud:IntegrationCloud", name, args, &resource, opts...)
@@ -109,17 +127,39 @@ type integrationCloudState struct {
 	AwsFormalIamRoleArn *string `pulumi:"awsFormalIamRoleArn"`
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
 	AwsFormalPingbackArn *string `pulumi:"awsFormalPingbackArn"`
+	// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+	AwsFormalRoleArn *string `pulumi:"awsFormalRoleArn"`
 	// A generated name for your CloudFormation stack.
 	AwsFormalStackName *string `pulumi:"awsFormalStackName"`
 	// The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
 	AwsS3BucketArn *string `pulumi:"awsS3BucketArn"`
 	// The template body of the CloudFormation stack.
 	AwsTemplateBody *string `pulumi:"awsTemplateBody"`
-	// Region of the cloud provider.
+	// Region of the cloud provider. (AWS only)
 	CloudRegion *string `pulumi:"cloudRegion"`
+	// Configuration block for GCP integration.
+	Gcp *IntegrationCloudGcp `pulumi:"gcp"`
+	// Whether the Cloud Integration is allowed to write logs to GCS.
+	GcpAllowGcsAccess *bool `pulumi:"gcpAllowGcsAccess"`
+	// Whether GCP Cloud SQL instances autodiscovery is enabled or not.
+	GcpEnableCloudsqlInstancesAutodiscovery *bool `pulumi:"gcpEnableCloudsqlInstancesAutodiscovery"`
+	// Whether GCP Compute Engine instances autodiscovery is enabled or not.
+	GcpEnableComputeInstancesAutodiscovery *bool `pulumi:"gcpEnableComputeInstancesAutodiscovery"`
+	// Whether GCP GKE clusters autodiscovery is enabled or not.
+	GcpEnableGkeClustersAutodiscovery *bool `pulumi:"gcpEnableGkeClustersAutodiscovery"`
+	// The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
+	GcpGcsBuckets []string `pulumi:"gcpGcsBuckets"`
+	// The GCP project ID this integration grants Formal access to.
+	GcpProjectId *string `pulumi:"gcpProjectId"`
+	// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+	GcpRoles []string `pulumi:"gcpRoles"`
+	// The GCP service account email created for this integration.
+	GcpServiceAccountEmail *string `pulumi:"gcpServiceAccountEmail"`
+	// The GCP workload identity pool provider created for this integration.
+	GcpWorkloadIdentityPoolProvider *string `pulumi:"gcpWorkloadIdentityPoolProvider"`
 	// Name of the Integration.
 	Name *string `pulumi:"name"`
-	// Type of the Integration. (Supported: aws)
+	// Type of the Integration. (Supported: aws, gcp)
 	//
 	// Deprecated: This field is deprecated and will be removed in a future version.
 	Type *string `pulumi:"type"`
@@ -148,17 +188,39 @@ type IntegrationCloudState struct {
 	AwsFormalIamRoleArn pulumi.StringPtrInput
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
 	AwsFormalPingbackArn pulumi.StringPtrInput
+	// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+	AwsFormalRoleArn pulumi.StringPtrInput
 	// A generated name for your CloudFormation stack.
 	AwsFormalStackName pulumi.StringPtrInput
 	// The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
 	AwsS3BucketArn pulumi.StringPtrInput
 	// The template body of the CloudFormation stack.
 	AwsTemplateBody pulumi.StringPtrInput
-	// Region of the cloud provider.
+	// Region of the cloud provider. (AWS only)
 	CloudRegion pulumi.StringPtrInput
+	// Configuration block for GCP integration.
+	Gcp IntegrationCloudGcpPtrInput
+	// Whether the Cloud Integration is allowed to write logs to GCS.
+	GcpAllowGcsAccess pulumi.BoolPtrInput
+	// Whether GCP Cloud SQL instances autodiscovery is enabled or not.
+	GcpEnableCloudsqlInstancesAutodiscovery pulumi.BoolPtrInput
+	// Whether GCP Compute Engine instances autodiscovery is enabled or not.
+	GcpEnableComputeInstancesAutodiscovery pulumi.BoolPtrInput
+	// Whether GCP GKE clusters autodiscovery is enabled or not.
+	GcpEnableGkeClustersAutodiscovery pulumi.BoolPtrInput
+	// The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
+	GcpGcsBuckets pulumi.StringArrayInput
+	// The GCP project ID this integration grants Formal access to.
+	GcpProjectId pulumi.StringPtrInput
+	// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+	GcpRoles pulumi.StringArrayInput
+	// The GCP service account email created for this integration.
+	GcpServiceAccountEmail pulumi.StringPtrInput
+	// The GCP workload identity pool provider created for this integration.
+	GcpWorkloadIdentityPoolProvider pulumi.StringPtrInput
 	// Name of the Integration.
 	Name pulumi.StringPtrInput
-	// Type of the Integration. (Supported: aws)
+	// Type of the Integration. (Supported: aws, gcp)
 	//
 	// Deprecated: This field is deprecated and will be removed in a future version.
 	Type pulumi.StringPtrInput
@@ -171,11 +233,13 @@ func (IntegrationCloudState) ElementType() reflect.Type {
 type integrationCloudArgs struct {
 	// Configuration block for AWS integration.
 	Aws *IntegrationCloudAws `pulumi:"aws"`
-	// Region of the cloud provider.
-	CloudRegion string `pulumi:"cloudRegion"`
+	// Region of the cloud provider. (AWS only)
+	CloudRegion *string `pulumi:"cloudRegion"`
+	// Configuration block for GCP integration.
+	Gcp *IntegrationCloudGcp `pulumi:"gcp"`
 	// Name of the Integration.
 	Name *string `pulumi:"name"`
-	// Type of the Integration. (Supported: aws)
+	// Type of the Integration. (Supported: aws, gcp)
 	//
 	// Deprecated: This field is deprecated and will be removed in a future version.
 	Type *string `pulumi:"type"`
@@ -185,11 +249,13 @@ type integrationCloudArgs struct {
 type IntegrationCloudArgs struct {
 	// Configuration block for AWS integration.
 	Aws IntegrationCloudAwsPtrInput
-	// Region of the cloud provider.
-	CloudRegion pulumi.StringInput
+	// Region of the cloud provider. (AWS only)
+	CloudRegion pulumi.StringPtrInput
+	// Configuration block for GCP integration.
+	Gcp IntegrationCloudGcpPtrInput
 	// Name of the Integration.
 	Name pulumi.StringPtrInput
-	// Type of the Integration. (Supported: aws)
+	// Type of the Integration. (Supported: aws, gcp)
 	//
 	// Deprecated: This field is deprecated and will be removed in a future version.
 	Type pulumi.StringPtrInput
@@ -337,6 +403,11 @@ func (o IntegrationCloudOutput) AwsFormalPingbackArn() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AwsFormalPingbackArn }).(pulumi.StringOutput)
 }
 
+// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+func (o IntegrationCloudOutput) AwsFormalRoleArn() pulumi.StringOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AwsFormalRoleArn }).(pulumi.StringOutput)
+}
+
 // A generated name for your CloudFormation stack.
 func (o IntegrationCloudOutput) AwsFormalStackName() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AwsFormalStackName }).(pulumi.StringOutput)
@@ -352,9 +423,59 @@ func (o IntegrationCloudOutput) AwsTemplateBody() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AwsTemplateBody }).(pulumi.StringOutput)
 }
 
-// Region of the cloud provider.
-func (o IntegrationCloudOutput) CloudRegion() pulumi.StringOutput {
-	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.CloudRegion }).(pulumi.StringOutput)
+// Region of the cloud provider. (AWS only)
+func (o IntegrationCloudOutput) CloudRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringPtrOutput { return v.CloudRegion }).(pulumi.StringPtrOutput)
+}
+
+// Configuration block for GCP integration.
+func (o IntegrationCloudOutput) Gcp() IntegrationCloudGcpPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloud) IntegrationCloudGcpPtrOutput { return v.Gcp }).(IntegrationCloudGcpPtrOutput)
+}
+
+// Whether the Cloud Integration is allowed to write logs to GCS.
+func (o IntegrationCloudOutput) GcpAllowGcsAccess() pulumi.BoolOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.GcpAllowGcsAccess }).(pulumi.BoolOutput)
+}
+
+// Whether GCP Cloud SQL instances autodiscovery is enabled or not.
+func (o IntegrationCloudOutput) GcpEnableCloudsqlInstancesAutodiscovery() pulumi.BoolOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.GcpEnableCloudsqlInstancesAutodiscovery }).(pulumi.BoolOutput)
+}
+
+// Whether GCP Compute Engine instances autodiscovery is enabled or not.
+func (o IntegrationCloudOutput) GcpEnableComputeInstancesAutodiscovery() pulumi.BoolOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.GcpEnableComputeInstancesAutodiscovery }).(pulumi.BoolOutput)
+}
+
+// Whether GCP GKE clusters autodiscovery is enabled or not.
+func (o IntegrationCloudOutput) GcpEnableGkeClustersAutodiscovery() pulumi.BoolOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.GcpEnableGkeClustersAutodiscovery }).(pulumi.BoolOutput)
+}
+
+// The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
+func (o IntegrationCloudOutput) GcpGcsBuckets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringArrayOutput { return v.GcpGcsBuckets }).(pulumi.StringArrayOutput)
+}
+
+// The GCP project ID this integration grants Formal access to.
+func (o IntegrationCloudOutput) GcpProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.GcpProjectId }).(pulumi.StringOutput)
+}
+
+// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+func (o IntegrationCloudOutput) GcpRoles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringArrayOutput { return v.GcpRoles }).(pulumi.StringArrayOutput)
+}
+
+// The GCP service account email created for this integration.
+func (o IntegrationCloudOutput) GcpServiceAccountEmail() pulumi.StringOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.GcpServiceAccountEmail }).(pulumi.StringOutput)
+}
+
+// The GCP workload identity pool provider created for this integration.
+func (o IntegrationCloudOutput) GcpWorkloadIdentityPoolProvider() pulumi.StringOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.GcpWorkloadIdentityPoolProvider }).(pulumi.StringOutput)
 }
 
 // Name of the Integration.
@@ -362,7 +483,7 @@ func (o IntegrationCloudOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Type of the Integration. (Supported: aws)
+// Type of the Integration. (Supported: aws, gcp)
 //
 // Deprecated: This field is deprecated and will be removed in a future version.
 func (o IntegrationCloudOutput) Type() pulumi.StringPtrOutput {

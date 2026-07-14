@@ -83,6 +83,12 @@ namespace Formal.Pulumi
         public Output<string> AwsFormalPingbackArn { get; private set; } = null!;
 
         /// <summary>
+        /// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+        /// </summary>
+        [Output("awsFormalRoleArn")]
+        public Output<string> AwsFormalRoleArn { get; private set; } = null!;
+
+        /// <summary>
         /// A generated name for your CloudFormation stack.
         /// </summary>
         [Output("awsFormalStackName")]
@@ -101,10 +107,70 @@ namespace Formal.Pulumi
         public Output<string> AwsTemplateBody { get; private set; } = null!;
 
         /// <summary>
-        /// Region of the cloud provider.
+        /// Region of the cloud provider. (AWS only)
         /// </summary>
         [Output("cloudRegion")]
-        public Output<string> CloudRegion { get; private set; } = null!;
+        public Output<string?> CloudRegion { get; private set; } = null!;
+
+        /// <summary>
+        /// Configuration block for GCP integration.
+        /// </summary>
+        [Output("gcp")]
+        public Output<Outputs.IntegrationCloudGcp?> Gcp { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether the Cloud Integration is allowed to write logs to GCS.
+        /// </summary>
+        [Output("gcpAllowGcsAccess")]
+        public Output<bool> GcpAllowGcsAccess { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether GCP Cloud SQL instances autodiscovery is enabled or not.
+        /// </summary>
+        [Output("gcpEnableCloudsqlInstancesAutodiscovery")]
+        public Output<bool> GcpEnableCloudsqlInstancesAutodiscovery { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether GCP Compute Engine instances autodiscovery is enabled or not.
+        /// </summary>
+        [Output("gcpEnableComputeInstancesAutodiscovery")]
+        public Output<bool> GcpEnableComputeInstancesAutodiscovery { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether GCP GKE clusters autodiscovery is enabled or not.
+        /// </summary>
+        [Output("gcpEnableGkeClustersAutodiscovery")]
+        public Output<bool> GcpEnableGkeClustersAutodiscovery { get; private set; } = null!;
+
+        /// <summary>
+        /// The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
+        /// </summary>
+        [Output("gcpGcsBuckets")]
+        public Output<ImmutableArray<string>> GcpGcsBuckets { get; private set; } = null!;
+
+        /// <summary>
+        /// The GCP project ID this integration grants Formal access to.
+        /// </summary>
+        [Output("gcpProjectId")]
+        public Output<string> GcpProjectId { get; private set; } = null!;
+
+        /// <summary>
+        /// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+        /// </summary>
+        [Output("gcpRoles")]
+        public Output<ImmutableArray<string>> GcpRoles { get; private set; } = null!;
+
+        /// <summary>
+        /// The GCP service account email created for this integration.
+        /// </summary>
+        [Output("gcpServiceAccountEmail")]
+        public Output<string> GcpServiceAccountEmail { get; private set; } = null!;
+
+        /// <summary>
+        /// The GCP workload identity pool provider created for this integration.
+        /// </summary>
+        [Output("gcpWorkloadIdentityPoolProvider")]
+        public Output<string> GcpWorkloadIdentityPoolProvider { get; private set; } = null!;
 
         /// <summary>
         /// Name of the Integration.
@@ -113,7 +179,7 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Type of the Integration. (Supported: aws)
+        /// Type of the Integration. (Supported: aws, gcp)
         /// </summary>
         [Output("type")]
         public Output<string?> Type { get; private set; } = null!;
@@ -126,7 +192,7 @@ namespace Formal.Pulumi
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public IntegrationCloud(string name, IntegrationCloudArgs args, CustomResourceOptions? options = null)
+        public IntegrationCloud(string name, IntegrationCloudArgs? args = null, CustomResourceOptions? options = null)
             : base("formal:index/integrationCloud:IntegrationCloud", name, args ?? new IntegrationCloudArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -172,10 +238,16 @@ namespace Formal.Pulumi
         public Input<Inputs.IntegrationCloudAwsArgs>? Aws { get; set; }
 
         /// <summary>
-        /// Region of the cloud provider.
+        /// Region of the cloud provider. (AWS only)
         /// </summary>
-        [Input("cloudRegion", required: true)]
-        public Input<string> CloudRegion { get; set; } = null!;
+        [Input("cloudRegion")]
+        public Input<string>? CloudRegion { get; set; }
+
+        /// <summary>
+        /// Configuration block for GCP integration.
+        /// </summary>
+        [Input("gcp")]
+        public Input<Inputs.IntegrationCloudGcpArgs>? Gcp { get; set; }
 
         /// <summary>
         /// Name of the Integration.
@@ -184,7 +256,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Type of the Integration. (Supported: aws)
+        /// Type of the Integration. (Supported: aws, gcp)
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
@@ -264,6 +336,12 @@ namespace Formal.Pulumi
         public Input<string>? AwsFormalPingbackArn { get; set; }
 
         /// <summary>
+        /// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+        /// </summary>
+        [Input("awsFormalRoleArn")]
+        public Input<string>? AwsFormalRoleArn { get; set; }
+
+        /// <summary>
         /// A generated name for your CloudFormation stack.
         /// </summary>
         [Input("awsFormalStackName")]
@@ -282,10 +360,82 @@ namespace Formal.Pulumi
         public Input<string>? AwsTemplateBody { get; set; }
 
         /// <summary>
-        /// Region of the cloud provider.
+        /// Region of the cloud provider. (AWS only)
         /// </summary>
         [Input("cloudRegion")]
         public Input<string>? CloudRegion { get; set; }
+
+        /// <summary>
+        /// Configuration block for GCP integration.
+        /// </summary>
+        [Input("gcp")]
+        public Input<Inputs.IntegrationCloudGcpGetArgs>? Gcp { get; set; }
+
+        /// <summary>
+        /// Whether the Cloud Integration is allowed to write logs to GCS.
+        /// </summary>
+        [Input("gcpAllowGcsAccess")]
+        public Input<bool>? GcpAllowGcsAccess { get; set; }
+
+        /// <summary>
+        /// Whether GCP Cloud SQL instances autodiscovery is enabled or not.
+        /// </summary>
+        [Input("gcpEnableCloudsqlInstancesAutodiscovery")]
+        public Input<bool>? GcpEnableCloudsqlInstancesAutodiscovery { get; set; }
+
+        /// <summary>
+        /// Whether GCP Compute Engine instances autodiscovery is enabled or not.
+        /// </summary>
+        [Input("gcpEnableComputeInstancesAutodiscovery")]
+        public Input<bool>? GcpEnableComputeInstancesAutodiscovery { get; set; }
+
+        /// <summary>
+        /// Whether GCP GKE clusters autodiscovery is enabled or not.
+        /// </summary>
+        [Input("gcpEnableGkeClustersAutodiscovery")]
+        public Input<bool>? GcpEnableGkeClustersAutodiscovery { get; set; }
+
+        [Input("gcpGcsBuckets")]
+        private InputList<string>? _gcpGcsBuckets;
+
+        /// <summary>
+        /// The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
+        /// </summary>
+        public InputList<string> GcpGcsBuckets
+        {
+            get => _gcpGcsBuckets ?? (_gcpGcsBuckets = new InputList<string>());
+            set => _gcpGcsBuckets = value;
+        }
+
+        /// <summary>
+        /// The GCP project ID this integration grants Formal access to.
+        /// </summary>
+        [Input("gcpProjectId")]
+        public Input<string>? GcpProjectId { get; set; }
+
+        [Input("gcpRoles")]
+        private InputList<string>? _gcpRoles;
+
+        /// <summary>
+        /// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+        /// </summary>
+        public InputList<string> GcpRoles
+        {
+            get => _gcpRoles ?? (_gcpRoles = new InputList<string>());
+            set => _gcpRoles = value;
+        }
+
+        /// <summary>
+        /// The GCP service account email created for this integration.
+        /// </summary>
+        [Input("gcpServiceAccountEmail")]
+        public Input<string>? GcpServiceAccountEmail { get; set; }
+
+        /// <summary>
+        /// The GCP workload identity pool provider created for this integration.
+        /// </summary>
+        [Input("gcpWorkloadIdentityPoolProvider")]
+        public Input<string>? GcpWorkloadIdentityPoolProvider { get; set; }
 
         /// <summary>
         /// Name of the Integration.
@@ -294,7 +444,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Type of the Integration. (Supported: aws)
+        /// Type of the Integration. (Supported: aws, gcp)
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

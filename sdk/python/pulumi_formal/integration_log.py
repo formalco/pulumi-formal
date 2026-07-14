@@ -23,6 +23,7 @@ class IntegrationLogArgs:
     def __init__(__self__, *,
                  aws_s3: pulumi.Input[Optional['IntegrationLogAwsS3Args']] = None,
                  datadog: pulumi.Input[Optional['IntegrationLogDatadogArgs']] = None,
+                 gcs: pulumi.Input[Optional['IntegrationLogGcsArgs']] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  splunk: pulumi.Input[Optional['IntegrationLogSplunkArgs']] = None):
         """
@@ -30,6 +31,7 @@ class IntegrationLogArgs:
 
         :param pulumi.Input['IntegrationLogAwsS3Args'] aws_s3: Configuration block for AWS S3 integration.
         :param pulumi.Input['IntegrationLogDatadogArgs'] datadog: Configuration block for Datadog integration.
+        :param pulumi.Input['IntegrationLogGcsArgs'] gcs: Configuration block for Google Cloud Storage integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         :param pulumi.Input['IntegrationLogSplunkArgs'] splunk: Configuration block for Splunk integration.
         """
@@ -37,6 +39,8 @@ class IntegrationLogArgs:
             pulumi.set(__self__, "aws_s3", aws_s3)
         if datadog is not None:
             pulumi.set(__self__, "datadog", datadog)
+        if gcs is not None:
+            pulumi.set(__self__, "gcs", gcs)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if splunk is not None:
@@ -65,6 +69,18 @@ class IntegrationLogArgs:
     @datadog.setter
     def datadog(self, value: pulumi.Input[Optional['IntegrationLogDatadogArgs']]):
         pulumi.set(self, "datadog", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def gcs(self) -> pulumi.Input[Optional['IntegrationLogGcsArgs']]:
+        """
+        Configuration block for Google Cloud Storage integration.
+        """
+        return pulumi.get(self, "gcs")
+
+    @gcs.setter
+    def gcs(self, value: pulumi.Input[Optional['IntegrationLogGcsArgs']]):
+        pulumi.set(self, "gcs", value)
 
     @_builtins.property
     @pulumi.getter
@@ -96,6 +112,7 @@ class _IntegrationLogState:
     def __init__(__self__, *,
                  aws_s3: pulumi.Input[Optional['IntegrationLogAwsS3Args']] = None,
                  datadog: pulumi.Input[Optional['IntegrationLogDatadogArgs']] = None,
+                 gcs: pulumi.Input[Optional['IntegrationLogGcsArgs']] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  splunk: pulumi.Input[Optional['IntegrationLogSplunkArgs']] = None):
         """
@@ -103,6 +120,7 @@ class _IntegrationLogState:
 
         :param pulumi.Input['IntegrationLogAwsS3Args'] aws_s3: Configuration block for AWS S3 integration.
         :param pulumi.Input['IntegrationLogDatadogArgs'] datadog: Configuration block for Datadog integration.
+        :param pulumi.Input['IntegrationLogGcsArgs'] gcs: Configuration block for Google Cloud Storage integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         :param pulumi.Input['IntegrationLogSplunkArgs'] splunk: Configuration block for Splunk integration.
         """
@@ -110,6 +128,8 @@ class _IntegrationLogState:
             pulumi.set(__self__, "aws_s3", aws_s3)
         if datadog is not None:
             pulumi.set(__self__, "datadog", datadog)
+        if gcs is not None:
+            pulumi.set(__self__, "gcs", gcs)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if splunk is not None:
@@ -138,6 +158,18 @@ class _IntegrationLogState:
     @datadog.setter
     def datadog(self, value: pulumi.Input[Optional['IntegrationLogDatadogArgs']]):
         pulumi.set(self, "datadog", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def gcs(self) -> pulumi.Input[Optional['IntegrationLogGcsArgs']]:
+        """
+        Configuration block for Google Cloud Storage integration.
+        """
+        return pulumi.get(self, "gcs")
+
+    @gcs.setter
+    def gcs(self, value: pulumi.Input[Optional['IntegrationLogGcsArgs']]):
+        pulumi.set(self, "gcs", value)
 
     @_builtins.property
     @pulumi.getter
@@ -172,6 +204,7 @@ class IntegrationLog(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
                  datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
+                 gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None,
                  __props__=None):
@@ -183,6 +216,7 @@ class IntegrationLog(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']] aws_s3: Configuration block for AWS S3 integration.
         :param pulumi.Input[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']] datadog: Configuration block for Datadog integration.
+        :param pulumi.Input[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict']] gcs: Configuration block for Google Cloud Storage integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         :param pulumi.Input[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']] splunk: Configuration block for Splunk integration.
         """
@@ -213,6 +247,7 @@ class IntegrationLog(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
                  datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
+                 gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None,
                  __props__=None):
@@ -226,6 +261,7 @@ class IntegrationLog(pulumi.CustomResource):
 
             __props__.__dict__["aws_s3"] = aws_s3
             __props__.__dict__["datadog"] = datadog
+            __props__.__dict__["gcs"] = gcs
             __props__.__dict__["name"] = name
             __props__.__dict__["splunk"] = splunk
         super(IntegrationLog, __self__).__init__(
@@ -240,6 +276,7 @@ class IntegrationLog(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
             datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
+            gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict']]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None) -> 'IntegrationLog':
         """
@@ -251,6 +288,7 @@ class IntegrationLog(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']] aws_s3: Configuration block for AWS S3 integration.
         :param pulumi.Input[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']] datadog: Configuration block for Datadog integration.
+        :param pulumi.Input[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict']] gcs: Configuration block for Google Cloud Storage integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         :param pulumi.Input[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']] splunk: Configuration block for Splunk integration.
         """
@@ -260,6 +298,7 @@ class IntegrationLog(pulumi.CustomResource):
 
         __props__.__dict__["aws_s3"] = aws_s3
         __props__.__dict__["datadog"] = datadog
+        __props__.__dict__["gcs"] = gcs
         __props__.__dict__["name"] = name
         __props__.__dict__["splunk"] = splunk
         return IntegrationLog(resource_name, opts=opts, __props__=__props__)
@@ -279,6 +318,14 @@ class IntegrationLog(pulumi.CustomResource):
         Configuration block for Datadog integration.
         """
         return pulumi.get(self, "datadog")
+
+    @_builtins.property
+    @pulumi.getter
+    def gcs(self) -> pulumi.Output[Optional['outputs.IntegrationLogGcs']]:
+        """
+        Configuration block for Google Cloud Storage integration.
+        """
+        return pulumi.get(self, "gcs")
 
     @_builtins.property
     @pulumi.getter

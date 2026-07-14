@@ -15,6 +15,10 @@ import (
 type IntegrationMdm struct {
 	pulumi.CustomResourceState
 
+	// Configuration block for Fleet integration.
+	Fleet IntegrationMdmFleetPtrOutput `pulumi:"fleet"`
+	// Configuration block for Jamf Pro integration.
+	Jamf IntegrationMdmJamfPtrOutput `pulumi:"jamf"`
 	// Configuration block for Kandji integration.
 	Kandji IntegrationMdmKandjiPtrOutput `pulumi:"kandji"`
 	// Friendly name for the Integration app.
@@ -51,6 +55,10 @@ func GetIntegrationMdm(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering IntegrationMdm resources.
 type integrationMdmState struct {
+	// Configuration block for Fleet integration.
+	Fleet *IntegrationMdmFleet `pulumi:"fleet"`
+	// Configuration block for Jamf Pro integration.
+	Jamf *IntegrationMdmJamf `pulumi:"jamf"`
 	// Configuration block for Kandji integration.
 	Kandji *IntegrationMdmKandji `pulumi:"kandji"`
 	// Friendly name for the Integration app.
@@ -58,6 +66,10 @@ type integrationMdmState struct {
 }
 
 type IntegrationMdmState struct {
+	// Configuration block for Fleet integration.
+	Fleet IntegrationMdmFleetPtrInput
+	// Configuration block for Jamf Pro integration.
+	Jamf IntegrationMdmJamfPtrInput
 	// Configuration block for Kandji integration.
 	Kandji IntegrationMdmKandjiPtrInput
 	// Friendly name for the Integration app.
@@ -69,6 +81,10 @@ func (IntegrationMdmState) ElementType() reflect.Type {
 }
 
 type integrationMdmArgs struct {
+	// Configuration block for Fleet integration.
+	Fleet *IntegrationMdmFleet `pulumi:"fleet"`
+	// Configuration block for Jamf Pro integration.
+	Jamf *IntegrationMdmJamf `pulumi:"jamf"`
 	// Configuration block for Kandji integration.
 	Kandji *IntegrationMdmKandji `pulumi:"kandji"`
 	// Friendly name for the Integration app.
@@ -77,6 +93,10 @@ type integrationMdmArgs struct {
 
 // The set of arguments for constructing a IntegrationMdm resource.
 type IntegrationMdmArgs struct {
+	// Configuration block for Fleet integration.
+	Fleet IntegrationMdmFleetPtrInput
+	// Configuration block for Jamf Pro integration.
+	Jamf IntegrationMdmJamfPtrInput
 	// Configuration block for Kandji integration.
 	Kandji IntegrationMdmKandjiPtrInput
 	// Friendly name for the Integration app.
@@ -168,6 +188,16 @@ func (o IntegrationMdmOutput) ToIntegrationMdmOutput() IntegrationMdmOutput {
 
 func (o IntegrationMdmOutput) ToIntegrationMdmOutputWithContext(ctx context.Context) IntegrationMdmOutput {
 	return o
+}
+
+// Configuration block for Fleet integration.
+func (o IntegrationMdmOutput) Fleet() IntegrationMdmFleetPtrOutput {
+	return o.ApplyT(func(v *IntegrationMdm) IntegrationMdmFleetPtrOutput { return v.Fleet }).(IntegrationMdmFleetPtrOutput)
+}
+
+// Configuration block for Jamf Pro integration.
+func (o IntegrationMdmOutput) Jamf() IntegrationMdmJamfPtrOutput {
+	return o.ApplyT(func(v *IntegrationMdm) IntegrationMdmJamfPtrOutput { return v.Jamf }).(IntegrationMdmJamfPtrOutput)
 }
 
 // Configuration block for Kandji integration.

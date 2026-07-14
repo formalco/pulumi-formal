@@ -19,6 +19,8 @@ type IntegrationLog struct {
 	AwsS3 IntegrationLogAwsS3PtrOutput `pulumi:"awsS3"`
 	// Configuration block for Datadog integration.
 	Datadog IntegrationLogDatadogPtrOutput `pulumi:"datadog"`
+	// Configuration block for Google Cloud Storage integration.
+	Gcs IntegrationLogGcsPtrOutput `pulumi:"gcs"`
 	// Friendly name for the Integration app.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Configuration block for Splunk integration.
@@ -59,6 +61,8 @@ type integrationLogState struct {
 	AwsS3 *IntegrationLogAwsS3 `pulumi:"awsS3"`
 	// Configuration block for Datadog integration.
 	Datadog *IntegrationLogDatadog `pulumi:"datadog"`
+	// Configuration block for Google Cloud Storage integration.
+	Gcs *IntegrationLogGcs `pulumi:"gcs"`
 	// Friendly name for the Integration app.
 	Name *string `pulumi:"name"`
 	// Configuration block for Splunk integration.
@@ -70,6 +74,8 @@ type IntegrationLogState struct {
 	AwsS3 IntegrationLogAwsS3PtrInput
 	// Configuration block for Datadog integration.
 	Datadog IntegrationLogDatadogPtrInput
+	// Configuration block for Google Cloud Storage integration.
+	Gcs IntegrationLogGcsPtrInput
 	// Friendly name for the Integration app.
 	Name pulumi.StringPtrInput
 	// Configuration block for Splunk integration.
@@ -85,6 +91,8 @@ type integrationLogArgs struct {
 	AwsS3 *IntegrationLogAwsS3 `pulumi:"awsS3"`
 	// Configuration block for Datadog integration.
 	Datadog *IntegrationLogDatadog `pulumi:"datadog"`
+	// Configuration block for Google Cloud Storage integration.
+	Gcs *IntegrationLogGcs `pulumi:"gcs"`
 	// Friendly name for the Integration app.
 	Name *string `pulumi:"name"`
 	// Configuration block for Splunk integration.
@@ -97,6 +105,8 @@ type IntegrationLogArgs struct {
 	AwsS3 IntegrationLogAwsS3PtrInput
 	// Configuration block for Datadog integration.
 	Datadog IntegrationLogDatadogPtrInput
+	// Configuration block for Google Cloud Storage integration.
+	Gcs IntegrationLogGcsPtrInput
 	// Friendly name for the Integration app.
 	Name pulumi.StringPtrInput
 	// Configuration block for Splunk integration.
@@ -198,6 +208,11 @@ func (o IntegrationLogOutput) AwsS3() IntegrationLogAwsS3PtrOutput {
 // Configuration block for Datadog integration.
 func (o IntegrationLogOutput) Datadog() IntegrationLogDatadogPtrOutput {
 	return o.ApplyT(func(v *IntegrationLog) IntegrationLogDatadogPtrOutput { return v.Datadog }).(IntegrationLogDatadogPtrOutput)
+}
+
+// Configuration block for Google Cloud Storage integration.
+func (o IntegrationLogOutput) Gcs() IntegrationLogGcsPtrOutput {
+	return o.ApplyT(func(v *IntegrationLog) IntegrationLogGcsPtrOutput { return v.Gcs }).(IntegrationLogGcsPtrOutput)
 }
 
 // Friendly name for the Integration app.

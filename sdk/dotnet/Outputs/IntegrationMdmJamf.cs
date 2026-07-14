@@ -12,26 +12,33 @@ namespace Formal.Pulumi.Outputs
 {
 
     [OutputType]
-    public sealed class IntegrationMdmKandji
+    public sealed class IntegrationMdmJamf
     {
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        /// API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=&lt;resource address&gt;`.
+        /// OAuth client secret for your Jamf Pro API client. This value is not stored in Terraform state. To rotate the secret, change this value and run `terraform apply -replace=&lt;resource address&gt;`.
         /// </summary>
         public readonly string ApiKey;
         /// <summary>
-        /// API URL of your Kandji organization.
+        /// API URL of your Jamf Pro instance.
         /// </summary>
         public readonly string ApiUrl;
+        /// <summary>
+        /// OAuth client ID for your Jamf Pro API client.
+        /// </summary>
+        public readonly string ClientId;
 
         [OutputConstructor]
-        private IntegrationMdmKandji(
+        private IntegrationMdmJamf(
             string apiKey,
 
-            string apiUrl)
+            string apiUrl,
+
+            string clientId)
         {
             ApiKey = apiKey;
             ApiUrl = apiUrl;
+            ClientId = clientId;
         }
     }
 }

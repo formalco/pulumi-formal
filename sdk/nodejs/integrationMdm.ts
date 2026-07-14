@@ -38,6 +38,14 @@ export class IntegrationMdm extends pulumi.CustomResource {
     }
 
     /**
+     * Configuration block for Fleet integration.
+     */
+    declare public readonly fleet: pulumi.Output<outputs.IntegrationMdmFleet | undefined>;
+    /**
+     * Configuration block for Jamf Pro integration.
+     */
+    declare public readonly jamf: pulumi.Output<outputs.IntegrationMdmJamf | undefined>;
+    /**
      * Configuration block for Kandji integration.
      */
     declare public readonly kandji: pulumi.Output<outputs.IntegrationMdmKandji | undefined>;
@@ -59,10 +67,14 @@ export class IntegrationMdm extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as IntegrationMdmState | undefined;
+            resourceInputs["fleet"] = state?.fleet;
+            resourceInputs["jamf"] = state?.jamf;
             resourceInputs["kandji"] = state?.kandji;
             resourceInputs["name"] = state?.name;
         } else {
             const args = argsOrState as IntegrationMdmArgs | undefined;
+            resourceInputs["fleet"] = args?.fleet;
+            resourceInputs["jamf"] = args?.jamf;
             resourceInputs["kandji"] = args?.kandji;
             resourceInputs["name"] = args?.name;
         }
@@ -75,6 +87,14 @@ export class IntegrationMdm extends pulumi.CustomResource {
  * Input properties used for looking up and filtering IntegrationMdm resources.
  */
 export interface IntegrationMdmState {
+    /**
+     * Configuration block for Fleet integration.
+     */
+    fleet?: pulumi.Input<inputs.IntegrationMdmFleet | undefined>;
+    /**
+     * Configuration block for Jamf Pro integration.
+     */
+    jamf?: pulumi.Input<inputs.IntegrationMdmJamf | undefined>;
     /**
      * Configuration block for Kandji integration.
      */
@@ -89,6 +109,14 @@ export interface IntegrationMdmState {
  * The set of arguments for constructing a IntegrationMdm resource.
  */
 export interface IntegrationMdmArgs {
+    /**
+     * Configuration block for Fleet integration.
+     */
+    fleet?: pulumi.Input<inputs.IntegrationMdmFleet | undefined>;
+    /**
+     * Configuration block for Jamf Pro integration.
+     */
+    jamf?: pulumi.Input<inputs.IntegrationMdmJamf | undefined>;
     /**
      * Configuration block for Kandji integration.
      */

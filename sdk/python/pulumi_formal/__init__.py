@@ -25,8 +25,10 @@ from .get_space import *
 from .get_user import *
 from .group import *
 from .group_user_link import *
+from .hook import *
 from .integration_bi import *
 from .integration_cloud import *
+from .integration_cloud_gcp_activation import *
 from .integration_log import *
 from .integration_mdm import *
 from .inventory_object import *
@@ -180,6 +182,14 @@ _utilities.register(
  },
  {
   "pkg": "formal",
+  "mod": "index/hook",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/hook:Hook": "Hook"
+  }
+ },
+ {
+  "pkg": "formal",
   "mod": "index/integrationBi",
   "fqn": "pulumi_formal",
   "classes": {
@@ -192,6 +202,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/integrationCloud:IntegrationCloud": "IntegrationCloud"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/integrationCloudGcpActivation",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/integrationCloudGcpActivation:IntegrationCloudGcpActivation": "IntegrationCloudGcpActivation"
   }
  },
  {

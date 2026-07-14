@@ -215,6 +215,33 @@ export interface IntegrationCloudAws {
     templateVersion: pulumi.Input<string>;
 }
 
+export interface IntegrationCloudGcp {
+    /**
+     * Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
+     */
+    allowGcsAccess?: pulumi.Input<boolean | undefined>;
+    /**
+     * Enables resource autodiscovery for Cloud SQL instances.
+     */
+    enableCloudsqlInstancesAutodiscovery?: pulumi.Input<boolean | undefined>;
+    /**
+     * Enables resource autodiscovery for Compute Engine instances.
+     */
+    enableComputeInstancesAutodiscovery?: pulumi.Input<boolean | undefined>;
+    /**
+     * Enables resource autodiscovery for GKE clusters.
+     */
+    enableGkeClustersAutodiscovery?: pulumi.Input<boolean | undefined>;
+    /**
+     * GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
+     */
+    gcsBuckets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * The GCP project ID this integration grants Formal access to.
+     */
+    projectId: pulumi.Input<string>;
+}
+
 export interface IntegrationLogAwsS3 {
     /**
      * Cloud Integration ID.
@@ -249,6 +276,21 @@ export interface IntegrationLogDatadog {
     site: pulumi.Input<string>;
 }
 
+export interface IntegrationLogGcs {
+    /**
+     * Cloud Integration ID.
+     */
+    cloudIntegrationId: pulumi.Input<string>;
+    /**
+     * GCS Bucket Name.
+     */
+    gcsBucketName: pulumi.Input<string>;
+    /**
+     * GCS bucket prefix to write logs under. Defaults to the bucket root.
+     */
+    gcsBucketPrefix?: pulumi.Input<string | undefined>;
+}
+
 export interface IntegrationLogSplunk {
     /**
      * Access Token of Splunk.
@@ -264,9 +306,38 @@ export interface IntegrationLogSplunk {
     port: pulumi.Input<number>;
 }
 
+export interface IntegrationMdmFleet {
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * API key for your Fleet server. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
+     */
+    apiKey: pulumi.Input<string>;
+    /**
+     * API URL of your Fleet server.
+     */
+    apiUrl: pulumi.Input<string>;
+}
+
+export interface IntegrationMdmJamf {
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * OAuth client secret for your Jamf Pro API client. This value is not stored in Terraform state. To rotate the secret, change this value and run `terraform apply -replace=<resource address>`.
+     */
+    apiKey: pulumi.Input<string>;
+    /**
+     * API URL of your Jamf Pro instance.
+     */
+    apiUrl: pulumi.Input<string>;
+    /**
+     * OAuth client ID for your Jamf Pro API client.
+     */
+    clientId: pulumi.Input<string>;
+}
+
 export interface IntegrationMdmKandji {
     /**
-     * API Key of your Kandji organization.
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
      */
     apiKey: pulumi.Input<string>;
     /**
