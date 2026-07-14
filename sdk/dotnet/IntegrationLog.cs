@@ -29,6 +29,12 @@ namespace Formal.Pulumi
         public Output<Outputs.IntegrationLogDatadog?> Datadog { get; private set; } = null!;
 
         /// <summary>
+        /// Configuration block for Google Cloud Storage integration.
+        /// </summary>
+        [Output("gcs")]
+        public Output<Outputs.IntegrationLogGcs?> Gcs { get; private set; } = null!;
+
+        /// <summary>
         /// Friendly name for the Integration app.
         /// </summary>
         [Output("name")]
@@ -100,6 +106,12 @@ namespace Formal.Pulumi
         public Input<Inputs.IntegrationLogDatadogArgs>? Datadog { get; set; }
 
         /// <summary>
+        /// Configuration block for Google Cloud Storage integration.
+        /// </summary>
+        [Input("gcs")]
+        public Input<Inputs.IntegrationLogGcsArgs>? Gcs { get; set; }
+
+        /// <summary>
         /// Friendly name for the Integration app.
         /// </summary>
         [Input("name")]
@@ -130,6 +142,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("datadog")]
         public Input<Inputs.IntegrationLogDatadogGetArgs>? Datadog { get; set; }
+
+        /// <summary>
+        /// Configuration block for Google Cloud Storage integration.
+        /// </summary>
+        [Input("gcs")]
+        public Input<Inputs.IntegrationLogGcsGetArgs>? Gcs { get; set; }
 
         /// <summary>
         /// Friendly name for the Integration app.

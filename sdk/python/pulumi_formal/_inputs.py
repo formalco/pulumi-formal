@@ -43,12 +43,20 @@ __all__ = [
     'IntegrationBiMetabaseArgsDict',
     'IntegrationCloudAwsArgs',
     'IntegrationCloudAwsArgsDict',
+    'IntegrationCloudGcpArgs',
+    'IntegrationCloudGcpArgsDict',
     'IntegrationLogAwsS3Args',
     'IntegrationLogAwsS3ArgsDict',
     'IntegrationLogDatadogArgs',
     'IntegrationLogDatadogArgsDict',
+    'IntegrationLogGcsArgs',
+    'IntegrationLogGcsArgsDict',
     'IntegrationLogSplunkArgs',
     'IntegrationLogSplunkArgsDict',
+    'IntegrationMdmFleetArgs',
+    'IntegrationMdmFleetArgsDict',
+    'IntegrationMdmJamfArgs',
+    'IntegrationMdmJamfArgsDict',
     'IntegrationMdmKandjiArgs',
     'IntegrationMdmKandjiArgsDict',
     'LogConfigurationRequestArgs',
@@ -1000,6 +1008,134 @@ class IntegrationCloudAwsArgs:
         pulumi.set(self, "s3_bucket_arn", value)
 
 
+class IntegrationCloudGcpArgsDict(TypedDict):
+    project_id: pulumi.Input[_builtins.str]
+    """
+    The GCP project ID this integration grants Formal access to.
+    """
+    allow_gcs_access: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
+    """
+    enable_cloudsql_instances_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for Cloud SQL instances.
+    """
+    enable_compute_instances_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for Compute Engine instances.
+    """
+    enable_gke_clusters_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for GKE clusters.
+    """
+    gcs_buckets: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
+    """
+
+@pulumi.input_type
+class IntegrationCloudGcpArgs:
+    def __init__(__self__, *,
+                 project_id: pulumi.Input[_builtins.str],
+                 allow_gcs_access: pulumi.Input[Optional[_builtins.bool]] = None,
+                 enable_cloudsql_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 enable_compute_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 enable_gke_clusters_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 gcs_buckets: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
+        """
+        :param pulumi.Input[_builtins.str] project_id: The GCP project ID this integration grants Formal access to.
+        :param pulumi.Input[_builtins.bool] allow_gcs_access: Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
+        :param pulumi.Input[_builtins.bool] enable_cloudsql_instances_autodiscovery: Enables resource autodiscovery for Cloud SQL instances.
+        :param pulumi.Input[_builtins.bool] enable_compute_instances_autodiscovery: Enables resource autodiscovery for Compute Engine instances.
+        :param pulumi.Input[_builtins.bool] enable_gke_clusters_autodiscovery: Enables resource autodiscovery for GKE clusters.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcs_buckets: GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
+        """
+        pulumi.set(__self__, "project_id", project_id)
+        if allow_gcs_access is not None:
+            pulumi.set(__self__, "allow_gcs_access", allow_gcs_access)
+        if enable_cloudsql_instances_autodiscovery is not None:
+            pulumi.set(__self__, "enable_cloudsql_instances_autodiscovery", enable_cloudsql_instances_autodiscovery)
+        if enable_compute_instances_autodiscovery is not None:
+            pulumi.set(__self__, "enable_compute_instances_autodiscovery", enable_compute_instances_autodiscovery)
+        if enable_gke_clusters_autodiscovery is not None:
+            pulumi.set(__self__, "enable_gke_clusters_autodiscovery", enable_gke_clusters_autodiscovery)
+        if gcs_buckets is not None:
+            pulumi.set(__self__, "gcs_buckets", gcs_buckets)
+
+    @_builtins.property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The GCP project ID this integration grants Formal access to.
+        """
+        return pulumi.get(self, "project_id")
+
+    @project_id.setter
+    def project_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "project_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowGcsAccess")
+    def allow_gcs_access(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
+        """
+        return pulumi.get(self, "allow_gcs_access")
+
+    @allow_gcs_access.setter
+    def allow_gcs_access(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "allow_gcs_access", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enableCloudsqlInstancesAutodiscovery")
+    def enable_cloudsql_instances_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Enables resource autodiscovery for Cloud SQL instances.
+        """
+        return pulumi.get(self, "enable_cloudsql_instances_autodiscovery")
+
+    @enable_cloudsql_instances_autodiscovery.setter
+    def enable_cloudsql_instances_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enable_cloudsql_instances_autodiscovery", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enableComputeInstancesAutodiscovery")
+    def enable_compute_instances_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Enables resource autodiscovery for Compute Engine instances.
+        """
+        return pulumi.get(self, "enable_compute_instances_autodiscovery")
+
+    @enable_compute_instances_autodiscovery.setter
+    def enable_compute_instances_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enable_compute_instances_autodiscovery", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enableGkeClustersAutodiscovery")
+    def enable_gke_clusters_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Enables resource autodiscovery for GKE clusters.
+        """
+        return pulumi.get(self, "enable_gke_clusters_autodiscovery")
+
+    @enable_gke_clusters_autodiscovery.setter
+    def enable_gke_clusters_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enable_gke_clusters_autodiscovery", value)
+
+    @_builtins.property
+    @pulumi.getter(name="gcsBuckets")
+    def gcs_buckets(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
+        """
+        return pulumi.get(self, "gcs_buckets")
+
+    @gcs_buckets.setter
+    def gcs_buckets(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "gcs_buckets", value)
+
+
 class IntegrationLogAwsS3ArgsDict(TypedDict):
     cloud_integration_id: pulumi.Input[_builtins.str]
     """
@@ -1153,6 +1289,73 @@ class IntegrationLogDatadogArgs:
         pulumi.set(self, "site", value)
 
 
+class IntegrationLogGcsArgsDict(TypedDict):
+    cloud_integration_id: pulumi.Input[_builtins.str]
+    """
+    Cloud Integration ID.
+    """
+    gcs_bucket_name: pulumi.Input[_builtins.str]
+    """
+    GCS Bucket Name.
+    """
+    gcs_bucket_prefix: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    GCS bucket prefix to write logs under. Defaults to the bucket root.
+    """
+
+@pulumi.input_type
+class IntegrationLogGcsArgs:
+    def __init__(__self__, *,
+                 cloud_integration_id: pulumi.Input[_builtins.str],
+                 gcs_bucket_name: pulumi.Input[_builtins.str],
+                 gcs_bucket_prefix: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] cloud_integration_id: Cloud Integration ID.
+        :param pulumi.Input[_builtins.str] gcs_bucket_name: GCS Bucket Name.
+        :param pulumi.Input[_builtins.str] gcs_bucket_prefix: GCS bucket prefix to write logs under. Defaults to the bucket root.
+        """
+        pulumi.set(__self__, "cloud_integration_id", cloud_integration_id)
+        pulumi.set(__self__, "gcs_bucket_name", gcs_bucket_name)
+        if gcs_bucket_prefix is not None:
+            pulumi.set(__self__, "gcs_bucket_prefix", gcs_bucket_prefix)
+
+    @_builtins.property
+    @pulumi.getter(name="cloudIntegrationId")
+    def cloud_integration_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        Cloud Integration ID.
+        """
+        return pulumi.get(self, "cloud_integration_id")
+
+    @cloud_integration_id.setter
+    def cloud_integration_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "cloud_integration_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="gcsBucketName")
+    def gcs_bucket_name(self) -> pulumi.Input[_builtins.str]:
+        """
+        GCS Bucket Name.
+        """
+        return pulumi.get(self, "gcs_bucket_name")
+
+    @gcs_bucket_name.setter
+    def gcs_bucket_name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "gcs_bucket_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="gcsBucketPrefix")
+    def gcs_bucket_prefix(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        GCS bucket prefix to write logs under. Defaults to the bucket root.
+        """
+        return pulumi.get(self, "gcs_bucket_prefix")
+
+    @gcs_bucket_prefix.setter
+    def gcs_bucket_prefix(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "gcs_bucket_prefix", value)
+
+
 class IntegrationLogSplunkArgsDict(TypedDict):
     access_token: pulumi.Input[_builtins.str]
     """
@@ -1219,10 +1422,130 @@ class IntegrationLogSplunkArgs:
         pulumi.set(self, "port", value)
 
 
+class IntegrationMdmFleetArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    API key for your Fleet server. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
+    """
+    api_url: pulumi.Input[_builtins.str]
+    """
+    API URL of your Fleet server.
+    """
+
+@pulumi.input_type
+class IntegrationMdmFleetArgs:
+    def __init__(__self__, *,
+                 api_key: pulumi.Input[_builtins.str],
+                 api_url: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] api_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               API key for your Fleet server. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
+        :param pulumi.Input[_builtins.str] api_url: API URL of your Fleet server.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_url", api_url)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        API key for your Fleet server. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
+        """
+        return pulumi.get(self, "api_key")
+
+    @api_key.setter
+    def api_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "api_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="apiUrl")
+    def api_url(self) -> pulumi.Input[_builtins.str]:
+        """
+        API URL of your Fleet server.
+        """
+        return pulumi.get(self, "api_url")
+
+    @api_url.setter
+    def api_url(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "api_url", value)
+
+
+class IntegrationMdmJamfArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    OAuth client secret for your Jamf Pro API client. This value is not stored in Terraform state. To rotate the secret, change this value and run `terraform apply -replace=<resource address>`.
+    """
+    api_url: pulumi.Input[_builtins.str]
+    """
+    API URL of your Jamf Pro instance.
+    """
+    client_id: pulumi.Input[_builtins.str]
+    """
+    OAuth client ID for your Jamf Pro API client.
+    """
+
+@pulumi.input_type
+class IntegrationMdmJamfArgs:
+    def __init__(__self__, *,
+                 api_key: pulumi.Input[_builtins.str],
+                 api_url: pulumi.Input[_builtins.str],
+                 client_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] api_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               OAuth client secret for your Jamf Pro API client. This value is not stored in Terraform state. To rotate the secret, change this value and run `terraform apply -replace=<resource address>`.
+        :param pulumi.Input[_builtins.str] api_url: API URL of your Jamf Pro instance.
+        :param pulumi.Input[_builtins.str] client_id: OAuth client ID for your Jamf Pro API client.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_url", api_url)
+        pulumi.set(__self__, "client_id", client_id)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        OAuth client secret for your Jamf Pro API client. This value is not stored in Terraform state. To rotate the secret, change this value and run `terraform apply -replace=<resource address>`.
+        """
+        return pulumi.get(self, "api_key")
+
+    @api_key.setter
+    def api_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "api_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="apiUrl")
+    def api_url(self) -> pulumi.Input[_builtins.str]:
+        """
+        API URL of your Jamf Pro instance.
+        """
+        return pulumi.get(self, "api_url")
+
+    @api_url.setter
+    def api_url(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "api_url", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        OAuth client ID for your Jamf Pro API client.
+        """
+        return pulumi.get(self, "client_id")
+
+    @client_id.setter
+    def client_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "client_id", value)
+
+
 class IntegrationMdmKandjiArgsDict(TypedDict):
     api_key: pulumi.Input[_builtins.str]
     """
-    API Key of your Kandji organization.
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
     """
     api_url: pulumi.Input[_builtins.str]
     """
@@ -1235,7 +1558,8 @@ class IntegrationMdmKandjiArgs:
                  api_key: pulumi.Input[_builtins.str],
                  api_url: pulumi.Input[_builtins.str]):
         """
-        :param pulumi.Input[_builtins.str] api_key: API Key of your Kandji organization.
+        :param pulumi.Input[_builtins.str] api_key: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
         :param pulumi.Input[_builtins.str] api_url: API URL of your Kandji organization.
         """
         pulumi.set(__self__, "api_key", api_key)
@@ -1245,7 +1569,8 @@ class IntegrationMdmKandjiArgs:
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[_builtins.str]:
         """
-        API Key of your Kandji organization.
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
         """
         return pulumi.get(self, "api_key")
 

@@ -100,6 +100,11 @@ export type GroupUserLink = import("./groupUserLink").GroupUserLink;
 export const GroupUserLink: typeof import("./groupUserLink").GroupUserLink = null as any;
 utilities.lazyLoad(exports, ["GroupUserLink"], () => require("./groupUserLink"));
 
+export { HookArgs, HookState } from "./hook";
+export type Hook = import("./hook").Hook;
+export const Hook: typeof import("./hook").Hook = null as any;
+utilities.lazyLoad(exports, ["Hook"], () => require("./hook"));
+
 export { IntegrationBiArgs, IntegrationBiState } from "./integrationBi";
 export type IntegrationBi = import("./integrationBi").IntegrationBi;
 export const IntegrationBi: typeof import("./integrationBi").IntegrationBi = null as any;
@@ -109,6 +114,11 @@ export { IntegrationCloudArgs, IntegrationCloudState } from "./integrationCloud"
 export type IntegrationCloud = import("./integrationCloud").IntegrationCloud;
 export const IntegrationCloud: typeof import("./integrationCloud").IntegrationCloud = null as any;
 utilities.lazyLoad(exports, ["IntegrationCloud"], () => require("./integrationCloud"));
+
+export { IntegrationCloudGcpActivationArgs, IntegrationCloudGcpActivationState } from "./integrationCloudGcpActivation";
+export type IntegrationCloudGcpActivation = import("./integrationCloudGcpActivation").IntegrationCloudGcpActivation;
+export const IntegrationCloudGcpActivation: typeof import("./integrationCloudGcpActivation").IntegrationCloudGcpActivation = null as any;
+utilities.lazyLoad(exports, ["IntegrationCloudGcpActivation"], () => require("./integrationCloudGcpActivation"));
 
 export { IntegrationLogArgs, IntegrationLogState } from "./integrationLog";
 export type IntegrationLog = import("./integrationLog").IntegrationLog;
@@ -280,10 +290,14 @@ const _module = {
                 return new Group(name, <any>undefined, { urn })
             case "formal:index/groupUserLink:GroupUserLink":
                 return new GroupUserLink(name, <any>undefined, { urn })
+            case "formal:index/hook:Hook":
+                return new Hook(name, <any>undefined, { urn })
             case "formal:index/integrationBi:IntegrationBi":
                 return new IntegrationBi(name, <any>undefined, { urn })
             case "formal:index/integrationCloud:IntegrationCloud":
                 return new IntegrationCloud(name, <any>undefined, { urn })
+            case "formal:index/integrationCloudGcpActivation:IntegrationCloudGcpActivation":
+                return new IntegrationCloudGcpActivation(name, <any>undefined, { urn })
             case "formal:index/integrationLog:IntegrationLog":
                 return new IntegrationLog(name, <any>undefined, { urn })
             case "formal:index/integrationMdm:IntegrationMdm":
@@ -353,8 +367,10 @@ pulumi.runtime.registerResourceModule("formal", "index/encryptionKey", _module)
 pulumi.runtime.registerResourceModule("formal", "index/form", _module)
 pulumi.runtime.registerResourceModule("formal", "index/group", _module)
 pulumi.runtime.registerResourceModule("formal", "index/groupUserLink", _module)
+pulumi.runtime.registerResourceModule("formal", "index/hook", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationBi", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationCloud", _module)
+pulumi.runtime.registerResourceModule("formal", "index/integrationCloudGcpActivation", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationLog", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationMdm", _module)
 pulumi.runtime.registerResourceModule("formal", "index/inventoryObject", _module)

@@ -49,10 +49,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Group{}
 	case "formal:index/groupUserLink:GroupUserLink":
 		r = &GroupUserLink{}
+	case "formal:index/hook:Hook":
+		r = &Hook{}
 	case "formal:index/integrationBi:IntegrationBi":
 		r = &IntegrationBi{}
 	case "formal:index/integrationCloud:IntegrationCloud":
 		r = &IntegrationCloud{}
+	case "formal:index/integrationCloudGcpActivation:IntegrationCloudGcpActivation":
+		r = &IntegrationCloudGcpActivation{}
 	case "formal:index/integrationLog:IntegrationLog":
 		r = &IntegrationLog{}
 	case "formal:index/integrationMdm:IntegrationMdm":
@@ -206,12 +210,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
+		"index/hook",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
 		"index/integrationBi",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/integrationCloud",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/integrationCloudGcpActivation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

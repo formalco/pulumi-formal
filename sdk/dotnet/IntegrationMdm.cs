@@ -17,6 +17,18 @@ namespace Formal.Pulumi
     public partial class IntegrationMdm : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Configuration block for Fleet integration.
+        /// </summary>
+        [Output("fleet")]
+        public Output<Outputs.IntegrationMdmFleet?> Fleet { get; private set; } = null!;
+
+        /// <summary>
+        /// Configuration block for Jamf Pro integration.
+        /// </summary>
+        [Output("jamf")]
+        public Output<Outputs.IntegrationMdmJamf?> Jamf { get; private set; } = null!;
+
+        /// <summary>
         /// Configuration block for Kandji integration.
         /// </summary>
         [Output("kandji")]
@@ -76,6 +88,18 @@ namespace Formal.Pulumi
     public sealed class IntegrationMdmArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Configuration block for Fleet integration.
+        /// </summary>
+        [Input("fleet")]
+        public Input<Inputs.IntegrationMdmFleetArgs>? Fleet { get; set; }
+
+        /// <summary>
+        /// Configuration block for Jamf Pro integration.
+        /// </summary>
+        [Input("jamf")]
+        public Input<Inputs.IntegrationMdmJamfArgs>? Jamf { get; set; }
+
+        /// <summary>
         /// Configuration block for Kandji integration.
         /// </summary>
         [Input("kandji")]
@@ -95,6 +119,18 @@ namespace Formal.Pulumi
 
     public sealed class IntegrationMdmState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Configuration block for Fleet integration.
+        /// </summary>
+        [Input("fleet")]
+        public Input<Inputs.IntegrationMdmFleetGetArgs>? Fleet { get; set; }
+
+        /// <summary>
+        /// Configuration block for Jamf Pro integration.
+        /// </summary>
+        [Input("jamf")]
+        public Input<Inputs.IntegrationMdmJamfGetArgs>? Jamf { get; set; }
+
         /// <summary>
         /// Configuration block for Kandji integration.
         /// </summary>

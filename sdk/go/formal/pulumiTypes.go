@@ -2340,6 +2340,238 @@ func (o IntegrationCloudAwsPtrOutput) TemplateVersion() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type IntegrationCloudGcp struct {
+	// Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
+	AllowGcsAccess *bool `pulumi:"allowGcsAccess"`
+	// Enables resource autodiscovery for Cloud SQL instances.
+	EnableCloudsqlInstancesAutodiscovery *bool `pulumi:"enableCloudsqlInstancesAutodiscovery"`
+	// Enables resource autodiscovery for Compute Engine instances.
+	EnableComputeInstancesAutodiscovery *bool `pulumi:"enableComputeInstancesAutodiscovery"`
+	// Enables resource autodiscovery for GKE clusters.
+	EnableGkeClustersAutodiscovery *bool `pulumi:"enableGkeClustersAutodiscovery"`
+	// GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
+	GcsBuckets []string `pulumi:"gcsBuckets"`
+	// The GCP project ID this integration grants Formal access to.
+	ProjectId string `pulumi:"projectId"`
+}
+
+// IntegrationCloudGcpInput is an input type that accepts IntegrationCloudGcpArgs and IntegrationCloudGcpOutput values.
+// You can construct a concrete instance of `IntegrationCloudGcpInput` via:
+//
+//	IntegrationCloudGcpArgs{...}
+type IntegrationCloudGcpInput interface {
+	pulumi.Input
+
+	ToIntegrationCloudGcpOutput() IntegrationCloudGcpOutput
+	ToIntegrationCloudGcpOutputWithContext(context.Context) IntegrationCloudGcpOutput
+}
+
+type IntegrationCloudGcpArgs struct {
+	// Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
+	AllowGcsAccess pulumi.BoolPtrInput `pulumi:"allowGcsAccess"`
+	// Enables resource autodiscovery for Cloud SQL instances.
+	EnableCloudsqlInstancesAutodiscovery pulumi.BoolPtrInput `pulumi:"enableCloudsqlInstancesAutodiscovery"`
+	// Enables resource autodiscovery for Compute Engine instances.
+	EnableComputeInstancesAutodiscovery pulumi.BoolPtrInput `pulumi:"enableComputeInstancesAutodiscovery"`
+	// Enables resource autodiscovery for GKE clusters.
+	EnableGkeClustersAutodiscovery pulumi.BoolPtrInput `pulumi:"enableGkeClustersAutodiscovery"`
+	// GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
+	GcsBuckets pulumi.StringArrayInput `pulumi:"gcsBuckets"`
+	// The GCP project ID this integration grants Formal access to.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+}
+
+func (IntegrationCloudGcpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationCloudGcp)(nil)).Elem()
+}
+
+func (i IntegrationCloudGcpArgs) ToIntegrationCloudGcpOutput() IntegrationCloudGcpOutput {
+	return i.ToIntegrationCloudGcpOutputWithContext(context.Background())
+}
+
+func (i IntegrationCloudGcpArgs) ToIntegrationCloudGcpOutputWithContext(ctx context.Context) IntegrationCloudGcpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationCloudGcpOutput)
+}
+
+func (i IntegrationCloudGcpArgs) ToIntegrationCloudGcpPtrOutput() IntegrationCloudGcpPtrOutput {
+	return i.ToIntegrationCloudGcpPtrOutputWithContext(context.Background())
+}
+
+func (i IntegrationCloudGcpArgs) ToIntegrationCloudGcpPtrOutputWithContext(ctx context.Context) IntegrationCloudGcpPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationCloudGcpOutput).ToIntegrationCloudGcpPtrOutputWithContext(ctx)
+}
+
+// IntegrationCloudGcpPtrInput is an input type that accepts IntegrationCloudGcpArgs, IntegrationCloudGcpPtr and IntegrationCloudGcpPtrOutput values.
+// You can construct a concrete instance of `IntegrationCloudGcpPtrInput` via:
+//
+//	        IntegrationCloudGcpArgs{...}
+//
+//	or:
+//
+//	        nil
+type IntegrationCloudGcpPtrInput interface {
+	pulumi.Input
+
+	ToIntegrationCloudGcpPtrOutput() IntegrationCloudGcpPtrOutput
+	ToIntegrationCloudGcpPtrOutputWithContext(context.Context) IntegrationCloudGcpPtrOutput
+}
+
+type integrationCloudGcpPtrType IntegrationCloudGcpArgs
+
+func IntegrationCloudGcpPtr(v *IntegrationCloudGcpArgs) IntegrationCloudGcpPtrInput {
+	return (*integrationCloudGcpPtrType)(v)
+}
+
+func (*integrationCloudGcpPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationCloudGcp)(nil)).Elem()
+}
+
+func (i *integrationCloudGcpPtrType) ToIntegrationCloudGcpPtrOutput() IntegrationCloudGcpPtrOutput {
+	return i.ToIntegrationCloudGcpPtrOutputWithContext(context.Background())
+}
+
+func (i *integrationCloudGcpPtrType) ToIntegrationCloudGcpPtrOutputWithContext(ctx context.Context) IntegrationCloudGcpPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationCloudGcpPtrOutput)
+}
+
+type IntegrationCloudGcpOutput struct{ *pulumi.OutputState }
+
+func (IntegrationCloudGcpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationCloudGcp)(nil)).Elem()
+}
+
+func (o IntegrationCloudGcpOutput) ToIntegrationCloudGcpOutput() IntegrationCloudGcpOutput {
+	return o
+}
+
+func (o IntegrationCloudGcpOutput) ToIntegrationCloudGcpOutputWithContext(ctx context.Context) IntegrationCloudGcpOutput {
+	return o
+}
+
+func (o IntegrationCloudGcpOutput) ToIntegrationCloudGcpPtrOutput() IntegrationCloudGcpPtrOutput {
+	return o.ToIntegrationCloudGcpPtrOutputWithContext(context.Background())
+}
+
+func (o IntegrationCloudGcpOutput) ToIntegrationCloudGcpPtrOutputWithContext(ctx context.Context) IntegrationCloudGcpPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IntegrationCloudGcp) *IntegrationCloudGcp {
+		return &v
+	}).(IntegrationCloudGcpPtrOutput)
+}
+
+// Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
+func (o IntegrationCloudGcpOutput) AllowGcsAccess() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudGcp) *bool { return v.AllowGcsAccess }).(pulumi.BoolPtrOutput)
+}
+
+// Enables resource autodiscovery for Cloud SQL instances.
+func (o IntegrationCloudGcpOutput) EnableCloudsqlInstancesAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudGcp) *bool { return v.EnableCloudsqlInstancesAutodiscovery }).(pulumi.BoolPtrOutput)
+}
+
+// Enables resource autodiscovery for Compute Engine instances.
+func (o IntegrationCloudGcpOutput) EnableComputeInstancesAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudGcp) *bool { return v.EnableComputeInstancesAutodiscovery }).(pulumi.BoolPtrOutput)
+}
+
+// Enables resource autodiscovery for GKE clusters.
+func (o IntegrationCloudGcpOutput) EnableGkeClustersAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudGcp) *bool { return v.EnableGkeClustersAutodiscovery }).(pulumi.BoolPtrOutput)
+}
+
+// GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
+func (o IntegrationCloudGcpOutput) GcsBuckets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v IntegrationCloudGcp) []string { return v.GcsBuckets }).(pulumi.StringArrayOutput)
+}
+
+// The GCP project ID this integration grants Formal access to.
+func (o IntegrationCloudGcpOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationCloudGcp) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+type IntegrationCloudGcpPtrOutput struct{ *pulumi.OutputState }
+
+func (IntegrationCloudGcpPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationCloudGcp)(nil)).Elem()
+}
+
+func (o IntegrationCloudGcpPtrOutput) ToIntegrationCloudGcpPtrOutput() IntegrationCloudGcpPtrOutput {
+	return o
+}
+
+func (o IntegrationCloudGcpPtrOutput) ToIntegrationCloudGcpPtrOutputWithContext(ctx context.Context) IntegrationCloudGcpPtrOutput {
+	return o
+}
+
+func (o IntegrationCloudGcpPtrOutput) Elem() IntegrationCloudGcpOutput {
+	return o.ApplyT(func(v *IntegrationCloudGcp) IntegrationCloudGcp {
+		if v != nil {
+			return *v
+		}
+		var ret IntegrationCloudGcp
+		return ret
+	}).(IntegrationCloudGcpOutput)
+}
+
+// Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
+func (o IntegrationCloudGcpPtrOutput) AllowGcsAccess() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudGcp) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.AllowGcsAccess
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Enables resource autodiscovery for Cloud SQL instances.
+func (o IntegrationCloudGcpPtrOutput) EnableCloudsqlInstancesAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudGcp) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnableCloudsqlInstancesAutodiscovery
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Enables resource autodiscovery for Compute Engine instances.
+func (o IntegrationCloudGcpPtrOutput) EnableComputeInstancesAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudGcp) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnableComputeInstancesAutodiscovery
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Enables resource autodiscovery for GKE clusters.
+func (o IntegrationCloudGcpPtrOutput) EnableGkeClustersAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudGcp) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnableGkeClustersAutodiscovery
+	}).(pulumi.BoolPtrOutput)
+}
+
+// GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
+func (o IntegrationCloudGcpPtrOutput) GcsBuckets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloudGcp) []string {
+		if v == nil {
+			return nil
+		}
+		return v.GcsBuckets
+	}).(pulumi.StringArrayOutput)
+}
+
+// The GCP project ID this integration grants Formal access to.
+func (o IntegrationCloudGcpPtrOutput) ProjectId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudGcp) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ProjectId
+	}).(pulumi.StringPtrOutput)
+}
+
 type IntegrationLogAwsS3 struct {
 	// Cloud Integration ID.
 	CloudIntegrationId string `pulumi:"cloudIntegrationId"`
@@ -2709,6 +2941,181 @@ func (o IntegrationLogDatadogPtrOutput) Site() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type IntegrationLogGcs struct {
+	// Cloud Integration ID.
+	CloudIntegrationId string `pulumi:"cloudIntegrationId"`
+	// GCS Bucket Name.
+	GcsBucketName string `pulumi:"gcsBucketName"`
+	// GCS bucket prefix to write logs under. Defaults to the bucket root.
+	GcsBucketPrefix *string `pulumi:"gcsBucketPrefix"`
+}
+
+// IntegrationLogGcsInput is an input type that accepts IntegrationLogGcsArgs and IntegrationLogGcsOutput values.
+// You can construct a concrete instance of `IntegrationLogGcsInput` via:
+//
+//	IntegrationLogGcsArgs{...}
+type IntegrationLogGcsInput interface {
+	pulumi.Input
+
+	ToIntegrationLogGcsOutput() IntegrationLogGcsOutput
+	ToIntegrationLogGcsOutputWithContext(context.Context) IntegrationLogGcsOutput
+}
+
+type IntegrationLogGcsArgs struct {
+	// Cloud Integration ID.
+	CloudIntegrationId pulumi.StringInput `pulumi:"cloudIntegrationId"`
+	// GCS Bucket Name.
+	GcsBucketName pulumi.StringInput `pulumi:"gcsBucketName"`
+	// GCS bucket prefix to write logs under. Defaults to the bucket root.
+	GcsBucketPrefix pulumi.StringPtrInput `pulumi:"gcsBucketPrefix"`
+}
+
+func (IntegrationLogGcsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationLogGcs)(nil)).Elem()
+}
+
+func (i IntegrationLogGcsArgs) ToIntegrationLogGcsOutput() IntegrationLogGcsOutput {
+	return i.ToIntegrationLogGcsOutputWithContext(context.Background())
+}
+
+func (i IntegrationLogGcsArgs) ToIntegrationLogGcsOutputWithContext(ctx context.Context) IntegrationLogGcsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationLogGcsOutput)
+}
+
+func (i IntegrationLogGcsArgs) ToIntegrationLogGcsPtrOutput() IntegrationLogGcsPtrOutput {
+	return i.ToIntegrationLogGcsPtrOutputWithContext(context.Background())
+}
+
+func (i IntegrationLogGcsArgs) ToIntegrationLogGcsPtrOutputWithContext(ctx context.Context) IntegrationLogGcsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationLogGcsOutput).ToIntegrationLogGcsPtrOutputWithContext(ctx)
+}
+
+// IntegrationLogGcsPtrInput is an input type that accepts IntegrationLogGcsArgs, IntegrationLogGcsPtr and IntegrationLogGcsPtrOutput values.
+// You can construct a concrete instance of `IntegrationLogGcsPtrInput` via:
+//
+//	        IntegrationLogGcsArgs{...}
+//
+//	or:
+//
+//	        nil
+type IntegrationLogGcsPtrInput interface {
+	pulumi.Input
+
+	ToIntegrationLogGcsPtrOutput() IntegrationLogGcsPtrOutput
+	ToIntegrationLogGcsPtrOutputWithContext(context.Context) IntegrationLogGcsPtrOutput
+}
+
+type integrationLogGcsPtrType IntegrationLogGcsArgs
+
+func IntegrationLogGcsPtr(v *IntegrationLogGcsArgs) IntegrationLogGcsPtrInput {
+	return (*integrationLogGcsPtrType)(v)
+}
+
+func (*integrationLogGcsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationLogGcs)(nil)).Elem()
+}
+
+func (i *integrationLogGcsPtrType) ToIntegrationLogGcsPtrOutput() IntegrationLogGcsPtrOutput {
+	return i.ToIntegrationLogGcsPtrOutputWithContext(context.Background())
+}
+
+func (i *integrationLogGcsPtrType) ToIntegrationLogGcsPtrOutputWithContext(ctx context.Context) IntegrationLogGcsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationLogGcsPtrOutput)
+}
+
+type IntegrationLogGcsOutput struct{ *pulumi.OutputState }
+
+func (IntegrationLogGcsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationLogGcs)(nil)).Elem()
+}
+
+func (o IntegrationLogGcsOutput) ToIntegrationLogGcsOutput() IntegrationLogGcsOutput {
+	return o
+}
+
+func (o IntegrationLogGcsOutput) ToIntegrationLogGcsOutputWithContext(ctx context.Context) IntegrationLogGcsOutput {
+	return o
+}
+
+func (o IntegrationLogGcsOutput) ToIntegrationLogGcsPtrOutput() IntegrationLogGcsPtrOutput {
+	return o.ToIntegrationLogGcsPtrOutputWithContext(context.Background())
+}
+
+func (o IntegrationLogGcsOutput) ToIntegrationLogGcsPtrOutputWithContext(ctx context.Context) IntegrationLogGcsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IntegrationLogGcs) *IntegrationLogGcs {
+		return &v
+	}).(IntegrationLogGcsPtrOutput)
+}
+
+// Cloud Integration ID.
+func (o IntegrationLogGcsOutput) CloudIntegrationId() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationLogGcs) string { return v.CloudIntegrationId }).(pulumi.StringOutput)
+}
+
+// GCS Bucket Name.
+func (o IntegrationLogGcsOutput) GcsBucketName() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationLogGcs) string { return v.GcsBucketName }).(pulumi.StringOutput)
+}
+
+// GCS bucket prefix to write logs under. Defaults to the bucket root.
+func (o IntegrationLogGcsOutput) GcsBucketPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IntegrationLogGcs) *string { return v.GcsBucketPrefix }).(pulumi.StringPtrOutput)
+}
+
+type IntegrationLogGcsPtrOutput struct{ *pulumi.OutputState }
+
+func (IntegrationLogGcsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationLogGcs)(nil)).Elem()
+}
+
+func (o IntegrationLogGcsPtrOutput) ToIntegrationLogGcsPtrOutput() IntegrationLogGcsPtrOutput {
+	return o
+}
+
+func (o IntegrationLogGcsPtrOutput) ToIntegrationLogGcsPtrOutputWithContext(ctx context.Context) IntegrationLogGcsPtrOutput {
+	return o
+}
+
+func (o IntegrationLogGcsPtrOutput) Elem() IntegrationLogGcsOutput {
+	return o.ApplyT(func(v *IntegrationLogGcs) IntegrationLogGcs {
+		if v != nil {
+			return *v
+		}
+		var ret IntegrationLogGcs
+		return ret
+	}).(IntegrationLogGcsOutput)
+}
+
+// Cloud Integration ID.
+func (o IntegrationLogGcsPtrOutput) CloudIntegrationId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogGcs) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CloudIntegrationId
+	}).(pulumi.StringPtrOutput)
+}
+
+// GCS Bucket Name.
+func (o IntegrationLogGcsPtrOutput) GcsBucketName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogGcs) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.GcsBucketName
+	}).(pulumi.StringPtrOutput)
+}
+
+// GCS bucket prefix to write logs under. Defaults to the bucket root.
+func (o IntegrationLogGcsPtrOutput) GcsBucketPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogGcs) *string {
+		if v == nil {
+			return nil
+		}
+		return v.GcsBucketPrefix
+	}).(pulumi.StringPtrOutput)
+}
+
 type IntegrationLogSplunk struct {
 	// Access Token of Splunk.
 	AccessToken string `pulumi:"accessToken"`
@@ -2884,8 +3291,348 @@ func (o IntegrationLogSplunkPtrOutput) Port() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+type IntegrationMdmFleet struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// API key for your Fleet server. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
+	ApiKey string `pulumi:"apiKey"`
+	// API URL of your Fleet server.
+	ApiUrl string `pulumi:"apiUrl"`
+}
+
+// IntegrationMdmFleetInput is an input type that accepts IntegrationMdmFleetArgs and IntegrationMdmFleetOutput values.
+// You can construct a concrete instance of `IntegrationMdmFleetInput` via:
+//
+//	IntegrationMdmFleetArgs{...}
+type IntegrationMdmFleetInput interface {
+	pulumi.Input
+
+	ToIntegrationMdmFleetOutput() IntegrationMdmFleetOutput
+	ToIntegrationMdmFleetOutputWithContext(context.Context) IntegrationMdmFleetOutput
+}
+
+type IntegrationMdmFleetArgs struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// API key for your Fleet server. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// API URL of your Fleet server.
+	ApiUrl pulumi.StringInput `pulumi:"apiUrl"`
+}
+
+func (IntegrationMdmFleetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationMdmFleet)(nil)).Elem()
+}
+
+func (i IntegrationMdmFleetArgs) ToIntegrationMdmFleetOutput() IntegrationMdmFleetOutput {
+	return i.ToIntegrationMdmFleetOutputWithContext(context.Background())
+}
+
+func (i IntegrationMdmFleetArgs) ToIntegrationMdmFleetOutputWithContext(ctx context.Context) IntegrationMdmFleetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationMdmFleetOutput)
+}
+
+func (i IntegrationMdmFleetArgs) ToIntegrationMdmFleetPtrOutput() IntegrationMdmFleetPtrOutput {
+	return i.ToIntegrationMdmFleetPtrOutputWithContext(context.Background())
+}
+
+func (i IntegrationMdmFleetArgs) ToIntegrationMdmFleetPtrOutputWithContext(ctx context.Context) IntegrationMdmFleetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationMdmFleetOutput).ToIntegrationMdmFleetPtrOutputWithContext(ctx)
+}
+
+// IntegrationMdmFleetPtrInput is an input type that accepts IntegrationMdmFleetArgs, IntegrationMdmFleetPtr and IntegrationMdmFleetPtrOutput values.
+// You can construct a concrete instance of `IntegrationMdmFleetPtrInput` via:
+//
+//	        IntegrationMdmFleetArgs{...}
+//
+//	or:
+//
+//	        nil
+type IntegrationMdmFleetPtrInput interface {
+	pulumi.Input
+
+	ToIntegrationMdmFleetPtrOutput() IntegrationMdmFleetPtrOutput
+	ToIntegrationMdmFleetPtrOutputWithContext(context.Context) IntegrationMdmFleetPtrOutput
+}
+
+type integrationMdmFleetPtrType IntegrationMdmFleetArgs
+
+func IntegrationMdmFleetPtr(v *IntegrationMdmFleetArgs) IntegrationMdmFleetPtrInput {
+	return (*integrationMdmFleetPtrType)(v)
+}
+
+func (*integrationMdmFleetPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationMdmFleet)(nil)).Elem()
+}
+
+func (i *integrationMdmFleetPtrType) ToIntegrationMdmFleetPtrOutput() IntegrationMdmFleetPtrOutput {
+	return i.ToIntegrationMdmFleetPtrOutputWithContext(context.Background())
+}
+
+func (i *integrationMdmFleetPtrType) ToIntegrationMdmFleetPtrOutputWithContext(ctx context.Context) IntegrationMdmFleetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationMdmFleetPtrOutput)
+}
+
+type IntegrationMdmFleetOutput struct{ *pulumi.OutputState }
+
+func (IntegrationMdmFleetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationMdmFleet)(nil)).Elem()
+}
+
+func (o IntegrationMdmFleetOutput) ToIntegrationMdmFleetOutput() IntegrationMdmFleetOutput {
+	return o
+}
+
+func (o IntegrationMdmFleetOutput) ToIntegrationMdmFleetOutputWithContext(ctx context.Context) IntegrationMdmFleetOutput {
+	return o
+}
+
+func (o IntegrationMdmFleetOutput) ToIntegrationMdmFleetPtrOutput() IntegrationMdmFleetPtrOutput {
+	return o.ToIntegrationMdmFleetPtrOutputWithContext(context.Background())
+}
+
+func (o IntegrationMdmFleetOutput) ToIntegrationMdmFleetPtrOutputWithContext(ctx context.Context) IntegrationMdmFleetPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IntegrationMdmFleet) *IntegrationMdmFleet {
+		return &v
+	}).(IntegrationMdmFleetPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// API key for your Fleet server. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
+func (o IntegrationMdmFleetOutput) ApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationMdmFleet) string { return v.ApiKey }).(pulumi.StringOutput)
+}
+
+// API URL of your Fleet server.
+func (o IntegrationMdmFleetOutput) ApiUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationMdmFleet) string { return v.ApiUrl }).(pulumi.StringOutput)
+}
+
+type IntegrationMdmFleetPtrOutput struct{ *pulumi.OutputState }
+
+func (IntegrationMdmFleetPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationMdmFleet)(nil)).Elem()
+}
+
+func (o IntegrationMdmFleetPtrOutput) ToIntegrationMdmFleetPtrOutput() IntegrationMdmFleetPtrOutput {
+	return o
+}
+
+func (o IntegrationMdmFleetPtrOutput) ToIntegrationMdmFleetPtrOutputWithContext(ctx context.Context) IntegrationMdmFleetPtrOutput {
+	return o
+}
+
+func (o IntegrationMdmFleetPtrOutput) Elem() IntegrationMdmFleetOutput {
+	return o.ApplyT(func(v *IntegrationMdmFleet) IntegrationMdmFleet {
+		if v != nil {
+			return *v
+		}
+		var ret IntegrationMdmFleet
+		return ret
+	}).(IntegrationMdmFleetOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// API key for your Fleet server. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
+func (o IntegrationMdmFleetPtrOutput) ApiKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationMdmFleet) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// API URL of your Fleet server.
+func (o IntegrationMdmFleetPtrOutput) ApiUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationMdmFleet) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+type IntegrationMdmJamf struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// OAuth client secret for your Jamf Pro API client. This value is not stored in Terraform state. To rotate the secret, change this value and run `terraform apply -replace=<resource address>`.
+	ApiKey string `pulumi:"apiKey"`
+	// API URL of your Jamf Pro instance.
+	ApiUrl string `pulumi:"apiUrl"`
+	// OAuth client ID for your Jamf Pro API client.
+	ClientId string `pulumi:"clientId"`
+}
+
+// IntegrationMdmJamfInput is an input type that accepts IntegrationMdmJamfArgs and IntegrationMdmJamfOutput values.
+// You can construct a concrete instance of `IntegrationMdmJamfInput` via:
+//
+//	IntegrationMdmJamfArgs{...}
+type IntegrationMdmJamfInput interface {
+	pulumi.Input
+
+	ToIntegrationMdmJamfOutput() IntegrationMdmJamfOutput
+	ToIntegrationMdmJamfOutputWithContext(context.Context) IntegrationMdmJamfOutput
+}
+
+type IntegrationMdmJamfArgs struct {
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// OAuth client secret for your Jamf Pro API client. This value is not stored in Terraform state. To rotate the secret, change this value and run `terraform apply -replace=<resource address>`.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// API URL of your Jamf Pro instance.
+	ApiUrl pulumi.StringInput `pulumi:"apiUrl"`
+	// OAuth client ID for your Jamf Pro API client.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+}
+
+func (IntegrationMdmJamfArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationMdmJamf)(nil)).Elem()
+}
+
+func (i IntegrationMdmJamfArgs) ToIntegrationMdmJamfOutput() IntegrationMdmJamfOutput {
+	return i.ToIntegrationMdmJamfOutputWithContext(context.Background())
+}
+
+func (i IntegrationMdmJamfArgs) ToIntegrationMdmJamfOutputWithContext(ctx context.Context) IntegrationMdmJamfOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationMdmJamfOutput)
+}
+
+func (i IntegrationMdmJamfArgs) ToIntegrationMdmJamfPtrOutput() IntegrationMdmJamfPtrOutput {
+	return i.ToIntegrationMdmJamfPtrOutputWithContext(context.Background())
+}
+
+func (i IntegrationMdmJamfArgs) ToIntegrationMdmJamfPtrOutputWithContext(ctx context.Context) IntegrationMdmJamfPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationMdmJamfOutput).ToIntegrationMdmJamfPtrOutputWithContext(ctx)
+}
+
+// IntegrationMdmJamfPtrInput is an input type that accepts IntegrationMdmJamfArgs, IntegrationMdmJamfPtr and IntegrationMdmJamfPtrOutput values.
+// You can construct a concrete instance of `IntegrationMdmJamfPtrInput` via:
+//
+//	        IntegrationMdmJamfArgs{...}
+//
+//	or:
+//
+//	        nil
+type IntegrationMdmJamfPtrInput interface {
+	pulumi.Input
+
+	ToIntegrationMdmJamfPtrOutput() IntegrationMdmJamfPtrOutput
+	ToIntegrationMdmJamfPtrOutputWithContext(context.Context) IntegrationMdmJamfPtrOutput
+}
+
+type integrationMdmJamfPtrType IntegrationMdmJamfArgs
+
+func IntegrationMdmJamfPtr(v *IntegrationMdmJamfArgs) IntegrationMdmJamfPtrInput {
+	return (*integrationMdmJamfPtrType)(v)
+}
+
+func (*integrationMdmJamfPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationMdmJamf)(nil)).Elem()
+}
+
+func (i *integrationMdmJamfPtrType) ToIntegrationMdmJamfPtrOutput() IntegrationMdmJamfPtrOutput {
+	return i.ToIntegrationMdmJamfPtrOutputWithContext(context.Background())
+}
+
+func (i *integrationMdmJamfPtrType) ToIntegrationMdmJamfPtrOutputWithContext(ctx context.Context) IntegrationMdmJamfPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationMdmJamfPtrOutput)
+}
+
+type IntegrationMdmJamfOutput struct{ *pulumi.OutputState }
+
+func (IntegrationMdmJamfOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationMdmJamf)(nil)).Elem()
+}
+
+func (o IntegrationMdmJamfOutput) ToIntegrationMdmJamfOutput() IntegrationMdmJamfOutput {
+	return o
+}
+
+func (o IntegrationMdmJamfOutput) ToIntegrationMdmJamfOutputWithContext(ctx context.Context) IntegrationMdmJamfOutput {
+	return o
+}
+
+func (o IntegrationMdmJamfOutput) ToIntegrationMdmJamfPtrOutput() IntegrationMdmJamfPtrOutput {
+	return o.ToIntegrationMdmJamfPtrOutputWithContext(context.Background())
+}
+
+func (o IntegrationMdmJamfOutput) ToIntegrationMdmJamfPtrOutputWithContext(ctx context.Context) IntegrationMdmJamfPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IntegrationMdmJamf) *IntegrationMdmJamf {
+		return &v
+	}).(IntegrationMdmJamfPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// OAuth client secret for your Jamf Pro API client. This value is not stored in Terraform state. To rotate the secret, change this value and run `terraform apply -replace=<resource address>`.
+func (o IntegrationMdmJamfOutput) ApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationMdmJamf) string { return v.ApiKey }).(pulumi.StringOutput)
+}
+
+// API URL of your Jamf Pro instance.
+func (o IntegrationMdmJamfOutput) ApiUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationMdmJamf) string { return v.ApiUrl }).(pulumi.StringOutput)
+}
+
+// OAuth client ID for your Jamf Pro API client.
+func (o IntegrationMdmJamfOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationMdmJamf) string { return v.ClientId }).(pulumi.StringOutput)
+}
+
+type IntegrationMdmJamfPtrOutput struct{ *pulumi.OutputState }
+
+func (IntegrationMdmJamfPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationMdmJamf)(nil)).Elem()
+}
+
+func (o IntegrationMdmJamfPtrOutput) ToIntegrationMdmJamfPtrOutput() IntegrationMdmJamfPtrOutput {
+	return o
+}
+
+func (o IntegrationMdmJamfPtrOutput) ToIntegrationMdmJamfPtrOutputWithContext(ctx context.Context) IntegrationMdmJamfPtrOutput {
+	return o
+}
+
+func (o IntegrationMdmJamfPtrOutput) Elem() IntegrationMdmJamfOutput {
+	return o.ApplyT(func(v *IntegrationMdmJamf) IntegrationMdmJamf {
+		if v != nil {
+			return *v
+		}
+		var ret IntegrationMdmJamf
+		return ret
+	}).(IntegrationMdmJamfOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// OAuth client secret for your Jamf Pro API client. This value is not stored in Terraform state. To rotate the secret, change this value and run `terraform apply -replace=<resource address>`.
+func (o IntegrationMdmJamfPtrOutput) ApiKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationMdmJamf) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// API URL of your Jamf Pro instance.
+func (o IntegrationMdmJamfPtrOutput) ApiUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationMdmJamf) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ApiUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// OAuth client ID for your Jamf Pro API client.
+func (o IntegrationMdmJamfPtrOutput) ClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationMdmJamf) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientId
+	}).(pulumi.StringPtrOutput)
+}
+
 type IntegrationMdmKandji struct {
-	// API Key of your Kandji organization.
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
 	ApiKey string `pulumi:"apiKey"`
 	// API URL of your Kandji organization.
 	ApiUrl string `pulumi:"apiUrl"`
@@ -2903,7 +3650,8 @@ type IntegrationMdmKandjiInput interface {
 }
 
 type IntegrationMdmKandjiArgs struct {
-	// API Key of your Kandji organization.
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
 	ApiKey pulumi.StringInput `pulumi:"apiKey"`
 	// API URL of your Kandji organization.
 	ApiUrl pulumi.StringInput `pulumi:"apiUrl"`
@@ -2986,7 +3734,8 @@ func (o IntegrationMdmKandjiOutput) ToIntegrationMdmKandjiPtrOutputWithContext(c
 	}).(IntegrationMdmKandjiPtrOutput)
 }
 
-// API Key of your Kandji organization.
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
 func (o IntegrationMdmKandjiOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v IntegrationMdmKandji) string { return v.ApiKey }).(pulumi.StringOutput)
 }
@@ -3020,7 +3769,8 @@ func (o IntegrationMdmKandjiPtrOutput) Elem() IntegrationMdmKandjiOutput {
 	}).(IntegrationMdmKandjiOutput)
 }
 
-// API Key of your Kandji organization.
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=<resource address>`.
 func (o IntegrationMdmKandjiPtrOutput) ApiKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *IntegrationMdmKandji) *string {
 		if v == nil {
@@ -4062,12 +4812,20 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationBiMetabasePtrInput)(nil)).Elem(), IntegrationBiMetabaseArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudAwsInput)(nil)).Elem(), IntegrationCloudAwsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudAwsPtrInput)(nil)).Elem(), IntegrationCloudAwsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudGcpInput)(nil)).Elem(), IntegrationCloudGcpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudGcpPtrInput)(nil)).Elem(), IntegrationCloudGcpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogAwsS3Input)(nil)).Elem(), IntegrationLogAwsS3Args{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogAwsS3PtrInput)(nil)).Elem(), IntegrationLogAwsS3Args{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogDatadogInput)(nil)).Elem(), IntegrationLogDatadogArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogDatadogPtrInput)(nil)).Elem(), IntegrationLogDatadogArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogGcsInput)(nil)).Elem(), IntegrationLogGcsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogGcsPtrInput)(nil)).Elem(), IntegrationLogGcsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogSplunkInput)(nil)).Elem(), IntegrationLogSplunkArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogSplunkPtrInput)(nil)).Elem(), IntegrationLogSplunkArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationMdmFleetInput)(nil)).Elem(), IntegrationMdmFleetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationMdmFleetPtrInput)(nil)).Elem(), IntegrationMdmFleetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationMdmJamfInput)(nil)).Elem(), IntegrationMdmJamfArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationMdmJamfPtrInput)(nil)).Elem(), IntegrationMdmJamfArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationMdmKandjiInput)(nil)).Elem(), IntegrationMdmKandjiArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationMdmKandjiPtrInput)(nil)).Elem(), IntegrationMdmKandjiArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationRequestInput)(nil)).Elem(), LogConfigurationRequestArgs{})
@@ -4110,12 +4868,20 @@ func init() {
 	pulumi.RegisterOutputType(IntegrationBiMetabasePtrOutput{})
 	pulumi.RegisterOutputType(IntegrationCloudAwsOutput{})
 	pulumi.RegisterOutputType(IntegrationCloudAwsPtrOutput{})
+	pulumi.RegisterOutputType(IntegrationCloudGcpOutput{})
+	pulumi.RegisterOutputType(IntegrationCloudGcpPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogAwsS3Output{})
 	pulumi.RegisterOutputType(IntegrationLogAwsS3PtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogDatadogOutput{})
 	pulumi.RegisterOutputType(IntegrationLogDatadogPtrOutput{})
+	pulumi.RegisterOutputType(IntegrationLogGcsOutput{})
+	pulumi.RegisterOutputType(IntegrationLogGcsPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogSplunkOutput{})
 	pulumi.RegisterOutputType(IntegrationLogSplunkPtrOutput{})
+	pulumi.RegisterOutputType(IntegrationMdmFleetOutput{})
+	pulumi.RegisterOutputType(IntegrationMdmFleetPtrOutput{})
+	pulumi.RegisterOutputType(IntegrationMdmJamfOutput{})
+	pulumi.RegisterOutputType(IntegrationMdmJamfPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationMdmKandjiOutput{})
 	pulumi.RegisterOutputType(IntegrationMdmKandjiPtrOutput{})
 	pulumi.RegisterOutputType(LogConfigurationRequestOutput{})

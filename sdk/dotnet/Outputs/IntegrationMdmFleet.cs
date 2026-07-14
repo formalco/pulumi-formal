@@ -12,20 +12,20 @@ namespace Formal.Pulumi.Outputs
 {
 
     [OutputType]
-    public sealed class IntegrationMdmKandji
+    public sealed class IntegrationMdmFleet
     {
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        /// API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=&lt;resource address&gt;`.
+        /// API key for your Fleet server. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=&lt;resource address&gt;`.
         /// </summary>
         public readonly string ApiKey;
         /// <summary>
-        /// API URL of your Kandji organization.
+        /// API URL of your Fleet server.
         /// </summary>
         public readonly string ApiUrl;
 
         [OutputConstructor]
-        private IntegrationMdmKandji(
+        private IntegrationMdmFleet(
             string apiKey,
 
             string apiUrl)

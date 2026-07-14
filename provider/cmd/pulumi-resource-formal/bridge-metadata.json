@@ -109,6 +109,10 @@
                 "current": "formal:index/groupUserLink:GroupUserLink",
                 "majorVersion": 1
             },
+            "formal_hook": {
+                "current": "formal:index/hook:Hook",
+                "majorVersion": 1
+            },
             "formal_integration_bi": {
                 "current": "formal:index/integrationBi:IntegrationBi",
                 "majorVersion": 1,
@@ -131,8 +135,28 @@
                                 }
                             }
                         }
+                    },
+                    "gcp": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "gcs_buckets": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "gcp_gcs_buckets": {
+                        "maxItemsOne": false
+                    },
+                    "gcp_roles": {
+                        "maxItemsOne": false
                     }
                 }
+            },
+            "formal_integration_cloud_gcp_activation": {
+                "current": "formal:index/integrationCloudGcpActivation:IntegrationCloudGcpActivation",
+                "majorVersion": 1
             },
             "formal_integration_log": {
                 "current": "formal:index/integrationLog:IntegrationLog",
@@ -144,6 +168,9 @@
                     "datadog": {
                         "maxItemsOne": true
                     },
+                    "gcs": {
+                        "maxItemsOne": true
+                    },
                     "splunk": {
                         "maxItemsOne": true
                     }
@@ -153,6 +180,12 @@
                 "current": "formal:index/integrationMdm:IntegrationMdm",
                 "majorVersion": 1,
                 "fields": {
+                    "fleet": {
+                        "maxItemsOne": true
+                    },
+                    "jamf": {
+                        "maxItemsOne": true
+                    },
                     "kandji": {
                         "maxItemsOne": true
                     }

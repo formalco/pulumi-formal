@@ -11,14 +11,14 @@ using Pulumi;
 namespace Formal.Pulumi.Inputs
 {
 
-    public sealed class IntegrationMdmKandjiGetArgs : global::Pulumi.ResourceArgs
+    public sealed class IntegrationMdmJamfGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("apiKey", required: true)]
         private Input<string>? _apiKey;
 
         /// <summary>
         /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
-        /// API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=&lt;resource address&gt;`.
+        /// OAuth client secret for your Jamf Pro API client. This value is not stored in Terraform state. To rotate the secret, change this value and run `terraform apply -replace=&lt;resource address&gt;`.
         /// </summary>
         public Input<string>? ApiKey
         {
@@ -31,14 +31,20 @@ namespace Formal.Pulumi.Inputs
         }
 
         /// <summary>
-        /// API URL of your Kandji organization.
+        /// API URL of your Jamf Pro instance.
         /// </summary>
         [Input("apiUrl", required: true)]
         public Input<string> ApiUrl { get; set; } = null!;
 
-        public IntegrationMdmKandjiGetArgs()
+        /// <summary>
+        /// OAuth client ID for your Jamf Pro API client.
+        /// </summary>
+        [Input("clientId", required: true)]
+        public Input<string> ClientId { get; set; } = null!;
+
+        public IntegrationMdmJamfGetArgs()
         {
         }
-        public static new IntegrationMdmKandjiGetArgs Empty => new IntegrationMdmKandjiGetArgs();
+        public static new IntegrationMdmJamfGetArgs Empty => new IntegrationMdmJamfGetArgs();
     }
 }

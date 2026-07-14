@@ -46,6 +46,10 @@ export class IntegrationLog extends pulumi.CustomResource {
      */
     declare public readonly datadog: pulumi.Output<outputs.IntegrationLogDatadog | undefined>;
     /**
+     * Configuration block for Google Cloud Storage integration.
+     */
+    declare public readonly gcs: pulumi.Output<outputs.IntegrationLogGcs | undefined>;
+    /**
      * Friendly name for the Integration app.
      */
     declare public readonly name: pulumi.Output<string>;
@@ -69,12 +73,14 @@ export class IntegrationLog extends pulumi.CustomResource {
             const state = argsOrState as IntegrationLogState | undefined;
             resourceInputs["awsS3"] = state?.awsS3;
             resourceInputs["datadog"] = state?.datadog;
+            resourceInputs["gcs"] = state?.gcs;
             resourceInputs["name"] = state?.name;
             resourceInputs["splunk"] = state?.splunk;
         } else {
             const args = argsOrState as IntegrationLogArgs | undefined;
             resourceInputs["awsS3"] = args?.awsS3;
             resourceInputs["datadog"] = args?.datadog;
+            resourceInputs["gcs"] = args?.gcs;
             resourceInputs["name"] = args?.name;
             resourceInputs["splunk"] = args?.splunk;
         }
@@ -95,6 +101,10 @@ export interface IntegrationLogState {
      * Configuration block for Datadog integration.
      */
     datadog?: pulumi.Input<inputs.IntegrationLogDatadog | undefined>;
+    /**
+     * Configuration block for Google Cloud Storage integration.
+     */
+    gcs?: pulumi.Input<inputs.IntegrationLogGcs | undefined>;
     /**
      * Friendly name for the Integration app.
      */
@@ -117,6 +127,10 @@ export interface IntegrationLogArgs {
      * Configuration block for Datadog integration.
      */
     datadog?: pulumi.Input<inputs.IntegrationLogDatadog | undefined>;
+    /**
+     * Configuration block for Google Cloud Storage integration.
+     */
+    gcs?: pulumi.Input<inputs.IntegrationLogGcs | undefined>;
     /**
      * Friendly name for the Integration app.
      */

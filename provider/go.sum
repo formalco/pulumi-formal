@@ -1,9 +1,9 @@
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260415201107-50325440f8f2.1 h1:s6hzCXtND/ICdGPTMGk7C+/BFlr2Jg5GyH0NKf4XGXg=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260415201107-50325440f8f2.1/go.mod h1:tvtbpgaVXZX4g6Pn+AnzFycuRK3MOz5HJfEGeEllXYM=
-buf.build/gen/go/formal/core/connectrpc/go v1.20.0-20260626233154-032acd50dd89.1 h1:7Hq+waI5iMmHrIa6PUT3548ls7suv+OhAb/mPAMppMg=
-buf.build/gen/go/formal/core/connectrpc/go v1.20.0-20260626233154-032acd50dd89.1/go.mod h1:TCiXaAwhfTDkJZ9e7ZuCh+cbMbAqx+r7SHX4O9+B0eM=
-buf.build/gen/go/formal/core/protocolbuffers/go v1.36.11-20260626233154-032acd50dd89.1 h1:LfRxz7Bs5QWR/karwVVxl2mZlpn5hfjpKw6dRGFTS0A=
-buf.build/gen/go/formal/core/protocolbuffers/go v1.36.11-20260626233154-032acd50dd89.1/go.mod h1:1dHiBGQoihkXZQkToxnFLSdzNSqSBKXROUMlOnbPcQY=
+buf.build/gen/go/formal/core/connectrpc/go v1.20.0-20260713135055-81dace3335b8.1 h1:GKlbTigDGOyj6uYuWSa2CMY4WA1nWlOqngg0ztWGTBE=
+buf.build/gen/go/formal/core/connectrpc/go v1.20.0-20260713135055-81dace3335b8.1/go.mod h1:I1/vu2D7zGHeKgw0AST4LlWfB1ZflHU1yBgG85qQPlw=
+buf.build/gen/go/formal/core/protocolbuffers/go v1.36.11-20260713135055-81dace3335b8.1 h1:bhhv9GhrHMP1BdnitgznUO05tOonlHlVLQdFIoW8CeU=
+buf.build/gen/go/formal/core/protocolbuffers/go v1.36.11-20260713135055-81dace3335b8.1/go.mod h1:1dHiBGQoihkXZQkToxnFLSdzNSqSBKXROUMlOnbPcQY=
 buf.build/gen/go/grpc-ecosystem/grpc-gateway/protocolbuffers/go v1.36.11-20260102203250-6467306b4f62.1 h1:1L6+uMVRfpetc9KKitISZKmsWGn70Bn6k+TkYYxhW0k=
 buf.build/gen/go/grpc-ecosystem/grpc-gateway/protocolbuffers/go v1.36.11-20260102203250-6467306b4f62.1/go.mod h1:KAAU6zfI4aGOR/SiWil31PiNwdpo1SlqZidcB3z+sL0=
 buf.build/go/protovalidate v1.2.0 h1:DQVrUWkmGTBij+kOYv/x2LLxwcLaGKMdzShj1/6/3H0=
@@ -3073,8 +3073,8 @@ github.com/felixge/httpsnoop v1.0.4 h1:NFTV2Zj1bL4mc9sqWACXbQFVBBg2W3GPvqp8/ESS2
 github.com/felixge/httpsnoop v1.0.4/go.mod h1:m8KPJKqk1gH5J9DgRY2ASl2lWCfGKXixSwevea8zH2U=
 github.com/fogleman/gg v1.2.1-0.20190220221249-0403632d5b90/go.mod h1:R/bRT+9gY/C5z7JzPU0zXsXHKM4/ayA+zqcVNZzPa1k=
 github.com/fogleman/gg v1.3.0/go.mod h1:R/bRT+9gY/C5z7JzPU0zXsXHKM4/ayA+zqcVNZzPa1k=
-github.com/formalco/go-sdk/sdk/v2 v2.14.0 h1:ukUQWg4i+mATDhWopgyz2np202TQ1WnXqfJ9N8/F0rw=
-github.com/formalco/go-sdk/sdk/v2 v2.14.0/go.mod h1:o0pGmF2KBP7BYXRDP3BezAfqcyLdvsQ6e9sOeOvDV4g=
+github.com/formalco/go-sdk/sdk/v2 v2.15.0 h1:XxUu68BJOwmQVQ7922VrwS95lOc8K/NyeM4Gb0V/gpQ=
+github.com/formalco/go-sdk/sdk/v2 v2.15.0/go.mod h1:+/Ijl3xybfvsm923VbrklB6ClS/igR6eNT7cPAQxOzM=
 github.com/franela/goblin v0.0.0-20200105215937-c9ffbefa60db/go.mod h1:7dvUGVsVBjqR7JHJk0brhHOZYGmfBYOrK0ZhYMEtBr4=
 github.com/franela/goreq v0.0.0-20171204163338-bcd34c9993f8/go.mod h1:ZhphrRTfi2rbfLwlschooIH4+wKKDR4Pdxhh+TRoA20=
 github.com/frankban/quicktest v1.14.6 h1:7Xjx+VpznH+oBnejlPUj8oUpdxnVs4f8XU8WnHkI4W8=
@@ -5438,8 +5438,8 @@ google.golang.org/genproto/googleapis/api v0.0.0-20250603155806-513f23925822/go.
 google.golang.org/genproto/googleapis/api v0.0.0-20250707201910-8d1bb00bc6a7/go.mod h1:kXqgZtrWaf6qS3jZOCnCH7WYfrvFjkC51bM8fz3RsCA=
 google.golang.org/genproto/googleapis/api v0.0.0-20250728155136-f173205681a0/go.mod h1:8ytArBbtOy2xfht+y2fqKd5DRDJRUQhqbyEnQ4bDChs=
 google.golang.org/genproto/googleapis/api v0.0.0-20251202230838-ff82c1b0f217/go.mod h1:+rXWjjaukWZun3mLfjmVnQi18E1AsFbDN9QdJ5YXLto=
-google.golang.org/genproto/googleapis/api v0.0.0-20260526163538-3dc84a4a5aaa h1:Kjn0N0tCrDgiAFW+lGO4JZ3ck44CehvJQMAwj9QF0G8=
-google.golang.org/genproto/googleapis/api v0.0.0-20260526163538-3dc84a4a5aaa/go.mod h1:q4lMZS6kskjT5HvCPrnnypcDPVJqT/f4nfxmkE7gryY=
+google.golang.org/genproto/googleapis/api v0.0.0-20260615183401-62b3387ff324 h1:g0RAkxK/smSu/iRwC/KIX1mwUoVJtk2OjbgaeS4DmUM=
+google.golang.org/genproto/googleapis/api v0.0.0-20260615183401-62b3387ff324/go.mod h1:Z4WJ5pJOYWFWcHEQUelD5QaZDknIQkpIL/+fyJOT9+A=
 google.golang.org/genproto/googleapis/bytestream v0.0.0-20230530153820-e85fd2cbaebc/go.mod h1:ylj+BE99M198VPbBh6A8d9n3w8fChvyLK3wwBOjXBFA=
 google.golang.org/genproto/googleapis/bytestream v0.0.0-20230807174057-1744710a1577/go.mod h1:NjCQG/D8JandXxM57PZbAJL1DCNL6EypA0vPPwfsc7c=
 google.golang.org/genproto/googleapis/bytestream v0.0.0-20231012201019-e917dd12ba7a/go.mod h1:+34luvCflYKiKylNwGJfn9cFBbcL/WrkciMmDmsTQ/A=

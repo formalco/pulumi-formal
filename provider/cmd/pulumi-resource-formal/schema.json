@@ -365,6 +365,42 @@
                 }
             }
         },
+        "formal:index/IntegrationCloudGcp:IntegrationCloudGcp": {
+            "properties": {
+                "allowGcsAccess": {
+                    "type": "boolean",
+                    "description": "Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.\n"
+                },
+                "enableCloudsqlInstancesAutodiscovery": {
+                    "type": "boolean",
+                    "description": "Enables resource autodiscovery for Cloud SQL instances.\n"
+                },
+                "enableComputeInstancesAutodiscovery": {
+                    "type": "boolean",
+                    "description": "Enables resource autodiscovery for Compute Engine instances.\n"
+                },
+                "enableGkeClustersAutodiscovery": {
+                    "type": "boolean",
+                    "description": "Enables resource autodiscovery for GKE clusters.\n"
+                },
+                "gcsBuckets": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "The GCP project ID this integration grants Formal access to.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "projectId"
+            ]
+        },
         "formal:index/IntegrationLogAwsS3:IntegrationLogAwsS3": {
             "properties": {
                 "cloudIntegrationId": {
@@ -422,6 +458,28 @@
                 "site"
             ]
         },
+        "formal:index/IntegrationLogGcs:IntegrationLogGcs": {
+            "properties": {
+                "cloudIntegrationId": {
+                    "type": "string",
+                    "description": "Cloud Integration ID.\n"
+                },
+                "gcsBucketName": {
+                    "type": "string",
+                    "description": "GCS Bucket Name.\n"
+                },
+                "gcsBucketPrefix": {
+                    "type": "string",
+                    "description": "GCS bucket prefix to write logs under. Defaults to the bucket root.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "cloudIntegrationId",
+                "gcsBucketName"
+            ]
+        },
         "formal:index/IntegrationLogSplunk:IntegrationLogSplunk": {
             "properties": {
                 "accessToken": {
@@ -444,15 +502,61 @@
                 "port"
             ]
         },
+        "formal:index/IntegrationMdmFleet:IntegrationMdmFleet": {
+            "properties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nAPI key for your Fleet server. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=\u003cresource address\u003e`.\n",
+                    "secret": true
+                },
+                "apiUrl": {
+                    "type": "string",
+                    "description": "API URL of your Fleet server.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "apiKey",
+                "apiUrl"
+            ]
+        },
+        "formal:index/IntegrationMdmJamf:IntegrationMdmJamf": {
+            "properties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nOAuth client secret for your Jamf Pro API client. This value is not stored in Terraform state. To rotate the secret, change this value and run `terraform apply -replace=\u003cresource address\u003e`.\n",
+                    "secret": true
+                },
+                "apiUrl": {
+                    "type": "string",
+                    "description": "API URL of your Jamf Pro instance.\n",
+                    "willReplaceOnChanges": true
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "OAuth client ID for your Jamf Pro API client.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "apiKey",
+                "apiUrl",
+                "clientId"
+            ]
+        },
         "formal:index/IntegrationMdmKandji:IntegrationMdmKandji": {
             "properties": {
                 "apiKey": {
                     "type": "string",
-                    "description": "API Key of your Kandji organization.\n"
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nAPI Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=\u003cresource address\u003e`.\n",
+                    "secret": true
                 },
                 "apiUrl": {
                     "type": "string",
-                    "description": "API URL of your Kandji organization.\n"
+                    "description": "API URL of your Kandji organization.\n",
+                    "willReplaceOnChanges": true
                 }
             },
             "type": "object",
@@ -1740,6 +1844,104 @@
                 "type": "object"
             }
         },
+        "formal:index/hook:Hook": {
+            "description": "Hooks are JavaScript functions evaluated during policy decisions. Policies reference hooks as `input.hooks.\u003cname\u003e`.\n",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).\n"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "When the hook was created.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The hook description.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the hook. Must be unique within the organization and match `^[A-Za-z_][A-Za-z0-9_]*$`. Policies reference this name as `input.hooks.\u003cname\u003e`.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The hook status. Accepted values are \u003cspan pulumi-lang-nodejs=\"`active`\" pulumi-lang-dotnet=\"`Active`\" pulumi-lang-go=\"`active`\" pulumi-lang-python=\"`active`\" pulumi-lang-yaml=\"`active`\" pulumi-lang-java=\"`active`\" pulumi-lang-hcl=\"`active`\"\u003e`active`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`draft`\" pulumi-lang-dotnet=\"`Draft`\" pulumi-lang-go=\"`draft`\" pulumi-lang-python=\"`draft`\" pulumi-lang-yaml=\"`draft`\" pulumi-lang-java=\"`draft`\" pulumi-lang-hcl=\"`draft`\"\u003e`draft`\u003c/span\u003e. Only active hooks can be referenced by policies.\n"
+                },
+                "timeoutMs": {
+                    "type": "integer",
+                    "description": "Maximum time in milliseconds the hook may run during policy evaluation. Must be between 1 and 60000.\n"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "When the hook was last updated.\n"
+                }
+            },
+            "required": [
+                "code",
+                "createdAt",
+                "name",
+                "updatedAt"
+            ],
+            "inputProperties": {
+                "code": {
+                    "type": "string",
+                    "description": "The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The hook description.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the hook. Must be unique within the organization and match `^[A-Za-z_][A-Za-z0-9_]*$`. Policies reference this name as `input.hooks.\u003cname\u003e`.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The hook status. Accepted values are \u003cspan pulumi-lang-nodejs=\"`active`\" pulumi-lang-dotnet=\"`Active`\" pulumi-lang-go=\"`active`\" pulumi-lang-python=\"`active`\" pulumi-lang-yaml=\"`active`\" pulumi-lang-java=\"`active`\" pulumi-lang-hcl=\"`active`\"\u003e`active`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`draft`\" pulumi-lang-dotnet=\"`Draft`\" pulumi-lang-go=\"`draft`\" pulumi-lang-python=\"`draft`\" pulumi-lang-yaml=\"`draft`\" pulumi-lang-java=\"`draft`\" pulumi-lang-hcl=\"`draft`\"\u003e`draft`\u003c/span\u003e. Only active hooks can be referenced by policies.\n"
+                },
+                "timeoutMs": {
+                    "type": "integer",
+                    "description": "Maximum time in milliseconds the hook may run during policy evaluation. Must be between 1 and 60000.\n"
+                }
+            },
+            "requiredInputs": [
+                "code"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Hook resources.\n",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).\n"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "When the hook was created.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The hook description.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the hook. Must be unique within the organization and match `^[A-Za-z_][A-Za-z0-9_]*$`. Policies reference this name as `input.hooks.\u003cname\u003e`.\n"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "The hook status. Accepted values are \u003cspan pulumi-lang-nodejs=\"`active`\" pulumi-lang-dotnet=\"`Active`\" pulumi-lang-go=\"`active`\" pulumi-lang-python=\"`active`\" pulumi-lang-yaml=\"`active`\" pulumi-lang-java=\"`active`\" pulumi-lang-hcl=\"`active`\"\u003e`active`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`draft`\" pulumi-lang-dotnet=\"`Draft`\" pulumi-lang-go=\"`draft`\" pulumi-lang-python=\"`draft`\" pulumi-lang-yaml=\"`draft`\" pulumi-lang-java=\"`draft`\" pulumi-lang-hcl=\"`draft`\"\u003e`draft`\u003c/span\u003e. Only active hooks can be referenced by policies.\n"
+                    },
+                    "timeoutMs": {
+                        "type": "integer",
+                        "description": "Maximum time in milliseconds the hook may run during policy evaluation. Must be between 1 and 60000.\n"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "When the hook was last updated.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "formal:index/integrationBi:IntegrationBi": {
             "description": "Registering a BI App.\n",
             "properties": {
@@ -1849,6 +2051,10 @@
                     "type": "string",
                     "description": "The SNS topic ARN CloudFormation can use to send events to Formal.\n"
                 },
+                "awsFormalRoleArn": {
+                    "type": "string",
+                    "description": "The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.\n"
+                },
                 "awsFormalStackName": {
                     "type": "string",
                     "description": "A generated name for your CloudFormation stack.\n"
@@ -1863,7 +2069,53 @@
                 },
                 "cloudRegion": {
                     "type": "string",
-                    "description": "Region of the cloud provider.\n"
+                    "description": "Region of the cloud provider. (AWS only)\n"
+                },
+                "gcp": {
+                    "$ref": "#/types/formal:index/IntegrationCloudGcp:IntegrationCloudGcp",
+                    "description": "Configuration block for GCP integration.\n"
+                },
+                "gcpAllowGcsAccess": {
+                    "type": "boolean",
+                    "description": "Whether the Cloud Integration is allowed to write logs to GCS.\n"
+                },
+                "gcpEnableCloudsqlInstancesAutodiscovery": {
+                    "type": "boolean",
+                    "description": "Whether GCP Cloud SQL instances autodiscovery is enabled or not.\n"
+                },
+                "gcpEnableComputeInstancesAutodiscovery": {
+                    "type": "boolean",
+                    "description": "Whether GCP Compute Engine instances autodiscovery is enabled or not.\n"
+                },
+                "gcpEnableGkeClustersAutodiscovery": {
+                    "type": "boolean",
+                    "description": "Whether GCP GKE clusters autodiscovery is enabled or not.\n"
+                },
+                "gcpGcsBuckets": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.\n"
+                },
+                "gcpProjectId": {
+                    "type": "string",
+                    "description": "The GCP project ID this integration grants Formal access to.\n"
+                },
+                "gcpRoles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.\n"
+                },
+                "gcpServiceAccountEmail": {
+                    "type": "string",
+                    "description": "The GCP service account email created for this integration.\n"
+                },
+                "gcpWorkloadIdentityPoolProvider": {
+                    "type": "string",
+                    "description": "The GCP workload identity pool provider created for this integration.\n"
                 },
                 "name": {
                     "type": "string",
@@ -1871,7 +2123,7 @@
                 },
                 "type": {
                     "type": "string",
-                    "description": "Type of the Integration. (Supported: aws)\n",
+                    "description": "Type of the Integration. (Supported: aws, gcp)\n",
                     "deprecationMessage": "This field is deprecated and will be removed in a future version."
                 }
             },
@@ -1886,10 +2138,19 @@
                 "awsFormalIamRole",
                 "awsFormalIamRoleArn",
                 "awsFormalPingbackArn",
+                "awsFormalRoleArn",
                 "awsFormalStackName",
                 "awsS3BucketArn",
                 "awsTemplateBody",
-                "cloudRegion",
+                "gcpAllowGcsAccess",
+                "gcpEnableCloudsqlInstancesAutodiscovery",
+                "gcpEnableComputeInstancesAutodiscovery",
+                "gcpEnableGkeClustersAutodiscovery",
+                "gcpGcsBuckets",
+                "gcpProjectId",
+                "gcpRoles",
+                "gcpServiceAccountEmail",
+                "gcpWorkloadIdentityPoolProvider",
                 "name"
             ],
             "inputProperties": {
@@ -1899,8 +2160,12 @@
                 },
                 "cloudRegion": {
                     "type": "string",
-                    "description": "Region of the cloud provider.\n",
+                    "description": "Region of the cloud provider. (AWS only)\n",
                     "willReplaceOnChanges": true
+                },
+                "gcp": {
+                    "$ref": "#/types/formal:index/IntegrationCloudGcp:IntegrationCloudGcp",
+                    "description": "Configuration block for GCP integration.\n"
                 },
                 "name": {
                     "type": "string",
@@ -1909,13 +2174,10 @@
                 },
                 "type": {
                     "type": "string",
-                    "description": "Type of the Integration. (Supported: aws)\n",
+                    "description": "Type of the Integration. (Supported: aws, gcp)\n",
                     "deprecationMessage": "This field is deprecated and will be removed in a future version."
                 }
             },
-            "requiredInputs": [
-                "cloudRegion"
-            ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering IntegrationCloud resources.\n",
                 "properties": {
@@ -1963,6 +2225,10 @@
                         "type": "string",
                         "description": "The SNS topic ARN CloudFormation can use to send events to Formal.\n"
                     },
+                    "awsFormalRoleArn": {
+                        "type": "string",
+                        "description": "The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.\n"
+                    },
                     "awsFormalStackName": {
                         "type": "string",
                         "description": "A generated name for your CloudFormation stack.\n"
@@ -1977,8 +2243,54 @@
                     },
                     "cloudRegion": {
                         "type": "string",
-                        "description": "Region of the cloud provider.\n",
+                        "description": "Region of the cloud provider. (AWS only)\n",
                         "willReplaceOnChanges": true
+                    },
+                    "gcp": {
+                        "$ref": "#/types/formal:index/IntegrationCloudGcp:IntegrationCloudGcp",
+                        "description": "Configuration block for GCP integration.\n"
+                    },
+                    "gcpAllowGcsAccess": {
+                        "type": "boolean",
+                        "description": "Whether the Cloud Integration is allowed to write logs to GCS.\n"
+                    },
+                    "gcpEnableCloudsqlInstancesAutodiscovery": {
+                        "type": "boolean",
+                        "description": "Whether GCP Cloud SQL instances autodiscovery is enabled or not.\n"
+                    },
+                    "gcpEnableComputeInstancesAutodiscovery": {
+                        "type": "boolean",
+                        "description": "Whether GCP Compute Engine instances autodiscovery is enabled or not.\n"
+                    },
+                    "gcpEnableGkeClustersAutodiscovery": {
+                        "type": "boolean",
+                        "description": "Whether GCP GKE clusters autodiscovery is enabled or not.\n"
+                    },
+                    "gcpGcsBuckets": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.\n"
+                    },
+                    "gcpProjectId": {
+                        "type": "string",
+                        "description": "The GCP project ID this integration grants Formal access to.\n"
+                    },
+                    "gcpRoles": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.\n"
+                    },
+                    "gcpServiceAccountEmail": {
+                        "type": "string",
+                        "description": "The GCP service account email created for this integration.\n"
+                    },
+                    "gcpWorkloadIdentityPoolProvider": {
+                        "type": "string",
+                        "description": "The GCP workload identity pool provider created for this integration.\n"
                     },
                     "name": {
                         "type": "string",
@@ -1987,8 +2299,69 @@
                     },
                     "type": {
                         "type": "string",
-                        "description": "Type of the Integration. (Supported: aws)\n",
+                        "description": "Type of the Integration. (Supported: aws, gcp)\n",
                         "deprecationMessage": "This field is deprecated and will be removed in a future version."
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "formal:index/integrationCloudGcpActivation:IntegrationCloudGcpActivation": {
+            "description": "Reports the GCP service account and workload identity pool provider back to Formal to activate a GCP Cloud Integration.\n",
+            "properties": {
+                "integrationId": {
+                    "type": "string",
+                    "description": "The ID of the GCP Cloud Integration to activate.\n"
+                },
+                "serviceAccountEmail": {
+                    "type": "string",
+                    "description": "The GCP service account email created for this integration.\n"
+                },
+                "workloadIdentityPoolProvider": {
+                    "type": "string",
+                    "description": "The GCP workload identity pool provider created for this integration.\n"
+                }
+            },
+            "required": [
+                "integrationId",
+                "serviceAccountEmail",
+                "workloadIdentityPoolProvider"
+            ],
+            "inputProperties": {
+                "integrationId": {
+                    "type": "string",
+                    "description": "The ID of the GCP Cloud Integration to activate.\n",
+                    "willReplaceOnChanges": true
+                },
+                "serviceAccountEmail": {
+                    "type": "string",
+                    "description": "The GCP service account email created for this integration.\n"
+                },
+                "workloadIdentityPoolProvider": {
+                    "type": "string",
+                    "description": "The GCP workload identity pool provider created for this integration.\n"
+                }
+            },
+            "requiredInputs": [
+                "integrationId",
+                "serviceAccountEmail",
+                "workloadIdentityPoolProvider"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering IntegrationCloudGcpActivation resources.\n",
+                "properties": {
+                    "integrationId": {
+                        "type": "string",
+                        "description": "The ID of the GCP Cloud Integration to activate.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "serviceAccountEmail": {
+                        "type": "string",
+                        "description": "The GCP service account email created for this integration.\n"
+                    },
+                    "workloadIdentityPoolProvider": {
+                        "type": "string",
+                        "description": "The GCP workload identity pool provider created for this integration.\n"
                     }
                 },
                 "type": "object"
@@ -2004,6 +2377,10 @@
                 "datadog": {
                     "$ref": "#/types/formal:index/IntegrationLogDatadog:IntegrationLogDatadog",
                     "description": "Configuration block for Datadog integration.\n"
+                },
+                "gcs": {
+                    "$ref": "#/types/formal:index/IntegrationLogGcs:IntegrationLogGcs",
+                    "description": "Configuration block for Google Cloud Storage integration.\n"
                 },
                 "name": {
                     "type": "string",
@@ -2026,6 +2403,11 @@
                 "datadog": {
                     "$ref": "#/types/formal:index/IntegrationLogDatadog:IntegrationLogDatadog",
                     "description": "Configuration block for Datadog integration.\n",
+                    "willReplaceOnChanges": true
+                },
+                "gcs": {
+                    "$ref": "#/types/formal:index/IntegrationLogGcs:IntegrationLogGcs",
+                    "description": "Configuration block for Google Cloud Storage integration.\n",
                     "willReplaceOnChanges": true
                 },
                 "name": {
@@ -2052,6 +2434,11 @@
                         "description": "Configuration block for Datadog integration.\n",
                         "willReplaceOnChanges": true
                     },
+                    "gcs": {
+                        "$ref": "#/types/formal:index/IntegrationLogGcs:IntegrationLogGcs",
+                        "description": "Configuration block for Google Cloud Storage integration.\n",
+                        "willReplaceOnChanges": true
+                    },
                     "name": {
                         "type": "string",
                         "description": "Friendly name for the Integration app.\n",
@@ -2069,9 +2456,17 @@
         "formal:index/integrationMdm:IntegrationMdm": {
             "description": "Registering a Integration MDM app.\n",
             "properties": {
+                "fleet": {
+                    "$ref": "#/types/formal:index/IntegrationMdmFleet:IntegrationMdmFleet",
+                    "description": "Configuration block for Fleet integration."
+                },
+                "jamf": {
+                    "$ref": "#/types/formal:index/IntegrationMdmJamf:IntegrationMdmJamf",
+                    "description": "Configuration block for Jamf Pro integration."
+                },
                 "kandji": {
                     "$ref": "#/types/formal:index/IntegrationMdmKandji:IntegrationMdmKandji",
-                    "description": "Configuration block for Kandji integration.\n"
+                    "description": "Configuration block for Kandji integration."
                 },
                 "name": {
                     "type": "string",
@@ -2082,10 +2477,17 @@
                 "name"
             ],
             "inputProperties": {
+                "fleet": {
+                    "$ref": "#/types/formal:index/IntegrationMdmFleet:IntegrationMdmFleet",
+                    "description": "Configuration block for Fleet integration."
+                },
+                "jamf": {
+                    "$ref": "#/types/formal:index/IntegrationMdmJamf:IntegrationMdmJamf",
+                    "description": "Configuration block for Jamf Pro integration."
+                },
                 "kandji": {
                     "$ref": "#/types/formal:index/IntegrationMdmKandji:IntegrationMdmKandji",
-                    "description": "Configuration block for Kandji integration.\n",
-                    "willReplaceOnChanges": true
+                    "description": "Configuration block for Kandji integration."
                 },
                 "name": {
                     "type": "string",
@@ -2096,10 +2498,17 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering IntegrationMdm resources.\n",
                 "properties": {
+                    "fleet": {
+                        "$ref": "#/types/formal:index/IntegrationMdmFleet:IntegrationMdmFleet",
+                        "description": "Configuration block for Fleet integration."
+                    },
+                    "jamf": {
+                        "$ref": "#/types/formal:index/IntegrationMdmJamf:IntegrationMdmJamf",
+                        "description": "Configuration block for Jamf Pro integration."
+                    },
                     "kandji": {
                         "$ref": "#/types/formal:index/IntegrationMdmKandji:IntegrationMdmKandji",
-                        "description": "Configuration block for Kandji integration.\n",
-                        "willReplaceOnChanges": true
+                        "description": "Configuration block for Kandji integration."
                     },
                     "name": {
                         "type": "string",

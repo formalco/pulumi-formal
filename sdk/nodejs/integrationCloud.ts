@@ -82,6 +82,10 @@ export class IntegrationCloud extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly awsFormalPingbackArn: pulumi.Output<string>;
     /**
+     * The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+     */
+    declare public /*out*/ readonly awsFormalRoleArn: pulumi.Output<string>;
+    /**
      * A generated name for your CloudFormation stack.
      */
     declare public /*out*/ readonly awsFormalStackName: pulumi.Output<string>;
@@ -94,15 +98,55 @@ export class IntegrationCloud extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly awsTemplateBody: pulumi.Output<string>;
     /**
-     * Region of the cloud provider.
+     * Region of the cloud provider. (AWS only)
      */
-    declare public readonly cloudRegion: pulumi.Output<string>;
+    declare public readonly cloudRegion: pulumi.Output<string | undefined>;
+    /**
+     * Configuration block for GCP integration.
+     */
+    declare public readonly gcp: pulumi.Output<outputs.IntegrationCloudGcp | undefined>;
+    /**
+     * Whether the Cloud Integration is allowed to write logs to GCS.
+     */
+    declare public /*out*/ readonly gcpAllowGcsAccess: pulumi.Output<boolean>;
+    /**
+     * Whether GCP Cloud SQL instances autodiscovery is enabled or not.
+     */
+    declare public /*out*/ readonly gcpEnableCloudsqlInstancesAutodiscovery: pulumi.Output<boolean>;
+    /**
+     * Whether GCP Compute Engine instances autodiscovery is enabled or not.
+     */
+    declare public /*out*/ readonly gcpEnableComputeInstancesAutodiscovery: pulumi.Output<boolean>;
+    /**
+     * Whether GCP GKE clusters autodiscovery is enabled or not.
+     */
+    declare public /*out*/ readonly gcpEnableGkeClustersAutodiscovery: pulumi.Output<boolean>;
+    /**
+     * The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
+     */
+    declare public /*out*/ readonly gcpGcsBuckets: pulumi.Output<string[]>;
+    /**
+     * The GCP project ID this integration grants Formal access to.
+     */
+    declare public /*out*/ readonly gcpProjectId: pulumi.Output<string>;
+    /**
+     * The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+     */
+    declare public /*out*/ readonly gcpRoles: pulumi.Output<string[]>;
+    /**
+     * The GCP service account email created for this integration.
+     */
+    declare public /*out*/ readonly gcpServiceAccountEmail: pulumi.Output<string>;
+    /**
+     * The GCP workload identity pool provider created for this integration.
+     */
+    declare public /*out*/ readonly gcpWorkloadIdentityPoolProvider: pulumi.Output<string>;
     /**
      * Name of the Integration.
      */
     declare public readonly name: pulumi.Output<string>;
     /**
-     * Type of the Integration. (Supported: aws)
+     * Type of the Integration. (Supported: aws, gcp)
      *
      * @deprecated This field is deprecated and will be removed in a future version.
      */
@@ -115,7 +159,7 @@ export class IntegrationCloud extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: IntegrationCloudArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: IntegrationCloudArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: IntegrationCloudArgs | IntegrationCloudState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -132,19 +176,28 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["awsFormalIamRole"] = state?.awsFormalIamRole;
             resourceInputs["awsFormalIamRoleArn"] = state?.awsFormalIamRoleArn;
             resourceInputs["awsFormalPingbackArn"] = state?.awsFormalPingbackArn;
+            resourceInputs["awsFormalRoleArn"] = state?.awsFormalRoleArn;
             resourceInputs["awsFormalStackName"] = state?.awsFormalStackName;
             resourceInputs["awsS3BucketArn"] = state?.awsS3BucketArn;
             resourceInputs["awsTemplateBody"] = state?.awsTemplateBody;
             resourceInputs["cloudRegion"] = state?.cloudRegion;
+            resourceInputs["gcp"] = state?.gcp;
+            resourceInputs["gcpAllowGcsAccess"] = state?.gcpAllowGcsAccess;
+            resourceInputs["gcpEnableCloudsqlInstancesAutodiscovery"] = state?.gcpEnableCloudsqlInstancesAutodiscovery;
+            resourceInputs["gcpEnableComputeInstancesAutodiscovery"] = state?.gcpEnableComputeInstancesAutodiscovery;
+            resourceInputs["gcpEnableGkeClustersAutodiscovery"] = state?.gcpEnableGkeClustersAutodiscovery;
+            resourceInputs["gcpGcsBuckets"] = state?.gcpGcsBuckets;
+            resourceInputs["gcpProjectId"] = state?.gcpProjectId;
+            resourceInputs["gcpRoles"] = state?.gcpRoles;
+            resourceInputs["gcpServiceAccountEmail"] = state?.gcpServiceAccountEmail;
+            resourceInputs["gcpWorkloadIdentityPoolProvider"] = state?.gcpWorkloadIdentityPoolProvider;
             resourceInputs["name"] = state?.name;
             resourceInputs["type"] = state?.type;
         } else {
             const args = argsOrState as IntegrationCloudArgs | undefined;
-            if (args?.cloudRegion === undefined && !opts.urn) {
-                throw new Error("Missing required property 'cloudRegion'");
-            }
             resourceInputs["aws"] = args?.aws;
             resourceInputs["cloudRegion"] = args?.cloudRegion;
+            resourceInputs["gcp"] = args?.gcp;
             resourceInputs["name"] = args?.name;
             resourceInputs["type"] = args?.type;
             resourceInputs["awsAllowS3Access"] = undefined /*out*/;
@@ -157,9 +210,19 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["awsFormalIamRole"] = undefined /*out*/;
             resourceInputs["awsFormalIamRoleArn"] = undefined /*out*/;
             resourceInputs["awsFormalPingbackArn"] = undefined /*out*/;
+            resourceInputs["awsFormalRoleArn"] = undefined /*out*/;
             resourceInputs["awsFormalStackName"] = undefined /*out*/;
             resourceInputs["awsS3BucketArn"] = undefined /*out*/;
             resourceInputs["awsTemplateBody"] = undefined /*out*/;
+            resourceInputs["gcpAllowGcsAccess"] = undefined /*out*/;
+            resourceInputs["gcpEnableCloudsqlInstancesAutodiscovery"] = undefined /*out*/;
+            resourceInputs["gcpEnableComputeInstancesAutodiscovery"] = undefined /*out*/;
+            resourceInputs["gcpEnableGkeClustersAutodiscovery"] = undefined /*out*/;
+            resourceInputs["gcpGcsBuckets"] = undefined /*out*/;
+            resourceInputs["gcpProjectId"] = undefined /*out*/;
+            resourceInputs["gcpRoles"] = undefined /*out*/;
+            resourceInputs["gcpServiceAccountEmail"] = undefined /*out*/;
+            resourceInputs["gcpWorkloadIdentityPoolProvider"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(IntegrationCloud.__pulumiType, name, resourceInputs, opts);
@@ -215,6 +278,10 @@ export interface IntegrationCloudState {
      */
     awsFormalPingbackArn?: pulumi.Input<string | undefined>;
     /**
+     * The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+     */
+    awsFormalRoleArn?: pulumi.Input<string | undefined>;
+    /**
      * A generated name for your CloudFormation stack.
      */
     awsFormalStackName?: pulumi.Input<string | undefined>;
@@ -227,15 +294,55 @@ export interface IntegrationCloudState {
      */
     awsTemplateBody?: pulumi.Input<string | undefined>;
     /**
-     * Region of the cloud provider.
+     * Region of the cloud provider. (AWS only)
      */
     cloudRegion?: pulumi.Input<string | undefined>;
+    /**
+     * Configuration block for GCP integration.
+     */
+    gcp?: pulumi.Input<inputs.IntegrationCloudGcp | undefined>;
+    /**
+     * Whether the Cloud Integration is allowed to write logs to GCS.
+     */
+    gcpAllowGcsAccess?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether GCP Cloud SQL instances autodiscovery is enabled or not.
+     */
+    gcpEnableCloudsqlInstancesAutodiscovery?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether GCP Compute Engine instances autodiscovery is enabled or not.
+     */
+    gcpEnableComputeInstancesAutodiscovery?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether GCP GKE clusters autodiscovery is enabled or not.
+     */
+    gcpEnableGkeClustersAutodiscovery?: pulumi.Input<boolean | undefined>;
+    /**
+     * The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
+     */
+    gcpGcsBuckets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * The GCP project ID this integration grants Formal access to.
+     */
+    gcpProjectId?: pulumi.Input<string | undefined>;
+    /**
+     * The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+     */
+    gcpRoles?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * The GCP service account email created for this integration.
+     */
+    gcpServiceAccountEmail?: pulumi.Input<string | undefined>;
+    /**
+     * The GCP workload identity pool provider created for this integration.
+     */
+    gcpWorkloadIdentityPoolProvider?: pulumi.Input<string | undefined>;
     /**
      * Name of the Integration.
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * Type of the Integration. (Supported: aws)
+     * Type of the Integration. (Supported: aws, gcp)
      *
      * @deprecated This field is deprecated and will be removed in a future version.
      */
@@ -251,15 +358,19 @@ export interface IntegrationCloudArgs {
      */
     aws?: pulumi.Input<inputs.IntegrationCloudAws | undefined>;
     /**
-     * Region of the cloud provider.
+     * Region of the cloud provider. (AWS only)
      */
-    cloudRegion: pulumi.Input<string>;
+    cloudRegion?: pulumi.Input<string | undefined>;
+    /**
+     * Configuration block for GCP integration.
+     */
+    gcp?: pulumi.Input<inputs.IntegrationCloudGcp | undefined>;
     /**
      * Name of the Integration.
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * Type of the Integration. (Supported: aws)
+     * Type of the Integration. (Supported: aws, gcp)
      *
      * @deprecated This field is deprecated and will be removed in a future version.
      */

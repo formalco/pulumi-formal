@@ -13,11 +13,22 @@ namespace Formal.Pulumi.Inputs
 
     public sealed class IntegrationMdmKandjiArgs : global::Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// API Key of your Kandji organization.
-        /// </summary>
         [Input("apiKey", required: true)]
-        public Input<string> ApiKey { get; set; } = null!;
+        private Input<string>? _apiKey;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// API Key of your Kandji organization. This value is not stored in Terraform state. To rotate the key, change this value and run `terraform apply -replace=&lt;resource address&gt;`.
+        /// </summary>
+        public Input<string>? ApiKey
+        {
+            get => _apiKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _apiKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// API URL of your Kandji organization.
