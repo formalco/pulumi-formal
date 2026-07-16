@@ -1847,9 +1847,23 @@
         "formal:index/hook:Hook": {
             "description": "Hooks are JavaScript functions evaluated during policy decisions. Policies reference hooks as `input.hooks.\u003cname\u003e`.\n",
             "properties": {
+                "allowlistedEnvironmentVariables": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Names of process environment variables the hook may read via its second \u003cspan pulumi-lang-nodejs=\"`env`\" pulumi-lang-dotnet=\"`Env`\" pulumi-lang-go=\"`env`\" pulumi-lang-python=\"`env`\" pulumi-lang-yaml=\"`env`\" pulumi-lang-java=\"`env`\" pulumi-lang-hcl=\"`env`\"\u003e`env`\u003c/span\u003e argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from \u003cspan pulumi-lang-nodejs=\"`env`\" pulumi-lang-dotnet=\"`Env`\" pulumi-lang-go=\"`env`\" pulumi-lang-python=\"`env`\" pulumi-lang-yaml=\"`env`\" pulumi-lang-java=\"`env`\" pulumi-lang-hcl=\"`env`\"\u003e`env`\u003c/span\u003e.\n"
+                },
+                "allowlistedNetworkHosts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.\n"
+                },
                 "code": {
                     "type": "string",
-                    "description": "The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).\n"
+                    "description": "The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.\n"
                 },
                 "createdAt": {
                     "type": "string",
@@ -1883,9 +1897,23 @@
                 "updatedAt"
             ],
             "inputProperties": {
+                "allowlistedEnvironmentVariables": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Names of process environment variables the hook may read via its second \u003cspan pulumi-lang-nodejs=\"`env`\" pulumi-lang-dotnet=\"`Env`\" pulumi-lang-go=\"`env`\" pulumi-lang-python=\"`env`\" pulumi-lang-yaml=\"`env`\" pulumi-lang-java=\"`env`\" pulumi-lang-hcl=\"`env`\"\u003e`env`\u003c/span\u003e argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from \u003cspan pulumi-lang-nodejs=\"`env`\" pulumi-lang-dotnet=\"`Env`\" pulumi-lang-go=\"`env`\" pulumi-lang-python=\"`env`\" pulumi-lang-yaml=\"`env`\" pulumi-lang-java=\"`env`\" pulumi-lang-hcl=\"`env`\"\u003e`env`\u003c/span\u003e.\n"
+                },
+                "allowlistedNetworkHosts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.\n"
+                },
                 "code": {
                     "type": "string",
-                    "description": "The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).\n"
+                    "description": "The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.\n"
                 },
                 "description": {
                     "type": "string",
@@ -1910,9 +1938,23 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Hook resources.\n",
                 "properties": {
+                    "allowlistedEnvironmentVariables": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Names of process environment variables the hook may read via its second \u003cspan pulumi-lang-nodejs=\"`env`\" pulumi-lang-dotnet=\"`Env`\" pulumi-lang-go=\"`env`\" pulumi-lang-python=\"`env`\" pulumi-lang-yaml=\"`env`\" pulumi-lang-java=\"`env`\" pulumi-lang-hcl=\"`env`\"\u003e`env`\u003c/span\u003e argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from \u003cspan pulumi-lang-nodejs=\"`env`\" pulumi-lang-dotnet=\"`Env`\" pulumi-lang-go=\"`env`\" pulumi-lang-python=\"`env`\" pulumi-lang-yaml=\"`env`\" pulumi-lang-java=\"`env`\" pulumi-lang-hcl=\"`env`\"\u003e`env`\u003c/span\u003e.\n"
+                    },
+                    "allowlistedNetworkHosts": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.\n"
+                    },
                     "code": {
                         "type": "string",
-                        "description": "The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).\n"
+                        "description": "The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.\n"
                     },
                     "createdAt": {
                         "type": "string",

@@ -17,7 +17,19 @@ namespace Formal.Pulumi
     public partial class Hook : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+        /// Names of process environment variables the hook may read via its second `Env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `Env`.
+        /// </summary>
+        [Output("allowlistedEnvironmentVariables")]
+        public Output<ImmutableArray<string>> AllowlistedEnvironmentVariables { get; private set; } = null!;
+
+        /// <summary>
+        /// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        /// </summary>
+        [Output("allowlistedNetworkHosts")]
+        public Output<ImmutableArray<string>> AllowlistedNetworkHosts { get; private set; } = null!;
+
+        /// <summary>
+        /// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         /// </summary>
         [Output("code")]
         public Output<string> Code { get; private set; } = null!;
@@ -105,8 +117,32 @@ namespace Formal.Pulumi
 
     public sealed class HookArgs : global::Pulumi.ResourceArgs
     {
+        [Input("allowlistedEnvironmentVariables")]
+        private InputList<string>? _allowlistedEnvironmentVariables;
+
         /// <summary>
-        /// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+        /// Names of process environment variables the hook may read via its second `Env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `Env`.
+        /// </summary>
+        public InputList<string> AllowlistedEnvironmentVariables
+        {
+            get => _allowlistedEnvironmentVariables ?? (_allowlistedEnvironmentVariables = new InputList<string>());
+            set => _allowlistedEnvironmentVariables = value;
+        }
+
+        [Input("allowlistedNetworkHosts")]
+        private InputList<string>? _allowlistedNetworkHosts;
+
+        /// <summary>
+        /// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        /// </summary>
+        public InputList<string> AllowlistedNetworkHosts
+        {
+            get => _allowlistedNetworkHosts ?? (_allowlistedNetworkHosts = new InputList<string>());
+            set => _allowlistedNetworkHosts = value;
+        }
+
+        /// <summary>
+        /// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         /// </summary>
         [Input("code", required: true)]
         public Input<string> Code { get; set; } = null!;
@@ -143,8 +179,32 @@ namespace Formal.Pulumi
 
     public sealed class HookState : global::Pulumi.ResourceArgs
     {
+        [Input("allowlistedEnvironmentVariables")]
+        private InputList<string>? _allowlistedEnvironmentVariables;
+
         /// <summary>
-        /// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+        /// Names of process environment variables the hook may read via its second `Env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `Env`.
+        /// </summary>
+        public InputList<string> AllowlistedEnvironmentVariables
+        {
+            get => _allowlistedEnvironmentVariables ?? (_allowlistedEnvironmentVariables = new InputList<string>());
+            set => _allowlistedEnvironmentVariables = value;
+        }
+
+        [Input("allowlistedNetworkHosts")]
+        private InputList<string>? _allowlistedNetworkHosts;
+
+        /// <summary>
+        /// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        /// </summary>
+        public InputList<string> AllowlistedNetworkHosts
+        {
+            get => _allowlistedNetworkHosts ?? (_allowlistedNetworkHosts = new InputList<string>());
+            set => _allowlistedNetworkHosts = value;
+        }
+
+        /// <summary>
+        /// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         /// </summary>
         [Input("code")]
         public Input<string>? Code { get; set; }

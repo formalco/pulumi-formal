@@ -36,7 +36,15 @@ export class Hook extends pulumi.CustomResource {
     }
 
     /**
-     * The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+     * Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+     */
+    declare public readonly allowlistedEnvironmentVariables: pulumi.Output<string[] | undefined>;
+    /**
+     * Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+     */
+    declare public readonly allowlistedNetworkHosts: pulumi.Output<string[] | undefined>;
+    /**
+     * The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
      */
     declare public readonly code: pulumi.Output<string>;
     /**
@@ -77,6 +85,8 @@ export class Hook extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as HookState | undefined;
+            resourceInputs["allowlistedEnvironmentVariables"] = state?.allowlistedEnvironmentVariables;
+            resourceInputs["allowlistedNetworkHosts"] = state?.allowlistedNetworkHosts;
             resourceInputs["code"] = state?.code;
             resourceInputs["createdAt"] = state?.createdAt;
             resourceInputs["description"] = state?.description;
@@ -89,6 +99,8 @@ export class Hook extends pulumi.CustomResource {
             if (args?.code === undefined && !opts.urn) {
                 throw new Error("Missing required property 'code'");
             }
+            resourceInputs["allowlistedEnvironmentVariables"] = args?.allowlistedEnvironmentVariables;
+            resourceInputs["allowlistedNetworkHosts"] = args?.allowlistedNetworkHosts;
             resourceInputs["code"] = args?.code;
             resourceInputs["description"] = args?.description;
             resourceInputs["name"] = args?.name;
@@ -107,7 +119,15 @@ export class Hook extends pulumi.CustomResource {
  */
 export interface HookState {
     /**
-     * The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+     * Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+     */
+    allowlistedEnvironmentVariables?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+     */
+    allowlistedNetworkHosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
      */
     code?: pulumi.Input<string | undefined>;
     /**
@@ -141,7 +161,15 @@ export interface HookState {
  */
 export interface HookArgs {
     /**
-     * The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+     * Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+     */
+    allowlistedEnvironmentVariables?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+     */
+    allowlistedNetworkHosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
      */
     code: pulumi.Input<string>;
     /**

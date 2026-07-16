@@ -20,6 +20,8 @@ __all__ = ['HookArgs', 'Hook']
 class HookArgs:
     def __init__(__self__, *,
                  code: pulumi.Input[_builtins.str],
+                 allowlisted_environment_variables: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 allowlisted_network_hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  status: pulumi.Input[Optional[_builtins.str]] = None,
@@ -27,13 +29,19 @@ class HookArgs:
         """
         The set of arguments for constructing a Hook resource.
 
-        :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+        :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_environment_variables: Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
         :param pulumi.Input[_builtins.str] description: The hook description.
         :param pulumi.Input[_builtins.str] name: The name of the hook. Must be unique within the organization and match `^[A-Za-z_][A-Za-z0-9_]*$`. Policies reference this name as `input.hooks.<name>`.
         :param pulumi.Input[_builtins.str] status: The hook status. Accepted values are `active` and `draft`. Only active hooks can be referenced by policies.
         :param pulumi.Input[_builtins.int] timeout_ms: Maximum time in milliseconds the hook may run during policy evaluation. Must be between 1 and 60000.
         """
         pulumi.set(__self__, "code", code)
+        if allowlisted_environment_variables is not None:
+            pulumi.set(__self__, "allowlisted_environment_variables", allowlisted_environment_variables)
+        if allowlisted_network_hosts is not None:
+            pulumi.set(__self__, "allowlisted_network_hosts", allowlisted_network_hosts)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if name is not None:
@@ -47,13 +55,37 @@ class HookArgs:
     @pulumi.getter
     def code(self) -> pulumi.Input[_builtins.str]:
         """
-        The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+        The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         """
         return pulumi.get(self, "code")
 
     @code.setter
     def code(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "code", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowlistedEnvironmentVariables")
+    def allowlisted_environment_variables(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+        """
+        return pulumi.get(self, "allowlisted_environment_variables")
+
+    @allowlisted_environment_variables.setter
+    def allowlisted_environment_variables(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "allowlisted_environment_variables", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowlistedNetworkHosts")
+    def allowlisted_network_hosts(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        """
+        return pulumi.get(self, "allowlisted_network_hosts")
+
+    @allowlisted_network_hosts.setter
+    def allowlisted_network_hosts(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "allowlisted_network_hosts", value)
 
     @_builtins.property
     @pulumi.getter
@@ -107,6 +139,8 @@ class HookArgs:
 @pulumi.input_type
 class _HookState:
     def __init__(__self__, *,
+                 allowlisted_environment_variables: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 allowlisted_network_hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  code: pulumi.Input[Optional[_builtins.str]] = None,
                  created_at: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -117,7 +151,9 @@ class _HookState:
         """
         Input properties used for looking up and filtering Hook resources.
 
-        :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_environment_variables: Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         :param pulumi.Input[_builtins.str] created_at: When the hook was created.
         :param pulumi.Input[_builtins.str] description: The hook description.
         :param pulumi.Input[_builtins.str] name: The name of the hook. Must be unique within the organization and match `^[A-Za-z_][A-Za-z0-9_]*$`. Policies reference this name as `input.hooks.<name>`.
@@ -125,6 +161,10 @@ class _HookState:
         :param pulumi.Input[_builtins.int] timeout_ms: Maximum time in milliseconds the hook may run during policy evaluation. Must be between 1 and 60000.
         :param pulumi.Input[_builtins.str] updated_at: When the hook was last updated.
         """
+        if allowlisted_environment_variables is not None:
+            pulumi.set(__self__, "allowlisted_environment_variables", allowlisted_environment_variables)
+        if allowlisted_network_hosts is not None:
+            pulumi.set(__self__, "allowlisted_network_hosts", allowlisted_network_hosts)
         if code is not None:
             pulumi.set(__self__, "code", code)
         if created_at is not None:
@@ -141,10 +181,34 @@ class _HookState:
             pulumi.set(__self__, "updated_at", updated_at)
 
     @_builtins.property
+    @pulumi.getter(name="allowlistedEnvironmentVariables")
+    def allowlisted_environment_variables(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+        """
+        return pulumi.get(self, "allowlisted_environment_variables")
+
+    @allowlisted_environment_variables.setter
+    def allowlisted_environment_variables(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "allowlisted_environment_variables", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowlistedNetworkHosts")
+    def allowlisted_network_hosts(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        """
+        return pulumi.get(self, "allowlisted_network_hosts")
+
+    @allowlisted_network_hosts.setter
+    def allowlisted_network_hosts(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "allowlisted_network_hosts", value)
+
+    @_builtins.property
     @pulumi.getter
     def code(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+        The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         """
         return pulumi.get(self, "code")
 
@@ -231,6 +295,8 @@ class Hook(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 allowlisted_environment_variables: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 allowlisted_network_hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  code: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -243,7 +309,9 @@ class Hook(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_environment_variables: Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         :param pulumi.Input[_builtins.str] description: The hook description.
         :param pulumi.Input[_builtins.str] name: The name of the hook. Must be unique within the organization and match `^[A-Za-z_][A-Za-z0-9_]*$`. Policies reference this name as `input.hooks.<name>`.
         :param pulumi.Input[_builtins.str] status: The hook status. Accepted values are `active` and `draft`. Only active hooks can be referenced by policies.
@@ -274,6 +342,8 @@ class Hook(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 allowlisted_environment_variables: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 allowlisted_network_hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  code: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -288,6 +358,8 @@ class Hook(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = HookArgs.__new__(HookArgs)
 
+            __props__.__dict__["allowlisted_environment_variables"] = allowlisted_environment_variables
+            __props__.__dict__["allowlisted_network_hosts"] = allowlisted_network_hosts
             if code is None and not opts.urn:
                 raise TypeError("Missing required property 'code'")
             __props__.__dict__["code"] = code
@@ -307,6 +379,8 @@ class Hook(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            allowlisted_environment_variables: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            allowlisted_network_hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             code: pulumi.Input[Optional[_builtins.str]] = None,
             created_at: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -321,7 +395,9 @@ class Hook(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_environment_variables: Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         :param pulumi.Input[_builtins.str] created_at: When the hook was created.
         :param pulumi.Input[_builtins.str] description: The hook description.
         :param pulumi.Input[_builtins.str] name: The name of the hook. Must be unique within the organization and match `^[A-Za-z_][A-Za-z0-9_]*$`. Policies reference this name as `input.hooks.<name>`.
@@ -333,6 +409,8 @@ class Hook(pulumi.CustomResource):
 
         __props__ = _HookState.__new__(_HookState)
 
+        __props__.__dict__["allowlisted_environment_variables"] = allowlisted_environment_variables
+        __props__.__dict__["allowlisted_network_hosts"] = allowlisted_network_hosts
         __props__.__dict__["code"] = code
         __props__.__dict__["created_at"] = created_at
         __props__.__dict__["description"] = description
@@ -343,10 +421,26 @@ class Hook(pulumi.CustomResource):
         return Hook(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
+    @pulumi.getter(name="allowlistedEnvironmentVariables")
+    def allowlisted_environment_variables(self) -> pulumi.Output[Optional[Sequence[_builtins.str]]]:
+        """
+        Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+        """
+        return pulumi.get(self, "allowlisted_environment_variables")
+
+    @_builtins.property
+    @pulumi.getter(name="allowlistedNetworkHosts")
+    def allowlisted_network_hosts(self) -> pulumi.Output[Optional[Sequence[_builtins.str]]]:
+        """
+        Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        """
+        return pulumi.get(self, "allowlisted_network_hosts")
+
+    @_builtins.property
     @pulumi.getter
     def code(self) -> pulumi.Output[_builtins.str]:
         """
-        The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+        The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         """
         return pulumi.get(self, "code")
 
