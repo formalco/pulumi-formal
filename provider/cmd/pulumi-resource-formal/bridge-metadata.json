@@ -111,7 +111,15 @@
             },
             "formal_hook": {
                 "current": "formal:index/hook:Hook",
-                "majorVersion": 1
+                "majorVersion": 1,
+                "fields": {
+                    "allowlisted_environment_variables": {
+                        "maxItemsOne": false
+                    },
+                    "allowlisted_network_hosts": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "formal_integration_bi": {
                 "current": "formal:index/integrationBi:IntegrationBi",
