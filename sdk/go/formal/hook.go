@@ -16,7 +16,11 @@ import (
 type Hook struct {
 	pulumi.CustomResourceState
 
-	// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+	// Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+	AllowlistedEnvironmentVariables pulumi.StringArrayOutput `pulumi:"allowlistedEnvironmentVariables"`
+	// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+	AllowlistedNetworkHosts pulumi.StringArrayOutput `pulumi:"allowlistedNetworkHosts"`
+	// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
 	Code pulumi.StringOutput `pulumi:"code"`
 	// When the hook was created.
 	CreatedAt pulumi.StringOutput `pulumi:"createdAt"`
@@ -65,7 +69,11 @@ func GetHook(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Hook resources.
 type hookState struct {
-	// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+	// Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+	AllowlistedEnvironmentVariables []string `pulumi:"allowlistedEnvironmentVariables"`
+	// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+	AllowlistedNetworkHosts []string `pulumi:"allowlistedNetworkHosts"`
+	// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
 	Code *string `pulumi:"code"`
 	// When the hook was created.
 	CreatedAt *string `pulumi:"createdAt"`
@@ -82,7 +90,11 @@ type hookState struct {
 }
 
 type HookState struct {
-	// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+	// Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+	AllowlistedEnvironmentVariables pulumi.StringArrayInput
+	// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+	AllowlistedNetworkHosts pulumi.StringArrayInput
+	// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
 	Code pulumi.StringPtrInput
 	// When the hook was created.
 	CreatedAt pulumi.StringPtrInput
@@ -103,7 +115,11 @@ func (HookState) ElementType() reflect.Type {
 }
 
 type hookArgs struct {
-	// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+	// Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+	AllowlistedEnvironmentVariables []string `pulumi:"allowlistedEnvironmentVariables"`
+	// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+	AllowlistedNetworkHosts []string `pulumi:"allowlistedNetworkHosts"`
+	// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
 	Code string `pulumi:"code"`
 	// The hook description.
 	Description *string `pulumi:"description"`
@@ -117,7 +133,11 @@ type hookArgs struct {
 
 // The set of arguments for constructing a Hook resource.
 type HookArgs struct {
-	// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+	// Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+	AllowlistedEnvironmentVariables pulumi.StringArrayInput
+	// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+	AllowlistedNetworkHosts pulumi.StringArrayInput
+	// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
 	Code pulumi.StringInput
 	// The hook description.
 	Description pulumi.StringPtrInput
@@ -216,7 +236,17 @@ func (o HookOutput) ToHookOutputWithContext(ctx context.Context) HookOutput {
 	return o
 }
 
-// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input) { ... }`).
+// Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
+func (o HookOutput) AllowlistedEnvironmentVariables() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Hook) pulumi.StringArrayOutput { return v.AllowlistedEnvironmentVariables }).(pulumi.StringArrayOutput)
+}
+
+// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+func (o HookOutput) AllowlistedNetworkHosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Hook) pulumi.StringArrayOutput { return v.AllowlistedNetworkHosts }).(pulumi.StringArrayOutput)
+}
+
+// The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
 func (o HookOutput) Code() pulumi.StringOutput {
 	return o.ApplyT(func(v *Hook) pulumi.StringOutput { return v.Code }).(pulumi.StringOutput)
 }
