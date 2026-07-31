@@ -126,11 +126,17 @@ export class IntegrationCloud extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly gcpGcsBuckets: pulumi.Output<string[]>;
     /**
+     * The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
+     */
+    declare public /*out*/ readonly gcpPermissions: pulumi.Output<string[]>;
+    /**
      * The GCP project ID this integration grants Formal access to.
      */
     declare public /*out*/ readonly gcpProjectId: pulumi.Output<string>;
     /**
      * The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+     *
+     * @deprecated Use gcp_permissions, which the GCP module grants through a single custom role.
      */
     declare public /*out*/ readonly gcpRoles: pulumi.Output<string[]>;
     /**
@@ -150,7 +156,7 @@ export class IntegrationCloud extends pulumi.CustomResource {
      *
      * @deprecated This field is deprecated and will be removed in a future version.
      */
-    declare public readonly type: pulumi.Output<string | undefined>;
+    declare public readonly type: pulumi.Output<string>;
 
     /**
      * Create a IntegrationCloud resource with the given unique name, arguments, and options.
@@ -187,6 +193,7 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["gcpEnableComputeInstancesAutodiscovery"] = state?.gcpEnableComputeInstancesAutodiscovery;
             resourceInputs["gcpEnableGkeClustersAutodiscovery"] = state?.gcpEnableGkeClustersAutodiscovery;
             resourceInputs["gcpGcsBuckets"] = state?.gcpGcsBuckets;
+            resourceInputs["gcpPermissions"] = state?.gcpPermissions;
             resourceInputs["gcpProjectId"] = state?.gcpProjectId;
             resourceInputs["gcpRoles"] = state?.gcpRoles;
             resourceInputs["gcpServiceAccountEmail"] = state?.gcpServiceAccountEmail;
@@ -219,6 +226,7 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["gcpEnableComputeInstancesAutodiscovery"] = undefined /*out*/;
             resourceInputs["gcpEnableGkeClustersAutodiscovery"] = undefined /*out*/;
             resourceInputs["gcpGcsBuckets"] = undefined /*out*/;
+            resourceInputs["gcpPermissions"] = undefined /*out*/;
             resourceInputs["gcpProjectId"] = undefined /*out*/;
             resourceInputs["gcpRoles"] = undefined /*out*/;
             resourceInputs["gcpServiceAccountEmail"] = undefined /*out*/;
@@ -322,11 +330,17 @@ export interface IntegrationCloudState {
      */
     gcpGcsBuckets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
+     * The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
+     */
+    gcpPermissions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
      * The GCP project ID this integration grants Formal access to.
      */
     gcpProjectId?: pulumi.Input<string | undefined>;
     /**
      * The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+     *
+     * @deprecated Use gcp_permissions, which the GCP module grants through a single custom role.
      */
     gcpRoles?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**

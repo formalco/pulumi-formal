@@ -59,9 +59,13 @@ type IntegrationCloud struct {
 	GcpEnableGkeClustersAutodiscovery pulumi.BoolOutput `pulumi:"gcpEnableGkeClustersAutodiscovery"`
 	// The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
 	GcpGcsBuckets pulumi.StringArrayOutput `pulumi:"gcpGcsBuckets"`
+	// The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
+	GcpPermissions pulumi.StringArrayOutput `pulumi:"gcpPermissions"`
 	// The GCP project ID this integration grants Formal access to.
 	GcpProjectId pulumi.StringOutput `pulumi:"gcpProjectId"`
 	// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+	//
+	// Deprecated: Use gcp_permissions, which the GCP module grants through a single custom role.
 	GcpRoles pulumi.StringArrayOutput `pulumi:"gcpRoles"`
 	// The GCP service account email created for this integration.
 	GcpServiceAccountEmail pulumi.StringOutput `pulumi:"gcpServiceAccountEmail"`
@@ -72,7 +76,7 @@ type IntegrationCloud struct {
 	// Type of the Integration. (Supported: aws, gcp)
 	//
 	// Deprecated: This field is deprecated and will be removed in a future version.
-	Type pulumi.StringPtrOutput `pulumi:"type"`
+	Type pulumi.StringOutput `pulumi:"type"`
 }
 
 // NewIntegrationCloud registers a new resource with the given unique name, arguments, and options.
@@ -149,9 +153,13 @@ type integrationCloudState struct {
 	GcpEnableGkeClustersAutodiscovery *bool `pulumi:"gcpEnableGkeClustersAutodiscovery"`
 	// The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
 	GcpGcsBuckets []string `pulumi:"gcpGcsBuckets"`
+	// The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
+	GcpPermissions []string `pulumi:"gcpPermissions"`
 	// The GCP project ID this integration grants Formal access to.
 	GcpProjectId *string `pulumi:"gcpProjectId"`
 	// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+	//
+	// Deprecated: Use gcp_permissions, which the GCP module grants through a single custom role.
 	GcpRoles []string `pulumi:"gcpRoles"`
 	// The GCP service account email created for this integration.
 	GcpServiceAccountEmail *string `pulumi:"gcpServiceAccountEmail"`
@@ -210,9 +218,13 @@ type IntegrationCloudState struct {
 	GcpEnableGkeClustersAutodiscovery pulumi.BoolPtrInput
 	// The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
 	GcpGcsBuckets pulumi.StringArrayInput
+	// The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
+	GcpPermissions pulumi.StringArrayInput
 	// The GCP project ID this integration grants Formal access to.
 	GcpProjectId pulumi.StringPtrInput
 	// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+	//
+	// Deprecated: Use gcp_permissions, which the GCP module grants through a single custom role.
 	GcpRoles pulumi.StringArrayInput
 	// The GCP service account email created for this integration.
 	GcpServiceAccountEmail pulumi.StringPtrInput
@@ -458,12 +470,19 @@ func (o IntegrationCloudOutput) GcpGcsBuckets() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringArrayOutput { return v.GcpGcsBuckets }).(pulumi.StringArrayOutput)
 }
 
+// The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
+func (o IntegrationCloudOutput) GcpPermissions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringArrayOutput { return v.GcpPermissions }).(pulumi.StringArrayOutput)
+}
+
 // The GCP project ID this integration grants Formal access to.
 func (o IntegrationCloudOutput) GcpProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.GcpProjectId }).(pulumi.StringOutput)
 }
 
 // The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
+//
+// Deprecated: Use gcp_permissions, which the GCP module grants through a single custom role.
 func (o IntegrationCloudOutput) GcpRoles() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringArrayOutput { return v.GcpRoles }).(pulumi.StringArrayOutput)
 }
@@ -486,8 +505,8 @@ func (o IntegrationCloudOutput) Name() pulumi.StringOutput {
 // Type of the Integration. (Supported: aws, gcp)
 //
 // Deprecated: This field is deprecated and will be removed in a future version.
-func (o IntegrationCloudOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringPtrOutput { return v.Type }).(pulumi.StringPtrOutput)
+func (o IntegrationCloudOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }
 
 type IntegrationCloudArrayOutput struct{ *pulumi.OutputState }

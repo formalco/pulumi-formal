@@ -37,6 +37,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ConnectorListenerRule{}
 	case "formal:index/connectorSatelliteLink:ConnectorSatelliteLink":
 		r = &ConnectorSatelliteLink{}
+	case "formal:index/connectorTokenEncryptionKey:ConnectorTokenEncryptionKey":
+		r = &ConnectorTokenEncryptionKey{}
 	case "formal:index/dataDiscovery:DataDiscovery":
 		r = &DataDiscovery{}
 	case "formal:index/dataLabel:DataLabel":
@@ -89,6 +91,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ResourceHealthCheck{}
 	case "formal:index/resourceHostname:ResourceHostname":
 		r = &ResourceHostname{}
+	case "formal:index/resourceSshHostKey:ResourceSshHostKey":
+		r = &ResourceSshHostKey{}
 	case "formal:index/resourceTlsConfiguration:ResourceTlsConfiguration":
 		r = &ResourceTlsConfiguration{}
 	case "formal:index/satellite:Satellite":
@@ -97,10 +101,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &SatelliteHostname{}
 	case "formal:index/satelliteLink:SatelliteLink":
 		r = &SatelliteLink{}
-	case "formal:index/sidecar:Sidecar":
-		r = &Sidecar{}
-	case "formal:index/sidecarResourceLink:SidecarResourceLink":
-		r = &SidecarResourceLink{}
 	case "formal:index/space:Space":
 		r = &Space{}
 	case "formal:index/user:User":
@@ -176,6 +176,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/connectorSatelliteLink",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/connectorTokenEncryptionKey",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -310,6 +315,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
+		"index/resourceSshHostKey",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
 		"index/resourceTlsConfiguration",
 		&module{version},
 	)
@@ -326,16 +336,6 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/satelliteLink",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"formal",
-		"index/sidecar",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"formal",
-		"index/sidecarResourceLink",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

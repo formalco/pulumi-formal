@@ -31,7 +31,7 @@ class HookArgs:
 
         :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_environment_variables: Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
         :param pulumi.Input[_builtins.str] description: The hook description.
         :param pulumi.Input[_builtins.str] name: The name of the hook. Must be unique within the organization and match `^[A-Za-z_][A-Za-z0-9_]*$`. Policies reference this name as `input.hooks.<name>`.
         :param pulumi.Input[_builtins.str] status: The hook status. Accepted values are `active` and `draft`. Only active hooks can be referenced by policies.
@@ -79,7 +79,7 @@ class HookArgs:
     @pulumi.getter(name="allowlistedNetworkHosts")
     def allowlisted_network_hosts(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
-        Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
         """
         return pulumi.get(self, "allowlisted_network_hosts")
 
@@ -152,7 +152,7 @@ class _HookState:
         Input properties used for looking up and filtering Hook resources.
 
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_environment_variables: Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
         :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         :param pulumi.Input[_builtins.str] created_at: When the hook was created.
         :param pulumi.Input[_builtins.str] description: The hook description.
@@ -196,7 +196,7 @@ class _HookState:
     @pulumi.getter(name="allowlistedNetworkHosts")
     def allowlisted_network_hosts(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
-        Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
         """
         return pulumi.get(self, "allowlisted_network_hosts")
 
@@ -310,7 +310,7 @@ class Hook(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_environment_variables: Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
         :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         :param pulumi.Input[_builtins.str] description: The hook description.
         :param pulumi.Input[_builtins.str] name: The name of the hook. Must be unique within the organization and match `^[A-Za-z_][A-Za-z0-9_]*$`. Policies reference this name as `input.hooks.<name>`.
@@ -396,7 +396,7 @@ class Hook(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_environment_variables: Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
         :param pulumi.Input[_builtins.str] code: The hook implementation as JavaScript. Must be a default-exported function (for example `export default function hook(input, env) { ... }`). The optional second argument receives allowlisted process environment variables.
         :param pulumi.Input[_builtins.str] created_at: When the hook was created.
         :param pulumi.Input[_builtins.str] description: The hook description.
@@ -432,7 +432,7 @@ class Hook(pulumi.CustomResource):
     @pulumi.getter(name="allowlistedNetworkHosts")
     def allowlisted_network_hosts(self) -> pulumi.Output[Optional[Sequence[_builtins.str]]]:
         """
-        Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
         """
         return pulumi.get(self, "allowlisted_network_hosts")
 

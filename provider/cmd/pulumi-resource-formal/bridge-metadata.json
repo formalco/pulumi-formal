@@ -56,6 +56,10 @@
                 "current": "formal:index/connectorSatelliteLink:ConnectorSatelliteLink",
                 "majorVersion": 1
             },
+            "formal_connector_token_encryption_key": {
+                "current": "formal:index/connectorTokenEncryptionKey:ConnectorTokenEncryptionKey",
+                "majorVersion": 1
+            },
             "formal_data_discovery": {
                 "current": "formal:index/dataDiscovery:DataDiscovery",
                 "majorVersion": 1
@@ -155,6 +159,9 @@
                         }
                     },
                     "gcp_gcs_buckets": {
+                        "maxItemsOne": false
+                    },
+                    "gcp_permissions": {
                         "maxItemsOne": false
                     },
                     "gcp_roles": {
@@ -284,6 +291,10 @@
                 "current": "formal:index/resourceHostname:ResourceHostname",
                 "majorVersion": 1
             },
+            "formal_resource_ssh_host_key": {
+                "current": "formal:index/resourceSshHostKey:ResourceSshHostKey",
+                "majorVersion": 1
+            },
             "formal_resource_tls_configuration": {
                 "current": "formal:index/resourceTlsConfiguration:ResourceTlsConfiguration",
                 "majorVersion": 1
@@ -298,14 +309,6 @@
             },
             "formal_satellite_link": {
                 "current": "formal:index/satelliteLink:SatelliteLink",
-                "majorVersion": 1
-            },
-            "formal_sidecar": {
-                "current": "formal:index/sidecar:Sidecar",
-                "majorVersion": 1
-            },
-            "formal_sidecar_resource_link": {
-                "current": "formal:index/sidecarResourceLink:SidecarResourceLink",
                 "majorVersion": 1
             },
             "formal_space": {

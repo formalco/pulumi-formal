@@ -136,6 +136,7 @@ class _IntegrationCloudState:
                  gcp_enable_compute_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  gcp_enable_gke_clusters_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  gcp_gcs_buckets: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 gcp_permissions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  gcp_project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  gcp_roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  gcp_service_account_email: pulumi.Input[Optional[_builtins.str]] = None,
@@ -167,6 +168,7 @@ class _IntegrationCloudState:
         :param pulumi.Input[_builtins.bool] gcp_enable_compute_instances_autodiscovery: Whether GCP Compute Engine instances autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] gcp_enable_gke_clusters_autodiscovery: Whether GCP GKE clusters autodiscovery is enabled or not.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_gcs_buckets: The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_permissions: The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
         :param pulumi.Input[_builtins.str] gcp_project_id: The GCP project ID this integration grants Formal access to.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_roles: The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
         :param pulumi.Input[_builtins.str] gcp_service_account_email: The GCP service account email created for this integration.
@@ -218,8 +220,13 @@ class _IntegrationCloudState:
             pulumi.set(__self__, "gcp_enable_gke_clusters_autodiscovery", gcp_enable_gke_clusters_autodiscovery)
         if gcp_gcs_buckets is not None:
             pulumi.set(__self__, "gcp_gcs_buckets", gcp_gcs_buckets)
+        if gcp_permissions is not None:
+            pulumi.set(__self__, "gcp_permissions", gcp_permissions)
         if gcp_project_id is not None:
             pulumi.set(__self__, "gcp_project_id", gcp_project_id)
+        if gcp_roles is not None:
+            warnings.warn("""Use gcp_permissions, which the GCP module grants through a single custom role.""", DeprecationWarning)
+            pulumi.log.warn("""gcp_roles is deprecated: Use gcp_permissions, which the GCP module grants through a single custom role.""")
         if gcp_roles is not None:
             pulumi.set(__self__, "gcp_roles", gcp_roles)
         if gcp_service_account_email is not None:
@@ -499,6 +506,18 @@ class _IntegrationCloudState:
         pulumi.set(self, "gcp_gcs_buckets", value)
 
     @_builtins.property
+    @pulumi.getter(name="gcpPermissions")
+    def gcp_permissions(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
+        """
+        return pulumi.get(self, "gcp_permissions")
+
+    @gcp_permissions.setter
+    def gcp_permissions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "gcp_permissions", value)
+
+    @_builtins.property
     @pulumi.getter(name="gcpProjectId")
     def gcp_project_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -512,6 +531,7 @@ class _IntegrationCloudState:
 
     @_builtins.property
     @pulumi.getter(name="gcpRoles")
+    @_utilities.deprecated("""Use gcp_permissions, which the GCP module grants through a single custom role.""")
     def gcp_roles(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
@@ -659,6 +679,7 @@ class IntegrationCloud(pulumi.CustomResource):
             __props__.__dict__["gcp_enable_compute_instances_autodiscovery"] = None
             __props__.__dict__["gcp_enable_gke_clusters_autodiscovery"] = None
             __props__.__dict__["gcp_gcs_buckets"] = None
+            __props__.__dict__["gcp_permissions"] = None
             __props__.__dict__["gcp_project_id"] = None
             __props__.__dict__["gcp_roles"] = None
             __props__.__dict__["gcp_service_account_email"] = None
@@ -695,6 +716,7 @@ class IntegrationCloud(pulumi.CustomResource):
             gcp_enable_compute_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_enable_gke_clusters_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_gcs_buckets: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            gcp_permissions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             gcp_project_id: pulumi.Input[Optional[_builtins.str]] = None,
             gcp_roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             gcp_service_account_email: pulumi.Input[Optional[_builtins.str]] = None,
@@ -730,6 +752,7 @@ class IntegrationCloud(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] gcp_enable_compute_instances_autodiscovery: Whether GCP Compute Engine instances autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] gcp_enable_gke_clusters_autodiscovery: Whether GCP GKE clusters autodiscovery is enabled or not.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_gcs_buckets: The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_permissions: The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
         :param pulumi.Input[_builtins.str] gcp_project_id: The GCP project ID this integration grants Formal access to.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_roles: The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
         :param pulumi.Input[_builtins.str] gcp_service_account_email: The GCP service account email created for this integration.
@@ -763,6 +786,7 @@ class IntegrationCloud(pulumi.CustomResource):
         __props__.__dict__["gcp_enable_compute_instances_autodiscovery"] = gcp_enable_compute_instances_autodiscovery
         __props__.__dict__["gcp_enable_gke_clusters_autodiscovery"] = gcp_enable_gke_clusters_autodiscovery
         __props__.__dict__["gcp_gcs_buckets"] = gcp_gcs_buckets
+        __props__.__dict__["gcp_permissions"] = gcp_permissions
         __props__.__dict__["gcp_project_id"] = gcp_project_id
         __props__.__dict__["gcp_roles"] = gcp_roles
         __props__.__dict__["gcp_service_account_email"] = gcp_service_account_email
@@ -948,6 +972,14 @@ class IntegrationCloud(pulumi.CustomResource):
         return pulumi.get(self, "gcp_gcs_buckets")
 
     @_builtins.property
+    @pulumi.getter(name="gcpPermissions")
+    def gcp_permissions(self) -> pulumi.Output[Sequence[_builtins.str]]:
+        """
+        The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
+        """
+        return pulumi.get(self, "gcp_permissions")
+
+    @_builtins.property
     @pulumi.getter(name="gcpProjectId")
     def gcp_project_id(self) -> pulumi.Output[_builtins.str]:
         """
@@ -957,6 +989,7 @@ class IntegrationCloud(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="gcpRoles")
+    @_utilities.deprecated("""Use gcp_permissions, which the GCP module grants through a single custom role.""")
     def gcp_roles(self) -> pulumi.Output[Sequence[_builtins.str]]:
         """
         The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
@@ -990,7 +1023,7 @@ class IntegrationCloud(pulumi.CustomResource):
     @_builtins.property
     @pulumi.getter
     @_utilities.deprecated("""This field is deprecated and will be removed in a future version.""")
-    def type(self) -> pulumi.Output[Optional[_builtins.str]]:
+    def type(self) -> pulumi.Output[_builtins.str]:
         """
         Type of the Integration. (Supported: aws, gcp)
         """

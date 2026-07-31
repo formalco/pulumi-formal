@@ -149,6 +149,12 @@ namespace Formal.Pulumi
         public Output<ImmutableArray<string>> GcpGcsBuckets { get; private set; } = null!;
 
         /// <summary>
+        /// The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
+        /// </summary>
+        [Output("gcpPermissions")]
+        public Output<ImmutableArray<string>> GcpPermissions { get; private set; } = null!;
+
+        /// <summary>
         /// The GCP project ID this integration grants Formal access to.
         /// </summary>
         [Output("gcpProjectId")]
@@ -182,7 +188,7 @@ namespace Formal.Pulumi
         /// Type of the Integration. (Supported: aws, gcp)
         /// </summary>
         [Output("type")]
-        public Output<string?> Type { get; private set; } = null!;
+        public Output<string> Type { get; private set; } = null!;
 
 
         /// <summary>
@@ -407,6 +413,18 @@ namespace Formal.Pulumi
             set => _gcpGcsBuckets = value;
         }
 
+        [Input("gcpPermissions")]
+        private InputList<string>? _gcpPermissions;
+
+        /// <summary>
+        /// The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
+        /// </summary>
+        public InputList<string> GcpPermissions
+        {
+            get => _gcpPermissions ?? (_gcpPermissions = new InputList<string>());
+            set => _gcpPermissions = value;
+        }
+
         /// <summary>
         /// The GCP project ID this integration grants Formal access to.
         /// </summary>
@@ -419,6 +437,7 @@ namespace Formal.Pulumi
         /// <summary>
         /// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
         /// </summary>
+        [Obsolete(@"Use gcp_permissions, which the GCP module grants through a single custom role.")]
         public InputList<string> GcpRoles
         {
             get => _gcpRoles ?? (_gcpRoles = new InputList<string>());
