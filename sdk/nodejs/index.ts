@@ -45,6 +45,11 @@ export type ConnectorSatelliteLink = import("./connectorSatelliteLink").Connecto
 export const ConnectorSatelliteLink: typeof import("./connectorSatelliteLink").ConnectorSatelliteLink = null as any;
 utilities.lazyLoad(exports, ["ConnectorSatelliteLink"], () => require("./connectorSatelliteLink"));
 
+export { ConnectorTokenEncryptionKeyArgs, ConnectorTokenEncryptionKeyState } from "./connectorTokenEncryptionKey";
+export type ConnectorTokenEncryptionKey = import("./connectorTokenEncryptionKey").ConnectorTokenEncryptionKey;
+export const ConnectorTokenEncryptionKey: typeof import("./connectorTokenEncryptionKey").ConnectorTokenEncryptionKey = null as any;
+utilities.lazyLoad(exports, ["ConnectorTokenEncryptionKey"], () => require("./connectorTokenEncryptionKey"));
+
 export { DataDiscoveryArgs, DataDiscoveryState } from "./dataDiscovery";
 export type DataDiscovery = import("./dataDiscovery").DataDiscovery;
 export const DataDiscovery: typeof import("./dataDiscovery").DataDiscovery = null as any;
@@ -203,6 +208,11 @@ export type ResourceHostname = import("./resourceHostname").ResourceHostname;
 export const ResourceHostname: typeof import("./resourceHostname").ResourceHostname = null as any;
 utilities.lazyLoad(exports, ["ResourceHostname"], () => require("./resourceHostname"));
 
+export { ResourceSshHostKeyArgs, ResourceSshHostKeyState } from "./resourceSshHostKey";
+export type ResourceSshHostKey = import("./resourceSshHostKey").ResourceSshHostKey;
+export const ResourceSshHostKey: typeof import("./resourceSshHostKey").ResourceSshHostKey = null as any;
+utilities.lazyLoad(exports, ["ResourceSshHostKey"], () => require("./resourceSshHostKey"));
+
 export { ResourceTlsConfigurationArgs, ResourceTlsConfigurationState } from "./resourceTlsConfiguration";
 export type ResourceTlsConfiguration = import("./resourceTlsConfiguration").ResourceTlsConfiguration;
 export const ResourceTlsConfiguration: typeof import("./resourceTlsConfiguration").ResourceTlsConfiguration = null as any;
@@ -222,16 +232,6 @@ export { SatelliteLinkArgs, SatelliteLinkState } from "./satelliteLink";
 export type SatelliteLink = import("./satelliteLink").SatelliteLink;
 export const SatelliteLink: typeof import("./satelliteLink").SatelliteLink = null as any;
 utilities.lazyLoad(exports, ["SatelliteLink"], () => require("./satelliteLink"));
-
-export { SidecarArgs, SidecarState } from "./sidecar";
-export type Sidecar = import("./sidecar").Sidecar;
-export const Sidecar: typeof import("./sidecar").Sidecar = null as any;
-utilities.lazyLoad(exports, ["Sidecar"], () => require("./sidecar"));
-
-export { SidecarResourceLinkArgs, SidecarResourceLinkState } from "./sidecarResourceLink";
-export type SidecarResourceLink = import("./sidecarResourceLink").SidecarResourceLink;
-export const SidecarResourceLink: typeof import("./sidecarResourceLink").SidecarResourceLink = null as any;
-utilities.lazyLoad(exports, ["SidecarResourceLink"], () => require("./sidecarResourceLink"));
 
 export { SpaceArgs, SpaceState } from "./space";
 export type Space = import("./space").Space;
@@ -278,6 +278,8 @@ const _module = {
                 return new ConnectorListenerRule(name, <any>undefined, { urn })
             case "formal:index/connectorSatelliteLink:ConnectorSatelliteLink":
                 return new ConnectorSatelliteLink(name, <any>undefined, { urn })
+            case "formal:index/connectorTokenEncryptionKey:ConnectorTokenEncryptionKey":
+                return new ConnectorTokenEncryptionKey(name, <any>undefined, { urn })
             case "formal:index/dataDiscovery:DataDiscovery":
                 return new DataDiscovery(name, <any>undefined, { urn })
             case "formal:index/dataLabel:DataLabel":
@@ -330,6 +332,8 @@ const _module = {
                 return new ResourceHealthCheck(name, <any>undefined, { urn })
             case "formal:index/resourceHostname:ResourceHostname":
                 return new ResourceHostname(name, <any>undefined, { urn })
+            case "formal:index/resourceSshHostKey:ResourceSshHostKey":
+                return new ResourceSshHostKey(name, <any>undefined, { urn })
             case "formal:index/resourceTlsConfiguration:ResourceTlsConfiguration":
                 return new ResourceTlsConfiguration(name, <any>undefined, { urn })
             case "formal:index/satellite:Satellite":
@@ -338,10 +342,6 @@ const _module = {
                 return new SatelliteHostname(name, <any>undefined, { urn })
             case "formal:index/satelliteLink:SatelliteLink":
                 return new SatelliteLink(name, <any>undefined, { urn })
-            case "formal:index/sidecar:Sidecar":
-                return new Sidecar(name, <any>undefined, { urn })
-            case "formal:index/sidecarResourceLink:SidecarResourceLink":
-                return new SidecarResourceLink(name, <any>undefined, { urn })
             case "formal:index/space:Space":
                 return new Space(name, <any>undefined, { urn })
             case "formal:index/user:User":
@@ -361,6 +361,7 @@ pulumi.runtime.registerResourceModule("formal", "index/connectorListener", _modu
 pulumi.runtime.registerResourceModule("formal", "index/connectorListenerLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/connectorListenerRule", _module)
 pulumi.runtime.registerResourceModule("formal", "index/connectorSatelliteLink", _module)
+pulumi.runtime.registerResourceModule("formal", "index/connectorTokenEncryptionKey", _module)
 pulumi.runtime.registerResourceModule("formal", "index/dataDiscovery", _module)
 pulumi.runtime.registerResourceModule("formal", "index/dataLabel", _module)
 pulumi.runtime.registerResourceModule("formal", "index/encryptionKey", _module)
@@ -387,12 +388,11 @@ pulumi.runtime.registerResourceModule("formal", "index/resourceClassifierConfigu
 pulumi.runtime.registerResourceModule("formal", "index/resourceDialConfiguration", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceHealthCheck", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceHostname", _module)
+pulumi.runtime.registerResourceModule("formal", "index/resourceSshHostKey", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceTlsConfiguration", _module)
 pulumi.runtime.registerResourceModule("formal", "index/satellite", _module)
 pulumi.runtime.registerResourceModule("formal", "index/satelliteHostname", _module)
 pulumi.runtime.registerResourceModule("formal", "index/satelliteLink", _module)
-pulumi.runtime.registerResourceModule("formal", "index/sidecar", _module)
-pulumi.runtime.registerResourceModule("formal", "index/sidecarResourceLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/space", _module)
 pulumi.runtime.registerResourceModule("formal", "index/user", _module)
 pulumi.runtime.registerResourceModule("formal", "index/workflow", _module)

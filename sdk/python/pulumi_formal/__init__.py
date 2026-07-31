@@ -14,6 +14,7 @@ from .connector_listener import *
 from .connector_listener_link import *
 from .connector_listener_rule import *
 from .connector_satellite_link import *
+from .connector_token_encryption_key import *
 from .data_discovery import *
 from .data_label import *
 from .encryption_key import *
@@ -46,12 +47,11 @@ from .resource_classifier_configuration import *
 from .resource_dial_configuration import *
 from .resource_health_check import *
 from .resource_hostname import *
+from .resource_ssh_host_key import *
 from .resource_tls_configuration import *
 from .satellite import *
 from .satellite_hostname import *
 from .satellite_link import *
-from .sidecar import *
-from .sidecar_resource_link import *
 from .space import *
 from .user import *
 from .workflow import *
@@ -130,6 +130,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/connectorSatelliteLink:ConnectorSatelliteLink": "ConnectorSatelliteLink"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/connectorTokenEncryptionKey",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/connectorTokenEncryptionKey:ConnectorTokenEncryptionKey": "ConnectorTokenEncryptionKey"
   }
  },
  {
@@ -342,6 +350,14 @@ _utilities.register(
  },
  {
   "pkg": "formal",
+  "mod": "index/resourceSshHostKey",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/resourceSshHostKey:ResourceSshHostKey": "ResourceSshHostKey"
+  }
+ },
+ {
+  "pkg": "formal",
   "mod": "index/resourceTlsConfiguration",
   "fqn": "pulumi_formal",
   "classes": {
@@ -370,22 +386,6 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/satelliteLink:SatelliteLink": "SatelliteLink"
-  }
- },
- {
-  "pkg": "formal",
-  "mod": "index/sidecar",
-  "fqn": "pulumi_formal",
-  "classes": {
-   "formal:index/sidecar:Sidecar": "Sidecar"
-  }
- },
- {
-  "pkg": "formal",
-  "mod": "index/sidecarResourceLink",
-  "fqn": "pulumi_formal",
-  "classes": {
-   "formal:index/sidecarResourceLink:SidecarResourceLink": "SidecarResourceLink"
   }
  },
  {

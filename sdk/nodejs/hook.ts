@@ -40,7 +40,7 @@ export class Hook extends pulumi.CustomResource {
      */
     declare public readonly allowlistedEnvironmentVariables: pulumi.Output<string[] | undefined>;
     /**
-     * Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+     * Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
      */
     declare public readonly allowlistedNetworkHosts: pulumi.Output<string[] | undefined>;
     /**
@@ -123,7 +123,7 @@ export interface HookState {
      */
     allowlistedEnvironmentVariables?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+     * Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
      */
     allowlistedNetworkHosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
@@ -165,7 +165,7 @@ export interface HookArgs {
      */
     allowlistedEnvironmentVariables?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+     * Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
      */
     allowlistedNetworkHosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**

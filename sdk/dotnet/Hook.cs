@@ -23,7 +23,7 @@ namespace Formal.Pulumi
         public Output<ImmutableArray<string>> AllowlistedEnvironmentVariables { get; private set; } = null!;
 
         /// <summary>
-        /// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        /// Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
         /// </summary>
         [Output("allowlistedNetworkHosts")]
         public Output<ImmutableArray<string>> AllowlistedNetworkHosts { get; private set; } = null!;
@@ -133,7 +133,7 @@ namespace Formal.Pulumi
         private InputList<string>? _allowlistedNetworkHosts;
 
         /// <summary>
-        /// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        /// Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
         /// </summary>
         public InputList<string> AllowlistedNetworkHosts
         {
@@ -195,7 +195,7 @@ namespace Formal.Pulumi
         private InputList<string>? _allowlistedNetworkHosts;
 
         /// <summary>
-        /// Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
+        /// Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.
         /// </summary>
         public InputList<string> AllowlistedNetworkHosts
         {
