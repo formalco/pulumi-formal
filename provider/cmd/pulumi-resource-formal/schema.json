@@ -1385,6 +1385,89 @@
                 "type": "object"
             }
         },
+        "formal:index/connectorTokenEncryptionKey:ConnectorTokenEncryptionKey": {
+            "description": "Register a KMS key encryption key (KEK) for HTTP policy token encryption on a Connector.\n",
+            "properties": {
+                "connectorId": {
+                    "type": "string",
+                    "description": "The ID of the Connector this token encryption key is linked to.\n"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "When the connector token encryption key was created.\n"
+                },
+                "keyId": {
+                    "type": "string",
+                    "description": "Provider-native key identifier (AWS KMS ARN, GCP CryptoKey resource name, or Azure Key Vault key URI).\n"
+                },
+                "keyProvider": {
+                    "type": "string",
+                    "description": "The KMS provider. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault'.\n"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "Last update time.\n"
+                }
+            },
+            "required": [
+                "connectorId",
+                "createdAt",
+                "keyId",
+                "keyProvider",
+                "updatedAt"
+            ],
+            "inputProperties": {
+                "connectorId": {
+                    "type": "string",
+                    "description": "The ID of the Connector this token encryption key is linked to.\n",
+                    "willReplaceOnChanges": true
+                },
+                "keyId": {
+                    "type": "string",
+                    "description": "Provider-native key identifier (AWS KMS ARN, GCP CryptoKey resource name, or Azure Key Vault key URI).\n",
+                    "willReplaceOnChanges": true
+                },
+                "keyProvider": {
+                    "type": "string",
+                    "description": "The KMS provider. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault'.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "connectorId",
+                "keyId",
+                "keyProvider"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ConnectorTokenEncryptionKey resources.\n",
+                "properties": {
+                    "connectorId": {
+                        "type": "string",
+                        "description": "The ID of the Connector this token encryption key is linked to.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "When the connector token encryption key was created.\n"
+                    },
+                    "keyId": {
+                        "type": "string",
+                        "description": "Provider-native key identifier (AWS KMS ARN, GCP CryptoKey resource name, or Azure Key Vault key URI).\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "keyProvider": {
+                        "type": "string",
+                        "description": "The KMS provider. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault'.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "Last update time.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "formal:index/dataDiscovery:DataDiscovery": {
             "description": "Registering a Data Discovery with Formal.\n",
             "properties": {
@@ -1859,7 +1942,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.\n"
+                    "description": "Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.\n"
                 },
                 "code": {
                     "type": "string",
@@ -1909,7 +1992,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.\n"
+                    "description": "Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.\n"
                 },
                 "code": {
                     "type": "string",
@@ -1950,7 +2033,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "Hostnames and IP addresses the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.\n"
+                        "description": "Hostnames, IP addresses, and CIDR ranges the hook may contact at evaluation time. Schemes, paths, and ports are not accepted. All ports on each host are allowed.\n"
                     },
                     "code": {
                         "type": "string",
@@ -2140,6 +2223,13 @@
                     },
                     "description": "The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.\n"
                 },
+                "gcpPermissions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.\n"
+                },
                 "gcpProjectId": {
                     "type": "string",
                     "description": "The GCP project ID this integration grants Formal access to.\n"
@@ -2149,7 +2239,8 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.\n"
+                    "description": "The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.\n",
+                    "deprecationMessage": "Use gcp_permissions, which the GCP module grants through a single custom role."
                 },
                 "gcpServiceAccountEmail": {
                     "type": "string",
@@ -2189,11 +2280,13 @@
                 "gcpEnableComputeInstancesAutodiscovery",
                 "gcpEnableGkeClustersAutodiscovery",
                 "gcpGcsBuckets",
+                "gcpPermissions",
                 "gcpProjectId",
                 "gcpRoles",
                 "gcpServiceAccountEmail",
                 "gcpWorkloadIdentityPoolProvider",
-                "name"
+                "name",
+                "type"
             ],
             "inputProperties": {
                 "aws": {
@@ -2315,6 +2408,13 @@
                         },
                         "description": "The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.\n"
                     },
+                    "gcpPermissions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.\n"
+                    },
                     "gcpProjectId": {
                         "type": "string",
                         "description": "The GCP project ID this integration grants Formal access to.\n"
@@ -2324,7 +2424,8 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.\n"
+                        "description": "The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.\n",
+                        "deprecationMessage": "Use gcp_permissions, which the GCP module grants through a single custom role."
                     },
                     "gcpServiceAccountEmail": {
                         "type": "string",
@@ -3964,6 +4065,53 @@
                 "type": "object"
             }
         },
+        "formal:index/resourceSshHostKey:ResourceSshHostKey": {
+            "description": "Pin an upstream SSH host public key for a Formal resource. Multiple pins may exist for one\u003cspan pulumi-lang-nodejs=\" resourceId \" pulumi-lang-dotnet=\" ResourceId \" pulumi-lang-go=\" resourceId \" pulumi-lang-python=\" resource_id \" pulumi-lang-yaml=\" resourceId \" pulumi-lang-java=\" resourceId \" pulumi-lang-hcl=\" resource_id \"\u003e resourceId \u003c/span\u003ewhen the host presents multiple key types.\n",
+            "properties": {
+                "publicKey": {
+                    "type": "string",
+                    "description": "OpenSSH public key of the upstream SSH host (for example the output of `ssh-keygen -yf /etc/ssh/ssh_host_ed25519_key`).\n"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "Resource ID for which the SSH host key is pinned.\n"
+                }
+            },
+            "required": [
+                "publicKey",
+                "resourceId"
+            ],
+            "inputProperties": {
+                "publicKey": {
+                    "type": "string",
+                    "description": "OpenSSH public key of the upstream SSH host (for example the output of `ssh-keygen -yf /etc/ssh/ssh_host_ed25519_key`).\n"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "Resource ID for which the SSH host key is pinned.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "publicKey",
+                "resourceId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ResourceSshHostKey resources.\n",
+                "properties": {
+                    "publicKey": {
+                        "type": "string",
+                        "description": "OpenSSH public key of the upstream SSH host (for example the output of `ssh-keygen -yf /etc/ssh/ssh_host_ed25519_key`).\n"
+                    },
+                    "resourceId": {
+                        "type": "string",
+                        "description": "Resource ID for which the SSH host key is pinned.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
         "formal:index/resourceTlsConfiguration:ResourceTlsConfiguration": {
             "description": "Creating a TLS Configuration of a Resource in Formal.\n",
             "properties": {
@@ -4319,196 +4467,6 @@
                     "updatedAt": {
                         "type": "string",
                         "description": "The timestamp when the satellite link was last updated.\n"
-                    }
-                },
-                "type": "object"
-            }
-        },
-        "formal:index/sidecar:Sidecar": {
-            "description": "(Deprecated) Registering a Sidecar with Formal.\n",
-            "properties": {
-                "apiKey": {
-                    "type": "string",
-                    "description": "Api key for the deployed Sidecar.\n",
-                    "secret": true
-                },
-                "createdAt": {
-                    "type": "integer",
-                    "description": "Creation time of the sidecar.\n"
-                },
-                "formalControlPlaneTlsCertificate": {
-                    "type": "string",
-                    "description": "If\u003cspan pulumi-lang-nodejs=\" deploymentType \" pulumi-lang-dotnet=\" DeploymentType \" pulumi-lang-go=\" deploymentType \" pulumi-lang-python=\" deployment_type \" pulumi-lang-yaml=\" deploymentType \" pulumi-lang-java=\" deploymentType \" pulumi-lang-hcl=\" deployment_type \"\u003e deploymentType \u003c/span\u003eis onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.\n",
-                    "secret": true
-                },
-                "hostname": {
-                    "type": "string",
-                    "description": "The hostname of the created sidecar.\n"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Friendly name for this Sidecar.\n"
-                },
-                "technology": {
-                    "type": "string",
-                    "description": "Technology of the Datastore: supported values are \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`gcp`\" pulumi-lang-dotnet=\"`Gcp`\" pulumi-lang-go=\"`gcp`\" pulumi-lang-python=\"`gcp`\" pulumi-lang-yaml=\"`gcp`\" pulumi-lang-java=\"`gcp`\" pulumi-lang-hcl=\"`gcp`\"\u003e`gcp`\u003c/span\u003e.\n"
-                },
-                "terminationProtection": {
-                    "type": "boolean",
-                    "description": "If set to true, this Sidecar cannot be deleted.\n"
-                },
-                "version": {
-                    "type": "string",
-                    "description": "Version of the Sidecar to deploy for \u003cspan pulumi-lang-nodejs=\"`managed`\" pulumi-lang-dotnet=\"`Managed`\" pulumi-lang-go=\"`managed`\" pulumi-lang-python=\"`managed`\" pulumi-lang-yaml=\"`managed`\" pulumi-lang-java=\"`managed`\" pulumi-lang-hcl=\"`managed`\"\u003e`managed`\u003c/span\u003e.\n"
-                }
-            },
-            "required": [
-                "apiKey",
-                "createdAt",
-                "formalControlPlaneTlsCertificate",
-                "hostname",
-                "name",
-                "technology"
-            ],
-            "inputProperties": {
-                "hostname": {
-                    "type": "string",
-                    "description": "The hostname of the created sidecar.\n"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Friendly name for this Sidecar.\n"
-                },
-                "technology": {
-                    "type": "string",
-                    "description": "Technology of the Datastore: supported values are \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`gcp`\" pulumi-lang-dotnet=\"`Gcp`\" pulumi-lang-go=\"`gcp`\" pulumi-lang-python=\"`gcp`\" pulumi-lang-yaml=\"`gcp`\" pulumi-lang-java=\"`gcp`\" pulumi-lang-hcl=\"`gcp`\"\u003e`gcp`\u003c/span\u003e.\n",
-                    "willReplaceOnChanges": true
-                },
-                "terminationProtection": {
-                    "type": "boolean",
-                    "description": "If set to true, this Sidecar cannot be deleted.\n"
-                },
-                "version": {
-                    "type": "string",
-                    "description": "Version of the Sidecar to deploy for \u003cspan pulumi-lang-nodejs=\"`managed`\" pulumi-lang-dotnet=\"`Managed`\" pulumi-lang-go=\"`managed`\" pulumi-lang-python=\"`managed`\" pulumi-lang-yaml=\"`managed`\" pulumi-lang-java=\"`managed`\" pulumi-lang-hcl=\"`managed`\"\u003e`managed`\u003c/span\u003e.\n"
-                }
-            },
-            "requiredInputs": [
-                "hostname",
-                "technology"
-            ],
-            "stateInputs": {
-                "description": "Input properties used for looking up and filtering Sidecar resources.\n",
-                "properties": {
-                    "apiKey": {
-                        "type": "string",
-                        "description": "Api key for the deployed Sidecar.\n",
-                        "secret": true
-                    },
-                    "createdAt": {
-                        "type": "integer",
-                        "description": "Creation time of the sidecar.\n"
-                    },
-                    "formalControlPlaneTlsCertificate": {
-                        "type": "string",
-                        "description": "If\u003cspan pulumi-lang-nodejs=\" deploymentType \" pulumi-lang-dotnet=\" DeploymentType \" pulumi-lang-go=\" deploymentType \" pulumi-lang-python=\" deployment_type \" pulumi-lang-yaml=\" deploymentType \" pulumi-lang-java=\" deploymentType \" pulumi-lang-hcl=\" deployment_type \"\u003e deploymentType \u003c/span\u003eis onprem, this is the Control Plane TLS Certificate to add to the deployed Sidecar.\n",
-                        "secret": true
-                    },
-                    "hostname": {
-                        "type": "string",
-                        "description": "The hostname of the created sidecar.\n"
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Friendly name for this Sidecar.\n"
-                    },
-                    "technology": {
-                        "type": "string",
-                        "description": "Technology of the Datastore: supported values are \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`gcp`\" pulumi-lang-dotnet=\"`Gcp`\" pulumi-lang-go=\"`gcp`\" pulumi-lang-python=\"`gcp`\" pulumi-lang-yaml=\"`gcp`\" pulumi-lang-java=\"`gcp`\" pulumi-lang-hcl=\"`gcp`\"\u003e`gcp`\u003c/span\u003e.\n",
-                        "willReplaceOnChanges": true
-                    },
-                    "terminationProtection": {
-                        "type": "boolean",
-                        "description": "If set to true, this Sidecar cannot be deleted.\n"
-                    },
-                    "version": {
-                        "type": "string",
-                        "description": "Version of the Sidecar to deploy for \u003cspan pulumi-lang-nodejs=\"`managed`\" pulumi-lang-dotnet=\"`Managed`\" pulumi-lang-go=\"`managed`\" pulumi-lang-python=\"`managed`\" pulumi-lang-yaml=\"`managed`\" pulumi-lang-java=\"`managed`\" pulumi-lang-hcl=\"`managed`\"\u003e`managed`\u003c/span\u003e.\n"
-                    }
-                },
-                "type": "object"
-            }
-        },
-        "formal:index/sidecarResourceLink:SidecarResourceLink": {
-            "description": "(Deprecated) Linking a Resource to a Sidecar in Formal.\n",
-            "properties": {
-                "port": {
-                    "type": "integer",
-                    "description": "Port.\n"
-                },
-                "resourceId": {
-                    "type": "string",
-                    "description": "Resource ID to be linked.\n"
-                },
-                "sidecarId": {
-                    "type": "string",
-                    "description": "Sidecar ID that should be linked.\n"
-                },
-                "terminationProtection": {
-                    "type": "boolean",
-                    "description": "If set to true, this Sidecar Datastore Link cannot be deleted.\n"
-                }
-            },
-            "required": [
-                "port",
-                "resourceId",
-                "sidecarId"
-            ],
-            "inputProperties": {
-                "port": {
-                    "type": "integer",
-                    "description": "Port.\n"
-                },
-                "resourceId": {
-                    "type": "string",
-                    "description": "Resource ID to be linked.\n",
-                    "willReplaceOnChanges": true
-                },
-                "sidecarId": {
-                    "type": "string",
-                    "description": "Sidecar ID that should be linked.\n",
-                    "willReplaceOnChanges": true
-                },
-                "terminationProtection": {
-                    "type": "boolean",
-                    "description": "If set to true, this Sidecar Datastore Link cannot be deleted.\n"
-                }
-            },
-            "requiredInputs": [
-                "port",
-                "resourceId",
-                "sidecarId"
-            ],
-            "stateInputs": {
-                "description": "Input properties used for looking up and filtering SidecarResourceLink resources.\n",
-                "properties": {
-                    "port": {
-                        "type": "integer",
-                        "description": "Port.\n"
-                    },
-                    "resourceId": {
-                        "type": "string",
-                        "description": "Resource ID to be linked.\n",
-                        "willReplaceOnChanges": true
-                    },
-                    "sidecarId": {
-                        "type": "string",
-                        "description": "Sidecar ID that should be linked.\n",
-                        "willReplaceOnChanges": true
-                    },
-                    "terminationProtection": {
-                        "type": "boolean",
-                        "description": "If set to true, this Sidecar Datastore Link cannot be deleted.\n"
                     }
                 },
                 "type": "object"
