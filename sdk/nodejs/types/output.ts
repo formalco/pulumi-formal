@@ -248,6 +248,10 @@ export interface IntegrationLogAwsS3 {
      */
     cloudIntegrationId: string;
     /**
+     * Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+     */
+    compression?: string;
+    /**
      * AWS Region.
      */
     region: string;
@@ -281,6 +285,10 @@ export interface IntegrationLogGcs {
      * Cloud Integration ID.
      */
     cloudIntegrationId: string;
+    /**
+     * Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+     */
+    compression?: string;
     /**
      * GCS Bucket Name.
      */

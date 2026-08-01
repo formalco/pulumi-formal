@@ -248,6 +248,10 @@ export interface IntegrationLogAwsS3 {
      */
     cloudIntegrationId: pulumi.Input<string>;
     /**
+     * Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+     */
+    compression?: pulumi.Input<string | undefined>;
+    /**
      * AWS Region.
      */
     region?: pulumi.Input<string | undefined>;
@@ -281,6 +285,10 @@ export interface IntegrationLogGcs {
      * Cloud Integration ID.
      */
     cloudIntegrationId: pulumi.Input<string>;
+    /**
+     * Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+     */
+    compression?: pulumi.Input<string | undefined>;
     /**
      * GCS Bucket Name.
      */

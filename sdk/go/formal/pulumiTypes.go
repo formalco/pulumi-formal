@@ -2575,6 +2575,8 @@ func (o IntegrationCloudGcpPtrOutput) ProjectId() pulumi.StringPtrOutput {
 type IntegrationLogAwsS3 struct {
 	// Cloud Integration ID.
 	CloudIntegrationId string `pulumi:"cloudIntegrationId"`
+	// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+	Compression *string `pulumi:"compression"`
 	// AWS Region.
 	Region *string `pulumi:"region"`
 	// AWS S3 Bucket Name.
@@ -2597,6 +2599,8 @@ type IntegrationLogAwsS3Input interface {
 type IntegrationLogAwsS3Args struct {
 	// Cloud Integration ID.
 	CloudIntegrationId pulumi.StringInput `pulumi:"cloudIntegrationId"`
+	// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+	Compression pulumi.StringPtrInput `pulumi:"compression"`
 	// AWS Region.
 	Region pulumi.StringPtrInput `pulumi:"region"`
 	// AWS S3 Bucket Name.
@@ -2687,6 +2691,11 @@ func (o IntegrationLogAwsS3Output) CloudIntegrationId() pulumi.StringOutput {
 	return o.ApplyT(func(v IntegrationLogAwsS3) string { return v.CloudIntegrationId }).(pulumi.StringOutput)
 }
 
+// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+func (o IntegrationLogAwsS3Output) Compression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IntegrationLogAwsS3) *string { return v.Compression }).(pulumi.StringPtrOutput)
+}
+
 // AWS Region.
 func (o IntegrationLogAwsS3Output) Region() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v IntegrationLogAwsS3) *string { return v.Region }).(pulumi.StringPtrOutput)
@@ -2733,6 +2742,16 @@ func (o IntegrationLogAwsS3PtrOutput) CloudIntegrationId() pulumi.StringPtrOutpu
 			return nil
 		}
 		return &v.CloudIntegrationId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+func (o IntegrationLogAwsS3PtrOutput) Compression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogAwsS3) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Compression
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -2944,6 +2963,8 @@ func (o IntegrationLogDatadogPtrOutput) Site() pulumi.StringPtrOutput {
 type IntegrationLogGcs struct {
 	// Cloud Integration ID.
 	CloudIntegrationId string `pulumi:"cloudIntegrationId"`
+	// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+	Compression *string `pulumi:"compression"`
 	// GCS Bucket Name.
 	GcsBucketName string `pulumi:"gcsBucketName"`
 	// GCS bucket prefix to write logs under. Defaults to the bucket root.
@@ -2964,6 +2985,8 @@ type IntegrationLogGcsInput interface {
 type IntegrationLogGcsArgs struct {
 	// Cloud Integration ID.
 	CloudIntegrationId pulumi.StringInput `pulumi:"cloudIntegrationId"`
+	// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+	Compression pulumi.StringPtrInput `pulumi:"compression"`
 	// GCS Bucket Name.
 	GcsBucketName pulumi.StringInput `pulumi:"gcsBucketName"`
 	// GCS bucket prefix to write logs under. Defaults to the bucket root.
@@ -3052,6 +3075,11 @@ func (o IntegrationLogGcsOutput) CloudIntegrationId() pulumi.StringOutput {
 	return o.ApplyT(func(v IntegrationLogGcs) string { return v.CloudIntegrationId }).(pulumi.StringOutput)
 }
 
+// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+func (o IntegrationLogGcsOutput) Compression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IntegrationLogGcs) *string { return v.Compression }).(pulumi.StringPtrOutput)
+}
+
 // GCS Bucket Name.
 func (o IntegrationLogGcsOutput) GcsBucketName() pulumi.StringOutput {
 	return o.ApplyT(func(v IntegrationLogGcs) string { return v.GcsBucketName }).(pulumi.StringOutput)
@@ -3093,6 +3121,16 @@ func (o IntegrationLogGcsPtrOutput) CloudIntegrationId() pulumi.StringPtrOutput 
 			return nil
 		}
 		return &v.CloudIntegrationId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+func (o IntegrationLogGcsPtrOutput) Compression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogGcs) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Compression
 	}).(pulumi.StringPtrOutput)
 }
 
