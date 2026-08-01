@@ -407,6 +407,11 @@
                     "type": "string",
                     "description": "Cloud Integration ID.\n"
                 },
+                "compression": {
+                    "type": "string",
+                    "description": "Codec each log object is compressed with, which also sets its file extension: \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\" pulumi-lang-hcl=\"`none`\"\u003e`none`\u003c/span\u003e (`.json`), \u003cspan pulumi-lang-nodejs=\"`gzip`\" pulumi-lang-dotnet=\"`Gzip`\" pulumi-lang-go=\"`gzip`\" pulumi-lang-python=\"`gzip`\" pulumi-lang-yaml=\"`gzip`\" pulumi-lang-java=\"`gzip`\" pulumi-lang-hcl=\"`gzip`\"\u003e`gzip`\u003c/span\u003e (`.json.gz`) or \u003cspan pulumi-lang-nodejs=\"`zstd`\" pulumi-lang-dotnet=\"`Zstd`\" pulumi-lang-go=\"`zstd`\" pulumi-lang-python=\"`zstd`\" pulumi-lang-yaml=\"`zstd`\" pulumi-lang-java=\"`zstd`\" pulumi-lang-hcl=\"`zstd`\"\u003e`zstd`\u003c/span\u003e (`.json.zst`).\n",
+                    "willReplaceOnChanges": true
+                },
                 "region": {
                     "type": "string",
                     "description": "AWS Region.\n"
@@ -463,6 +468,11 @@
                 "cloudIntegrationId": {
                     "type": "string",
                     "description": "Cloud Integration ID.\n"
+                },
+                "compression": {
+                    "type": "string",
+                    "description": "Codec each log object is compressed with, which also sets its file extension: \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\" pulumi-lang-hcl=\"`none`\"\u003e`none`\u003c/span\u003e (`.json`), \u003cspan pulumi-lang-nodejs=\"`gzip`\" pulumi-lang-dotnet=\"`Gzip`\" pulumi-lang-go=\"`gzip`\" pulumi-lang-python=\"`gzip`\" pulumi-lang-yaml=\"`gzip`\" pulumi-lang-java=\"`gzip`\" pulumi-lang-hcl=\"`gzip`\"\u003e`gzip`\u003c/span\u003e (`.json.gz`) or \u003cspan pulumi-lang-nodejs=\"`zstd`\" pulumi-lang-dotnet=\"`Zstd`\" pulumi-lang-go=\"`zstd`\" pulumi-lang-python=\"`zstd`\" pulumi-lang-yaml=\"`zstd`\" pulumi-lang-java=\"`zstd`\" pulumi-lang-hcl=\"`zstd`\"\u003e`zstd`\u003c/span\u003e (`.json.zst`).\n",
+                    "willReplaceOnChanges": true
                 },
                 "gcsBucketName": {
                     "type": "string",
