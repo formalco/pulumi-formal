@@ -19,6 +19,10 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly string CloudIntegrationId;
         /// <summary>
+        /// Codec each log object is compressed with, which also sets its file extension: `None` (`.json`), `Gzip` (`.json.gz`) or `Zstd` (`.json.zst`).
+        /// </summary>
+        public readonly string? Compression;
+        /// <summary>
         /// GCS Bucket Name.
         /// </summary>
         public readonly string GcsBucketName;
@@ -31,11 +35,14 @@ namespace Formal.Pulumi.Outputs
         private IntegrationLogGcs(
             string cloudIntegrationId,
 
+            string? compression,
+
             string gcsBucketName,
 
             string? gcsBucketPrefix)
         {
             CloudIntegrationId = cloudIntegrationId;
+            Compression = compression;
             GcsBucketName = gcsBucketName;
             GcsBucketPrefix = gcsBucketPrefix;
         }

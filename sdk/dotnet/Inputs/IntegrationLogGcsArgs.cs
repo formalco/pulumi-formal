@@ -20,6 +20,12 @@ namespace Formal.Pulumi.Inputs
         public Input<string> CloudIntegrationId { get; set; } = null!;
 
         /// <summary>
+        /// Codec each log object is compressed with, which also sets its file extension: `None` (`.json`), `Gzip` (`.json.gz`) or `Zstd` (`.json.zst`).
+        /// </summary>
+        [Input("compression")]
+        public Input<string>? Compression { get; set; }
+
+        /// <summary>
         /// GCS Bucket Name.
         /// </summary>
         [Input("gcsBucketName", required: true)]

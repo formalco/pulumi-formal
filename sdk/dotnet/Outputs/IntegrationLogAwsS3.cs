@@ -19,6 +19,10 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly string CloudIntegrationId;
         /// <summary>
+        /// Codec each log object is compressed with, which also sets its file extension: `None` (`.json`), `Gzip` (`.json.gz`) or `Zstd` (`.json.zst`).
+        /// </summary>
+        public readonly string? Compression;
+        /// <summary>
         /// AWS Region.
         /// </summary>
         public readonly string? Region;
@@ -35,6 +39,8 @@ namespace Formal.Pulumi.Outputs
         private IntegrationLogAwsS3(
             string cloudIntegrationId,
 
+            string? compression,
+
             string? region,
 
             string s3BucketName,
@@ -42,6 +48,7 @@ namespace Formal.Pulumi.Outputs
             string? s3BucketPrefix)
         {
             CloudIntegrationId = cloudIntegrationId;
+            Compression = compression;
             Region = region;
             S3BucketName = s3BucketName;
             S3BucketPrefix = s3BucketPrefix;

@@ -1145,6 +1145,10 @@ class IntegrationLogAwsS3ArgsDict(TypedDict):
     """
     AWS S3 Bucket Name.
     """
+    compression: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+    """
     region: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     AWS Region.
@@ -1159,16 +1163,20 @@ class IntegrationLogAwsS3Args:
     def __init__(__self__, *,
                  cloud_integration_id: pulumi.Input[_builtins.str],
                  s3_bucket_name: pulumi.Input[_builtins.str],
+                 compression: pulumi.Input[Optional[_builtins.str]] = None,
                  region: pulumi.Input[Optional[_builtins.str]] = None,
                  s3_bucket_prefix: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] cloud_integration_id: Cloud Integration ID.
         :param pulumi.Input[_builtins.str] s3_bucket_name: AWS S3 Bucket Name.
+        :param pulumi.Input[_builtins.str] compression: Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
         :param pulumi.Input[_builtins.str] region: AWS Region.
         :param pulumi.Input[_builtins.str] s3_bucket_prefix: AWS S3 bucket prefix to write logs under. Defaults to the bucket root.
         """
         pulumi.set(__self__, "cloud_integration_id", cloud_integration_id)
         pulumi.set(__self__, "s3_bucket_name", s3_bucket_name)
+        if compression is not None:
+            pulumi.set(__self__, "compression", compression)
         if region is not None:
             pulumi.set(__self__, "region", region)
         if s3_bucket_prefix is not None:
@@ -1197,6 +1205,18 @@ class IntegrationLogAwsS3Args:
     @s3_bucket_name.setter
     def s3_bucket_name(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "s3_bucket_name", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def compression(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+        """
+        return pulumi.get(self, "compression")
+
+    @compression.setter
+    def compression(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "compression", value)
 
     @_builtins.property
     @pulumi.getter
@@ -1298,6 +1318,10 @@ class IntegrationLogGcsArgsDict(TypedDict):
     """
     GCS Bucket Name.
     """
+    compression: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+    """
     gcs_bucket_prefix: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     GCS bucket prefix to write logs under. Defaults to the bucket root.
@@ -1308,14 +1332,18 @@ class IntegrationLogGcsArgs:
     def __init__(__self__, *,
                  cloud_integration_id: pulumi.Input[_builtins.str],
                  gcs_bucket_name: pulumi.Input[_builtins.str],
+                 compression: pulumi.Input[Optional[_builtins.str]] = None,
                  gcs_bucket_prefix: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] cloud_integration_id: Cloud Integration ID.
         :param pulumi.Input[_builtins.str] gcs_bucket_name: GCS Bucket Name.
+        :param pulumi.Input[_builtins.str] compression: Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
         :param pulumi.Input[_builtins.str] gcs_bucket_prefix: GCS bucket prefix to write logs under. Defaults to the bucket root.
         """
         pulumi.set(__self__, "cloud_integration_id", cloud_integration_id)
         pulumi.set(__self__, "gcs_bucket_name", gcs_bucket_name)
+        if compression is not None:
+            pulumi.set(__self__, "compression", compression)
         if gcs_bucket_prefix is not None:
             pulumi.set(__self__, "gcs_bucket_prefix", gcs_bucket_prefix)
 
@@ -1342,6 +1370,18 @@ class IntegrationLogGcsArgs:
     @gcs_bucket_name.setter
     def gcs_bucket_name(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "gcs_bucket_name", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def compression(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+        """
+        return pulumi.get(self, "compression")
+
+    @compression.setter
+    def compression(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "compression", value)
 
     @_builtins.property
     @pulumi.getter(name="gcsBucketPrefix")
