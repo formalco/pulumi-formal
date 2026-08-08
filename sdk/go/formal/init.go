@@ -63,6 +63,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &IntegrationLog{}
 	case "formal:index/integrationMdm:IntegrationMdm":
 		r = &IntegrationMdm{}
+	case "formal:index/integrationOidc:IntegrationOidc":
+		r = &IntegrationOidc{}
 	case "formal:index/inventoryObject:InventoryObject":
 		r = &InventoryObject{}
 	case "formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink":
@@ -241,6 +243,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/integrationMdm",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/integrationOidc",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

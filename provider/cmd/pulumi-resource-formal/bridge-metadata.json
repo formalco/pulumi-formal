@@ -206,6 +206,10 @@
                     }
                 }
             },
+            "formal_integration_oidc": {
+                "current": "formal:index/integrationOidc:IntegrationOidc",
+                "majorVersion": 1
+            },
             "formal_inventory_object": {
                 "current": "formal:index/inventoryObject:InventoryObject",
                 "majorVersion": 1

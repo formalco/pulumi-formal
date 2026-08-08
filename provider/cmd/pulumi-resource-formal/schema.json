@@ -2672,6 +2672,139 @@
                 "type": "object"
             }
         },
+        "formal:index/integrationOidc:IntegrationOidc": {
+            "description": "Registers an OIDC trust configuration used to authenticate externally signed JWTs to the Formal control plane as a machine user.\n",
+            "properties": {
+                "audience": {
+                    "type": "string",
+                    "description": "The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.\n"
+                },
+                "claimCondition": {
+                    "type": "string",
+                    "description": "CEL expression evaluated against verified token claims. Must return a boolean. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "When the integration was created.\n"
+                },
+                "endUserEmailExpression": {
+                    "type": "string",
+                    "description": "Optional CEL expression over verified token claims that must evaluate to a string email. When set, federation mint resolves a Formal human by case-insensitive email. Leave unset for machine-only trusts. Examples: `claims.owner_email` (Cursor); `claims.sub.split('/').last()` (AWSReservedSSO session name when the session name is an email).\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "description": "OIDC issuer URL. Must be absolute HTTPS (path preserved). In local `ENV=dev`, the configured fake OIDC provider origin may use HTTP.\n"
+                },
+                "jwksUri": {
+                    "type": "string",
+                    "description": "Optional JWKS URI. When unset, Formal uses OIDC Discovery from the issuer. Must be absolute HTTPS when set.\n"
+                },
+                "machineUserId": {
+                    "type": "string",
+                    "description": "ID of the Formal machine user that authenticated OIDC tokens map to.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Friendly name for the OIDC integration. Must be unique within the organization.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Integration status. Accepted values are \u003cspan pulumi-lang-nodejs=\"`active`\" pulumi-lang-dotnet=\"`Active`\" pulumi-lang-go=\"`active`\" pulumi-lang-python=\"`active`\" pulumi-lang-yaml=\"`active`\" pulumi-lang-java=\"`active`\" pulumi-lang-hcl=\"`active`\"\u003e`active`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`draft`\" pulumi-lang-dotnet=\"`Draft`\" pulumi-lang-go=\"`draft`\" pulumi-lang-python=\"`draft`\" pulumi-lang-yaml=\"`draft`\" pulumi-lang-java=\"`draft`\" pulumi-lang-hcl=\"`draft`\"\u003e`draft`\u003c/span\u003e. Draft disables authentication.\n"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "When the integration was last updated.\n"
+                }
+            },
+            "required": [
+                "audience",
+                "createdAt",
+                "issuer",
+                "machineUserId",
+                "name",
+                "updatedAt"
+            ],
+            "inputProperties": {
+                "claimCondition": {
+                    "type": "string",
+                    "description": "CEL expression evaluated against verified token claims. Must return a boolean. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
+                },
+                "endUserEmailExpression": {
+                    "type": "string",
+                    "description": "Optional CEL expression over verified token claims that must evaluate to a string email. When set, federation mint resolves a Formal human by case-insensitive email. Leave unset for machine-only trusts. Examples: `claims.owner_email` (Cursor); `claims.sub.split('/').last()` (AWSReservedSSO session name when the session name is an email).\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "description": "OIDC issuer URL. Must be absolute HTTPS (path preserved). In local `ENV=dev`, the configured fake OIDC provider origin may use HTTP.\n"
+                },
+                "jwksUri": {
+                    "type": "string",
+                    "description": "Optional JWKS URI. When unset, Formal uses OIDC Discovery from the issuer. Must be absolute HTTPS when set.\n"
+                },
+                "machineUserId": {
+                    "type": "string",
+                    "description": "ID of the Formal machine user that authenticated OIDC tokens map to.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Friendly name for the OIDC integration. Must be unique within the organization.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Integration status. Accepted values are \u003cspan pulumi-lang-nodejs=\"`active`\" pulumi-lang-dotnet=\"`Active`\" pulumi-lang-go=\"`active`\" pulumi-lang-python=\"`active`\" pulumi-lang-yaml=\"`active`\" pulumi-lang-java=\"`active`\" pulumi-lang-hcl=\"`active`\"\u003e`active`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`draft`\" pulumi-lang-dotnet=\"`Draft`\" pulumi-lang-go=\"`draft`\" pulumi-lang-python=\"`draft`\" pulumi-lang-yaml=\"`draft`\" pulumi-lang-java=\"`draft`\" pulumi-lang-hcl=\"`draft`\"\u003e`draft`\u003c/span\u003e. Draft disables authentication.\n"
+                }
+            },
+            "requiredInputs": [
+                "issuer",
+                "machineUserId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering IntegrationOidc resources.\n",
+                "properties": {
+                    "audience": {
+                        "type": "string",
+                        "description": "The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.\n"
+                    },
+                    "claimCondition": {
+                        "type": "string",
+                        "description": "CEL expression evaluated against verified token claims. Must return a boolean. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "When the integration was created.\n"
+                    },
+                    "endUserEmailExpression": {
+                        "type": "string",
+                        "description": "Optional CEL expression over verified token claims that must evaluate to a string email. When set, federation mint resolves a Formal human by case-insensitive email. Leave unset for machine-only trusts. Examples: `claims.owner_email` (Cursor); `claims.sub.split('/').last()` (AWSReservedSSO session name when the session name is an email).\n"
+                    },
+                    "issuer": {
+                        "type": "string",
+                        "description": "OIDC issuer URL. Must be absolute HTTPS (path preserved). In local `ENV=dev`, the configured fake OIDC provider origin may use HTTP.\n"
+                    },
+                    "jwksUri": {
+                        "type": "string",
+                        "description": "Optional JWKS URI. When unset, Formal uses OIDC Discovery from the issuer. Must be absolute HTTPS when set.\n"
+                    },
+                    "machineUserId": {
+                        "type": "string",
+                        "description": "ID of the Formal machine user that authenticated OIDC tokens map to.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Friendly name for the OIDC integration. Must be unique within the organization.\n"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Integration status. Accepted values are \u003cspan pulumi-lang-nodejs=\"`active`\" pulumi-lang-dotnet=\"`Active`\" pulumi-lang-go=\"`active`\" pulumi-lang-python=\"`active`\" pulumi-lang-yaml=\"`active`\" pulumi-lang-java=\"`active`\" pulumi-lang-hcl=\"`active`\"\u003e`active`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`draft`\" pulumi-lang-dotnet=\"`Draft`\" pulumi-lang-go=\"`draft`\" pulumi-lang-python=\"`draft`\" pulumi-lang-yaml=\"`draft`\" pulumi-lang-java=\"`draft`\" pulumi-lang-hcl=\"`draft`\"\u003e`draft`\u003c/span\u003e. Draft disables authentication.\n"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "When the integration was last updated.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "formal:index/inventoryObject:InventoryObject": {
             "description": "Registering an inventory object (db, schema, table, column, sub-column) with Formal. Useful for seeding the inventory in test fixtures so that connectors load it at startup instead of relying on inline discovery.\n",
             "properties": {

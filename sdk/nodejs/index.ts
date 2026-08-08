@@ -135,6 +135,11 @@ export type IntegrationMdm = import("./integrationMdm").IntegrationMdm;
 export const IntegrationMdm: typeof import("./integrationMdm").IntegrationMdm = null as any;
 utilities.lazyLoad(exports, ["IntegrationMdm"], () => require("./integrationMdm"));
 
+export { IntegrationOidcArgs, IntegrationOidcState } from "./integrationOidc";
+export type IntegrationOidc = import("./integrationOidc").IntegrationOidc;
+export const IntegrationOidc: typeof import("./integrationOidc").IntegrationOidc = null as any;
+utilities.lazyLoad(exports, ["IntegrationOidc"], () => require("./integrationOidc"));
+
 export { InventoryObjectArgs, InventoryObjectState } from "./inventoryObject";
 export type InventoryObject = import("./inventoryObject").InventoryObject;
 export const InventoryObject: typeof import("./inventoryObject").InventoryObject = null as any;
@@ -304,6 +309,8 @@ const _module = {
                 return new IntegrationLog(name, <any>undefined, { urn })
             case "formal:index/integrationMdm:IntegrationMdm":
                 return new IntegrationMdm(name, <any>undefined, { urn })
+            case "formal:index/integrationOidc:IntegrationOidc":
+                return new IntegrationOidc(name, <any>undefined, { urn })
             case "formal:index/inventoryObject:InventoryObject":
                 return new InventoryObject(name, <any>undefined, { urn })
             case "formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink":
@@ -374,6 +381,7 @@ pulumi.runtime.registerResourceModule("formal", "index/integrationCloud", _modul
 pulumi.runtime.registerResourceModule("formal", "index/integrationCloudGcpActivation", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationLog", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationMdm", _module)
+pulumi.runtime.registerResourceModule("formal", "index/integrationOidc", _module)
 pulumi.runtime.registerResourceModule("formal", "index/inventoryObject", _module)
 pulumi.runtime.registerResourceModule("formal", "index/inventoryObjectDataLabelLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/logConfiguration", _module)
