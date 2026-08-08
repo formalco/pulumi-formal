@@ -48,6 +48,7 @@
         "integrationCloudGcpActivation.ts",
         "integrationLog.ts",
         "integrationMdm.ts",
+        "integrationOidc.ts",
         "inventoryObject.ts",
         "inventoryObjectDataLabelLink.ts",
         "logConfiguration.ts",

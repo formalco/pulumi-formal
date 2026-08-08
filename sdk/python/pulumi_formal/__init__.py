@@ -32,6 +32,7 @@ from .integration_cloud import *
 from .integration_cloud_gcp_activation import *
 from .integration_log import *
 from .integration_mdm import *
+from .integration_oidc import *
 from .inventory_object import *
 from .inventory_object_data_label_link import *
 from .log_configuration import *
@@ -234,6 +235,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/integrationMdm:IntegrationMdm": "IntegrationMdm"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/integrationOidc",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/integrationOidc:IntegrationOidc": "IntegrationOidc"
   }
  },
  {
