@@ -56,7 +56,13 @@
     "config": {
         "variables": {
             "apiKey": {
-                "type": "string"
+                "type": "string",
+                "description": "Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with \u003cspan pulumi-lang-nodejs=\"`oidc`\" pulumi-lang-dotnet=\"`Oidc`\" pulumi-lang-go=\"`oidc`\" pulumi-lang-python=\"`oidc`\" pulumi-lang-yaml=\"`oidc`\" pulumi-lang-java=\"`oidc`\" pulumi-lang-hcl=\"`oidc`\"\u003e`oidc`\u003c/span\u003e.",
+                "secret": true
+            },
+            "oidc": {
+                "$ref": "#/types/formal:config/oidc:oidc",
+                "description": "OIDC authentication configuration. Conflicts with \u003cspan pulumi-lang-nodejs=\"`apiKey`\" pulumi-lang-dotnet=\"`ApiKey`\" pulumi-lang-go=\"`apiKey`\" pulumi-lang-python=\"`api_key`\" pulumi-lang-yaml=\"`apiKey`\" pulumi-lang-java=\"`apiKey`\" pulumi-lang-hcl=\"`api_key`\"\u003e`apiKey`\u003c/span\u003e."
             },
             "retrieveSensitiveValues": {
                 "type": "boolean"
@@ -64,6 +70,36 @@
         }
     },
     "types": {
+        "formal:config/oidc:oidc": {
+            "properties": {
+                "aws": {
+                    "$ref": "#/types/formal:config/oidcAws:oidcAws",
+                    "description": "Mint short-lived OIDC tokens using the AWS credential chain and STS.\n"
+                },
+                "env": {
+                    "type": "string",
+                    "description": "Name of an environment variable containing a pre-minted OIDC JWT.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:config/oidcAws:oidcAws": {
+            "properties": {
+                "audience": {
+                    "type": "string",
+                    "description": "Formal OIDC integration audience requested from AWS STS.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "audience"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
         "formal:index/ConnectorAiProviderAnthropic:ConnectorAiProviderAnthropic": {
             "properties": {
                 "apiKey": {
@@ -317,7 +353,7 @@
                 },
                 "awsCustomerRoleArn": {
                     "type": "string",
-                    "description": "The ARN of the IAM role that Formal assumes in your AWS account to access your resources.\n"
+                    "description": "The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless \u003cspan pulumi-lang-nodejs=\"`templateVersion`\" pulumi-lang-dotnet=\"`TemplateVersion`\" pulumi-lang-go=\"`templateVersion`\" pulumi-lang-python=\"`template_version`\" pulumi-lang-yaml=\"`templateVersion`\" pulumi-lang-java=\"`templateVersion`\" pulumi-lang-hcl=\"`template_version`\"\u003e`templateVersion`\u003c/span\u003e is set (CloudFormation path).\n"
                 },
                 "enableEc2Autodiscovery": {
                     "type": "boolean",
@@ -349,13 +385,10 @@
                 },
                 "templateVersion": {
                     "type": "string",
-                    "description": "The template version of the CloudFormation stack. Use \u003cspan pulumi-lang-nodejs=\"`latest`\" pulumi-lang-dotnet=\"`Latest`\" pulumi-lang-go=\"`latest`\" pulumi-lang-python=\"`latest`\" pulumi-lang-yaml=\"`latest`\" pulumi-lang-java=\"`latest`\" pulumi-lang-hcl=\"`latest`\"\u003e`latest`\u003c/span\u003e to stay in sync.\n"
+                    "description": "The CloudFormation template version to use when deploying \u003cspan pulumi-lang-nodejs=\"`awsCloudformationStack`\" pulumi-lang-dotnet=\"`AwsCloudformationStack`\" pulumi-lang-go=\"`awsCloudformationStack`\" pulumi-lang-python=\"`aws_cloudformation_stack`\" pulumi-lang-yaml=\"`awsCloudformationStack`\" pulumi-lang-java=\"`awsCloudformationStack`\" pulumi-lang-hcl=\"`aws_cloudformation_stack`\"\u003e`awsCloudformationStack`\u003c/span\u003e. Required unless \u003cspan pulumi-lang-nodejs=\"`awsCustomerRoleArn`\" pulumi-lang-dotnet=\"`AwsCustomerRoleArn`\" pulumi-lang-go=\"`awsCustomerRoleArn`\" pulumi-lang-python=\"`aws_customer_role_arn`\" pulumi-lang-yaml=\"`awsCustomerRoleArn`\" pulumi-lang-java=\"`awsCustomerRoleArn`\" pulumi-lang-hcl=\"`aws_customer_role_arn`\"\u003e`awsCustomerRoleArn`\u003c/span\u003e is set. Use \u003cspan pulumi-lang-nodejs=\"`latest`\" pulumi-lang-dotnet=\"`Latest`\" pulumi-lang-go=\"`latest`\" pulumi-lang-python=\"`latest`\" pulumi-lang-yaml=\"`latest`\" pulumi-lang-java=\"`latest`\" pulumi-lang-hcl=\"`latest`\"\u003e`latest`\u003c/span\u003e to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.\n"
                 }
             },
             "type": "object",
-            "required": [
-                "templateVersion"
-            ],
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
@@ -680,13 +713,49 @@
             "required": [
                 "encrypt"
             ]
+        },
+        "formal:index/ProviderOidc:ProviderOidc": {
+            "properties": {
+                "aws": {
+                    "$ref": "#/types/formal:index/ProviderOidcAws:ProviderOidcAws",
+                    "description": "Mint short-lived OIDC tokens using the AWS credential chain and STS.\n"
+                },
+                "env": {
+                    "type": "string",
+                    "description": "Name of an environment variable containing a pre-minted OIDC JWT.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:index/ProviderOidcAws:ProviderOidcAws": {
+            "properties": {
+                "audience": {
+                    "type": "string",
+                    "description": "Formal OIDC integration audience requested from AWS STS.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "audience"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": []
+                }
+            }
         }
     },
     "provider": {
         "description": "The provider type for the formal package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
         "properties": {
             "apiKey": {
-                "type": "string"
+                "type": "string",
+                "description": "Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with \u003cspan pulumi-lang-nodejs=\"`oidc`\" pulumi-lang-dotnet=\"`Oidc`\" pulumi-lang-go=\"`oidc`\" pulumi-lang-python=\"`oidc`\" pulumi-lang-yaml=\"`oidc`\" pulumi-lang-java=\"`oidc`\" pulumi-lang-hcl=\"`oidc`\"\u003e`oidc`\u003c/span\u003e.",
+                "secret": true
+            },
+            "oidc": {
+                "$ref": "#/types/formal:index/ProviderOidc:ProviderOidc",
+                "description": "OIDC authentication configuration. Conflicts with \u003cspan pulumi-lang-nodejs=\"`apiKey`\" pulumi-lang-dotnet=\"`ApiKey`\" pulumi-lang-go=\"`apiKey`\" pulumi-lang-python=\"`api_key`\" pulumi-lang-yaml=\"`apiKey`\" pulumi-lang-java=\"`apiKey`\" pulumi-lang-hcl=\"`api_key`\"\u003e`apiKey`\u003c/span\u003e."
             },
             "retrieveSensitiveValues": {
                 "type": "boolean"
@@ -694,7 +763,13 @@
         },
         "inputProperties": {
             "apiKey": {
-                "type": "string"
+                "type": "string",
+                "description": "Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with \u003cspan pulumi-lang-nodejs=\"`oidc`\" pulumi-lang-dotnet=\"`Oidc`\" pulumi-lang-go=\"`oidc`\" pulumi-lang-python=\"`oidc`\" pulumi-lang-yaml=\"`oidc`\" pulumi-lang-java=\"`oidc`\" pulumi-lang-hcl=\"`oidc`\"\u003e`oidc`\u003c/span\u003e.",
+                "secret": true
+            },
+            "oidc": {
+                "$ref": "#/types/formal:index/ProviderOidc:ProviderOidc",
+                "description": "OIDC authentication configuration. Conflicts with \u003cspan pulumi-lang-nodejs=\"`apiKey`\" pulumi-lang-dotnet=\"`ApiKey`\" pulumi-lang-go=\"`apiKey`\" pulumi-lang-python=\"`api_key`\" pulumi-lang-yaml=\"`apiKey`\" pulumi-lang-java=\"`apiKey`\" pulumi-lang-hcl=\"`api_key`\"\u003e`apiKey`\u003c/span\u003e."
             },
             "retrieveSensitiveValues": {
                 "type": "boolean"
@@ -1652,11 +1727,11 @@
                 },
                 "keyId": {
                     "type": "string",
-                    "description": "The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).\n"
+                    "description": "The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).\n"
                 },
                 "keyProvider": {
                     "type": "string",
-                    "description": "The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').\n"
+                    "description": "The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').\n"
                 },
                 "publicKeyPem": {
                     "type": "string",
@@ -1686,11 +1761,11 @@
                 },
                 "keyId": {
                     "type": "string",
-                    "description": "The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).\n"
+                    "description": "The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).\n"
                 },
                 "keyProvider": {
                     "type": "string",
-                    "description": "The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').\n"
+                    "description": "The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').\n"
                 },
                 "publicKeyPem": {
                     "type": "string",
@@ -1719,11 +1794,11 @@
                     },
                     "keyId": {
                         "type": "string",
-                        "description": "The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).\n"
+                        "description": "The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).\n"
                     },
                     "keyProvider": {
                         "type": "string",
-                        "description": "The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').\n"
+                        "description": "The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').\n"
                     },
                     "publicKeyPem": {
                         "type": "string",
@@ -3143,7 +3218,7 @@
                 },
                 "useAsDefault": {
                     "type": "boolean",
-                    "description": "The password of the Native User."
+                    "description": "Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default."
                 }
             },
             "required": [
@@ -3181,7 +3256,7 @@
                 },
                 "useAsDefault": {
                     "type": "boolean",
-                    "description": "The password of the Native User."
+                    "description": "Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default."
                 }
             },
             "requiredInputs": [
@@ -3221,7 +3296,7 @@
                     },
                     "useAsDefault": {
                         "type": "boolean",
-                        "description": "The password of the Native User."
+                        "description": "Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default."
                     }
                 },
                 "type": "object"
@@ -3783,7 +3858,7 @@
                 },
                 "technology": {
                     "type": "string",
-                    "description": "Technology of the Resource: supported values are \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`rdp`\" pulumi-lang-dotnet=\"`Rdp`\" pulumi-lang-go=\"`rdp`\" pulumi-lang-python=\"`rdp`\" pulumi-lang-yaml=\"`rdp`\" pulumi-lang-java=\"`rdp`\" pulumi-lang-hcl=\"`rdp`\"\u003e`rdp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`clickhouse`\" pulumi-lang-dotnet=\"`Clickhouse`\" pulumi-lang-go=\"`clickhouse`\" pulumi-lang-python=\"`clickhouse`\" pulumi-lang-yaml=\"`clickhouse`\" pulumi-lang-java=\"`clickhouse`\" pulumi-lang-hcl=\"`clickhouse`\"\u003e`clickhouse`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redis`\" pulumi-lang-dotnet=\"`Redis`\" pulumi-lang-go=\"`redis`\" pulumi-lang-python=\"`redis`\" pulumi-lang-yaml=\"`redis`\" pulumi-lang-java=\"`redis`\" pulumi-lang-hcl=\"`redis`\"\u003e`redis`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`web`\" pulumi-lang-dotnet=\"`Web`\" pulumi-lang-go=\"`web`\" pulumi-lang-python=\"`web`\" pulumi-lang-yaml=\"`web`\" pulumi-lang-java=\"`web`\" pulumi-lang-hcl=\"`web`\"\u003e`web`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`grpc`\" pulumi-lang-dotnet=\"`Grpc`\" pulumi-lang-go=\"`grpc`\" pulumi-lang-python=\"`grpc`\" pulumi-lang-yaml=\"`grpc`\" pulumi-lang-java=\"`grpc`\" pulumi-lang-hcl=\"`grpc`\"\u003e`grpc`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`gcp`\" pulumi-lang-dotnet=\"`Gcp`\" pulumi-lang-go=\"`gcp`\" pulumi-lang-python=\"`gcp`\" pulumi-lang-yaml=\"`gcp`\" pulumi-lang-java=\"`gcp`\" pulumi-lang-hcl=\"`gcp`\"\u003e`gcp`\u003c/span\u003e.\n"
+                    "description": "Technology of the Resource: supported values are \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`bigquery`\" pulumi-lang-dotnet=\"`Bigquery`\" pulumi-lang-go=\"`bigquery`\" pulumi-lang-python=\"`bigquery`\" pulumi-lang-yaml=\"`bigquery`\" pulumi-lang-java=\"`bigquery`\" pulumi-lang-hcl=\"`bigquery`\"\u003e`bigquery`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`clickhouse`\" pulumi-lang-dotnet=\"`Clickhouse`\" pulumi-lang-go=\"`clickhouse`\" pulumi-lang-python=\"`clickhouse`\" pulumi-lang-yaml=\"`clickhouse`\" pulumi-lang-java=\"`clickhouse`\" pulumi-lang-hcl=\"`clickhouse`\"\u003e`clickhouse`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`gcp`\" pulumi-lang-dotnet=\"`Gcp`\" pulumi-lang-go=\"`gcp`\" pulumi-lang-python=\"`gcp`\" pulumi-lang-yaml=\"`gcp`\" pulumi-lang-java=\"`gcp`\" pulumi-lang-hcl=\"`gcp`\"\u003e`gcp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`grpc`\" pulumi-lang-dotnet=\"`Grpc`\" pulumi-lang-go=\"`grpc`\" pulumi-lang-python=\"`grpc`\" pulumi-lang-yaml=\"`grpc`\" pulumi-lang-java=\"`grpc`\" pulumi-lang-hcl=\"`grpc`\"\u003e`grpc`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`kubernetes`\" pulumi-lang-dotnet=\"`Kubernetes`\" pulumi-lang-go=\"`kubernetes`\" pulumi-lang-python=\"`kubernetes`\" pulumi-lang-yaml=\"`kubernetes`\" pulumi-lang-java=\"`kubernetes`\" pulumi-lang-hcl=\"`kubernetes`\"\u003e`kubernetes`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`llm`\" pulumi-lang-dotnet=\"`Llm`\" pulumi-lang-go=\"`llm`\" pulumi-lang-python=\"`llm`\" pulumi-lang-yaml=\"`llm`\" pulumi-lang-java=\"`llm`\" pulumi-lang-hcl=\"`llm`\"\u003e`llm`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mcp`\" pulumi-lang-dotnet=\"`Mcp`\" pulumi-lang-go=\"`mcp`\" pulumi-lang-python=\"`mcp`\" pulumi-lang-yaml=\"`mcp`\" pulumi-lang-java=\"`mcp`\" pulumi-lang-hcl=\"`mcp`\"\u003e`mcp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`rdp`\" pulumi-lang-dotnet=\"`Rdp`\" pulumi-lang-go=\"`rdp`\" pulumi-lang-python=\"`rdp`\" pulumi-lang-yaml=\"`rdp`\" pulumi-lang-java=\"`rdp`\" pulumi-lang-hcl=\"`rdp`\"\u003e`rdp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redis`\" pulumi-lang-dotnet=\"`Redis`\" pulumi-lang-go=\"`redis`\" pulumi-lang-python=\"`redis`\" pulumi-lang-yaml=\"`redis`\" pulumi-lang-java=\"`redis`\" pulumi-lang-hcl=\"`redis`\"\u003e`redis`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`web`\" pulumi-lang-dotnet=\"`Web`\" pulumi-lang-go=\"`web`\" pulumi-lang-python=\"`web`\" pulumi-lang-yaml=\"`web`\" pulumi-lang-java=\"`web`\" pulumi-lang-hcl=\"`web`\"\u003e`web`\u003c/span\u003e.\n"
                 },
                 "technologyProvider": {
                     "type": "string",
@@ -3839,7 +3914,7 @@
                 },
                 "technology": {
                     "type": "string",
-                    "description": "Technology of the Resource: supported values are \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`rdp`\" pulumi-lang-dotnet=\"`Rdp`\" pulumi-lang-go=\"`rdp`\" pulumi-lang-python=\"`rdp`\" pulumi-lang-yaml=\"`rdp`\" pulumi-lang-java=\"`rdp`\" pulumi-lang-hcl=\"`rdp`\"\u003e`rdp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`clickhouse`\" pulumi-lang-dotnet=\"`Clickhouse`\" pulumi-lang-go=\"`clickhouse`\" pulumi-lang-python=\"`clickhouse`\" pulumi-lang-yaml=\"`clickhouse`\" pulumi-lang-java=\"`clickhouse`\" pulumi-lang-hcl=\"`clickhouse`\"\u003e`clickhouse`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redis`\" pulumi-lang-dotnet=\"`Redis`\" pulumi-lang-go=\"`redis`\" pulumi-lang-python=\"`redis`\" pulumi-lang-yaml=\"`redis`\" pulumi-lang-java=\"`redis`\" pulumi-lang-hcl=\"`redis`\"\u003e`redis`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`web`\" pulumi-lang-dotnet=\"`Web`\" pulumi-lang-go=\"`web`\" pulumi-lang-python=\"`web`\" pulumi-lang-yaml=\"`web`\" pulumi-lang-java=\"`web`\" pulumi-lang-hcl=\"`web`\"\u003e`web`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`grpc`\" pulumi-lang-dotnet=\"`Grpc`\" pulumi-lang-go=\"`grpc`\" pulumi-lang-python=\"`grpc`\" pulumi-lang-yaml=\"`grpc`\" pulumi-lang-java=\"`grpc`\" pulumi-lang-hcl=\"`grpc`\"\u003e`grpc`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`gcp`\" pulumi-lang-dotnet=\"`Gcp`\" pulumi-lang-go=\"`gcp`\" pulumi-lang-python=\"`gcp`\" pulumi-lang-yaml=\"`gcp`\" pulumi-lang-java=\"`gcp`\" pulumi-lang-hcl=\"`gcp`\"\u003e`gcp`\u003c/span\u003e.\n",
+                    "description": "Technology of the Resource: supported values are \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`bigquery`\" pulumi-lang-dotnet=\"`Bigquery`\" pulumi-lang-go=\"`bigquery`\" pulumi-lang-python=\"`bigquery`\" pulumi-lang-yaml=\"`bigquery`\" pulumi-lang-java=\"`bigquery`\" pulumi-lang-hcl=\"`bigquery`\"\u003e`bigquery`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`clickhouse`\" pulumi-lang-dotnet=\"`Clickhouse`\" pulumi-lang-go=\"`clickhouse`\" pulumi-lang-python=\"`clickhouse`\" pulumi-lang-yaml=\"`clickhouse`\" pulumi-lang-java=\"`clickhouse`\" pulumi-lang-hcl=\"`clickhouse`\"\u003e`clickhouse`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`gcp`\" pulumi-lang-dotnet=\"`Gcp`\" pulumi-lang-go=\"`gcp`\" pulumi-lang-python=\"`gcp`\" pulumi-lang-yaml=\"`gcp`\" pulumi-lang-java=\"`gcp`\" pulumi-lang-hcl=\"`gcp`\"\u003e`gcp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`grpc`\" pulumi-lang-dotnet=\"`Grpc`\" pulumi-lang-go=\"`grpc`\" pulumi-lang-python=\"`grpc`\" pulumi-lang-yaml=\"`grpc`\" pulumi-lang-java=\"`grpc`\" pulumi-lang-hcl=\"`grpc`\"\u003e`grpc`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`kubernetes`\" pulumi-lang-dotnet=\"`Kubernetes`\" pulumi-lang-go=\"`kubernetes`\" pulumi-lang-python=\"`kubernetes`\" pulumi-lang-yaml=\"`kubernetes`\" pulumi-lang-java=\"`kubernetes`\" pulumi-lang-hcl=\"`kubernetes`\"\u003e`kubernetes`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`llm`\" pulumi-lang-dotnet=\"`Llm`\" pulumi-lang-go=\"`llm`\" pulumi-lang-python=\"`llm`\" pulumi-lang-yaml=\"`llm`\" pulumi-lang-java=\"`llm`\" pulumi-lang-hcl=\"`llm`\"\u003e`llm`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mcp`\" pulumi-lang-dotnet=\"`Mcp`\" pulumi-lang-go=\"`mcp`\" pulumi-lang-python=\"`mcp`\" pulumi-lang-yaml=\"`mcp`\" pulumi-lang-java=\"`mcp`\" pulumi-lang-hcl=\"`mcp`\"\u003e`mcp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`rdp`\" pulumi-lang-dotnet=\"`Rdp`\" pulumi-lang-go=\"`rdp`\" pulumi-lang-python=\"`rdp`\" pulumi-lang-yaml=\"`rdp`\" pulumi-lang-java=\"`rdp`\" pulumi-lang-hcl=\"`rdp`\"\u003e`rdp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redis`\" pulumi-lang-dotnet=\"`Redis`\" pulumi-lang-go=\"`redis`\" pulumi-lang-python=\"`redis`\" pulumi-lang-yaml=\"`redis`\" pulumi-lang-java=\"`redis`\" pulumi-lang-hcl=\"`redis`\"\u003e`redis`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`web`\" pulumi-lang-dotnet=\"`Web`\" pulumi-lang-go=\"`web`\" pulumi-lang-python=\"`web`\" pulumi-lang-yaml=\"`web`\" pulumi-lang-java=\"`web`\" pulumi-lang-hcl=\"`web`\"\u003e`web`\u003c/span\u003e.\n",
                     "willReplaceOnChanges": true
                 },
                 "technologyProvider": {
@@ -3900,7 +3975,7 @@
                     },
                     "technology": {
                         "type": "string",
-                        "description": "Technology of the Resource: supported values are \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`rdp`\" pulumi-lang-dotnet=\"`Rdp`\" pulumi-lang-go=\"`rdp`\" pulumi-lang-python=\"`rdp`\" pulumi-lang-yaml=\"`rdp`\" pulumi-lang-java=\"`rdp`\" pulumi-lang-hcl=\"`rdp`\"\u003e`rdp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`documentdb`\" pulumi-lang-dotnet=\"`Documentdb`\" pulumi-lang-go=\"`documentdb`\" pulumi-lang-python=\"`documentdb`\" pulumi-lang-yaml=\"`documentdb`\" pulumi-lang-java=\"`documentdb`\" pulumi-lang-hcl=\"`documentdb`\"\u003e`documentdb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`clickhouse`\" pulumi-lang-dotnet=\"`Clickhouse`\" pulumi-lang-go=\"`clickhouse`\" pulumi-lang-python=\"`clickhouse`\" pulumi-lang-yaml=\"`clickhouse`\" pulumi-lang-java=\"`clickhouse`\" pulumi-lang-hcl=\"`clickhouse`\"\u003e`clickhouse`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redis`\" pulumi-lang-dotnet=\"`Redis`\" pulumi-lang-go=\"`redis`\" pulumi-lang-python=\"`redis`\" pulumi-lang-yaml=\"`redis`\" pulumi-lang-java=\"`redis`\" pulumi-lang-hcl=\"`redis`\"\u003e`redis`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`web`\" pulumi-lang-dotnet=\"`Web`\" pulumi-lang-go=\"`web`\" pulumi-lang-python=\"`web`\" pulumi-lang-yaml=\"`web`\" pulumi-lang-java=\"`web`\" pulumi-lang-hcl=\"`web`\"\u003e`web`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`grpc`\" pulumi-lang-dotnet=\"`Grpc`\" pulumi-lang-go=\"`grpc`\" pulumi-lang-python=\"`grpc`\" pulumi-lang-yaml=\"`grpc`\" pulumi-lang-java=\"`grpc`\" pulumi-lang-hcl=\"`grpc`\"\u003e`grpc`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`gcp`\" pulumi-lang-dotnet=\"`Gcp`\" pulumi-lang-go=\"`gcp`\" pulumi-lang-python=\"`gcp`\" pulumi-lang-yaml=\"`gcp`\" pulumi-lang-java=\"`gcp`\" pulumi-lang-hcl=\"`gcp`\"\u003e`gcp`\u003c/span\u003e.\n",
+                        "description": "Technology of the Resource: supported values are \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`bigquery`\" pulumi-lang-dotnet=\"`Bigquery`\" pulumi-lang-go=\"`bigquery`\" pulumi-lang-python=\"`bigquery`\" pulumi-lang-yaml=\"`bigquery`\" pulumi-lang-java=\"`bigquery`\" pulumi-lang-hcl=\"`bigquery`\"\u003e`bigquery`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`clickhouse`\" pulumi-lang-dotnet=\"`Clickhouse`\" pulumi-lang-go=\"`clickhouse`\" pulumi-lang-python=\"`clickhouse`\" pulumi-lang-yaml=\"`clickhouse`\" pulumi-lang-java=\"`clickhouse`\" pulumi-lang-hcl=\"`clickhouse`\"\u003e`clickhouse`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`dynamodb`\" pulumi-lang-dotnet=\"`Dynamodb`\" pulumi-lang-go=\"`dynamodb`\" pulumi-lang-python=\"`dynamodb`\" pulumi-lang-yaml=\"`dynamodb`\" pulumi-lang-java=\"`dynamodb`\" pulumi-lang-hcl=\"`dynamodb`\"\u003e`dynamodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`gcp`\" pulumi-lang-dotnet=\"`Gcp`\" pulumi-lang-go=\"`gcp`\" pulumi-lang-python=\"`gcp`\" pulumi-lang-yaml=\"`gcp`\" pulumi-lang-java=\"`gcp`\" pulumi-lang-hcl=\"`gcp`\"\u003e`gcp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`grpc`\" pulumi-lang-dotnet=\"`Grpc`\" pulumi-lang-go=\"`grpc`\" pulumi-lang-python=\"`grpc`\" pulumi-lang-yaml=\"`grpc`\" pulumi-lang-java=\"`grpc`\" pulumi-lang-hcl=\"`grpc`\"\u003e`grpc`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`http`\" pulumi-lang-dotnet=\"`Http`\" pulumi-lang-go=\"`http`\" pulumi-lang-python=\"`http`\" pulumi-lang-yaml=\"`http`\" pulumi-lang-java=\"`http`\" pulumi-lang-hcl=\"`http`\"\u003e`http`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`kubernetes`\" pulumi-lang-dotnet=\"`Kubernetes`\" pulumi-lang-go=\"`kubernetes`\" pulumi-lang-python=\"`kubernetes`\" pulumi-lang-yaml=\"`kubernetes`\" pulumi-lang-java=\"`kubernetes`\" pulumi-lang-hcl=\"`kubernetes`\"\u003e`kubernetes`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`llm`\" pulumi-lang-dotnet=\"`Llm`\" pulumi-lang-go=\"`llm`\" pulumi-lang-python=\"`llm`\" pulumi-lang-yaml=\"`llm`\" pulumi-lang-java=\"`llm`\" pulumi-lang-hcl=\"`llm`\"\u003e`llm`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mariadb`\" pulumi-lang-dotnet=\"`Mariadb`\" pulumi-lang-go=\"`mariadb`\" pulumi-lang-python=\"`mariadb`\" pulumi-lang-yaml=\"`mariadb`\" pulumi-lang-java=\"`mariadb`\" pulumi-lang-hcl=\"`mariadb`\"\u003e`mariadb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mcp`\" pulumi-lang-dotnet=\"`Mcp`\" pulumi-lang-go=\"`mcp`\" pulumi-lang-python=\"`mcp`\" pulumi-lang-yaml=\"`mcp`\" pulumi-lang-java=\"`mcp`\" pulumi-lang-hcl=\"`mcp`\"\u003e`mcp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mongodb`\" pulumi-lang-dotnet=\"`Mongodb`\" pulumi-lang-go=\"`mongodb`\" pulumi-lang-python=\"`mongodb`\" pulumi-lang-yaml=\"`mongodb`\" pulumi-lang-java=\"`mongodb`\" pulumi-lang-hcl=\"`mongodb`\"\u003e`mongodb`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mysql`\" pulumi-lang-dotnet=\"`Mysql`\" pulumi-lang-go=\"`mysql`\" pulumi-lang-python=\"`mysql`\" pulumi-lang-yaml=\"`mysql`\" pulumi-lang-java=\"`mysql`\" pulumi-lang-hcl=\"`mysql`\"\u003e`mysql`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`postgres`\" pulumi-lang-dotnet=\"`Postgres`\" pulumi-lang-go=\"`postgres`\" pulumi-lang-python=\"`postgres`\" pulumi-lang-yaml=\"`postgres`\" pulumi-lang-java=\"`postgres`\" pulumi-lang-hcl=\"`postgres`\"\u003e`postgres`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`rdp`\" pulumi-lang-dotnet=\"`Rdp`\" pulumi-lang-go=\"`rdp`\" pulumi-lang-python=\"`rdp`\" pulumi-lang-yaml=\"`rdp`\" pulumi-lang-java=\"`rdp`\" pulumi-lang-hcl=\"`rdp`\"\u003e`rdp`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redis`\" pulumi-lang-dotnet=\"`Redis`\" pulumi-lang-go=\"`redis`\" pulumi-lang-python=\"`redis`\" pulumi-lang-yaml=\"`redis`\" pulumi-lang-java=\"`redis`\" pulumi-lang-hcl=\"`redis`\"\u003e`redis`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`redshift`\" pulumi-lang-dotnet=\"`Redshift`\" pulumi-lang-go=\"`redshift`\" pulumi-lang-python=\"`redshift`\" pulumi-lang-yaml=\"`redshift`\" pulumi-lang-java=\"`redshift`\" pulumi-lang-hcl=\"`redshift`\"\u003e`redshift`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`s3`\" pulumi-lang-dotnet=\"`S3`\" pulumi-lang-go=\"`s3`\" pulumi-lang-python=\"`s3`\" pulumi-lang-yaml=\"`s3`\" pulumi-lang-java=\"`s3`\" pulumi-lang-hcl=\"`s3`\"\u003e`s3`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`snowflake`\" pulumi-lang-dotnet=\"`Snowflake`\" pulumi-lang-go=\"`snowflake`\" pulumi-lang-python=\"`snowflake`\" pulumi-lang-yaml=\"`snowflake`\" pulumi-lang-java=\"`snowflake`\" pulumi-lang-hcl=\"`snowflake`\"\u003e`snowflake`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`ssh`\" pulumi-lang-dotnet=\"`Ssh`\" pulumi-lang-go=\"`ssh`\" pulumi-lang-python=\"`ssh`\" pulumi-lang-yaml=\"`ssh`\" pulumi-lang-java=\"`ssh`\" pulumi-lang-hcl=\"`ssh`\"\u003e`ssh`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`web`\" pulumi-lang-dotnet=\"`Web`\" pulumi-lang-go=\"`web`\" pulumi-lang-python=\"`web`\" pulumi-lang-yaml=\"`web`\" pulumi-lang-java=\"`web`\" pulumi-lang-hcl=\"`web`\"\u003e`web`\u003c/span\u003e.\n",
                         "willReplaceOnChanges": true
                     },
                     "technologyProvider": {
