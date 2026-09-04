@@ -34,7 +34,8 @@ import (
 const (
 	// This variable controls the default name of the package in the package
 	// registries for nodejs and python:
-	mainPkg = "formal"
+	mainPkg     = "formal"
+	displayName = "Formal"
 	// modules:
 	mainMod = "index" // the formal module
 )
@@ -109,14 +110,14 @@ func Provider() tfbridge.ProviderInfo {
 		//nolint:lll
 		P: shimv2.NewProvider(formal.New(version.Version)()),
 
-		Name:    "formal",
+		Name:    mainPkg,
 		Version: version.Version,
 		// DisplayName is a way to be able to change the casing of the provider name when being
 		// displayed on the Pulumi registry
-		DisplayName: "Formal",
+		DisplayName: displayName,
 		// Change this to your personal name (or a company name) that you would like to be shown in
 		// the Pulumi Registry if this package is published there.
-		Publisher: "Formal",
+		Publisher: displayName,
 		// LogoURL is optional but useful to help identify your package in the Pulumi Registry
 		// if this package is published there.
 		//
@@ -131,7 +132,7 @@ func Provider() tfbridge.ProviderInfo {
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:          []string{"formal", "category/cloud", "category/database", "category/network"},
+		Keywords:          []string{mainPkg, "category/cloud", "category/database", "category/network"},
 		License:           "MPL-2.0",
 		Homepage:          "https://joinformal.com",
 		Repository:        "https://github.com/formalco/pulumi-formal",
@@ -177,9 +178,9 @@ func Provider() tfbridge.ProviderInfo {
 				"Pulumi": "3.*",
 			},
 			// This makes the package name Formal.Pulumi which follows the same format as the NPM package
-			RootNamespace: "Formal",
+			RootNamespace: displayName,
 			Namespaces: map[string]string{
-				"formal": "Pulumi",
+				mainPkg: "Pulumi",
 			},
 		},
 	}
