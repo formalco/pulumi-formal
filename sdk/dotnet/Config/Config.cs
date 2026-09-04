@@ -33,10 +33,23 @@ namespace Formal.Pulumi
         private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("formal");
 
         private static readonly __Value<string?> _apiKey = new __Value<string?>(() => __config.Get("apiKey"));
+        /// <summary>
+        /// Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `Oidc`.
+        /// </summary>
         public static string? ApiKey
         {
             get => _apiKey.Get();
             set => _apiKey.Set(value);
+        }
+
+        private static readonly __Value<Formal.Pulumi.Config.Types.Oidc?> _oidc = new __Value<Formal.Pulumi.Config.Types.Oidc?>(() => __config.GetObject<Formal.Pulumi.Config.Types.Oidc>("oidc"));
+        /// <summary>
+        /// OIDC authentication configuration. Conflicts with `ApiKey`.
+        /// </summary>
+        public static Formal.Pulumi.Config.Types.Oidc? Oidc
+        {
+            get => _oidc.Get();
+            set => _oidc.Set(value);
         }
 
         private static readonly __Value<bool?> _retrieveSensitiveValues = new __Value<bool?>(() => __config.GetBoolean("retrieveSensitiveValues"));
@@ -46,5 +59,28 @@ namespace Formal.Pulumi
             set => _retrieveSensitiveValues.Set(value);
         }
 
+        public static class Types
+        {
+
+             public class Oidc
+             {
+            /// <summary>
+            /// Mint short-lived OIDC tokens using the AWS credential chain and STS.
+            /// </summary>
+                public Formal.Pulumi.Config.Types.OidcAws? Aws { get; set; } = null!;
+            /// <summary>
+            /// Name of an environment variable containing a pre-minted OIDC JWT.
+            /// </summary>
+                public string? Env { get; set; } = null!;
+            }
+
+             public class OidcAws
+             {
+            /// <summary>
+            /// Formal OIDC integration audience requested from AWS STS.
+            /// </summary>
+                public string Audience { get; set; }
+            }
+        }
     }
 }

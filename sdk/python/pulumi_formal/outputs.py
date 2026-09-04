@@ -616,9 +616,7 @@ class IntegrationCloudAws(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "templateVersion":
-            suggest = "template_version"
-        elif key == "allowS3Access":
+        if key == "allowS3Access":
             suggest = "allow_s3_access"
         elif key == "autodiscoveryRegions":
             suggest = "autodiscovery_regions"
@@ -638,6 +636,8 @@ class IntegrationCloudAws(dict):
             suggest = "enable_s3_autodiscovery"
         elif key == "s3BucketArn":
             suggest = "s3_bucket_arn"
+        elif key == "templateVersion":
+            suggest = "template_version"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in IntegrationCloudAws. Access the value via the '{suggest}' property getter instead.")
@@ -651,7 +651,6 @@ class IntegrationCloudAws(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 template_version: _builtins.str,
                  allow_s3_access: Optional[_builtins.bool] = None,
                  autodiscovery_regions: Optional[Sequence[_builtins.str]] = None,
                  aws_customer_role_arn: Optional[_builtins.str] = None,
@@ -661,12 +660,12 @@ class IntegrationCloudAws(dict):
                  enable_rds_autodiscovery: Optional[_builtins.bool] = None,
                  enable_redshift_autodiscovery: Optional[_builtins.bool] = None,
                  enable_s3_autodiscovery: Optional[_builtins.bool] = None,
-                 s3_bucket_arn: Optional[_builtins.str] = None):
+                 s3_bucket_arn: Optional[_builtins.str] = None,
+                 template_version: Optional[_builtins.str] = None):
         """
-        :param _builtins.str template_version: The template version of the CloudFormation stack. Use `latest` to stay in sync.
         :param _builtins.bool allow_s3_access: Allows the Cloud Integration to access S3 buckets for Log Integrations.
         :param Sequence[_builtins.str] autodiscovery_regions: The regions to enable resource autodiscovery for.
-        :param _builtins.str aws_customer_role_arn: The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+        :param _builtins.str aws_customer_role_arn: The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `template_version` is set (CloudFormation path).
         :param _builtins.bool enable_ec2_autodiscovery: Enables resource autodiscovery for EC2 instances.
         :param _builtins.bool enable_ecs_autodiscovery: Enables resource autodiscovery for ECS clusters.
         :param _builtins.bool enable_eks_autodiscovery: Enables resource autodiscovery for EKS clusters.
@@ -674,8 +673,8 @@ class IntegrationCloudAws(dict):
         :param _builtins.bool enable_redshift_autodiscovery: Enables resource autodiscovery for Redshift clusters.
         :param _builtins.bool enable_s3_autodiscovery: Enables resource autodiscovery for S3 buckets.
         :param _builtins.str s3_bucket_arn: The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
+        :param _builtins.str template_version: The CloudFormation template version to use when deploying `aws_cloudformation_stack`. Required unless `aws_customer_role_arn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
         """
-        pulumi.set(__self__, "template_version", template_version)
         if allow_s3_access is not None:
             pulumi.set(__self__, "allow_s3_access", allow_s3_access)
         if autodiscovery_regions is not None:
@@ -696,14 +695,8 @@ class IntegrationCloudAws(dict):
             pulumi.set(__self__, "enable_s3_autodiscovery", enable_s3_autodiscovery)
         if s3_bucket_arn is not None:
             pulumi.set(__self__, "s3_bucket_arn", s3_bucket_arn)
-
-    @_builtins.property
-    @pulumi.getter(name="templateVersion")
-    def template_version(self) -> _builtins.str:
-        """
-        The template version of the CloudFormation stack. Use `latest` to stay in sync.
-        """
-        return pulumi.get(self, "template_version")
+        if template_version is not None:
+            pulumi.set(__self__, "template_version", template_version)
 
     @_builtins.property
     @pulumi.getter(name="allowS3Access")
@@ -725,7 +718,7 @@ class IntegrationCloudAws(dict):
     @pulumi.getter(name="awsCustomerRoleArn")
     def aws_customer_role_arn(self) -> Optional[_builtins.str]:
         """
-        The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+        The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `template_version` is set (CloudFormation path).
         """
         return pulumi.get(self, "aws_customer_role_arn")
 
@@ -784,6 +777,14 @@ class IntegrationCloudAws(dict):
         The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
         """
         return pulumi.get(self, "s3_bucket_arn")
+
+    @_builtins.property
+    @pulumi.getter(name="templateVersion")
+    def template_version(self) -> Optional[_builtins.str]:
+        """
+        The CloudFormation template version to use when deploying `aws_cloudformation_stack`. Required unless `aws_customer_role_arn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
+        """
+        return pulumi.get(self, "template_version")
 
 
 @pulumi.output_type

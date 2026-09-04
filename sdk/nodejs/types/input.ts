@@ -178,7 +178,7 @@ export interface IntegrationCloudAws {
      */
     autodiscoveryRegions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+     * The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `templateVersion` is set (CloudFormation path).
      */
     awsCustomerRoleArn?: pulumi.Input<string | undefined>;
     /**
@@ -210,9 +210,9 @@ export interface IntegrationCloudAws {
      */
     s3BucketArn?: pulumi.Input<string | undefined>;
     /**
-     * The template version of the CloudFormation stack. Use `latest` to stay in sync.
+     * The CloudFormation template version to use when deploying `awsCloudformationStack`. Required unless `awsCustomerRoleArn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
      */
-    templateVersion: pulumi.Input<string>;
+    templateVersion?: pulumi.Input<string | undefined>;
 }
 
 export interface IntegrationCloudGcp {
@@ -430,4 +430,24 @@ export interface LogConfigurationStream {
      * Whether to encrypt stream data.
      */
     encrypt: pulumi.Input<boolean>;
+}
+
+export interface ProviderOidc {
+    /**
+     * Mint short-lived OIDC tokens using the AWS credential chain and STS.
+     */
+    aws?: pulumi.Input<inputs.ProviderOidcAws | undefined>;
+    /**
+     * Name of an environment variable containing a pre-minted OIDC JWT.
+     */
+    env?: pulumi.Input<string | undefined>;
+}
+
+export interface ProviderOidcAws {
+    /**
+     * Formal OIDC integration audience requested from AWS STS.
+     */
+    audience: pulumi.Input<string>;
+}
+export namespace config {
 }

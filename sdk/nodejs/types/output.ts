@@ -178,7 +178,7 @@ export interface IntegrationCloudAws {
      */
     autodiscoveryRegions: string[];
     /**
-     * The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+     * The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `templateVersion` is set (CloudFormation path).
      */
     awsCustomerRoleArn?: string;
     /**
@@ -210,7 +210,7 @@ export interface IntegrationCloudAws {
      */
     s3BucketArn?: string;
     /**
-     * The template version of the CloudFormation stack. Use `latest` to stay in sync.
+     * The CloudFormation template version to use when deploying `awsCloudformationStack`. Required unless `awsCustomerRoleArn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
      */
     templateVersion: string;
 }
@@ -432,3 +432,23 @@ export interface LogConfigurationStream {
     encrypt: boolean;
 }
 
+export namespace config {
+    export interface Oidc {
+        /**
+         * Mint short-lived OIDC tokens using the AWS credential chain and STS.
+         */
+        aws?: outputs.config.OidcAws;
+        /**
+         * Name of an environment variable containing a pre-minted OIDC JWT.
+         */
+        env?: string;
+    }
+
+    export interface OidcAws {
+        /**
+         * Formal OIDC integration audience requested from AWS STS.
+         */
+        audience: string;
+    }
+
+}
