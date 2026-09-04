@@ -23,7 +23,7 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly ImmutableArray<string> AutodiscoveryRegions;
         /// <summary>
-        /// The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+        /// The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `TemplateVersion` is set (CloudFormation path).
         /// </summary>
         public readonly string? AwsCustomerRoleArn;
         /// <summary>
@@ -55,9 +55,9 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly string? S3BucketArn;
         /// <summary>
-        /// The template version of the CloudFormation stack. Use `Latest` to stay in sync.
+        /// The CloudFormation template version to use when deploying `AwsCloudformationStack`. Required unless `AwsCustomerRoleArn` is set. Use `Latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
         /// </summary>
-        public readonly string TemplateVersion;
+        public readonly string? TemplateVersion;
 
         [OutputConstructor]
         private IntegrationCloudAws(
@@ -81,7 +81,7 @@ namespace Formal.Pulumi.Outputs
 
             string? s3BucketArn,
 
-            string templateVersion)
+            string? templateVersion)
         {
             AllowS3Access = allowS3Access;
             AutodiscoveryRegions = autodiscoveryRegions;

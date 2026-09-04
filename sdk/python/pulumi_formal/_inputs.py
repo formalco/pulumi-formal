@@ -71,6 +71,10 @@ __all__ = [
     'LogConfigurationSessionArgsDict',
     'LogConfigurationStreamArgs',
     'LogConfigurationStreamArgsDict',
+    'ProviderOidcArgs',
+    'ProviderOidcArgsDict',
+    'ProviderOidcAwsArgs',
+    'ProviderOidcAwsArgsDict',
 ]
 
 class ConnectorAiProviderAnthropicArgsDict(TypedDict):
@@ -781,10 +785,6 @@ class IntegrationBiMetabaseArgs:
 
 
 class IntegrationCloudAwsArgsDict(TypedDict):
-    template_version: pulumi.Input[_builtins.str]
-    """
-    The template version of the CloudFormation stack. Use `latest` to stay in sync.
-    """
     allow_s3_access: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
     Allows the Cloud Integration to access S3 buckets for Log Integrations.
@@ -795,7 +795,7 @@ class IntegrationCloudAwsArgsDict(TypedDict):
     """
     aws_customer_role_arn: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+    The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `template_version` is set (CloudFormation path).
     """
     enable_ec2_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
@@ -825,11 +825,14 @@ class IntegrationCloudAwsArgsDict(TypedDict):
     """
     The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
     """
+    template_version: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The CloudFormation template version to use when deploying `aws_cloudformation_stack`. Required unless `aws_customer_role_arn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
+    """
 
 @pulumi.input_type
 class IntegrationCloudAwsArgs:
     def __init__(__self__, *,
-                 template_version: pulumi.Input[_builtins.str],
                  allow_s3_access: pulumi.Input[Optional[_builtins.bool]] = None,
                  autodiscovery_regions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  aws_customer_role_arn: pulumi.Input[Optional[_builtins.str]] = None,
@@ -839,12 +842,12 @@ class IntegrationCloudAwsArgs:
                  enable_rds_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_redshift_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_s3_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
-                 s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None):
+                 s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None,
+                 template_version: pulumi.Input[Optional[_builtins.str]] = None):
         """
-        :param pulumi.Input[_builtins.str] template_version: The template version of the CloudFormation stack. Use `latest` to stay in sync.
         :param pulumi.Input[_builtins.bool] allow_s3_access: Allows the Cloud Integration to access S3 buckets for Log Integrations.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] autodiscovery_regions: The regions to enable resource autodiscovery for.
-        :param pulumi.Input[_builtins.str] aws_customer_role_arn: The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+        :param pulumi.Input[_builtins.str] aws_customer_role_arn: The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `template_version` is set (CloudFormation path).
         :param pulumi.Input[_builtins.bool] enable_ec2_autodiscovery: Enables resource autodiscovery for EC2 instances.
         :param pulumi.Input[_builtins.bool] enable_ecs_autodiscovery: Enables resource autodiscovery for ECS clusters.
         :param pulumi.Input[_builtins.bool] enable_eks_autodiscovery: Enables resource autodiscovery for EKS clusters.
@@ -852,8 +855,8 @@ class IntegrationCloudAwsArgs:
         :param pulumi.Input[_builtins.bool] enable_redshift_autodiscovery: Enables resource autodiscovery for Redshift clusters.
         :param pulumi.Input[_builtins.bool] enable_s3_autodiscovery: Enables resource autodiscovery for S3 buckets.
         :param pulumi.Input[_builtins.str] s3_bucket_arn: The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
+        :param pulumi.Input[_builtins.str] template_version: The CloudFormation template version to use when deploying `aws_cloudformation_stack`. Required unless `aws_customer_role_arn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
         """
-        pulumi.set(__self__, "template_version", template_version)
         if allow_s3_access is not None:
             pulumi.set(__self__, "allow_s3_access", allow_s3_access)
         if autodiscovery_regions is not None:
@@ -874,18 +877,8 @@ class IntegrationCloudAwsArgs:
             pulumi.set(__self__, "enable_s3_autodiscovery", enable_s3_autodiscovery)
         if s3_bucket_arn is not None:
             pulumi.set(__self__, "s3_bucket_arn", s3_bucket_arn)
-
-    @_builtins.property
-    @pulumi.getter(name="templateVersion")
-    def template_version(self) -> pulumi.Input[_builtins.str]:
-        """
-        The template version of the CloudFormation stack. Use `latest` to stay in sync.
-        """
-        return pulumi.get(self, "template_version")
-
-    @template_version.setter
-    def template_version(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "template_version", value)
+        if template_version is not None:
+            pulumi.set(__self__, "template_version", template_version)
 
     @_builtins.property
     @pulumi.getter(name="allowS3Access")
@@ -915,7 +908,7 @@ class IntegrationCloudAwsArgs:
     @pulumi.getter(name="awsCustomerRoleArn")
     def aws_customer_role_arn(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+        The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `template_version` is set (CloudFormation path).
         """
         return pulumi.get(self, "aws_customer_role_arn")
 
@@ -1006,6 +999,18 @@ class IntegrationCloudAwsArgs:
     @s3_bucket_arn.setter
     def s3_bucket_arn(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "s3_bucket_arn", value)
+
+    @_builtins.property
+    @pulumi.getter(name="templateVersion")
+    def template_version(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The CloudFormation template version to use when deploying `aws_cloudformation_stack`. Required unless `aws_customer_role_arn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
+        """
+        return pulumi.get(self, "template_version")
+
+    @template_version.setter
+    def template_version(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "template_version", value)
 
 
 class IntegrationCloudGcpArgsDict(TypedDict):
@@ -1977,5 +1982,82 @@ class LogConfigurationStreamArgs:
     @encrypt.setter
     def encrypt(self, value: pulumi.Input[_builtins.bool]):
         pulumi.set(self, "encrypt", value)
+
+
+class ProviderOidcArgsDict(TypedDict):
+    aws: NotRequired[pulumi.Input[Optional['ProviderOidcAwsArgsDict']]]
+    """
+    Mint short-lived OIDC tokens using the AWS credential chain and STS.
+    """
+    env: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Name of an environment variable containing a pre-minted OIDC JWT.
+    """
+
+@pulumi.input_type
+class ProviderOidcArgs:
+    def __init__(__self__, *,
+                 aws: pulumi.Input[Optional['ProviderOidcAwsArgs']] = None,
+                 env: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input['ProviderOidcAwsArgs'] aws: Mint short-lived OIDC tokens using the AWS credential chain and STS.
+        :param pulumi.Input[_builtins.str] env: Name of an environment variable containing a pre-minted OIDC JWT.
+        """
+        if aws is not None:
+            pulumi.set(__self__, "aws", aws)
+        if env is not None:
+            pulumi.set(__self__, "env", env)
+
+    @_builtins.property
+    @pulumi.getter
+    def aws(self) -> pulumi.Input[Optional['ProviderOidcAwsArgs']]:
+        """
+        Mint short-lived OIDC tokens using the AWS credential chain and STS.
+        """
+        return pulumi.get(self, "aws")
+
+    @aws.setter
+    def aws(self, value: pulumi.Input[Optional['ProviderOidcAwsArgs']]):
+        pulumi.set(self, "aws", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def env(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Name of an environment variable containing a pre-minted OIDC JWT.
+        """
+        return pulumi.get(self, "env")
+
+    @env.setter
+    def env(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "env", value)
+
+
+class ProviderOidcAwsArgsDict(TypedDict):
+    audience: pulumi.Input[_builtins.str]
+    """
+    Formal OIDC integration audience requested from AWS STS.
+    """
+
+@pulumi.input_type
+class ProviderOidcAwsArgs:
+    def __init__(__self__, *,
+                 audience: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] audience: Formal OIDC integration audience requested from AWS STS.
+        """
+        pulumi.set(__self__, "audience", audience)
+
+    @_builtins.property
+    @pulumi.getter
+    def audience(self) -> pulumi.Input[_builtins.str]:
+        """
+        Formal OIDC integration audience requested from AWS STS.
+        """
+        return pulumi.get(self, "audience")
+
+    @audience.setter
+    def audience(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "audience", value)
 
 

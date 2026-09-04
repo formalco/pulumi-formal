@@ -2,15 +2,31 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 declare var exports: any;
 const __config = new pulumi.Config("formal");
 
+/**
+ * Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
+ */
 export declare const apiKey: string | undefined;
 Object.defineProperty(exports, "apiKey", {
     get() {
         return __config.get("apiKey");
+    },
+    enumerable: true,
+});
+
+/**
+ * OIDC authentication configuration. Conflicts with `apiKey`.
+ */
+export declare const oidc: outputs.config.Oidc | undefined;
+Object.defineProperty(exports, "oidc", {
+    get() {
+        return __config.getObject<outputs.config.Oidc>("oidc");
     },
     enumerable: true,
 });

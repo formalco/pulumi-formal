@@ -61,7 +61,7 @@ export class NativeUser extends pulumi.CustomResource {
      */
     declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
     /**
-     * The password of the Native User.
+     * Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
      */
     declare public readonly useAsDefault: pulumi.Output<boolean | undefined>;
 
@@ -138,7 +138,7 @@ export interface NativeUserState {
      */
     terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
-     * The password of the Native User.
+     * Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
      */
     useAsDefault?: pulumi.Input<boolean | undefined>;
 }
@@ -173,7 +173,7 @@ export interface NativeUserArgs {
      */
     terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
-     * The password of the Native User.
+     * Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
      */
     useAsDefault?: pulumi.Input<boolean | undefined>;
 }
