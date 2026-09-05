@@ -36,11 +36,11 @@ export class IntegrationOidc extends pulumi.CustomResource {
     }
 
     /**
-     * The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
+     * The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `id`.
      */
     declare public /*out*/ readonly audience: pulumi.Output<string>;
     /**
-     * CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+     * CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
      */
     declare public readonly claimCondition: pulumi.Output<string | undefined>;
     /**
@@ -128,11 +128,11 @@ export class IntegrationOidc extends pulumi.CustomResource {
  */
 export interface IntegrationOidcState {
     /**
-     * The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
+     * The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `id`.
      */
     audience?: pulumi.Input<string | undefined>;
     /**
-     * CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+     * CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
      */
     claimCondition?: pulumi.Input<string | undefined>;
     /**
@@ -174,7 +174,7 @@ export interface IntegrationOidcState {
  */
 export interface IntegrationOidcArgs {
     /**
-     * CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+     * CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
      */
     claimCondition?: pulumi.Input<string | undefined>;
     /**

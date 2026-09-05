@@ -2018,7 +2018,7 @@ type IntegrationCloudAws struct {
 	AllowS3Access *bool `pulumi:"allowS3Access"`
 	// The regions to enable resource autodiscovery for.
 	AutodiscoveryRegions []string `pulumi:"autodiscoveryRegions"`
-	// The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+	// The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `templateVersion` is set (CloudFormation path).
 	AwsCustomerRoleArn *string `pulumi:"awsCustomerRoleArn"`
 	// Enables resource autodiscovery for EC2 instances.
 	EnableEc2Autodiscovery *bool `pulumi:"enableEc2Autodiscovery"`
@@ -2034,8 +2034,8 @@ type IntegrationCloudAws struct {
 	EnableS3Autodiscovery *bool `pulumi:"enableS3Autodiscovery"`
 	// The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
 	S3BucketArn *string `pulumi:"s3BucketArn"`
-	// The template version of the CloudFormation stack. Use `latest` to stay in sync.
-	TemplateVersion string `pulumi:"templateVersion"`
+	// The CloudFormation template version to use when deploying `awsCloudformationStack`. Required unless `awsCustomerRoleArn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
+	TemplateVersion *string `pulumi:"templateVersion"`
 }
 
 // IntegrationCloudAwsInput is an input type that accepts IntegrationCloudAwsArgs and IntegrationCloudAwsOutput values.
@@ -2054,7 +2054,7 @@ type IntegrationCloudAwsArgs struct {
 	AllowS3Access pulumi.BoolPtrInput `pulumi:"allowS3Access"`
 	// The regions to enable resource autodiscovery for.
 	AutodiscoveryRegions pulumi.StringArrayInput `pulumi:"autodiscoveryRegions"`
-	// The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+	// The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `templateVersion` is set (CloudFormation path).
 	AwsCustomerRoleArn pulumi.StringPtrInput `pulumi:"awsCustomerRoleArn"`
 	// Enables resource autodiscovery for EC2 instances.
 	EnableEc2Autodiscovery pulumi.BoolPtrInput `pulumi:"enableEc2Autodiscovery"`
@@ -2070,8 +2070,8 @@ type IntegrationCloudAwsArgs struct {
 	EnableS3Autodiscovery pulumi.BoolPtrInput `pulumi:"enableS3Autodiscovery"`
 	// The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
 	S3BucketArn pulumi.StringPtrInput `pulumi:"s3BucketArn"`
-	// The template version of the CloudFormation stack. Use `latest` to stay in sync.
-	TemplateVersion pulumi.StringInput `pulumi:"templateVersion"`
+	// The CloudFormation template version to use when deploying `awsCloudformationStack`. Required unless `awsCustomerRoleArn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
+	TemplateVersion pulumi.StringPtrInput `pulumi:"templateVersion"`
 }
 
 func (IntegrationCloudAwsArgs) ElementType() reflect.Type {
@@ -2161,7 +2161,7 @@ func (o IntegrationCloudAwsOutput) AutodiscoveryRegions() pulumi.StringArrayOutp
 	return o.ApplyT(func(v IntegrationCloudAws) []string { return v.AutodiscoveryRegions }).(pulumi.StringArrayOutput)
 }
 
-// The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+// The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `templateVersion` is set (CloudFormation path).
 func (o IntegrationCloudAwsOutput) AwsCustomerRoleArn() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v IntegrationCloudAws) *string { return v.AwsCustomerRoleArn }).(pulumi.StringPtrOutput)
 }
@@ -2201,9 +2201,9 @@ func (o IntegrationCloudAwsOutput) S3BucketArn() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v IntegrationCloudAws) *string { return v.S3BucketArn }).(pulumi.StringPtrOutput)
 }
 
-// The template version of the CloudFormation stack. Use `latest` to stay in sync.
-func (o IntegrationCloudAwsOutput) TemplateVersion() pulumi.StringOutput {
-	return o.ApplyT(func(v IntegrationCloudAws) string { return v.TemplateVersion }).(pulumi.StringOutput)
+// The CloudFormation template version to use when deploying `awsCloudformationStack`. Required unless `awsCustomerRoleArn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
+func (o IntegrationCloudAwsOutput) TemplateVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudAws) *string { return v.TemplateVersion }).(pulumi.StringPtrOutput)
 }
 
 type IntegrationCloudAwsPtrOutput struct{ *pulumi.OutputState }
@@ -2250,7 +2250,7 @@ func (o IntegrationCloudAwsPtrOutput) AutodiscoveryRegions() pulumi.StringArrayO
 	}).(pulumi.StringArrayOutput)
 }
 
-// The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+// The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `templateVersion` is set (CloudFormation path).
 func (o IntegrationCloudAwsPtrOutput) AwsCustomerRoleArn() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *IntegrationCloudAws) *string {
 		if v == nil {
@@ -2330,13 +2330,264 @@ func (o IntegrationCloudAwsPtrOutput) S3BucketArn() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// The template version of the CloudFormation stack. Use `latest` to stay in sync.
+// The CloudFormation template version to use when deploying `awsCloudformationStack`. Required unless `awsCustomerRoleArn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
 func (o IntegrationCloudAwsPtrOutput) TemplateVersion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *IntegrationCloudAws) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.TemplateVersion
+		return v.TemplateVersion
+	}).(pulumi.StringPtrOutput)
+}
+
+type IntegrationCloudAzure struct {
+	// Allows the Cloud Integration to write logs to Azure Blob Storage for Log Integrations.
+	AllowBlobAccess *bool `pulumi:"allowBlobAccess"`
+	// Storage accounts Formal may write logs to. An empty list allows every account in scope.
+	BlobStorageAccounts []string `pulumi:"blobStorageAccounts"`
+	// Enables resource autodiscovery for AKS clusters.
+	EnableAksAutodiscovery *bool `pulumi:"enableAksAutodiscovery"`
+	// Enables resource autodiscovery for Azure managed database servers.
+	EnableDbAutodiscovery *bool `pulumi:"enableDbAutodiscovery"`
+	// Enables resource autodiscovery for Azure virtual machines.
+	EnableVmAutodiscovery *bool `pulumi:"enableVmAutodiscovery"`
+	// Narrows discovery to a single resource group. Empty covers the whole subscription.
+	ResourceGroup *string `pulumi:"resourceGroup"`
+	// The Azure subscription this integration grants Formal access to.
+	SubscriptionId string `pulumi:"subscriptionId"`
+}
+
+// IntegrationCloudAzureInput is an input type that accepts IntegrationCloudAzureArgs and IntegrationCloudAzureOutput values.
+// You can construct a concrete instance of `IntegrationCloudAzureInput` via:
+//
+//	IntegrationCloudAzureArgs{...}
+type IntegrationCloudAzureInput interface {
+	pulumi.Input
+
+	ToIntegrationCloudAzureOutput() IntegrationCloudAzureOutput
+	ToIntegrationCloudAzureOutputWithContext(context.Context) IntegrationCloudAzureOutput
+}
+
+type IntegrationCloudAzureArgs struct {
+	// Allows the Cloud Integration to write logs to Azure Blob Storage for Log Integrations.
+	AllowBlobAccess pulumi.BoolPtrInput `pulumi:"allowBlobAccess"`
+	// Storage accounts Formal may write logs to. An empty list allows every account in scope.
+	BlobStorageAccounts pulumi.StringArrayInput `pulumi:"blobStorageAccounts"`
+	// Enables resource autodiscovery for AKS clusters.
+	EnableAksAutodiscovery pulumi.BoolPtrInput `pulumi:"enableAksAutodiscovery"`
+	// Enables resource autodiscovery for Azure managed database servers.
+	EnableDbAutodiscovery pulumi.BoolPtrInput `pulumi:"enableDbAutodiscovery"`
+	// Enables resource autodiscovery for Azure virtual machines.
+	EnableVmAutodiscovery pulumi.BoolPtrInput `pulumi:"enableVmAutodiscovery"`
+	// Narrows discovery to a single resource group. Empty covers the whole subscription.
+	ResourceGroup pulumi.StringPtrInput `pulumi:"resourceGroup"`
+	// The Azure subscription this integration grants Formal access to.
+	SubscriptionId pulumi.StringInput `pulumi:"subscriptionId"`
+}
+
+func (IntegrationCloudAzureArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationCloudAzure)(nil)).Elem()
+}
+
+func (i IntegrationCloudAzureArgs) ToIntegrationCloudAzureOutput() IntegrationCloudAzureOutput {
+	return i.ToIntegrationCloudAzureOutputWithContext(context.Background())
+}
+
+func (i IntegrationCloudAzureArgs) ToIntegrationCloudAzureOutputWithContext(ctx context.Context) IntegrationCloudAzureOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationCloudAzureOutput)
+}
+
+func (i IntegrationCloudAzureArgs) ToIntegrationCloudAzurePtrOutput() IntegrationCloudAzurePtrOutput {
+	return i.ToIntegrationCloudAzurePtrOutputWithContext(context.Background())
+}
+
+func (i IntegrationCloudAzureArgs) ToIntegrationCloudAzurePtrOutputWithContext(ctx context.Context) IntegrationCloudAzurePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationCloudAzureOutput).ToIntegrationCloudAzurePtrOutputWithContext(ctx)
+}
+
+// IntegrationCloudAzurePtrInput is an input type that accepts IntegrationCloudAzureArgs, IntegrationCloudAzurePtr and IntegrationCloudAzurePtrOutput values.
+// You can construct a concrete instance of `IntegrationCloudAzurePtrInput` via:
+//
+//	        IntegrationCloudAzureArgs{...}
+//
+//	or:
+//
+//	        nil
+type IntegrationCloudAzurePtrInput interface {
+	pulumi.Input
+
+	ToIntegrationCloudAzurePtrOutput() IntegrationCloudAzurePtrOutput
+	ToIntegrationCloudAzurePtrOutputWithContext(context.Context) IntegrationCloudAzurePtrOutput
+}
+
+type integrationCloudAzurePtrType IntegrationCloudAzureArgs
+
+func IntegrationCloudAzurePtr(v *IntegrationCloudAzureArgs) IntegrationCloudAzurePtrInput {
+	return (*integrationCloudAzurePtrType)(v)
+}
+
+func (*integrationCloudAzurePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationCloudAzure)(nil)).Elem()
+}
+
+func (i *integrationCloudAzurePtrType) ToIntegrationCloudAzurePtrOutput() IntegrationCloudAzurePtrOutput {
+	return i.ToIntegrationCloudAzurePtrOutputWithContext(context.Background())
+}
+
+func (i *integrationCloudAzurePtrType) ToIntegrationCloudAzurePtrOutputWithContext(ctx context.Context) IntegrationCloudAzurePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationCloudAzurePtrOutput)
+}
+
+type IntegrationCloudAzureOutput struct{ *pulumi.OutputState }
+
+func (IntegrationCloudAzureOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationCloudAzure)(nil)).Elem()
+}
+
+func (o IntegrationCloudAzureOutput) ToIntegrationCloudAzureOutput() IntegrationCloudAzureOutput {
+	return o
+}
+
+func (o IntegrationCloudAzureOutput) ToIntegrationCloudAzureOutputWithContext(ctx context.Context) IntegrationCloudAzureOutput {
+	return o
+}
+
+func (o IntegrationCloudAzureOutput) ToIntegrationCloudAzurePtrOutput() IntegrationCloudAzurePtrOutput {
+	return o.ToIntegrationCloudAzurePtrOutputWithContext(context.Background())
+}
+
+func (o IntegrationCloudAzureOutput) ToIntegrationCloudAzurePtrOutputWithContext(ctx context.Context) IntegrationCloudAzurePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IntegrationCloudAzure) *IntegrationCloudAzure {
+		return &v
+	}).(IntegrationCloudAzurePtrOutput)
+}
+
+// Allows the Cloud Integration to write logs to Azure Blob Storage for Log Integrations.
+func (o IntegrationCloudAzureOutput) AllowBlobAccess() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudAzure) *bool { return v.AllowBlobAccess }).(pulumi.BoolPtrOutput)
+}
+
+// Storage accounts Formal may write logs to. An empty list allows every account in scope.
+func (o IntegrationCloudAzureOutput) BlobStorageAccounts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v IntegrationCloudAzure) []string { return v.BlobStorageAccounts }).(pulumi.StringArrayOutput)
+}
+
+// Enables resource autodiscovery for AKS clusters.
+func (o IntegrationCloudAzureOutput) EnableAksAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudAzure) *bool { return v.EnableAksAutodiscovery }).(pulumi.BoolPtrOutput)
+}
+
+// Enables resource autodiscovery for Azure managed database servers.
+func (o IntegrationCloudAzureOutput) EnableDbAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudAzure) *bool { return v.EnableDbAutodiscovery }).(pulumi.BoolPtrOutput)
+}
+
+// Enables resource autodiscovery for Azure virtual machines.
+func (o IntegrationCloudAzureOutput) EnableVmAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudAzure) *bool { return v.EnableVmAutodiscovery }).(pulumi.BoolPtrOutput)
+}
+
+// Narrows discovery to a single resource group. Empty covers the whole subscription.
+func (o IntegrationCloudAzureOutput) ResourceGroup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudAzure) *string { return v.ResourceGroup }).(pulumi.StringPtrOutput)
+}
+
+// The Azure subscription this integration grants Formal access to.
+func (o IntegrationCloudAzureOutput) SubscriptionId() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationCloudAzure) string { return v.SubscriptionId }).(pulumi.StringOutput)
+}
+
+type IntegrationCloudAzurePtrOutput struct{ *pulumi.OutputState }
+
+func (IntegrationCloudAzurePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationCloudAzure)(nil)).Elem()
+}
+
+func (o IntegrationCloudAzurePtrOutput) ToIntegrationCloudAzurePtrOutput() IntegrationCloudAzurePtrOutput {
+	return o
+}
+
+func (o IntegrationCloudAzurePtrOutput) ToIntegrationCloudAzurePtrOutputWithContext(ctx context.Context) IntegrationCloudAzurePtrOutput {
+	return o
+}
+
+func (o IntegrationCloudAzurePtrOutput) Elem() IntegrationCloudAzureOutput {
+	return o.ApplyT(func(v *IntegrationCloudAzure) IntegrationCloudAzure {
+		if v != nil {
+			return *v
+		}
+		var ret IntegrationCloudAzure
+		return ret
+	}).(IntegrationCloudAzureOutput)
+}
+
+// Allows the Cloud Integration to write logs to Azure Blob Storage for Log Integrations.
+func (o IntegrationCloudAzurePtrOutput) AllowBlobAccess() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudAzure) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.AllowBlobAccess
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Storage accounts Formal may write logs to. An empty list allows every account in scope.
+func (o IntegrationCloudAzurePtrOutput) BlobStorageAccounts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloudAzure) []string {
+		if v == nil {
+			return nil
+		}
+		return v.BlobStorageAccounts
+	}).(pulumi.StringArrayOutput)
+}
+
+// Enables resource autodiscovery for AKS clusters.
+func (o IntegrationCloudAzurePtrOutput) EnableAksAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudAzure) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnableAksAutodiscovery
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Enables resource autodiscovery for Azure managed database servers.
+func (o IntegrationCloudAzurePtrOutput) EnableDbAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudAzure) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnableDbAutodiscovery
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Enables resource autodiscovery for Azure virtual machines.
+func (o IntegrationCloudAzurePtrOutput) EnableVmAutodiscovery() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudAzure) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnableVmAutodiscovery
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Narrows discovery to a single resource group. Empty covers the whole subscription.
+func (o IntegrationCloudAzurePtrOutput) ResourceGroup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudAzure) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceGroup
+	}).(pulumi.StringPtrOutput)
+}
+
+// The Azure subscription this integration grants Formal access to.
+func (o IntegrationCloudAzurePtrOutput) SubscriptionId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudAzure) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.SubscriptionId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -4821,6 +5072,436 @@ func (o LogConfigurationStreamPtrOutput) Encrypt() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+type ProviderOidc struct {
+	// Mint short-lived OIDC tokens using the AWS credential chain and STS.
+	Aws *ProviderOidcAws `pulumi:"aws"`
+	// Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
+	Azure *ProviderOidcAzure `pulumi:"azure"`
+	// Name of an environment variable containing a pre-minted OIDC JWT.
+	Env *string `pulumi:"env"`
+	// Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+	IntegrationId *string `pulumi:"integrationId"`
+}
+
+// ProviderOidcInput is an input type that accepts ProviderOidcArgs and ProviderOidcOutput values.
+// You can construct a concrete instance of `ProviderOidcInput` via:
+//
+//	ProviderOidcArgs{...}
+type ProviderOidcInput interface {
+	pulumi.Input
+
+	ToProviderOidcOutput() ProviderOidcOutput
+	ToProviderOidcOutputWithContext(context.Context) ProviderOidcOutput
+}
+
+type ProviderOidcArgs struct {
+	// Mint short-lived OIDC tokens using the AWS credential chain and STS.
+	Aws ProviderOidcAwsPtrInput `pulumi:"aws"`
+	// Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
+	Azure ProviderOidcAzurePtrInput `pulumi:"azure"`
+	// Name of an environment variable containing a pre-minted OIDC JWT.
+	Env pulumi.StringPtrInput `pulumi:"env"`
+	// Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+	IntegrationId pulumi.StringPtrInput `pulumi:"integrationId"`
+}
+
+func (ProviderOidcArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderOidc)(nil)).Elem()
+}
+
+func (i ProviderOidcArgs) ToProviderOidcOutput() ProviderOidcOutput {
+	return i.ToProviderOidcOutputWithContext(context.Background())
+}
+
+func (i ProviderOidcArgs) ToProviderOidcOutputWithContext(ctx context.Context) ProviderOidcOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcOutput)
+}
+
+func (i ProviderOidcArgs) ToProviderOidcPtrOutput() ProviderOidcPtrOutput {
+	return i.ToProviderOidcPtrOutputWithContext(context.Background())
+}
+
+func (i ProviderOidcArgs) ToProviderOidcPtrOutputWithContext(ctx context.Context) ProviderOidcPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcOutput).ToProviderOidcPtrOutputWithContext(ctx)
+}
+
+// ProviderOidcPtrInput is an input type that accepts ProviderOidcArgs, ProviderOidcPtr and ProviderOidcPtrOutput values.
+// You can construct a concrete instance of `ProviderOidcPtrInput` via:
+//
+//	        ProviderOidcArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProviderOidcPtrInput interface {
+	pulumi.Input
+
+	ToProviderOidcPtrOutput() ProviderOidcPtrOutput
+	ToProviderOidcPtrOutputWithContext(context.Context) ProviderOidcPtrOutput
+}
+
+type providerOidcPtrType ProviderOidcArgs
+
+func ProviderOidcPtr(v *ProviderOidcArgs) ProviderOidcPtrInput {
+	return (*providerOidcPtrType)(v)
+}
+
+func (*providerOidcPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderOidc)(nil)).Elem()
+}
+
+func (i *providerOidcPtrType) ToProviderOidcPtrOutput() ProviderOidcPtrOutput {
+	return i.ToProviderOidcPtrOutputWithContext(context.Background())
+}
+
+func (i *providerOidcPtrType) ToProviderOidcPtrOutputWithContext(ctx context.Context) ProviderOidcPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcPtrOutput)
+}
+
+type ProviderOidcOutput struct{ *pulumi.OutputState }
+
+func (ProviderOidcOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderOidc)(nil)).Elem()
+}
+
+func (o ProviderOidcOutput) ToProviderOidcOutput() ProviderOidcOutput {
+	return o
+}
+
+func (o ProviderOidcOutput) ToProviderOidcOutputWithContext(ctx context.Context) ProviderOidcOutput {
+	return o
+}
+
+func (o ProviderOidcOutput) ToProviderOidcPtrOutput() ProviderOidcPtrOutput {
+	return o.ToProviderOidcPtrOutputWithContext(context.Background())
+}
+
+func (o ProviderOidcOutput) ToProviderOidcPtrOutputWithContext(ctx context.Context) ProviderOidcPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProviderOidc) *ProviderOidc {
+		return &v
+	}).(ProviderOidcPtrOutput)
+}
+
+// Mint short-lived OIDC tokens using the AWS credential chain and STS.
+func (o ProviderOidcOutput) Aws() ProviderOidcAwsPtrOutput {
+	return o.ApplyT(func(v ProviderOidc) *ProviderOidcAws { return v.Aws }).(ProviderOidcAwsPtrOutput)
+}
+
+// Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
+func (o ProviderOidcOutput) Azure() ProviderOidcAzurePtrOutput {
+	return o.ApplyT(func(v ProviderOidc) *ProviderOidcAzure { return v.Azure }).(ProviderOidcAzurePtrOutput)
+}
+
+// Name of an environment variable containing a pre-minted OIDC JWT.
+func (o ProviderOidcOutput) Env() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProviderOidc) *string { return v.Env }).(pulumi.StringPtrOutput)
+}
+
+// Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+func (o ProviderOidcOutput) IntegrationId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProviderOidc) *string { return v.IntegrationId }).(pulumi.StringPtrOutput)
+}
+
+type ProviderOidcPtrOutput struct{ *pulumi.OutputState }
+
+func (ProviderOidcPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderOidc)(nil)).Elem()
+}
+
+func (o ProviderOidcPtrOutput) ToProviderOidcPtrOutput() ProviderOidcPtrOutput {
+	return o
+}
+
+func (o ProviderOidcPtrOutput) ToProviderOidcPtrOutputWithContext(ctx context.Context) ProviderOidcPtrOutput {
+	return o
+}
+
+func (o ProviderOidcPtrOutput) Elem() ProviderOidcOutput {
+	return o.ApplyT(func(v *ProviderOidc) ProviderOidc {
+		if v != nil {
+			return *v
+		}
+		var ret ProviderOidc
+		return ret
+	}).(ProviderOidcOutput)
+}
+
+// Mint short-lived OIDC tokens using the AWS credential chain and STS.
+func (o ProviderOidcPtrOutput) Aws() ProviderOidcAwsPtrOutput {
+	return o.ApplyT(func(v *ProviderOidc) *ProviderOidcAws {
+		if v == nil {
+			return nil
+		}
+		return v.Aws
+	}).(ProviderOidcAwsPtrOutput)
+}
+
+// Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
+func (o ProviderOidcPtrOutput) Azure() ProviderOidcAzurePtrOutput {
+	return o.ApplyT(func(v *ProviderOidc) *ProviderOidcAzure {
+		if v == nil {
+			return nil
+		}
+		return v.Azure
+	}).(ProviderOidcAzurePtrOutput)
+}
+
+// Name of an environment variable containing a pre-minted OIDC JWT.
+func (o ProviderOidcPtrOutput) Env() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderOidc) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Env
+	}).(pulumi.StringPtrOutput)
+}
+
+// Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+func (o ProviderOidcPtrOutput) IntegrationId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderOidc) *string {
+		if v == nil {
+			return nil
+		}
+		return v.IntegrationId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProviderOidcAws struct {
+}
+
+// ProviderOidcAwsInput is an input type that accepts ProviderOidcAwsArgs and ProviderOidcAwsOutput values.
+// You can construct a concrete instance of `ProviderOidcAwsInput` via:
+//
+//	ProviderOidcAwsArgs{...}
+type ProviderOidcAwsInput interface {
+	pulumi.Input
+
+	ToProviderOidcAwsOutput() ProviderOidcAwsOutput
+	ToProviderOidcAwsOutputWithContext(context.Context) ProviderOidcAwsOutput
+}
+
+type ProviderOidcAwsArgs struct {
+}
+
+func (ProviderOidcAwsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderOidcAws)(nil)).Elem()
+}
+
+func (i ProviderOidcAwsArgs) ToProviderOidcAwsOutput() ProviderOidcAwsOutput {
+	return i.ToProviderOidcAwsOutputWithContext(context.Background())
+}
+
+func (i ProviderOidcAwsArgs) ToProviderOidcAwsOutputWithContext(ctx context.Context) ProviderOidcAwsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcAwsOutput)
+}
+
+func (i ProviderOidcAwsArgs) ToProviderOidcAwsPtrOutput() ProviderOidcAwsPtrOutput {
+	return i.ToProviderOidcAwsPtrOutputWithContext(context.Background())
+}
+
+func (i ProviderOidcAwsArgs) ToProviderOidcAwsPtrOutputWithContext(ctx context.Context) ProviderOidcAwsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcAwsOutput).ToProviderOidcAwsPtrOutputWithContext(ctx)
+}
+
+// ProviderOidcAwsPtrInput is an input type that accepts ProviderOidcAwsArgs, ProviderOidcAwsPtr and ProviderOidcAwsPtrOutput values.
+// You can construct a concrete instance of `ProviderOidcAwsPtrInput` via:
+//
+//	        ProviderOidcAwsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProviderOidcAwsPtrInput interface {
+	pulumi.Input
+
+	ToProviderOidcAwsPtrOutput() ProviderOidcAwsPtrOutput
+	ToProviderOidcAwsPtrOutputWithContext(context.Context) ProviderOidcAwsPtrOutput
+}
+
+type providerOidcAwsPtrType ProviderOidcAwsArgs
+
+func ProviderOidcAwsPtr(v *ProviderOidcAwsArgs) ProviderOidcAwsPtrInput {
+	return (*providerOidcAwsPtrType)(v)
+}
+
+func (*providerOidcAwsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderOidcAws)(nil)).Elem()
+}
+
+func (i *providerOidcAwsPtrType) ToProviderOidcAwsPtrOutput() ProviderOidcAwsPtrOutput {
+	return i.ToProviderOidcAwsPtrOutputWithContext(context.Background())
+}
+
+func (i *providerOidcAwsPtrType) ToProviderOidcAwsPtrOutputWithContext(ctx context.Context) ProviderOidcAwsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcAwsPtrOutput)
+}
+
+type ProviderOidcAwsOutput struct{ *pulumi.OutputState }
+
+func (ProviderOidcAwsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderOidcAws)(nil)).Elem()
+}
+
+func (o ProviderOidcAwsOutput) ToProviderOidcAwsOutput() ProviderOidcAwsOutput {
+	return o
+}
+
+func (o ProviderOidcAwsOutput) ToProviderOidcAwsOutputWithContext(ctx context.Context) ProviderOidcAwsOutput {
+	return o
+}
+
+func (o ProviderOidcAwsOutput) ToProviderOidcAwsPtrOutput() ProviderOidcAwsPtrOutput {
+	return o.ToProviderOidcAwsPtrOutputWithContext(context.Background())
+}
+
+func (o ProviderOidcAwsOutput) ToProviderOidcAwsPtrOutputWithContext(ctx context.Context) ProviderOidcAwsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProviderOidcAws) *ProviderOidcAws {
+		return &v
+	}).(ProviderOidcAwsPtrOutput)
+}
+
+type ProviderOidcAwsPtrOutput struct{ *pulumi.OutputState }
+
+func (ProviderOidcAwsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderOidcAws)(nil)).Elem()
+}
+
+func (o ProviderOidcAwsPtrOutput) ToProviderOidcAwsPtrOutput() ProviderOidcAwsPtrOutput {
+	return o
+}
+
+func (o ProviderOidcAwsPtrOutput) ToProviderOidcAwsPtrOutputWithContext(ctx context.Context) ProviderOidcAwsPtrOutput {
+	return o
+}
+
+func (o ProviderOidcAwsPtrOutput) Elem() ProviderOidcAwsOutput {
+	return o.ApplyT(func(v *ProviderOidcAws) ProviderOidcAws {
+		if v != nil {
+			return *v
+		}
+		var ret ProviderOidcAws
+		return ret
+	}).(ProviderOidcAwsOutput)
+}
+
+type ProviderOidcAzure struct {
+}
+
+// ProviderOidcAzureInput is an input type that accepts ProviderOidcAzureArgs and ProviderOidcAzureOutput values.
+// You can construct a concrete instance of `ProviderOidcAzureInput` via:
+//
+//	ProviderOidcAzureArgs{...}
+type ProviderOidcAzureInput interface {
+	pulumi.Input
+
+	ToProviderOidcAzureOutput() ProviderOidcAzureOutput
+	ToProviderOidcAzureOutputWithContext(context.Context) ProviderOidcAzureOutput
+}
+
+type ProviderOidcAzureArgs struct {
+}
+
+func (ProviderOidcAzureArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderOidcAzure)(nil)).Elem()
+}
+
+func (i ProviderOidcAzureArgs) ToProviderOidcAzureOutput() ProviderOidcAzureOutput {
+	return i.ToProviderOidcAzureOutputWithContext(context.Background())
+}
+
+func (i ProviderOidcAzureArgs) ToProviderOidcAzureOutputWithContext(ctx context.Context) ProviderOidcAzureOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcAzureOutput)
+}
+
+func (i ProviderOidcAzureArgs) ToProviderOidcAzurePtrOutput() ProviderOidcAzurePtrOutput {
+	return i.ToProviderOidcAzurePtrOutputWithContext(context.Background())
+}
+
+func (i ProviderOidcAzureArgs) ToProviderOidcAzurePtrOutputWithContext(ctx context.Context) ProviderOidcAzurePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcAzureOutput).ToProviderOidcAzurePtrOutputWithContext(ctx)
+}
+
+// ProviderOidcAzurePtrInput is an input type that accepts ProviderOidcAzureArgs, ProviderOidcAzurePtr and ProviderOidcAzurePtrOutput values.
+// You can construct a concrete instance of `ProviderOidcAzurePtrInput` via:
+//
+//	        ProviderOidcAzureArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProviderOidcAzurePtrInput interface {
+	pulumi.Input
+
+	ToProviderOidcAzurePtrOutput() ProviderOidcAzurePtrOutput
+	ToProviderOidcAzurePtrOutputWithContext(context.Context) ProviderOidcAzurePtrOutput
+}
+
+type providerOidcAzurePtrType ProviderOidcAzureArgs
+
+func ProviderOidcAzurePtr(v *ProviderOidcAzureArgs) ProviderOidcAzurePtrInput {
+	return (*providerOidcAzurePtrType)(v)
+}
+
+func (*providerOidcAzurePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderOidcAzure)(nil)).Elem()
+}
+
+func (i *providerOidcAzurePtrType) ToProviderOidcAzurePtrOutput() ProviderOidcAzurePtrOutput {
+	return i.ToProviderOidcAzurePtrOutputWithContext(context.Background())
+}
+
+func (i *providerOidcAzurePtrType) ToProviderOidcAzurePtrOutputWithContext(ctx context.Context) ProviderOidcAzurePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcAzurePtrOutput)
+}
+
+type ProviderOidcAzureOutput struct{ *pulumi.OutputState }
+
+func (ProviderOidcAzureOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderOidcAzure)(nil)).Elem()
+}
+
+func (o ProviderOidcAzureOutput) ToProviderOidcAzureOutput() ProviderOidcAzureOutput {
+	return o
+}
+
+func (o ProviderOidcAzureOutput) ToProviderOidcAzureOutputWithContext(ctx context.Context) ProviderOidcAzureOutput {
+	return o
+}
+
+func (o ProviderOidcAzureOutput) ToProviderOidcAzurePtrOutput() ProviderOidcAzurePtrOutput {
+	return o.ToProviderOidcAzurePtrOutputWithContext(context.Background())
+}
+
+func (o ProviderOidcAzureOutput) ToProviderOidcAzurePtrOutputWithContext(ctx context.Context) ProviderOidcAzurePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProviderOidcAzure) *ProviderOidcAzure {
+		return &v
+	}).(ProviderOidcAzurePtrOutput)
+}
+
+type ProviderOidcAzurePtrOutput struct{ *pulumi.OutputState }
+
+func (ProviderOidcAzurePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderOidcAzure)(nil)).Elem()
+}
+
+func (o ProviderOidcAzurePtrOutput) ToProviderOidcAzurePtrOutput() ProviderOidcAzurePtrOutput {
+	return o
+}
+
+func (o ProviderOidcAzurePtrOutput) ToProviderOidcAzurePtrOutputWithContext(ctx context.Context) ProviderOidcAzurePtrOutput {
+	return o
+}
+
+func (o ProviderOidcAzurePtrOutput) Elem() ProviderOidcAzureOutput {
+	return o.ApplyT(func(v *ProviderOidcAzure) ProviderOidcAzure {
+		if v != nil {
+			return *v
+		}
+		var ret ProviderOidcAzure
+		return ret
+	}).(ProviderOidcAzureOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderAnthropicInput)(nil)).Elem(), ConnectorAiProviderAnthropicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderAnthropicPtrInput)(nil)).Elem(), ConnectorAiProviderAnthropicArgs{})
@@ -4850,6 +5531,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationBiMetabasePtrInput)(nil)).Elem(), IntegrationBiMetabaseArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudAwsInput)(nil)).Elem(), IntegrationCloudAwsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudAwsPtrInput)(nil)).Elem(), IntegrationCloudAwsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudAzureInput)(nil)).Elem(), IntegrationCloudAzureArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudAzurePtrInput)(nil)).Elem(), IntegrationCloudAzureArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudGcpInput)(nil)).Elem(), IntegrationCloudGcpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudGcpPtrInput)(nil)).Elem(), IntegrationCloudGcpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogAwsS3Input)(nil)).Elem(), IntegrationLogAwsS3Args{})
@@ -4878,6 +5561,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationSessionPtrInput)(nil)).Elem(), LogConfigurationSessionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationStreamInput)(nil)).Elem(), LogConfigurationStreamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationStreamPtrInput)(nil)).Elem(), LogConfigurationStreamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcInput)(nil)).Elem(), ProviderOidcArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcPtrInput)(nil)).Elem(), ProviderOidcArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAwsInput)(nil)).Elem(), ProviderOidcAwsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAwsPtrInput)(nil)).Elem(), ProviderOidcAwsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAzureInput)(nil)).Elem(), ProviderOidcAzureArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAzurePtrInput)(nil)).Elem(), ProviderOidcAzureArgs{})
 	pulumi.RegisterOutputType(ConnectorAiProviderAnthropicOutput{})
 	pulumi.RegisterOutputType(ConnectorAiProviderAnthropicPtrOutput{})
 	pulumi.RegisterOutputType(ConnectorAiProviderAwsBedrockOutput{})
@@ -4906,6 +5595,8 @@ func init() {
 	pulumi.RegisterOutputType(IntegrationBiMetabasePtrOutput{})
 	pulumi.RegisterOutputType(IntegrationCloudAwsOutput{})
 	pulumi.RegisterOutputType(IntegrationCloudAwsPtrOutput{})
+	pulumi.RegisterOutputType(IntegrationCloudAzureOutput{})
+	pulumi.RegisterOutputType(IntegrationCloudAzurePtrOutput{})
 	pulumi.RegisterOutputType(IntegrationCloudGcpOutput{})
 	pulumi.RegisterOutputType(IntegrationCloudGcpPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogAwsS3Output{})
@@ -4934,4 +5625,10 @@ func init() {
 	pulumi.RegisterOutputType(LogConfigurationSessionPtrOutput{})
 	pulumi.RegisterOutputType(LogConfigurationStreamOutput{})
 	pulumi.RegisterOutputType(LogConfigurationStreamPtrOutput{})
+	pulumi.RegisterOutputType(ProviderOidcOutput{})
+	pulumi.RegisterOutputType(ProviderOidcPtrOutput{})
+	pulumi.RegisterOutputType(ProviderOidcAwsOutput{})
+	pulumi.RegisterOutputType(ProviderOidcAwsPtrOutput{})
+	pulumi.RegisterOutputType(ProviderOidcAzureOutput{})
+	pulumi.RegisterOutputType(ProviderOidcAzurePtrOutput{})
 }

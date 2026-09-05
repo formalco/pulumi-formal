@@ -30,6 +30,7 @@ __all__ = [
     'FormFieldConfigOptionsSourceCommand',
     'IntegrationBiMetabase',
     'IntegrationCloudAws',
+    'IntegrationCloudAzure',
     'IntegrationCloudGcp',
     'IntegrationLogAwsS3',
     'IntegrationLogDatadog',
@@ -616,9 +617,7 @@ class IntegrationCloudAws(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "templateVersion":
-            suggest = "template_version"
-        elif key == "allowS3Access":
+        if key == "allowS3Access":
             suggest = "allow_s3_access"
         elif key == "autodiscoveryRegions":
             suggest = "autodiscovery_regions"
@@ -638,6 +637,8 @@ class IntegrationCloudAws(dict):
             suggest = "enable_s3_autodiscovery"
         elif key == "s3BucketArn":
             suggest = "s3_bucket_arn"
+        elif key == "templateVersion":
+            suggest = "template_version"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in IntegrationCloudAws. Access the value via the '{suggest}' property getter instead.")
@@ -651,7 +652,6 @@ class IntegrationCloudAws(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 template_version: _builtins.str,
                  allow_s3_access: Optional[_builtins.bool] = None,
                  autodiscovery_regions: Optional[Sequence[_builtins.str]] = None,
                  aws_customer_role_arn: Optional[_builtins.str] = None,
@@ -661,12 +661,12 @@ class IntegrationCloudAws(dict):
                  enable_rds_autodiscovery: Optional[_builtins.bool] = None,
                  enable_redshift_autodiscovery: Optional[_builtins.bool] = None,
                  enable_s3_autodiscovery: Optional[_builtins.bool] = None,
-                 s3_bucket_arn: Optional[_builtins.str] = None):
+                 s3_bucket_arn: Optional[_builtins.str] = None,
+                 template_version: Optional[_builtins.str] = None):
         """
-        :param _builtins.str template_version: The template version of the CloudFormation stack. Use `latest` to stay in sync.
         :param _builtins.bool allow_s3_access: Allows the Cloud Integration to access S3 buckets for Log Integrations.
         :param Sequence[_builtins.str] autodiscovery_regions: The regions to enable resource autodiscovery for.
-        :param _builtins.str aws_customer_role_arn: The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+        :param _builtins.str aws_customer_role_arn: The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `template_version` is set (CloudFormation path).
         :param _builtins.bool enable_ec2_autodiscovery: Enables resource autodiscovery for EC2 instances.
         :param _builtins.bool enable_ecs_autodiscovery: Enables resource autodiscovery for ECS clusters.
         :param _builtins.bool enable_eks_autodiscovery: Enables resource autodiscovery for EKS clusters.
@@ -674,8 +674,8 @@ class IntegrationCloudAws(dict):
         :param _builtins.bool enable_redshift_autodiscovery: Enables resource autodiscovery for Redshift clusters.
         :param _builtins.bool enable_s3_autodiscovery: Enables resource autodiscovery for S3 buckets.
         :param _builtins.str s3_bucket_arn: The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
+        :param _builtins.str template_version: The CloudFormation template version to use when deploying `aws_cloudformation_stack`. Required unless `aws_customer_role_arn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
         """
-        pulumi.set(__self__, "template_version", template_version)
         if allow_s3_access is not None:
             pulumi.set(__self__, "allow_s3_access", allow_s3_access)
         if autodiscovery_regions is not None:
@@ -696,14 +696,8 @@ class IntegrationCloudAws(dict):
             pulumi.set(__self__, "enable_s3_autodiscovery", enable_s3_autodiscovery)
         if s3_bucket_arn is not None:
             pulumi.set(__self__, "s3_bucket_arn", s3_bucket_arn)
-
-    @_builtins.property
-    @pulumi.getter(name="templateVersion")
-    def template_version(self) -> _builtins.str:
-        """
-        The template version of the CloudFormation stack. Use `latest` to stay in sync.
-        """
-        return pulumi.get(self, "template_version")
+        if template_version is not None:
+            pulumi.set(__self__, "template_version", template_version)
 
     @_builtins.property
     @pulumi.getter(name="allowS3Access")
@@ -725,7 +719,7 @@ class IntegrationCloudAws(dict):
     @pulumi.getter(name="awsCustomerRoleArn")
     def aws_customer_role_arn(self) -> Optional[_builtins.str]:
         """
-        The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+        The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `template_version` is set (CloudFormation path).
         """
         return pulumi.get(self, "aws_customer_role_arn")
 
@@ -784,6 +778,133 @@ class IntegrationCloudAws(dict):
         The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
         """
         return pulumi.get(self, "s3_bucket_arn")
+
+    @_builtins.property
+    @pulumi.getter(name="templateVersion")
+    def template_version(self) -> Optional[_builtins.str]:
+        """
+        The CloudFormation template version to use when deploying `aws_cloudformation_stack`. Required unless `aws_customer_role_arn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
+        """
+        return pulumi.get(self, "template_version")
+
+
+@pulumi.output_type
+class IntegrationCloudAzure(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "subscriptionId":
+            suggest = "subscription_id"
+        elif key == "allowBlobAccess":
+            suggest = "allow_blob_access"
+        elif key == "blobStorageAccounts":
+            suggest = "blob_storage_accounts"
+        elif key == "enableAksAutodiscovery":
+            suggest = "enable_aks_autodiscovery"
+        elif key == "enableDbAutodiscovery":
+            suggest = "enable_db_autodiscovery"
+        elif key == "enableVmAutodiscovery":
+            suggest = "enable_vm_autodiscovery"
+        elif key == "resourceGroup":
+            suggest = "resource_group"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in IntegrationCloudAzure. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        IntegrationCloudAzure.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        IntegrationCloudAzure.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 subscription_id: _builtins.str,
+                 allow_blob_access: Optional[_builtins.bool] = None,
+                 blob_storage_accounts: Optional[Sequence[_builtins.str]] = None,
+                 enable_aks_autodiscovery: Optional[_builtins.bool] = None,
+                 enable_db_autodiscovery: Optional[_builtins.bool] = None,
+                 enable_vm_autodiscovery: Optional[_builtins.bool] = None,
+                 resource_group: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str subscription_id: The Azure subscription this integration grants Formal access to.
+        :param _builtins.bool allow_blob_access: Allows the Cloud Integration to write logs to Azure Blob Storage for Log Integrations.
+        :param Sequence[_builtins.str] blob_storage_accounts: Storage accounts Formal may write logs to. An empty list allows every account in scope.
+        :param _builtins.bool enable_aks_autodiscovery: Enables resource autodiscovery for AKS clusters.
+        :param _builtins.bool enable_db_autodiscovery: Enables resource autodiscovery for Azure managed database servers.
+        :param _builtins.bool enable_vm_autodiscovery: Enables resource autodiscovery for Azure virtual machines.
+        :param _builtins.str resource_group: Narrows discovery to a single resource group. Empty covers the whole subscription.
+        """
+        pulumi.set(__self__, "subscription_id", subscription_id)
+        if allow_blob_access is not None:
+            pulumi.set(__self__, "allow_blob_access", allow_blob_access)
+        if blob_storage_accounts is not None:
+            pulumi.set(__self__, "blob_storage_accounts", blob_storage_accounts)
+        if enable_aks_autodiscovery is not None:
+            pulumi.set(__self__, "enable_aks_autodiscovery", enable_aks_autodiscovery)
+        if enable_db_autodiscovery is not None:
+            pulumi.set(__self__, "enable_db_autodiscovery", enable_db_autodiscovery)
+        if enable_vm_autodiscovery is not None:
+            pulumi.set(__self__, "enable_vm_autodiscovery", enable_vm_autodiscovery)
+        if resource_group is not None:
+            pulumi.set(__self__, "resource_group", resource_group)
+
+    @_builtins.property
+    @pulumi.getter(name="subscriptionId")
+    def subscription_id(self) -> _builtins.str:
+        """
+        The Azure subscription this integration grants Formal access to.
+        """
+        return pulumi.get(self, "subscription_id")
+
+    @_builtins.property
+    @pulumi.getter(name="allowBlobAccess")
+    def allow_blob_access(self) -> Optional[_builtins.bool]:
+        """
+        Allows the Cloud Integration to write logs to Azure Blob Storage for Log Integrations.
+        """
+        return pulumi.get(self, "allow_blob_access")
+
+    @_builtins.property
+    @pulumi.getter(name="blobStorageAccounts")
+    def blob_storage_accounts(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        Storage accounts Formal may write logs to. An empty list allows every account in scope.
+        """
+        return pulumi.get(self, "blob_storage_accounts")
+
+    @_builtins.property
+    @pulumi.getter(name="enableAksAutodiscovery")
+    def enable_aks_autodiscovery(self) -> Optional[_builtins.bool]:
+        """
+        Enables resource autodiscovery for AKS clusters.
+        """
+        return pulumi.get(self, "enable_aks_autodiscovery")
+
+    @_builtins.property
+    @pulumi.getter(name="enableDbAutodiscovery")
+    def enable_db_autodiscovery(self) -> Optional[_builtins.bool]:
+        """
+        Enables resource autodiscovery for Azure managed database servers.
+        """
+        return pulumi.get(self, "enable_db_autodiscovery")
+
+    @_builtins.property
+    @pulumi.getter(name="enableVmAutodiscovery")
+    def enable_vm_autodiscovery(self) -> Optional[_builtins.bool]:
+        """
+        Enables resource autodiscovery for Azure virtual machines.
+        """
+        return pulumi.get(self, "enable_vm_autodiscovery")
+
+    @_builtins.property
+    @pulumi.getter(name="resourceGroup")
+    def resource_group(self) -> Optional[_builtins.str]:
+        """
+        Narrows discovery to a single resource group. Empty covers the whole subscription.
+        """
+        return pulumi.get(self, "resource_group")
 
 
 @pulumi.output_type

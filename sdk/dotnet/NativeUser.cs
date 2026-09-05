@@ -54,7 +54,7 @@ namespace Formal.Pulumi
         public Output<bool?> TerminationProtection { get; private set; } = null!;
 
         /// <summary>
-        /// The password of the Native User.
+        /// Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
         /// </summary>
         [Output("useAsDefault")]
         public Output<bool?> UseAsDefault { get; private set; } = null!;
@@ -169,7 +169,7 @@ namespace Formal.Pulumi
         public Input<bool>? TerminationProtection { get; set; }
 
         /// <summary>
-        /// The password of the Native User.
+        /// Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
         /// </summary>
         [Input("useAsDefault")]
         public Input<bool>? UseAsDefault { get; set; }
@@ -240,7 +240,7 @@ namespace Formal.Pulumi
         public Input<bool>? TerminationProtection { get; set; }
 
         /// <summary>
-        /// The password of the Native User.
+        /// Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
         /// </summary>
         [Input("useAsDefault")]
         public Input<bool>? UseAsDefault { get; set; }

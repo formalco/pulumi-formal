@@ -45,6 +45,7 @@
         "index.ts",
         "integrationBi.ts",
         "integrationCloud.ts",
+        "integrationCloudAzureActivation.ts",
         "integrationCloudGcpActivation.ts",
         "integrationLog.ts",
         "integrationMdm.ts",

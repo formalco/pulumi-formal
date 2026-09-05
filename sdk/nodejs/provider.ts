@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -25,6 +27,9 @@ export class Provider extends pulumi.ProviderResource {
         return obj['__pulumiType'] === "pulumi:providers:" + Provider.__pulumiType;
     }
 
+    /**
+     * Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
+     */
     declare public readonly apiKey: pulumi.Output<string | undefined>;
 
     /**
@@ -38,10 +43,13 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            resourceInputs["apiKey"] = args?.apiKey;
+            resourceInputs["apiKey"] = args?.apiKey ? pulumi.secret(args.apiKey) : undefined;
+            resourceInputs["oidc"] = pulumi.output(args?.oidc).apply(JSON.stringify);
             resourceInputs["retrieveSensitiveValues"] = pulumi.output(args?.retrieveSensitiveValues).apply(JSON.stringify);
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["apiKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
     }
 
@@ -59,7 +67,14 @@ export class Provider extends pulumi.ProviderResource {
  * The set of arguments for constructing a Provider resource.
  */
 export interface ProviderArgs {
+    /**
+     * Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
+     */
     apiKey?: pulumi.Input<string | undefined>;
+    /**
+     * OIDC authentication configuration. Conflicts with `apiKey`.
+     */
+    oidc?: pulumi.Input<inputs.ProviderOidc | undefined>;
     retrieveSensitiveValues?: pulumi.Input<boolean | undefined>;
 }
 

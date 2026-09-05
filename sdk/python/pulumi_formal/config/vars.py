@@ -13,6 +13,7 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from .. import _utilities
+from . import outputs
 
 import types
 
@@ -22,7 +23,17 @@ __config__ = pulumi.Config('formal')
 class _ExportableConfig(types.ModuleType):
     @_builtins.property
     def api_key(self) -> Optional[str]:
+        """
+        Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
+        """
         return __config__.get('apiKey')
+
+    @_builtins.property
+    def oidc(self) -> Optional[str]:
+        """
+        OIDC authentication configuration. Conflicts with `api_key`.
+        """
+        return __config__.get('oidc')
 
     @_builtins.property
     def retrieve_sensitive_values(self) -> Optional[bool]:

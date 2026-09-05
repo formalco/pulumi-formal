@@ -27,8 +27,8 @@ class EncryptionKeyArgs:
         """
         The set of arguments for constructing a EncryptionKey resource.
 
-        :param pulumi.Input[_builtins.str] key_id: The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
-        :param pulumi.Input[_builtins.str] key_provider: The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+        :param pulumi.Input[_builtins.str] key_id: The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
+        :param pulumi.Input[_builtins.str] key_provider: The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
         :param pulumi.Input[_builtins.str] algorithm: Deprecated. Symmetric and deterministic algorithms ('aes*random', 'aes*deterministic') are no longer supported. Encryption keys use asymmetric RSA ('rsaes*oaep*sha256'), which is the default.
         :param pulumi.Input[_builtins.str] decryptor_uri: The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
         :param pulumi.Input[_builtins.str] public_key_pem: PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
@@ -49,7 +49,7 @@ class EncryptionKeyArgs:
     @pulumi.getter(name="keyId")
     def key_id(self) -> pulumi.Input[_builtins.str]:
         """
-        The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+        The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
         """
         return pulumi.get(self, "key_id")
 
@@ -61,7 +61,7 @@ class EncryptionKeyArgs:
     @pulumi.getter(name="keyProvider")
     def key_provider(self) -> pulumi.Input[_builtins.str]:
         """
-        The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+        The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
         """
         return pulumi.get(self, "key_provider")
 
@@ -123,8 +123,8 @@ class _EncryptionKeyState:
         :param pulumi.Input[_builtins.str] algorithm: Deprecated. Symmetric and deterministic algorithms ('aes*random', 'aes*deterministic') are no longer supported. Encryption keys use asymmetric RSA ('rsaes*oaep*sha256'), which is the default.
         :param pulumi.Input[_builtins.str] created_at: When the encryption key was created.
         :param pulumi.Input[_builtins.str] decryptor_uri: The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
-        :param pulumi.Input[_builtins.str] key_id: The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
-        :param pulumi.Input[_builtins.str] key_provider: The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+        :param pulumi.Input[_builtins.str] key_id: The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
+        :param pulumi.Input[_builtins.str] key_provider: The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
         :param pulumi.Input[_builtins.str] public_key_pem: PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         """
@@ -187,7 +187,7 @@ class _EncryptionKeyState:
     @pulumi.getter(name="keyId")
     def key_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+        The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
         """
         return pulumi.get(self, "key_id")
 
@@ -199,7 +199,7 @@ class _EncryptionKeyState:
     @pulumi.getter(name="keyProvider")
     def key_provider(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+        The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
         """
         return pulumi.get(self, "key_provider")
 
@@ -252,8 +252,8 @@ class EncryptionKey(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] algorithm: Deprecated. Symmetric and deterministic algorithms ('aes*random', 'aes*deterministic') are no longer supported. Encryption keys use asymmetric RSA ('rsaes*oaep*sha256'), which is the default.
         :param pulumi.Input[_builtins.str] decryptor_uri: The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
-        :param pulumi.Input[_builtins.str] key_id: The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
-        :param pulumi.Input[_builtins.str] key_provider: The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+        :param pulumi.Input[_builtins.str] key_id: The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
+        :param pulumi.Input[_builtins.str] key_provider: The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
         :param pulumi.Input[_builtins.str] public_key_pem: PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
         """
         ...
@@ -333,8 +333,8 @@ class EncryptionKey(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] algorithm: Deprecated. Symmetric and deterministic algorithms ('aes*random', 'aes*deterministic') are no longer supported. Encryption keys use asymmetric RSA ('rsaes*oaep*sha256'), which is the default.
         :param pulumi.Input[_builtins.str] created_at: When the encryption key was created.
         :param pulumi.Input[_builtins.str] decryptor_uri: The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
-        :param pulumi.Input[_builtins.str] key_id: The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
-        :param pulumi.Input[_builtins.str] key_provider: The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+        :param pulumi.Input[_builtins.str] key_id: The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
+        :param pulumi.Input[_builtins.str] key_provider: The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
         :param pulumi.Input[_builtins.str] public_key_pem: PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         """
@@ -380,7 +380,7 @@ class EncryptionKey(pulumi.CustomResource):
     @pulumi.getter(name="keyId")
     def key_id(self) -> pulumi.Output[_builtins.str]:
         """
-        The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+        The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
         """
         return pulumi.get(self, "key_id")
 
@@ -388,7 +388,7 @@ class EncryptionKey(pulumi.CustomResource):
     @pulumi.getter(name="keyProvider")
     def key_provider(self) -> pulumi.Output[_builtins.str]:
         """
-        The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+        The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
         """
         return pulumi.get(self, "key_provider")
 

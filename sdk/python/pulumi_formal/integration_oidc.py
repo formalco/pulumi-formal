@@ -31,7 +31,7 @@ class IntegrationOidcArgs:
 
         :param pulumi.Input[_builtins.str] issuer: OIDC issuer URL. Must be absolute HTTPS (path preserved). In local `ENV=dev`, the configured fake OIDC provider origin may use HTTP.
         :param pulumi.Input[_builtins.str] machine_user_id: ID of the Formal machine user that authenticated OIDC tokens map to.
-        :param pulumi.Input[_builtins.str] claim_condition: CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+        :param pulumi.Input[_builtins.str] claim_condition: CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
         :param pulumi.Input[_builtins.str] end_user_email_expression: Optional CEL expression over verified token claims that must evaluate to a string email. When set, federation mint resolves a Formal human by case-insensitive email. Leave unset for machine-only trusts. Examples: `claims.owner_email` (Cursor); `claims.sub.split('/').last()` (AWSReservedSSO session name when the session name is an email).
         :param pulumi.Input[_builtins.str] jwks_uri: Optional JWKS URI. When unset, Formal uses OIDC Discovery from the issuer. Must be absolute HTTPS when set.
         :param pulumi.Input[_builtins.str] name: Friendly name for the OIDC integration. Must be unique within the organization.
@@ -78,7 +78,7 @@ class IntegrationOidcArgs:
     @pulumi.getter(name="claimCondition")
     def claim_condition(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+        CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
         """
         return pulumi.get(self, "claim_condition")
 
@@ -151,8 +151,8 @@ class _IntegrationOidcState:
         """
         Input properties used for looking up and filtering IntegrationOidc resources.
 
-        :param pulumi.Input[_builtins.str] audience: The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
-        :param pulumi.Input[_builtins.str] claim_condition: CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+        :param pulumi.Input[_builtins.str] audience: The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `id`.
+        :param pulumi.Input[_builtins.str] claim_condition: CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
         :param pulumi.Input[_builtins.str] created_at: When the integration was created.
         :param pulumi.Input[_builtins.str] end_user_email_expression: Optional CEL expression over verified token claims that must evaluate to a string email. When set, federation mint resolves a Formal human by case-insensitive email. Leave unset for machine-only trusts. Examples: `claims.owner_email` (Cursor); `claims.sub.split('/').last()` (AWSReservedSSO session name when the session name is an email).
         :param pulumi.Input[_builtins.str] issuer: OIDC issuer URL. Must be absolute HTTPS (path preserved). In local `ENV=dev`, the configured fake OIDC provider origin may use HTTP.
@@ -187,7 +187,7 @@ class _IntegrationOidcState:
     @pulumi.getter
     def audience(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
+        The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `id`.
         """
         return pulumi.get(self, "audience")
 
@@ -199,7 +199,7 @@ class _IntegrationOidcState:
     @pulumi.getter(name="claimCondition")
     def claim_condition(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+        CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
         """
         return pulumi.get(self, "claim_condition")
 
@@ -324,7 +324,7 @@ class IntegrationOidc(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] claim_condition: CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+        :param pulumi.Input[_builtins.str] claim_condition: CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
         :param pulumi.Input[_builtins.str] end_user_email_expression: Optional CEL expression over verified token claims that must evaluate to a string email. When set, federation mint resolves a Formal human by case-insensitive email. Leave unset for machine-only trusts. Examples: `claims.owner_email` (Cursor); `claims.sub.split('/').last()` (AWSReservedSSO session name when the session name is an email).
         :param pulumi.Input[_builtins.str] issuer: OIDC issuer URL. Must be absolute HTTPS (path preserved). In local `ENV=dev`, the configured fake OIDC provider origin may use HTTP.
         :param pulumi.Input[_builtins.str] jwks_uri: Optional JWKS URI. When unset, Formal uses OIDC Discovery from the issuer. Must be absolute HTTPS when set.
@@ -414,8 +414,8 @@ class IntegrationOidc(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] audience: The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
-        :param pulumi.Input[_builtins.str] claim_condition: CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+        :param pulumi.Input[_builtins.str] audience: The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `id`.
+        :param pulumi.Input[_builtins.str] claim_condition: CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
         :param pulumi.Input[_builtins.str] created_at: When the integration was created.
         :param pulumi.Input[_builtins.str] end_user_email_expression: Optional CEL expression over verified token claims that must evaluate to a string email. When set, federation mint resolves a Formal human by case-insensitive email. Leave unset for machine-only trusts. Examples: `claims.owner_email` (Cursor); `claims.sub.split('/').last()` (AWSReservedSSO session name when the session name is an email).
         :param pulumi.Input[_builtins.str] issuer: OIDC issuer URL. Must be absolute HTTPS (path preserved). In local `ENV=dev`, the configured fake OIDC provider origin may use HTTP.
@@ -445,7 +445,7 @@ class IntegrationOidc(pulumi.CustomResource):
     @pulumi.getter
     def audience(self) -> pulumi.Output[_builtins.str]:
         """
-        The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
+        The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `id`.
         """
         return pulumi.get(self, "audience")
 
@@ -453,7 +453,7 @@ class IntegrationOidc(pulumi.CustomResource):
     @pulumi.getter(name="claimCondition")
     def claim_condition(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+        CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
         """
         return pulumi.get(self, "claim_condition")
 

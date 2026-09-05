@@ -50,11 +50,11 @@ export class EncryptionKey extends pulumi.CustomResource {
      */
     declare public readonly decryptorUri: pulumi.Output<string | undefined>;
     /**
-     * The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+     * The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
      */
     declare public readonly keyId: pulumi.Output<string>;
     /**
-     * The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+     * The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
      */
     declare public readonly keyProvider: pulumi.Output<string>;
     /**
@@ -126,11 +126,11 @@ export interface EncryptionKeyState {
      */
     decryptorUri?: pulumi.Input<string | undefined>;
     /**
-     * The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+     * The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
      */
     keyId?: pulumi.Input<string | undefined>;
     /**
-     * The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+     * The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
      */
     keyProvider?: pulumi.Input<string | undefined>;
     /**
@@ -158,11 +158,11 @@ export interface EncryptionKeyArgs {
      */
     decryptorUri?: pulumi.Input<string | undefined>;
     /**
-     * The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+     * The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
      */
     keyId: pulumi.Input<string>;
     /**
-     * The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+     * The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
      */
     keyProvider: pulumi.Input<string>;
     /**
