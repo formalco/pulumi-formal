@@ -178,7 +178,7 @@ export interface IntegrationCloudAws {
      */
     autodiscoveryRegions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+     * The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `templateVersion` is set (CloudFormation path).
      */
     awsCustomerRoleArn?: pulumi.Input<string | undefined>;
     /**
@@ -210,9 +210,40 @@ export interface IntegrationCloudAws {
      */
     s3BucketArn?: pulumi.Input<string | undefined>;
     /**
-     * The template version of the CloudFormation stack. Use `latest` to stay in sync.
+     * The CloudFormation template version to use when deploying `awsCloudformationStack`. Required unless `awsCustomerRoleArn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
      */
-    templateVersion: pulumi.Input<string>;
+    templateVersion?: pulumi.Input<string | undefined>;
+}
+
+export interface IntegrationCloudAzure {
+    /**
+     * Allows the Cloud Integration to write logs to Azure Blob Storage for Log Integrations.
+     */
+    allowBlobAccess?: pulumi.Input<boolean | undefined>;
+    /**
+     * Storage accounts Formal may write logs to. An empty list allows every account in scope.
+     */
+    blobStorageAccounts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Enables resource autodiscovery for AKS clusters.
+     */
+    enableAksAutodiscovery?: pulumi.Input<boolean | undefined>;
+    /**
+     * Enables resource autodiscovery for Azure managed database servers.
+     */
+    enableDbAutodiscovery?: pulumi.Input<boolean | undefined>;
+    /**
+     * Enables resource autodiscovery for Azure virtual machines.
+     */
+    enableVmAutodiscovery?: pulumi.Input<boolean | undefined>;
+    /**
+     * Narrows discovery to a single resource group. Empty covers the whole subscription.
+     */
+    resourceGroup?: pulumi.Input<string | undefined>;
+    /**
+     * The Azure subscription this integration grants Formal access to.
+     */
+    subscriptionId: pulumi.Input<string>;
 }
 
 export interface IntegrationCloudGcp {
@@ -430,4 +461,31 @@ export interface LogConfigurationStream {
      * Whether to encrypt stream data.
      */
     encrypt: pulumi.Input<boolean>;
+}
+
+export interface ProviderOidc {
+    /**
+     * Mint short-lived OIDC tokens using the AWS credential chain and STS.
+     */
+    aws?: pulumi.Input<inputs.ProviderOidcAws | undefined>;
+    /**
+     * Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
+     */
+    azure?: pulumi.Input<inputs.ProviderOidcAzure | undefined>;
+    /**
+     * Name of an environment variable containing a pre-minted OIDC JWT.
+     */
+    env?: pulumi.Input<string | undefined>;
+    /**
+     * Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+     */
+    integrationId?: pulumi.Input<string | undefined>;
+}
+
+export interface ProviderOidcAws {
+}
+
+export interface ProviderOidcAzure {
+}
+export namespace config {
 }

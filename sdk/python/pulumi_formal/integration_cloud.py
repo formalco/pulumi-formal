@@ -22,6 +22,7 @@ __all__ = ['IntegrationCloudArgs', 'IntegrationCloud']
 class IntegrationCloudArgs:
     def __init__(__self__, *,
                  aws: pulumi.Input[Optional['IntegrationCloudAwsArgs']] = None,
+                 azure: pulumi.Input[Optional['IntegrationCloudAzureArgs']] = None,
                  cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
                  gcp: pulumi.Input[Optional['IntegrationCloudGcpArgs']] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -30,6 +31,7 @@ class IntegrationCloudArgs:
         The set of arguments for constructing a IntegrationCloud resource.
 
         :param pulumi.Input['IntegrationCloudAwsArgs'] aws: Configuration block for AWS integration.
+        :param pulumi.Input['IntegrationCloudAzureArgs'] azure: Configuration block for Azure integration.
         :param pulumi.Input[_builtins.str] cloud_region: Region of the cloud provider. (AWS only)
         :param pulumi.Input['IntegrationCloudGcpArgs'] gcp: Configuration block for GCP integration.
         :param pulumi.Input[_builtins.str] name: Name of the Integration.
@@ -37,6 +39,8 @@ class IntegrationCloudArgs:
         """
         if aws is not None:
             pulumi.set(__self__, "aws", aws)
+        if azure is not None:
+            pulumi.set(__self__, "azure", azure)
         if cloud_region is not None:
             pulumi.set(__self__, "cloud_region", cloud_region)
         if gcp is not None:
@@ -60,6 +64,18 @@ class IntegrationCloudArgs:
     @aws.setter
     def aws(self, value: pulumi.Input[Optional['IntegrationCloudAwsArgs']]):
         pulumi.set(self, "aws", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def azure(self) -> pulumi.Input[Optional['IntegrationCloudAzureArgs']]:
+        """
+        Configuration block for Azure integration.
+        """
+        return pulumi.get(self, "azure")
+
+    @azure.setter
+    def azure(self, value: pulumi.Input[Optional['IntegrationCloudAzureArgs']]):
+        pulumi.set(self, "azure", value)
 
     @_builtins.property
     @pulumi.getter(name="cloudRegion")
@@ -129,6 +145,18 @@ class _IntegrationCloudState:
                  aws_formal_stack_name: pulumi.Input[Optional[_builtins.str]] = None,
                  aws_s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None,
                  aws_template_body: pulumi.Input[Optional[_builtins.str]] = None,
+                 azure: pulumi.Input[Optional['IntegrationCloudAzureArgs']] = None,
+                 azure_allow_blob_access: pulumi.Input[Optional[_builtins.bool]] = None,
+                 azure_blob_storage_accounts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 azure_client_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 azure_enable_aks_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 azure_enable_db_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 azure_enable_vm_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 azure_issuer: pulumi.Input[Optional[_builtins.str]] = None,
+                 azure_resource_group: pulumi.Input[Optional[_builtins.str]] = None,
+                 azure_role_definitions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 azure_subscription_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 azure_tenant_id: pulumi.Input[Optional[_builtins.str]] = None,
                  cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
                  gcp: pulumi.Input[Optional['IntegrationCloudGcpArgs']] = None,
                  gcp_allow_gcs_access: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -157,10 +185,22 @@ class _IntegrationCloudState:
         :param pulumi.Input[_builtins.str] aws_formal_iam_role: The IAM role ID Formal will use to access your resources.
         :param pulumi.Input[_builtins.str] aws_formal_iam_role_arn: The ARN of the IAM role Formal will use to access your resources.
         :param pulumi.Input[_builtins.str] aws_formal_pingback_arn: The SNS topic ARN CloudFormation can use to send events to Formal.
-        :param pulumi.Input[_builtins.str] aws_formal_role_arn: The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+        :param pulumi.Input[_builtins.str] aws_formal_role_arn: The AWS IAM role ARN Formal presents when federating into your GCP workload identity pool or your Entra tenant.
         :param pulumi.Input[_builtins.str] aws_formal_stack_name: A generated name for your CloudFormation stack.
         :param pulumi.Input[_builtins.str] aws_s3_bucket_arn: The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
         :param pulumi.Input[_builtins.str] aws_template_body: The template body of the CloudFormation stack.
+        :param pulumi.Input['IntegrationCloudAzureArgs'] azure: Configuration block for Azure integration.
+        :param pulumi.Input[_builtins.bool] azure_allow_blob_access: Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_blob_storage_accounts: The storage accounts this Cloud Integration is allowed to write logs to.
+        :param pulumi.Input[_builtins.str] azure_client_id: The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+        :param pulumi.Input[_builtins.bool] azure_enable_aks_autodiscovery: Whether AKS cluster autodiscovery is enabled or not.
+        :param pulumi.Input[_builtins.bool] azure_enable_db_autodiscovery: Whether Azure managed database server autodiscovery is enabled or not.
+        :param pulumi.Input[_builtins.bool] azure_enable_vm_autodiscovery: Whether Azure virtual machine autodiscovery is enabled or not.
+        :param pulumi.Input[_builtins.str] azure_issuer: The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
+        :param pulumi.Input[_builtins.str] azure_resource_group: The resource group discovery is narrowed to. Empty covers the whole subscription.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_role_definitions: The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        :param pulumi.Input[_builtins.str] azure_subscription_id: The Azure subscription this integration grants Formal access to.
+        :param pulumi.Input[_builtins.str] azure_tenant_id: The Entra tenant of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
         :param pulumi.Input[_builtins.str] cloud_region: Region of the cloud provider. (AWS only)
         :param pulumi.Input['IntegrationCloudGcpArgs'] gcp: Configuration block for GCP integration.
         :param pulumi.Input[_builtins.bool] gcp_allow_gcs_access: Whether the Cloud Integration is allowed to write logs to GCS.
@@ -206,6 +246,30 @@ class _IntegrationCloudState:
             pulumi.set(__self__, "aws_s3_bucket_arn", aws_s3_bucket_arn)
         if aws_template_body is not None:
             pulumi.set(__self__, "aws_template_body", aws_template_body)
+        if azure is not None:
+            pulumi.set(__self__, "azure", azure)
+        if azure_allow_blob_access is not None:
+            pulumi.set(__self__, "azure_allow_blob_access", azure_allow_blob_access)
+        if azure_blob_storage_accounts is not None:
+            pulumi.set(__self__, "azure_blob_storage_accounts", azure_blob_storage_accounts)
+        if azure_client_id is not None:
+            pulumi.set(__self__, "azure_client_id", azure_client_id)
+        if azure_enable_aks_autodiscovery is not None:
+            pulumi.set(__self__, "azure_enable_aks_autodiscovery", azure_enable_aks_autodiscovery)
+        if azure_enable_db_autodiscovery is not None:
+            pulumi.set(__self__, "azure_enable_db_autodiscovery", azure_enable_db_autodiscovery)
+        if azure_enable_vm_autodiscovery is not None:
+            pulumi.set(__self__, "azure_enable_vm_autodiscovery", azure_enable_vm_autodiscovery)
+        if azure_issuer is not None:
+            pulumi.set(__self__, "azure_issuer", azure_issuer)
+        if azure_resource_group is not None:
+            pulumi.set(__self__, "azure_resource_group", azure_resource_group)
+        if azure_role_definitions is not None:
+            pulumi.set(__self__, "azure_role_definitions", azure_role_definitions)
+        if azure_subscription_id is not None:
+            pulumi.set(__self__, "azure_subscription_id", azure_subscription_id)
+        if azure_tenant_id is not None:
+            pulumi.set(__self__, "azure_tenant_id", azure_tenant_id)
         if cloud_region is not None:
             pulumi.set(__self__, "cloud_region", cloud_region)
         if gcp is not None:
@@ -377,7 +441,7 @@ class _IntegrationCloudState:
     @pulumi.getter(name="awsFormalRoleArn")
     def aws_formal_role_arn(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+        The AWS IAM role ARN Formal presents when federating into your GCP workload identity pool or your Entra tenant.
         """
         return pulumi.get(self, "aws_formal_role_arn")
 
@@ -420,6 +484,150 @@ class _IntegrationCloudState:
     @aws_template_body.setter
     def aws_template_body(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "aws_template_body", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def azure(self) -> pulumi.Input[Optional['IntegrationCloudAzureArgs']]:
+        """
+        Configuration block for Azure integration.
+        """
+        return pulumi.get(self, "azure")
+
+    @azure.setter
+    def azure(self, value: pulumi.Input[Optional['IntegrationCloudAzureArgs']]):
+        pulumi.set(self, "azure", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureAllowBlobAccess")
+    def azure_allow_blob_access(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
+        """
+        return pulumi.get(self, "azure_allow_blob_access")
+
+    @azure_allow_blob_access.setter
+    def azure_allow_blob_access(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "azure_allow_blob_access", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureBlobStorageAccounts")
+    def azure_blob_storage_accounts(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        The storage accounts this Cloud Integration is allowed to write logs to.
+        """
+        return pulumi.get(self, "azure_blob_storage_accounts")
+
+    @azure_blob_storage_accounts.setter
+    def azure_blob_storage_accounts(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "azure_blob_storage_accounts", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureClientId")
+    def azure_client_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+        """
+        return pulumi.get(self, "azure_client_id")
+
+    @azure_client_id.setter
+    def azure_client_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "azure_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureEnableAksAutodiscovery")
+    def azure_enable_aks_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether AKS cluster autodiscovery is enabled or not.
+        """
+        return pulumi.get(self, "azure_enable_aks_autodiscovery")
+
+    @azure_enable_aks_autodiscovery.setter
+    def azure_enable_aks_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "azure_enable_aks_autodiscovery", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureEnableDbAutodiscovery")
+    def azure_enable_db_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether Azure managed database server autodiscovery is enabled or not.
+        """
+        return pulumi.get(self, "azure_enable_db_autodiscovery")
+
+    @azure_enable_db_autodiscovery.setter
+    def azure_enable_db_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "azure_enable_db_autodiscovery", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureEnableVmAutodiscovery")
+    def azure_enable_vm_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether Azure virtual machine autodiscovery is enabled or not.
+        """
+        return pulumi.get(self, "azure_enable_vm_autodiscovery")
+
+    @azure_enable_vm_autodiscovery.setter
+    def azure_enable_vm_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "azure_enable_vm_autodiscovery", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureIssuer")
+    def azure_issuer(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
+        """
+        return pulumi.get(self, "azure_issuer")
+
+    @azure_issuer.setter
+    def azure_issuer(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "azure_issuer", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureResourceGroup")
+    def azure_resource_group(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The resource group discovery is narrowed to. Empty covers the whole subscription.
+        """
+        return pulumi.get(self, "azure_resource_group")
+
+    @azure_resource_group.setter
+    def azure_resource_group(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "azure_resource_group", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureRoleDefinitions")
+    def azure_role_definitions(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        """
+        return pulumi.get(self, "azure_role_definitions")
+
+    @azure_role_definitions.setter
+    def azure_role_definitions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "azure_role_definitions", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureSubscriptionId")
+    def azure_subscription_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The Azure subscription this integration grants Formal access to.
+        """
+        return pulumi.get(self, "azure_subscription_id")
+
+    @azure_subscription_id.setter
+    def azure_subscription_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "azure_subscription_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureTenantId")
+    def azure_tenant_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The Entra tenant of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+        """
+        return pulumi.get(self, "azure_tenant_id")
+
+    @azure_tenant_id.setter
+    def azure_tenant_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "azure_tenant_id", value)
 
     @_builtins.property
     @pulumi.getter(name="cloudRegion")
@@ -599,6 +807,7 @@ class IntegrationCloud(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']]] = None,
+                 azure: pulumi.Input[Optional[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']]] = None,
                  cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
                  gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -611,6 +820,7 @@ class IntegrationCloud(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']] aws: Configuration block for AWS integration.
+        :param pulumi.Input[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']] azure: Configuration block for Azure integration.
         :param pulumi.Input[_builtins.str] cloud_region: Region of the cloud provider. (AWS only)
         :param pulumi.Input[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict']] gcp: Configuration block for GCP integration.
         :param pulumi.Input[_builtins.str] name: Name of the Integration.
@@ -642,6 +852,7 @@ class IntegrationCloud(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']]] = None,
+                 azure: pulumi.Input[Optional[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']]] = None,
                  cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
                  gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -656,6 +867,7 @@ class IntegrationCloud(pulumi.CustomResource):
             __props__ = IntegrationCloudArgs.__new__(IntegrationCloudArgs)
 
             __props__.__dict__["aws"] = aws
+            __props__.__dict__["azure"] = azure
             __props__.__dict__["cloud_region"] = cloud_region
             __props__.__dict__["gcp"] = gcp
             __props__.__dict__["name"] = name
@@ -674,6 +886,17 @@ class IntegrationCloud(pulumi.CustomResource):
             __props__.__dict__["aws_formal_stack_name"] = None
             __props__.__dict__["aws_s3_bucket_arn"] = None
             __props__.__dict__["aws_template_body"] = None
+            __props__.__dict__["azure_allow_blob_access"] = None
+            __props__.__dict__["azure_blob_storage_accounts"] = None
+            __props__.__dict__["azure_client_id"] = None
+            __props__.__dict__["azure_enable_aks_autodiscovery"] = None
+            __props__.__dict__["azure_enable_db_autodiscovery"] = None
+            __props__.__dict__["azure_enable_vm_autodiscovery"] = None
+            __props__.__dict__["azure_issuer"] = None
+            __props__.__dict__["azure_resource_group"] = None
+            __props__.__dict__["azure_role_definitions"] = None
+            __props__.__dict__["azure_subscription_id"] = None
+            __props__.__dict__["azure_tenant_id"] = None
             __props__.__dict__["gcp_allow_gcs_access"] = None
             __props__.__dict__["gcp_enable_cloudsql_instances_autodiscovery"] = None
             __props__.__dict__["gcp_enable_compute_instances_autodiscovery"] = None
@@ -709,6 +932,18 @@ class IntegrationCloud(pulumi.CustomResource):
             aws_formal_stack_name: pulumi.Input[Optional[_builtins.str]] = None,
             aws_s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None,
             aws_template_body: pulumi.Input[Optional[_builtins.str]] = None,
+            azure: pulumi.Input[Optional[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']]] = None,
+            azure_allow_blob_access: pulumi.Input[Optional[_builtins.bool]] = None,
+            azure_blob_storage_accounts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            azure_client_id: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_enable_aks_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            azure_enable_db_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            azure_enable_vm_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            azure_issuer: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_resource_group: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_role_definitions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            azure_subscription_id: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_tenant_id: pulumi.Input[Optional[_builtins.str]] = None,
             cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
             gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict']]] = None,
             gcp_allow_gcs_access: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -741,10 +976,22 @@ class IntegrationCloud(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] aws_formal_iam_role: The IAM role ID Formal will use to access your resources.
         :param pulumi.Input[_builtins.str] aws_formal_iam_role_arn: The ARN of the IAM role Formal will use to access your resources.
         :param pulumi.Input[_builtins.str] aws_formal_pingback_arn: The SNS topic ARN CloudFormation can use to send events to Formal.
-        :param pulumi.Input[_builtins.str] aws_formal_role_arn: The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+        :param pulumi.Input[_builtins.str] aws_formal_role_arn: The AWS IAM role ARN Formal presents when federating into your GCP workload identity pool or your Entra tenant.
         :param pulumi.Input[_builtins.str] aws_formal_stack_name: A generated name for your CloudFormation stack.
         :param pulumi.Input[_builtins.str] aws_s3_bucket_arn: The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
         :param pulumi.Input[_builtins.str] aws_template_body: The template body of the CloudFormation stack.
+        :param pulumi.Input[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']] azure: Configuration block for Azure integration.
+        :param pulumi.Input[_builtins.bool] azure_allow_blob_access: Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_blob_storage_accounts: The storage accounts this Cloud Integration is allowed to write logs to.
+        :param pulumi.Input[_builtins.str] azure_client_id: The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+        :param pulumi.Input[_builtins.bool] azure_enable_aks_autodiscovery: Whether AKS cluster autodiscovery is enabled or not.
+        :param pulumi.Input[_builtins.bool] azure_enable_db_autodiscovery: Whether Azure managed database server autodiscovery is enabled or not.
+        :param pulumi.Input[_builtins.bool] azure_enable_vm_autodiscovery: Whether Azure virtual machine autodiscovery is enabled or not.
+        :param pulumi.Input[_builtins.str] azure_issuer: The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
+        :param pulumi.Input[_builtins.str] azure_resource_group: The resource group discovery is narrowed to. Empty covers the whole subscription.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_role_definitions: The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        :param pulumi.Input[_builtins.str] azure_subscription_id: The Azure subscription this integration grants Formal access to.
+        :param pulumi.Input[_builtins.str] azure_tenant_id: The Entra tenant of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
         :param pulumi.Input[_builtins.str] cloud_region: Region of the cloud provider. (AWS only)
         :param pulumi.Input[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict']] gcp: Configuration block for GCP integration.
         :param pulumi.Input[_builtins.bool] gcp_allow_gcs_access: Whether the Cloud Integration is allowed to write logs to GCS.
@@ -779,6 +1026,18 @@ class IntegrationCloud(pulumi.CustomResource):
         __props__.__dict__["aws_formal_stack_name"] = aws_formal_stack_name
         __props__.__dict__["aws_s3_bucket_arn"] = aws_s3_bucket_arn
         __props__.__dict__["aws_template_body"] = aws_template_body
+        __props__.__dict__["azure"] = azure
+        __props__.__dict__["azure_allow_blob_access"] = azure_allow_blob_access
+        __props__.__dict__["azure_blob_storage_accounts"] = azure_blob_storage_accounts
+        __props__.__dict__["azure_client_id"] = azure_client_id
+        __props__.__dict__["azure_enable_aks_autodiscovery"] = azure_enable_aks_autodiscovery
+        __props__.__dict__["azure_enable_db_autodiscovery"] = azure_enable_db_autodiscovery
+        __props__.__dict__["azure_enable_vm_autodiscovery"] = azure_enable_vm_autodiscovery
+        __props__.__dict__["azure_issuer"] = azure_issuer
+        __props__.__dict__["azure_resource_group"] = azure_resource_group
+        __props__.__dict__["azure_role_definitions"] = azure_role_definitions
+        __props__.__dict__["azure_subscription_id"] = azure_subscription_id
+        __props__.__dict__["azure_tenant_id"] = azure_tenant_id
         __props__.__dict__["cloud_region"] = cloud_region
         __props__.__dict__["gcp"] = gcp
         __props__.__dict__["gcp_allow_gcs_access"] = gcp_allow_gcs_access
@@ -887,7 +1146,7 @@ class IntegrationCloud(pulumi.CustomResource):
     @pulumi.getter(name="awsFormalRoleArn")
     def aws_formal_role_arn(self) -> pulumi.Output[_builtins.str]:
         """
-        The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+        The AWS IAM role ARN Formal presents when federating into your GCP workload identity pool or your Entra tenant.
         """
         return pulumi.get(self, "aws_formal_role_arn")
 
@@ -914,6 +1173,102 @@ class IntegrationCloud(pulumi.CustomResource):
         The template body of the CloudFormation stack.
         """
         return pulumi.get(self, "aws_template_body")
+
+    @_builtins.property
+    @pulumi.getter
+    def azure(self) -> pulumi.Output[Optional['outputs.IntegrationCloudAzure']]:
+        """
+        Configuration block for Azure integration.
+        """
+        return pulumi.get(self, "azure")
+
+    @_builtins.property
+    @pulumi.getter(name="azureAllowBlobAccess")
+    def azure_allow_blob_access(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
+        """
+        return pulumi.get(self, "azure_allow_blob_access")
+
+    @_builtins.property
+    @pulumi.getter(name="azureBlobStorageAccounts")
+    def azure_blob_storage_accounts(self) -> pulumi.Output[Sequence[_builtins.str]]:
+        """
+        The storage accounts this Cloud Integration is allowed to write logs to.
+        """
+        return pulumi.get(self, "azure_blob_storage_accounts")
+
+    @_builtins.property
+    @pulumi.getter(name="azureClientId")
+    def azure_client_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+        """
+        return pulumi.get(self, "azure_client_id")
+
+    @_builtins.property
+    @pulumi.getter(name="azureEnableAksAutodiscovery")
+    def azure_enable_aks_autodiscovery(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether AKS cluster autodiscovery is enabled or not.
+        """
+        return pulumi.get(self, "azure_enable_aks_autodiscovery")
+
+    @_builtins.property
+    @pulumi.getter(name="azureEnableDbAutodiscovery")
+    def azure_enable_db_autodiscovery(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether Azure managed database server autodiscovery is enabled or not.
+        """
+        return pulumi.get(self, "azure_enable_db_autodiscovery")
+
+    @_builtins.property
+    @pulumi.getter(name="azureEnableVmAutodiscovery")
+    def azure_enable_vm_autodiscovery(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether Azure virtual machine autodiscovery is enabled or not.
+        """
+        return pulumi.get(self, "azure_enable_vm_autodiscovery")
+
+    @_builtins.property
+    @pulumi.getter(name="azureIssuer")
+    def azure_issuer(self) -> pulumi.Output[_builtins.str]:
+        """
+        The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
+        """
+        return pulumi.get(self, "azure_issuer")
+
+    @_builtins.property
+    @pulumi.getter(name="azureResourceGroup")
+    def azure_resource_group(self) -> pulumi.Output[_builtins.str]:
+        """
+        The resource group discovery is narrowed to. Empty covers the whole subscription.
+        """
+        return pulumi.get(self, "azure_resource_group")
+
+    @_builtins.property
+    @pulumi.getter(name="azureRoleDefinitions")
+    def azure_role_definitions(self) -> pulumi.Output[Sequence[_builtins.str]]:
+        """
+        The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        """
+        return pulumi.get(self, "azure_role_definitions")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSubscriptionId")
+    def azure_subscription_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        The Azure subscription this integration grants Formal access to.
+        """
+        return pulumi.get(self, "azure_subscription_id")
+
+    @_builtins.property
+    @pulumi.getter(name="azureTenantId")
+    def azure_tenant_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        The Entra tenant of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+        """
+        return pulumi.get(self, "azure_tenant_id")
 
     @_builtins.property
     @pulumi.getter(name="cloudRegion")

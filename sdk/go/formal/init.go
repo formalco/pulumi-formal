@@ -57,6 +57,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &IntegrationBi{}
 	case "formal:index/integrationCloud:IntegrationCloud":
 		r = &IntegrationCloud{}
+	case "formal:index/integrationCloudAzureActivation:IntegrationCloudAzureActivation":
+		r = &IntegrationCloudAzureActivation{}
 	case "formal:index/integrationCloudGcpActivation:IntegrationCloudGcpActivation":
 		r = &IntegrationCloudGcpActivation{}
 	case "formal:index/integrationLog:IntegrationLog":
@@ -228,6 +230,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/integrationCloud",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/integrationCloudAzureActivation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

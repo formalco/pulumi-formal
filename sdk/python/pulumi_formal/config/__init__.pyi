@@ -13,8 +13,17 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from .. import _utilities
+from . import outputs
 
 apiKey: Optional[str]
+"""
+Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
+"""
+
+oidc: Optional[str]
+"""
+OIDC authentication configuration. Conflicts with `api_key`.
+"""
 
 retrieveSensitiveValues: Optional[bool]
 

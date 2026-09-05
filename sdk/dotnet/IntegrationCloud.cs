@@ -83,7 +83,7 @@ namespace Formal.Pulumi
         public Output<string> AwsFormalPingbackArn { get; private set; } = null!;
 
         /// <summary>
-        /// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+        /// The AWS IAM role ARN Formal presents when federating into your GCP workload identity pool or your Entra tenant.
         /// </summary>
         [Output("awsFormalRoleArn")]
         public Output<string> AwsFormalRoleArn { get; private set; } = null!;
@@ -105,6 +105,78 @@ namespace Formal.Pulumi
         /// </summary>
         [Output("awsTemplateBody")]
         public Output<string> AwsTemplateBody { get; private set; } = null!;
+
+        /// <summary>
+        /// Configuration block for Azure integration.
+        /// </summary>
+        [Output("azure")]
+        public Output<Outputs.IntegrationCloudAzure?> Azure { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
+        /// </summary>
+        [Output("azureAllowBlobAccess")]
+        public Output<bool> AzureAllowBlobAccess { get; private set; } = null!;
+
+        /// <summary>
+        /// The storage accounts this Cloud Integration is allowed to write logs to.
+        /// </summary>
+        [Output("azureBlobStorageAccounts")]
+        public Output<ImmutableArray<string>> AzureBlobStorageAccounts { get; private set; } = null!;
+
+        /// <summary>
+        /// The client id of the managed identity Formal authenticates as, reported back by `formal.IntegrationCloudAzureActivation`.
+        /// </summary>
+        [Output("azureClientId")]
+        public Output<string> AzureClientId { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether AKS cluster autodiscovery is enabled or not.
+        /// </summary>
+        [Output("azureEnableAksAutodiscovery")]
+        public Output<bool> AzureEnableAksAutodiscovery { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether Azure managed database server autodiscovery is enabled or not.
+        /// </summary>
+        [Output("azureEnableDbAutodiscovery")]
+        public Output<bool> AzureEnableDbAutodiscovery { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether Azure virtual machine autodiscovery is enabled or not.
+        /// </summary>
+        [Output("azureEnableVmAutodiscovery")]
+        public Output<bool> AzureEnableVmAutodiscovery { get; private set; } = null!;
+
+        /// <summary>
+        /// The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
+        /// </summary>
+        [Output("azureIssuer")]
+        public Output<string> AzureIssuer { get; private set; } = null!;
+
+        /// <summary>
+        /// The resource group discovery is narrowed to. Empty covers the whole subscription.
+        /// </summary>
+        [Output("azureResourceGroup")]
+        public Output<string> AzureResourceGroup { get; private set; } = null!;
+
+        /// <summary>
+        /// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        /// </summary>
+        [Output("azureRoleDefinitions")]
+        public Output<ImmutableArray<string>> AzureRoleDefinitions { get; private set; } = null!;
+
+        /// <summary>
+        /// The Azure subscription this integration grants Formal access to.
+        /// </summary>
+        [Output("azureSubscriptionId")]
+        public Output<string> AzureSubscriptionId { get; private set; } = null!;
+
+        /// <summary>
+        /// The Entra tenant of the managed identity Formal authenticates as, reported back by `formal.IntegrationCloudAzureActivation`.
+        /// </summary>
+        [Output("azureTenantId")]
+        public Output<string> AzureTenantId { get; private set; } = null!;
 
         /// <summary>
         /// Region of the cloud provider. (AWS only)
@@ -244,6 +316,12 @@ namespace Formal.Pulumi
         public Input<Inputs.IntegrationCloudAwsArgs>? Aws { get; set; }
 
         /// <summary>
+        /// Configuration block for Azure integration.
+        /// </summary>
+        [Input("azure")]
+        public Input<Inputs.IntegrationCloudAzureArgs>? Azure { get; set; }
+
+        /// <summary>
         /// Region of the cloud provider. (AWS only)
         /// </summary>
         [Input("cloudRegion")]
@@ -342,7 +420,7 @@ namespace Formal.Pulumi
         public Input<string>? AwsFormalPingbackArn { get; set; }
 
         /// <summary>
-        /// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+        /// The AWS IAM role ARN Formal presents when federating into your GCP workload identity pool or your Entra tenant.
         /// </summary>
         [Input("awsFormalRoleArn")]
         public Input<string>? AwsFormalRoleArn { get; set; }
@@ -364,6 +442,90 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("awsTemplateBody")]
         public Input<string>? AwsTemplateBody { get; set; }
+
+        /// <summary>
+        /// Configuration block for Azure integration.
+        /// </summary>
+        [Input("azure")]
+        public Input<Inputs.IntegrationCloudAzureGetArgs>? Azure { get; set; }
+
+        /// <summary>
+        /// Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
+        /// </summary>
+        [Input("azureAllowBlobAccess")]
+        public Input<bool>? AzureAllowBlobAccess { get; set; }
+
+        [Input("azureBlobStorageAccounts")]
+        private InputList<string>? _azureBlobStorageAccounts;
+
+        /// <summary>
+        /// The storage accounts this Cloud Integration is allowed to write logs to.
+        /// </summary>
+        public InputList<string> AzureBlobStorageAccounts
+        {
+            get => _azureBlobStorageAccounts ?? (_azureBlobStorageAccounts = new InputList<string>());
+            set => _azureBlobStorageAccounts = value;
+        }
+
+        /// <summary>
+        /// The client id of the managed identity Formal authenticates as, reported back by `formal.IntegrationCloudAzureActivation`.
+        /// </summary>
+        [Input("azureClientId")]
+        public Input<string>? AzureClientId { get; set; }
+
+        /// <summary>
+        /// Whether AKS cluster autodiscovery is enabled or not.
+        /// </summary>
+        [Input("azureEnableAksAutodiscovery")]
+        public Input<bool>? AzureEnableAksAutodiscovery { get; set; }
+
+        /// <summary>
+        /// Whether Azure managed database server autodiscovery is enabled or not.
+        /// </summary>
+        [Input("azureEnableDbAutodiscovery")]
+        public Input<bool>? AzureEnableDbAutodiscovery { get; set; }
+
+        /// <summary>
+        /// Whether Azure virtual machine autodiscovery is enabled or not.
+        /// </summary>
+        [Input("azureEnableVmAutodiscovery")]
+        public Input<bool>? AzureEnableVmAutodiscovery { get; set; }
+
+        /// <summary>
+        /// The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
+        /// </summary>
+        [Input("azureIssuer")]
+        public Input<string>? AzureIssuer { get; set; }
+
+        /// <summary>
+        /// The resource group discovery is narrowed to. Empty covers the whole subscription.
+        /// </summary>
+        [Input("azureResourceGroup")]
+        public Input<string>? AzureResourceGroup { get; set; }
+
+        [Input("azureRoleDefinitions")]
+        private InputList<string>? _azureRoleDefinitions;
+
+        /// <summary>
+        /// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        /// </summary>
+        public InputList<string> AzureRoleDefinitions
+        {
+            get => _azureRoleDefinitions ?? (_azureRoleDefinitions = new InputList<string>());
+            set => _azureRoleDefinitions = value;
+        }
+
+        /// <summary>
+        /// The Azure subscription this integration grants Formal access to.
+        /// </summary>
+        [Input("azureSubscriptionId")]
+        public Input<string>? AzureSubscriptionId { get; set; }
+
+        /// <summary>
+        /// The Entra tenant of the managed identity Formal authenticates as, reported back by `formal.IntegrationCloudAzureActivation`.
+        /// </summary>
+        [Input("azureTenantId")]
+        public Input<string>? AzureTenantId { get; set; }
 
         /// <summary>
         /// Region of the cloud provider. (AWS only)

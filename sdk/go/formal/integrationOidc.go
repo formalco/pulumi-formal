@@ -16,9 +16,9 @@ import (
 type IntegrationOidc struct {
 	pulumi.CustomResourceState
 
-	// The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
+	// The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `id`.
 	Audience pulumi.StringOutput `pulumi:"audience"`
-	// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+	// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
 	ClaimCondition pulumi.StringPtrOutput `pulumi:"claimCondition"`
 	// When the integration was created.
 	CreatedAt pulumi.StringOutput `pulumi:"createdAt"`
@@ -74,9 +74,9 @@ func GetIntegrationOidc(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering IntegrationOidc resources.
 type integrationOidcState struct {
-	// The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
+	// The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `id`.
 	Audience *string `pulumi:"audience"`
-	// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+	// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
 	ClaimCondition *string `pulumi:"claimCondition"`
 	// When the integration was created.
 	CreatedAt *string `pulumi:"createdAt"`
@@ -97,9 +97,9 @@ type integrationOidcState struct {
 }
 
 type IntegrationOidcState struct {
-	// The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
+	// The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `id`.
 	Audience pulumi.StringPtrInput
-	// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+	// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
 	ClaimCondition pulumi.StringPtrInput
 	// When the integration was created.
 	CreatedAt pulumi.StringPtrInput
@@ -124,7 +124,7 @@ func (IntegrationOidcState) ElementType() reflect.Type {
 }
 
 type integrationOidcArgs struct {
-	// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+	// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
 	ClaimCondition *string `pulumi:"claimCondition"`
 	// Optional CEL expression over verified token claims that must evaluate to a string email. When set, federation mint resolves a Formal human by case-insensitive email. Leave unset for machine-only trusts. Examples: `claims.owner_email` (Cursor); `claims.sub.split('/').last()` (AWSReservedSSO session name when the session name is an email).
 	EndUserEmailExpression *string `pulumi:"endUserEmailExpression"`
@@ -142,7 +142,7 @@ type integrationOidcArgs struct {
 
 // The set of arguments for constructing a IntegrationOidc resource.
 type IntegrationOidcArgs struct {
-	// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+	// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
 	ClaimCondition pulumi.StringPtrInput
 	// Optional CEL expression over verified token claims that must evaluate to a string email. When set, federation mint resolves a Formal human by case-insensitive email. Leave unset for machine-only trusts. Examples: `claims.owner_email` (Cursor); `claims.sub.split('/').last()` (AWSReservedSSO session name when the session name is an email).
 	EndUserEmailExpression pulumi.StringPtrInput
@@ -245,12 +245,12 @@ func (o IntegrationOidcOutput) ToIntegrationOidcOutputWithContext(ctx context.Co
 	return o
 }
 
-// The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
+// The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `id`.
 func (o IntegrationOidcOutput) Audience() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationOidc) pulumi.StringOutput { return v.Audience }).(pulumi.StringOutput)
 }
 
-// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`.
+// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
 func (o IntegrationOidcOutput) ClaimCondition() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *IntegrationOidc) pulumi.StringPtrOutput { return v.ClaimCondition }).(pulumi.StringPtrOutput)
 }

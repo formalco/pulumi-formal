@@ -37,7 +37,7 @@ type IntegrationCloud struct {
 	AwsFormalIamRoleArn pulumi.StringOutput `pulumi:"awsFormalIamRoleArn"`
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
 	AwsFormalPingbackArn pulumi.StringOutput `pulumi:"awsFormalPingbackArn"`
-	// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+	// The AWS IAM role ARN Formal presents when federating into your GCP workload identity pool or your Entra tenant.
 	AwsFormalRoleArn pulumi.StringOutput `pulumi:"awsFormalRoleArn"`
 	// A generated name for your CloudFormation stack.
 	AwsFormalStackName pulumi.StringOutput `pulumi:"awsFormalStackName"`
@@ -45,6 +45,30 @@ type IntegrationCloud struct {
 	AwsS3BucketArn pulumi.StringOutput `pulumi:"awsS3BucketArn"`
 	// The template body of the CloudFormation stack.
 	AwsTemplateBody pulumi.StringOutput `pulumi:"awsTemplateBody"`
+	// Configuration block for Azure integration.
+	Azure IntegrationCloudAzurePtrOutput `pulumi:"azure"`
+	// Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
+	AzureAllowBlobAccess pulumi.BoolOutput `pulumi:"azureAllowBlobAccess"`
+	// The storage accounts this Cloud Integration is allowed to write logs to.
+	AzureBlobStorageAccounts pulumi.StringArrayOutput `pulumi:"azureBlobStorageAccounts"`
+	// The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+	AzureClientId pulumi.StringOutput `pulumi:"azureClientId"`
+	// Whether AKS cluster autodiscovery is enabled or not.
+	AzureEnableAksAutodiscovery pulumi.BoolOutput `pulumi:"azureEnableAksAutodiscovery"`
+	// Whether Azure managed database server autodiscovery is enabled or not.
+	AzureEnableDbAutodiscovery pulumi.BoolOutput `pulumi:"azureEnableDbAutodiscovery"`
+	// Whether Azure virtual machine autodiscovery is enabled or not.
+	AzureEnableVmAutodiscovery pulumi.BoolOutput `pulumi:"azureEnableVmAutodiscovery"`
+	// The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
+	AzureIssuer pulumi.StringOutput `pulumi:"azureIssuer"`
+	// The resource group discovery is narrowed to. Empty covers the whole subscription.
+	AzureResourceGroup pulumi.StringOutput `pulumi:"azureResourceGroup"`
+	// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+	AzureRoleDefinitions pulumi.StringArrayOutput `pulumi:"azureRoleDefinitions"`
+	// The Azure subscription this integration grants Formal access to.
+	AzureSubscriptionId pulumi.StringOutput `pulumi:"azureSubscriptionId"`
+	// The Entra tenant of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+	AzureTenantId pulumi.StringOutput `pulumi:"azureTenantId"`
 	// Region of the cloud provider. (AWS only)
 	CloudRegion pulumi.StringPtrOutput `pulumi:"cloudRegion"`
 	// Configuration block for GCP integration.
@@ -131,7 +155,7 @@ type integrationCloudState struct {
 	AwsFormalIamRoleArn *string `pulumi:"awsFormalIamRoleArn"`
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
 	AwsFormalPingbackArn *string `pulumi:"awsFormalPingbackArn"`
-	// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+	// The AWS IAM role ARN Formal presents when federating into your GCP workload identity pool or your Entra tenant.
 	AwsFormalRoleArn *string `pulumi:"awsFormalRoleArn"`
 	// A generated name for your CloudFormation stack.
 	AwsFormalStackName *string `pulumi:"awsFormalStackName"`
@@ -139,6 +163,30 @@ type integrationCloudState struct {
 	AwsS3BucketArn *string `pulumi:"awsS3BucketArn"`
 	// The template body of the CloudFormation stack.
 	AwsTemplateBody *string `pulumi:"awsTemplateBody"`
+	// Configuration block for Azure integration.
+	Azure *IntegrationCloudAzure `pulumi:"azure"`
+	// Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
+	AzureAllowBlobAccess *bool `pulumi:"azureAllowBlobAccess"`
+	// The storage accounts this Cloud Integration is allowed to write logs to.
+	AzureBlobStorageAccounts []string `pulumi:"azureBlobStorageAccounts"`
+	// The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+	AzureClientId *string `pulumi:"azureClientId"`
+	// Whether AKS cluster autodiscovery is enabled or not.
+	AzureEnableAksAutodiscovery *bool `pulumi:"azureEnableAksAutodiscovery"`
+	// Whether Azure managed database server autodiscovery is enabled or not.
+	AzureEnableDbAutodiscovery *bool `pulumi:"azureEnableDbAutodiscovery"`
+	// Whether Azure virtual machine autodiscovery is enabled or not.
+	AzureEnableVmAutodiscovery *bool `pulumi:"azureEnableVmAutodiscovery"`
+	// The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
+	AzureIssuer *string `pulumi:"azureIssuer"`
+	// The resource group discovery is narrowed to. Empty covers the whole subscription.
+	AzureResourceGroup *string `pulumi:"azureResourceGroup"`
+	// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+	AzureRoleDefinitions []string `pulumi:"azureRoleDefinitions"`
+	// The Azure subscription this integration grants Formal access to.
+	AzureSubscriptionId *string `pulumi:"azureSubscriptionId"`
+	// The Entra tenant of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+	AzureTenantId *string `pulumi:"azureTenantId"`
 	// Region of the cloud provider. (AWS only)
 	CloudRegion *string `pulumi:"cloudRegion"`
 	// Configuration block for GCP integration.
@@ -196,7 +244,7 @@ type IntegrationCloudState struct {
 	AwsFormalIamRoleArn pulumi.StringPtrInput
 	// The SNS topic ARN CloudFormation can use to send events to Formal.
 	AwsFormalPingbackArn pulumi.StringPtrInput
-	// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+	// The AWS IAM role ARN Formal presents when federating into your GCP workload identity pool or your Entra tenant.
 	AwsFormalRoleArn pulumi.StringPtrInput
 	// A generated name for your CloudFormation stack.
 	AwsFormalStackName pulumi.StringPtrInput
@@ -204,6 +252,30 @@ type IntegrationCloudState struct {
 	AwsS3BucketArn pulumi.StringPtrInput
 	// The template body of the CloudFormation stack.
 	AwsTemplateBody pulumi.StringPtrInput
+	// Configuration block for Azure integration.
+	Azure IntegrationCloudAzurePtrInput
+	// Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
+	AzureAllowBlobAccess pulumi.BoolPtrInput
+	// The storage accounts this Cloud Integration is allowed to write logs to.
+	AzureBlobStorageAccounts pulumi.StringArrayInput
+	// The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+	AzureClientId pulumi.StringPtrInput
+	// Whether AKS cluster autodiscovery is enabled or not.
+	AzureEnableAksAutodiscovery pulumi.BoolPtrInput
+	// Whether Azure managed database server autodiscovery is enabled or not.
+	AzureEnableDbAutodiscovery pulumi.BoolPtrInput
+	// Whether Azure virtual machine autodiscovery is enabled or not.
+	AzureEnableVmAutodiscovery pulumi.BoolPtrInput
+	// The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
+	AzureIssuer pulumi.StringPtrInput
+	// The resource group discovery is narrowed to. Empty covers the whole subscription.
+	AzureResourceGroup pulumi.StringPtrInput
+	// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+	AzureRoleDefinitions pulumi.StringArrayInput
+	// The Azure subscription this integration grants Formal access to.
+	AzureSubscriptionId pulumi.StringPtrInput
+	// The Entra tenant of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+	AzureTenantId pulumi.StringPtrInput
 	// Region of the cloud provider. (AWS only)
 	CloudRegion pulumi.StringPtrInput
 	// Configuration block for GCP integration.
@@ -245,6 +317,8 @@ func (IntegrationCloudState) ElementType() reflect.Type {
 type integrationCloudArgs struct {
 	// Configuration block for AWS integration.
 	Aws *IntegrationCloudAws `pulumi:"aws"`
+	// Configuration block for Azure integration.
+	Azure *IntegrationCloudAzure `pulumi:"azure"`
 	// Region of the cloud provider. (AWS only)
 	CloudRegion *string `pulumi:"cloudRegion"`
 	// Configuration block for GCP integration.
@@ -261,6 +335,8 @@ type integrationCloudArgs struct {
 type IntegrationCloudArgs struct {
 	// Configuration block for AWS integration.
 	Aws IntegrationCloudAwsPtrInput
+	// Configuration block for Azure integration.
+	Azure IntegrationCloudAzurePtrInput
 	// Region of the cloud provider. (AWS only)
 	CloudRegion pulumi.StringPtrInput
 	// Configuration block for GCP integration.
@@ -415,7 +491,7 @@ func (o IntegrationCloudOutput) AwsFormalPingbackArn() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AwsFormalPingbackArn }).(pulumi.StringOutput)
 }
 
-// The AWS IAM role ARN Formal uses to federate into your GCP workload identity pool.
+// The AWS IAM role ARN Formal presents when federating into your GCP workload identity pool or your Entra tenant.
 func (o IntegrationCloudOutput) AwsFormalRoleArn() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AwsFormalRoleArn }).(pulumi.StringOutput)
 }
@@ -433,6 +509,66 @@ func (o IntegrationCloudOutput) AwsS3BucketArn() pulumi.StringOutput {
 // The template body of the CloudFormation stack.
 func (o IntegrationCloudOutput) AwsTemplateBody() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AwsTemplateBody }).(pulumi.StringOutput)
+}
+
+// Configuration block for Azure integration.
+func (o IntegrationCloudOutput) Azure() IntegrationCloudAzurePtrOutput {
+	return o.ApplyT(func(v *IntegrationCloud) IntegrationCloudAzurePtrOutput { return v.Azure }).(IntegrationCloudAzurePtrOutput)
+}
+
+// Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
+func (o IntegrationCloudOutput) AzureAllowBlobAccess() pulumi.BoolOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.AzureAllowBlobAccess }).(pulumi.BoolOutput)
+}
+
+// The storage accounts this Cloud Integration is allowed to write logs to.
+func (o IntegrationCloudOutput) AzureBlobStorageAccounts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringArrayOutput { return v.AzureBlobStorageAccounts }).(pulumi.StringArrayOutput)
+}
+
+// The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+func (o IntegrationCloudOutput) AzureClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AzureClientId }).(pulumi.StringOutput)
+}
+
+// Whether AKS cluster autodiscovery is enabled or not.
+func (o IntegrationCloudOutput) AzureEnableAksAutodiscovery() pulumi.BoolOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.AzureEnableAksAutodiscovery }).(pulumi.BoolOutput)
+}
+
+// Whether Azure managed database server autodiscovery is enabled or not.
+func (o IntegrationCloudOutput) AzureEnableDbAutodiscovery() pulumi.BoolOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.AzureEnableDbAutodiscovery }).(pulumi.BoolOutput)
+}
+
+// Whether Azure virtual machine autodiscovery is enabled or not.
+func (o IntegrationCloudOutput) AzureEnableVmAutodiscovery() pulumi.BoolOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.AzureEnableVmAutodiscovery }).(pulumi.BoolOutput)
+}
+
+// The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
+func (o IntegrationCloudOutput) AzureIssuer() pulumi.StringOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AzureIssuer }).(pulumi.StringOutput)
+}
+
+// The resource group discovery is narrowed to. Empty covers the whole subscription.
+func (o IntegrationCloudOutput) AzureResourceGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AzureResourceGroup }).(pulumi.StringOutput)
+}
+
+// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+func (o IntegrationCloudOutput) AzureRoleDefinitions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringArrayOutput { return v.AzureRoleDefinitions }).(pulumi.StringArrayOutput)
+}
+
+// The Azure subscription this integration grants Formal access to.
+func (o IntegrationCloudOutput) AzureSubscriptionId() pulumi.StringOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AzureSubscriptionId }).(pulumi.StringOutput)
+}
+
+// The Entra tenant of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+func (o IntegrationCloudOutput) AzureTenantId() pulumi.StringOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AzureTenantId }).(pulumi.StringOutput)
 }
 
 // Region of the cloud provider. (AWS only)
