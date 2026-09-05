@@ -148,6 +148,22 @@
                             }
                         }
                     },
+                    "azure": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "blob_storage_accounts": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "azure_blob_storage_accounts": {
+                        "maxItemsOne": false
+                    },
+                    "azure_role_definitions": {
+                        "maxItemsOne": false
+                    },
                     "gcp": {
                         "maxItemsOne": true,
                         "elem": {
@@ -168,6 +184,10 @@
                         "maxItemsOne": false
                     }
                 }
+            },
+            "formal_integration_cloud_azure_activation": {
+                "current": "formal:index/integrationCloudAzureActivation:IntegrationCloudAzureActivation",
+                "majorVersion": 1
             },
             "formal_integration_cloud_gcp_activation": {
                 "current": "formal:index/integrationCloudGcpActivation:IntegrationCloudGcpActivation",
