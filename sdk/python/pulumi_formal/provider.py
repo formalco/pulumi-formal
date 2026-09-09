@@ -13,6 +13,7 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
+from ._inputs import *
 
 __all__ = ['ProviderArgs', 'Provider']
 
@@ -20,23 +21,44 @@ __all__ = ['ProviderArgs', 'Provider']
 class ProviderArgs:
     def __init__(__self__, *,
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 oidc: pulumi.Input[Optional['ProviderOidcArgs']] = None,
                  retrieve_sensitive_values: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Provider resource.
+
+        :param pulumi.Input[_builtins.str] api_key: Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
+        :param pulumi.Input['ProviderOidcArgs'] oidc: OIDC authentication configuration. Conflicts with `api_key`.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
+        if oidc is not None:
+            pulumi.set(__self__, "oidc", oidc)
         if retrieve_sensitive_values is not None:
             pulumi.set(__self__, "retrieve_sensitive_values", retrieve_sensitive_values)
 
     @_builtins.property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
+        """
         return pulumi.get(self, "api_key")
 
     @api_key.setter
     def api_key(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "api_key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def oidc(self) -> pulumi.Input[Optional['ProviderOidcArgs']]:
+        """
+        OIDC authentication configuration. Conflicts with `api_key`.
+        """
+        return pulumi.get(self, "oidc")
+
+    @oidc.setter
+    def oidc(self, value: pulumi.Input[Optional['ProviderOidcArgs']]):
+        pulumi.set(self, "oidc", value)
 
     @_builtins.property
     @pulumi.getter(name="retrieveSensitiveValues")
@@ -55,6 +77,7 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 oidc: pulumi.Input[Optional[Union['ProviderOidcArgs', 'ProviderOidcArgsDict']]] = None,
                  retrieve_sensitive_values: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
@@ -66,6 +89,8 @@ class Provider(pulumi.ProviderResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.str] api_key: Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
+        :param pulumi.Input[Union['ProviderOidcArgs', 'ProviderOidcArgsDict']] oidc: OIDC authentication configuration. Conflicts with `api_key`.
         """
         ...
     @overload
@@ -96,6 +121,7 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 oidc: pulumi.Input[Optional[Union['ProviderOidcArgs', 'ProviderOidcArgsDict']]] = None,
                  retrieve_sensitive_values: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -106,8 +132,11 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
-            __props__.__dict__["api_key"] = api_key
+            __props__.__dict__["api_key"] = None if api_key is None else pulumi.Output.secret(api_key)
+            __props__.__dict__["oidc"] = pulumi.Output.from_input(oidc).apply(pulumi.runtime.to_json) if oidc is not None else None
             __props__.__dict__["retrieve_sensitive_values"] = pulumi.Output.from_input(retrieve_sensitive_values).apply(pulumi.runtime.to_json) if retrieve_sensitive_values is not None else None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["apiKey"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(Provider, __self__).__init__(
             'formal',
             resource_name,
@@ -117,6 +146,9 @@ class Provider(pulumi.ProviderResource):
     @_builtins.property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
+        """
         return pulumi.get(self, "api_key")
 
     @pulumi.output_type

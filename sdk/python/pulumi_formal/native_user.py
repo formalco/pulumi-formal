@@ -36,7 +36,7 @@ class NativeUserArgs:
                Write-only password of the Native User. This value is not stored in Terraform state. Requires Terraform 1.11+.
         :param pulumi.Input[_builtins.int] native_user_secret_wo_version: Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Native User cannot be deleted.
-        :param pulumi.Input[_builtins.bool] use_as_default: The password of the Native User.
+        :param pulumi.Input[_builtins.bool] use_as_default: Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
         """
         pulumi.set(__self__, "native_user_id", native_user_id)
         pulumi.set(__self__, "resource_id", resource_id)
@@ -128,7 +128,7 @@ class NativeUserArgs:
     @pulumi.getter(name="useAsDefault")
     def use_as_default(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        The password of the Native User.
+        Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
         """
         return pulumi.get(self, "use_as_default")
 
@@ -157,7 +157,7 @@ class _NativeUserState:
         :param pulumi.Input[_builtins.int] native_user_secret_wo_version: Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
         :param pulumi.Input[_builtins.str] resource_id: The Sidecar ID for the resource this Native User is for.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Native User cannot be deleted.
-        :param pulumi.Input[_builtins.bool] use_as_default: The password of the Native User.
+        :param pulumi.Input[_builtins.bool] use_as_default: Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
         """
         if native_user_id is not None:
             pulumi.set(__self__, "native_user_id", native_user_id)
@@ -251,7 +251,7 @@ class _NativeUserState:
     @pulumi.getter(name="useAsDefault")
     def use_as_default(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        The password of the Native User.
+        Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
         """
         return pulumi.get(self, "use_as_default")
 
@@ -287,7 +287,7 @@ class NativeUser(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] native_user_secret_wo_version: Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
         :param pulumi.Input[_builtins.str] resource_id: The Sidecar ID for the resource this Native User is for.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Native User cannot be deleted.
-        :param pulumi.Input[_builtins.bool] use_as_default: The password of the Native User.
+        :param pulumi.Input[_builtins.bool] use_as_default: Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
         """
         ...
     @overload
@@ -374,7 +374,7 @@ class NativeUser(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] native_user_secret_wo_version: Version trigger for `native_user_secret_wo`. Increment this value to update the secret.
         :param pulumi.Input[_builtins.str] resource_id: The Sidecar ID for the resource this Native User is for.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Native User cannot be deleted.
-        :param pulumi.Input[_builtins.bool] use_as_default: The password of the Native User.
+        :param pulumi.Input[_builtins.bool] use_as_default: Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -442,7 +442,7 @@ class NativeUser(pulumi.CustomResource):
     @pulumi.getter(name="useAsDefault")
     def use_as_default(self) -> pulumi.Output[Optional[_builtins.bool]]:
         """
-        The password of the Native User.
+        Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
         """
         return pulumi.get(self, "use_as_default")
 

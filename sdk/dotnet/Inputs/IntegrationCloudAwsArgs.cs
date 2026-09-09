@@ -32,7 +32,7 @@ namespace Formal.Pulumi.Inputs
         }
 
         /// <summary>
-        /// The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+        /// The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `TemplateVersion` is set (CloudFormation path).
         /// </summary>
         [Input("awsCustomerRoleArn")]
         public Input<string>? AwsCustomerRoleArn { get; set; }
@@ -80,10 +80,10 @@ namespace Formal.Pulumi.Inputs
         public Input<string>? S3BucketArn { get; set; }
 
         /// <summary>
-        /// The template version of the CloudFormation stack. Use `Latest` to stay in sync.
+        /// The CloudFormation template version to use when deploying `AwsCloudformationStack`. Required unless `AwsCustomerRoleArn` is set. Use `Latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
         /// </summary>
-        [Input("templateVersion", required: true)]
-        public Input<string> TemplateVersion { get; set; } = null!;
+        [Input("templateVersion")]
+        public Input<string>? TemplateVersion { get; set; }
 
         public IntegrationCloudAwsArgs()
         {

@@ -33,10 +33,23 @@ namespace Formal.Pulumi
         private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("formal");
 
         private static readonly __Value<string?> _apiKey = new __Value<string?>(() => __config.Get("apiKey"));
+        /// <summary>
+        /// Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `Oidc`.
+        /// </summary>
         public static string? ApiKey
         {
             get => _apiKey.Get();
             set => _apiKey.Set(value);
+        }
+
+        private static readonly __Value<Formal.Pulumi.Config.Types.Oidc?> _oidc = new __Value<Formal.Pulumi.Config.Types.Oidc?>(() => __config.GetObject<Formal.Pulumi.Config.Types.Oidc>("oidc"));
+        /// <summary>
+        /// OIDC authentication configuration. Conflicts with `ApiKey`.
+        /// </summary>
+        public static Formal.Pulumi.Config.Types.Oidc? Oidc
+        {
+            get => _oidc.Get();
+            set => _oidc.Set(value);
         }
 
         private static readonly __Value<bool?> _retrieveSensitiveValues = new __Value<bool?>(() => __config.GetBoolean("retrieveSensitiveValues"));
@@ -46,5 +59,36 @@ namespace Formal.Pulumi
             set => _retrieveSensitiveValues.Set(value);
         }
 
+        public static class Types
+        {
+
+             public class Oidc
+             {
+            /// <summary>
+            /// Mint short-lived OIDC tokens using the AWS credential chain and STS.
+            /// </summary>
+                public Formal.Pulumi.Config.Types.OidcAws? Aws { get; set; } = null!;
+            /// <summary>
+            /// Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
+            /// </summary>
+                public Formal.Pulumi.Config.Types.OidcAzure? Azure { get; set; } = null!;
+            /// <summary>
+            /// Name of an environment variable containing a pre-minted OIDC JWT.
+            /// </summary>
+                public string? Env { get; set; } = null!;
+            /// <summary>
+            /// Formal OIDC integration ID. Required for `Aws` and `Azure`; with `Env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+            /// </summary>
+                public string? IntegrationId { get; set; } = null!;
+            }
+
+             public class OidcAws
+             {
+            }
+
+             public class OidcAzure
+             {
+            }
+        }
     }
 }

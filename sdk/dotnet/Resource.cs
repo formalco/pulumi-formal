@@ -65,7 +65,7 @@ namespace Formal.Pulumi
         public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// Technology of the Resource: supported values are `Snowflake`, `Postgres`, `Rdp`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http`, `Clickhouse`, `Redis`, `Web`, `Ssh`, `Grpc`, `Aws`, and `Gcp`.
+        /// Technology of the Resource: supported values are `Aws`, `Bigquery`, `Clickhouse`, `Dynamodb`, `Gcp`, `Grpc`, `Http`, `Kubernetes`, `Llm`, `Mariadb`, `Mcp`, `Mongodb`, `Mysql`, `Postgres`, `Rdp`, `Redis`, `Redshift`, `S3`, `Snowflake`, `Socket`, `Ssh`, `Web`.
         /// </summary>
         [Output("technology")]
         public Output<string> Technology { get; private set; } = null!;
@@ -184,7 +184,7 @@ namespace Formal.Pulumi
         }
 
         /// <summary>
-        /// Technology of the Resource: supported values are `Snowflake`, `Postgres`, `Rdp`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http`, `Clickhouse`, `Redis`, `Web`, `Ssh`, `Grpc`, `Aws`, and `Gcp`.
+        /// Technology of the Resource: supported values are `Aws`, `Bigquery`, `Clickhouse`, `Dynamodb`, `Gcp`, `Grpc`, `Http`, `Kubernetes`, `Llm`, `Mariadb`, `Mcp`, `Mongodb`, `Mysql`, `Postgres`, `Rdp`, `Redis`, `Redshift`, `S3`, `Snowflake`, `Socket`, `Ssh`, `Web`.
         /// </summary>
         [Input("technology", required: true)]
         public Input<string> Technology { get; set; } = null!;
@@ -270,7 +270,7 @@ namespace Formal.Pulumi
         }
 
         /// <summary>
-        /// Technology of the Resource: supported values are `Snowflake`, `Postgres`, `Rdp`, `Redshift`, `Mysql`, `Mariadb`, `S3`, `Dynamodb`, `Mongodb`, `Documentdb`, `Http`, `Clickhouse`, `Redis`, `Web`, `Ssh`, `Grpc`, `Aws`, and `Gcp`.
+        /// Technology of the Resource: supported values are `Aws`, `Bigquery`, `Clickhouse`, `Dynamodb`, `Gcp`, `Grpc`, `Http`, `Kubernetes`, `Llm`, `Mariadb`, `Mcp`, `Mongodb`, `Mysql`, `Postgres`, `Rdp`, `Redis`, `Redshift`, `S3`, `Snowflake`, `Socket`, `Ssh`, `Web`.
         /// </summary>
         [Input("technology")]
         public Input<string>? Technology { get; set; }

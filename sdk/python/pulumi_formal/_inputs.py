@@ -43,6 +43,8 @@ __all__ = [
     'IntegrationBiMetabaseArgsDict',
     'IntegrationCloudAwsArgs',
     'IntegrationCloudAwsArgsDict',
+    'IntegrationCloudAzureArgs',
+    'IntegrationCloudAzureArgsDict',
     'IntegrationCloudGcpArgs',
     'IntegrationCloudGcpArgsDict',
     'IntegrationLogAwsS3Args',
@@ -71,6 +73,12 @@ __all__ = [
     'LogConfigurationSessionArgsDict',
     'LogConfigurationStreamArgs',
     'LogConfigurationStreamArgsDict',
+    'ProviderOidcArgs',
+    'ProviderOidcArgsDict',
+    'ProviderOidcAwsArgs',
+    'ProviderOidcAwsArgsDict',
+    'ProviderOidcAzureArgs',
+    'ProviderOidcAzureArgsDict',
 ]
 
 class ConnectorAiProviderAnthropicArgsDict(TypedDict):
@@ -781,10 +789,6 @@ class IntegrationBiMetabaseArgs:
 
 
 class IntegrationCloudAwsArgsDict(TypedDict):
-    template_version: pulumi.Input[_builtins.str]
-    """
-    The template version of the CloudFormation stack. Use `latest` to stay in sync.
-    """
     allow_s3_access: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
     Allows the Cloud Integration to access S3 buckets for Log Integrations.
@@ -795,7 +799,7 @@ class IntegrationCloudAwsArgsDict(TypedDict):
     """
     aws_customer_role_arn: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+    The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `template_version` is set (CloudFormation path).
     """
     enable_ec2_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
@@ -825,11 +829,14 @@ class IntegrationCloudAwsArgsDict(TypedDict):
     """
     The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
     """
+    template_version: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The CloudFormation template version to use when deploying `aws_cloudformation_stack`. Required unless `aws_customer_role_arn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
+    """
 
 @pulumi.input_type
 class IntegrationCloudAwsArgs:
     def __init__(__self__, *,
-                 template_version: pulumi.Input[_builtins.str],
                  allow_s3_access: pulumi.Input[Optional[_builtins.bool]] = None,
                  autodiscovery_regions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  aws_customer_role_arn: pulumi.Input[Optional[_builtins.str]] = None,
@@ -839,12 +846,12 @@ class IntegrationCloudAwsArgs:
                  enable_rds_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_redshift_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_s3_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
-                 s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None):
+                 s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None,
+                 template_version: pulumi.Input[Optional[_builtins.str]] = None):
         """
-        :param pulumi.Input[_builtins.str] template_version: The template version of the CloudFormation stack. Use `latest` to stay in sync.
         :param pulumi.Input[_builtins.bool] allow_s3_access: Allows the Cloud Integration to access S3 buckets for Log Integrations.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] autodiscovery_regions: The regions to enable resource autodiscovery for.
-        :param pulumi.Input[_builtins.str] aws_customer_role_arn: The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+        :param pulumi.Input[_builtins.str] aws_customer_role_arn: The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `template_version` is set (CloudFormation path).
         :param pulumi.Input[_builtins.bool] enable_ec2_autodiscovery: Enables resource autodiscovery for EC2 instances.
         :param pulumi.Input[_builtins.bool] enable_ecs_autodiscovery: Enables resource autodiscovery for ECS clusters.
         :param pulumi.Input[_builtins.bool] enable_eks_autodiscovery: Enables resource autodiscovery for EKS clusters.
@@ -852,8 +859,8 @@ class IntegrationCloudAwsArgs:
         :param pulumi.Input[_builtins.bool] enable_redshift_autodiscovery: Enables resource autodiscovery for Redshift clusters.
         :param pulumi.Input[_builtins.bool] enable_s3_autodiscovery: Enables resource autodiscovery for S3 buckets.
         :param pulumi.Input[_builtins.str] s3_bucket_arn: The S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations.
+        :param pulumi.Input[_builtins.str] template_version: The CloudFormation template version to use when deploying `aws_cloudformation_stack`. Required unless `aws_customer_role_arn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
         """
-        pulumi.set(__self__, "template_version", template_version)
         if allow_s3_access is not None:
             pulumi.set(__self__, "allow_s3_access", allow_s3_access)
         if autodiscovery_regions is not None:
@@ -874,18 +881,8 @@ class IntegrationCloudAwsArgs:
             pulumi.set(__self__, "enable_s3_autodiscovery", enable_s3_autodiscovery)
         if s3_bucket_arn is not None:
             pulumi.set(__self__, "s3_bucket_arn", s3_bucket_arn)
-
-    @_builtins.property
-    @pulumi.getter(name="templateVersion")
-    def template_version(self) -> pulumi.Input[_builtins.str]:
-        """
-        The template version of the CloudFormation stack. Use `latest` to stay in sync.
-        """
-        return pulumi.get(self, "template_version")
-
-    @template_version.setter
-    def template_version(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "template_version", value)
+        if template_version is not None:
+            pulumi.set(__self__, "template_version", template_version)
 
     @_builtins.property
     @pulumi.getter(name="allowS3Access")
@@ -915,7 +912,7 @@ class IntegrationCloudAwsArgs:
     @pulumi.getter(name="awsCustomerRoleArn")
     def aws_customer_role_arn(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+        The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `template_version` is set (CloudFormation path).
         """
         return pulumi.get(self, "aws_customer_role_arn")
 
@@ -1006,6 +1003,166 @@ class IntegrationCloudAwsArgs:
     @s3_bucket_arn.setter
     def s3_bucket_arn(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "s3_bucket_arn", value)
+
+    @_builtins.property
+    @pulumi.getter(name="templateVersion")
+    def template_version(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The CloudFormation template version to use when deploying `aws_cloudformation_stack`. Required unless `aws_customer_role_arn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
+        """
+        return pulumi.get(self, "template_version")
+
+    @template_version.setter
+    def template_version(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "template_version", value)
+
+
+class IntegrationCloudAzureArgsDict(TypedDict):
+    subscription_id: pulumi.Input[_builtins.str]
+    """
+    The Azure subscription this integration grants Formal access to.
+    """
+    allow_blob_access: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Allows the Cloud Integration to write logs to Azure Blob Storage for Log Integrations.
+    """
+    blob_storage_accounts: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    Storage accounts Formal may write logs to. An empty list allows every account in scope.
+    """
+    enable_aks_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for AKS clusters.
+    """
+    enable_db_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for Azure managed database servers.
+    """
+    enable_vm_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Enables resource autodiscovery for Azure virtual machines.
+    """
+    resource_group: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Narrows discovery to a single resource group. Empty covers the whole subscription.
+    """
+
+@pulumi.input_type
+class IntegrationCloudAzureArgs:
+    def __init__(__self__, *,
+                 subscription_id: pulumi.Input[_builtins.str],
+                 allow_blob_access: pulumi.Input[Optional[_builtins.bool]] = None,
+                 blob_storage_accounts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 enable_aks_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 enable_db_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 enable_vm_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+                 resource_group: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] subscription_id: The Azure subscription this integration grants Formal access to.
+        :param pulumi.Input[_builtins.bool] allow_blob_access: Allows the Cloud Integration to write logs to Azure Blob Storage for Log Integrations.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] blob_storage_accounts: Storage accounts Formal may write logs to. An empty list allows every account in scope.
+        :param pulumi.Input[_builtins.bool] enable_aks_autodiscovery: Enables resource autodiscovery for AKS clusters.
+        :param pulumi.Input[_builtins.bool] enable_db_autodiscovery: Enables resource autodiscovery for Azure managed database servers.
+        :param pulumi.Input[_builtins.bool] enable_vm_autodiscovery: Enables resource autodiscovery for Azure virtual machines.
+        :param pulumi.Input[_builtins.str] resource_group: Narrows discovery to a single resource group. Empty covers the whole subscription.
+        """
+        pulumi.set(__self__, "subscription_id", subscription_id)
+        if allow_blob_access is not None:
+            pulumi.set(__self__, "allow_blob_access", allow_blob_access)
+        if blob_storage_accounts is not None:
+            pulumi.set(__self__, "blob_storage_accounts", blob_storage_accounts)
+        if enable_aks_autodiscovery is not None:
+            pulumi.set(__self__, "enable_aks_autodiscovery", enable_aks_autodiscovery)
+        if enable_db_autodiscovery is not None:
+            pulumi.set(__self__, "enable_db_autodiscovery", enable_db_autodiscovery)
+        if enable_vm_autodiscovery is not None:
+            pulumi.set(__self__, "enable_vm_autodiscovery", enable_vm_autodiscovery)
+        if resource_group is not None:
+            pulumi.set(__self__, "resource_group", resource_group)
+
+    @_builtins.property
+    @pulumi.getter(name="subscriptionId")
+    def subscription_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The Azure subscription this integration grants Formal access to.
+        """
+        return pulumi.get(self, "subscription_id")
+
+    @subscription_id.setter
+    def subscription_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "subscription_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowBlobAccess")
+    def allow_blob_access(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Allows the Cloud Integration to write logs to Azure Blob Storage for Log Integrations.
+        """
+        return pulumi.get(self, "allow_blob_access")
+
+    @allow_blob_access.setter
+    def allow_blob_access(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "allow_blob_access", value)
+
+    @_builtins.property
+    @pulumi.getter(name="blobStorageAccounts")
+    def blob_storage_accounts(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Storage accounts Formal may write logs to. An empty list allows every account in scope.
+        """
+        return pulumi.get(self, "blob_storage_accounts")
+
+    @blob_storage_accounts.setter
+    def blob_storage_accounts(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "blob_storage_accounts", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enableAksAutodiscovery")
+    def enable_aks_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Enables resource autodiscovery for AKS clusters.
+        """
+        return pulumi.get(self, "enable_aks_autodiscovery")
+
+    @enable_aks_autodiscovery.setter
+    def enable_aks_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enable_aks_autodiscovery", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enableDbAutodiscovery")
+    def enable_db_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Enables resource autodiscovery for Azure managed database servers.
+        """
+        return pulumi.get(self, "enable_db_autodiscovery")
+
+    @enable_db_autodiscovery.setter
+    def enable_db_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enable_db_autodiscovery", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enableVmAutodiscovery")
+    def enable_vm_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Enables resource autodiscovery for Azure virtual machines.
+        """
+        return pulumi.get(self, "enable_vm_autodiscovery")
+
+    @enable_vm_autodiscovery.setter
+    def enable_vm_autodiscovery(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enable_vm_autodiscovery", value)
+
+    @_builtins.property
+    @pulumi.getter(name="resourceGroup")
+    def resource_group(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Narrows discovery to a single resource group. Empty covers the whole subscription.
+        """
+        return pulumi.get(self, "resource_group")
+
+    @resource_group.setter
+    def resource_group(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "resource_group", value)
 
 
 class IntegrationCloudGcpArgsDict(TypedDict):
@@ -1977,5 +2134,112 @@ class LogConfigurationStreamArgs:
     @encrypt.setter
     def encrypt(self, value: pulumi.Input[_builtins.bool]):
         pulumi.set(self, "encrypt", value)
+
+
+class ProviderOidcArgsDict(TypedDict):
+    aws: NotRequired[pulumi.Input[Optional['ProviderOidcAwsArgsDict']]]
+    """
+    Mint short-lived OIDC tokens using the AWS credential chain and STS.
+    """
+    azure: NotRequired[pulumi.Input[Optional['ProviderOidcAzureArgsDict']]]
+    """
+    Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
+    """
+    env: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Name of an environment variable containing a pre-minted OIDC JWT.
+    """
+    integration_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+    """
+
+@pulumi.input_type
+class ProviderOidcArgs:
+    def __init__(__self__, *,
+                 aws: pulumi.Input[Optional['ProviderOidcAwsArgs']] = None,
+                 azure: pulumi.Input[Optional['ProviderOidcAzureArgs']] = None,
+                 env: pulumi.Input[Optional[_builtins.str]] = None,
+                 integration_id: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input['ProviderOidcAwsArgs'] aws: Mint short-lived OIDC tokens using the AWS credential chain and STS.
+        :param pulumi.Input['ProviderOidcAzureArgs'] azure: Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
+        :param pulumi.Input[_builtins.str] env: Name of an environment variable containing a pre-minted OIDC JWT.
+        :param pulumi.Input[_builtins.str] integration_id: Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+        """
+        if aws is not None:
+            pulumi.set(__self__, "aws", aws)
+        if azure is not None:
+            pulumi.set(__self__, "azure", azure)
+        if env is not None:
+            pulumi.set(__self__, "env", env)
+        if integration_id is not None:
+            pulumi.set(__self__, "integration_id", integration_id)
+
+    @_builtins.property
+    @pulumi.getter
+    def aws(self) -> pulumi.Input[Optional['ProviderOidcAwsArgs']]:
+        """
+        Mint short-lived OIDC tokens using the AWS credential chain and STS.
+        """
+        return pulumi.get(self, "aws")
+
+    @aws.setter
+    def aws(self, value: pulumi.Input[Optional['ProviderOidcAwsArgs']]):
+        pulumi.set(self, "aws", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def azure(self) -> pulumi.Input[Optional['ProviderOidcAzureArgs']]:
+        """
+        Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
+        """
+        return pulumi.get(self, "azure")
+
+    @azure.setter
+    def azure(self, value: pulumi.Input[Optional['ProviderOidcAzureArgs']]):
+        pulumi.set(self, "azure", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def env(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Name of an environment variable containing a pre-minted OIDC JWT.
+        """
+        return pulumi.get(self, "env")
+
+    @env.setter
+    def env(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "env", value)
+
+    @_builtins.property
+    @pulumi.getter(name="integrationId")
+    def integration_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+        """
+        return pulumi.get(self, "integration_id")
+
+    @integration_id.setter
+    def integration_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "integration_id", value)
+
+
+class ProviderOidcAwsArgsDict(TypedDict):
+    pass
+
+@pulumi.input_type
+class ProviderOidcAwsArgs:
+    def __init__(__self__):
+        pass
+
+
+class ProviderOidcAzureArgsDict(TypedDict):
+    pass
+
+@pulumi.input_type
+class ProviderOidcAzureArgs:
+    def __init__(__self__):
+        pass
 
 

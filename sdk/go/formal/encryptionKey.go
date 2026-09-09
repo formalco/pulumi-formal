@@ -24,9 +24,9 @@ type EncryptionKey struct {
 	CreatedAt pulumi.StringOutput `pulumi:"createdAt"`
 	// The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
 	DecryptorUri pulumi.StringPtrOutput `pulumi:"decryptorUri"`
-	// The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+	// The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
 	KeyId pulumi.StringOutput `pulumi:"keyId"`
-	// The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+	// The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
 	KeyProvider pulumi.StringOutput `pulumi:"keyProvider"`
 	// PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
 	PublicKeyPem pulumi.StringPtrOutput `pulumi:"publicKeyPem"`
@@ -78,9 +78,9 @@ type encryptionKeyState struct {
 	CreatedAt *string `pulumi:"createdAt"`
 	// The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
 	DecryptorUri *string `pulumi:"decryptorUri"`
-	// The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+	// The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
 	KeyId *string `pulumi:"keyId"`
-	// The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+	// The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
 	KeyProvider *string `pulumi:"keyProvider"`
 	// PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
 	PublicKeyPem *string `pulumi:"publicKeyPem"`
@@ -97,9 +97,9 @@ type EncryptionKeyState struct {
 	CreatedAt pulumi.StringPtrInput
 	// The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
 	DecryptorUri pulumi.StringPtrInput
-	// The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+	// The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
 	KeyId pulumi.StringPtrInput
-	// The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+	// The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
 	KeyProvider pulumi.StringPtrInput
 	// PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
 	PublicKeyPem pulumi.StringPtrInput
@@ -118,9 +118,9 @@ type encryptionKeyArgs struct {
 	Algorithm *string `pulumi:"algorithm"`
 	// The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
 	DecryptorUri *string `pulumi:"decryptorUri"`
-	// The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+	// The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
 	KeyId string `pulumi:"keyId"`
-	// The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+	// The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
 	KeyProvider string `pulumi:"keyProvider"`
 	// PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
 	PublicKeyPem *string `pulumi:"publicKeyPem"`
@@ -134,9 +134,9 @@ type EncryptionKeyArgs struct {
 	Algorithm pulumi.StringPtrInput
 	// The URI of the decryptor (e.g., a URL to a Lambda function, either directly or via API Gateway). This is used to decrypt the data on the frontend only (and is never called by the Formal Control Plane backend).
 	DecryptorUri pulumi.StringPtrInput
-	// The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+	// The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
 	KeyId pulumi.StringInput
-	// The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+	// The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
 	KeyProvider pulumi.StringInput
 	// PEM-encoded RSA public key for client-side encryption. Required for all encryption keys. Typically wired from another resource, e.g. `data.aws_kms_public_key.<name>.public_key_pem` for an asymmetric AWS KMS key.
 	PublicKeyPem pulumi.StringPtrInput
@@ -246,12 +246,12 @@ func (o EncryptionKeyOutput) DecryptorUri() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *EncryptionKey) pulumi.StringPtrOutput { return v.DecryptorUri }).(pulumi.StringPtrOutput)
 }
 
-// The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+// The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
 func (o EncryptionKeyOutput) KeyId() pulumi.StringOutput {
 	return o.ApplyT(func(v *EncryptionKey) pulumi.StringOutput { return v.KeyId }).(pulumi.StringOutput)
 }
 
-// The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+// The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
 func (o EncryptionKeyOutput) KeyProvider() pulumi.StringOutput {
 	return o.ApplyT(func(v *EncryptionKey) pulumi.StringOutput { return v.KeyProvider }).(pulumi.StringOutput)
 }
