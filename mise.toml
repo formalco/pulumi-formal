@@ -1,7 +1,7 @@
 [tools]
 # NOTE: If rerunning `make ci-mgmt`, the golangci.yml file will be overwritten
 # to an old syntax version. Use `golangci-lint migrate` to update it.
-golangci-lint = "2.10.1"
+golangci-lint = "2.13.2"
 "go:github.com/pulumi/upgrade-provider" = "latest"
 # Override the ci-mgmt-pinned Node (20.19.5) — @pulumi/pulumi >= 3.250.0 requires
 # node >= 22, so the nodejs SDK build fails on 20. We only override the version
