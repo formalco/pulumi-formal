@@ -98,7 +98,7 @@ jobs:
           echo 'EOF'
         } >> "$GITHUB_OUTPUT"
     # REPO-OWNED PATCH (re-apply after `make ci-mgmt`): surface which upstream
-    # terraform-provider-formal version this release wraps. See AGENTS.md.
+    # terraform-provider-formal commit this release wraps. See AGENTS.md.
     - name: Get upstream provider commit
       id: upstream-commit
       shell: bash
