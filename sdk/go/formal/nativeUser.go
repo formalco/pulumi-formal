@@ -29,7 +29,7 @@ type NativeUser struct {
 	ResourceId pulumi.StringOutput `pulumi:"resourceId"`
 	// If set to true, this Native User cannot be deleted.
 	TerminationProtection pulumi.BoolPtrOutput `pulumi:"terminationProtection"`
-	// The password of the Native User.
+	// Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
 	UseAsDefault pulumi.BoolPtrOutput `pulumi:"useAsDefault"`
 }
 
@@ -93,7 +93,7 @@ type nativeUserState struct {
 	ResourceId *string `pulumi:"resourceId"`
 	// If set to true, this Native User cannot be deleted.
 	TerminationProtection *bool `pulumi:"terminationProtection"`
-	// The password of the Native User.
+	// Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
 	UseAsDefault *bool `pulumi:"useAsDefault"`
 }
 
@@ -111,7 +111,7 @@ type NativeUserState struct {
 	ResourceId pulumi.StringPtrInput
 	// If set to true, this Native User cannot be deleted.
 	TerminationProtection pulumi.BoolPtrInput
-	// The password of the Native User.
+	// Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
 	UseAsDefault pulumi.BoolPtrInput
 }
 
@@ -133,7 +133,7 @@ type nativeUserArgs struct {
 	ResourceId string `pulumi:"resourceId"`
 	// If set to true, this Native User cannot be deleted.
 	TerminationProtection *bool `pulumi:"terminationProtection"`
-	// The password of the Native User.
+	// Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
 	UseAsDefault *bool `pulumi:"useAsDefault"`
 }
 
@@ -152,7 +152,7 @@ type NativeUserArgs struct {
 	ResourceId pulumi.StringInput
 	// If set to true, this Native User cannot be deleted.
 	TerminationProtection pulumi.BoolPtrInput
-	// The password of the Native User.
+	// Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
 	UseAsDefault pulumi.BoolPtrInput
 }
 
@@ -274,7 +274,7 @@ func (o NativeUserOutput) TerminationProtection() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *NativeUser) pulumi.BoolPtrOutput { return v.TerminationProtection }).(pulumi.BoolPtrOutput)
 }
 
-// The password of the Native User.
+// Whether the Connector uses this Native User when a connection does not name one. Defaults to false, so a Resource whose Native Users all leave this unset has no default.
 func (o NativeUserOutput) UseAsDefault() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *NativeUser) pulumi.BoolPtrOutput { return v.UseAsDefault }).(pulumi.BoolPtrOutput)
 }

@@ -17,13 +17,13 @@ namespace Formal.Pulumi
     public partial class IntegrationOidc : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
+        /// The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `Id`.
         /// </summary>
         [Output("audience")]
         public Output<string> Audience { get; private set; } = null!;
 
         /// <summary>
-        /// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `True`.
+        /// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `True`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
         /// </summary>
         [Output("claimCondition")]
         public Output<string?> ClaimCondition { get; private set; } = null!;
@@ -124,7 +124,7 @@ namespace Formal.Pulumi
     public sealed class IntegrationOidcArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `True`.
+        /// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `True`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
         /// </summary>
         [Input("claimCondition")]
         public Input<string>? ClaimCondition { get; set; }
@@ -174,13 +174,13 @@ namespace Formal.Pulumi
     public sealed class IntegrationOidcState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The Formal audience value that tokens must present: `oidc.formal.ai/{id}`.
+        /// The Formal audience value that tokens may present: `oidc.formal.ai/{id}`. Providers that cannot set a custom audience (e.g. Spacelift) can instead send `X-Formal-OIDC-Integration-Id` with this resource's `Id`.
         /// </summary>
         [Input("audience")]
         public Input<string>? Audience { get; set; }
 
         /// <summary>
-        /// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `True`.
+        /// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `True`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
         /// </summary>
         [Input("claimCondition")]
         public Input<string>? ClaimCondition { get; set; }

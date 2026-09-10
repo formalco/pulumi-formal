@@ -18,6 +18,7 @@ import (
 type Provider struct {
 	pulumi.ProviderResourceState
 
+	// Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
 	ApiKey pulumi.StringPtrOutput `pulumi:"apiKey"`
 }
 
@@ -28,6 +29,13 @@ func NewProvider(ctx *pulumi.Context,
 		args = &ProviderArgs{}
 	}
 
+	if args.ApiKey != nil {
+		args.ApiKey = pulumi.ToSecret(args.ApiKey).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"apiKey",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Provider
 	err := ctx.RegisterResource("pulumi:providers:formal", name, args, &resource, opts...)
@@ -38,13 +46,19 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
-	ApiKey                  *string `pulumi:"apiKey"`
-	RetrieveSensitiveValues *bool   `pulumi:"retrieveSensitiveValues"`
+	// Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
+	ApiKey *string `pulumi:"apiKey"`
+	// OIDC authentication configuration. Conflicts with `apiKey`.
+	Oidc                    *ProviderOidc `pulumi:"oidc"`
+	RetrieveSensitiveValues *bool         `pulumi:"retrieveSensitiveValues"`
 }
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
-	ApiKey                  pulumi.StringPtrInput
+	// Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
+	ApiKey pulumi.StringPtrInput
+	// OIDC authentication configuration. Conflicts with `apiKey`.
+	Oidc                    ProviderOidcPtrInput
 	RetrieveSensitiveValues pulumi.BoolPtrInput
 }
 
@@ -108,6 +122,7 @@ func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) Provide
 	return o
 }
 
+// Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
 func (o ProviderOutput) ApiKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.ApiKey }).(pulumi.StringPtrOutput)
 }

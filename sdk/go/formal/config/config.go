@@ -11,8 +11,14 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+// Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
 func GetApiKey(ctx *pulumi.Context) string {
 	return config.Get(ctx, "formal:apiKey")
+}
+
+// OIDC authentication configuration. Conflicts with `apiKey`.
+func GetOidc(ctx *pulumi.Context) string {
+	return config.Get(ctx, "formal:oidc")
 }
 func GetRetrieveSensitiveValues(ctx *pulumi.Context) bool {
 	return config.GetBool(ctx, "formal:retrieveSensitiveValues")

@@ -29,6 +29,7 @@ from .group_user_link import *
 from .hook import *
 from .integration_bi import *
 from .integration_cloud import *
+from .integration_cloud_azure_activation import *
 from .integration_cloud_gcp_activation import *
 from .integration_log import *
 from .integration_mdm import *
@@ -211,6 +212,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/integrationCloud:IntegrationCloud": "IntegrationCloud"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/integrationCloudAzureActivation",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/integrationCloudAzureActivation:IntegrationCloudAzureActivation": "IntegrationCloudAzureActivation"
   }
  },
  {

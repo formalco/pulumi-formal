@@ -178,7 +178,7 @@ export interface IntegrationCloudAws {
      */
     autodiscoveryRegions: string[];
     /**
-     * The ARN of the IAM role that Formal assumes in your AWS account to access your resources.
+     * The ARN of the IAM role that Formal assumes in your AWS account to access your resources. Required unless `templateVersion` is set (CloudFormation path).
      */
     awsCustomerRoleArn?: string;
     /**
@@ -210,9 +210,40 @@ export interface IntegrationCloudAws {
      */
     s3BucketArn?: string;
     /**
-     * The template version of the CloudFormation stack. Use `latest` to stay in sync.
+     * The CloudFormation template version to use when deploying `awsCloudformationStack`. Required unless `awsCustomerRoleArn` is set. Use `latest` to stay in sync. See https://docs.joinformal.com/docs/changelog/cloudformation for version history.
      */
     templateVersion: string;
+}
+
+export interface IntegrationCloudAzure {
+    /**
+     * Allows the Cloud Integration to write logs to Azure Blob Storage for Log Integrations.
+     */
+    allowBlobAccess?: boolean;
+    /**
+     * Storage accounts Formal may write logs to. An empty list allows every account in scope.
+     */
+    blobStorageAccounts?: string[];
+    /**
+     * Enables resource autodiscovery for AKS clusters.
+     */
+    enableAksAutodiscovery?: boolean;
+    /**
+     * Enables resource autodiscovery for Azure managed database servers.
+     */
+    enableDbAutodiscovery?: boolean;
+    /**
+     * Enables resource autodiscovery for Azure virtual machines.
+     */
+    enableVmAutodiscovery?: boolean;
+    /**
+     * Narrows discovery to a single resource group. Empty covers the whole subscription.
+     */
+    resourceGroup?: string;
+    /**
+     * The Azure subscription this integration grants Formal access to.
+     */
+    subscriptionId: string;
 }
 
 export interface IntegrationCloudGcp {
@@ -432,3 +463,30 @@ export interface LogConfigurationStream {
     encrypt: boolean;
 }
 
+export namespace config {
+    export interface Oidc {
+        /**
+         * Mint short-lived OIDC tokens using the AWS credential chain and STS.
+         */
+        aws?: outputs.config.OidcAws;
+        /**
+         * Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
+         */
+        azure?: outputs.config.OidcAzure;
+        /**
+         * Name of an environment variable containing a pre-minted OIDC JWT.
+         */
+        env?: string;
+        /**
+         * Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+         */
+        integrationId?: string;
+    }
+
+    export interface OidcAws {
+    }
+
+    export interface OidcAzure {
+    }
+
+}

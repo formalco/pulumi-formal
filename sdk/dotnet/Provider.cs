@@ -19,6 +19,9 @@ namespace Formal.Pulumi
     [PulumiResourceType("pulumi:providers:formal")]
     public partial class Provider : global::Pulumi.ProviderResource
     {
+        /// <summary>
+        /// Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `Oidc`.
+        /// </summary>
         [Output("apiKey")]
         public Output<string?> ApiKey { get; private set; } = null!;
 
@@ -41,6 +44,10 @@ namespace Formal.Pulumi
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/formalco",
+                AdditionalSecretOutputs =
+                {
+                    "apiKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -58,7 +65,26 @@ namespace Formal.Pulumi
     public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
         [Input("apiKey")]
-        public Input<string>? ApiKey { get; set; }
+        private Input<string>? _apiKey;
+
+        /// <summary>
+        /// Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `Oidc`.
+        /// </summary>
+        public Input<string>? ApiKey
+        {
+            get => _apiKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _apiKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// OIDC authentication configuration. Conflicts with `ApiKey`.
+        /// </summary>
+        [Input("oidc", json: true)]
+        public Input<Inputs.ProviderOidcArgs>? Oidc { get; set; }
 
         [Input("retrieveSensitiveValues", json: true)]
         public Input<bool>? RetrieveSensitiveValues { get; set; }

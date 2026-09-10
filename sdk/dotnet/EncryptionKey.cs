@@ -35,13 +35,13 @@ namespace Formal.Pulumi
         public Output<string?> DecryptorUri { get; private set; } = null!;
 
         /// <summary>
-        /// The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+        /// The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
         /// </summary>
         [Output("keyId")]
         public Output<string> KeyId { get; private set; } = null!;
 
         /// <summary>
-        /// The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+        /// The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
         /// </summary>
         [Output("keyProvider")]
         public Output<string> KeyProvider { get; private set; } = null!;
@@ -118,13 +118,13 @@ namespace Formal.Pulumi
         public Input<string>? DecryptorUri { get; set; }
 
         /// <summary>
-        /// The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+        /// The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
         /// </summary>
         [Input("keyId", required: true)]
         public Input<string> KeyId { get; set; } = null!;
 
         /// <summary>
-        /// The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+        /// The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
         /// </summary>
         [Input("keyProvider", required: true)]
         public Input<string> KeyProvider { get; set; } = null!;
@@ -162,13 +162,13 @@ namespace Formal.Pulumi
         public Input<string>? DecryptorUri { get; set; }
 
         /// <summary>
-        /// The ID of the key in the provider's system (key ARN for AWS KMS, or the crypto key version resource name for GCP KMS).
+        /// The ID of the key in the provider's system (key ARN for AWS KMS, crypto key version resource name for GCP KMS, or Azure Key Vault key URI).
         /// </summary>
         [Input("keyId")]
         public Input<string>? KeyId { get; set; }
 
         /// <summary>
-        /// The provider of the encryption key. One of 'aws-kms' or 'gcp-kms' ('aws' is a deprecated alias for 'aws-kms').
+        /// The provider of the encryption key. One of 'aws-kms', 'gcp-kms', or 'azure-key-vault' ('aws' is a deprecated alias for 'aws-kms').
         /// </summary>
         [Input("keyProvider")]
         public Input<string>? KeyProvider { get; set; }

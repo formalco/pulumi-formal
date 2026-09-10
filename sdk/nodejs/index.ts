@@ -120,6 +120,11 @@ export type IntegrationCloud = import("./integrationCloud").IntegrationCloud;
 export const IntegrationCloud: typeof import("./integrationCloud").IntegrationCloud = null as any;
 utilities.lazyLoad(exports, ["IntegrationCloud"], () => require("./integrationCloud"));
 
+export { IntegrationCloudAzureActivationArgs, IntegrationCloudAzureActivationState } from "./integrationCloudAzureActivation";
+export type IntegrationCloudAzureActivation = import("./integrationCloudAzureActivation").IntegrationCloudAzureActivation;
+export const IntegrationCloudAzureActivation: typeof import("./integrationCloudAzureActivation").IntegrationCloudAzureActivation = null as any;
+utilities.lazyLoad(exports, ["IntegrationCloudAzureActivation"], () => require("./integrationCloudAzureActivation"));
+
 export { IntegrationCloudGcpActivationArgs, IntegrationCloudGcpActivationState } from "./integrationCloudGcpActivation";
 export type IntegrationCloudGcpActivation = import("./integrationCloudGcpActivation").IntegrationCloudGcpActivation;
 export const IntegrationCloudGcpActivation: typeof import("./integrationCloudGcpActivation").IntegrationCloudGcpActivation = null as any;
@@ -303,6 +308,8 @@ const _module = {
                 return new IntegrationBi(name, <any>undefined, { urn })
             case "formal:index/integrationCloud:IntegrationCloud":
                 return new IntegrationCloud(name, <any>undefined, { urn })
+            case "formal:index/integrationCloudAzureActivation:IntegrationCloudAzureActivation":
+                return new IntegrationCloudAzureActivation(name, <any>undefined, { urn })
             case "formal:index/integrationCloudGcpActivation:IntegrationCloudGcpActivation":
                 return new IntegrationCloudGcpActivation(name, <any>undefined, { urn })
             case "formal:index/integrationLog:IntegrationLog":
@@ -378,6 +385,7 @@ pulumi.runtime.registerResourceModule("formal", "index/groupUserLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/hook", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationBi", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationCloud", _module)
+pulumi.runtime.registerResourceModule("formal", "index/integrationCloudAzureActivation", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationCloudGcpActivation", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationLog", _module)
 pulumi.runtime.registerResourceModule("formal", "index/integrationMdm", _module)
