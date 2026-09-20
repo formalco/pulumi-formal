@@ -274,6 +274,130 @@
                 "current": "formal:index/nativeUserLink:NativeUserLink",
                 "majorVersion": 1
             },
+            "formal_native_user_v3": {
+                "current": "formal:index/nativeUserV3:NativeUserV3",
+                "majorVersion": 1,
+                "fields": {
+                    "aws_iam": {
+                        "maxItemsOne": true
+                    },
+                    "aws_iam_role": {
+                        "maxItemsOne": true
+                    },
+                    "azure_iam": {
+                        "maxItemsOne": true
+                    },
+                    "basic": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "password": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    },
+                    "gcp_iam": {
+                        "maxItemsOne": true
+                    },
+                    "hook": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "allowlisted_env_variables": {
+                                    "maxItemsOne": false
+                                },
+                                "allowlisted_network_hosts": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "http_api_key_header": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "value": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    },
+                    "http_api_key_query": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "value": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    },
+                    "http_basic": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "password": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    },
+                    "http_bearer": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "token": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    },
+                    "kubernetes_inline": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "kubeconfig": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    },
+                    "kubernetes_path": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "kubeconfig_path": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    },
+                    "snowflake_key": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "key": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    },
+                    "ssh_key": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "certificate": {
+                                    "maxItemsOne": true
+                                },
+                                "key": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "formal_network_rule": {
                 "current": "formal:index/networkRule:NetworkRule",
                 "majorVersion": 1
@@ -313,6 +437,10 @@
             },
             "formal_resource_hostname": {
                 "current": "formal:index/resourceHostname:ResourceHostname",
+                "majorVersion": 1
+            },
+            "formal_resource_native_user_selection": {
+                "current": "formal:index/resourceNativeUserSelection:ResourceNativeUserSelection",
                 "majorVersion": 1
             },
             "formal_resource_ssh_host_key": {

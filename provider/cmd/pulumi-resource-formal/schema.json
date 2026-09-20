@@ -66,6 +66,10 @@
             },
             "retrieveSensitiveValues": {
                 "type": "boolean"
+            },
+            "url": {
+                "type": "string",
+                "description": "Formal control plane URL. Defaults to `https://api.formal.ai`."
             }
         }
     },
@@ -752,6 +756,473 @@
                 "encrypt"
             ]
         },
+        "formal:index/NativeUserV3AwsIam:NativeUserV3AwsIam": {
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "The database username mapped to the IAM identity.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "username"
+            ]
+        },
+        "formal:index/NativeUserV3AwsIamRole:NativeUserV3AwsIamRole": {
+            "properties": {
+                "role": {
+                    "type": "string",
+                    "description": "The ARN of the role to assume.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "The database username mapped to the IAM identity.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "role",
+                "username"
+            ]
+        },
+        "formal:index/NativeUserV3AzureIam:NativeUserV3AzureIam": {
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "The database username mapped to the Azure identity.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "username"
+            ]
+        },
+        "formal:index/NativeUserV3Basic:NativeUserV3Basic": {
+            "properties": {
+                "password": {
+                    "$ref": "#/types/formal:index/NativeUserV3BasicPassword:NativeUserV3BasicPassword",
+                    "description": "The password to authenticate with. Set exactly one of \u003cspan pulumi-lang-nodejs=\"`literal`\" pulumi-lang-dotnet=\"`Literal`\" pulumi-lang-go=\"`literal`\" pulumi-lang-python=\"`literal`\" pulumi-lang-yaml=\"`literal`\" pulumi-lang-java=\"`literal`\" pulumi-lang-hcl=\"`literal`\"\u003e`literal`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "The username to authenticate as.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ]
+        },
+        "formal:index/NativeUserV3BasicPassword:NativeUserV3BasicPassword": {
+            "properties": {
+                "environmentVariable": {
+                    "type": "string",
+                    "description": "The name of an environment variable the connector reads the secret from.\n"
+                },
+                "literal": {
+                    "type": "string",
+                    "description": "The secret value itself. Stored in Terraform state; prefer \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e where possible.\n",
+                    "secret": true
+                },
+                "literalWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and \u003cspan pulumi-lang-nodejs=\"`literalWoVersion`\" pulumi-lang-dotnet=\"`LiteralWoVersion`\" pulumi-lang-go=\"`literalWoVersion`\" pulumi-lang-python=\"`literal_wo_version`\" pulumi-lang-yaml=\"`literalWoVersion`\" pulumi-lang-java=\"`literalWoVersion`\" pulumi-lang-hcl=\"`literal_wo_version`\"\u003e`literalWoVersion`\u003c/span\u003e.\n",
+                    "secret": true
+                },
+                "literalWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e. Increment this value to update the secret.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:index/NativeUserV3GcpIam:NativeUserV3GcpIam": {
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "The database username mapped to the GCP identity.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "username"
+            ]
+        },
+        "formal:index/NativeUserV3Hook:NativeUserV3Hook": {
+            "properties": {
+                "allowlistedEnvVariables": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Environment variables the hook may read.\n"
+                },
+                "allowlistedNetworkHosts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Network hosts the hook may access.\n"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "The TypeScript or JavaScript source of the hook, in the same form as `formal_hook.code`.\n"
+                },
+                "outputType": {
+                    "type": "string",
+                    "description": "The credential shape the hook must return, so the connector can validate its result. One of: \u003cspan pulumi-lang-nodejs=\"`basic`\" pulumi-lang-dotnet=\"`Basic`\" pulumi-lang-go=\"`basic`\" pulumi-lang-python=\"`basic`\" pulumi-lang-yaml=\"`basic`\" pulumi-lang-java=\"`basic`\" pulumi-lang-hcl=\"`basic`\"\u003e`basic`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`awsIam`\" pulumi-lang-dotnet=\"`AwsIam`\" pulumi-lang-go=\"`awsIam`\" pulumi-lang-python=\"`aws_iam`\" pulumi-lang-yaml=\"`awsIam`\" pulumi-lang-java=\"`awsIam`\" pulumi-lang-hcl=\"`aws_iam`\"\u003e`awsIam`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`awsIamRole`\" pulumi-lang-dotnet=\"`AwsIamRole`\" pulumi-lang-go=\"`awsIamRole`\" pulumi-lang-python=\"`aws_iam_role`\" pulumi-lang-yaml=\"`awsIamRole`\" pulumi-lang-java=\"`awsIamRole`\" pulumi-lang-hcl=\"`aws_iam_role`\"\u003e`awsIamRole`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`gcpIam`\" pulumi-lang-dotnet=\"`GcpIam`\" pulumi-lang-go=\"`gcpIam`\" pulumi-lang-python=\"`gcp_iam`\" pulumi-lang-yaml=\"`gcpIam`\" pulumi-lang-java=\"`gcpIam`\" pulumi-lang-hcl=\"`gcp_iam`\"\u003e`gcpIam`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`azureIam`\" pulumi-lang-dotnet=\"`AzureIam`\" pulumi-lang-go=\"`azureIam`\" pulumi-lang-python=\"`azure_iam`\" pulumi-lang-yaml=\"`azureIam`\" pulumi-lang-java=\"`azureIam`\" pulumi-lang-hcl=\"`azure_iam`\"\u003e`azureIam`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`kubernetesPath`\" pulumi-lang-dotnet=\"`KubernetesPath`\" pulumi-lang-go=\"`kubernetesPath`\" pulumi-lang-python=\"`kubernetes_path`\" pulumi-lang-yaml=\"`kubernetesPath`\" pulumi-lang-java=\"`kubernetesPath`\" pulumi-lang-hcl=\"`kubernetes_path`\"\u003e`kubernetesPath`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`kubernetesInline`\" pulumi-lang-dotnet=\"`KubernetesInline`\" pulumi-lang-go=\"`kubernetesInline`\" pulumi-lang-python=\"`kubernetes_inline`\" pulumi-lang-yaml=\"`kubernetesInline`\" pulumi-lang-java=\"`kubernetesInline`\" pulumi-lang-hcl=\"`kubernetes_inline`\"\u003e`kubernetesInline`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sshKey`\" pulumi-lang-dotnet=\"`SshKey`\" pulumi-lang-go=\"`sshKey`\" pulumi-lang-python=\"`ssh_key`\" pulumi-lang-yaml=\"`sshKey`\" pulumi-lang-java=\"`sshKey`\" pulumi-lang-hcl=\"`ssh_key`\"\u003e`sshKey`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`snowflakeKey`\" pulumi-lang-dotnet=\"`SnowflakeKey`\" pulumi-lang-go=\"`snowflakeKey`\" pulumi-lang-python=\"`snowflake_key`\" pulumi-lang-yaml=\"`snowflakeKey`\" pulumi-lang-java=\"`snowflakeKey`\" pulumi-lang-hcl=\"`snowflake_key`\"\u003e`snowflakeKey`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`httpBasic`\" pulumi-lang-dotnet=\"`HttpBasic`\" pulumi-lang-go=\"`httpBasic`\" pulumi-lang-python=\"`http_basic`\" pulumi-lang-yaml=\"`httpBasic`\" pulumi-lang-java=\"`httpBasic`\" pulumi-lang-hcl=\"`http_basic`\"\u003e`httpBasic`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`httpBearer`\" pulumi-lang-dotnet=\"`HttpBearer`\" pulumi-lang-go=\"`httpBearer`\" pulumi-lang-python=\"`http_bearer`\" pulumi-lang-yaml=\"`httpBearer`\" pulumi-lang-java=\"`httpBearer`\" pulumi-lang-hcl=\"`http_bearer`\"\u003e`httpBearer`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`httpApiKeyHeader`\" pulumi-lang-dotnet=\"`HttpApiKeyHeader`\" pulumi-lang-go=\"`httpApiKeyHeader`\" pulumi-lang-python=\"`http_api_key_header`\" pulumi-lang-yaml=\"`httpApiKeyHeader`\" pulumi-lang-java=\"`httpApiKeyHeader`\" pulumi-lang-hcl=\"`http_api_key_header`\"\u003e`httpApiKeyHeader`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`httpApiKeyQuery`\" pulumi-lang-dotnet=\"`HttpApiKeyQuery`\" pulumi-lang-go=\"`httpApiKeyQuery`\" pulumi-lang-python=\"`http_api_key_query`\" pulumi-lang-yaml=\"`httpApiKeyQuery`\" pulumi-lang-java=\"`httpApiKeyQuery`\" pulumi-lang-hcl=\"`http_api_key_query`\"\u003e`httpApiKeyQuery`\u003c/span\u003e.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "code",
+                "outputType"
+            ]
+        },
+        "formal:index/NativeUserV3HttpApiKeyHeader:NativeUserV3HttpApiKeyHeader": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "The name of the header carrying the API key.\n"
+                },
+                "value": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpApiKeyHeaderValue:NativeUserV3HttpApiKeyHeaderValue",
+                    "description": "The API key. Set exactly one of \u003cspan pulumi-lang-nodejs=\"`literal`\" pulumi-lang-dotnet=\"`Literal`\" pulumi-lang-go=\"`literal`\" pulumi-lang-python=\"`literal`\" pulumi-lang-yaml=\"`literal`\" pulumi-lang-java=\"`literal`\" pulumi-lang-hcl=\"`literal`\"\u003e`literal`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "value"
+            ]
+        },
+        "formal:index/NativeUserV3HttpApiKeyHeaderValue:NativeUserV3HttpApiKeyHeaderValue": {
+            "properties": {
+                "environmentVariable": {
+                    "type": "string",
+                    "description": "The name of an environment variable the connector reads the secret from.\n"
+                },
+                "literal": {
+                    "type": "string",
+                    "description": "The secret value itself. Stored in Terraform state; prefer \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e where possible.\n",
+                    "secret": true
+                },
+                "literalWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and \u003cspan pulumi-lang-nodejs=\"`literalWoVersion`\" pulumi-lang-dotnet=\"`LiteralWoVersion`\" pulumi-lang-go=\"`literalWoVersion`\" pulumi-lang-python=\"`literal_wo_version`\" pulumi-lang-yaml=\"`literalWoVersion`\" pulumi-lang-java=\"`literalWoVersion`\" pulumi-lang-hcl=\"`literal_wo_version`\"\u003e`literalWoVersion`\u003c/span\u003e.\n",
+                    "secret": true
+                },
+                "literalWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e. Increment this value to update the secret.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:index/NativeUserV3HttpApiKeyQuery:NativeUserV3HttpApiKeyQuery": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "The name of the query parameter carrying the API key.\n"
+                },
+                "value": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpApiKeyQueryValue:NativeUserV3HttpApiKeyQueryValue",
+                    "description": "The API key. Set exactly one of \u003cspan pulumi-lang-nodejs=\"`literal`\" pulumi-lang-dotnet=\"`Literal`\" pulumi-lang-go=\"`literal`\" pulumi-lang-python=\"`literal`\" pulumi-lang-yaml=\"`literal`\" pulumi-lang-java=\"`literal`\" pulumi-lang-hcl=\"`literal`\"\u003e`literal`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "value"
+            ]
+        },
+        "formal:index/NativeUserV3HttpApiKeyQueryValue:NativeUserV3HttpApiKeyQueryValue": {
+            "properties": {
+                "environmentVariable": {
+                    "type": "string",
+                    "description": "The name of an environment variable the connector reads the secret from.\n"
+                },
+                "literal": {
+                    "type": "string",
+                    "description": "The secret value itself. Stored in Terraform state; prefer \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e where possible.\n",
+                    "secret": true
+                },
+                "literalWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and \u003cspan pulumi-lang-nodejs=\"`literalWoVersion`\" pulumi-lang-dotnet=\"`LiteralWoVersion`\" pulumi-lang-go=\"`literalWoVersion`\" pulumi-lang-python=\"`literal_wo_version`\" pulumi-lang-yaml=\"`literalWoVersion`\" pulumi-lang-java=\"`literalWoVersion`\" pulumi-lang-hcl=\"`literal_wo_version`\"\u003e`literalWoVersion`\u003c/span\u003e.\n",
+                    "secret": true
+                },
+                "literalWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e. Increment this value to update the secret.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:index/NativeUserV3HttpBasic:NativeUserV3HttpBasic": {
+            "properties": {
+                "header": {
+                    "type": "string",
+                    "description": "The header to inject the credentials on, for example `Authorization`.\n"
+                },
+                "password": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpBasicPassword:NativeUserV3HttpBasicPassword",
+                    "description": "The password to authenticate with. Set exactly one of \u003cspan pulumi-lang-nodejs=\"`literal`\" pulumi-lang-dotnet=\"`Literal`\" pulumi-lang-go=\"`literal`\" pulumi-lang-python=\"`literal`\" pulumi-lang-yaml=\"`literal`\" pulumi-lang-java=\"`literal`\" pulumi-lang-hcl=\"`literal`\"\u003e`literal`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "The username to authenticate as.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "header",
+                "password",
+                "username"
+            ]
+        },
+        "formal:index/NativeUserV3HttpBasicPassword:NativeUserV3HttpBasicPassword": {
+            "properties": {
+                "environmentVariable": {
+                    "type": "string",
+                    "description": "The name of an environment variable the connector reads the secret from.\n"
+                },
+                "literal": {
+                    "type": "string",
+                    "description": "The secret value itself. Stored in Terraform state; prefer \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e where possible.\n",
+                    "secret": true
+                },
+                "literalWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and \u003cspan pulumi-lang-nodejs=\"`literalWoVersion`\" pulumi-lang-dotnet=\"`LiteralWoVersion`\" pulumi-lang-go=\"`literalWoVersion`\" pulumi-lang-python=\"`literal_wo_version`\" pulumi-lang-yaml=\"`literalWoVersion`\" pulumi-lang-java=\"`literalWoVersion`\" pulumi-lang-hcl=\"`literal_wo_version`\"\u003e`literalWoVersion`\u003c/span\u003e.\n",
+                    "secret": true
+                },
+                "literalWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e. Increment this value to update the secret.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:index/NativeUserV3HttpBearer:NativeUserV3HttpBearer": {
+            "properties": {
+                "header": {
+                    "type": "string",
+                    "description": "The header to inject the token on, for example `Authorization`.\n"
+                },
+                "token": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpBearerToken:NativeUserV3HttpBearerToken",
+                    "description": "The bearer token. Set exactly one of \u003cspan pulumi-lang-nodejs=\"`literal`\" pulumi-lang-dotnet=\"`Literal`\" pulumi-lang-go=\"`literal`\" pulumi-lang-python=\"`literal`\" pulumi-lang-yaml=\"`literal`\" pulumi-lang-java=\"`literal`\" pulumi-lang-hcl=\"`literal`\"\u003e`literal`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "header",
+                "token"
+            ]
+        },
+        "formal:index/NativeUserV3HttpBearerToken:NativeUserV3HttpBearerToken": {
+            "properties": {
+                "environmentVariable": {
+                    "type": "string",
+                    "description": "The name of an environment variable the connector reads the secret from.\n"
+                },
+                "literal": {
+                    "type": "string",
+                    "description": "The secret value itself. Stored in Terraform state; prefer \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e where possible.\n",
+                    "secret": true
+                },
+                "literalWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and \u003cspan pulumi-lang-nodejs=\"`literalWoVersion`\" pulumi-lang-dotnet=\"`LiteralWoVersion`\" pulumi-lang-go=\"`literalWoVersion`\" pulumi-lang-python=\"`literal_wo_version`\" pulumi-lang-yaml=\"`literalWoVersion`\" pulumi-lang-java=\"`literalWoVersion`\" pulumi-lang-hcl=\"`literal_wo_version`\"\u003e`literalWoVersion`\u003c/span\u003e.\n",
+                    "secret": true
+                },
+                "literalWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e. Increment this value to update the secret.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:index/NativeUserV3KubernetesInline:NativeUserV3KubernetesInline": {
+            "properties": {
+                "kubeconfig": {
+                    "$ref": "#/types/formal:index/NativeUserV3KubernetesInlineKubeconfig:NativeUserV3KubernetesInlineKubeconfig",
+                    "description": "The kubeconfig YAML document. Set exactly one of \u003cspan pulumi-lang-nodejs=\"`literal`\" pulumi-lang-dotnet=\"`Literal`\" pulumi-lang-go=\"`literal`\" pulumi-lang-python=\"`literal`\" pulumi-lang-yaml=\"`literal`\" pulumi-lang-java=\"`literal`\" pulumi-lang-hcl=\"`literal`\"\u003e`literal`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "kubeconfig"
+            ]
+        },
+        "formal:index/NativeUserV3KubernetesInlineKubeconfig:NativeUserV3KubernetesInlineKubeconfig": {
+            "properties": {
+                "environmentVariable": {
+                    "type": "string",
+                    "description": "The name of an environment variable the connector reads the secret from.\n"
+                },
+                "literal": {
+                    "type": "string",
+                    "description": "The secret value itself. Stored in Terraform state; prefer \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e where possible.\n",
+                    "secret": true
+                },
+                "literalWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and \u003cspan pulumi-lang-nodejs=\"`literalWoVersion`\" pulumi-lang-dotnet=\"`LiteralWoVersion`\" pulumi-lang-go=\"`literalWoVersion`\" pulumi-lang-python=\"`literal_wo_version`\" pulumi-lang-yaml=\"`literalWoVersion`\" pulumi-lang-java=\"`literalWoVersion`\" pulumi-lang-hcl=\"`literal_wo_version`\"\u003e`literalWoVersion`\u003c/span\u003e.\n",
+                    "secret": true
+                },
+                "literalWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e. Increment this value to update the secret.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:index/NativeUserV3KubernetesPath:NativeUserV3KubernetesPath": {
+            "properties": {
+                "kubeconfigPath": {
+                    "$ref": "#/types/formal:index/NativeUserV3KubernetesPathKubeconfigPath:NativeUserV3KubernetesPathKubeconfigPath",
+                    "description": "Path to the kubeconfig file on the connector. Set exactly one of \u003cspan pulumi-lang-nodejs=\"`literal`\" pulumi-lang-dotnet=\"`Literal`\" pulumi-lang-go=\"`literal`\" pulumi-lang-python=\"`literal`\" pulumi-lang-yaml=\"`literal`\" pulumi-lang-java=\"`literal`\" pulumi-lang-hcl=\"`literal`\"\u003e`literal`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "kubeconfigPath"
+            ]
+        },
+        "formal:index/NativeUserV3KubernetesPathKubeconfigPath:NativeUserV3KubernetesPathKubeconfigPath": {
+            "properties": {
+                "environmentVariable": {
+                    "type": "string",
+                    "description": "The name of an environment variable the connector reads the secret from.\n"
+                },
+                "literal": {
+                    "type": "string",
+                    "description": "The secret value itself. Stored in Terraform state; prefer \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e where possible.\n",
+                    "secret": true
+                },
+                "literalWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and \u003cspan pulumi-lang-nodejs=\"`literalWoVersion`\" pulumi-lang-dotnet=\"`LiteralWoVersion`\" pulumi-lang-go=\"`literalWoVersion`\" pulumi-lang-python=\"`literal_wo_version`\" pulumi-lang-yaml=\"`literalWoVersion`\" pulumi-lang-java=\"`literalWoVersion`\" pulumi-lang-hcl=\"`literal_wo_version`\"\u003e`literalWoVersion`\u003c/span\u003e.\n",
+                    "secret": true
+                },
+                "literalWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e. Increment this value to update the secret.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:index/NativeUserV3SnowflakeKey:NativeUserV3SnowflakeKey": {
+            "properties": {
+                "key": {
+                    "$ref": "#/types/formal:index/NativeUserV3SnowflakeKeyKey:NativeUserV3SnowflakeKeyKey",
+                    "description": "The private key. Set exactly one of \u003cspan pulumi-lang-nodejs=\"`literal`\" pulumi-lang-dotnet=\"`Literal`\" pulumi-lang-go=\"`literal`\" pulumi-lang-python=\"`literal`\" pulumi-lang-yaml=\"`literal`\" pulumi-lang-java=\"`literal`\" pulumi-lang-hcl=\"`literal`\"\u003e`literal`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "The Snowflake username to authenticate as.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "username"
+            ]
+        },
+        "formal:index/NativeUserV3SnowflakeKeyKey:NativeUserV3SnowflakeKeyKey": {
+            "properties": {
+                "environmentVariable": {
+                    "type": "string",
+                    "description": "The name of an environment variable the connector reads the secret from.\n"
+                },
+                "literal": {
+                    "type": "string",
+                    "description": "The secret value itself. Stored in Terraform state; prefer \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e where possible.\n",
+                    "secret": true
+                },
+                "literalWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and \u003cspan pulumi-lang-nodejs=\"`literalWoVersion`\" pulumi-lang-dotnet=\"`LiteralWoVersion`\" pulumi-lang-go=\"`literalWoVersion`\" pulumi-lang-python=\"`literal_wo_version`\" pulumi-lang-yaml=\"`literalWoVersion`\" pulumi-lang-java=\"`literalWoVersion`\" pulumi-lang-hcl=\"`literal_wo_version`\"\u003e`literalWoVersion`\u003c/span\u003e.\n",
+                    "secret": true
+                },
+                "literalWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e. Increment this value to update the secret.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:index/NativeUserV3SshKey:NativeUserV3SshKey": {
+            "properties": {
+                "certificate": {
+                    "$ref": "#/types/formal:index/NativeUserV3SshKeyCertificate:NativeUserV3SshKeyCertificate",
+                    "description": "The optional SSH certificate paired with the private key. Set exactly one of \u003cspan pulumi-lang-nodejs=\"`literal`\" pulumi-lang-dotnet=\"`Literal`\" pulumi-lang-go=\"`literal`\" pulumi-lang-python=\"`literal`\" pulumi-lang-yaml=\"`literal`\" pulumi-lang-java=\"`literal`\" pulumi-lang-hcl=\"`literal`\"\u003e`literal`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e.\n"
+                },
+                "key": {
+                    "$ref": "#/types/formal:index/NativeUserV3SshKeyKey:NativeUserV3SshKeyKey",
+                    "description": "The SSH private key. Set exactly one of \u003cspan pulumi-lang-nodejs=\"`literal`\" pulumi-lang-dotnet=\"`Literal`\" pulumi-lang-go=\"`literal`\" pulumi-lang-python=\"`literal`\" pulumi-lang-yaml=\"`literal`\" pulumi-lang-java=\"`literal`\" pulumi-lang-hcl=\"`literal`\"\u003e`literal`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "The username to authenticate as.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "username"
+            ]
+        },
+        "formal:index/NativeUserV3SshKeyCertificate:NativeUserV3SshKeyCertificate": {
+            "properties": {
+                "environmentVariable": {
+                    "type": "string",
+                    "description": "The name of an environment variable the connector reads the secret from.\n"
+                },
+                "literal": {
+                    "type": "string",
+                    "description": "The secret value itself. Stored in Terraform state; prefer \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e where possible.\n",
+                    "secret": true
+                },
+                "literalWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and \u003cspan pulumi-lang-nodejs=\"`literalWoVersion`\" pulumi-lang-dotnet=\"`LiteralWoVersion`\" pulumi-lang-go=\"`literalWoVersion`\" pulumi-lang-python=\"`literal_wo_version`\" pulumi-lang-yaml=\"`literalWoVersion`\" pulumi-lang-java=\"`literalWoVersion`\" pulumi-lang-hcl=\"`literal_wo_version`\"\u003e`literalWoVersion`\u003c/span\u003e.\n",
+                    "secret": true
+                },
+                "literalWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e. Increment this value to update the secret.\n"
+                }
+            },
+            "type": "object"
+        },
+        "formal:index/NativeUserV3SshKeyKey:NativeUserV3SshKeyKey": {
+            "properties": {
+                "environmentVariable": {
+                    "type": "string",
+                    "description": "The name of an environment variable the connector reads the secret from.\n"
+                },
+                "literal": {
+                    "type": "string",
+                    "description": "The secret value itself. Stored in Terraform state; prefer \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`environmentVariable`\" pulumi-lang-dotnet=\"`EnvironmentVariable`\" pulumi-lang-go=\"`environmentVariable`\" pulumi-lang-python=\"`environment_variable`\" pulumi-lang-yaml=\"`environmentVariable`\" pulumi-lang-java=\"`environmentVariable`\" pulumi-lang-hcl=\"`environment_variable`\"\u003e`environmentVariable`\u003c/span\u003e where possible.\n",
+                    "secret": true
+                },
+                "literalWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and \u003cspan pulumi-lang-nodejs=\"`literalWoVersion`\" pulumi-lang-dotnet=\"`LiteralWoVersion`\" pulumi-lang-go=\"`literalWoVersion`\" pulumi-lang-python=\"`literal_wo_version`\" pulumi-lang-yaml=\"`literalWoVersion`\" pulumi-lang-java=\"`literalWoVersion`\" pulumi-lang-hcl=\"`literal_wo_version`\"\u003e`literalWoVersion`\u003c/span\u003e.\n",
+                    "secret": true
+                },
+                "literalWoVersion": {
+                    "type": "integer",
+                    "description": "Version trigger for \u003cspan pulumi-lang-nodejs=\"`literalWo`\" pulumi-lang-dotnet=\"`LiteralWo`\" pulumi-lang-go=\"`literalWo`\" pulumi-lang-python=\"`literal_wo`\" pulumi-lang-yaml=\"`literalWo`\" pulumi-lang-java=\"`literalWo`\" pulumi-lang-hcl=\"`literal_wo`\"\u003e`literalWo`\u003c/span\u003e. Increment this value to update the secret.\n"
+                }
+            },
+            "type": "object"
+        },
         "formal:index/ProviderOidc:ProviderOidc": {
             "properties": {
                 "aws": {
@@ -794,6 +1265,10 @@
             },
             "retrieveSensitiveValues": {
                 "type": "boolean"
+            },
+            "url": {
+                "type": "string",
+                "description": "Formal control plane URL. Defaults to `https://api.formal.ai`."
             }
         },
         "inputProperties": {
@@ -808,6 +1283,10 @@
             },
             "retrieveSensitiveValues": {
                 "type": "boolean"
+            },
+            "url": {
+                "type": "string",
+                "description": "Formal control plane URL. Defaults to `https://api.formal.ai`."
             }
         },
         "methods": {
@@ -3605,6 +4084,251 @@
                 "type": "object"
             }
         },
+        "formal:index/nativeUserV3:NativeUserV3": {
+            "description": "A Native User the Formal connector authenticates to a Resource as. The Resource decides which Native User a session uses through its \u003cspan pulumi-lang-nodejs=\"`formal.ResourceNativeUserSelection`\" pulumi-lang-dotnet=\"`formal.ResourceNativeUserSelection`\" pulumi-lang-go=\"`ResourceNativeUserSelection`\" pulumi-lang-python=\"`ResourceNativeUserSelection`\" pulumi-lang-yaml=\"`formal.ResourceNativeUserSelection`\" pulumi-lang-java=\"`formal.ResourceNativeUserSelection`\" pulumi-lang-hcl=\"`formal_resource_native_user_selection`\"\u003e`formal.ResourceNativeUserSelection`\u003c/span\u003e expression.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as formal from \"@formalco/pulumi\";\n\nconst config = new pulumi.Config();\nconst analyticsAdminPassword = config.require(\"analyticsAdminPassword\");\nconst db = new formal.Resource(\"db\", {\n    name: \"analytics-postgres\",\n    hostname: \"analytics.internal\",\n    technology: \"postgres\",\n    port: 5432,\n    nativeUsersV3Enabled: true,\n});\n// Username and password, read from an environment variable on the connector.\nconst basic = new formal.NativeUserV3(\"basic\", {\n    basic: {\n        password: {\n            environmentVariable: \"ANALYTICS_ADMIN_PASSWORD\",\n        },\n        username: \"app_admin\",\n    },\n    resourceId: db.id,\n    label: \"admin\",\n});\n// Username and password, with the password passed as a write-only value so it\n// never lands in Terraform state. Increment literal_wo_version to rotate it.\nconst basicWriteOnly = new formal.NativeUserV3(\"basic_write_only\", {\n    basic: {\n        password: {\n            literalWo: analyticsAdminPassword,\n            literalWoVersion: 1,\n        },\n        username: \"app_admin\",\n    },\n    resourceId: db.id,\n    label: \"admin-write-only\",\n});\n// AWS IAM, inheriting the role from the connector's environment.\nconst awsIam = new formal.NativeUserV3(\"aws_iam\", {\n    awsIam: {\n        username: \"app_iam\",\n    },\n    resourceId: db.id,\n    label: \"iam\",\n});\nconst api = new formal.Resource(\"api\", {\n    name: \"billing-api\",\n    hostname: \"billing.internal\",\n    technology: \"http\",\n    port: 443,\n    nativeUsersV3Enabled: true,\n});\nconst bearerToken = new formal.NativeUserV3(\"bearer_token\", {\n    httpBearer: {\n        token: {\n            environmentVariable: \"BILLING_API_TOKEN\",\n        },\n        header: \"Authorization\",\n    },\n    resourceId: api.id,\n    label: \"service-account\",\n});\n// Credentials resolved at connection time by a hook running on the connector,\n// for example to mint short-lived credentials from a secrets manager.\nconst fromHook = new formal.NativeUserV3(\"from_hook\", {\n    hook: {\n        outputType: \"basic\",\n        allowlistedEnvVariables: [\n            \"FORMAL_ENV_USER\",\n            \"FORMAL_ENV_PASSWORD\",\n        ],\n        code: `export default async function (_input, env) {\n  return {\n    username: env.FORMAL_ENV_USER,\n    password: env.FORMAL_ENV_PASSWORD,\n  };\n}\n`,\n    },\n    resourceId: db.id,\n    label: \"dynamic\",\n});\n```\n```python\nimport pulumi\nimport pulumi_formal as formal\n\nconfig = pulumi.Config()\nanalytics_admin_password = config.require(\"analyticsAdminPassword\")\ndb = formal.Resource(\"db\",\n    name=\"analytics-postgres\",\n    hostname=\"analytics.internal\",\n    technology=\"postgres\",\n    port=5432,\n    native_users_v3_enabled=True)\n# Username and password, read from an environment variable on the connector.\nbasic = formal.NativeUserV3(\"basic\",\n    basic={\n        \"password\": {\n            \"environment_variable\": \"ANALYTICS_ADMIN_PASSWORD\",\n        },\n        \"username\": \"app_admin\",\n    },\n    resource_id=db.id,\n    label=\"admin\")\n# Username and password, with the password passed as a write-only value so it\n# never lands in Terraform state. Increment literal_wo_version to rotate it.\nbasic_write_only = formal.NativeUserV3(\"basic_write_only\",\n    basic={\n        \"password\": {\n            \"literal_wo\": analytics_admin_password,\n            \"literal_wo_version\": 1,\n        },\n        \"username\": \"app_admin\",\n    },\n    resource_id=db.id,\n    label=\"admin-write-only\")\n# AWS IAM, inheriting the role from the connector's environment.\naws_iam = formal.NativeUserV3(\"aws_iam\",\n    aws_iam={\n        \"username\": \"app_iam\",\n    },\n    resource_id=db.id,\n    label=\"iam\")\napi = formal.Resource(\"api\",\n    name=\"billing-api\",\n    hostname=\"billing.internal\",\n    technology=\"http\",\n    port=443,\n    native_users_v3_enabled=True)\nbearer_token = formal.NativeUserV3(\"bearer_token\",\n    http_bearer={\n        \"token\": {\n            \"environment_variable\": \"BILLING_API_TOKEN\",\n        },\n        \"header\": \"Authorization\",\n    },\n    resource_id=api.id,\n    label=\"service-account\")\n# Credentials resolved at connection time by a hook running on the connector,\n# for example to mint short-lived credentials from a secrets manager.\nfrom_hook = formal.NativeUserV3(\"from_hook\",\n    hook={\n        \"output_type\": \"basic\",\n        \"allowlisted_env_variables\": [\n            \"FORMAL_ENV_USER\",\n            \"FORMAL_ENV_PASSWORD\",\n        ],\n        \"code\": \"\"\"export default async function (_input, env) {\n  return {\n    username: env.FORMAL_ENV_USER,\n    password: env.FORMAL_ENV_PASSWORD,\n  };\n}\n\"\"\",\n    },\n    resource_id=db.id,\n    label=\"dynamic\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Pulumi = Formal.Pulumi;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var config = new Config();\n    var analyticsAdminPassword = config.Require(\"analyticsAdminPassword\");\n    var db = new Pulumi.Resource(\"db\", new()\n    {\n        Name = \"analytics-postgres\",\n        Hostname = \"analytics.internal\",\n        Technology = \"postgres\",\n        Port = 5432,\n        NativeUsersV3Enabled = true,\n    });\n\n    // Username and password, read from an environment variable on the connector.\n    var basic = new Pulumi.NativeUserV3(\"basic\", new()\n    {\n        Basic = new Pulumi.Inputs.NativeUserV3BasicArgs\n        {\n            Password = new Pulumi.Inputs.NativeUserV3BasicPasswordArgs\n            {\n                EnvironmentVariable = \"ANALYTICS_ADMIN_PASSWORD\",\n            },\n            Username = \"app_admin\",\n        },\n        ResourceId = db.Id,\n        Label = \"admin\",\n    });\n\n    // Username and password, with the password passed as a write-only value so it\n    // never lands in Terraform state. Increment literal_wo_version to rotate it.\n    var basicWriteOnly = new Pulumi.NativeUserV3(\"basic_write_only\", new()\n    {\n        Basic = new Pulumi.Inputs.NativeUserV3BasicArgs\n        {\n            Password = new Pulumi.Inputs.NativeUserV3BasicPasswordArgs\n            {\n                LiteralWo = analyticsAdminPassword,\n                LiteralWoVersion = 1,\n            },\n            Username = \"app_admin\",\n        },\n        ResourceId = db.Id,\n        Label = \"admin-write-only\",\n    });\n\n    // AWS IAM, inheriting the role from the connector's environment.\n    var awsIam = new Pulumi.NativeUserV3(\"aws_iam\", new()\n    {\n        AwsIam = new Pulumi.Inputs.NativeUserV3AwsIamArgs\n        {\n            Username = \"app_iam\",\n        },\n        ResourceId = db.Id,\n        Label = \"iam\",\n    });\n\n    var api = new Pulumi.Resource(\"api\", new()\n    {\n        Name = \"billing-api\",\n        Hostname = \"billing.internal\",\n        Technology = \"http\",\n        Port = 443,\n        NativeUsersV3Enabled = true,\n    });\n\n    var bearerToken = new Pulumi.NativeUserV3(\"bearer_token\", new()\n    {\n        HttpBearer = new Pulumi.Inputs.NativeUserV3HttpBearerArgs\n        {\n            Token = new Pulumi.Inputs.NativeUserV3HttpBearerTokenArgs\n            {\n                EnvironmentVariable = \"BILLING_API_TOKEN\",\n            },\n            Header = \"Authorization\",\n        },\n        ResourceId = api.Id,\n        Label = \"service-account\",\n    });\n\n    // Credentials resolved at connection time by a hook running on the connector,\n    // for example to mint short-lived credentials from a secrets manager.\n    var fromHook = new Pulumi.NativeUserV3(\"from_hook\", new()\n    {\n        Hook = new Pulumi.Inputs.NativeUserV3HookArgs\n        {\n            OutputType = \"basic\",\n            AllowlistedEnvVariables = new[]\n            {\n                \"FORMAL_ENV_USER\",\n                \"FORMAL_ENV_PASSWORD\",\n            },\n            Code = @\"export default async function (_input, env) {\n  return {\n    username: env.FORMAL_ENV_USER,\n    password: env.FORMAL_ENV_PASSWORD,\n  };\n}\n\",\n        },\n        ResourceId = db.Id,\n        Label = \"dynamic\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/formalco/pulumi-formal/sdk/go/formal\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcfg := config.New(ctx, \"\")\n\t\tanalyticsAdminPassword := cfg.Require(\"analyticsAdminPassword\")\n\t\tdb, err := formal.NewResource(ctx, \"db\", \u0026formal.ResourceArgs{\n\t\t\tName:                 pulumi.String(\"analytics-postgres\"),\n\t\t\tHostname:             pulumi.String(\"analytics.internal\"),\n\t\t\tTechnology:           pulumi.String(\"postgres\"),\n\t\t\tPort:                 pulumi.Int(5432),\n\t\t\tNativeUsersV3Enabled: pulumi.Bool(true),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t// Username and password, read from an environment variable on the connector.\n\t\t_, err = formal.NewNativeUserV3(ctx, \"basic\", \u0026formal.NativeUserV3Args{\n\t\t\tBasic: \u0026formal.NativeUserV3BasicArgs{\n\t\t\t\tPassword: \u0026formal.NativeUserV3BasicPasswordArgs{\n\t\t\t\t\tEnvironmentVariable: pulumi.String(\"ANALYTICS_ADMIN_PASSWORD\"),\n\t\t\t\t},\n\t\t\t\tUsername: pulumi.String(\"app_admin\"),\n\t\t\t},\n\t\t\tResourceId: db.ID(),\n\t\t\tLabel:      pulumi.String(\"admin\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t// Username and password, with the password passed as a write-only value so it\n\t\t// never lands in Terraform state. Increment literal_wo_version to rotate it.\n\t\t_, err = formal.NewNativeUserV3(ctx, \"basic_write_only\", \u0026formal.NativeUserV3Args{\n\t\t\tBasic: \u0026formal.NativeUserV3BasicArgs{\n\t\t\t\tPassword: \u0026formal.NativeUserV3BasicPasswordArgs{\n\t\t\t\t\tLiteralWo:        pulumi.String(pulumi.String(analyticsAdminPassword)),\n\t\t\t\t\tLiteralWoVersion: pulumi.Int(1),\n\t\t\t\t},\n\t\t\t\tUsername: pulumi.String(\"app_admin\"),\n\t\t\t},\n\t\t\tResourceId: db.ID(),\n\t\t\tLabel:      pulumi.String(\"admin-write-only\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t// AWS IAM, inheriting the role from the connector's environment.\n\t\t_, err = formal.NewNativeUserV3(ctx, \"aws_iam\", \u0026formal.NativeUserV3Args{\n\t\t\tAwsIam: \u0026formal.NativeUserV3AwsIamArgs{\n\t\t\t\tUsername: pulumi.String(\"app_iam\"),\n\t\t\t},\n\t\t\tResourceId: db.ID(),\n\t\t\tLabel:      pulumi.String(\"iam\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tapi, err := formal.NewResource(ctx, \"api\", \u0026formal.ResourceArgs{\n\t\t\tName:                 pulumi.String(\"billing-api\"),\n\t\t\tHostname:             pulumi.String(\"billing.internal\"),\n\t\t\tTechnology:           pulumi.String(\"http\"),\n\t\t\tPort:                 pulumi.Int(443),\n\t\t\tNativeUsersV3Enabled: pulumi.Bool(true),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = formal.NewNativeUserV3(ctx, \"bearer_token\", \u0026formal.NativeUserV3Args{\n\t\t\tHttpBearer: \u0026formal.NativeUserV3HttpBearerArgs{\n\t\t\t\tToken: \u0026formal.NativeUserV3HttpBearerTokenArgs{\n\t\t\t\t\tEnvironmentVariable: pulumi.String(\"BILLING_API_TOKEN\"),\n\t\t\t\t},\n\t\t\t\tHeader: pulumi.String(\"Authorization\"),\n\t\t\t},\n\t\t\tResourceId: api.ID(),\n\t\t\tLabel:      pulumi.String(\"service-account\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t// Credentials resolved at connection time by a hook running on the connector,\n\t\t// for example to mint short-lived credentials from a secrets manager.\n\t\t_, err = formal.NewNativeUserV3(ctx, \"from_hook\", \u0026formal.NativeUserV3Args{\n\t\t\tHook: \u0026formal.NativeUserV3HookArgs{\n\t\t\t\tOutputType: pulumi.String(\"basic\"),\n\t\t\t\tAllowlistedEnvVariables: pulumi.StringArray{\n\t\t\t\t\tpulumi.String(\"FORMAL_ENV_USER\"),\n\t\t\t\t\tpulumi.String(\"FORMAL_ENV_PASSWORD\"),\n\t\t\t\t},\n\t\t\t\tCode: pulumi.String(`export default async function (_input, env) {\n  return {\n    username: env.FORMAL_ENV_USER,\n    password: env.FORMAL_ENV_PASSWORD,\n  };\n}\n`),\n\t\t\t},\n\t\t\tResourceId: db.ID(),\n\t\t\tLabel:      pulumi.String(\"dynamic\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```hcl\npulumi {\n  required_providers {\n    formal = {\n      source = \"pulumi/formal\"\n    }\n  }\n}\n\nresource \"formal_resource\" \"db\" {\n  name                    = \"analytics-postgres\"\n  hostname                = \"analytics.internal\"\n  technology              = \"postgres\"\n  port                    = 5432\n  native_users_v3_enabled = true\n}\n# Username and password, read from an environment variable on the connector.\nresource \"formal_nativeuserv3\" \"basic\" {\n  basic = {\n    password = {\n      environment_variable = \"ANALYTICS_ADMIN_PASSWORD\"\n    }\n    username = \"app_admin\"\n  }\n  resource_id = formal_resource.db.id\n  label       = \"admin\"\n}\n# Username and password, with the password passed as a write-only value so it\n# never lands in Terraform state. Increment literal_wo_version to rotate it.\nresource \"formal_nativeuserv3\" \"basic_write_only\" {\n  basic = {\n    password = {\n      literal_wo         = var.analyticsAdminPassword\n      literal_wo_version = 1\n    }\n    username = \"app_admin\"\n  }\n  resource_id = formal_resource.db.id\n  label       = \"admin-write-only\"\n}\n# AWS IAM, inheriting the role from the connector's environment.\nresource \"formal_nativeuserv3\" \"aws_iam\" {\n  aws_iam = {\n    username = \"app_iam\"\n  }\n  resource_id = formal_resource.db.id\n  label       = \"iam\"\n}\nresource \"formal_resource\" \"api\" {\n  name                    = \"billing-api\"\n  hostname                = \"billing.internal\"\n  technology              = \"http\"\n  port                    = 443\n  native_users_v3_enabled = true\n}\nresource \"formal_nativeuserv3\" \"bearer_token\" {\n  http_bearer = {\n    token = {\n      environment_variable = \"BILLING_API_TOKEN\"\n    }\n    header = \"Authorization\"\n  }\n  resource_id = formal_resource.api.id\n  label       = \"service-account\"\n}\n# Credentials resolved at connection time by a hook running on the connector,\n# for example to mint short-lived credentials from a secrets manager.\nresource \"formal_nativeuserv3\" \"from_hook\" {\n  hook = {\n    output_type               = \"basic\"\n    allowlisted_env_variables = [\"FORMAL_ENV_USER\", \"FORMAL_ENV_PASSWORD\"]\n    code                      = \"export default async function (_input, env) {\\n  return {\\n    username: env.FORMAL_ENV_USER,\\n    password: env.FORMAL_ENV_PASSWORD,\\n  };\\n}\\n\"\n  }\n  resource_id = formal_resource.db.id\n  label       = \"dynamic\"\n}\nvariable \"analyticsAdminPassword\" {\n  type = string\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.formal.Resource;\nimport com.pulumi.formal.ResourceArgs;\nimport com.pulumi.formal.NativeUserV3;\nimport com.pulumi.formal.NativeUserV3Args;\nimport com.pulumi.formal.inputs.NativeUserV3BasicArgs;\nimport com.pulumi.formal.inputs.NativeUserV3BasicPasswordArgs;\nimport com.pulumi.formal.inputs.NativeUserV3AwsIamArgs;\nimport com.pulumi.formal.inputs.NativeUserV3HttpBearerArgs;\nimport com.pulumi.formal.inputs.NativeUserV3HttpBearerTokenArgs;\nimport com.pulumi.formal.inputs.NativeUserV3HookArgs;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var config = ctx.config();\n        final var analyticsAdminPassword = config.require(\"analyticsAdminPassword\");\n        var db = new Resource(\"db\", ResourceArgs.builder()\n            .name(\"analytics-postgres\")\n            .hostname(\"analytics.internal\")\n            .technology(\"postgres\")\n            .port(5432)\n            .nativeUsersV3Enabled(true)\n            .build());\n\n        // Username and password, read from an environment variable on the connector.\n        var basic = new NativeUserV3(\"basic\", NativeUserV3Args.builder()\n            .basic(NativeUserV3BasicArgs.builder()\n                .password(NativeUserV3BasicPasswordArgs.builder()\n                    .environmentVariable(\"ANALYTICS_ADMIN_PASSWORD\")\n                    .build())\n                .username(\"app_admin\")\n                .build())\n            .resourceId(db.id())\n            .label(\"admin\")\n            .build());\n\n        // Username and password, with the password passed as a write-only value so it\n        // never lands in Terraform state. Increment literal_wo_version to rotate it.\n        var basicWriteOnly = new NativeUserV3(\"basicWriteOnly\", NativeUserV3Args.builder()\n            .basic(NativeUserV3BasicArgs.builder()\n                .password(NativeUserV3BasicPasswordArgs.builder()\n                    .literalWo(analyticsAdminPassword)\n                    .literalWoVersion(1)\n                    .build())\n                .username(\"app_admin\")\n                .build())\n            .resourceId(db.id())\n            .label(\"admin-write-only\")\n            .build());\n\n        // AWS IAM, inheriting the role from the connector's environment.\n        var awsIam = new NativeUserV3(\"awsIam\", NativeUserV3Args.builder()\n            .awsIam(NativeUserV3AwsIamArgs.builder()\n                .username(\"app_iam\")\n                .build())\n            .resourceId(db.id())\n            .label(\"iam\")\n            .build());\n\n        var api = new Resource(\"api\", ResourceArgs.builder()\n            .name(\"billing-api\")\n            .hostname(\"billing.internal\")\n            .technology(\"http\")\n            .port(443)\n            .nativeUsersV3Enabled(true)\n            .build());\n\n        var bearerToken = new NativeUserV3(\"bearerToken\", NativeUserV3Args.builder()\n            .httpBearer(NativeUserV3HttpBearerArgs.builder()\n                .token(NativeUserV3HttpBearerTokenArgs.builder()\n                    .environmentVariable(\"BILLING_API_TOKEN\")\n                    .build())\n                .header(\"Authorization\")\n                .build())\n            .resourceId(api.id())\n            .label(\"service-account\")\n            .build());\n\n        // Credentials resolved at connection time by a hook running on the connector,\n        // for example to mint short-lived credentials from a secrets manager.\n        var fromHook = new NativeUserV3(\"fromHook\", NativeUserV3Args.builder()\n            .hook(NativeUserV3HookArgs.builder()\n                .outputType(\"basic\")\n                .allowlistedEnvVariables(                \n                    \"FORMAL_ENV_USER\",\n                    \"FORMAL_ENV_PASSWORD\")\n                .code(\"\"\"\nexport default async function (_input, env) {\n  return {\n    username: env.FORMAL_ENV_USER,\n    password: env.FORMAL_ENV_PASSWORD,\n  };\n}\n                \"\"\")\n                .build())\n            .resourceId(db.id())\n            .label(\"dynamic\")\n            .build());\n\n    }\n}\n```\n```yaml\nconfiguration:\n  analyticsAdminPassword:\n    type: string\nresources:\n  db:\n    type: formal:Resource\n    properties:\n      name: analytics-postgres\n      hostname: analytics.internal\n      technology: postgres\n      port: 5432\n      nativeUsersV3Enabled: true\n  # Username and password, read from an environment variable on the connector.\n  basic:\n    type: formal:NativeUserV3\n    properties:\n      basic:\n        password:\n          environmentVariable: ANALYTICS_ADMIN_PASSWORD\n        username: app_admin\n      resourceId: ${db.id}\n      label: admin\n  # Username and password, with the password passed as a write-only value so it\n  # never lands in Terraform state. Increment literal_wo_version to rotate it.\n  basicWriteOnly:\n    type: formal:NativeUserV3\n    name: basic_write_only\n    properties:\n      basic:\n        password:\n          literalWo: ${analyticsAdminPassword}\n          literalWoVersion: 1\n        username: app_admin\n      resourceId: ${db.id}\n      label: admin-write-only\n  # AWS IAM, inheriting the role from the connector's environment.\n  awsIam:\n    type: formal:NativeUserV3\n    name: aws_iam\n    properties:\n      awsIam:\n        username: app_iam\n      resourceId: ${db.id}\n      label: iam\n  api:\n    type: formal:Resource\n    properties:\n      name: billing-api\n      hostname: billing.internal\n      technology: http\n      port: 443\n      nativeUsersV3Enabled: true\n  bearerToken:\n    type: formal:NativeUserV3\n    name: bearer_token\n    properties:\n      httpBearer:\n        token:\n          environmentVariable: BILLING_API_TOKEN\n        header: Authorization\n      resourceId: ${api.id}\n      label: service-account\n  # Credentials resolved at connection time by a hook running on the connector,\n  # for example to mint short-lived credentials from a secrets manager.\n  fromHook:\n    type: formal:NativeUserV3\n    name: from_hook\n    properties:\n      hook:\n        outputType: basic\n        allowlistedEnvVariables:\n          - FORMAL_ENV_USER\n          - FORMAL_ENV_PASSWORD\n        code: |\n          export default async function (_input, env) {\n            return {\n              username: env.FORMAL_ENV_USER,\n              password: env.FORMAL_ENV_PASSWORD,\n            };\n          }\n      resourceId: ${db.id}\n      label: dynamic\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "awsIam": {
+                    "$ref": "#/types/formal:index/NativeUserV3AwsIam:NativeUserV3AwsIam",
+                    "description": "AWS IAM authentication."
+                },
+                "awsIamRole": {
+                    "$ref": "#/types/formal:index/NativeUserV3AwsIamRole:NativeUserV3AwsIamRole",
+                    "description": "AWS IAM authentication using an assumed role."
+                },
+                "azureIam": {
+                    "$ref": "#/types/formal:index/NativeUserV3AzureIam:NativeUserV3AzureIam",
+                    "description": "Azure IAM authentication."
+                },
+                "basic": {
+                    "$ref": "#/types/formal:index/NativeUserV3Basic:NativeUserV3Basic",
+                    "description": "Username and password authentication, for example Postgres or MySQL."
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "Creation time of the Native User."
+                },
+                "gcpIam": {
+                    "$ref": "#/types/formal:index/NativeUserV3GcpIam:NativeUserV3GcpIam",
+                    "description": "GCP IAM authentication."
+                },
+                "hook": {
+                    "$ref": "#/types/formal:index/NativeUserV3Hook:NativeUserV3Hook",
+                    "description": "Credentials resolved on the connector by running a hook."
+                },
+                "httpApiKeyHeader": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpApiKeyHeader:NativeUserV3HttpApiKeyHeader",
+                    "description": "HTTP API key authentication, sent as a header."
+                },
+                "httpApiKeyQuery": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpApiKeyQuery:NativeUserV3HttpApiKeyQuery",
+                    "description": "HTTP API key authentication, sent as a query parameter."
+                },
+                "httpBasic": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpBasic:NativeUserV3HttpBasic",
+                    "description": "HTTP Basic authentication, injected on a named header."
+                },
+                "httpBearer": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpBearer:NativeUserV3HttpBearer",
+                    "description": "HTTP Bearer token authentication, injected on a named header."
+                },
+                "kubernetesInline": {
+                    "$ref": "#/types/formal:index/NativeUserV3KubernetesInline:NativeUserV3KubernetesInline",
+                    "description": "Kubernetes authentication using an inline kubeconfig document."
+                },
+                "kubernetesPath": {
+                    "$ref": "#/types/formal:index/NativeUserV3KubernetesPath:NativeUserV3KubernetesPath",
+                    "description": "Kubernetes authentication using a kubeconfig file path on the connector."
+                },
+                "label": {
+                    "type": "string",
+                    "description": "A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.\n"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "The ID of the Resource this Native User authenticates to.\n"
+                },
+                "snowflakeKey": {
+                    "$ref": "#/types/formal:index/NativeUserV3SnowflakeKey:NativeUserV3SnowflakeKey",
+                    "description": "Snowflake key-pair authentication."
+                },
+                "sshKey": {
+                    "$ref": "#/types/formal:index/NativeUserV3SshKey:NativeUserV3SshKey",
+                    "description": "SSH private key authentication."
+                },
+                "terminationProtection": {
+                    "type": "boolean",
+                    "description": "If set to true, this Native User cannot be deleted."
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "Last update time of the Native User."
+                }
+            },
+            "required": [
+                "createdAt",
+                "label",
+                "resourceId",
+                "updatedAt"
+            ],
+            "inputProperties": {
+                "awsIam": {
+                    "$ref": "#/types/formal:index/NativeUserV3AwsIam:NativeUserV3AwsIam",
+                    "description": "AWS IAM authentication."
+                },
+                "awsIamRole": {
+                    "$ref": "#/types/formal:index/NativeUserV3AwsIamRole:NativeUserV3AwsIamRole",
+                    "description": "AWS IAM authentication using an assumed role."
+                },
+                "azureIam": {
+                    "$ref": "#/types/formal:index/NativeUserV3AzureIam:NativeUserV3AzureIam",
+                    "description": "Azure IAM authentication."
+                },
+                "basic": {
+                    "$ref": "#/types/formal:index/NativeUserV3Basic:NativeUserV3Basic",
+                    "description": "Username and password authentication, for example Postgres or MySQL."
+                },
+                "gcpIam": {
+                    "$ref": "#/types/formal:index/NativeUserV3GcpIam:NativeUserV3GcpIam",
+                    "description": "GCP IAM authentication."
+                },
+                "hook": {
+                    "$ref": "#/types/formal:index/NativeUserV3Hook:NativeUserV3Hook",
+                    "description": "Credentials resolved on the connector by running a hook."
+                },
+                "httpApiKeyHeader": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpApiKeyHeader:NativeUserV3HttpApiKeyHeader",
+                    "description": "HTTP API key authentication, sent as a header."
+                },
+                "httpApiKeyQuery": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpApiKeyQuery:NativeUserV3HttpApiKeyQuery",
+                    "description": "HTTP API key authentication, sent as a query parameter."
+                },
+                "httpBasic": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpBasic:NativeUserV3HttpBasic",
+                    "description": "HTTP Basic authentication, injected on a named header."
+                },
+                "httpBearer": {
+                    "$ref": "#/types/formal:index/NativeUserV3HttpBearer:NativeUserV3HttpBearer",
+                    "description": "HTTP Bearer token authentication, injected on a named header."
+                },
+                "kubernetesInline": {
+                    "$ref": "#/types/formal:index/NativeUserV3KubernetesInline:NativeUserV3KubernetesInline",
+                    "description": "Kubernetes authentication using an inline kubeconfig document."
+                },
+                "kubernetesPath": {
+                    "$ref": "#/types/formal:index/NativeUserV3KubernetesPath:NativeUserV3KubernetesPath",
+                    "description": "Kubernetes authentication using a kubeconfig file path on the connector."
+                },
+                "label": {
+                    "type": "string",
+                    "description": "A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.\n"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "The ID of the Resource this Native User authenticates to.\n",
+                    "willReplaceOnChanges": true
+                },
+                "snowflakeKey": {
+                    "$ref": "#/types/formal:index/NativeUserV3SnowflakeKey:NativeUserV3SnowflakeKey",
+                    "description": "Snowflake key-pair authentication."
+                },
+                "sshKey": {
+                    "$ref": "#/types/formal:index/NativeUserV3SshKey:NativeUserV3SshKey",
+                    "description": "SSH private key authentication."
+                },
+                "terminationProtection": {
+                    "type": "boolean",
+                    "description": "If set to true, this Native User cannot be deleted."
+                }
+            },
+            "requiredInputs": [
+                "label",
+                "resourceId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering NativeUserV3 resources.\n",
+                "properties": {
+                    "awsIam": {
+                        "$ref": "#/types/formal:index/NativeUserV3AwsIam:NativeUserV3AwsIam",
+                        "description": "AWS IAM authentication."
+                    },
+                    "awsIamRole": {
+                        "$ref": "#/types/formal:index/NativeUserV3AwsIamRole:NativeUserV3AwsIamRole",
+                        "description": "AWS IAM authentication using an assumed role."
+                    },
+                    "azureIam": {
+                        "$ref": "#/types/formal:index/NativeUserV3AzureIam:NativeUserV3AzureIam",
+                        "description": "Azure IAM authentication."
+                    },
+                    "basic": {
+                        "$ref": "#/types/formal:index/NativeUserV3Basic:NativeUserV3Basic",
+                        "description": "Username and password authentication, for example Postgres or MySQL."
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Creation time of the Native User."
+                    },
+                    "gcpIam": {
+                        "$ref": "#/types/formal:index/NativeUserV3GcpIam:NativeUserV3GcpIam",
+                        "description": "GCP IAM authentication."
+                    },
+                    "hook": {
+                        "$ref": "#/types/formal:index/NativeUserV3Hook:NativeUserV3Hook",
+                        "description": "Credentials resolved on the connector by running a hook."
+                    },
+                    "httpApiKeyHeader": {
+                        "$ref": "#/types/formal:index/NativeUserV3HttpApiKeyHeader:NativeUserV3HttpApiKeyHeader",
+                        "description": "HTTP API key authentication, sent as a header."
+                    },
+                    "httpApiKeyQuery": {
+                        "$ref": "#/types/formal:index/NativeUserV3HttpApiKeyQuery:NativeUserV3HttpApiKeyQuery",
+                        "description": "HTTP API key authentication, sent as a query parameter."
+                    },
+                    "httpBasic": {
+                        "$ref": "#/types/formal:index/NativeUserV3HttpBasic:NativeUserV3HttpBasic",
+                        "description": "HTTP Basic authentication, injected on a named header."
+                    },
+                    "httpBearer": {
+                        "$ref": "#/types/formal:index/NativeUserV3HttpBearer:NativeUserV3HttpBearer",
+                        "description": "HTTP Bearer token authentication, injected on a named header."
+                    },
+                    "kubernetesInline": {
+                        "$ref": "#/types/formal:index/NativeUserV3KubernetesInline:NativeUserV3KubernetesInline",
+                        "description": "Kubernetes authentication using an inline kubeconfig document."
+                    },
+                    "kubernetesPath": {
+                        "$ref": "#/types/formal:index/NativeUserV3KubernetesPath:NativeUserV3KubernetesPath",
+                        "description": "Kubernetes authentication using a kubeconfig file path on the connector."
+                    },
+                    "label": {
+                        "type": "string",
+                        "description": "A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.\n"
+                    },
+                    "resourceId": {
+                        "type": "string",
+                        "description": "The ID of the Resource this Native User authenticates to.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "snowflakeKey": {
+                        "$ref": "#/types/formal:index/NativeUserV3SnowflakeKey:NativeUserV3SnowflakeKey",
+                        "description": "Snowflake key-pair authentication."
+                    },
+                    "sshKey": {
+                        "$ref": "#/types/formal:index/NativeUserV3SshKey:NativeUserV3SshKey",
+                        "description": "SSH private key authentication."
+                    },
+                    "terminationProtection": {
+                        "type": "boolean",
+                        "description": "If set to true, this Native User cannot be deleted."
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "Last update time of the Native User."
+                    }
+                },
+                "type": "object"
+            }
+        },
         "formal:index/networkRule:NetworkRule": {
             "description": "Creating a Network Rule in Formal.\n",
             "properties": {
@@ -3810,6 +4534,13 @@
                     "type": "string",
                     "description": "Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.\n"
                 },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Policy metadata as string key/value pairs. Maximum 500 tags per policy.\n"
+                },
                 "terminationProtection": {
                     "type": "boolean",
                     "description": "If set to true, this Policy cannot be deleted.\n"
@@ -3844,6 +4575,13 @@
                     "type": "string",
                     "description": "Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.\n"
                 },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Policy metadata as string key/value pairs. Maximum 500 tags per policy.\n"
+                },
                 "terminationProtection": {
                     "type": "boolean",
                     "description": "If set to true, this Policy cannot be deleted.\n"
@@ -3876,6 +4614,13 @@
                     "status": {
                         "type": "string",
                         "description": "Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.\n"
+                    },
+                    "tags": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Policy metadata as string key/value pairs. Maximum 500 tags per policy.\n"
                     },
                     "terminationProtection": {
                         "type": "boolean",
@@ -4060,6 +4805,14 @@
                     "type": "string",
                     "description": "Friendly name for the Resource.\n"
                 },
+                "nativeUserSelectionCel": {
+                    "type": "string",
+                    "description": "The CEL expression that selects which Native User V3 a session connects as.\n"
+                },
+                "nativeUsersV3Enabled": {
+                    "type": "boolean",
+                    "description": "Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.\n"
+                },
                 "port": {
                     "type": "integer",
                     "description": "The port your Resource is listening on.\n"
@@ -4092,6 +4845,8 @@
                 "createdAt",
                 "hostname",
                 "name",
+                "nativeUserSelectionCel",
+                "nativeUsersV3Enabled",
                 "port",
                 "technology"
             ],
@@ -4115,6 +4870,10 @@
                 "name": {
                     "type": "string",
                     "description": "Friendly name for the Resource.\n"
+                },
+                "nativeUsersV3Enabled": {
+                    "type": "boolean",
+                    "description": "Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.\n"
                 },
                 "port": {
                     "type": "integer",
@@ -4176,6 +4935,14 @@
                     "name": {
                         "type": "string",
                         "description": "Friendly name for the Resource.\n"
+                    },
+                    "nativeUserSelectionCel": {
+                        "type": "string",
+                        "description": "The CEL expression that selects which Native User V3 a session connects as.\n"
+                    },
+                    "nativeUsersV3Enabled": {
+                        "type": "boolean",
+                        "description": "Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.\n"
                     },
                     "port": {
                         "type": "integer",
@@ -4497,6 +5264,53 @@
                     "terminationProtection": {
                         "type": "boolean",
                         "description": "If set to true, this resource hostname cannot be deleted.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "formal:index/resourceNativeUserSelection:ResourceNativeUserSelection": {
+            "description": "Controls which Native User V3 a session connects to a Resource as using a CEL expression. Enable Native Users V3 on the Resource separately with \u003cspan pulumi-lang-nodejs=\"`nativeUsersV3Enabled`\" pulumi-lang-dotnet=\"`NativeUsersV3Enabled`\" pulumi-lang-go=\"`nativeUsersV3Enabled`\" pulumi-lang-python=\"`native_users_v3_enabled`\" pulumi-lang-yaml=\"`nativeUsersV3Enabled`\" pulumi-lang-java=\"`nativeUsersV3Enabled`\" pulumi-lang-hcl=\"`native_users_v3_enabled`\"\u003e`nativeUsersV3Enabled`\u003c/span\u003e.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as formal from \"@formalco/pulumi\";\n\nconst db = new formal.Resource(\"db\", {\n    name: \"analytics-postgres\",\n    hostname: \"analytics.internal\",\n    technology: \"postgres\",\n    port: 5432,\n    nativeUsersV3Enabled: true,\n});\nconst admin = new formal.NativeUserV3(\"admin\", {\n    basic: {\n        password: {\n            environmentVariable: \"ANALYTICS_ADMIN_PASSWORD\",\n        },\n        username: \"app_admin\",\n    },\n    resourceId: db.id,\n    label: \"admin\",\n});\nconst readOnly = new formal.NativeUserV3(\"read_only\", {\n    basic: {\n        password: {\n            environmentVariable: \"ANALYTICS_READONLY_PASSWORD\",\n        },\n        username: \"app_readonly\",\n    },\n    resourceId: db.id,\n    label: \"read-only\",\n});\n// Sessions from the admins group connect as app_admin; everyone else connects as\n// app_readonly.\nconst dbResourceNativeUserSelection = new formal.ResourceNativeUserSelection(\"db\", {\n    resourceId: db.id,\n    cel: pulumi.interpolate`\\\"admins\\\" in user.groups ? \\\"${admin.id}\\\"\n: \\\"${readOnly.id}\\\"\n`,\n});\n```\n```python\nimport pulumi\nimport pulumi_formal as formal\n\ndb = formal.Resource(\"db\",\n    name=\"analytics-postgres\",\n    hostname=\"analytics.internal\",\n    technology=\"postgres\",\n    port=5432,\n    native_users_v3_enabled=True)\nadmin = formal.NativeUserV3(\"admin\",\n    basic={\n        \"password\": {\n            \"environment_variable\": \"ANALYTICS_ADMIN_PASSWORD\",\n        },\n        \"username\": \"app_admin\",\n    },\n    resource_id=db.id,\n    label=\"admin\")\nread_only = formal.NativeUserV3(\"read_only\",\n    basic={\n        \"password\": {\n            \"environment_variable\": \"ANALYTICS_READONLY_PASSWORD\",\n        },\n        \"username\": \"app_readonly\",\n    },\n    resource_id=db.id,\n    label=\"read-only\")\n# Sessions from the admins group connect as app_admin; everyone else connects as\n# app_readonly.\ndb_resource_native_user_selection = formal.ResourceNativeUserSelection(\"db\",\n    resource_id=db.id,\n    cel=pulumi.Output.all(\n        adminId=admin.id,\n        readOnlyId=read_only.id\n).apply(lambda resolved_outputs: f\"\"\"\\\"admins\\\" in user.groups ? \\\"{resolved_outputs['adminId']}\\\"\n: \\\"{resolved_outputs['readOnlyId']}\\\"\n\"\"\")\n)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Pulumi = Formal.Pulumi;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var db = new Pulumi.Resource(\"db\", new()\n    {\n        Name = \"analytics-postgres\",\n        Hostname = \"analytics.internal\",\n        Technology = \"postgres\",\n        Port = 5432,\n        NativeUsersV3Enabled = true,\n    });\n\n    var admin = new Pulumi.NativeUserV3(\"admin\", new()\n    {\n        Basic = new Pulumi.Inputs.NativeUserV3BasicArgs\n        {\n            Password = new Pulumi.Inputs.NativeUserV3BasicPasswordArgs\n            {\n                EnvironmentVariable = \"ANALYTICS_ADMIN_PASSWORD\",\n            },\n            Username = \"app_admin\",\n        },\n        ResourceId = db.Id,\n        Label = \"admin\",\n    });\n\n    var readOnly = new Pulumi.NativeUserV3(\"read_only\", new()\n    {\n        Basic = new Pulumi.Inputs.NativeUserV3BasicArgs\n        {\n            Password = new Pulumi.Inputs.NativeUserV3BasicPasswordArgs\n            {\n                EnvironmentVariable = \"ANALYTICS_READONLY_PASSWORD\",\n            },\n            Username = \"app_readonly\",\n        },\n        ResourceId = db.Id,\n        Label = \"read-only\",\n    });\n\n    // Sessions from the admins group connect as app_admin; everyone else connects as\n    // app_readonly.\n    var dbResourceNativeUserSelection = new Pulumi.ResourceNativeUserSelection(\"db\", new()\n    {\n        ResourceId = db.Id,\n        Cel = Output.Tuple(admin.Id, readOnly.Id).Apply(values =\u003e\n        {\n            var adminId = values.Item1;\n            var readOnlyId = values.Item2;\n            return @$\"\\\"\"admins\\\"\" in user.groups ? \\\"\"{adminId}\\\"\"\n: \\\"\"{readOnlyId}\\\"\"\n\";\n        }),\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/formalco/pulumi-formal/sdk/go/formal\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tdb, err := formal.NewResource(ctx, \"db\", \u0026formal.ResourceArgs{\n\t\t\tName:                 pulumi.String(\"analytics-postgres\"),\n\t\t\tHostname:             pulumi.String(\"analytics.internal\"),\n\t\t\tTechnology:           pulumi.String(\"postgres\"),\n\t\t\tPort:                 pulumi.Int(5432),\n\t\t\tNativeUsersV3Enabled: pulumi.Bool(true),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tadmin, err := formal.NewNativeUserV3(ctx, \"admin\", \u0026formal.NativeUserV3Args{\n\t\t\tBasic: \u0026formal.NativeUserV3BasicArgs{\n\t\t\t\tPassword: \u0026formal.NativeUserV3BasicPasswordArgs{\n\t\t\t\t\tEnvironmentVariable: pulumi.String(\"ANALYTICS_ADMIN_PASSWORD\"),\n\t\t\t\t},\n\t\t\t\tUsername: pulumi.String(\"app_admin\"),\n\t\t\t},\n\t\t\tResourceId: db.ID(),\n\t\t\tLabel:      pulumi.String(\"admin\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treadOnly, err := formal.NewNativeUserV3(ctx, \"read_only\", \u0026formal.NativeUserV3Args{\n\t\t\tBasic: \u0026formal.NativeUserV3BasicArgs{\n\t\t\t\tPassword: \u0026formal.NativeUserV3BasicPasswordArgs{\n\t\t\t\t\tEnvironmentVariable: pulumi.String(\"ANALYTICS_READONLY_PASSWORD\"),\n\t\t\t\t},\n\t\t\t\tUsername: pulumi.String(\"app_readonly\"),\n\t\t\t},\n\t\t\tResourceId: db.ID(),\n\t\t\tLabel:      pulumi.String(\"read-only\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t// Sessions from the admins group connect as app_admin; everyone else connects as\n\t\t// app_readonly.\n\t\t_, err = formal.NewResourceNativeUserSelection(ctx, \"db\", \u0026formal.ResourceNativeUserSelectionArgs{\n\t\t\tResourceId: db.ID(),\n\t\t\tCel: pulumi.All(admin.ID(), readOnly.ID()).ApplyT(func(_args []interface{}) (string, error) {\n\t\t\t\tadminId := _args[0].(string)\n\t\t\t\treadOnlyId := _args[1].(string)\n\t\t\t\treturn fmt.Sprintf(\"\\\\\\\"admins\\\\\\\" in user.groups ? \\\\\\\"%v\\\\\\\"\\n: \\\\\\\"%v\\\\\\\"\\n\", adminId, readOnlyId), nil\n\t\t\t}).(pulumi.StringOutput),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```hcl\npulumi {\n  required_providers {\n    formal = {\n      source = \"pulumi/formal\"\n    }\n  }\n}\n\nresource \"formal_resource\" \"db\" {\n  name                    = \"analytics-postgres\"\n  hostname                = \"analytics.internal\"\n  technology              = \"postgres\"\n  port                    = 5432\n  native_users_v3_enabled = true\n}\nresource \"formal_nativeuserv3\" \"admin\" {\n  basic = {\n    password = {\n      environment_variable = \"ANALYTICS_ADMIN_PASSWORD\"\n    }\n    username = \"app_admin\"\n  }\n  resource_id = formal_resource.db.id\n  label       = \"admin\"\n}\nresource \"formal_nativeuserv3\" \"read_only\" {\n  basic = {\n    password = {\n      environment_variable = \"ANALYTICS_READONLY_PASSWORD\"\n    }\n    username = \"app_readonly\"\n  }\n  resource_id = formal_resource.db.id\n  label       = \"read-only\"\n}\n# Sessions from the admins group connect as app_admin; everyone else connects as\n# app_readonly.\nresource \"formal_resourcenativeuserselection\" \"db\" {\n  resource_id = formal_resource.db.id\n  cel         =\"\\\"admins\\\" in user.groups ? \\\"${formal_nativeuserv3.admin.id}\\\"\n: \\\"${formal_nativeuserv3.read_only.id}\\\"\n\"\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.formal.Resource;\nimport com.pulumi.formal.ResourceArgs;\nimport com.pulumi.formal.NativeUserV3;\nimport com.pulumi.formal.NativeUserV3Args;\nimport com.pulumi.formal.inputs.NativeUserV3BasicArgs;\nimport com.pulumi.formal.inputs.NativeUserV3BasicPasswordArgs;\nimport com.pulumi.formal.ResourceNativeUserSelection;\nimport com.pulumi.formal.ResourceNativeUserSelectionArgs;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var db = new Resource(\"db\", ResourceArgs.builder()\n            .name(\"analytics-postgres\")\n            .hostname(\"analytics.internal\")\n            .technology(\"postgres\")\n            .port(5432)\n            .nativeUsersV3Enabled(true)\n            .build());\n\n        var admin = new NativeUserV3(\"admin\", NativeUserV3Args.builder()\n            .basic(NativeUserV3BasicArgs.builder()\n                .password(NativeUserV3BasicPasswordArgs.builder()\n                    .environmentVariable(\"ANALYTICS_ADMIN_PASSWORD\")\n                    .build())\n                .username(\"app_admin\")\n                .build())\n            .resourceId(db.id())\n            .label(\"admin\")\n            .build());\n\n        var readOnly = new NativeUserV3(\"readOnly\", NativeUserV3Args.builder()\n            .basic(NativeUserV3BasicArgs.builder()\n                .password(NativeUserV3BasicPasswordArgs.builder()\n                    .environmentVariable(\"ANALYTICS_READONLY_PASSWORD\")\n                    .build())\n                .username(\"app_readonly\")\n                .build())\n            .resourceId(db.id())\n            .label(\"read-only\")\n            .build());\n\n        // Sessions from the admins group connect as app_admin; everyone else connects as\n        // app_readonly.\n        var dbResourceNativeUserSelection = new ResourceNativeUserSelection(\"dbResourceNativeUserSelection\", ResourceNativeUserSelectionArgs.builder()\n            .resourceId(db.id())\n            .cel(Output.tuple(admin.id(), readOnly.id()).applyValue(values -\u003e {\n                var adminId = values.t1;\n                var readOnlyId = values.t2;\n                return \"\"\"\n\\\"admins\\\" in user.groups ? \\\"%s\\\"\n: \\\"%s\\\"\n\", adminId,readOnlyId);\n            }))\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  db:\n    type: formal:Resource\n    properties:\n      name: analytics-postgres\n      hostname: analytics.internal\n      technology: postgres\n      port: 5432\n      nativeUsersV3Enabled: true\n  admin:\n    type: formal:NativeUserV3\n    properties:\n      basic:\n        password:\n          environmentVariable: ANALYTICS_ADMIN_PASSWORD\n        username: app_admin\n      resourceId: ${db.id}\n      label: admin\n  readOnly:\n    type: formal:NativeUserV3\n    name: read_only\n    properties:\n      basic:\n        password:\n          environmentVariable: ANALYTICS_READONLY_PASSWORD\n        username: app_readonly\n      resourceId: ${db.id}\n      label: read-only\n  # Sessions from the admins group connect as app_admin; everyone else connects as\n  # app_readonly.\n  dbResourceNativeUserSelection:\n    type: formal:ResourceNativeUserSelection\n    name: db\n    properties:\n      resourceId: ${db.id}\n      cel: |\n        \\\"admins\\\" in user.groups ? \\\"${admin.id}\\\"\n        : \\\"${readOnly.id}\\\"\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "cel": {
+                    "type": "string",
+                    "description": "The CEL expression that returns the ID of the Native User a session connects as, or an empty string to refuse the session.\n"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "The ID of the Resource this selection applies to. Only one selection can exist per Resource.\n"
+                }
+            },
+            "required": [
+                "cel",
+                "resourceId"
+            ],
+            "inputProperties": {
+                "cel": {
+                    "type": "string",
+                    "description": "The CEL expression that returns the ID of the Native User a session connects as, or an empty string to refuse the session.\n"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "The ID of the Resource this selection applies to. Only one selection can exist per Resource.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "cel",
+                "resourceId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ResourceNativeUserSelection resources.\n",
+                "properties": {
+                    "cel": {
+                        "type": "string",
+                        "description": "The CEL expression that returns the ID of the Native User a session connects as, or an empty string to refuse the session.\n"
+                    },
+                    "resourceId": {
+                        "type": "string",
+                        "description": "The ID of the Resource this selection applies to. Only one selection can exist per Resource.\n",
+                        "willReplaceOnChanges": true
                     }
                 },
                 "type": "object"
@@ -4987,7 +5801,7 @@
                 },
                 "expireAt": {
                     "type": "integer",
-                    "description": "When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.\n"
+                    "description": "When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.\n"
                 },
                 "firstName": {
                     "type": "string",
@@ -5008,7 +5822,7 @@
                 },
                 "terminationProtection": {
                     "type": "boolean",
-                    "description": "If set to true, this User cannot be deleted.\n"
+                    "description": "If set to true, this User cannot be deleted. Cannot be set together with expire_at.\n"
                 },
                 "type": {
                     "type": "string",
@@ -5033,7 +5847,7 @@
                 },
                 "expireAt": {
                     "type": "integer",
-                    "description": "When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.\n",
+                    "description": "When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.\n",
                     "willReplaceOnChanges": true
                 },
                 "firstName": {
@@ -5050,7 +5864,7 @@
                 },
                 "terminationProtection": {
                     "type": "boolean",
-                    "description": "If set to true, this User cannot be deleted.\n"
+                    "description": "If set to true, this User cannot be deleted. Cannot be set together with expire_at.\n"
                 },
                 "type": {
                     "type": "string",
@@ -5078,7 +5892,7 @@
                     },
                     "expireAt": {
                         "type": "integer",
-                        "description": "When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.\n",
+                        "description": "When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.\n",
                         "willReplaceOnChanges": true
                     },
                     "firstName": {
@@ -5100,7 +5914,7 @@
                     },
                     "terminationProtection": {
                         "type": "boolean",
-                        "description": "If set to true, this User cannot be deleted.\n"
+                        "description": "If set to true, this User cannot be deleted. Cannot be set together with expire_at.\n"
                     },
                     "type": {
                         "type": "string",
