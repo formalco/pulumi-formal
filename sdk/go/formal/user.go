@@ -22,7 +22,7 @@ type User struct {
 	DbUsername pulumi.StringOutput `pulumi:"dbUsername"`
 	// For human users, their email.
 	Email pulumi.StringPtrOutput `pulumi:"email"`
-	// When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+	// When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
 	ExpireAt pulumi.IntPtrOutput `pulumi:"expireAt"`
 	// For human users, their first name.
 	FirstName pulumi.StringPtrOutput `pulumi:"firstName"`
@@ -32,7 +32,7 @@ type User struct {
 	MachineUserAccessToken pulumi.StringOutput `pulumi:"machineUserAccessToken"`
 	// For machine users, the name of the user.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// If set to true, this User cannot be deleted.
+	// If set to true, this User cannot be deleted. Cannot be set together with expire_at.
 	TerminationProtection pulumi.BoolPtrOutput `pulumi:"terminationProtection"`
 	// Either 'human' or 'machine'.
 	Type pulumi.StringOutput `pulumi:"type"`
@@ -81,7 +81,7 @@ type userState struct {
 	DbUsername *string `pulumi:"dbUsername"`
 	// For human users, their email.
 	Email *string `pulumi:"email"`
-	// When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+	// When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
 	ExpireAt *int `pulumi:"expireAt"`
 	// For human users, their first name.
 	FirstName *string `pulumi:"firstName"`
@@ -91,7 +91,7 @@ type userState struct {
 	MachineUserAccessToken *string `pulumi:"machineUserAccessToken"`
 	// For machine users, the name of the user.
 	Name *string `pulumi:"name"`
-	// If set to true, this User cannot be deleted.
+	// If set to true, this User cannot be deleted. Cannot be set together with expire_at.
 	TerminationProtection *bool `pulumi:"terminationProtection"`
 	// Either 'human' or 'machine'.
 	Type *string `pulumi:"type"`
@@ -104,7 +104,7 @@ type UserState struct {
 	DbUsername pulumi.StringPtrInput
 	// For human users, their email.
 	Email pulumi.StringPtrInput
-	// When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+	// When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
 	ExpireAt pulumi.IntPtrInput
 	// For human users, their first name.
 	FirstName pulumi.StringPtrInput
@@ -114,7 +114,7 @@ type UserState struct {
 	MachineUserAccessToken pulumi.StringPtrInput
 	// For machine users, the name of the user.
 	Name pulumi.StringPtrInput
-	// If set to true, this User cannot be deleted.
+	// If set to true, this User cannot be deleted. Cannot be set together with expire_at.
 	TerminationProtection pulumi.BoolPtrInput
 	// Either 'human' or 'machine'.
 	Type pulumi.StringPtrInput
@@ -129,7 +129,7 @@ type userArgs struct {
 	AppType *string `pulumi:"appType"`
 	// For human users, their email.
 	Email *string `pulumi:"email"`
-	// When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+	// When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
 	ExpireAt *int `pulumi:"expireAt"`
 	// For human users, their first name.
 	FirstName *string `pulumi:"firstName"`
@@ -137,7 +137,7 @@ type userArgs struct {
 	LastName *string `pulumi:"lastName"`
 	// For machine users, the name of the user.
 	Name *string `pulumi:"name"`
-	// If set to true, this User cannot be deleted.
+	// If set to true, this User cannot be deleted. Cannot be set together with expire_at.
 	TerminationProtection *bool `pulumi:"terminationProtection"`
 	// Either 'human' or 'machine'.
 	Type string `pulumi:"type"`
@@ -149,7 +149,7 @@ type UserArgs struct {
 	AppType pulumi.StringPtrInput
 	// For human users, their email.
 	Email pulumi.StringPtrInput
-	// When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+	// When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
 	ExpireAt pulumi.IntPtrInput
 	// For human users, their first name.
 	FirstName pulumi.StringPtrInput
@@ -157,7 +157,7 @@ type UserArgs struct {
 	LastName pulumi.StringPtrInput
 	// For machine users, the name of the user.
 	Name pulumi.StringPtrInput
-	// If set to true, this User cannot be deleted.
+	// If set to true, this User cannot be deleted. Cannot be set together with expire_at.
 	TerminationProtection pulumi.BoolPtrInput
 	// Either 'human' or 'machine'.
 	Type pulumi.StringInput
@@ -265,7 +265,7 @@ func (o UserOutput) Email() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Email }).(pulumi.StringPtrOutput)
 }
 
-// When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+// When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
 func (o UserOutput) ExpireAt() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.IntPtrOutput { return v.ExpireAt }).(pulumi.IntPtrOutput)
 }
@@ -290,7 +290,7 @@ func (o UserOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *User) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// If set to true, this User cannot be deleted.
+// If set to true, this User cannot be deleted. Cannot be set together with expire_at.
 func (o UserOutput) TerminationProtection() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.BoolPtrOutput { return v.TerminationProtection }).(pulumi.BoolPtrOutput)
 }

@@ -26,6 +26,8 @@ type Policy struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
 	Status pulumi.StringOutput `pulumi:"status"`
+	// Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// If set to true, this Policy cannot be deleted.
 	TerminationProtection pulumi.BoolPtrOutput `pulumi:"terminationProtection"`
 	// Last update time.
@@ -81,6 +83,8 @@ type policyState struct {
 	Name *string `pulumi:"name"`
 	// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
 	Status *string `pulumi:"status"`
+	// Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+	Tags map[string]string `pulumi:"tags"`
 	// If set to true, this Policy cannot be deleted.
 	TerminationProtection *bool `pulumi:"terminationProtection"`
 	// Last update time.
@@ -98,6 +102,8 @@ type PolicyState struct {
 	Name pulumi.StringPtrInput
 	// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
 	Status pulumi.StringPtrInput
+	// Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+	Tags pulumi.StringMapInput
 	// If set to true, this Policy cannot be deleted.
 	TerminationProtection pulumi.BoolPtrInput
 	// Last update time.
@@ -117,6 +123,8 @@ type policyArgs struct {
 	Name *string `pulumi:"name"`
 	// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
 	Status string `pulumi:"status"`
+	// Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+	Tags map[string]string `pulumi:"tags"`
 	// If set to true, this Policy cannot be deleted.
 	TerminationProtection *bool `pulumi:"terminationProtection"`
 }
@@ -131,6 +139,8 @@ type PolicyArgs struct {
 	Name pulumi.StringPtrInput
 	// Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
 	Status pulumi.StringInput
+	// Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+	Tags pulumi.StringMapInput
 	// If set to true, this Policy cannot be deleted.
 	TerminationProtection pulumi.BoolPtrInput
 }
@@ -245,6 +255,11 @@ func (o PolicyOutput) Name() pulumi.StringOutput {
 // Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
 func (o PolicyOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *Policy) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
+}
+
+// Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+func (o PolicyOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Policy) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
 // If set to true, this Policy cannot be deleted.

@@ -47,6 +47,18 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// The CEL expression that selects which Native User V3 a session connects as.
+        /// </summary>
+        [Output("nativeUserSelectionCel")]
+        public Output<string> NativeUserSelectionCel { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+        /// </summary>
+        [Output("nativeUsersV3Enabled")]
+        public Output<bool> NativeUsersV3Enabled { get; private set; } = null!;
+
+        /// <summary>
         /// The port your Resource is listening on.
         /// </summary>
         [Output("port")]
@@ -160,6 +172,12 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+        /// </summary>
+        [Input("nativeUsersV3Enabled")]
+        public Input<bool>? NativeUsersV3Enabled { get; set; }
+
+        /// <summary>
         /// The port your Resource is listening on.
         /// </summary>
         [Input("port", required: true)]
@@ -244,6 +262,18 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The CEL expression that selects which Native User V3 a session connects as.
+        /// </summary>
+        [Input("nativeUserSelectionCel")]
+        public Input<string>? NativeUserSelectionCel { get; set; }
+
+        /// <summary>
+        /// Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+        /// </summary>
+        [Input("nativeUsersV3Enabled")]
+        public Input<bool>? NativeUsersV3Enabled { get; set; }
 
         /// <summary>
         /// The port your Resource is listening on.

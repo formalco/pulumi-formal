@@ -35,7 +35,7 @@ namespace Formal.Pulumi
         public Output<string?> Email { get; private set; } = null!;
 
         /// <summary>
-        /// When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+        /// When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
         /// </summary>
         [Output("expireAt")]
         public Output<int?> ExpireAt { get; private set; } = null!;
@@ -65,7 +65,7 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// If set to true, this User cannot be deleted.
+        /// If set to true, this User cannot be deleted. Cannot be set together with expire_at.
         /// </summary>
         [Output("terminationProtection")]
         public Output<bool?> TerminationProtection { get; private set; } = null!;
@@ -140,7 +140,7 @@ namespace Formal.Pulumi
         public Input<string>? Email { get; set; }
 
         /// <summary>
-        /// When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+        /// When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
         /// </summary>
         [Input("expireAt")]
         public Input<int>? ExpireAt { get; set; }
@@ -164,7 +164,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// If set to true, this User cannot be deleted.
+        /// If set to true, this User cannot be deleted. Cannot be set together with expire_at.
         /// </summary>
         [Input("terminationProtection")]
         public Input<bool>? TerminationProtection { get; set; }
@@ -202,7 +202,7 @@ namespace Formal.Pulumi
         public Input<string>? Email { get; set; }
 
         /// <summary>
-        /// When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+        /// When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
         /// </summary>
         [Input("expireAt")]
         public Input<int>? ExpireAt { get; set; }
@@ -242,7 +242,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// If set to true, this User cannot be deleted.
+        /// If set to true, this User cannot be deleted. Cannot be set together with expire_at.
         /// </summary>
         [Input("terminationProtection")]
         public Input<bool>? TerminationProtection { get; set; }

@@ -23,6 +23,7 @@ class PolicyArgs:
                  module: pulumi.Input[_builtins.str],
                  status: pulumi.Input[_builtins.str],
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Policy resource.
@@ -31,6 +32,7 @@ class PolicyArgs:
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         :param pulumi.Input[_builtins.str] name: Policy Name
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Policy metadata as string key/value pairs. Maximum 500 tags per policy.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Policy cannot be deleted.
         """
         pulumi.set(__self__, "description", description)
@@ -38,6 +40,8 @@ class PolicyArgs:
         pulumi.set(__self__, "status", status)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if termination_protection is not None:
             pulumi.set(__self__, "termination_protection", termination_protection)
 
@@ -90,6 +94,18 @@ class PolicyArgs:
         pulumi.set(self, "name", value)
 
     @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
+        """
+        Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @_builtins.property
     @pulumi.getter(name="terminationProtection")
     def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -110,6 +126,7 @@ class _PolicyState:
                  module: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  status: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  updated_at: pulumi.Input[Optional[_builtins.str]] = None):
         """
@@ -120,6 +137,7 @@ class _PolicyState:
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] name: Policy Name
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Policy metadata as string key/value pairs. Maximum 500 tags per policy.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Policy cannot be deleted.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         """
@@ -133,6 +151,8 @@ class _PolicyState:
             pulumi.set(__self__, "name", name)
         if status is not None:
             pulumi.set(__self__, "status", status)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if termination_protection is not None:
             pulumi.set(__self__, "termination_protection", termination_protection)
         if updated_at is not None:
@@ -199,6 +219,18 @@ class _PolicyState:
         pulumi.set(self, "status", value)
 
     @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
+        """
+        Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @_builtins.property
     @pulumi.getter(name="terminationProtection")
     def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -233,6 +265,7 @@ class Policy(pulumi.CustomResource):
                  module: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  status: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
@@ -245,6 +278,7 @@ class Policy(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] name: Policy Name
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Policy metadata as string key/value pairs. Maximum 500 tags per policy.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Policy cannot be deleted.
         """
         ...
@@ -276,6 +310,7 @@ class Policy(pulumi.CustomResource):
                  module: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  status: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -296,6 +331,7 @@ class Policy(pulumi.CustomResource):
             if status is None and not opts.urn:
                 raise TypeError("Missing required property 'status'")
             __props__.__dict__["status"] = status
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["termination_protection"] = termination_protection
             __props__.__dict__["created_at"] = None
             __props__.__dict__["updated_at"] = None
@@ -314,6 +350,7 @@ class Policy(pulumi.CustomResource):
             module: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             status: pulumi.Input[Optional[_builtins.str]] = None,
+            tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
             termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
             updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'Policy':
         """
@@ -328,6 +365,7 @@ class Policy(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] module: The module describing how the policy works. Create one in the Formal Console.
         :param pulumi.Input[_builtins.str] name: Policy Name
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Policy metadata as string key/value pairs. Maximum 500 tags per policy.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Policy cannot be deleted.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         """
@@ -340,6 +378,7 @@ class Policy(pulumi.CustomResource):
         __props__.__dict__["module"] = module
         __props__.__dict__["name"] = name
         __props__.__dict__["status"] = status
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["termination_protection"] = termination_protection
         __props__.__dict__["updated_at"] = updated_at
         return Policy(resource_name, opts=opts, __props__=__props__)
@@ -383,6 +422,14 @@ class Policy(pulumi.CustomResource):
         Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
         """
         return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, _builtins.str]]]:
+        """
+        Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+        """
+        return pulumi.get(self, "tags")
 
     @_builtins.property
     @pulumi.getter(name="terminationProtection")

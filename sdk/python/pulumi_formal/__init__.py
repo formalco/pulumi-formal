@@ -39,6 +39,7 @@ from .inventory_object_data_label_link import *
 from .log_configuration import *
 from .native_user import *
 from .native_user_link import *
+from .native_user_v3 import *
 from .network_rule import *
 from .permission import *
 from .policy import *
@@ -49,6 +50,7 @@ from .resource_classifier_configuration import *
 from .resource_dial_configuration import *
 from .resource_health_check import *
 from .resource_hostname import *
+from .resource_native_user_selection import *
 from .resource_ssh_host_key import *
 from .resource_tls_configuration import *
 from .satellite import *
@@ -296,6 +298,14 @@ _utilities.register(
  },
  {
   "pkg": "formal",
+  "mod": "index/nativeUserV3",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/nativeUserV3:NativeUserV3": "NativeUserV3"
+  }
+ },
+ {
+  "pkg": "formal",
   "mod": "index/networkRule",
   "fqn": "pulumi_formal",
   "classes": {
@@ -364,6 +374,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/resourceHostname:ResourceHostname": "ResourceHostname"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/resourceNativeUserSelection",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/resourceNativeUserSelection:ResourceNativeUserSelection": "ResourceNativeUserSelection"
   }
  },
  {

@@ -28,6 +28,10 @@ type Resource struct {
 	Hostname pulumi.StringOutput `pulumi:"hostname"`
 	// Friendly name for the Resource.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The CEL expression that selects which Native User V3 a session connects as.
+	NativeUserSelectionCel pulumi.StringOutput `pulumi:"nativeUserSelectionCel"`
+	// Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+	NativeUsersV3Enabled pulumi.BoolOutput `pulumi:"nativeUsersV3Enabled"`
 	// The port your Resource is listening on.
 	Port pulumi.IntOutput `pulumi:"port"`
 	// The ID of the Space to create the Resource in.
@@ -93,6 +97,10 @@ type resourceState struct {
 	Hostname *string `pulumi:"hostname"`
 	// Friendly name for the Resource.
 	Name *string `pulumi:"name"`
+	// The CEL expression that selects which Native User V3 a session connects as.
+	NativeUserSelectionCel *string `pulumi:"nativeUserSelectionCel"`
+	// Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+	NativeUsersV3Enabled *bool `pulumi:"nativeUsersV3Enabled"`
 	// The port your Resource is listening on.
 	Port *int `pulumi:"port"`
 	// The ID of the Space to create the Resource in.
@@ -120,6 +128,10 @@ type ResourceState struct {
 	Hostname pulumi.StringPtrInput
 	// Friendly name for the Resource.
 	Name pulumi.StringPtrInput
+	// The CEL expression that selects which Native User V3 a session connects as.
+	NativeUserSelectionCel pulumi.StringPtrInput
+	// Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+	NativeUsersV3Enabled pulumi.BoolPtrInput
 	// The port your Resource is listening on.
 	Port pulumi.IntPtrInput
 	// The ID of the Space to create the Resource in.
@@ -149,6 +161,8 @@ type resourceArgs struct {
 	Hostname string `pulumi:"hostname"`
 	// Friendly name for the Resource.
 	Name *string `pulumi:"name"`
+	// Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+	NativeUsersV3Enabled *bool `pulumi:"nativeUsersV3Enabled"`
 	// The port your Resource is listening on.
 	Port int `pulumi:"port"`
 	// The ID of the Space to create the Resource in.
@@ -175,6 +189,8 @@ type ResourceArgs struct {
 	Hostname pulumi.StringInput
 	// Friendly name for the Resource.
 	Name pulumi.StringPtrInput
+	// Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+	NativeUsersV3Enabled pulumi.BoolPtrInput
 	// The port your Resource is listening on.
 	Port pulumi.IntInput
 	// The ID of the Space to create the Resource in.
@@ -301,6 +317,16 @@ func (o ResourceOutput) Hostname() pulumi.StringOutput {
 // Friendly name for the Resource.
 func (o ResourceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Resource) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The CEL expression that selects which Native User V3 a session connects as.
+func (o ResourceOutput) NativeUserSelectionCel() pulumi.StringOutput {
+	return o.ApplyT(func(v *Resource) pulumi.StringOutput { return v.NativeUserSelectionCel }).(pulumi.StringOutput)
+}
+
+// Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+func (o ResourceOutput) NativeUsersV3Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Resource) pulumi.BoolOutput { return v.NativeUsersV3Enabled }).(pulumi.BoolOutput)
 }
 
 // The port your Resource is listening on.

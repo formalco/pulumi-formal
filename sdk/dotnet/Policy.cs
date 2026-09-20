@@ -47,6 +47,12 @@ namespace Formal.Pulumi
         public Output<string> Status { get; private set; } = null!;
 
         /// <summary>
+        /// Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
+
+        /// <summary>
         /// If set to true, this Policy cannot be deleted.
         /// </summary>
         [Output("terminationProtection")]
@@ -129,6 +135,18 @@ namespace Formal.Pulumi
         [Input("status", required: true)]
         public Input<string> Status { get; set; } = null!;
 
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
+
         /// <summary>
         /// If set to true, this Policy cannot be deleted.
         /// </summary>
@@ -172,6 +190,18 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// If set to true, this Policy cannot be deleted.

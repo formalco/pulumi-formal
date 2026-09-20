@@ -33,11 +33,11 @@ class UserArgs:
         :param pulumi.Input[_builtins.str] type: Either 'human' or 'machine'.
         :param pulumi.Input[_builtins.str] app_type: If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.
         :param pulumi.Input[_builtins.str] email: For human users, their email.
-        :param pulumi.Input[_builtins.int] expire_at: When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+        :param pulumi.Input[_builtins.int] expire_at: When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
         :param pulumi.Input[_builtins.str] first_name: For human users, their first name.
         :param pulumi.Input[_builtins.str] last_name: For human users, their last name.
         :param pulumi.Input[_builtins.str] name: For machine users, the name of the user.
-        :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this User cannot be deleted.
+        :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this User cannot be deleted. Cannot be set together with expire_at.
         """
         pulumi.set(__self__, "type", type)
         if app_type is not None:
@@ -95,7 +95,7 @@ class UserArgs:
     @pulumi.getter(name="expireAt")
     def expire_at(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+        When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
         """
         return pulumi.get(self, "expire_at")
 
@@ -143,7 +143,7 @@ class UserArgs:
     @pulumi.getter(name="terminationProtection")
     def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        If set to true, this User cannot be deleted.
+        If set to true, this User cannot be deleted. Cannot be set together with expire_at.
         """
         return pulumi.get(self, "termination_protection")
 
@@ -171,12 +171,12 @@ class _UserState:
         :param pulumi.Input[_builtins.str] app_type: If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.
         :param pulumi.Input[_builtins.str] db_username: The username that the user will use to access the sidecar.
         :param pulumi.Input[_builtins.str] email: For human users, their email.
-        :param pulumi.Input[_builtins.int] expire_at: When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+        :param pulumi.Input[_builtins.int] expire_at: When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
         :param pulumi.Input[_builtins.str] first_name: For human users, their first name.
         :param pulumi.Input[_builtins.str] last_name: For human users, their last name.
         :param pulumi.Input[_builtins.str] machine_user_access_token: If the user is of type `machine`, this is the access token (database password) of this user.
         :param pulumi.Input[_builtins.str] name: For machine users, the name of the user.
-        :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this User cannot be deleted.
+        :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this User cannot be deleted. Cannot be set together with expire_at.
         :param pulumi.Input[_builtins.str] type: Either 'human' or 'machine'.
         """
         if app_type is not None:
@@ -240,7 +240,7 @@ class _UserState:
     @pulumi.getter(name="expireAt")
     def expire_at(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+        When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
         """
         return pulumi.get(self, "expire_at")
 
@@ -300,7 +300,7 @@ class _UserState:
     @pulumi.getter(name="terminationProtection")
     def termination_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        If set to true, this User cannot be deleted.
+        If set to true, this User cannot be deleted. Cannot be set together with expire_at.
         """
         return pulumi.get(self, "termination_protection")
 
@@ -344,11 +344,11 @@ class User(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] app_type: If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.
         :param pulumi.Input[_builtins.str] email: For human users, their email.
-        :param pulumi.Input[_builtins.int] expire_at: When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+        :param pulumi.Input[_builtins.int] expire_at: When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
         :param pulumi.Input[_builtins.str] first_name: For human users, their first name.
         :param pulumi.Input[_builtins.str] last_name: For human users, their last name.
         :param pulumi.Input[_builtins.str] name: For machine users, the name of the user.
-        :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this User cannot be deleted.
+        :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this User cannot be deleted. Cannot be set together with expire_at.
         :param pulumi.Input[_builtins.str] type: Either 'human' or 'machine'.
         """
         ...
@@ -437,12 +437,12 @@ class User(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] app_type: If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.
         :param pulumi.Input[_builtins.str] db_username: The username that the user will use to access the sidecar.
         :param pulumi.Input[_builtins.str] email: For human users, their email.
-        :param pulumi.Input[_builtins.int] expire_at: When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+        :param pulumi.Input[_builtins.int] expire_at: When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
         :param pulumi.Input[_builtins.str] first_name: For human users, their first name.
         :param pulumi.Input[_builtins.str] last_name: For human users, their last name.
         :param pulumi.Input[_builtins.str] machine_user_access_token: If the user is of type `machine`, this is the access token (database password) of this user.
         :param pulumi.Input[_builtins.str] name: For machine users, the name of the user.
-        :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this User cannot be deleted.
+        :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this User cannot be deleted. Cannot be set together with expire_at.
         :param pulumi.Input[_builtins.str] type: Either 'human' or 'machine'.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -489,7 +489,7 @@ class User(pulumi.CustomResource):
     @pulumi.getter(name="expireAt")
     def expire_at(self) -> pulumi.Output[Optional[_builtins.int]]:
         """
-        When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+        When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
         """
         return pulumi.get(self, "expire_at")
 
@@ -529,7 +529,7 @@ class User(pulumi.CustomResource):
     @pulumi.getter(name="terminationProtection")
     def termination_protection(self) -> pulumi.Output[Optional[_builtins.bool]]:
         """
-        If set to true, this User cannot be deleted.
+        If set to true, this User cannot be deleted. Cannot be set together with expire_at.
         """
         return pulumi.get(self, "termination_protection")
 

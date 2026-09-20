@@ -170,6 +170,11 @@ export type NativeUserLink = import("./nativeUserLink").NativeUserLink;
 export const NativeUserLink: typeof import("./nativeUserLink").NativeUserLink = null as any;
 utilities.lazyLoad(exports, ["NativeUserLink"], () => require("./nativeUserLink"));
 
+export { NativeUserV3Args, NativeUserV3State } from "./nativeUserV3";
+export type NativeUserV3 = import("./nativeUserV3").NativeUserV3;
+export const NativeUserV3: typeof import("./nativeUserV3").NativeUserV3 = null as any;
+utilities.lazyLoad(exports, ["NativeUserV3"], () => require("./nativeUserV3"));
+
 export { NetworkRuleArgs, NetworkRuleState } from "./networkRule";
 export type NetworkRule = import("./networkRule").NetworkRule;
 export const NetworkRule: typeof import("./networkRule").NetworkRule = null as any;
@@ -217,6 +222,11 @@ export { ResourceHostnameArgs, ResourceHostnameState } from "./resourceHostname"
 export type ResourceHostname = import("./resourceHostname").ResourceHostname;
 export const ResourceHostname: typeof import("./resourceHostname").ResourceHostname = null as any;
 utilities.lazyLoad(exports, ["ResourceHostname"], () => require("./resourceHostname"));
+
+export { ResourceNativeUserSelectionArgs, ResourceNativeUserSelectionState } from "./resourceNativeUserSelection";
+export type ResourceNativeUserSelection = import("./resourceNativeUserSelection").ResourceNativeUserSelection;
+export const ResourceNativeUserSelection: typeof import("./resourceNativeUserSelection").ResourceNativeUserSelection = null as any;
+utilities.lazyLoad(exports, ["ResourceNativeUserSelection"], () => require("./resourceNativeUserSelection"));
 
 export { ResourceSshHostKeyArgs, ResourceSshHostKeyState } from "./resourceSshHostKey";
 export type ResourceSshHostKey = import("./resourceSshHostKey").ResourceSshHostKey;
@@ -328,6 +338,8 @@ const _module = {
                 return new NativeUser(name, <any>undefined, { urn })
             case "formal:index/nativeUserLink:NativeUserLink":
                 return new NativeUserLink(name, <any>undefined, { urn })
+            case "formal:index/nativeUserV3:NativeUserV3":
+                return new NativeUserV3(name, <any>undefined, { urn })
             case "formal:index/networkRule:NetworkRule":
                 return new NetworkRule(name, <any>undefined, { urn })
             case "formal:index/permission:Permission":
@@ -346,6 +358,8 @@ const _module = {
                 return new ResourceHealthCheck(name, <any>undefined, { urn })
             case "formal:index/resourceHostname:ResourceHostname":
                 return new ResourceHostname(name, <any>undefined, { urn })
+            case "formal:index/resourceNativeUserSelection:ResourceNativeUserSelection":
+                return new ResourceNativeUserSelection(name, <any>undefined, { urn })
             case "formal:index/resourceSshHostKey:ResourceSshHostKey":
                 return new ResourceSshHostKey(name, <any>undefined, { urn })
             case "formal:index/resourceTlsConfiguration:ResourceTlsConfiguration":
@@ -395,6 +409,7 @@ pulumi.runtime.registerResourceModule("formal", "index/inventoryObjectDataLabelL
 pulumi.runtime.registerResourceModule("formal", "index/logConfiguration", _module)
 pulumi.runtime.registerResourceModule("formal", "index/nativeUser", _module)
 pulumi.runtime.registerResourceModule("formal", "index/nativeUserLink", _module)
+pulumi.runtime.registerResourceModule("formal", "index/nativeUserV3", _module)
 pulumi.runtime.registerResourceModule("formal", "index/networkRule", _module)
 pulumi.runtime.registerResourceModule("formal", "index/permission", _module)
 pulumi.runtime.registerResourceModule("formal", "index/policy", _module)
@@ -404,6 +419,7 @@ pulumi.runtime.registerResourceModule("formal", "index/resourceClassifierConfigu
 pulumi.runtime.registerResourceModule("formal", "index/resourceDialConfiguration", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceHealthCheck", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceHostname", _module)
+pulumi.runtime.registerResourceModule("formal", "index/resourceNativeUserSelection", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceSshHostKey", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceTlsConfiguration", _module)
 pulumi.runtime.registerResourceModule("formal", "index/satellite", _module)

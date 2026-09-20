@@ -39,3 +39,14 @@ Object.defineProperty(exports, "retrieveSensitiveValues", {
     enumerable: true,
 });
 
+/**
+ * Formal control plane URL. Defaults to `https://api.formal.ai`.
+ */
+export declare const url: string | undefined;
+Object.defineProperty(exports, "url", {
+    get() {
+        return __config.get("url");
+    },
+    enumerable: true,
+});
+

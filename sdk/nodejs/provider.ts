@@ -31,6 +31,10 @@ export class Provider extends pulumi.ProviderResource {
      * Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
      */
     declare public readonly apiKey: pulumi.Output<string | undefined>;
+    /**
+     * Formal control plane URL. Defaults to `https://api.formal.ai`.
+     */
+    declare public readonly url: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -46,6 +50,7 @@ export class Provider extends pulumi.ProviderResource {
             resourceInputs["apiKey"] = args?.apiKey ? pulumi.secret(args.apiKey) : undefined;
             resourceInputs["oidc"] = pulumi.output(args?.oidc).apply(JSON.stringify);
             resourceInputs["retrieveSensitiveValues"] = pulumi.output(args?.retrieveSensitiveValues).apply(JSON.stringify);
+            resourceInputs["url"] = args?.url;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["apiKey"] };
@@ -76,6 +81,10 @@ export interface ProviderArgs {
      */
     oidc?: pulumi.Input<inputs.ProviderOidc | undefined>;
     retrieveSensitiveValues?: pulumi.Input<boolean | undefined>;
+    /**
+     * Formal control plane URL. Defaults to `https://api.formal.ai`.
+     */
+    url?: pulumi.Input<string | undefined>;
 }
 
 export namespace Provider {
