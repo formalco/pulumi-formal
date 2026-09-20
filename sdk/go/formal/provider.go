@@ -20,6 +20,8 @@ type Provider struct {
 
 	// Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
 	ApiKey pulumi.StringPtrOutput `pulumi:"apiKey"`
+	// Formal control plane URL. Defaults to `https://api.formal.ai`.
+	Url pulumi.StringPtrOutput `pulumi:"url"`
 }
 
 // NewProvider registers a new resource with the given unique name, arguments, and options.
@@ -51,6 +53,8 @@ type providerArgs struct {
 	// OIDC authentication configuration. Conflicts with `apiKey`.
 	Oidc                    *ProviderOidc `pulumi:"oidc"`
 	RetrieveSensitiveValues *bool         `pulumi:"retrieveSensitiveValues"`
+	// Formal control plane URL. Defaults to `https://api.formal.ai`.
+	Url *string `pulumi:"url"`
 }
 
 // The set of arguments for constructing a Provider resource.
@@ -60,6 +64,8 @@ type ProviderArgs struct {
 	// OIDC authentication configuration. Conflicts with `apiKey`.
 	Oidc                    ProviderOidcPtrInput
 	RetrieveSensitiveValues pulumi.BoolPtrInput
+	// Formal control plane URL. Defaults to `https://api.formal.ai`.
+	Url pulumi.StringPtrInput
 }
 
 func (ProviderArgs) ElementType() reflect.Type {
@@ -125,6 +131,11 @@ func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) Provide
 // Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
 func (o ProviderOutput) ApiKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.ApiKey }).(pulumi.StringPtrOutput)
+}
+
+// Formal control plane URL. Defaults to `https://api.formal.ai`.
+func (o ProviderOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Url }).(pulumi.StringPtrOutput)
 }
 
 func init() {

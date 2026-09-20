@@ -463,6 +463,356 @@ export interface LogConfigurationStream {
     encrypt: boolean;
 }
 
+export interface NativeUserV3AwsIam {
+    /**
+     * The database username mapped to the IAM identity.
+     */
+    username: string;
+}
+
+export interface NativeUserV3AwsIamRole {
+    /**
+     * The ARN of the role to assume.
+     */
+    role: string;
+    /**
+     * The database username mapped to the IAM identity.
+     */
+    username: string;
+}
+
+export interface NativeUserV3AzureIam {
+    /**
+     * The database username mapped to the Azure identity.
+     */
+    username: string;
+}
+
+export interface NativeUserV3Basic {
+    /**
+     * The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     */
+    password: outputs.NativeUserV3BasicPassword;
+    /**
+     * The username to authenticate as.
+     */
+    username: string;
+}
+
+export interface NativeUserV3BasicPassword {
+    /**
+     * The name of an environment variable the connector reads the secret from.
+     */
+    environmentVariable?: string;
+    /**
+     * The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+     */
+    literal?: string;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+     */
+    literalWo?: string;
+    /**
+     * Version trigger for `literalWo`. Increment this value to update the secret.
+     */
+    literalWoVersion?: number;
+}
+
+export interface NativeUserV3GcpIam {
+    /**
+     * The database username mapped to the GCP identity.
+     */
+    username: string;
+}
+
+export interface NativeUserV3Hook {
+    /**
+     * Environment variables the hook may read.
+     */
+    allowlistedEnvVariables?: string[];
+    /**
+     * Network hosts the hook may access.
+     */
+    allowlistedNetworkHosts?: string[];
+    /**
+     * The TypeScript or JavaScript source of the hook, in the same form as `formal_hook.code`.
+     */
+    code: string;
+    /**
+     * The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `awsIam`, `awsIamRole`, `gcpIam`, `azureIam`, `kubernetesPath`, `kubernetesInline`, `sshKey`, `snowflakeKey`, `httpBasic`, `httpBearer`, `httpApiKeyHeader`, `httpApiKeyQuery`.
+     */
+    outputType: string;
+}
+
+export interface NativeUserV3HttpApiKeyHeader {
+    /**
+     * The name of the header carrying the API key.
+     */
+    key: string;
+    /**
+     * The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     */
+    value: outputs.NativeUserV3HttpApiKeyHeaderValue;
+}
+
+export interface NativeUserV3HttpApiKeyHeaderValue {
+    /**
+     * The name of an environment variable the connector reads the secret from.
+     */
+    environmentVariable?: string;
+    /**
+     * The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+     */
+    literal?: string;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+     */
+    literalWo?: string;
+    /**
+     * Version trigger for `literalWo`. Increment this value to update the secret.
+     */
+    literalWoVersion?: number;
+}
+
+export interface NativeUserV3HttpApiKeyQuery {
+    /**
+     * The name of the query parameter carrying the API key.
+     */
+    key: string;
+    /**
+     * The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     */
+    value: outputs.NativeUserV3HttpApiKeyQueryValue;
+}
+
+export interface NativeUserV3HttpApiKeyQueryValue {
+    /**
+     * The name of an environment variable the connector reads the secret from.
+     */
+    environmentVariable?: string;
+    /**
+     * The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+     */
+    literal?: string;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+     */
+    literalWo?: string;
+    /**
+     * Version trigger for `literalWo`. Increment this value to update the secret.
+     */
+    literalWoVersion?: number;
+}
+
+export interface NativeUserV3HttpBasic {
+    /**
+     * The header to inject the credentials on, for example `Authorization`.
+     */
+    header: string;
+    /**
+     * The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     */
+    password: outputs.NativeUserV3HttpBasicPassword;
+    /**
+     * The username to authenticate as.
+     */
+    username: string;
+}
+
+export interface NativeUserV3HttpBasicPassword {
+    /**
+     * The name of an environment variable the connector reads the secret from.
+     */
+    environmentVariable?: string;
+    /**
+     * The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+     */
+    literal?: string;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+     */
+    literalWo?: string;
+    /**
+     * Version trigger for `literalWo`. Increment this value to update the secret.
+     */
+    literalWoVersion?: number;
+}
+
+export interface NativeUserV3HttpBearer {
+    /**
+     * The header to inject the token on, for example `Authorization`.
+     */
+    header: string;
+    /**
+     * The bearer token. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     */
+    token: outputs.NativeUserV3HttpBearerToken;
+}
+
+export interface NativeUserV3HttpBearerToken {
+    /**
+     * The name of an environment variable the connector reads the secret from.
+     */
+    environmentVariable?: string;
+    /**
+     * The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+     */
+    literal?: string;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+     */
+    literalWo?: string;
+    /**
+     * Version trigger for `literalWo`. Increment this value to update the secret.
+     */
+    literalWoVersion?: number;
+}
+
+export interface NativeUserV3KubernetesInline {
+    /**
+     * The kubeconfig YAML document. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     */
+    kubeconfig: outputs.NativeUserV3KubernetesInlineKubeconfig;
+}
+
+export interface NativeUserV3KubernetesInlineKubeconfig {
+    /**
+     * The name of an environment variable the connector reads the secret from.
+     */
+    environmentVariable?: string;
+    /**
+     * The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+     */
+    literal?: string;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+     */
+    literalWo?: string;
+    /**
+     * Version trigger for `literalWo`. Increment this value to update the secret.
+     */
+    literalWoVersion?: number;
+}
+
+export interface NativeUserV3KubernetesPath {
+    /**
+     * Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     */
+    kubeconfigPath: outputs.NativeUserV3KubernetesPathKubeconfigPath;
+}
+
+export interface NativeUserV3KubernetesPathKubeconfigPath {
+    /**
+     * The name of an environment variable the connector reads the secret from.
+     */
+    environmentVariable?: string;
+    /**
+     * The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+     */
+    literal?: string;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+     */
+    literalWo?: string;
+    /**
+     * Version trigger for `literalWo`. Increment this value to update the secret.
+     */
+    literalWoVersion?: number;
+}
+
+export interface NativeUserV3SnowflakeKey {
+    /**
+     * The private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     */
+    key: outputs.NativeUserV3SnowflakeKeyKey;
+    /**
+     * The Snowflake username to authenticate as.
+     */
+    username: string;
+}
+
+export interface NativeUserV3SnowflakeKeyKey {
+    /**
+     * The name of an environment variable the connector reads the secret from.
+     */
+    environmentVariable?: string;
+    /**
+     * The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+     */
+    literal?: string;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+     */
+    literalWo?: string;
+    /**
+     * Version trigger for `literalWo`. Increment this value to update the secret.
+     */
+    literalWoVersion?: number;
+}
+
+export interface NativeUserV3SshKey {
+    /**
+     * The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     */
+    certificate?: outputs.NativeUserV3SshKeyCertificate;
+    /**
+     * The SSH private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     */
+    key: outputs.NativeUserV3SshKeyKey;
+    /**
+     * The username to authenticate as.
+     */
+    username: string;
+}
+
+export interface NativeUserV3SshKeyCertificate {
+    /**
+     * The name of an environment variable the connector reads the secret from.
+     */
+    environmentVariable?: string;
+    /**
+     * The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+     */
+    literal?: string;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+     */
+    literalWo?: string;
+    /**
+     * Version trigger for `literalWo`. Increment this value to update the secret.
+     */
+    literalWoVersion?: number;
+}
+
+export interface NativeUserV3SshKeyKey {
+    /**
+     * The name of an environment variable the connector reads the secret from.
+     */
+    environmentVariable?: string;
+    /**
+     * The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+     */
+    literal?: string;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+     */
+    literalWo?: string;
+    /**
+     * Version trigger for `literalWo`. Increment this value to update the secret.
+     */
+    literalWoVersion?: number;
+}
+
 export namespace config {
     export interface Oidc {
         /**

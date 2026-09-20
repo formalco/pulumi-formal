@@ -77,6 +77,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &NativeUser{}
 	case "formal:index/nativeUserLink:NativeUserLink":
 		r = &NativeUserLink{}
+	case "formal:index/nativeUserV3:NativeUserV3":
+		r = &NativeUserV3{}
 	case "formal:index/networkRule:NetworkRule":
 		r = &NetworkRule{}
 	case "formal:index/permission:Permission":
@@ -95,6 +97,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ResourceHealthCheck{}
 	case "formal:index/resourceHostname:ResourceHostname":
 		r = &ResourceHostname{}
+	case "formal:index/resourceNativeUserSelection:ResourceNativeUserSelection":
+		r = &ResourceNativeUserSelection{}
 	case "formal:index/resourceSshHostKey:ResourceSshHostKey":
 		r = &ResourceSshHostKey{}
 	case "formal:index/resourceTlsConfiguration:ResourceTlsConfiguration":
@@ -284,6 +288,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
+		"index/nativeUserV3",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
 		"index/networkRule",
 		&module{version},
 	)
@@ -325,6 +334,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/resourceHostname",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/resourceNativeUserSelection",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -27,3 +27,8 @@ OIDC authentication configuration. Conflicts with `api_key`.
 
 retrieveSensitiveValues: Optional[bool]
 
+url: Optional[str]
+"""
+Formal control plane URL. Defaults to `https://api.formal.ai`.
+"""
+

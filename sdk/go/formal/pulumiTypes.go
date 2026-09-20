@@ -5072,6 +5072,4151 @@ func (o LogConfigurationStreamPtrOutput) Encrypt() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+type NativeUserV3AwsIam struct {
+	// The database username mapped to the IAM identity.
+	Username string `pulumi:"username"`
+}
+
+// NativeUserV3AwsIamInput is an input type that accepts NativeUserV3AwsIamArgs and NativeUserV3AwsIamOutput values.
+// You can construct a concrete instance of `NativeUserV3AwsIamInput` via:
+//
+//	NativeUserV3AwsIamArgs{...}
+type NativeUserV3AwsIamInput interface {
+	pulumi.Input
+
+	ToNativeUserV3AwsIamOutput() NativeUserV3AwsIamOutput
+	ToNativeUserV3AwsIamOutputWithContext(context.Context) NativeUserV3AwsIamOutput
+}
+
+type NativeUserV3AwsIamArgs struct {
+	// The database username mapped to the IAM identity.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (NativeUserV3AwsIamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3AwsIam)(nil)).Elem()
+}
+
+func (i NativeUserV3AwsIamArgs) ToNativeUserV3AwsIamOutput() NativeUserV3AwsIamOutput {
+	return i.ToNativeUserV3AwsIamOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3AwsIamArgs) ToNativeUserV3AwsIamOutputWithContext(ctx context.Context) NativeUserV3AwsIamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3AwsIamOutput)
+}
+
+func (i NativeUserV3AwsIamArgs) ToNativeUserV3AwsIamPtrOutput() NativeUserV3AwsIamPtrOutput {
+	return i.ToNativeUserV3AwsIamPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3AwsIamArgs) ToNativeUserV3AwsIamPtrOutputWithContext(ctx context.Context) NativeUserV3AwsIamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3AwsIamOutput).ToNativeUserV3AwsIamPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3AwsIamPtrInput is an input type that accepts NativeUserV3AwsIamArgs, NativeUserV3AwsIamPtr and NativeUserV3AwsIamPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3AwsIamPtrInput` via:
+//
+//	        NativeUserV3AwsIamArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3AwsIamPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3AwsIamPtrOutput() NativeUserV3AwsIamPtrOutput
+	ToNativeUserV3AwsIamPtrOutputWithContext(context.Context) NativeUserV3AwsIamPtrOutput
+}
+
+type nativeUserV3AwsIamPtrType NativeUserV3AwsIamArgs
+
+func NativeUserV3AwsIamPtr(v *NativeUserV3AwsIamArgs) NativeUserV3AwsIamPtrInput {
+	return (*nativeUserV3AwsIamPtrType)(v)
+}
+
+func (*nativeUserV3AwsIamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3AwsIam)(nil)).Elem()
+}
+
+func (i *nativeUserV3AwsIamPtrType) ToNativeUserV3AwsIamPtrOutput() NativeUserV3AwsIamPtrOutput {
+	return i.ToNativeUserV3AwsIamPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3AwsIamPtrType) ToNativeUserV3AwsIamPtrOutputWithContext(ctx context.Context) NativeUserV3AwsIamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3AwsIamPtrOutput)
+}
+
+type NativeUserV3AwsIamOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3AwsIamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3AwsIam)(nil)).Elem()
+}
+
+func (o NativeUserV3AwsIamOutput) ToNativeUserV3AwsIamOutput() NativeUserV3AwsIamOutput {
+	return o
+}
+
+func (o NativeUserV3AwsIamOutput) ToNativeUserV3AwsIamOutputWithContext(ctx context.Context) NativeUserV3AwsIamOutput {
+	return o
+}
+
+func (o NativeUserV3AwsIamOutput) ToNativeUserV3AwsIamPtrOutput() NativeUserV3AwsIamPtrOutput {
+	return o.ToNativeUserV3AwsIamPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3AwsIamOutput) ToNativeUserV3AwsIamPtrOutputWithContext(ctx context.Context) NativeUserV3AwsIamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3AwsIam) *NativeUserV3AwsIam {
+		return &v
+	}).(NativeUserV3AwsIamPtrOutput)
+}
+
+// The database username mapped to the IAM identity.
+func (o NativeUserV3AwsIamOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3AwsIam) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type NativeUserV3AwsIamPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3AwsIamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3AwsIam)(nil)).Elem()
+}
+
+func (o NativeUserV3AwsIamPtrOutput) ToNativeUserV3AwsIamPtrOutput() NativeUserV3AwsIamPtrOutput {
+	return o
+}
+
+func (o NativeUserV3AwsIamPtrOutput) ToNativeUserV3AwsIamPtrOutputWithContext(ctx context.Context) NativeUserV3AwsIamPtrOutput {
+	return o
+}
+
+func (o NativeUserV3AwsIamPtrOutput) Elem() NativeUserV3AwsIamOutput {
+	return o.ApplyT(func(v *NativeUserV3AwsIam) NativeUserV3AwsIam {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3AwsIam
+		return ret
+	}).(NativeUserV3AwsIamOutput)
+}
+
+// The database username mapped to the IAM identity.
+func (o NativeUserV3AwsIamPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3AwsIam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3AwsIamRole struct {
+	// The ARN of the role to assume.
+	Role string `pulumi:"role"`
+	// The database username mapped to the IAM identity.
+	Username string `pulumi:"username"`
+}
+
+// NativeUserV3AwsIamRoleInput is an input type that accepts NativeUserV3AwsIamRoleArgs and NativeUserV3AwsIamRoleOutput values.
+// You can construct a concrete instance of `NativeUserV3AwsIamRoleInput` via:
+//
+//	NativeUserV3AwsIamRoleArgs{...}
+type NativeUserV3AwsIamRoleInput interface {
+	pulumi.Input
+
+	ToNativeUserV3AwsIamRoleOutput() NativeUserV3AwsIamRoleOutput
+	ToNativeUserV3AwsIamRoleOutputWithContext(context.Context) NativeUserV3AwsIamRoleOutput
+}
+
+type NativeUserV3AwsIamRoleArgs struct {
+	// The ARN of the role to assume.
+	Role pulumi.StringInput `pulumi:"role"`
+	// The database username mapped to the IAM identity.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (NativeUserV3AwsIamRoleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3AwsIamRole)(nil)).Elem()
+}
+
+func (i NativeUserV3AwsIamRoleArgs) ToNativeUserV3AwsIamRoleOutput() NativeUserV3AwsIamRoleOutput {
+	return i.ToNativeUserV3AwsIamRoleOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3AwsIamRoleArgs) ToNativeUserV3AwsIamRoleOutputWithContext(ctx context.Context) NativeUserV3AwsIamRoleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3AwsIamRoleOutput)
+}
+
+func (i NativeUserV3AwsIamRoleArgs) ToNativeUserV3AwsIamRolePtrOutput() NativeUserV3AwsIamRolePtrOutput {
+	return i.ToNativeUserV3AwsIamRolePtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3AwsIamRoleArgs) ToNativeUserV3AwsIamRolePtrOutputWithContext(ctx context.Context) NativeUserV3AwsIamRolePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3AwsIamRoleOutput).ToNativeUserV3AwsIamRolePtrOutputWithContext(ctx)
+}
+
+// NativeUserV3AwsIamRolePtrInput is an input type that accepts NativeUserV3AwsIamRoleArgs, NativeUserV3AwsIamRolePtr and NativeUserV3AwsIamRolePtrOutput values.
+// You can construct a concrete instance of `NativeUserV3AwsIamRolePtrInput` via:
+//
+//	        NativeUserV3AwsIamRoleArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3AwsIamRolePtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3AwsIamRolePtrOutput() NativeUserV3AwsIamRolePtrOutput
+	ToNativeUserV3AwsIamRolePtrOutputWithContext(context.Context) NativeUserV3AwsIamRolePtrOutput
+}
+
+type nativeUserV3AwsIamRolePtrType NativeUserV3AwsIamRoleArgs
+
+func NativeUserV3AwsIamRolePtr(v *NativeUserV3AwsIamRoleArgs) NativeUserV3AwsIamRolePtrInput {
+	return (*nativeUserV3AwsIamRolePtrType)(v)
+}
+
+func (*nativeUserV3AwsIamRolePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3AwsIamRole)(nil)).Elem()
+}
+
+func (i *nativeUserV3AwsIamRolePtrType) ToNativeUserV3AwsIamRolePtrOutput() NativeUserV3AwsIamRolePtrOutput {
+	return i.ToNativeUserV3AwsIamRolePtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3AwsIamRolePtrType) ToNativeUserV3AwsIamRolePtrOutputWithContext(ctx context.Context) NativeUserV3AwsIamRolePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3AwsIamRolePtrOutput)
+}
+
+type NativeUserV3AwsIamRoleOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3AwsIamRoleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3AwsIamRole)(nil)).Elem()
+}
+
+func (o NativeUserV3AwsIamRoleOutput) ToNativeUserV3AwsIamRoleOutput() NativeUserV3AwsIamRoleOutput {
+	return o
+}
+
+func (o NativeUserV3AwsIamRoleOutput) ToNativeUserV3AwsIamRoleOutputWithContext(ctx context.Context) NativeUserV3AwsIamRoleOutput {
+	return o
+}
+
+func (o NativeUserV3AwsIamRoleOutput) ToNativeUserV3AwsIamRolePtrOutput() NativeUserV3AwsIamRolePtrOutput {
+	return o.ToNativeUserV3AwsIamRolePtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3AwsIamRoleOutput) ToNativeUserV3AwsIamRolePtrOutputWithContext(ctx context.Context) NativeUserV3AwsIamRolePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3AwsIamRole) *NativeUserV3AwsIamRole {
+		return &v
+	}).(NativeUserV3AwsIamRolePtrOutput)
+}
+
+// The ARN of the role to assume.
+func (o NativeUserV3AwsIamRoleOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3AwsIamRole) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// The database username mapped to the IAM identity.
+func (o NativeUserV3AwsIamRoleOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3AwsIamRole) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type NativeUserV3AwsIamRolePtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3AwsIamRolePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3AwsIamRole)(nil)).Elem()
+}
+
+func (o NativeUserV3AwsIamRolePtrOutput) ToNativeUserV3AwsIamRolePtrOutput() NativeUserV3AwsIamRolePtrOutput {
+	return o
+}
+
+func (o NativeUserV3AwsIamRolePtrOutput) ToNativeUserV3AwsIamRolePtrOutputWithContext(ctx context.Context) NativeUserV3AwsIamRolePtrOutput {
+	return o
+}
+
+func (o NativeUserV3AwsIamRolePtrOutput) Elem() NativeUserV3AwsIamRoleOutput {
+	return o.ApplyT(func(v *NativeUserV3AwsIamRole) NativeUserV3AwsIamRole {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3AwsIamRole
+		return ret
+	}).(NativeUserV3AwsIamRoleOutput)
+}
+
+// The ARN of the role to assume.
+func (o NativeUserV3AwsIamRolePtrOutput) Role() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3AwsIamRole) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Role
+	}).(pulumi.StringPtrOutput)
+}
+
+// The database username mapped to the IAM identity.
+func (o NativeUserV3AwsIamRolePtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3AwsIamRole) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3AzureIam struct {
+	// The database username mapped to the Azure identity.
+	Username string `pulumi:"username"`
+}
+
+// NativeUserV3AzureIamInput is an input type that accepts NativeUserV3AzureIamArgs and NativeUserV3AzureIamOutput values.
+// You can construct a concrete instance of `NativeUserV3AzureIamInput` via:
+//
+//	NativeUserV3AzureIamArgs{...}
+type NativeUserV3AzureIamInput interface {
+	pulumi.Input
+
+	ToNativeUserV3AzureIamOutput() NativeUserV3AzureIamOutput
+	ToNativeUserV3AzureIamOutputWithContext(context.Context) NativeUserV3AzureIamOutput
+}
+
+type NativeUserV3AzureIamArgs struct {
+	// The database username mapped to the Azure identity.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (NativeUserV3AzureIamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3AzureIam)(nil)).Elem()
+}
+
+func (i NativeUserV3AzureIamArgs) ToNativeUserV3AzureIamOutput() NativeUserV3AzureIamOutput {
+	return i.ToNativeUserV3AzureIamOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3AzureIamArgs) ToNativeUserV3AzureIamOutputWithContext(ctx context.Context) NativeUserV3AzureIamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3AzureIamOutput)
+}
+
+func (i NativeUserV3AzureIamArgs) ToNativeUserV3AzureIamPtrOutput() NativeUserV3AzureIamPtrOutput {
+	return i.ToNativeUserV3AzureIamPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3AzureIamArgs) ToNativeUserV3AzureIamPtrOutputWithContext(ctx context.Context) NativeUserV3AzureIamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3AzureIamOutput).ToNativeUserV3AzureIamPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3AzureIamPtrInput is an input type that accepts NativeUserV3AzureIamArgs, NativeUserV3AzureIamPtr and NativeUserV3AzureIamPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3AzureIamPtrInput` via:
+//
+//	        NativeUserV3AzureIamArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3AzureIamPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3AzureIamPtrOutput() NativeUserV3AzureIamPtrOutput
+	ToNativeUserV3AzureIamPtrOutputWithContext(context.Context) NativeUserV3AzureIamPtrOutput
+}
+
+type nativeUserV3AzureIamPtrType NativeUserV3AzureIamArgs
+
+func NativeUserV3AzureIamPtr(v *NativeUserV3AzureIamArgs) NativeUserV3AzureIamPtrInput {
+	return (*nativeUserV3AzureIamPtrType)(v)
+}
+
+func (*nativeUserV3AzureIamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3AzureIam)(nil)).Elem()
+}
+
+func (i *nativeUserV3AzureIamPtrType) ToNativeUserV3AzureIamPtrOutput() NativeUserV3AzureIamPtrOutput {
+	return i.ToNativeUserV3AzureIamPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3AzureIamPtrType) ToNativeUserV3AzureIamPtrOutputWithContext(ctx context.Context) NativeUserV3AzureIamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3AzureIamPtrOutput)
+}
+
+type NativeUserV3AzureIamOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3AzureIamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3AzureIam)(nil)).Elem()
+}
+
+func (o NativeUserV3AzureIamOutput) ToNativeUserV3AzureIamOutput() NativeUserV3AzureIamOutput {
+	return o
+}
+
+func (o NativeUserV3AzureIamOutput) ToNativeUserV3AzureIamOutputWithContext(ctx context.Context) NativeUserV3AzureIamOutput {
+	return o
+}
+
+func (o NativeUserV3AzureIamOutput) ToNativeUserV3AzureIamPtrOutput() NativeUserV3AzureIamPtrOutput {
+	return o.ToNativeUserV3AzureIamPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3AzureIamOutput) ToNativeUserV3AzureIamPtrOutputWithContext(ctx context.Context) NativeUserV3AzureIamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3AzureIam) *NativeUserV3AzureIam {
+		return &v
+	}).(NativeUserV3AzureIamPtrOutput)
+}
+
+// The database username mapped to the Azure identity.
+func (o NativeUserV3AzureIamOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3AzureIam) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type NativeUserV3AzureIamPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3AzureIamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3AzureIam)(nil)).Elem()
+}
+
+func (o NativeUserV3AzureIamPtrOutput) ToNativeUserV3AzureIamPtrOutput() NativeUserV3AzureIamPtrOutput {
+	return o
+}
+
+func (o NativeUserV3AzureIamPtrOutput) ToNativeUserV3AzureIamPtrOutputWithContext(ctx context.Context) NativeUserV3AzureIamPtrOutput {
+	return o
+}
+
+func (o NativeUserV3AzureIamPtrOutput) Elem() NativeUserV3AzureIamOutput {
+	return o.ApplyT(func(v *NativeUserV3AzureIam) NativeUserV3AzureIam {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3AzureIam
+		return ret
+	}).(NativeUserV3AzureIamOutput)
+}
+
+// The database username mapped to the Azure identity.
+func (o NativeUserV3AzureIamPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3AzureIam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3Basic struct {
+	// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Password NativeUserV3BasicPassword `pulumi:"password"`
+	// The username to authenticate as.
+	Username string `pulumi:"username"`
+}
+
+// NativeUserV3BasicInput is an input type that accepts NativeUserV3BasicArgs and NativeUserV3BasicOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicInput` via:
+//
+//	NativeUserV3BasicArgs{...}
+type NativeUserV3BasicInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicOutput() NativeUserV3BasicOutput
+	ToNativeUserV3BasicOutputWithContext(context.Context) NativeUserV3BasicOutput
+}
+
+type NativeUserV3BasicArgs struct {
+	// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Password NativeUserV3BasicPasswordInput `pulumi:"password"`
+	// The username to authenticate as.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (NativeUserV3BasicArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3Basic)(nil)).Elem()
+}
+
+func (i NativeUserV3BasicArgs) ToNativeUserV3BasicOutput() NativeUserV3BasicOutput {
+	return i.ToNativeUserV3BasicOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicArgs) ToNativeUserV3BasicOutputWithContext(ctx context.Context) NativeUserV3BasicOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicOutput)
+}
+
+func (i NativeUserV3BasicArgs) ToNativeUserV3BasicPtrOutput() NativeUserV3BasicPtrOutput {
+	return i.ToNativeUserV3BasicPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicArgs) ToNativeUserV3BasicPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicOutput).ToNativeUserV3BasicPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3BasicPtrInput is an input type that accepts NativeUserV3BasicArgs, NativeUserV3BasicPtr and NativeUserV3BasicPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicPtrInput` via:
+//
+//	        NativeUserV3BasicArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3BasicPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicPtrOutput() NativeUserV3BasicPtrOutput
+	ToNativeUserV3BasicPtrOutputWithContext(context.Context) NativeUserV3BasicPtrOutput
+}
+
+type nativeUserV3BasicPtrType NativeUserV3BasicArgs
+
+func NativeUserV3BasicPtr(v *NativeUserV3BasicArgs) NativeUserV3BasicPtrInput {
+	return (*nativeUserV3BasicPtrType)(v)
+}
+
+func (*nativeUserV3BasicPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3Basic)(nil)).Elem()
+}
+
+func (i *nativeUserV3BasicPtrType) ToNativeUserV3BasicPtrOutput() NativeUserV3BasicPtrOutput {
+	return i.ToNativeUserV3BasicPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3BasicPtrType) ToNativeUserV3BasicPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPtrOutput)
+}
+
+type NativeUserV3BasicOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3Basic)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicOutput) ToNativeUserV3BasicOutput() NativeUserV3BasicOutput {
+	return o
+}
+
+func (o NativeUserV3BasicOutput) ToNativeUserV3BasicOutputWithContext(ctx context.Context) NativeUserV3BasicOutput {
+	return o
+}
+
+func (o NativeUserV3BasicOutput) ToNativeUserV3BasicPtrOutput() NativeUserV3BasicPtrOutput {
+	return o.ToNativeUserV3BasicPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3BasicOutput) ToNativeUserV3BasicPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3Basic) *NativeUserV3Basic {
+		return &v
+	}).(NativeUserV3BasicPtrOutput)
+}
+
+// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3BasicOutput) Password() NativeUserV3BasicPasswordOutput {
+	return o.ApplyT(func(v NativeUserV3Basic) NativeUserV3BasicPassword { return v.Password }).(NativeUserV3BasicPasswordOutput)
+}
+
+// The username to authenticate as.
+func (o NativeUserV3BasicOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3Basic) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type NativeUserV3BasicPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3Basic)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicPtrOutput) ToNativeUserV3BasicPtrOutput() NativeUserV3BasicPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPtrOutput) ToNativeUserV3BasicPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPtrOutput) Elem() NativeUserV3BasicOutput {
+	return o.ApplyT(func(v *NativeUserV3Basic) NativeUserV3Basic {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3Basic
+		return ret
+	}).(NativeUserV3BasicOutput)
+}
+
+// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3BasicPtrOutput) Password() NativeUserV3BasicPasswordPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3Basic) *NativeUserV3BasicPassword {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(NativeUserV3BasicPasswordPtrOutput)
+}
+
+// The username to authenticate as.
+func (o NativeUserV3BasicPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3Basic) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3BasicPassword struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable *string `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal *string `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo *string `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+}
+
+// NativeUserV3BasicPasswordInput is an input type that accepts NativeUserV3BasicPasswordArgs and NativeUserV3BasicPasswordOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicPasswordInput` via:
+//
+//	NativeUserV3BasicPasswordArgs{...}
+type NativeUserV3BasicPasswordInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicPasswordOutput() NativeUserV3BasicPasswordOutput
+	ToNativeUserV3BasicPasswordOutputWithContext(context.Context) NativeUserV3BasicPasswordOutput
+}
+
+type NativeUserV3BasicPasswordArgs struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable pulumi.StringPtrInput `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal pulumi.StringPtrInput `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+}
+
+func (NativeUserV3BasicPasswordArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3BasicPassword)(nil)).Elem()
+}
+
+func (i NativeUserV3BasicPasswordArgs) ToNativeUserV3BasicPasswordOutput() NativeUserV3BasicPasswordOutput {
+	return i.ToNativeUserV3BasicPasswordOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicPasswordArgs) ToNativeUserV3BasicPasswordOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordOutput)
+}
+
+func (i NativeUserV3BasicPasswordArgs) ToNativeUserV3BasicPasswordPtrOutput() NativeUserV3BasicPasswordPtrOutput {
+	return i.ToNativeUserV3BasicPasswordPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicPasswordArgs) ToNativeUserV3BasicPasswordPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordOutput).ToNativeUserV3BasicPasswordPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3BasicPasswordPtrInput is an input type that accepts NativeUserV3BasicPasswordArgs, NativeUserV3BasicPasswordPtr and NativeUserV3BasicPasswordPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicPasswordPtrInput` via:
+//
+//	        NativeUserV3BasicPasswordArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3BasicPasswordPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicPasswordPtrOutput() NativeUserV3BasicPasswordPtrOutput
+	ToNativeUserV3BasicPasswordPtrOutputWithContext(context.Context) NativeUserV3BasicPasswordPtrOutput
+}
+
+type nativeUserV3BasicPasswordPtrType NativeUserV3BasicPasswordArgs
+
+func NativeUserV3BasicPasswordPtr(v *NativeUserV3BasicPasswordArgs) NativeUserV3BasicPasswordPtrInput {
+	return (*nativeUserV3BasicPasswordPtrType)(v)
+}
+
+func (*nativeUserV3BasicPasswordPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3BasicPassword)(nil)).Elem()
+}
+
+func (i *nativeUserV3BasicPasswordPtrType) ToNativeUserV3BasicPasswordPtrOutput() NativeUserV3BasicPasswordPtrOutput {
+	return i.ToNativeUserV3BasicPasswordPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3BasicPasswordPtrType) ToNativeUserV3BasicPasswordPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordPtrOutput)
+}
+
+type NativeUserV3BasicPasswordOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicPasswordOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3BasicPassword)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicPasswordOutput) ToNativeUserV3BasicPasswordOutput() NativeUserV3BasicPasswordOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordOutput) ToNativeUserV3BasicPasswordOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordOutput) ToNativeUserV3BasicPasswordPtrOutput() NativeUserV3BasicPasswordPtrOutput {
+	return o.ToNativeUserV3BasicPasswordPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3BasicPasswordOutput) ToNativeUserV3BasicPasswordPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3BasicPassword) *NativeUserV3BasicPassword {
+		return &v
+	}).(NativeUserV3BasicPasswordPtrOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3BasicPasswordOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3BasicPassword) *string { return v.EnvironmentVariable }).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3BasicPasswordOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3BasicPassword) *string { return v.Literal }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3BasicPasswordOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3BasicPassword) *string { return v.LiteralWo }).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3BasicPasswordOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeUserV3BasicPassword) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3BasicPasswordPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicPasswordPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3BasicPassword)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicPasswordPtrOutput) ToNativeUserV3BasicPasswordPtrOutput() NativeUserV3BasicPasswordPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordPtrOutput) ToNativeUserV3BasicPasswordPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordPtrOutput) Elem() NativeUserV3BasicPasswordOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPassword) NativeUserV3BasicPassword {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3BasicPassword
+		return ret
+	}).(NativeUserV3BasicPasswordOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3BasicPasswordPtrOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPassword) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EnvironmentVariable
+	}).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3BasicPasswordPtrOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPassword) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Literal
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3BasicPasswordPtrOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPassword) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3BasicPasswordPtrOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPassword) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWoVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3GcpIam struct {
+	// The database username mapped to the GCP identity.
+	Username string `pulumi:"username"`
+}
+
+// NativeUserV3GcpIamInput is an input type that accepts NativeUserV3GcpIamArgs and NativeUserV3GcpIamOutput values.
+// You can construct a concrete instance of `NativeUserV3GcpIamInput` via:
+//
+//	NativeUserV3GcpIamArgs{...}
+type NativeUserV3GcpIamInput interface {
+	pulumi.Input
+
+	ToNativeUserV3GcpIamOutput() NativeUserV3GcpIamOutput
+	ToNativeUserV3GcpIamOutputWithContext(context.Context) NativeUserV3GcpIamOutput
+}
+
+type NativeUserV3GcpIamArgs struct {
+	// The database username mapped to the GCP identity.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (NativeUserV3GcpIamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3GcpIam)(nil)).Elem()
+}
+
+func (i NativeUserV3GcpIamArgs) ToNativeUserV3GcpIamOutput() NativeUserV3GcpIamOutput {
+	return i.ToNativeUserV3GcpIamOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3GcpIamArgs) ToNativeUserV3GcpIamOutputWithContext(ctx context.Context) NativeUserV3GcpIamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3GcpIamOutput)
+}
+
+func (i NativeUserV3GcpIamArgs) ToNativeUserV3GcpIamPtrOutput() NativeUserV3GcpIamPtrOutput {
+	return i.ToNativeUserV3GcpIamPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3GcpIamArgs) ToNativeUserV3GcpIamPtrOutputWithContext(ctx context.Context) NativeUserV3GcpIamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3GcpIamOutput).ToNativeUserV3GcpIamPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3GcpIamPtrInput is an input type that accepts NativeUserV3GcpIamArgs, NativeUserV3GcpIamPtr and NativeUserV3GcpIamPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3GcpIamPtrInput` via:
+//
+//	        NativeUserV3GcpIamArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3GcpIamPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3GcpIamPtrOutput() NativeUserV3GcpIamPtrOutput
+	ToNativeUserV3GcpIamPtrOutputWithContext(context.Context) NativeUserV3GcpIamPtrOutput
+}
+
+type nativeUserV3GcpIamPtrType NativeUserV3GcpIamArgs
+
+func NativeUserV3GcpIamPtr(v *NativeUserV3GcpIamArgs) NativeUserV3GcpIamPtrInput {
+	return (*nativeUserV3GcpIamPtrType)(v)
+}
+
+func (*nativeUserV3GcpIamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3GcpIam)(nil)).Elem()
+}
+
+func (i *nativeUserV3GcpIamPtrType) ToNativeUserV3GcpIamPtrOutput() NativeUserV3GcpIamPtrOutput {
+	return i.ToNativeUserV3GcpIamPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3GcpIamPtrType) ToNativeUserV3GcpIamPtrOutputWithContext(ctx context.Context) NativeUserV3GcpIamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3GcpIamPtrOutput)
+}
+
+type NativeUserV3GcpIamOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3GcpIamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3GcpIam)(nil)).Elem()
+}
+
+func (o NativeUserV3GcpIamOutput) ToNativeUserV3GcpIamOutput() NativeUserV3GcpIamOutput {
+	return o
+}
+
+func (o NativeUserV3GcpIamOutput) ToNativeUserV3GcpIamOutputWithContext(ctx context.Context) NativeUserV3GcpIamOutput {
+	return o
+}
+
+func (o NativeUserV3GcpIamOutput) ToNativeUserV3GcpIamPtrOutput() NativeUserV3GcpIamPtrOutput {
+	return o.ToNativeUserV3GcpIamPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3GcpIamOutput) ToNativeUserV3GcpIamPtrOutputWithContext(ctx context.Context) NativeUserV3GcpIamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3GcpIam) *NativeUserV3GcpIam {
+		return &v
+	}).(NativeUserV3GcpIamPtrOutput)
+}
+
+// The database username mapped to the GCP identity.
+func (o NativeUserV3GcpIamOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3GcpIam) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type NativeUserV3GcpIamPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3GcpIamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3GcpIam)(nil)).Elem()
+}
+
+func (o NativeUserV3GcpIamPtrOutput) ToNativeUserV3GcpIamPtrOutput() NativeUserV3GcpIamPtrOutput {
+	return o
+}
+
+func (o NativeUserV3GcpIamPtrOutput) ToNativeUserV3GcpIamPtrOutputWithContext(ctx context.Context) NativeUserV3GcpIamPtrOutput {
+	return o
+}
+
+func (o NativeUserV3GcpIamPtrOutput) Elem() NativeUserV3GcpIamOutput {
+	return o.ApplyT(func(v *NativeUserV3GcpIam) NativeUserV3GcpIam {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3GcpIam
+		return ret
+	}).(NativeUserV3GcpIamOutput)
+}
+
+// The database username mapped to the GCP identity.
+func (o NativeUserV3GcpIamPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3GcpIam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3Hook struct {
+	// Environment variables the hook may read.
+	AllowlistedEnvVariables []string `pulumi:"allowlistedEnvVariables"`
+	// Network hosts the hook may access.
+	AllowlistedNetworkHosts []string `pulumi:"allowlistedNetworkHosts"`
+	// The TypeScript or JavaScript source of the hook, in the same form as `formal_hook.code`.
+	Code string `pulumi:"code"`
+	// The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `awsIam`, `awsIamRole`, `gcpIam`, `azureIam`, `kubernetesPath`, `kubernetesInline`, `sshKey`, `snowflakeKey`, `httpBasic`, `httpBearer`, `httpApiKeyHeader`, `httpApiKeyQuery`.
+	OutputType string `pulumi:"outputType"`
+}
+
+// NativeUserV3HookInput is an input type that accepts NativeUserV3HookArgs and NativeUserV3HookOutput values.
+// You can construct a concrete instance of `NativeUserV3HookInput` via:
+//
+//	NativeUserV3HookArgs{...}
+type NativeUserV3HookInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HookOutput() NativeUserV3HookOutput
+	ToNativeUserV3HookOutputWithContext(context.Context) NativeUserV3HookOutput
+}
+
+type NativeUserV3HookArgs struct {
+	// Environment variables the hook may read.
+	AllowlistedEnvVariables pulumi.StringArrayInput `pulumi:"allowlistedEnvVariables"`
+	// Network hosts the hook may access.
+	AllowlistedNetworkHosts pulumi.StringArrayInput `pulumi:"allowlistedNetworkHosts"`
+	// The TypeScript or JavaScript source of the hook, in the same form as `formal_hook.code`.
+	Code pulumi.StringInput `pulumi:"code"`
+	// The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `awsIam`, `awsIamRole`, `gcpIam`, `azureIam`, `kubernetesPath`, `kubernetesInline`, `sshKey`, `snowflakeKey`, `httpBasic`, `httpBearer`, `httpApiKeyHeader`, `httpApiKeyQuery`.
+	OutputType pulumi.StringInput `pulumi:"outputType"`
+}
+
+func (NativeUserV3HookArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3Hook)(nil)).Elem()
+}
+
+func (i NativeUserV3HookArgs) ToNativeUserV3HookOutput() NativeUserV3HookOutput {
+	return i.ToNativeUserV3HookOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HookArgs) ToNativeUserV3HookOutputWithContext(ctx context.Context) NativeUserV3HookOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookOutput)
+}
+
+func (i NativeUserV3HookArgs) ToNativeUserV3HookPtrOutput() NativeUserV3HookPtrOutput {
+	return i.ToNativeUserV3HookPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HookArgs) ToNativeUserV3HookPtrOutputWithContext(ctx context.Context) NativeUserV3HookPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookOutput).ToNativeUserV3HookPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HookPtrInput is an input type that accepts NativeUserV3HookArgs, NativeUserV3HookPtr and NativeUserV3HookPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HookPtrInput` via:
+//
+//	        NativeUserV3HookArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HookPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HookPtrOutput() NativeUserV3HookPtrOutput
+	ToNativeUserV3HookPtrOutputWithContext(context.Context) NativeUserV3HookPtrOutput
+}
+
+type nativeUserV3HookPtrType NativeUserV3HookArgs
+
+func NativeUserV3HookPtr(v *NativeUserV3HookArgs) NativeUserV3HookPtrInput {
+	return (*nativeUserV3HookPtrType)(v)
+}
+
+func (*nativeUserV3HookPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3Hook)(nil)).Elem()
+}
+
+func (i *nativeUserV3HookPtrType) ToNativeUserV3HookPtrOutput() NativeUserV3HookPtrOutput {
+	return i.ToNativeUserV3HookPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HookPtrType) ToNativeUserV3HookPtrOutputWithContext(ctx context.Context) NativeUserV3HookPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookPtrOutput)
+}
+
+type NativeUserV3HookOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HookOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3Hook)(nil)).Elem()
+}
+
+func (o NativeUserV3HookOutput) ToNativeUserV3HookOutput() NativeUserV3HookOutput {
+	return o
+}
+
+func (o NativeUserV3HookOutput) ToNativeUserV3HookOutputWithContext(ctx context.Context) NativeUserV3HookOutput {
+	return o
+}
+
+func (o NativeUserV3HookOutput) ToNativeUserV3HookPtrOutput() NativeUserV3HookPtrOutput {
+	return o.ToNativeUserV3HookPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HookOutput) ToNativeUserV3HookPtrOutputWithContext(ctx context.Context) NativeUserV3HookPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3Hook) *NativeUserV3Hook {
+		return &v
+	}).(NativeUserV3HookPtrOutput)
+}
+
+// Environment variables the hook may read.
+func (o NativeUserV3HookOutput) AllowlistedEnvVariables() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NativeUserV3Hook) []string { return v.AllowlistedEnvVariables }).(pulumi.StringArrayOutput)
+}
+
+// Network hosts the hook may access.
+func (o NativeUserV3HookOutput) AllowlistedNetworkHosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NativeUserV3Hook) []string { return v.AllowlistedNetworkHosts }).(pulumi.StringArrayOutput)
+}
+
+// The TypeScript or JavaScript source of the hook, in the same form as `formal_hook.code`.
+func (o NativeUserV3HookOutput) Code() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3Hook) string { return v.Code }).(pulumi.StringOutput)
+}
+
+// The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `awsIam`, `awsIamRole`, `gcpIam`, `azureIam`, `kubernetesPath`, `kubernetesInline`, `sshKey`, `snowflakeKey`, `httpBasic`, `httpBearer`, `httpApiKeyHeader`, `httpApiKeyQuery`.
+func (o NativeUserV3HookOutput) OutputType() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3Hook) string { return v.OutputType }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HookPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HookPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3Hook)(nil)).Elem()
+}
+
+func (o NativeUserV3HookPtrOutput) ToNativeUserV3HookPtrOutput() NativeUserV3HookPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HookPtrOutput) ToNativeUserV3HookPtrOutputWithContext(ctx context.Context) NativeUserV3HookPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HookPtrOutput) Elem() NativeUserV3HookOutput {
+	return o.ApplyT(func(v *NativeUserV3Hook) NativeUserV3Hook {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3Hook
+		return ret
+	}).(NativeUserV3HookOutput)
+}
+
+// Environment variables the hook may read.
+func (o NativeUserV3HookPtrOutput) AllowlistedEnvVariables() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NativeUserV3Hook) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowlistedEnvVariables
+	}).(pulumi.StringArrayOutput)
+}
+
+// Network hosts the hook may access.
+func (o NativeUserV3HookPtrOutput) AllowlistedNetworkHosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NativeUserV3Hook) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowlistedNetworkHosts
+	}).(pulumi.StringArrayOutput)
+}
+
+// The TypeScript or JavaScript source of the hook, in the same form as `formal_hook.code`.
+func (o NativeUserV3HookPtrOutput) Code() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3Hook) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Code
+	}).(pulumi.StringPtrOutput)
+}
+
+// The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `awsIam`, `awsIamRole`, `gcpIam`, `azureIam`, `kubernetesPath`, `kubernetesInline`, `sshKey`, `snowflakeKey`, `httpBasic`, `httpBearer`, `httpApiKeyHeader`, `httpApiKeyQuery`.
+func (o NativeUserV3HookPtrOutput) OutputType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3Hook) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.OutputType
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeader struct {
+	// The name of the header carrying the API key.
+	Key string `pulumi:"key"`
+	// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Value NativeUserV3HttpApiKeyHeaderValue `pulumi:"value"`
+}
+
+// NativeUserV3HttpApiKeyHeaderInput is an input type that accepts NativeUserV3HttpApiKeyHeaderArgs and NativeUserV3HttpApiKeyHeaderOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderInput` via:
+//
+//	NativeUserV3HttpApiKeyHeaderArgs{...}
+type NativeUserV3HttpApiKeyHeaderInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderOutput() NativeUserV3HttpApiKeyHeaderOutput
+	ToNativeUserV3HttpApiKeyHeaderOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderOutput
+}
+
+type NativeUserV3HttpApiKeyHeaderArgs struct {
+	// The name of the header carrying the API key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Value NativeUserV3HttpApiKeyHeaderValueInput `pulumi:"value"`
+}
+
+func (NativeUserV3HttpApiKeyHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeader)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyHeaderArgs) ToNativeUserV3HttpApiKeyHeaderOutput() NativeUserV3HttpApiKeyHeaderOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderArgs) ToNativeUserV3HttpApiKeyHeaderOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderOutput)
+}
+
+func (i NativeUserV3HttpApiKeyHeaderArgs) ToNativeUserV3HttpApiKeyHeaderPtrOutput() NativeUserV3HttpApiKeyHeaderPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderArgs) ToNativeUserV3HttpApiKeyHeaderPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderOutput).ToNativeUserV3HttpApiKeyHeaderPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyHeaderPtrInput is an input type that accepts NativeUserV3HttpApiKeyHeaderArgs, NativeUserV3HttpApiKeyHeaderPtr and NativeUserV3HttpApiKeyHeaderPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderPtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyHeaderArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyHeaderPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderPtrOutput() NativeUserV3HttpApiKeyHeaderPtrOutput
+	ToNativeUserV3HttpApiKeyHeaderPtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderPtrOutput
+}
+
+type nativeUserV3HttpApiKeyHeaderPtrType NativeUserV3HttpApiKeyHeaderArgs
+
+func NativeUserV3HttpApiKeyHeaderPtr(v *NativeUserV3HttpApiKeyHeaderArgs) NativeUserV3HttpApiKeyHeaderPtrInput {
+	return (*nativeUserV3HttpApiKeyHeaderPtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyHeaderPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeader)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderPtrType) ToNativeUserV3HttpApiKeyHeaderPtrOutput() NativeUserV3HttpApiKeyHeaderPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderPtrType) ToNativeUserV3HttpApiKeyHeaderPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeader)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderOutput) ToNativeUserV3HttpApiKeyHeaderOutput() NativeUserV3HttpApiKeyHeaderOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderOutput) ToNativeUserV3HttpApiKeyHeaderOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderOutput) ToNativeUserV3HttpApiKeyHeaderPtrOutput() NativeUserV3HttpApiKeyHeaderPtrOutput {
+	return o.ToNativeUserV3HttpApiKeyHeaderPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyHeaderOutput) ToNativeUserV3HttpApiKeyHeaderPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyHeader) *NativeUserV3HttpApiKeyHeader {
+		return &v
+	}).(NativeUserV3HttpApiKeyHeaderPtrOutput)
+}
+
+// The name of the header carrying the API key.
+func (o NativeUserV3HttpApiKeyHeaderOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeader) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3HttpApiKeyHeaderOutput) Value() NativeUserV3HttpApiKeyHeaderValueOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeader) NativeUserV3HttpApiKeyHeaderValue { return v.Value }).(NativeUserV3HttpApiKeyHeaderValueOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeader)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderPtrOutput) ToNativeUserV3HttpApiKeyHeaderPtrOutput() NativeUserV3HttpApiKeyHeaderPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderPtrOutput) ToNativeUserV3HttpApiKeyHeaderPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderPtrOutput) Elem() NativeUserV3HttpApiKeyHeaderOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeader) NativeUserV3HttpApiKeyHeader {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyHeader
+		return ret
+	}).(NativeUserV3HttpApiKeyHeaderOutput)
+}
+
+// The name of the header carrying the API key.
+func (o NativeUserV3HttpApiKeyHeaderPtrOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeader) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3HttpApiKeyHeaderPtrOutput) Value() NativeUserV3HttpApiKeyHeaderValuePtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeader) *NativeUserV3HttpApiKeyHeaderValue {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(NativeUserV3HttpApiKeyHeaderValuePtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValue struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable *string `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal *string `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo *string `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+}
+
+// NativeUserV3HttpApiKeyHeaderValueInput is an input type that accepts NativeUserV3HttpApiKeyHeaderValueArgs and NativeUserV3HttpApiKeyHeaderValueOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderValueInput` via:
+//
+//	NativeUserV3HttpApiKeyHeaderValueArgs{...}
+type NativeUserV3HttpApiKeyHeaderValueInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderValueOutput() NativeUserV3HttpApiKeyHeaderValueOutput
+	ToNativeUserV3HttpApiKeyHeaderValueOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderValueOutput
+}
+
+type NativeUserV3HttpApiKeyHeaderValueArgs struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable pulumi.StringPtrInput `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal pulumi.StringPtrInput `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+}
+
+func (NativeUserV3HttpApiKeyHeaderValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValue)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueArgs) ToNativeUserV3HttpApiKeyHeaderValueOutput() NativeUserV3HttpApiKeyHeaderValueOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueArgs) ToNativeUserV3HttpApiKeyHeaderValueOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueOutput)
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueArgs) ToNativeUserV3HttpApiKeyHeaderValuePtrOutput() NativeUserV3HttpApiKeyHeaderValuePtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValuePtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueArgs) ToNativeUserV3HttpApiKeyHeaderValuePtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueOutput).ToNativeUserV3HttpApiKeyHeaderValuePtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyHeaderValuePtrInput is an input type that accepts NativeUserV3HttpApiKeyHeaderValueArgs, NativeUserV3HttpApiKeyHeaderValuePtr and NativeUserV3HttpApiKeyHeaderValuePtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderValuePtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyHeaderValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyHeaderValuePtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderValuePtrOutput() NativeUserV3HttpApiKeyHeaderValuePtrOutput
+	ToNativeUserV3HttpApiKeyHeaderValuePtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderValuePtrOutput
+}
+
+type nativeUserV3HttpApiKeyHeaderValuePtrType NativeUserV3HttpApiKeyHeaderValueArgs
+
+func NativeUserV3HttpApiKeyHeaderValuePtr(v *NativeUserV3HttpApiKeyHeaderValueArgs) NativeUserV3HttpApiKeyHeaderValuePtrInput {
+	return (*nativeUserV3HttpApiKeyHeaderValuePtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyHeaderValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeaderValue)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderValuePtrType) ToNativeUserV3HttpApiKeyHeaderValuePtrOutput() NativeUserV3HttpApiKeyHeaderValuePtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValuePtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderValuePtrType) ToNativeUserV3HttpApiKeyHeaderValuePtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValuePtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValue)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueOutput) ToNativeUserV3HttpApiKeyHeaderValueOutput() NativeUserV3HttpApiKeyHeaderValueOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueOutput) ToNativeUserV3HttpApiKeyHeaderValueOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueOutput) ToNativeUserV3HttpApiKeyHeaderValuePtrOutput() NativeUserV3HttpApiKeyHeaderValuePtrOutput {
+	return o.ToNativeUserV3HttpApiKeyHeaderValuePtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueOutput) ToNativeUserV3HttpApiKeyHeaderValuePtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyHeaderValue) *NativeUserV3HttpApiKeyHeaderValue {
+		return &v
+	}).(NativeUserV3HttpApiKeyHeaderValuePtrOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3HttpApiKeyHeaderValueOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValue) *string { return v.EnvironmentVariable }).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3HttpApiKeyHeaderValueOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValue) *string { return v.Literal }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3HttpApiKeyHeaderValueOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValue) *string { return v.LiteralWo }).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3HttpApiKeyHeaderValueOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValue) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValuePtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeaderValue)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValuePtrOutput) ToNativeUserV3HttpApiKeyHeaderValuePtrOutput() NativeUserV3HttpApiKeyHeaderValuePtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValuePtrOutput) ToNativeUserV3HttpApiKeyHeaderValuePtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValuePtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValuePtrOutput) Elem() NativeUserV3HttpApiKeyHeaderValueOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValue) NativeUserV3HttpApiKeyHeaderValue {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyHeaderValue
+		return ret
+	}).(NativeUserV3HttpApiKeyHeaderValueOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3HttpApiKeyHeaderValuePtrOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EnvironmentVariable
+	}).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3HttpApiKeyHeaderValuePtrOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Literal
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3HttpApiKeyHeaderValuePtrOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3HttpApiKeyHeaderValuePtrOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValue) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWoVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQuery struct {
+	// The name of the query parameter carrying the API key.
+	Key string `pulumi:"key"`
+	// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Value NativeUserV3HttpApiKeyQueryValue `pulumi:"value"`
+}
+
+// NativeUserV3HttpApiKeyQueryInput is an input type that accepts NativeUserV3HttpApiKeyQueryArgs and NativeUserV3HttpApiKeyQueryOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryInput` via:
+//
+//	NativeUserV3HttpApiKeyQueryArgs{...}
+type NativeUserV3HttpApiKeyQueryInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryOutput() NativeUserV3HttpApiKeyQueryOutput
+	ToNativeUserV3HttpApiKeyQueryOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryOutput
+}
+
+type NativeUserV3HttpApiKeyQueryArgs struct {
+	// The name of the query parameter carrying the API key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Value NativeUserV3HttpApiKeyQueryValueInput `pulumi:"value"`
+}
+
+func (NativeUserV3HttpApiKeyQueryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQuery)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyQueryArgs) ToNativeUserV3HttpApiKeyQueryOutput() NativeUserV3HttpApiKeyQueryOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryArgs) ToNativeUserV3HttpApiKeyQueryOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryOutput)
+}
+
+func (i NativeUserV3HttpApiKeyQueryArgs) ToNativeUserV3HttpApiKeyQueryPtrOutput() NativeUserV3HttpApiKeyQueryPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryArgs) ToNativeUserV3HttpApiKeyQueryPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryOutput).ToNativeUserV3HttpApiKeyQueryPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyQueryPtrInput is an input type that accepts NativeUserV3HttpApiKeyQueryArgs, NativeUserV3HttpApiKeyQueryPtr and NativeUserV3HttpApiKeyQueryPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryPtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyQueryArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyQueryPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryPtrOutput() NativeUserV3HttpApiKeyQueryPtrOutput
+	ToNativeUserV3HttpApiKeyQueryPtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryPtrOutput
+}
+
+type nativeUserV3HttpApiKeyQueryPtrType NativeUserV3HttpApiKeyQueryArgs
+
+func NativeUserV3HttpApiKeyQueryPtr(v *NativeUserV3HttpApiKeyQueryArgs) NativeUserV3HttpApiKeyQueryPtrInput {
+	return (*nativeUserV3HttpApiKeyQueryPtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyQueryPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQuery)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyQueryPtrType) ToNativeUserV3HttpApiKeyQueryPtrOutput() NativeUserV3HttpApiKeyQueryPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyQueryPtrType) ToNativeUserV3HttpApiKeyQueryPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQuery)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryOutput) ToNativeUserV3HttpApiKeyQueryOutput() NativeUserV3HttpApiKeyQueryOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryOutput) ToNativeUserV3HttpApiKeyQueryOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryOutput) ToNativeUserV3HttpApiKeyQueryPtrOutput() NativeUserV3HttpApiKeyQueryPtrOutput {
+	return o.ToNativeUserV3HttpApiKeyQueryPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyQueryOutput) ToNativeUserV3HttpApiKeyQueryPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyQuery) *NativeUserV3HttpApiKeyQuery {
+		return &v
+	}).(NativeUserV3HttpApiKeyQueryPtrOutput)
+}
+
+// The name of the query parameter carrying the API key.
+func (o NativeUserV3HttpApiKeyQueryOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQuery) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3HttpApiKeyQueryOutput) Value() NativeUserV3HttpApiKeyQueryValueOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQuery) NativeUserV3HttpApiKeyQueryValue { return v.Value }).(NativeUserV3HttpApiKeyQueryValueOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQuery)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryPtrOutput) ToNativeUserV3HttpApiKeyQueryPtrOutput() NativeUserV3HttpApiKeyQueryPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryPtrOutput) ToNativeUserV3HttpApiKeyQueryPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryPtrOutput) Elem() NativeUserV3HttpApiKeyQueryOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQuery) NativeUserV3HttpApiKeyQuery {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyQuery
+		return ret
+	}).(NativeUserV3HttpApiKeyQueryOutput)
+}
+
+// The name of the query parameter carrying the API key.
+func (o NativeUserV3HttpApiKeyQueryPtrOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQuery) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3HttpApiKeyQueryPtrOutput) Value() NativeUserV3HttpApiKeyQueryValuePtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQuery) *NativeUserV3HttpApiKeyQueryValue {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(NativeUserV3HttpApiKeyQueryValuePtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValue struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable *string `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal *string `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo *string `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+}
+
+// NativeUserV3HttpApiKeyQueryValueInput is an input type that accepts NativeUserV3HttpApiKeyQueryValueArgs and NativeUserV3HttpApiKeyQueryValueOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryValueInput` via:
+//
+//	NativeUserV3HttpApiKeyQueryValueArgs{...}
+type NativeUserV3HttpApiKeyQueryValueInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryValueOutput() NativeUserV3HttpApiKeyQueryValueOutput
+	ToNativeUserV3HttpApiKeyQueryValueOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryValueOutput
+}
+
+type NativeUserV3HttpApiKeyQueryValueArgs struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable pulumi.StringPtrInput `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal pulumi.StringPtrInput `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+}
+
+func (NativeUserV3HttpApiKeyQueryValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValue)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueArgs) ToNativeUserV3HttpApiKeyQueryValueOutput() NativeUserV3HttpApiKeyQueryValueOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueArgs) ToNativeUserV3HttpApiKeyQueryValueOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueOutput)
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueArgs) ToNativeUserV3HttpApiKeyQueryValuePtrOutput() NativeUserV3HttpApiKeyQueryValuePtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValuePtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueArgs) ToNativeUserV3HttpApiKeyQueryValuePtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueOutput).ToNativeUserV3HttpApiKeyQueryValuePtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyQueryValuePtrInput is an input type that accepts NativeUserV3HttpApiKeyQueryValueArgs, NativeUserV3HttpApiKeyQueryValuePtr and NativeUserV3HttpApiKeyQueryValuePtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryValuePtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyQueryValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyQueryValuePtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryValuePtrOutput() NativeUserV3HttpApiKeyQueryValuePtrOutput
+	ToNativeUserV3HttpApiKeyQueryValuePtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryValuePtrOutput
+}
+
+type nativeUserV3HttpApiKeyQueryValuePtrType NativeUserV3HttpApiKeyQueryValueArgs
+
+func NativeUserV3HttpApiKeyQueryValuePtr(v *NativeUserV3HttpApiKeyQueryValueArgs) NativeUserV3HttpApiKeyQueryValuePtrInput {
+	return (*nativeUserV3HttpApiKeyQueryValuePtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyQueryValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQueryValue)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyQueryValuePtrType) ToNativeUserV3HttpApiKeyQueryValuePtrOutput() NativeUserV3HttpApiKeyQueryValuePtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValuePtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyQueryValuePtrType) ToNativeUserV3HttpApiKeyQueryValuePtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValuePtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValue)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueOutput) ToNativeUserV3HttpApiKeyQueryValueOutput() NativeUserV3HttpApiKeyQueryValueOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueOutput) ToNativeUserV3HttpApiKeyQueryValueOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueOutput) ToNativeUserV3HttpApiKeyQueryValuePtrOutput() NativeUserV3HttpApiKeyQueryValuePtrOutput {
+	return o.ToNativeUserV3HttpApiKeyQueryValuePtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueOutput) ToNativeUserV3HttpApiKeyQueryValuePtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyQueryValue) *NativeUserV3HttpApiKeyQueryValue {
+		return &v
+	}).(NativeUserV3HttpApiKeyQueryValuePtrOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3HttpApiKeyQueryValueOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValue) *string { return v.EnvironmentVariable }).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3HttpApiKeyQueryValueOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValue) *string { return v.Literal }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3HttpApiKeyQueryValueOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValue) *string { return v.LiteralWo }).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3HttpApiKeyQueryValueOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValue) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValuePtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQueryValue)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryValuePtrOutput) ToNativeUserV3HttpApiKeyQueryValuePtrOutput() NativeUserV3HttpApiKeyQueryValuePtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValuePtrOutput) ToNativeUserV3HttpApiKeyQueryValuePtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValuePtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValuePtrOutput) Elem() NativeUserV3HttpApiKeyQueryValueOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValue) NativeUserV3HttpApiKeyQueryValue {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyQueryValue
+		return ret
+	}).(NativeUserV3HttpApiKeyQueryValueOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3HttpApiKeyQueryValuePtrOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EnvironmentVariable
+	}).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3HttpApiKeyQueryValuePtrOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Literal
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3HttpApiKeyQueryValuePtrOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3HttpApiKeyQueryValuePtrOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValue) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWoVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3HttpBasic struct {
+	// The header to inject the credentials on, for example `Authorization`.
+	Header string `pulumi:"header"`
+	// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Password NativeUserV3HttpBasicPassword `pulumi:"password"`
+	// The username to authenticate as.
+	Username string `pulumi:"username"`
+}
+
+// NativeUserV3HttpBasicInput is an input type that accepts NativeUserV3HttpBasicArgs and NativeUserV3HttpBasicOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicInput` via:
+//
+//	NativeUserV3HttpBasicArgs{...}
+type NativeUserV3HttpBasicInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicOutput() NativeUserV3HttpBasicOutput
+	ToNativeUserV3HttpBasicOutputWithContext(context.Context) NativeUserV3HttpBasicOutput
+}
+
+type NativeUserV3HttpBasicArgs struct {
+	// The header to inject the credentials on, for example `Authorization`.
+	Header pulumi.StringInput `pulumi:"header"`
+	// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Password NativeUserV3HttpBasicPasswordInput `pulumi:"password"`
+	// The username to authenticate as.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (NativeUserV3HttpBasicArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasic)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBasicArgs) ToNativeUserV3HttpBasicOutput() NativeUserV3HttpBasicOutput {
+	return i.ToNativeUserV3HttpBasicOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicArgs) ToNativeUserV3HttpBasicOutputWithContext(ctx context.Context) NativeUserV3HttpBasicOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicOutput)
+}
+
+func (i NativeUserV3HttpBasicArgs) ToNativeUserV3HttpBasicPtrOutput() NativeUserV3HttpBasicPtrOutput {
+	return i.ToNativeUserV3HttpBasicPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicArgs) ToNativeUserV3HttpBasicPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicOutput).ToNativeUserV3HttpBasicPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBasicPtrInput is an input type that accepts NativeUserV3HttpBasicArgs, NativeUserV3HttpBasicPtr and NativeUserV3HttpBasicPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicPtrInput` via:
+//
+//	        NativeUserV3HttpBasicArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBasicPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicPtrOutput() NativeUserV3HttpBasicPtrOutput
+	ToNativeUserV3HttpBasicPtrOutputWithContext(context.Context) NativeUserV3HttpBasicPtrOutput
+}
+
+type nativeUserV3HttpBasicPtrType NativeUserV3HttpBasicArgs
+
+func NativeUserV3HttpBasicPtr(v *NativeUserV3HttpBasicArgs) NativeUserV3HttpBasicPtrInput {
+	return (*nativeUserV3HttpBasicPtrType)(v)
+}
+
+func (*nativeUserV3HttpBasicPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasic)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBasicPtrType) ToNativeUserV3HttpBasicPtrOutput() NativeUserV3HttpBasicPtrOutput {
+	return i.ToNativeUserV3HttpBasicPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBasicPtrType) ToNativeUserV3HttpBasicPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPtrOutput)
+}
+
+type NativeUserV3HttpBasicOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasic)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicOutput) ToNativeUserV3HttpBasicOutput() NativeUserV3HttpBasicOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicOutput) ToNativeUserV3HttpBasicOutputWithContext(ctx context.Context) NativeUserV3HttpBasicOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicOutput) ToNativeUserV3HttpBasicPtrOutput() NativeUserV3HttpBasicPtrOutput {
+	return o.ToNativeUserV3HttpBasicPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBasicOutput) ToNativeUserV3HttpBasicPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBasic) *NativeUserV3HttpBasic {
+		return &v
+	}).(NativeUserV3HttpBasicPtrOutput)
+}
+
+// The header to inject the credentials on, for example `Authorization`.
+func (o NativeUserV3HttpBasicOutput) Header() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasic) string { return v.Header }).(pulumi.StringOutput)
+}
+
+// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3HttpBasicOutput) Password() NativeUserV3HttpBasicPasswordOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasic) NativeUserV3HttpBasicPassword { return v.Password }).(NativeUserV3HttpBasicPasswordOutput)
+}
+
+// The username to authenticate as.
+func (o NativeUserV3HttpBasicOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasic) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpBasicPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasic)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicPtrOutput) ToNativeUserV3HttpBasicPtrOutput() NativeUserV3HttpBasicPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPtrOutput) ToNativeUserV3HttpBasicPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPtrOutput) Elem() NativeUserV3HttpBasicOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasic) NativeUserV3HttpBasic {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBasic
+		return ret
+	}).(NativeUserV3HttpBasicOutput)
+}
+
+// The header to inject the credentials on, for example `Authorization`.
+func (o NativeUserV3HttpBasicPtrOutput) Header() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasic) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Header
+	}).(pulumi.StringPtrOutput)
+}
+
+// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3HttpBasicPtrOutput) Password() NativeUserV3HttpBasicPasswordPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasic) *NativeUserV3HttpBasicPassword {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(NativeUserV3HttpBasicPasswordPtrOutput)
+}
+
+// The username to authenticate as.
+func (o NativeUserV3HttpBasicPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasic) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HttpBasicPassword struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable *string `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal *string `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo *string `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+}
+
+// NativeUserV3HttpBasicPasswordInput is an input type that accepts NativeUserV3HttpBasicPasswordArgs and NativeUserV3HttpBasicPasswordOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicPasswordInput` via:
+//
+//	NativeUserV3HttpBasicPasswordArgs{...}
+type NativeUserV3HttpBasicPasswordInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicPasswordOutput() NativeUserV3HttpBasicPasswordOutput
+	ToNativeUserV3HttpBasicPasswordOutputWithContext(context.Context) NativeUserV3HttpBasicPasswordOutput
+}
+
+type NativeUserV3HttpBasicPasswordArgs struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable pulumi.StringPtrInput `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal pulumi.StringPtrInput `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+}
+
+func (NativeUserV3HttpBasicPasswordArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasicPassword)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBasicPasswordArgs) ToNativeUserV3HttpBasicPasswordOutput() NativeUserV3HttpBasicPasswordOutput {
+	return i.ToNativeUserV3HttpBasicPasswordOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicPasswordArgs) ToNativeUserV3HttpBasicPasswordOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordOutput)
+}
+
+func (i NativeUserV3HttpBasicPasswordArgs) ToNativeUserV3HttpBasicPasswordPtrOutput() NativeUserV3HttpBasicPasswordPtrOutput {
+	return i.ToNativeUserV3HttpBasicPasswordPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicPasswordArgs) ToNativeUserV3HttpBasicPasswordPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordOutput).ToNativeUserV3HttpBasicPasswordPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBasicPasswordPtrInput is an input type that accepts NativeUserV3HttpBasicPasswordArgs, NativeUserV3HttpBasicPasswordPtr and NativeUserV3HttpBasicPasswordPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicPasswordPtrInput` via:
+//
+//	        NativeUserV3HttpBasicPasswordArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBasicPasswordPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicPasswordPtrOutput() NativeUserV3HttpBasicPasswordPtrOutput
+	ToNativeUserV3HttpBasicPasswordPtrOutputWithContext(context.Context) NativeUserV3HttpBasicPasswordPtrOutput
+}
+
+type nativeUserV3HttpBasicPasswordPtrType NativeUserV3HttpBasicPasswordArgs
+
+func NativeUserV3HttpBasicPasswordPtr(v *NativeUserV3HttpBasicPasswordArgs) NativeUserV3HttpBasicPasswordPtrInput {
+	return (*nativeUserV3HttpBasicPasswordPtrType)(v)
+}
+
+func (*nativeUserV3HttpBasicPasswordPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasicPassword)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBasicPasswordPtrType) ToNativeUserV3HttpBasicPasswordPtrOutput() NativeUserV3HttpBasicPasswordPtrOutput {
+	return i.ToNativeUserV3HttpBasicPasswordPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBasicPasswordPtrType) ToNativeUserV3HttpBasicPasswordPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordPtrOutput)
+}
+
+type NativeUserV3HttpBasicPasswordOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicPasswordOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasicPassword)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicPasswordOutput) ToNativeUserV3HttpBasicPasswordOutput() NativeUserV3HttpBasicPasswordOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordOutput) ToNativeUserV3HttpBasicPasswordOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordOutput) ToNativeUserV3HttpBasicPasswordPtrOutput() NativeUserV3HttpBasicPasswordPtrOutput {
+	return o.ToNativeUserV3HttpBasicPasswordPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBasicPasswordOutput) ToNativeUserV3HttpBasicPasswordPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBasicPassword) *NativeUserV3HttpBasicPassword {
+		return &v
+	}).(NativeUserV3HttpBasicPasswordPtrOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3HttpBasicPasswordOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasicPassword) *string { return v.EnvironmentVariable }).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3HttpBasicPasswordOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasicPassword) *string { return v.Literal }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3HttpBasicPasswordOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasicPassword) *string { return v.LiteralWo }).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3HttpBasicPasswordOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasicPassword) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3HttpBasicPasswordPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicPasswordPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasicPassword)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicPasswordPtrOutput) ToNativeUserV3HttpBasicPasswordPtrOutput() NativeUserV3HttpBasicPasswordPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordPtrOutput) ToNativeUserV3HttpBasicPasswordPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordPtrOutput) Elem() NativeUserV3HttpBasicPasswordOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPassword) NativeUserV3HttpBasicPassword {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBasicPassword
+		return ret
+	}).(NativeUserV3HttpBasicPasswordOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3HttpBasicPasswordPtrOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPassword) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EnvironmentVariable
+	}).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3HttpBasicPasswordPtrOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPassword) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Literal
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3HttpBasicPasswordPtrOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPassword) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3HttpBasicPasswordPtrOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPassword) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWoVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3HttpBearer struct {
+	// The header to inject the token on, for example `Authorization`.
+	Header string `pulumi:"header"`
+	// The bearer token. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Token NativeUserV3HttpBearerToken `pulumi:"token"`
+}
+
+// NativeUserV3HttpBearerInput is an input type that accepts NativeUserV3HttpBearerArgs and NativeUserV3HttpBearerOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerInput` via:
+//
+//	NativeUserV3HttpBearerArgs{...}
+type NativeUserV3HttpBearerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerOutput() NativeUserV3HttpBearerOutput
+	ToNativeUserV3HttpBearerOutputWithContext(context.Context) NativeUserV3HttpBearerOutput
+}
+
+type NativeUserV3HttpBearerArgs struct {
+	// The header to inject the token on, for example `Authorization`.
+	Header pulumi.StringInput `pulumi:"header"`
+	// The bearer token. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Token NativeUserV3HttpBearerTokenInput `pulumi:"token"`
+}
+
+func (NativeUserV3HttpBearerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearer)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBearerArgs) ToNativeUserV3HttpBearerOutput() NativeUserV3HttpBearerOutput {
+	return i.ToNativeUserV3HttpBearerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerArgs) ToNativeUserV3HttpBearerOutputWithContext(ctx context.Context) NativeUserV3HttpBearerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerOutput)
+}
+
+func (i NativeUserV3HttpBearerArgs) ToNativeUserV3HttpBearerPtrOutput() NativeUserV3HttpBearerPtrOutput {
+	return i.ToNativeUserV3HttpBearerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerArgs) ToNativeUserV3HttpBearerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerOutput).ToNativeUserV3HttpBearerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBearerPtrInput is an input type that accepts NativeUserV3HttpBearerArgs, NativeUserV3HttpBearerPtr and NativeUserV3HttpBearerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerPtrInput` via:
+//
+//	        NativeUserV3HttpBearerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBearerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerPtrOutput() NativeUserV3HttpBearerPtrOutput
+	ToNativeUserV3HttpBearerPtrOutputWithContext(context.Context) NativeUserV3HttpBearerPtrOutput
+}
+
+type nativeUserV3HttpBearerPtrType NativeUserV3HttpBearerArgs
+
+func NativeUserV3HttpBearerPtr(v *NativeUserV3HttpBearerArgs) NativeUserV3HttpBearerPtrInput {
+	return (*nativeUserV3HttpBearerPtrType)(v)
+}
+
+func (*nativeUserV3HttpBearerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearer)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBearerPtrType) ToNativeUserV3HttpBearerPtrOutput() NativeUserV3HttpBearerPtrOutput {
+	return i.ToNativeUserV3HttpBearerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBearerPtrType) ToNativeUserV3HttpBearerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerPtrOutput)
+}
+
+type NativeUserV3HttpBearerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearer)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerOutput) ToNativeUserV3HttpBearerOutput() NativeUserV3HttpBearerOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerOutput) ToNativeUserV3HttpBearerOutputWithContext(ctx context.Context) NativeUserV3HttpBearerOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerOutput) ToNativeUserV3HttpBearerPtrOutput() NativeUserV3HttpBearerPtrOutput {
+	return o.ToNativeUserV3HttpBearerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBearerOutput) ToNativeUserV3HttpBearerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBearer) *NativeUserV3HttpBearer {
+		return &v
+	}).(NativeUserV3HttpBearerPtrOutput)
+}
+
+// The header to inject the token on, for example `Authorization`.
+func (o NativeUserV3HttpBearerOutput) Header() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearer) string { return v.Header }).(pulumi.StringOutput)
+}
+
+// The bearer token. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3HttpBearerOutput) Token() NativeUserV3HttpBearerTokenOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearer) NativeUserV3HttpBearerToken { return v.Token }).(NativeUserV3HttpBearerTokenOutput)
+}
+
+type NativeUserV3HttpBearerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearer)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerPtrOutput) ToNativeUserV3HttpBearerPtrOutput() NativeUserV3HttpBearerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerPtrOutput) ToNativeUserV3HttpBearerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerPtrOutput) Elem() NativeUserV3HttpBearerOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearer) NativeUserV3HttpBearer {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBearer
+		return ret
+	}).(NativeUserV3HttpBearerOutput)
+}
+
+// The header to inject the token on, for example `Authorization`.
+func (o NativeUserV3HttpBearerPtrOutput) Header() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearer) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Header
+	}).(pulumi.StringPtrOutput)
+}
+
+// The bearer token. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3HttpBearerPtrOutput) Token() NativeUserV3HttpBearerTokenPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearer) *NativeUserV3HttpBearerToken {
+		if v == nil {
+			return nil
+		}
+		return &v.Token
+	}).(NativeUserV3HttpBearerTokenPtrOutput)
+}
+
+type NativeUserV3HttpBearerToken struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable *string `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal *string `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo *string `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+}
+
+// NativeUserV3HttpBearerTokenInput is an input type that accepts NativeUserV3HttpBearerTokenArgs and NativeUserV3HttpBearerTokenOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerTokenInput` via:
+//
+//	NativeUserV3HttpBearerTokenArgs{...}
+type NativeUserV3HttpBearerTokenInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerTokenOutput() NativeUserV3HttpBearerTokenOutput
+	ToNativeUserV3HttpBearerTokenOutputWithContext(context.Context) NativeUserV3HttpBearerTokenOutput
+}
+
+type NativeUserV3HttpBearerTokenArgs struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable pulumi.StringPtrInput `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal pulumi.StringPtrInput `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+}
+
+func (NativeUserV3HttpBearerTokenArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearerToken)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBearerTokenArgs) ToNativeUserV3HttpBearerTokenOutput() NativeUserV3HttpBearerTokenOutput {
+	return i.ToNativeUserV3HttpBearerTokenOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerTokenArgs) ToNativeUserV3HttpBearerTokenOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenOutput)
+}
+
+func (i NativeUserV3HttpBearerTokenArgs) ToNativeUserV3HttpBearerTokenPtrOutput() NativeUserV3HttpBearerTokenPtrOutput {
+	return i.ToNativeUserV3HttpBearerTokenPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerTokenArgs) ToNativeUserV3HttpBearerTokenPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenOutput).ToNativeUserV3HttpBearerTokenPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBearerTokenPtrInput is an input type that accepts NativeUserV3HttpBearerTokenArgs, NativeUserV3HttpBearerTokenPtr and NativeUserV3HttpBearerTokenPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerTokenPtrInput` via:
+//
+//	        NativeUserV3HttpBearerTokenArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBearerTokenPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerTokenPtrOutput() NativeUserV3HttpBearerTokenPtrOutput
+	ToNativeUserV3HttpBearerTokenPtrOutputWithContext(context.Context) NativeUserV3HttpBearerTokenPtrOutput
+}
+
+type nativeUserV3HttpBearerTokenPtrType NativeUserV3HttpBearerTokenArgs
+
+func NativeUserV3HttpBearerTokenPtr(v *NativeUserV3HttpBearerTokenArgs) NativeUserV3HttpBearerTokenPtrInput {
+	return (*nativeUserV3HttpBearerTokenPtrType)(v)
+}
+
+func (*nativeUserV3HttpBearerTokenPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearerToken)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBearerTokenPtrType) ToNativeUserV3HttpBearerTokenPtrOutput() NativeUserV3HttpBearerTokenPtrOutput {
+	return i.ToNativeUserV3HttpBearerTokenPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBearerTokenPtrType) ToNativeUserV3HttpBearerTokenPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenPtrOutput)
+}
+
+type NativeUserV3HttpBearerTokenOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerTokenOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearerToken)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerTokenOutput) ToNativeUserV3HttpBearerTokenOutput() NativeUserV3HttpBearerTokenOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenOutput) ToNativeUserV3HttpBearerTokenOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenOutput) ToNativeUserV3HttpBearerTokenPtrOutput() NativeUserV3HttpBearerTokenPtrOutput {
+	return o.ToNativeUserV3HttpBearerTokenPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBearerTokenOutput) ToNativeUserV3HttpBearerTokenPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBearerToken) *NativeUserV3HttpBearerToken {
+		return &v
+	}).(NativeUserV3HttpBearerTokenPtrOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3HttpBearerTokenOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearerToken) *string { return v.EnvironmentVariable }).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3HttpBearerTokenOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearerToken) *string { return v.Literal }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3HttpBearerTokenOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearerToken) *string { return v.LiteralWo }).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3HttpBearerTokenOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearerToken) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3HttpBearerTokenPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerTokenPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearerToken)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerTokenPtrOutput) ToNativeUserV3HttpBearerTokenPtrOutput() NativeUserV3HttpBearerTokenPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenPtrOutput) ToNativeUserV3HttpBearerTokenPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenPtrOutput) Elem() NativeUserV3HttpBearerTokenOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerToken) NativeUserV3HttpBearerToken {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBearerToken
+		return ret
+	}).(NativeUserV3HttpBearerTokenOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3HttpBearerTokenPtrOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerToken) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EnvironmentVariable
+	}).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3HttpBearerTokenPtrOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerToken) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Literal
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3HttpBearerTokenPtrOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerToken) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3HttpBearerTokenPtrOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerToken) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWoVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3KubernetesInline struct {
+	// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Kubeconfig NativeUserV3KubernetesInlineKubeconfig `pulumi:"kubeconfig"`
+}
+
+// NativeUserV3KubernetesInlineInput is an input type that accepts NativeUserV3KubernetesInlineArgs and NativeUserV3KubernetesInlineOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlineInput` via:
+//
+//	NativeUserV3KubernetesInlineArgs{...}
+type NativeUserV3KubernetesInlineInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlineOutput() NativeUserV3KubernetesInlineOutput
+	ToNativeUserV3KubernetesInlineOutputWithContext(context.Context) NativeUserV3KubernetesInlineOutput
+}
+
+type NativeUserV3KubernetesInlineArgs struct {
+	// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Kubeconfig NativeUserV3KubernetesInlineKubeconfigInput `pulumi:"kubeconfig"`
+}
+
+func (NativeUserV3KubernetesInlineArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInline)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesInlineArgs) ToNativeUserV3KubernetesInlineOutput() NativeUserV3KubernetesInlineOutput {
+	return i.ToNativeUserV3KubernetesInlineOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineArgs) ToNativeUserV3KubernetesInlineOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineOutput)
+}
+
+func (i NativeUserV3KubernetesInlineArgs) ToNativeUserV3KubernetesInlinePtrOutput() NativeUserV3KubernetesInlinePtrOutput {
+	return i.ToNativeUserV3KubernetesInlinePtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineArgs) ToNativeUserV3KubernetesInlinePtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlinePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineOutput).ToNativeUserV3KubernetesInlinePtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesInlinePtrInput is an input type that accepts NativeUserV3KubernetesInlineArgs, NativeUserV3KubernetesInlinePtr and NativeUserV3KubernetesInlinePtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlinePtrInput` via:
+//
+//	        NativeUserV3KubernetesInlineArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesInlinePtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlinePtrOutput() NativeUserV3KubernetesInlinePtrOutput
+	ToNativeUserV3KubernetesInlinePtrOutputWithContext(context.Context) NativeUserV3KubernetesInlinePtrOutput
+}
+
+type nativeUserV3KubernetesInlinePtrType NativeUserV3KubernetesInlineArgs
+
+func NativeUserV3KubernetesInlinePtr(v *NativeUserV3KubernetesInlineArgs) NativeUserV3KubernetesInlinePtrInput {
+	return (*nativeUserV3KubernetesInlinePtrType)(v)
+}
+
+func (*nativeUserV3KubernetesInlinePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInline)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesInlinePtrType) ToNativeUserV3KubernetesInlinePtrOutput() NativeUserV3KubernetesInlinePtrOutput {
+	return i.ToNativeUserV3KubernetesInlinePtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesInlinePtrType) ToNativeUserV3KubernetesInlinePtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlinePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlinePtrOutput)
+}
+
+type NativeUserV3KubernetesInlineOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlineOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInline)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlineOutput) ToNativeUserV3KubernetesInlineOutput() NativeUserV3KubernetesInlineOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineOutput) ToNativeUserV3KubernetesInlineOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineOutput) ToNativeUserV3KubernetesInlinePtrOutput() NativeUserV3KubernetesInlinePtrOutput {
+	return o.ToNativeUserV3KubernetesInlinePtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesInlineOutput) ToNativeUserV3KubernetesInlinePtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlinePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesInline) *NativeUserV3KubernetesInline {
+		return &v
+	}).(NativeUserV3KubernetesInlinePtrOutput)
+}
+
+// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3KubernetesInlineOutput) Kubeconfig() NativeUserV3KubernetesInlineKubeconfigOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInline) NativeUserV3KubernetesInlineKubeconfig { return v.Kubeconfig }).(NativeUserV3KubernetesInlineKubeconfigOutput)
+}
+
+type NativeUserV3KubernetesInlinePtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlinePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInline)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlinePtrOutput) ToNativeUserV3KubernetesInlinePtrOutput() NativeUserV3KubernetesInlinePtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlinePtrOutput) ToNativeUserV3KubernetesInlinePtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlinePtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlinePtrOutput) Elem() NativeUserV3KubernetesInlineOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInline) NativeUserV3KubernetesInline {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesInline
+		return ret
+	}).(NativeUserV3KubernetesInlineOutput)
+}
+
+// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3KubernetesInlinePtrOutput) Kubeconfig() NativeUserV3KubernetesInlineKubeconfigPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInline) *NativeUserV3KubernetesInlineKubeconfig {
+		if v == nil {
+			return nil
+		}
+		return &v.Kubeconfig
+	}).(NativeUserV3KubernetesInlineKubeconfigPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfig struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable *string `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal *string `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo *string `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+}
+
+// NativeUserV3KubernetesInlineKubeconfigInput is an input type that accepts NativeUserV3KubernetesInlineKubeconfigArgs and NativeUserV3KubernetesInlineKubeconfigOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlineKubeconfigInput` via:
+//
+//	NativeUserV3KubernetesInlineKubeconfigArgs{...}
+type NativeUserV3KubernetesInlineKubeconfigInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlineKubeconfigOutput() NativeUserV3KubernetesInlineKubeconfigOutput
+	ToNativeUserV3KubernetesInlineKubeconfigOutputWithContext(context.Context) NativeUserV3KubernetesInlineKubeconfigOutput
+}
+
+type NativeUserV3KubernetesInlineKubeconfigArgs struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable pulumi.StringPtrInput `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal pulumi.StringPtrInput `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+}
+
+func (NativeUserV3KubernetesInlineKubeconfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfig)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigArgs) ToNativeUserV3KubernetesInlineKubeconfigOutput() NativeUserV3KubernetesInlineKubeconfigOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigArgs) ToNativeUserV3KubernetesInlineKubeconfigOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigOutput)
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigArgs) ToNativeUserV3KubernetesInlineKubeconfigPtrOutput() NativeUserV3KubernetesInlineKubeconfigPtrOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigArgs) ToNativeUserV3KubernetesInlineKubeconfigPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigOutput).ToNativeUserV3KubernetesInlineKubeconfigPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesInlineKubeconfigPtrInput is an input type that accepts NativeUserV3KubernetesInlineKubeconfigArgs, NativeUserV3KubernetesInlineKubeconfigPtr and NativeUserV3KubernetesInlineKubeconfigPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlineKubeconfigPtrInput` via:
+//
+//	        NativeUserV3KubernetesInlineKubeconfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesInlineKubeconfigPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlineKubeconfigPtrOutput() NativeUserV3KubernetesInlineKubeconfigPtrOutput
+	ToNativeUserV3KubernetesInlineKubeconfigPtrOutputWithContext(context.Context) NativeUserV3KubernetesInlineKubeconfigPtrOutput
+}
+
+type nativeUserV3KubernetesInlineKubeconfigPtrType NativeUserV3KubernetesInlineKubeconfigArgs
+
+func NativeUserV3KubernetesInlineKubeconfigPtr(v *NativeUserV3KubernetesInlineKubeconfigArgs) NativeUserV3KubernetesInlineKubeconfigPtrInput {
+	return (*nativeUserV3KubernetesInlineKubeconfigPtrType)(v)
+}
+
+func (*nativeUserV3KubernetesInlineKubeconfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInlineKubeconfig)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesInlineKubeconfigPtrType) ToNativeUserV3KubernetesInlineKubeconfigPtrOutput() NativeUserV3KubernetesInlineKubeconfigPtrOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesInlineKubeconfigPtrType) ToNativeUserV3KubernetesInlineKubeconfigPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlineKubeconfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfig)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigOutput) ToNativeUserV3KubernetesInlineKubeconfigOutput() NativeUserV3KubernetesInlineKubeconfigOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigOutput) ToNativeUserV3KubernetesInlineKubeconfigOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigOutput) ToNativeUserV3KubernetesInlineKubeconfigPtrOutput() NativeUserV3KubernetesInlineKubeconfigPtrOutput {
+	return o.ToNativeUserV3KubernetesInlineKubeconfigPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigOutput) ToNativeUserV3KubernetesInlineKubeconfigPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesInlineKubeconfig) *NativeUserV3KubernetesInlineKubeconfig {
+		return &v
+	}).(NativeUserV3KubernetesInlineKubeconfigPtrOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3KubernetesInlineKubeconfigOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfig) *string { return v.EnvironmentVariable }).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3KubernetesInlineKubeconfigOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfig) *string { return v.Literal }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3KubernetesInlineKubeconfigOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfig) *string { return v.LiteralWo }).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3KubernetesInlineKubeconfigOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfig) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlineKubeconfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInlineKubeconfig)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigPtrOutput) ToNativeUserV3KubernetesInlineKubeconfigPtrOutput() NativeUserV3KubernetesInlineKubeconfigPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigPtrOutput) ToNativeUserV3KubernetesInlineKubeconfigPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigPtrOutput) Elem() NativeUserV3KubernetesInlineKubeconfigOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfig) NativeUserV3KubernetesInlineKubeconfig {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesInlineKubeconfig
+		return ret
+	}).(NativeUserV3KubernetesInlineKubeconfigOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3KubernetesInlineKubeconfigPtrOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EnvironmentVariable
+	}).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3KubernetesInlineKubeconfigPtrOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Literal
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3KubernetesInlineKubeconfigPtrOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3KubernetesInlineKubeconfigPtrOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWoVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3KubernetesPath struct {
+	// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	KubeconfigPath NativeUserV3KubernetesPathKubeconfigPath `pulumi:"kubeconfigPath"`
+}
+
+// NativeUserV3KubernetesPathInput is an input type that accepts NativeUserV3KubernetesPathArgs and NativeUserV3KubernetesPathOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathInput` via:
+//
+//	NativeUserV3KubernetesPathArgs{...}
+type NativeUserV3KubernetesPathInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathOutput() NativeUserV3KubernetesPathOutput
+	ToNativeUserV3KubernetesPathOutputWithContext(context.Context) NativeUserV3KubernetesPathOutput
+}
+
+type NativeUserV3KubernetesPathArgs struct {
+	// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	KubeconfigPath NativeUserV3KubernetesPathKubeconfigPathInput `pulumi:"kubeconfigPath"`
+}
+
+func (NativeUserV3KubernetesPathArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPath)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesPathArgs) ToNativeUserV3KubernetesPathOutput() NativeUserV3KubernetesPathOutput {
+	return i.ToNativeUserV3KubernetesPathOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathArgs) ToNativeUserV3KubernetesPathOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathOutput)
+}
+
+func (i NativeUserV3KubernetesPathArgs) ToNativeUserV3KubernetesPathPtrOutput() NativeUserV3KubernetesPathPtrOutput {
+	return i.ToNativeUserV3KubernetesPathPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathArgs) ToNativeUserV3KubernetesPathPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathOutput).ToNativeUserV3KubernetesPathPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesPathPtrInput is an input type that accepts NativeUserV3KubernetesPathArgs, NativeUserV3KubernetesPathPtr and NativeUserV3KubernetesPathPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathPtrInput` via:
+//
+//	        NativeUserV3KubernetesPathArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesPathPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathPtrOutput() NativeUserV3KubernetesPathPtrOutput
+	ToNativeUserV3KubernetesPathPtrOutputWithContext(context.Context) NativeUserV3KubernetesPathPtrOutput
+}
+
+type nativeUserV3KubernetesPathPtrType NativeUserV3KubernetesPathArgs
+
+func NativeUserV3KubernetesPathPtr(v *NativeUserV3KubernetesPathArgs) NativeUserV3KubernetesPathPtrInput {
+	return (*nativeUserV3KubernetesPathPtrType)(v)
+}
+
+func (*nativeUserV3KubernetesPathPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPath)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesPathPtrType) ToNativeUserV3KubernetesPathPtrOutput() NativeUserV3KubernetesPathPtrOutput {
+	return i.ToNativeUserV3KubernetesPathPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesPathPtrType) ToNativeUserV3KubernetesPathPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathPtrOutput)
+}
+
+type NativeUserV3KubernetesPathOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPath)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathOutput) ToNativeUserV3KubernetesPathOutput() NativeUserV3KubernetesPathOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathOutput) ToNativeUserV3KubernetesPathOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathOutput) ToNativeUserV3KubernetesPathPtrOutput() NativeUserV3KubernetesPathPtrOutput {
+	return o.ToNativeUserV3KubernetesPathPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesPathOutput) ToNativeUserV3KubernetesPathPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesPath) *NativeUserV3KubernetesPath {
+		return &v
+	}).(NativeUserV3KubernetesPathPtrOutput)
+}
+
+// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3KubernetesPathOutput) KubeconfigPath() NativeUserV3KubernetesPathKubeconfigPathOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPath) NativeUserV3KubernetesPathKubeconfigPath { return v.KubeconfigPath }).(NativeUserV3KubernetesPathKubeconfigPathOutput)
+}
+
+type NativeUserV3KubernetesPathPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPath)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathPtrOutput) ToNativeUserV3KubernetesPathPtrOutput() NativeUserV3KubernetesPathPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathPtrOutput) ToNativeUserV3KubernetesPathPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathPtrOutput) Elem() NativeUserV3KubernetesPathOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPath) NativeUserV3KubernetesPath {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesPath
+		return ret
+	}).(NativeUserV3KubernetesPathOutput)
+}
+
+// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3KubernetesPathPtrOutput) KubeconfigPath() NativeUserV3KubernetesPathKubeconfigPathPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPath) *NativeUserV3KubernetesPathKubeconfigPath {
+		if v == nil {
+			return nil
+		}
+		return &v.KubeconfigPath
+	}).(NativeUserV3KubernetesPathKubeconfigPathPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPath struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable *string `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal *string `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo *string `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+}
+
+// NativeUserV3KubernetesPathKubeconfigPathInput is an input type that accepts NativeUserV3KubernetesPathKubeconfigPathArgs and NativeUserV3KubernetesPathKubeconfigPathOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathKubeconfigPathInput` via:
+//
+//	NativeUserV3KubernetesPathKubeconfigPathArgs{...}
+type NativeUserV3KubernetesPathKubeconfigPathInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathKubeconfigPathOutput() NativeUserV3KubernetesPathKubeconfigPathOutput
+	ToNativeUserV3KubernetesPathKubeconfigPathOutputWithContext(context.Context) NativeUserV3KubernetesPathKubeconfigPathOutput
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathArgs struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable pulumi.StringPtrInput `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal pulumi.StringPtrInput `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+}
+
+func (NativeUserV3KubernetesPathKubeconfigPathArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPath)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathArgs) ToNativeUserV3KubernetesPathKubeconfigPathOutput() NativeUserV3KubernetesPathKubeconfigPathOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathArgs) ToNativeUserV3KubernetesPathKubeconfigPathOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathOutput)
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathArgs) ToNativeUserV3KubernetesPathKubeconfigPathPtrOutput() NativeUserV3KubernetesPathKubeconfigPathPtrOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathArgs) ToNativeUserV3KubernetesPathKubeconfigPathPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathOutput).ToNativeUserV3KubernetesPathKubeconfigPathPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesPathKubeconfigPathPtrInput is an input type that accepts NativeUserV3KubernetesPathKubeconfigPathArgs, NativeUserV3KubernetesPathKubeconfigPathPtr and NativeUserV3KubernetesPathKubeconfigPathPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathKubeconfigPathPtrInput` via:
+//
+//	        NativeUserV3KubernetesPathKubeconfigPathArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesPathKubeconfigPathPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathKubeconfigPathPtrOutput() NativeUserV3KubernetesPathKubeconfigPathPtrOutput
+	ToNativeUserV3KubernetesPathKubeconfigPathPtrOutputWithContext(context.Context) NativeUserV3KubernetesPathKubeconfigPathPtrOutput
+}
+
+type nativeUserV3KubernetesPathKubeconfigPathPtrType NativeUserV3KubernetesPathKubeconfigPathArgs
+
+func NativeUserV3KubernetesPathKubeconfigPathPtr(v *NativeUserV3KubernetesPathKubeconfigPathArgs) NativeUserV3KubernetesPathKubeconfigPathPtrInput {
+	return (*nativeUserV3KubernetesPathKubeconfigPathPtrType)(v)
+}
+
+func (*nativeUserV3KubernetesPathKubeconfigPathPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPathKubeconfigPath)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesPathKubeconfigPathPtrType) ToNativeUserV3KubernetesPathKubeconfigPathPtrOutput() NativeUserV3KubernetesPathKubeconfigPathPtrOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesPathKubeconfigPathPtrType) ToNativeUserV3KubernetesPathKubeconfigPathPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathKubeconfigPathOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPath)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathOutput) ToNativeUserV3KubernetesPathKubeconfigPathOutput() NativeUserV3KubernetesPathKubeconfigPathOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathOutput) ToNativeUserV3KubernetesPathKubeconfigPathOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathOutput) ToNativeUserV3KubernetesPathKubeconfigPathPtrOutput() NativeUserV3KubernetesPathKubeconfigPathPtrOutput {
+	return o.ToNativeUserV3KubernetesPathKubeconfigPathPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathOutput) ToNativeUserV3KubernetesPathKubeconfigPathPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesPathKubeconfigPath) *NativeUserV3KubernetesPathKubeconfigPath {
+		return &v
+	}).(NativeUserV3KubernetesPathKubeconfigPathPtrOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3KubernetesPathKubeconfigPathOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPath) *string { return v.EnvironmentVariable }).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3KubernetesPathKubeconfigPathOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPath) *string { return v.Literal }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3KubernetesPathKubeconfigPathOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPath) *string { return v.LiteralWo }).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3KubernetesPathKubeconfigPathOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPath) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathKubeconfigPathPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPathKubeconfigPath)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathPtrOutput) ToNativeUserV3KubernetesPathKubeconfigPathPtrOutput() NativeUserV3KubernetesPathKubeconfigPathPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathPtrOutput) ToNativeUserV3KubernetesPathKubeconfigPathPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathPtrOutput) Elem() NativeUserV3KubernetesPathKubeconfigPathOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPath) NativeUserV3KubernetesPathKubeconfigPath {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesPathKubeconfigPath
+		return ret
+	}).(NativeUserV3KubernetesPathKubeconfigPathOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3KubernetesPathKubeconfigPathPtrOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPath) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EnvironmentVariable
+	}).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3KubernetesPathKubeconfigPathPtrOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPath) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Literal
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3KubernetesPathKubeconfigPathPtrOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPath) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3KubernetesPathKubeconfigPathPtrOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPath) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWoVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3SnowflakeKey struct {
+	// The private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Key NativeUserV3SnowflakeKeyKey `pulumi:"key"`
+	// The Snowflake username to authenticate as.
+	Username string `pulumi:"username"`
+}
+
+// NativeUserV3SnowflakeKeyInput is an input type that accepts NativeUserV3SnowflakeKeyArgs and NativeUserV3SnowflakeKeyOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyInput` via:
+//
+//	NativeUserV3SnowflakeKeyArgs{...}
+type NativeUserV3SnowflakeKeyInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyOutput() NativeUserV3SnowflakeKeyOutput
+	ToNativeUserV3SnowflakeKeyOutputWithContext(context.Context) NativeUserV3SnowflakeKeyOutput
+}
+
+type NativeUserV3SnowflakeKeyArgs struct {
+	// The private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Key NativeUserV3SnowflakeKeyKeyInput `pulumi:"key"`
+	// The Snowflake username to authenticate as.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (NativeUserV3SnowflakeKeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKey)(nil)).Elem()
+}
+
+func (i NativeUserV3SnowflakeKeyArgs) ToNativeUserV3SnowflakeKeyOutput() NativeUserV3SnowflakeKeyOutput {
+	return i.ToNativeUserV3SnowflakeKeyOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyArgs) ToNativeUserV3SnowflakeKeyOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyOutput)
+}
+
+func (i NativeUserV3SnowflakeKeyArgs) ToNativeUserV3SnowflakeKeyPtrOutput() NativeUserV3SnowflakeKeyPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyArgs) ToNativeUserV3SnowflakeKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyOutput).ToNativeUserV3SnowflakeKeyPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SnowflakeKeyPtrInput is an input type that accepts NativeUserV3SnowflakeKeyArgs, NativeUserV3SnowflakeKeyPtr and NativeUserV3SnowflakeKeyPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyPtrInput` via:
+//
+//	        NativeUserV3SnowflakeKeyArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SnowflakeKeyPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyPtrOutput() NativeUserV3SnowflakeKeyPtrOutput
+	ToNativeUserV3SnowflakeKeyPtrOutputWithContext(context.Context) NativeUserV3SnowflakeKeyPtrOutput
+}
+
+type nativeUserV3SnowflakeKeyPtrType NativeUserV3SnowflakeKeyArgs
+
+func NativeUserV3SnowflakeKeyPtr(v *NativeUserV3SnowflakeKeyArgs) NativeUserV3SnowflakeKeyPtrInput {
+	return (*nativeUserV3SnowflakeKeyPtrType)(v)
+}
+
+func (*nativeUserV3SnowflakeKeyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKey)(nil)).Elem()
+}
+
+func (i *nativeUserV3SnowflakeKeyPtrType) ToNativeUserV3SnowflakeKeyPtrOutput() NativeUserV3SnowflakeKeyPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SnowflakeKeyPtrType) ToNativeUserV3SnowflakeKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKey)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyOutput) ToNativeUserV3SnowflakeKeyOutput() NativeUserV3SnowflakeKeyOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyOutput) ToNativeUserV3SnowflakeKeyOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyOutput) ToNativeUserV3SnowflakeKeyPtrOutput() NativeUserV3SnowflakeKeyPtrOutput {
+	return o.ToNativeUserV3SnowflakeKeyPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SnowflakeKeyOutput) ToNativeUserV3SnowflakeKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SnowflakeKey) *NativeUserV3SnowflakeKey {
+		return &v
+	}).(NativeUserV3SnowflakeKeyPtrOutput)
+}
+
+// The private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3SnowflakeKeyOutput) Key() NativeUserV3SnowflakeKeyKeyOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKey) NativeUserV3SnowflakeKeyKey { return v.Key }).(NativeUserV3SnowflakeKeyKeyOutput)
+}
+
+// The Snowflake username to authenticate as.
+func (o NativeUserV3SnowflakeKeyOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKey) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type NativeUserV3SnowflakeKeyPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKey)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyPtrOutput) ToNativeUserV3SnowflakeKeyPtrOutput() NativeUserV3SnowflakeKeyPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyPtrOutput) ToNativeUserV3SnowflakeKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyPtrOutput) Elem() NativeUserV3SnowflakeKeyOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKey) NativeUserV3SnowflakeKey {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SnowflakeKey
+		return ret
+	}).(NativeUserV3SnowflakeKeyOutput)
+}
+
+// The private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3SnowflakeKeyPtrOutput) Key() NativeUserV3SnowflakeKeyKeyPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKey) *NativeUserV3SnowflakeKeyKey {
+		if v == nil {
+			return nil
+		}
+		return &v.Key
+	}).(NativeUserV3SnowflakeKeyKeyPtrOutput)
+}
+
+// The Snowflake username to authenticate as.
+func (o NativeUserV3SnowflakeKeyPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKey) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKey struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable *string `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal *string `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo *string `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+}
+
+// NativeUserV3SnowflakeKeyKeyInput is an input type that accepts NativeUserV3SnowflakeKeyKeyArgs and NativeUserV3SnowflakeKeyKeyOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyKeyInput` via:
+//
+//	NativeUserV3SnowflakeKeyKeyArgs{...}
+type NativeUserV3SnowflakeKeyKeyInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyKeyOutput() NativeUserV3SnowflakeKeyKeyOutput
+	ToNativeUserV3SnowflakeKeyKeyOutputWithContext(context.Context) NativeUserV3SnowflakeKeyKeyOutput
+}
+
+type NativeUserV3SnowflakeKeyKeyArgs struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable pulumi.StringPtrInput `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal pulumi.StringPtrInput `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+}
+
+func (NativeUserV3SnowflakeKeyKeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKeyKey)(nil)).Elem()
+}
+
+func (i NativeUserV3SnowflakeKeyKeyArgs) ToNativeUserV3SnowflakeKeyKeyOutput() NativeUserV3SnowflakeKeyKeyOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeyOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyKeyArgs) ToNativeUserV3SnowflakeKeyKeyOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeyOutput)
+}
+
+func (i NativeUserV3SnowflakeKeyKeyArgs) ToNativeUserV3SnowflakeKeyKeyPtrOutput() NativeUserV3SnowflakeKeyKeyPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeyPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyKeyArgs) ToNativeUserV3SnowflakeKeyKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeyOutput).ToNativeUserV3SnowflakeKeyKeyPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SnowflakeKeyKeyPtrInput is an input type that accepts NativeUserV3SnowflakeKeyKeyArgs, NativeUserV3SnowflakeKeyKeyPtr and NativeUserV3SnowflakeKeyKeyPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyKeyPtrInput` via:
+//
+//	        NativeUserV3SnowflakeKeyKeyArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SnowflakeKeyKeyPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyKeyPtrOutput() NativeUserV3SnowflakeKeyKeyPtrOutput
+	ToNativeUserV3SnowflakeKeyKeyPtrOutputWithContext(context.Context) NativeUserV3SnowflakeKeyKeyPtrOutput
+}
+
+type nativeUserV3SnowflakeKeyKeyPtrType NativeUserV3SnowflakeKeyKeyArgs
+
+func NativeUserV3SnowflakeKeyKeyPtr(v *NativeUserV3SnowflakeKeyKeyArgs) NativeUserV3SnowflakeKeyKeyPtrInput {
+	return (*nativeUserV3SnowflakeKeyKeyPtrType)(v)
+}
+
+func (*nativeUserV3SnowflakeKeyKeyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKeyKey)(nil)).Elem()
+}
+
+func (i *nativeUserV3SnowflakeKeyKeyPtrType) ToNativeUserV3SnowflakeKeyKeyPtrOutput() NativeUserV3SnowflakeKeyKeyPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeyPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SnowflakeKeyKeyPtrType) ToNativeUserV3SnowflakeKeyKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeyPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeyOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKeyKey)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyKeyOutput) ToNativeUserV3SnowflakeKeyKeyOutput() NativeUserV3SnowflakeKeyKeyOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeyOutput) ToNativeUserV3SnowflakeKeyKeyOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeyOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeyOutput) ToNativeUserV3SnowflakeKeyKeyPtrOutput() NativeUserV3SnowflakeKeyKeyPtrOutput {
+	return o.ToNativeUserV3SnowflakeKeyKeyPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SnowflakeKeyKeyOutput) ToNativeUserV3SnowflakeKeyKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SnowflakeKeyKey) *NativeUserV3SnowflakeKeyKey {
+		return &v
+	}).(NativeUserV3SnowflakeKeyKeyPtrOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3SnowflakeKeyKeyOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKey) *string { return v.EnvironmentVariable }).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3SnowflakeKeyKeyOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKey) *string { return v.Literal }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3SnowflakeKeyKeyOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKey) *string { return v.LiteralWo }).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3SnowflakeKeyKeyOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKey) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeyPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyKeyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKeyKey)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyKeyPtrOutput) ToNativeUserV3SnowflakeKeyKeyPtrOutput() NativeUserV3SnowflakeKeyKeyPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeyPtrOutput) ToNativeUserV3SnowflakeKeyKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeyPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeyPtrOutput) Elem() NativeUserV3SnowflakeKeyKeyOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKey) NativeUserV3SnowflakeKeyKey {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SnowflakeKeyKey
+		return ret
+	}).(NativeUserV3SnowflakeKeyKeyOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3SnowflakeKeyKeyPtrOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKey) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EnvironmentVariable
+	}).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3SnowflakeKeyKeyPtrOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKey) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Literal
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3SnowflakeKeyKeyPtrOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKey) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3SnowflakeKeyKeyPtrOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKey) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWoVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3SshKey struct {
+	// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Certificate *NativeUserV3SshKeyCertificate `pulumi:"certificate"`
+	// The SSH private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Key NativeUserV3SshKeyKey `pulumi:"key"`
+	// The username to authenticate as.
+	Username string `pulumi:"username"`
+}
+
+// NativeUserV3SshKeyInput is an input type that accepts NativeUserV3SshKeyArgs and NativeUserV3SshKeyOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyInput` via:
+//
+//	NativeUserV3SshKeyArgs{...}
+type NativeUserV3SshKeyInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyOutput() NativeUserV3SshKeyOutput
+	ToNativeUserV3SshKeyOutputWithContext(context.Context) NativeUserV3SshKeyOutput
+}
+
+type NativeUserV3SshKeyArgs struct {
+	// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Certificate NativeUserV3SshKeyCertificatePtrInput `pulumi:"certificate"`
+	// The SSH private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	Key NativeUserV3SshKeyKeyInput `pulumi:"key"`
+	// The username to authenticate as.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (NativeUserV3SshKeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKey)(nil)).Elem()
+}
+
+func (i NativeUserV3SshKeyArgs) ToNativeUserV3SshKeyOutput() NativeUserV3SshKeyOutput {
+	return i.ToNativeUserV3SshKeyOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyArgs) ToNativeUserV3SshKeyOutputWithContext(ctx context.Context) NativeUserV3SshKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyOutput)
+}
+
+func (i NativeUserV3SshKeyArgs) ToNativeUserV3SshKeyPtrOutput() NativeUserV3SshKeyPtrOutput {
+	return i.ToNativeUserV3SshKeyPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyArgs) ToNativeUserV3SshKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyOutput).ToNativeUserV3SshKeyPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SshKeyPtrInput is an input type that accepts NativeUserV3SshKeyArgs, NativeUserV3SshKeyPtr and NativeUserV3SshKeyPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyPtrInput` via:
+//
+//	        NativeUserV3SshKeyArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SshKeyPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyPtrOutput() NativeUserV3SshKeyPtrOutput
+	ToNativeUserV3SshKeyPtrOutputWithContext(context.Context) NativeUserV3SshKeyPtrOutput
+}
+
+type nativeUserV3SshKeyPtrType NativeUserV3SshKeyArgs
+
+func NativeUserV3SshKeyPtr(v *NativeUserV3SshKeyArgs) NativeUserV3SshKeyPtrInput {
+	return (*nativeUserV3SshKeyPtrType)(v)
+}
+
+func (*nativeUserV3SshKeyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKey)(nil)).Elem()
+}
+
+func (i *nativeUserV3SshKeyPtrType) ToNativeUserV3SshKeyPtrOutput() NativeUserV3SshKeyPtrOutput {
+	return i.ToNativeUserV3SshKeyPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SshKeyPtrType) ToNativeUserV3SshKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyPtrOutput)
+}
+
+type NativeUserV3SshKeyOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKey)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyOutput) ToNativeUserV3SshKeyOutput() NativeUserV3SshKeyOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyOutput) ToNativeUserV3SshKeyOutputWithContext(ctx context.Context) NativeUserV3SshKeyOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyOutput) ToNativeUserV3SshKeyPtrOutput() NativeUserV3SshKeyPtrOutput {
+	return o.ToNativeUserV3SshKeyPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SshKeyOutput) ToNativeUserV3SshKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SshKey) *NativeUserV3SshKey {
+		return &v
+	}).(NativeUserV3SshKeyPtrOutput)
+}
+
+// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3SshKeyOutput) Certificate() NativeUserV3SshKeyCertificatePtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKey) *NativeUserV3SshKeyCertificate { return v.Certificate }).(NativeUserV3SshKeyCertificatePtrOutput)
+}
+
+// The SSH private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3SshKeyOutput) Key() NativeUserV3SshKeyKeyOutput {
+	return o.ApplyT(func(v NativeUserV3SshKey) NativeUserV3SshKeyKey { return v.Key }).(NativeUserV3SshKeyKeyOutput)
+}
+
+// The username to authenticate as.
+func (o NativeUserV3SshKeyOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3SshKey) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type NativeUserV3SshKeyPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKey)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyPtrOutput) ToNativeUserV3SshKeyPtrOutput() NativeUserV3SshKeyPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyPtrOutput) ToNativeUserV3SshKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyPtrOutput) Elem() NativeUserV3SshKeyOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKey) NativeUserV3SshKey {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SshKey
+		return ret
+	}).(NativeUserV3SshKeyOutput)
+}
+
+// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3SshKeyPtrOutput) Certificate() NativeUserV3SshKeyCertificatePtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKey) *NativeUserV3SshKeyCertificate {
+		if v == nil {
+			return nil
+		}
+		return v.Certificate
+	}).(NativeUserV3SshKeyCertificatePtrOutput)
+}
+
+// The SSH private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+func (o NativeUserV3SshKeyPtrOutput) Key() NativeUserV3SshKeyKeyPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKey) *NativeUserV3SshKeyKey {
+		if v == nil {
+			return nil
+		}
+		return &v.Key
+	}).(NativeUserV3SshKeyKeyPtrOutput)
+}
+
+// The username to authenticate as.
+func (o NativeUserV3SshKeyPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKey) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3SshKeyCertificate struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable *string `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal *string `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo *string `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+}
+
+// NativeUserV3SshKeyCertificateInput is an input type that accepts NativeUserV3SshKeyCertificateArgs and NativeUserV3SshKeyCertificateOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyCertificateInput` via:
+//
+//	NativeUserV3SshKeyCertificateArgs{...}
+type NativeUserV3SshKeyCertificateInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyCertificateOutput() NativeUserV3SshKeyCertificateOutput
+	ToNativeUserV3SshKeyCertificateOutputWithContext(context.Context) NativeUserV3SshKeyCertificateOutput
+}
+
+type NativeUserV3SshKeyCertificateArgs struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable pulumi.StringPtrInput `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal pulumi.StringPtrInput `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+}
+
+func (NativeUserV3SshKeyCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyCertificate)(nil)).Elem()
+}
+
+func (i NativeUserV3SshKeyCertificateArgs) ToNativeUserV3SshKeyCertificateOutput() NativeUserV3SshKeyCertificateOutput {
+	return i.ToNativeUserV3SshKeyCertificateOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyCertificateArgs) ToNativeUserV3SshKeyCertificateOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateOutput)
+}
+
+func (i NativeUserV3SshKeyCertificateArgs) ToNativeUserV3SshKeyCertificatePtrOutput() NativeUserV3SshKeyCertificatePtrOutput {
+	return i.ToNativeUserV3SshKeyCertificatePtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyCertificateArgs) ToNativeUserV3SshKeyCertificatePtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateOutput).ToNativeUserV3SshKeyCertificatePtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SshKeyCertificatePtrInput is an input type that accepts NativeUserV3SshKeyCertificateArgs, NativeUserV3SshKeyCertificatePtr and NativeUserV3SshKeyCertificatePtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyCertificatePtrInput` via:
+//
+//	        NativeUserV3SshKeyCertificateArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SshKeyCertificatePtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyCertificatePtrOutput() NativeUserV3SshKeyCertificatePtrOutput
+	ToNativeUserV3SshKeyCertificatePtrOutputWithContext(context.Context) NativeUserV3SshKeyCertificatePtrOutput
+}
+
+type nativeUserV3SshKeyCertificatePtrType NativeUserV3SshKeyCertificateArgs
+
+func NativeUserV3SshKeyCertificatePtr(v *NativeUserV3SshKeyCertificateArgs) NativeUserV3SshKeyCertificatePtrInput {
+	return (*nativeUserV3SshKeyCertificatePtrType)(v)
+}
+
+func (*nativeUserV3SshKeyCertificatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyCertificate)(nil)).Elem()
+}
+
+func (i *nativeUserV3SshKeyCertificatePtrType) ToNativeUserV3SshKeyCertificatePtrOutput() NativeUserV3SshKeyCertificatePtrOutput {
+	return i.ToNativeUserV3SshKeyCertificatePtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SshKeyCertificatePtrType) ToNativeUserV3SshKeyCertificatePtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificatePtrOutput)
+}
+
+type NativeUserV3SshKeyCertificateOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyCertificate)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyCertificateOutput) ToNativeUserV3SshKeyCertificateOutput() NativeUserV3SshKeyCertificateOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateOutput) ToNativeUserV3SshKeyCertificateOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateOutput) ToNativeUserV3SshKeyCertificatePtrOutput() NativeUserV3SshKeyCertificatePtrOutput {
+	return o.ToNativeUserV3SshKeyCertificatePtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SshKeyCertificateOutput) ToNativeUserV3SshKeyCertificatePtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SshKeyCertificate) *NativeUserV3SshKeyCertificate {
+		return &v
+	}).(NativeUserV3SshKeyCertificatePtrOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3SshKeyCertificateOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyCertificate) *string { return v.EnvironmentVariable }).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3SshKeyCertificateOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyCertificate) *string { return v.Literal }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3SshKeyCertificateOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyCertificate) *string { return v.LiteralWo }).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3SshKeyCertificateOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyCertificate) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3SshKeyCertificatePtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyCertificatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyCertificate)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyCertificatePtrOutput) ToNativeUserV3SshKeyCertificatePtrOutput() NativeUserV3SshKeyCertificatePtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificatePtrOutput) ToNativeUserV3SshKeyCertificatePtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificatePtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificatePtrOutput) Elem() NativeUserV3SshKeyCertificateOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificate) NativeUserV3SshKeyCertificate {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SshKeyCertificate
+		return ret
+	}).(NativeUserV3SshKeyCertificateOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3SshKeyCertificatePtrOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EnvironmentVariable
+	}).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3SshKeyCertificatePtrOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Literal
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3SshKeyCertificatePtrOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3SshKeyCertificatePtrOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificate) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWoVersion
+	}).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3SshKeyKey struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable *string `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal *string `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo *string `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+}
+
+// NativeUserV3SshKeyKeyInput is an input type that accepts NativeUserV3SshKeyKeyArgs and NativeUserV3SshKeyKeyOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyKeyInput` via:
+//
+//	NativeUserV3SshKeyKeyArgs{...}
+type NativeUserV3SshKeyKeyInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyKeyOutput() NativeUserV3SshKeyKeyOutput
+	ToNativeUserV3SshKeyKeyOutputWithContext(context.Context) NativeUserV3SshKeyKeyOutput
+}
+
+type NativeUserV3SshKeyKeyArgs struct {
+	// The name of an environment variable the connector reads the secret from.
+	EnvironmentVariable pulumi.StringPtrInput `pulumi:"environmentVariable"`
+	// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+	Literal pulumi.StringPtrInput `pulumi:"literal"`
+	// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+	// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
+	// Version trigger for `literalWo`. Increment this value to update the secret.
+	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+}
+
+func (NativeUserV3SshKeyKeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyKey)(nil)).Elem()
+}
+
+func (i NativeUserV3SshKeyKeyArgs) ToNativeUserV3SshKeyKeyOutput() NativeUserV3SshKeyKeyOutput {
+	return i.ToNativeUserV3SshKeyKeyOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyKeyArgs) ToNativeUserV3SshKeyKeyOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeyOutput)
+}
+
+func (i NativeUserV3SshKeyKeyArgs) ToNativeUserV3SshKeyKeyPtrOutput() NativeUserV3SshKeyKeyPtrOutput {
+	return i.ToNativeUserV3SshKeyKeyPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyKeyArgs) ToNativeUserV3SshKeyKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeyOutput).ToNativeUserV3SshKeyKeyPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SshKeyKeyPtrInput is an input type that accepts NativeUserV3SshKeyKeyArgs, NativeUserV3SshKeyKeyPtr and NativeUserV3SshKeyKeyPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyKeyPtrInput` via:
+//
+//	        NativeUserV3SshKeyKeyArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SshKeyKeyPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyKeyPtrOutput() NativeUserV3SshKeyKeyPtrOutput
+	ToNativeUserV3SshKeyKeyPtrOutputWithContext(context.Context) NativeUserV3SshKeyKeyPtrOutput
+}
+
+type nativeUserV3SshKeyKeyPtrType NativeUserV3SshKeyKeyArgs
+
+func NativeUserV3SshKeyKeyPtr(v *NativeUserV3SshKeyKeyArgs) NativeUserV3SshKeyKeyPtrInput {
+	return (*nativeUserV3SshKeyKeyPtrType)(v)
+}
+
+func (*nativeUserV3SshKeyKeyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyKey)(nil)).Elem()
+}
+
+func (i *nativeUserV3SshKeyKeyPtrType) ToNativeUserV3SshKeyKeyPtrOutput() NativeUserV3SshKeyKeyPtrOutput {
+	return i.ToNativeUserV3SshKeyKeyPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SshKeyKeyPtrType) ToNativeUserV3SshKeyKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeyPtrOutput)
+}
+
+type NativeUserV3SshKeyKeyOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyKey)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyKeyOutput) ToNativeUserV3SshKeyKeyOutput() NativeUserV3SshKeyKeyOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeyOutput) ToNativeUserV3SshKeyKeyOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeyOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeyOutput) ToNativeUserV3SshKeyKeyPtrOutput() NativeUserV3SshKeyKeyPtrOutput {
+	return o.ToNativeUserV3SshKeyKeyPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SshKeyKeyOutput) ToNativeUserV3SshKeyKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SshKeyKey) *NativeUserV3SshKeyKey {
+		return &v
+	}).(NativeUserV3SshKeyKeyPtrOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3SshKeyKeyOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyKey) *string { return v.EnvironmentVariable }).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3SshKeyKeyOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyKey) *string { return v.Literal }).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3SshKeyKeyOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyKey) *string { return v.LiteralWo }).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3SshKeyKeyOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyKey) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
+}
+
+type NativeUserV3SshKeyKeyPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyKeyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyKey)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyKeyPtrOutput) ToNativeUserV3SshKeyKeyPtrOutput() NativeUserV3SshKeyKeyPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeyPtrOutput) ToNativeUserV3SshKeyKeyPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeyPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeyPtrOutput) Elem() NativeUserV3SshKeyKeyOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKey) NativeUserV3SshKeyKey {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SshKeyKey
+		return ret
+	}).(NativeUserV3SshKeyKeyOutput)
+}
+
+// The name of an environment variable the connector reads the secret from.
+func (o NativeUserV3SshKeyKeyPtrOutput) EnvironmentVariable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKey) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EnvironmentVariable
+	}).(pulumi.StringPtrOutput)
+}
+
+// The secret value itself. Stored in Terraform state; prefer `literalWo` or `environmentVariable` where possible.
+func (o NativeUserV3SshKeyKeyPtrOutput) Literal() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKey) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Literal
+	}).(pulumi.StringPtrOutput)
+}
+
+// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+// Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literalWoVersion`.
+func (o NativeUserV3SshKeyKeyPtrOutput) LiteralWo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKey) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Version trigger for `literalWo`. Increment this value to update the secret.
+func (o NativeUserV3SshKeyKeyPtrOutput) LiteralWoVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKey) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LiteralWoVersion
+	}).(pulumi.IntPtrOutput)
+}
+
 type ProviderOidc struct {
 	// Mint short-lived OIDC tokens using the AWS credential chain and STS.
 	Aws *ProviderOidcAws `pulumi:"aws"`
@@ -5561,6 +9706,54 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationSessionPtrInput)(nil)).Elem(), LogConfigurationSessionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationStreamInput)(nil)).Elem(), LogConfigurationStreamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationStreamPtrInput)(nil)).Elem(), LogConfigurationStreamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3AwsIamInput)(nil)).Elem(), NativeUserV3AwsIamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3AwsIamPtrInput)(nil)).Elem(), NativeUserV3AwsIamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3AwsIamRoleInput)(nil)).Elem(), NativeUserV3AwsIamRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3AwsIamRolePtrInput)(nil)).Elem(), NativeUserV3AwsIamRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3AzureIamInput)(nil)).Elem(), NativeUserV3AzureIamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3AzureIamPtrInput)(nil)).Elem(), NativeUserV3AzureIamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicInput)(nil)).Elem(), NativeUserV3BasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPtrInput)(nil)).Elem(), NativeUserV3BasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordInput)(nil)).Elem(), NativeUserV3BasicPasswordArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordPtrInput)(nil)).Elem(), NativeUserV3BasicPasswordArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3GcpIamInput)(nil)).Elem(), NativeUserV3GcpIamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3GcpIamPtrInput)(nil)).Elem(), NativeUserV3GcpIamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookInput)(nil)).Elem(), NativeUserV3HookArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookPtrInput)(nil)).Elem(), NativeUserV3HookArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValuePtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValuePtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicInput)(nil)).Elem(), NativeUserV3HttpBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPtrInput)(nil)).Elem(), NativeUserV3HttpBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordPtrInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerInput)(nil)).Elem(), NativeUserV3HttpBearerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerPtrInput)(nil)).Elem(), NativeUserV3HttpBearerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenInput)(nil)).Elem(), NativeUserV3HttpBearerTokenArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenPtrInput)(nil)).Elem(), NativeUserV3HttpBearerTokenArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineInput)(nil)).Elem(), NativeUserV3KubernetesInlineArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlinePtrInput)(nil)).Elem(), NativeUserV3KubernetesInlineArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigPtrInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathInput)(nil)).Elem(), NativeUserV3KubernetesPathArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathPtrInput)(nil)).Elem(), NativeUserV3KubernetesPathArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathPtrInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyInput)(nil)).Elem(), NativeUserV3SnowflakeKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyPtrInput)(nil)).Elem(), NativeUserV3SnowflakeKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeyInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeyPtrInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyInput)(nil)).Elem(), NativeUserV3SshKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyPtrInput)(nil)).Elem(), NativeUserV3SshKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificateInput)(nil)).Elem(), NativeUserV3SshKeyCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificatePtrInput)(nil)).Elem(), NativeUserV3SshKeyCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeyInput)(nil)).Elem(), NativeUserV3SshKeyKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeyPtrInput)(nil)).Elem(), NativeUserV3SshKeyKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcInput)(nil)).Elem(), ProviderOidcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcPtrInput)(nil)).Elem(), ProviderOidcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAwsInput)(nil)).Elem(), ProviderOidcAwsArgs{})
@@ -5625,6 +9818,54 @@ func init() {
 	pulumi.RegisterOutputType(LogConfigurationSessionPtrOutput{})
 	pulumi.RegisterOutputType(LogConfigurationStreamOutput{})
 	pulumi.RegisterOutputType(LogConfigurationStreamPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3AwsIamOutput{})
+	pulumi.RegisterOutputType(NativeUserV3AwsIamPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3AwsIamRoleOutput{})
+	pulumi.RegisterOutputType(NativeUserV3AwsIamRolePtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3AzureIamOutput{})
+	pulumi.RegisterOutputType(NativeUserV3AzureIamPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicPasswordOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicPasswordPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3GcpIamOutput{})
+	pulumi.RegisterOutputType(NativeUserV3GcpIamPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HookOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HookPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValueOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValuePtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValueOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValuePtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlinePtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeyOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeyPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificateOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificatePtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyKeyOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyKeyPtrOutput{})
 	pulumi.RegisterOutputType(ProviderOidcOutput{})
 	pulumi.RegisterOutputType(ProviderOidcPtrOutput{})
 	pulumi.RegisterOutputType(ProviderOidcAwsOutput{})

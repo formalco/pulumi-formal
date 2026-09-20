@@ -25,6 +25,12 @@ namespace Formal.Pulumi
         [Output("apiKey")]
         public Output<string?> ApiKey { get; private set; } = null!;
 
+        /// <summary>
+        /// Formal control plane URL. Defaults to `https://api.formal.ai`.
+        /// </summary>
+        [Output("url")]
+        public Output<string?> Url { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Provider resource with the given unique name, arguments, and options.
@@ -88,6 +94,12 @@ namespace Formal.Pulumi
 
         [Input("retrieveSensitiveValues", json: true)]
         public Input<bool>? RetrieveSensitiveValues { get; set; }
+
+        /// <summary>
+        /// Formal control plane URL. Defaults to `https://api.formal.ai`.
+        /// </summary>
+        [Input("url")]
+        public Input<string>? Url { get; set; }
 
         public ProviderArgs()
         {

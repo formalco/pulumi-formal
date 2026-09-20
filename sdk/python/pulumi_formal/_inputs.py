@@ -73,6 +73,54 @@ __all__ = [
     'LogConfigurationSessionArgsDict',
     'LogConfigurationStreamArgs',
     'LogConfigurationStreamArgsDict',
+    'NativeUserV3AwsIamArgs',
+    'NativeUserV3AwsIamArgsDict',
+    'NativeUserV3AwsIamRoleArgs',
+    'NativeUserV3AwsIamRoleArgsDict',
+    'NativeUserV3AzureIamArgs',
+    'NativeUserV3AzureIamArgsDict',
+    'NativeUserV3BasicArgs',
+    'NativeUserV3BasicArgsDict',
+    'NativeUserV3BasicPasswordArgs',
+    'NativeUserV3BasicPasswordArgsDict',
+    'NativeUserV3GcpIamArgs',
+    'NativeUserV3GcpIamArgsDict',
+    'NativeUserV3HookArgs',
+    'NativeUserV3HookArgsDict',
+    'NativeUserV3HttpApiKeyHeaderArgs',
+    'NativeUserV3HttpApiKeyHeaderArgsDict',
+    'NativeUserV3HttpApiKeyHeaderValueArgs',
+    'NativeUserV3HttpApiKeyHeaderValueArgsDict',
+    'NativeUserV3HttpApiKeyQueryArgs',
+    'NativeUserV3HttpApiKeyQueryArgsDict',
+    'NativeUserV3HttpApiKeyQueryValueArgs',
+    'NativeUserV3HttpApiKeyQueryValueArgsDict',
+    'NativeUserV3HttpBasicArgs',
+    'NativeUserV3HttpBasicArgsDict',
+    'NativeUserV3HttpBasicPasswordArgs',
+    'NativeUserV3HttpBasicPasswordArgsDict',
+    'NativeUserV3HttpBearerArgs',
+    'NativeUserV3HttpBearerArgsDict',
+    'NativeUserV3HttpBearerTokenArgs',
+    'NativeUserV3HttpBearerTokenArgsDict',
+    'NativeUserV3KubernetesInlineArgs',
+    'NativeUserV3KubernetesInlineArgsDict',
+    'NativeUserV3KubernetesInlineKubeconfigArgs',
+    'NativeUserV3KubernetesInlineKubeconfigArgsDict',
+    'NativeUserV3KubernetesPathArgs',
+    'NativeUserV3KubernetesPathArgsDict',
+    'NativeUserV3KubernetesPathKubeconfigPathArgs',
+    'NativeUserV3KubernetesPathKubeconfigPathArgsDict',
+    'NativeUserV3SnowflakeKeyArgs',
+    'NativeUserV3SnowflakeKeyArgsDict',
+    'NativeUserV3SnowflakeKeyKeyArgs',
+    'NativeUserV3SnowflakeKeyKeyArgsDict',
+    'NativeUserV3SshKeyArgs',
+    'NativeUserV3SshKeyArgsDict',
+    'NativeUserV3SshKeyCertificateArgs',
+    'NativeUserV3SshKeyCertificateArgsDict',
+    'NativeUserV3SshKeyKeyArgs',
+    'NativeUserV3SshKeyKeyArgsDict',
     'ProviderOidcArgs',
     'ProviderOidcArgsDict',
     'ProviderOidcAwsArgs',
@@ -2134,6 +2182,1568 @@ class LogConfigurationStreamArgs:
     @encrypt.setter
     def encrypt(self, value: pulumi.Input[_builtins.bool]):
         pulumi.set(self, "encrypt", value)
+
+
+class NativeUserV3AwsIamArgsDict(TypedDict):
+    username: pulumi.Input[_builtins.str]
+    """
+    The database username mapped to the IAM identity.
+    """
+
+@pulumi.input_type
+class NativeUserV3AwsIamArgs:
+    def __init__(__self__, *,
+                 username: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] username: The database username mapped to the IAM identity.
+        """
+        pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> pulumi.Input[_builtins.str]:
+        """
+        The database username mapped to the IAM identity.
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "username", value)
+
+
+class NativeUserV3AwsIamRoleArgsDict(TypedDict):
+    role: pulumi.Input[_builtins.str]
+    """
+    The ARN of the role to assume.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    The database username mapped to the IAM identity.
+    """
+
+@pulumi.input_type
+class NativeUserV3AwsIamRoleArgs:
+    def __init__(__self__, *,
+                 role: pulumi.Input[_builtins.str],
+                 username: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] role: The ARN of the role to assume.
+        :param pulumi.Input[_builtins.str] username: The database username mapped to the IAM identity.
+        """
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def role(self) -> pulumi.Input[_builtins.str]:
+        """
+        The ARN of the role to assume.
+        """
+        return pulumi.get(self, "role")
+
+    @role.setter
+    def role(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "role", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> pulumi.Input[_builtins.str]:
+        """
+        The database username mapped to the IAM identity.
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "username", value)
+
+
+class NativeUserV3AzureIamArgsDict(TypedDict):
+    username: pulumi.Input[_builtins.str]
+    """
+    The database username mapped to the Azure identity.
+    """
+
+@pulumi.input_type
+class NativeUserV3AzureIamArgs:
+    def __init__(__self__, *,
+                 username: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] username: The database username mapped to the Azure identity.
+        """
+        pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> pulumi.Input[_builtins.str]:
+        """
+        The database username mapped to the Azure identity.
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "username", value)
+
+
+class NativeUserV3BasicArgsDict(TypedDict):
+    password: pulumi.Input['NativeUserV3BasicPasswordArgsDict']
+    """
+    The password to authenticate with. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    The username to authenticate as.
+    """
+
+@pulumi.input_type
+class NativeUserV3BasicArgs:
+    def __init__(__self__, *,
+                 password: pulumi.Input['NativeUserV3BasicPasswordArgs'],
+                 username: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input['NativeUserV3BasicPasswordArgs'] password: The password to authenticate with. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param pulumi.Input[_builtins.str] username: The username to authenticate as.
+        """
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def password(self) -> pulumi.Input['NativeUserV3BasicPasswordArgs']:
+        """
+        The password to authenticate with. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: pulumi.Input['NativeUserV3BasicPasswordArgs']):
+        pulumi.set(self, "password", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> pulumi.Input[_builtins.str]:
+        """
+        The username to authenticate as.
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "username", value)
+
+
+class NativeUserV3BasicPasswordArgsDict(TypedDict):
+    environment_variable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of an environment variable the connector reads the secret from.
+    """
+    literal: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+    """
+    literal_wo: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+    """
+    literal_wo_version: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Version trigger for `literal_wo`. Increment this value to update the secret.
+    """
+
+@pulumi.input_type
+class NativeUserV3BasicPasswordArgs:
+    def __init__(__self__, *,
+                 environment_variable: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo_version: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] environment_variable: The name of an environment variable the connector reads the secret from.
+        :param pulumi.Input[_builtins.str] literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        :param pulumi.Input[_builtins.str] literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        :param pulumi.Input[_builtins.int] literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        if environment_variable is not None:
+            pulumi.set(__self__, "environment_variable", environment_variable)
+        if literal is not None:
+            pulumi.set(__self__, "literal", literal)
+        if literal_wo is not None:
+            pulumi.set(__self__, "literal_wo", literal_wo)
+        if literal_wo_version is not None:
+            pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+
+    @_builtins.property
+    @pulumi.getter(name="environmentVariable")
+    def environment_variable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of an environment variable the connector reads the secret from.
+        """
+        return pulumi.get(self, "environment_variable")
+
+    @environment_variable.setter
+    def environment_variable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "environment_variable", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def literal(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        """
+        return pulumi.get(self, "literal")
+
+    @literal.setter
+    def literal(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWo")
+    def literal_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        """
+        return pulumi.get(self, "literal_wo")
+
+    @literal_wo.setter
+    def literal_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWoVersion")
+    def literal_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        return pulumi.get(self, "literal_wo_version")
+
+    @literal_wo_version.setter
+    def literal_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "literal_wo_version", value)
+
+
+class NativeUserV3GcpIamArgsDict(TypedDict):
+    username: pulumi.Input[_builtins.str]
+    """
+    The database username mapped to the GCP identity.
+    """
+
+@pulumi.input_type
+class NativeUserV3GcpIamArgs:
+    def __init__(__self__, *,
+                 username: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] username: The database username mapped to the GCP identity.
+        """
+        pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> pulumi.Input[_builtins.str]:
+        """
+        The database username mapped to the GCP identity.
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "username", value)
+
+
+class NativeUserV3HookArgsDict(TypedDict):
+    code: pulumi.Input[_builtins.str]
+    """
+    The TypeScript or JavaScript source of the hook, in the same form as `formal_hook.code`.
+    """
+    output_type: pulumi.Input[_builtins.str]
+    """
+    The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `aws_iam`, `aws_iam_role`, `gcp_iam`, `azure_iam`, `kubernetes_path`, `kubernetes_inline`, `ssh_key`, `snowflake_key`, `http_basic`, `http_bearer`, `http_api_key_header`, `http_api_key_query`.
+    """
+    allowlisted_env_variables: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    Environment variables the hook may read.
+    """
+    allowlisted_network_hosts: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    Network hosts the hook may access.
+    """
+
+@pulumi.input_type
+class NativeUserV3HookArgs:
+    def __init__(__self__, *,
+                 code: pulumi.Input[_builtins.str],
+                 output_type: pulumi.Input[_builtins.str],
+                 allowlisted_env_variables: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 allowlisted_network_hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
+        """
+        :param pulumi.Input[_builtins.str] code: The TypeScript or JavaScript source of the hook, in the same form as `formal_hook.code`.
+        :param pulumi.Input[_builtins.str] output_type: The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `aws_iam`, `aws_iam_role`, `gcp_iam`, `azure_iam`, `kubernetes_path`, `kubernetes_inline`, `ssh_key`, `snowflake_key`, `http_basic`, `http_bearer`, `http_api_key_header`, `http_api_key_query`.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_env_variables: Environment variables the hook may read.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowlisted_network_hosts: Network hosts the hook may access.
+        """
+        pulumi.set(__self__, "code", code)
+        pulumi.set(__self__, "output_type", output_type)
+        if allowlisted_env_variables is not None:
+            pulumi.set(__self__, "allowlisted_env_variables", allowlisted_env_variables)
+        if allowlisted_network_hosts is not None:
+            pulumi.set(__self__, "allowlisted_network_hosts", allowlisted_network_hosts)
+
+    @_builtins.property
+    @pulumi.getter
+    def code(self) -> pulumi.Input[_builtins.str]:
+        """
+        The TypeScript or JavaScript source of the hook, in the same form as `formal_hook.code`.
+        """
+        return pulumi.get(self, "code")
+
+    @code.setter
+    def code(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "code", value)
+
+    @_builtins.property
+    @pulumi.getter(name="outputType")
+    def output_type(self) -> pulumi.Input[_builtins.str]:
+        """
+        The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `aws_iam`, `aws_iam_role`, `gcp_iam`, `azure_iam`, `kubernetes_path`, `kubernetes_inline`, `ssh_key`, `snowflake_key`, `http_basic`, `http_bearer`, `http_api_key_header`, `http_api_key_query`.
+        """
+        return pulumi.get(self, "output_type")
+
+    @output_type.setter
+    def output_type(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "output_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowlistedEnvVariables")
+    def allowlisted_env_variables(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Environment variables the hook may read.
+        """
+        return pulumi.get(self, "allowlisted_env_variables")
+
+    @allowlisted_env_variables.setter
+    def allowlisted_env_variables(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "allowlisted_env_variables", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowlistedNetworkHosts")
+    def allowlisted_network_hosts(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Network hosts the hook may access.
+        """
+        return pulumi.get(self, "allowlisted_network_hosts")
+
+    @allowlisted_network_hosts.setter
+    def allowlisted_network_hosts(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "allowlisted_network_hosts", value)
+
+
+class NativeUserV3HttpApiKeyHeaderArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The name of the header carrying the API key.
+    """
+    value: pulumi.Input['NativeUserV3HttpApiKeyHeaderValueArgsDict']
+    """
+    The API key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+    """
+
+@pulumi.input_type
+class NativeUserV3HttpApiKeyHeaderArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[_builtins.str],
+                 value: pulumi.Input['NativeUserV3HttpApiKeyHeaderValueArgs']):
+        """
+        :param pulumi.Input[_builtins.str] key: The name of the header carrying the API key.
+        :param pulumi.Input['NativeUserV3HttpApiKeyHeaderValueArgs'] value: The API key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of the header carrying the API key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> pulumi.Input['NativeUserV3HttpApiKeyHeaderValueArgs']:
+        """
+        The API key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input['NativeUserV3HttpApiKeyHeaderValueArgs']):
+        pulumi.set(self, "value", value)
+
+
+class NativeUserV3HttpApiKeyHeaderValueArgsDict(TypedDict):
+    environment_variable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of an environment variable the connector reads the secret from.
+    """
+    literal: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+    """
+    literal_wo: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+    """
+    literal_wo_version: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Version trigger for `literal_wo`. Increment this value to update the secret.
+    """
+
+@pulumi.input_type
+class NativeUserV3HttpApiKeyHeaderValueArgs:
+    def __init__(__self__, *,
+                 environment_variable: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo_version: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] environment_variable: The name of an environment variable the connector reads the secret from.
+        :param pulumi.Input[_builtins.str] literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        :param pulumi.Input[_builtins.str] literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        :param pulumi.Input[_builtins.int] literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        if environment_variable is not None:
+            pulumi.set(__self__, "environment_variable", environment_variable)
+        if literal is not None:
+            pulumi.set(__self__, "literal", literal)
+        if literal_wo is not None:
+            pulumi.set(__self__, "literal_wo", literal_wo)
+        if literal_wo_version is not None:
+            pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+
+    @_builtins.property
+    @pulumi.getter(name="environmentVariable")
+    def environment_variable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of an environment variable the connector reads the secret from.
+        """
+        return pulumi.get(self, "environment_variable")
+
+    @environment_variable.setter
+    def environment_variable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "environment_variable", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def literal(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        """
+        return pulumi.get(self, "literal")
+
+    @literal.setter
+    def literal(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWo")
+    def literal_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        """
+        return pulumi.get(self, "literal_wo")
+
+    @literal_wo.setter
+    def literal_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWoVersion")
+    def literal_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        return pulumi.get(self, "literal_wo_version")
+
+    @literal_wo_version.setter
+    def literal_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "literal_wo_version", value)
+
+
+class NativeUserV3HttpApiKeyQueryArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The name of the query parameter carrying the API key.
+    """
+    value: pulumi.Input['NativeUserV3HttpApiKeyQueryValueArgsDict']
+    """
+    The API key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+    """
+
+@pulumi.input_type
+class NativeUserV3HttpApiKeyQueryArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[_builtins.str],
+                 value: pulumi.Input['NativeUserV3HttpApiKeyQueryValueArgs']):
+        """
+        :param pulumi.Input[_builtins.str] key: The name of the query parameter carrying the API key.
+        :param pulumi.Input['NativeUserV3HttpApiKeyQueryValueArgs'] value: The API key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of the query parameter carrying the API key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> pulumi.Input['NativeUserV3HttpApiKeyQueryValueArgs']:
+        """
+        The API key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input['NativeUserV3HttpApiKeyQueryValueArgs']):
+        pulumi.set(self, "value", value)
+
+
+class NativeUserV3HttpApiKeyQueryValueArgsDict(TypedDict):
+    environment_variable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of an environment variable the connector reads the secret from.
+    """
+    literal: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+    """
+    literal_wo: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+    """
+    literal_wo_version: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Version trigger for `literal_wo`. Increment this value to update the secret.
+    """
+
+@pulumi.input_type
+class NativeUserV3HttpApiKeyQueryValueArgs:
+    def __init__(__self__, *,
+                 environment_variable: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo_version: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] environment_variable: The name of an environment variable the connector reads the secret from.
+        :param pulumi.Input[_builtins.str] literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        :param pulumi.Input[_builtins.str] literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        :param pulumi.Input[_builtins.int] literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        if environment_variable is not None:
+            pulumi.set(__self__, "environment_variable", environment_variable)
+        if literal is not None:
+            pulumi.set(__self__, "literal", literal)
+        if literal_wo is not None:
+            pulumi.set(__self__, "literal_wo", literal_wo)
+        if literal_wo_version is not None:
+            pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+
+    @_builtins.property
+    @pulumi.getter(name="environmentVariable")
+    def environment_variable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of an environment variable the connector reads the secret from.
+        """
+        return pulumi.get(self, "environment_variable")
+
+    @environment_variable.setter
+    def environment_variable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "environment_variable", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def literal(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        """
+        return pulumi.get(self, "literal")
+
+    @literal.setter
+    def literal(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWo")
+    def literal_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        """
+        return pulumi.get(self, "literal_wo")
+
+    @literal_wo.setter
+    def literal_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWoVersion")
+    def literal_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        return pulumi.get(self, "literal_wo_version")
+
+    @literal_wo_version.setter
+    def literal_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "literal_wo_version", value)
+
+
+class NativeUserV3HttpBasicArgsDict(TypedDict):
+    header: pulumi.Input[_builtins.str]
+    """
+    The header to inject the credentials on, for example `Authorization`.
+    """
+    password: pulumi.Input['NativeUserV3HttpBasicPasswordArgsDict']
+    """
+    The password to authenticate with. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    The username to authenticate as.
+    """
+
+@pulumi.input_type
+class NativeUserV3HttpBasicArgs:
+    def __init__(__self__, *,
+                 header: pulumi.Input[_builtins.str],
+                 password: pulumi.Input['NativeUserV3HttpBasicPasswordArgs'],
+                 username: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] header: The header to inject the credentials on, for example `Authorization`.
+        :param pulumi.Input['NativeUserV3HttpBasicPasswordArgs'] password: The password to authenticate with. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param pulumi.Input[_builtins.str] username: The username to authenticate as.
+        """
+        pulumi.set(__self__, "header", header)
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def header(self) -> pulumi.Input[_builtins.str]:
+        """
+        The header to inject the credentials on, for example `Authorization`.
+        """
+        return pulumi.get(self, "header")
+
+    @header.setter
+    def header(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "header", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def password(self) -> pulumi.Input['NativeUserV3HttpBasicPasswordArgs']:
+        """
+        The password to authenticate with. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: pulumi.Input['NativeUserV3HttpBasicPasswordArgs']):
+        pulumi.set(self, "password", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> pulumi.Input[_builtins.str]:
+        """
+        The username to authenticate as.
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "username", value)
+
+
+class NativeUserV3HttpBasicPasswordArgsDict(TypedDict):
+    environment_variable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of an environment variable the connector reads the secret from.
+    """
+    literal: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+    """
+    literal_wo: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+    """
+    literal_wo_version: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Version trigger for `literal_wo`. Increment this value to update the secret.
+    """
+
+@pulumi.input_type
+class NativeUserV3HttpBasicPasswordArgs:
+    def __init__(__self__, *,
+                 environment_variable: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo_version: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] environment_variable: The name of an environment variable the connector reads the secret from.
+        :param pulumi.Input[_builtins.str] literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        :param pulumi.Input[_builtins.str] literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        :param pulumi.Input[_builtins.int] literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        if environment_variable is not None:
+            pulumi.set(__self__, "environment_variable", environment_variable)
+        if literal is not None:
+            pulumi.set(__self__, "literal", literal)
+        if literal_wo is not None:
+            pulumi.set(__self__, "literal_wo", literal_wo)
+        if literal_wo_version is not None:
+            pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+
+    @_builtins.property
+    @pulumi.getter(name="environmentVariable")
+    def environment_variable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of an environment variable the connector reads the secret from.
+        """
+        return pulumi.get(self, "environment_variable")
+
+    @environment_variable.setter
+    def environment_variable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "environment_variable", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def literal(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        """
+        return pulumi.get(self, "literal")
+
+    @literal.setter
+    def literal(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWo")
+    def literal_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        """
+        return pulumi.get(self, "literal_wo")
+
+    @literal_wo.setter
+    def literal_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWoVersion")
+    def literal_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        return pulumi.get(self, "literal_wo_version")
+
+    @literal_wo_version.setter
+    def literal_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "literal_wo_version", value)
+
+
+class NativeUserV3HttpBearerArgsDict(TypedDict):
+    header: pulumi.Input[_builtins.str]
+    """
+    The header to inject the token on, for example `Authorization`.
+    """
+    token: pulumi.Input['NativeUserV3HttpBearerTokenArgsDict']
+    """
+    The bearer token. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+    """
+
+@pulumi.input_type
+class NativeUserV3HttpBearerArgs:
+    def __init__(__self__, *,
+                 header: pulumi.Input[_builtins.str],
+                 token: pulumi.Input['NativeUserV3HttpBearerTokenArgs']):
+        """
+        :param pulumi.Input[_builtins.str] header: The header to inject the token on, for example `Authorization`.
+        :param pulumi.Input['NativeUserV3HttpBearerTokenArgs'] token: The bearer token. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        pulumi.set(__self__, "header", header)
+        pulumi.set(__self__, "token", token)
+
+    @_builtins.property
+    @pulumi.getter
+    def header(self) -> pulumi.Input[_builtins.str]:
+        """
+        The header to inject the token on, for example `Authorization`.
+        """
+        return pulumi.get(self, "header")
+
+    @header.setter
+    def header(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "header", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def token(self) -> pulumi.Input['NativeUserV3HttpBearerTokenArgs']:
+        """
+        The bearer token. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        return pulumi.get(self, "token")
+
+    @token.setter
+    def token(self, value: pulumi.Input['NativeUserV3HttpBearerTokenArgs']):
+        pulumi.set(self, "token", value)
+
+
+class NativeUserV3HttpBearerTokenArgsDict(TypedDict):
+    environment_variable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of an environment variable the connector reads the secret from.
+    """
+    literal: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+    """
+    literal_wo: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+    """
+    literal_wo_version: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Version trigger for `literal_wo`. Increment this value to update the secret.
+    """
+
+@pulumi.input_type
+class NativeUserV3HttpBearerTokenArgs:
+    def __init__(__self__, *,
+                 environment_variable: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo_version: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] environment_variable: The name of an environment variable the connector reads the secret from.
+        :param pulumi.Input[_builtins.str] literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        :param pulumi.Input[_builtins.str] literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        :param pulumi.Input[_builtins.int] literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        if environment_variable is not None:
+            pulumi.set(__self__, "environment_variable", environment_variable)
+        if literal is not None:
+            pulumi.set(__self__, "literal", literal)
+        if literal_wo is not None:
+            pulumi.set(__self__, "literal_wo", literal_wo)
+        if literal_wo_version is not None:
+            pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+
+    @_builtins.property
+    @pulumi.getter(name="environmentVariable")
+    def environment_variable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of an environment variable the connector reads the secret from.
+        """
+        return pulumi.get(self, "environment_variable")
+
+    @environment_variable.setter
+    def environment_variable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "environment_variable", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def literal(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        """
+        return pulumi.get(self, "literal")
+
+    @literal.setter
+    def literal(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWo")
+    def literal_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        """
+        return pulumi.get(self, "literal_wo")
+
+    @literal_wo.setter
+    def literal_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWoVersion")
+    def literal_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        return pulumi.get(self, "literal_wo_version")
+
+    @literal_wo_version.setter
+    def literal_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "literal_wo_version", value)
+
+
+class NativeUserV3KubernetesInlineArgsDict(TypedDict):
+    kubeconfig: pulumi.Input['NativeUserV3KubernetesInlineKubeconfigArgsDict']
+    """
+    The kubeconfig YAML document. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+    """
+
+@pulumi.input_type
+class NativeUserV3KubernetesInlineArgs:
+    def __init__(__self__, *,
+                 kubeconfig: pulumi.Input['NativeUserV3KubernetesInlineKubeconfigArgs']):
+        """
+        :param pulumi.Input['NativeUserV3KubernetesInlineKubeconfigArgs'] kubeconfig: The kubeconfig YAML document. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        pulumi.set(__self__, "kubeconfig", kubeconfig)
+
+    @_builtins.property
+    @pulumi.getter
+    def kubeconfig(self) -> pulumi.Input['NativeUserV3KubernetesInlineKubeconfigArgs']:
+        """
+        The kubeconfig YAML document. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        return pulumi.get(self, "kubeconfig")
+
+    @kubeconfig.setter
+    def kubeconfig(self, value: pulumi.Input['NativeUserV3KubernetesInlineKubeconfigArgs']):
+        pulumi.set(self, "kubeconfig", value)
+
+
+class NativeUserV3KubernetesInlineKubeconfigArgsDict(TypedDict):
+    environment_variable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of an environment variable the connector reads the secret from.
+    """
+    literal: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+    """
+    literal_wo: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+    """
+    literal_wo_version: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Version trigger for `literal_wo`. Increment this value to update the secret.
+    """
+
+@pulumi.input_type
+class NativeUserV3KubernetesInlineKubeconfigArgs:
+    def __init__(__self__, *,
+                 environment_variable: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo_version: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] environment_variable: The name of an environment variable the connector reads the secret from.
+        :param pulumi.Input[_builtins.str] literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        :param pulumi.Input[_builtins.str] literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        :param pulumi.Input[_builtins.int] literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        if environment_variable is not None:
+            pulumi.set(__self__, "environment_variable", environment_variable)
+        if literal is not None:
+            pulumi.set(__self__, "literal", literal)
+        if literal_wo is not None:
+            pulumi.set(__self__, "literal_wo", literal_wo)
+        if literal_wo_version is not None:
+            pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+
+    @_builtins.property
+    @pulumi.getter(name="environmentVariable")
+    def environment_variable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of an environment variable the connector reads the secret from.
+        """
+        return pulumi.get(self, "environment_variable")
+
+    @environment_variable.setter
+    def environment_variable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "environment_variable", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def literal(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        """
+        return pulumi.get(self, "literal")
+
+    @literal.setter
+    def literal(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWo")
+    def literal_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        """
+        return pulumi.get(self, "literal_wo")
+
+    @literal_wo.setter
+    def literal_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWoVersion")
+    def literal_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        return pulumi.get(self, "literal_wo_version")
+
+    @literal_wo_version.setter
+    def literal_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "literal_wo_version", value)
+
+
+class NativeUserV3KubernetesPathArgsDict(TypedDict):
+    kubeconfig_path: pulumi.Input['NativeUserV3KubernetesPathKubeconfigPathArgsDict']
+    """
+    Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+    """
+
+@pulumi.input_type
+class NativeUserV3KubernetesPathArgs:
+    def __init__(__self__, *,
+                 kubeconfig_path: pulumi.Input['NativeUserV3KubernetesPathKubeconfigPathArgs']):
+        """
+        :param pulumi.Input['NativeUserV3KubernetesPathKubeconfigPathArgs'] kubeconfig_path: Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        pulumi.set(__self__, "kubeconfig_path", kubeconfig_path)
+
+    @_builtins.property
+    @pulumi.getter(name="kubeconfigPath")
+    def kubeconfig_path(self) -> pulumi.Input['NativeUserV3KubernetesPathKubeconfigPathArgs']:
+        """
+        Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        return pulumi.get(self, "kubeconfig_path")
+
+    @kubeconfig_path.setter
+    def kubeconfig_path(self, value: pulumi.Input['NativeUserV3KubernetesPathKubeconfigPathArgs']):
+        pulumi.set(self, "kubeconfig_path", value)
+
+
+class NativeUserV3KubernetesPathKubeconfigPathArgsDict(TypedDict):
+    environment_variable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of an environment variable the connector reads the secret from.
+    """
+    literal: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+    """
+    literal_wo: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+    """
+    literal_wo_version: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Version trigger for `literal_wo`. Increment this value to update the secret.
+    """
+
+@pulumi.input_type
+class NativeUserV3KubernetesPathKubeconfigPathArgs:
+    def __init__(__self__, *,
+                 environment_variable: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo_version: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] environment_variable: The name of an environment variable the connector reads the secret from.
+        :param pulumi.Input[_builtins.str] literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        :param pulumi.Input[_builtins.str] literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        :param pulumi.Input[_builtins.int] literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        if environment_variable is not None:
+            pulumi.set(__self__, "environment_variable", environment_variable)
+        if literal is not None:
+            pulumi.set(__self__, "literal", literal)
+        if literal_wo is not None:
+            pulumi.set(__self__, "literal_wo", literal_wo)
+        if literal_wo_version is not None:
+            pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+
+    @_builtins.property
+    @pulumi.getter(name="environmentVariable")
+    def environment_variable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of an environment variable the connector reads the secret from.
+        """
+        return pulumi.get(self, "environment_variable")
+
+    @environment_variable.setter
+    def environment_variable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "environment_variable", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def literal(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        """
+        return pulumi.get(self, "literal")
+
+    @literal.setter
+    def literal(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWo")
+    def literal_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        """
+        return pulumi.get(self, "literal_wo")
+
+    @literal_wo.setter
+    def literal_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWoVersion")
+    def literal_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        return pulumi.get(self, "literal_wo_version")
+
+    @literal_wo_version.setter
+    def literal_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "literal_wo_version", value)
+
+
+class NativeUserV3SnowflakeKeyArgsDict(TypedDict):
+    key: pulumi.Input['NativeUserV3SnowflakeKeyKeyArgsDict']
+    """
+    The private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    The Snowflake username to authenticate as.
+    """
+
+@pulumi.input_type
+class NativeUserV3SnowflakeKeyArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input['NativeUserV3SnowflakeKeyKeyArgs'],
+                 username: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input['NativeUserV3SnowflakeKeyKeyArgs'] key: The private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param pulumi.Input[_builtins.str] username: The Snowflake username to authenticate as.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> pulumi.Input['NativeUserV3SnowflakeKeyKeyArgs']:
+        """
+        The private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input['NativeUserV3SnowflakeKeyKeyArgs']):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> pulumi.Input[_builtins.str]:
+        """
+        The Snowflake username to authenticate as.
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "username", value)
+
+
+class NativeUserV3SnowflakeKeyKeyArgsDict(TypedDict):
+    environment_variable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of an environment variable the connector reads the secret from.
+    """
+    literal: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+    """
+    literal_wo: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+    """
+    literal_wo_version: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Version trigger for `literal_wo`. Increment this value to update the secret.
+    """
+
+@pulumi.input_type
+class NativeUserV3SnowflakeKeyKeyArgs:
+    def __init__(__self__, *,
+                 environment_variable: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo_version: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] environment_variable: The name of an environment variable the connector reads the secret from.
+        :param pulumi.Input[_builtins.str] literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        :param pulumi.Input[_builtins.str] literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        :param pulumi.Input[_builtins.int] literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        if environment_variable is not None:
+            pulumi.set(__self__, "environment_variable", environment_variable)
+        if literal is not None:
+            pulumi.set(__self__, "literal", literal)
+        if literal_wo is not None:
+            pulumi.set(__self__, "literal_wo", literal_wo)
+        if literal_wo_version is not None:
+            pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+
+    @_builtins.property
+    @pulumi.getter(name="environmentVariable")
+    def environment_variable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of an environment variable the connector reads the secret from.
+        """
+        return pulumi.get(self, "environment_variable")
+
+    @environment_variable.setter
+    def environment_variable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "environment_variable", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def literal(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        """
+        return pulumi.get(self, "literal")
+
+    @literal.setter
+    def literal(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWo")
+    def literal_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        """
+        return pulumi.get(self, "literal_wo")
+
+    @literal_wo.setter
+    def literal_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWoVersion")
+    def literal_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        return pulumi.get(self, "literal_wo_version")
+
+    @literal_wo_version.setter
+    def literal_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "literal_wo_version", value)
+
+
+class NativeUserV3SshKeyArgsDict(TypedDict):
+    key: pulumi.Input['NativeUserV3SshKeyKeyArgsDict']
+    """
+    The SSH private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    The username to authenticate as.
+    """
+    certificate: NotRequired[pulumi.Input[Optional['NativeUserV3SshKeyCertificateArgsDict']]]
+    """
+    The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+    """
+
+@pulumi.input_type
+class NativeUserV3SshKeyArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input['NativeUserV3SshKeyKeyArgs'],
+                 username: pulumi.Input[_builtins.str],
+                 certificate: pulumi.Input[Optional['NativeUserV3SshKeyCertificateArgs']] = None):
+        """
+        :param pulumi.Input['NativeUserV3SshKeyKeyArgs'] key: The SSH private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param pulumi.Input[_builtins.str] username: The username to authenticate as.
+        :param pulumi.Input['NativeUserV3SshKeyCertificateArgs'] certificate: The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "username", username)
+        if certificate is not None:
+            pulumi.set(__self__, "certificate", certificate)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> pulumi.Input['NativeUserV3SshKeyKeyArgs']:
+        """
+        The SSH private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input['NativeUserV3SshKeyKeyArgs']):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> pulumi.Input[_builtins.str]:
+        """
+        The username to authenticate as.
+        """
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "username", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def certificate(self) -> pulumi.Input[Optional['NativeUserV3SshKeyCertificateArgs']]:
+        """
+        The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        """
+        return pulumi.get(self, "certificate")
+
+    @certificate.setter
+    def certificate(self, value: pulumi.Input[Optional['NativeUserV3SshKeyCertificateArgs']]):
+        pulumi.set(self, "certificate", value)
+
+
+class NativeUserV3SshKeyCertificateArgsDict(TypedDict):
+    environment_variable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of an environment variable the connector reads the secret from.
+    """
+    literal: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+    """
+    literal_wo: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+    """
+    literal_wo_version: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Version trigger for `literal_wo`. Increment this value to update the secret.
+    """
+
+@pulumi.input_type
+class NativeUserV3SshKeyCertificateArgs:
+    def __init__(__self__, *,
+                 environment_variable: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo_version: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] environment_variable: The name of an environment variable the connector reads the secret from.
+        :param pulumi.Input[_builtins.str] literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        :param pulumi.Input[_builtins.str] literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        :param pulumi.Input[_builtins.int] literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        if environment_variable is not None:
+            pulumi.set(__self__, "environment_variable", environment_variable)
+        if literal is not None:
+            pulumi.set(__self__, "literal", literal)
+        if literal_wo is not None:
+            pulumi.set(__self__, "literal_wo", literal_wo)
+        if literal_wo_version is not None:
+            pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+
+    @_builtins.property
+    @pulumi.getter(name="environmentVariable")
+    def environment_variable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of an environment variable the connector reads the secret from.
+        """
+        return pulumi.get(self, "environment_variable")
+
+    @environment_variable.setter
+    def environment_variable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "environment_variable", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def literal(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        """
+        return pulumi.get(self, "literal")
+
+    @literal.setter
+    def literal(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWo")
+    def literal_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        """
+        return pulumi.get(self, "literal_wo")
+
+    @literal_wo.setter
+    def literal_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWoVersion")
+    def literal_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        return pulumi.get(self, "literal_wo_version")
+
+    @literal_wo_version.setter
+    def literal_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "literal_wo_version", value)
+
+
+class NativeUserV3SshKeyKeyArgsDict(TypedDict):
+    environment_variable: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of an environment variable the connector reads the secret from.
+    """
+    literal: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+    """
+    literal_wo: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+    Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+    """
+    literal_wo_version: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Version trigger for `literal_wo`. Increment this value to update the secret.
+    """
+
+@pulumi.input_type
+class NativeUserV3SshKeyKeyArgs:
+    def __init__(__self__, *,
+                 environment_variable: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 literal_wo_version: pulumi.Input[Optional[_builtins.int]] = None):
+        """
+        :param pulumi.Input[_builtins.str] environment_variable: The name of an environment variable the connector reads the secret from.
+        :param pulumi.Input[_builtins.str] literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        :param pulumi.Input[_builtins.str] literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        :param pulumi.Input[_builtins.int] literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        if environment_variable is not None:
+            pulumi.set(__self__, "environment_variable", environment_variable)
+        if literal is not None:
+            pulumi.set(__self__, "literal", literal)
+        if literal_wo is not None:
+            pulumi.set(__self__, "literal_wo", literal_wo)
+        if literal_wo_version is not None:
+            pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+
+    @_builtins.property
+    @pulumi.getter(name="environmentVariable")
+    def environment_variable(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of an environment variable the connector reads the secret from.
+        """
+        return pulumi.get(self, "environment_variable")
+
+    @environment_variable.setter
+    def environment_variable(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "environment_variable", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def literal(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
+        """
+        return pulumi.get(self, "literal")
+
+    @literal.setter
+    def literal(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWo")
+    def literal_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
+        """
+        return pulumi.get(self, "literal_wo")
+
+    @literal_wo.setter
+    def literal_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "literal_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="literalWoVersion")
+    def literal_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Version trigger for `literal_wo`. Increment this value to update the secret.
+        """
+        return pulumi.get(self, "literal_wo_version")
+
+    @literal_wo_version.setter
+    def literal_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "literal_wo_version", value)
 
 
 class ProviderOidcArgsDict(TypedDict):

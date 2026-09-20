@@ -23,3 +23,8 @@ func GetOidc(ctx *pulumi.Context) string {
 func GetRetrieveSensitiveValues(ctx *pulumi.Context) bool {
 	return config.GetBool(ctx, "formal:retrieveSensitiveValues")
 }
+
+// Formal control plane URL. Defaults to `https://api.formal.ai`.
+func GetUrl(ctx *pulumi.Context) string {
+	return config.Get(ctx, "formal:url")
+}

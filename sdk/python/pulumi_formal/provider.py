@@ -22,12 +22,14 @@ class ProviderArgs:
     def __init__(__self__, *,
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
                  oidc: pulumi.Input[Optional['ProviderOidcArgs']] = None,
-                 retrieve_sensitive_values: pulumi.Input[Optional[_builtins.bool]] = None):
+                 retrieve_sensitive_values: pulumi.Input[Optional[_builtins.bool]] = None,
+                 url: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a Provider resource.
 
         :param pulumi.Input[_builtins.str] api_key: Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
         :param pulumi.Input['ProviderOidcArgs'] oidc: OIDC authentication configuration. Conflicts with `api_key`.
+        :param pulumi.Input[_builtins.str] url: Formal control plane URL. Defaults to `https://api.formal.ai`.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
@@ -35,6 +37,8 @@ class ProviderArgs:
             pulumi.set(__self__, "oidc", oidc)
         if retrieve_sensitive_values is not None:
             pulumi.set(__self__, "retrieve_sensitive_values", retrieve_sensitive_values)
+        if url is not None:
+            pulumi.set(__self__, "url", url)
 
     @_builtins.property
     @pulumi.getter(name="apiKey")
@@ -69,6 +73,18 @@ class ProviderArgs:
     def retrieve_sensitive_values(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "retrieve_sensitive_values", value)
 
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Formal control plane URL. Defaults to `https://api.formal.ai`.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "url", value)
+
 
 @pulumi.type_token("pulumi:providers:formal")
 class Provider(pulumi.ProviderResource):
@@ -79,6 +95,7 @@ class Provider(pulumi.ProviderResource):
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
                  oidc: pulumi.Input[Optional[Union['ProviderOidcArgs', 'ProviderOidcArgsDict']]] = None,
                  retrieve_sensitive_values: pulumi.Input[Optional[_builtins.bool]] = None,
+                 url: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         The provider type for the formal package. By default, resources use package-wide configuration
@@ -91,6 +108,7 @@ class Provider(pulumi.ProviderResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] api_key: Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
         :param pulumi.Input[Union['ProviderOidcArgs', 'ProviderOidcArgsDict']] oidc: OIDC authentication configuration. Conflicts with `api_key`.
+        :param pulumi.Input[_builtins.str] url: Formal control plane URL. Defaults to `https://api.formal.ai`.
         """
         ...
     @overload
@@ -123,6 +141,7 @@ class Provider(pulumi.ProviderResource):
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
                  oidc: pulumi.Input[Optional[Union['ProviderOidcArgs', 'ProviderOidcArgsDict']]] = None,
                  retrieve_sensitive_values: pulumi.Input[Optional[_builtins.bool]] = None,
+                 url: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -135,6 +154,7 @@ class Provider(pulumi.ProviderResource):
             __props__.__dict__["api_key"] = None if api_key is None else pulumi.Output.secret(api_key)
             __props__.__dict__["oidc"] = pulumi.Output.from_input(oidc).apply(pulumi.runtime.to_json) if oidc is not None else None
             __props__.__dict__["retrieve_sensitive_values"] = pulumi.Output.from_input(retrieve_sensitive_values).apply(pulumi.runtime.to_json) if retrieve_sensitive_values is not None else None
+            __props__.__dict__["url"] = url
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["apiKey"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(Provider, __self__).__init__(
@@ -150,6 +170,14 @@ class Provider(pulumi.ProviderResource):
         Formal API key. May also be set with the `FORMAL_API_KEY` environment variable. Conflicts with `oidc`.
         """
         return pulumi.get(self, "api_key")
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        Formal control plane URL. Defaults to `https://api.formal.ai`.
+        """
+        return pulumi.get(self, "url")
 
     @pulumi.output_type
     class TerraformConfigResult:

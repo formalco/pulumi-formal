@@ -48,7 +48,7 @@ export class User extends pulumi.CustomResource {
      */
     declare public readonly email: pulumi.Output<string | undefined>;
     /**
-     * When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+     * When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
      */
     declare public readonly expireAt: pulumi.Output<number | undefined>;
     /**
@@ -68,7 +68,7 @@ export class User extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
-     * If set to true, this User cannot be deleted.
+     * If set to true, this User cannot be deleted. Cannot be set together with expire_at.
      */
     declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
     /**
@@ -139,7 +139,7 @@ export interface UserState {
      */
     email?: pulumi.Input<string | undefined>;
     /**
-     * When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+     * When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
      */
     expireAt?: pulumi.Input<number | undefined>;
     /**
@@ -159,7 +159,7 @@ export interface UserState {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * If set to true, this User cannot be deleted.
+     * If set to true, this User cannot be deleted. Cannot be set together with expire_at.
      */
     terminationProtection?: pulumi.Input<boolean | undefined>;
     /**
@@ -181,7 +181,7 @@ export interface UserArgs {
      */
     email?: pulumi.Input<string | undefined>;
     /**
-     * When the Role should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970.
+     * When the user should be deleted and access revoked. Value should be provided in Unix epoch time, in seconds since midnight UTC of January 1, 1970. Cannot be set together with termination_protection.
      */
     expireAt?: pulumi.Input<number | undefined>;
     /**
@@ -197,7 +197,7 @@ export interface UserArgs {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * If set to true, this User cannot be deleted.
+     * If set to true, this User cannot be deleted. Cannot be set together with expire_at.
      */
     terminationProtection?: pulumi.Input<boolean | undefined>;
     /**

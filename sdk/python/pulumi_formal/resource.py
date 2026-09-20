@@ -25,6 +25,7 @@ class ResourceArgs:
                  aliases: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  environment: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_users_v3_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  space_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  technology_provider: pulumi.Input[Optional[_builtins.str]] = None,
@@ -38,6 +39,7 @@ class ResourceArgs:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] aliases: Aliases to apply to the Resource.
         :param pulumi.Input[_builtins.str] environment: Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Resource.
+        :param pulumi.Input[_builtins.bool] native_users_v3_enabled: Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags to apply to the Resource.
         :param pulumi.Input[_builtins.str] technology_provider: For SSH resources, if the backend connection is SSM, supported values are `aws-ec2`, and `aws-ecs`
@@ -55,6 +57,8 @@ class ResourceArgs:
             pulumi.set(__self__, "environment", environment)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if native_users_v3_enabled is not None:
+            pulumi.set(__self__, "native_users_v3_enabled", native_users_v3_enabled)
         if space_id is not None:
             pulumi.set(__self__, "space_id", space_id)
         if tags is not None:
@@ -138,6 +142,18 @@ class ResourceArgs:
         pulumi.set(self, "name", value)
 
     @_builtins.property
+    @pulumi.getter(name="nativeUsersV3Enabled")
+    def native_users_v3_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+        """
+        return pulumi.get(self, "native_users_v3_enabled")
+
+    @native_users_v3_enabled.setter
+    def native_users_v3_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "native_users_v3_enabled", value)
+
+    @_builtins.property
     @pulumi.getter(name="spaceId")
     def space_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -194,6 +210,8 @@ class _ResourceState:
                  environment: pulumi.Input[Optional[_builtins.str]] = None,
                  hostname: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_user_selection_cel: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_users_v3_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  port: pulumi.Input[Optional[_builtins.int]] = None,
                  space_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -208,6 +226,8 @@ class _ResourceState:
         :param pulumi.Input[_builtins.str] environment: Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         :param pulumi.Input[_builtins.str] hostname: Hostname of the Resource.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Resource.
+        :param pulumi.Input[_builtins.str] native_user_selection_cel: The CEL expression that selects which Native User V3 a session connects as.
+        :param pulumi.Input[_builtins.bool] native_users_v3_enabled: Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags to apply to the Resource.
@@ -228,6 +248,10 @@ class _ResourceState:
             pulumi.set(__self__, "hostname", hostname)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if native_user_selection_cel is not None:
+            pulumi.set(__self__, "native_user_selection_cel", native_user_selection_cel)
+        if native_users_v3_enabled is not None:
+            pulumi.set(__self__, "native_users_v3_enabled", native_users_v3_enabled)
         if port is not None:
             pulumi.set(__self__, "port", port)
         if space_id is not None:
@@ -301,6 +325,30 @@ class _ResourceState:
     @name.setter
     def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeUserSelectionCel")
+    def native_user_selection_cel(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The CEL expression that selects which Native User V3 a session connects as.
+        """
+        return pulumi.get(self, "native_user_selection_cel")
+
+    @native_user_selection_cel.setter
+    def native_user_selection_cel(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "native_user_selection_cel", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeUsersV3Enabled")
+    def native_users_v3_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+        """
+        return pulumi.get(self, "native_users_v3_enabled")
+
+    @native_users_v3_enabled.setter
+    def native_users_v3_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "native_users_v3_enabled", value)
 
     @_builtins.property
     @pulumi.getter
@@ -385,6 +433,7 @@ class Resource(pulumi.CustomResource):
                  environment: pulumi.Input[Optional[_builtins.str]] = None,
                  hostname: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_users_v3_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  port: pulumi.Input[Optional[_builtins.int]] = None,
                  space_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -402,6 +451,7 @@ class Resource(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] environment: Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         :param pulumi.Input[_builtins.str] hostname: Hostname of the Resource.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Resource.
+        :param pulumi.Input[_builtins.bool] native_users_v3_enabled: Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags to apply to the Resource.
@@ -438,6 +488,7 @@ class Resource(pulumi.CustomResource):
                  environment: pulumi.Input[Optional[_builtins.str]] = None,
                  hostname: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 native_users_v3_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  port: pulumi.Input[Optional[_builtins.int]] = None,
                  space_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -459,6 +510,7 @@ class Resource(pulumi.CustomResource):
                 raise TypeError("Missing required property 'hostname'")
             __props__.__dict__["hostname"] = hostname
             __props__.__dict__["name"] = name
+            __props__.__dict__["native_users_v3_enabled"] = native_users_v3_enabled
             if port is None and not opts.urn:
                 raise TypeError("Missing required property 'port'")
             __props__.__dict__["port"] = port
@@ -470,6 +522,7 @@ class Resource(pulumi.CustomResource):
             __props__.__dict__["technology_provider"] = technology_provider
             __props__.__dict__["termination_protection"] = termination_protection
             __props__.__dict__["created_at"] = None
+            __props__.__dict__["native_user_selection_cel"] = None
         super(Resource, __self__).__init__(
             'formal:index/resource:Resource',
             resource_name,
@@ -485,6 +538,8 @@ class Resource(pulumi.CustomResource):
             environment: pulumi.Input[Optional[_builtins.str]] = None,
             hostname: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
+            native_user_selection_cel: pulumi.Input[Optional[_builtins.str]] = None,
+            native_users_v3_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             port: pulumi.Input[Optional[_builtins.int]] = None,
             space_id: pulumi.Input[Optional[_builtins.str]] = None,
             tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -503,6 +558,8 @@ class Resource(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] environment: Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         :param pulumi.Input[_builtins.str] hostname: Hostname of the Resource.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Resource.
+        :param pulumi.Input[_builtins.str] native_user_selection_cel: The CEL expression that selects which Native User V3 a session connects as.
+        :param pulumi.Input[_builtins.bool] native_users_v3_enabled: Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
         :param pulumi.Input[_builtins.int] port: The port your Resource is listening on.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Resource in.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags to apply to the Resource.
@@ -519,6 +576,8 @@ class Resource(pulumi.CustomResource):
         __props__.__dict__["environment"] = environment
         __props__.__dict__["hostname"] = hostname
         __props__.__dict__["name"] = name
+        __props__.__dict__["native_user_selection_cel"] = native_user_selection_cel
+        __props__.__dict__["native_users_v3_enabled"] = native_users_v3_enabled
         __props__.__dict__["port"] = port
         __props__.__dict__["space_id"] = space_id
         __props__.__dict__["tags"] = tags
@@ -567,6 +626,22 @@ class Resource(pulumi.CustomResource):
         Friendly name for the Resource.
         """
         return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="nativeUserSelectionCel")
+    def native_user_selection_cel(self) -> pulumi.Output[_builtins.str]:
+        """
+        The CEL expression that selects which Native User V3 a session connects as.
+        """
+        return pulumi.get(self, "native_user_selection_cel")
+
+    @_builtins.property
+    @pulumi.getter(name="nativeUsersV3Enabled")
+    def native_users_v3_enabled(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+        """
+        return pulumi.get(self, "native_users_v3_enabled")
 
     @_builtins.property
     @pulumi.getter

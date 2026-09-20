@@ -59,6 +59,16 @@ namespace Formal.Pulumi
             set => _retrieveSensitiveValues.Set(value);
         }
 
+        private static readonly __Value<string?> _url = new __Value<string?>(() => __config.Get("url"));
+        /// <summary>
+        /// Formal control plane URL. Defaults to `https://api.formal.ai`.
+        /// </summary>
+        public static string? Url
+        {
+            get => _url.Get();
+            set => _url.Set(value);
+        }
+
         public static class Types
         {
 

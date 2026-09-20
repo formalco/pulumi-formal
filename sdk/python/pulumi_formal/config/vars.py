@@ -39,3 +39,10 @@ class _ExportableConfig(types.ModuleType):
     def retrieve_sensitive_values(self) -> Optional[bool]:
         return __config__.get_bool('retrieveSensitiveValues')
 
+    @_builtins.property
+    def url(self) -> Optional[str]:
+        """
+        Formal control plane URL. Defaults to `https://api.formal.ai`.
+        """
+        return __config__.get('url')
+

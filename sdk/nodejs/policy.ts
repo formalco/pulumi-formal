@@ -56,6 +56,10 @@ export class Policy extends pulumi.CustomResource {
      */
     declare public readonly status: pulumi.Output<string>;
     /**
+     * Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+     */
+    declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
+    /**
      * If set to true, this Policy cannot be deleted.
      */
     declare public readonly terminationProtection: pulumi.Output<boolean | undefined>;
@@ -82,6 +86,7 @@ export class Policy extends pulumi.CustomResource {
             resourceInputs["module"] = state?.module;
             resourceInputs["name"] = state?.name;
             resourceInputs["status"] = state?.status;
+            resourceInputs["tags"] = state?.tags;
             resourceInputs["terminationProtection"] = state?.terminationProtection;
             resourceInputs["updatedAt"] = state?.updatedAt;
         } else {
@@ -99,6 +104,7 @@ export class Policy extends pulumi.CustomResource {
             resourceInputs["module"] = args?.module;
             resourceInputs["name"] = args?.name;
             resourceInputs["status"] = args?.status;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["terminationProtection"] = args?.terminationProtection;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
@@ -133,6 +139,10 @@ export interface PolicyState {
      */
     status?: pulumi.Input<string | undefined>;
     /**
+     * Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
      * If set to true, this Policy cannot be deleted.
      */
     terminationProtection?: pulumi.Input<boolean | undefined>;
@@ -162,6 +172,10 @@ export interface PolicyArgs {
      * Defines the current status of the policy. It can be one of the following: 'draft', 'dry-run', or 'active'.
      */
     status: pulumi.Input<string>;
+    /**
+     * Policy metadata as string key/value pairs. Maximum 500 tags per policy.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * If set to true, this Policy cannot be deleted.
      */

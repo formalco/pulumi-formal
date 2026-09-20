@@ -58,6 +58,14 @@ export class Resource extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
+     * The CEL expression that selects which Native User V3 a session connects as.
+     */
+    declare public /*out*/ readonly nativeUserSelectionCel: pulumi.Output<string>;
+    /**
+     * Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+     */
+    declare public readonly nativeUsersV3Enabled: pulumi.Output<boolean>;
+    /**
      * The port your Resource is listening on.
      */
     declare public readonly port: pulumi.Output<number>;
@@ -100,6 +108,8 @@ export class Resource extends pulumi.CustomResource {
             resourceInputs["environment"] = state?.environment;
             resourceInputs["hostname"] = state?.hostname;
             resourceInputs["name"] = state?.name;
+            resourceInputs["nativeUserSelectionCel"] = state?.nativeUserSelectionCel;
+            resourceInputs["nativeUsersV3Enabled"] = state?.nativeUsersV3Enabled;
             resourceInputs["port"] = state?.port;
             resourceInputs["spaceId"] = state?.spaceId;
             resourceInputs["tags"] = state?.tags;
@@ -121,6 +131,7 @@ export class Resource extends pulumi.CustomResource {
             resourceInputs["environment"] = args?.environment;
             resourceInputs["hostname"] = args?.hostname;
             resourceInputs["name"] = args?.name;
+            resourceInputs["nativeUsersV3Enabled"] = args?.nativeUsersV3Enabled;
             resourceInputs["port"] = args?.port;
             resourceInputs["spaceId"] = args?.spaceId;
             resourceInputs["tags"] = args?.tags;
@@ -128,6 +139,7 @@ export class Resource extends pulumi.CustomResource {
             resourceInputs["technologyProvider"] = args?.technologyProvider;
             resourceInputs["terminationProtection"] = args?.terminationProtection;
             resourceInputs["createdAt"] = undefined /*out*/;
+            resourceInputs["nativeUserSelectionCel"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Resource.__pulumiType, name, resourceInputs, opts);
@@ -160,6 +172,14 @@ export interface ResourceState {
      * Friendly name for the Resource.
      */
     name?: pulumi.Input<string | undefined>;
+    /**
+     * The CEL expression that selects which Native User V3 a session connects as.
+     */
+    nativeUserSelectionCel?: pulumi.Input<string | undefined>;
+    /**
+     * Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+     */
+    nativeUsersV3Enabled?: pulumi.Input<boolean | undefined>;
     /**
      * The port your Resource is listening on.
      */
@@ -208,6 +228,10 @@ export interface ResourceArgs {
      * Friendly name for the Resource.
      */
     name?: pulumi.Input<string | undefined>;
+    /**
+     * Whether the Resource uses Native Users V3. When omitted, new Resources enable V3 while existing Resources preserve their current mode. Only one Native User version can be enabled at a time.
+     */
+    nativeUsersV3Enabled?: pulumi.Input<boolean | undefined>;
     /**
      * The port your Resource is listening on.
      */
