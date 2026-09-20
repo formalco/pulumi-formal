@@ -3,6 +3,7 @@
 # to an old syntax version. Use `golangci-lint migrate` to update it.
 golangci-lint = "2.13.2"
 "go:github.com/pulumi/upgrade-provider" = "latest"
+"vfox-pulumi:pulumi/pulumi-converter-terraform" = "1.4.0"
 # Override the ci-mgmt-pinned Node (20.19.5) — @pulumi/pulumi >= 3.250.0 requires
 # node >= 22, so the nodejs SDK build fails on 20. We only override the version
 # here rather than adopting the boilerplate's .config/mise.toml wholesale, because
