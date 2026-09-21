@@ -463,6 +463,40 @@ export interface LogConfigurationStream {
     encrypt: boolean;
 }
 
+export interface LogRewritePath {
+    /**
+     * Whether to remove the field from the log.
+     */
+    drop?: boolean;
+    /**
+     * Whether to encrypt the string field.
+     */
+    encrypt?: boolean;
+    /**
+     * Whether to encrypt literal values in a SQL query.
+     */
+    encryptSql?: boolean;
+    /**
+     * The protobuf field path, starting with `log`.
+     */
+    name: string;
+    /**
+     * Whether to remove literal values from a SQL query.
+     */
+    stripSql?: boolean;
+    /**
+     * Truncates the string field to a maximum UTF-8 byte length.
+     */
+    truncate?: outputs.LogRewritePathTruncate;
+}
+
+export interface LogRewritePathTruncate {
+    /**
+     * The maximum field size in bytes.
+     */
+    maxSizeBytes: number;
+}
+
 export interface NativeUserV3AwsIam {
     /**
      * The database username mapped to the IAM identity.

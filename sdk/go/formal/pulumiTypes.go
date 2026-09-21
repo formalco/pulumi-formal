@@ -5072,6 +5072,285 @@ func (o LogConfigurationStreamPtrOutput) Encrypt() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+type LogRewritePath struct {
+	// Whether to remove the field from the log.
+	Drop *bool `pulumi:"drop"`
+	// Whether to encrypt the string field.
+	Encrypt *bool `pulumi:"encrypt"`
+	// Whether to encrypt literal values in a SQL query.
+	EncryptSql *bool `pulumi:"encryptSql"`
+	// The protobuf field path, starting with `log`.
+	Name string `pulumi:"name"`
+	// Whether to remove literal values from a SQL query.
+	StripSql *bool `pulumi:"stripSql"`
+	// Truncates the string field to a maximum UTF-8 byte length.
+	Truncate *LogRewritePathTruncate `pulumi:"truncate"`
+}
+
+// LogRewritePathInput is an input type that accepts LogRewritePathArgs and LogRewritePathOutput values.
+// You can construct a concrete instance of `LogRewritePathInput` via:
+//
+//	LogRewritePathArgs{...}
+type LogRewritePathInput interface {
+	pulumi.Input
+
+	ToLogRewritePathOutput() LogRewritePathOutput
+	ToLogRewritePathOutputWithContext(context.Context) LogRewritePathOutput
+}
+
+type LogRewritePathArgs struct {
+	// Whether to remove the field from the log.
+	Drop pulumi.BoolPtrInput `pulumi:"drop"`
+	// Whether to encrypt the string field.
+	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
+	// Whether to encrypt literal values in a SQL query.
+	EncryptSql pulumi.BoolPtrInput `pulumi:"encryptSql"`
+	// The protobuf field path, starting with `log`.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Whether to remove literal values from a SQL query.
+	StripSql pulumi.BoolPtrInput `pulumi:"stripSql"`
+	// Truncates the string field to a maximum UTF-8 byte length.
+	Truncate LogRewritePathTruncatePtrInput `pulumi:"truncate"`
+}
+
+func (LogRewritePathArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogRewritePath)(nil)).Elem()
+}
+
+func (i LogRewritePathArgs) ToLogRewritePathOutput() LogRewritePathOutput {
+	return i.ToLogRewritePathOutputWithContext(context.Background())
+}
+
+func (i LogRewritePathArgs) ToLogRewritePathOutputWithContext(ctx context.Context) LogRewritePathOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogRewritePathOutput)
+}
+
+// LogRewritePathArrayInput is an input type that accepts LogRewritePathArray and LogRewritePathArrayOutput values.
+// You can construct a concrete instance of `LogRewritePathArrayInput` via:
+//
+//	LogRewritePathArray{ LogRewritePathArgs{...} }
+type LogRewritePathArrayInput interface {
+	pulumi.Input
+
+	ToLogRewritePathArrayOutput() LogRewritePathArrayOutput
+	ToLogRewritePathArrayOutputWithContext(context.Context) LogRewritePathArrayOutput
+}
+
+type LogRewritePathArray []LogRewritePathInput
+
+func (LogRewritePathArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LogRewritePath)(nil)).Elem()
+}
+
+func (i LogRewritePathArray) ToLogRewritePathArrayOutput() LogRewritePathArrayOutput {
+	return i.ToLogRewritePathArrayOutputWithContext(context.Background())
+}
+
+func (i LogRewritePathArray) ToLogRewritePathArrayOutputWithContext(ctx context.Context) LogRewritePathArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogRewritePathArrayOutput)
+}
+
+type LogRewritePathOutput struct{ *pulumi.OutputState }
+
+func (LogRewritePathOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogRewritePath)(nil)).Elem()
+}
+
+func (o LogRewritePathOutput) ToLogRewritePathOutput() LogRewritePathOutput {
+	return o
+}
+
+func (o LogRewritePathOutput) ToLogRewritePathOutputWithContext(ctx context.Context) LogRewritePathOutput {
+	return o
+}
+
+// Whether to remove the field from the log.
+func (o LogRewritePathOutput) Drop() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v LogRewritePath) *bool { return v.Drop }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to encrypt the string field.
+func (o LogRewritePathOutput) Encrypt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v LogRewritePath) *bool { return v.Encrypt }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to encrypt literal values in a SQL query.
+func (o LogRewritePathOutput) EncryptSql() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v LogRewritePath) *bool { return v.EncryptSql }).(pulumi.BoolPtrOutput)
+}
+
+// The protobuf field path, starting with `log`.
+func (o LogRewritePathOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LogRewritePath) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Whether to remove literal values from a SQL query.
+func (o LogRewritePathOutput) StripSql() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v LogRewritePath) *bool { return v.StripSql }).(pulumi.BoolPtrOutput)
+}
+
+// Truncates the string field to a maximum UTF-8 byte length.
+func (o LogRewritePathOutput) Truncate() LogRewritePathTruncatePtrOutput {
+	return o.ApplyT(func(v LogRewritePath) *LogRewritePathTruncate { return v.Truncate }).(LogRewritePathTruncatePtrOutput)
+}
+
+type LogRewritePathArrayOutput struct{ *pulumi.OutputState }
+
+func (LogRewritePathArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LogRewritePath)(nil)).Elem()
+}
+
+func (o LogRewritePathArrayOutput) ToLogRewritePathArrayOutput() LogRewritePathArrayOutput {
+	return o
+}
+
+func (o LogRewritePathArrayOutput) ToLogRewritePathArrayOutputWithContext(ctx context.Context) LogRewritePathArrayOutput {
+	return o
+}
+
+func (o LogRewritePathArrayOutput) Index(i pulumi.IntInput) LogRewritePathOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) LogRewritePath {
+		return vs[0].([]LogRewritePath)[vs[1].(int)]
+	}).(LogRewritePathOutput)
+}
+
+type LogRewritePathTruncate struct {
+	// The maximum field size in bytes.
+	MaxSizeBytes int `pulumi:"maxSizeBytes"`
+}
+
+// LogRewritePathTruncateInput is an input type that accepts LogRewritePathTruncateArgs and LogRewritePathTruncateOutput values.
+// You can construct a concrete instance of `LogRewritePathTruncateInput` via:
+//
+//	LogRewritePathTruncateArgs{...}
+type LogRewritePathTruncateInput interface {
+	pulumi.Input
+
+	ToLogRewritePathTruncateOutput() LogRewritePathTruncateOutput
+	ToLogRewritePathTruncateOutputWithContext(context.Context) LogRewritePathTruncateOutput
+}
+
+type LogRewritePathTruncateArgs struct {
+	// The maximum field size in bytes.
+	MaxSizeBytes pulumi.IntInput `pulumi:"maxSizeBytes"`
+}
+
+func (LogRewritePathTruncateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogRewritePathTruncate)(nil)).Elem()
+}
+
+func (i LogRewritePathTruncateArgs) ToLogRewritePathTruncateOutput() LogRewritePathTruncateOutput {
+	return i.ToLogRewritePathTruncateOutputWithContext(context.Background())
+}
+
+func (i LogRewritePathTruncateArgs) ToLogRewritePathTruncateOutputWithContext(ctx context.Context) LogRewritePathTruncateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogRewritePathTruncateOutput)
+}
+
+func (i LogRewritePathTruncateArgs) ToLogRewritePathTruncatePtrOutput() LogRewritePathTruncatePtrOutput {
+	return i.ToLogRewritePathTruncatePtrOutputWithContext(context.Background())
+}
+
+func (i LogRewritePathTruncateArgs) ToLogRewritePathTruncatePtrOutputWithContext(ctx context.Context) LogRewritePathTruncatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogRewritePathTruncateOutput).ToLogRewritePathTruncatePtrOutputWithContext(ctx)
+}
+
+// LogRewritePathTruncatePtrInput is an input type that accepts LogRewritePathTruncateArgs, LogRewritePathTruncatePtr and LogRewritePathTruncatePtrOutput values.
+// You can construct a concrete instance of `LogRewritePathTruncatePtrInput` via:
+//
+//	        LogRewritePathTruncateArgs{...}
+//
+//	or:
+//
+//	        nil
+type LogRewritePathTruncatePtrInput interface {
+	pulumi.Input
+
+	ToLogRewritePathTruncatePtrOutput() LogRewritePathTruncatePtrOutput
+	ToLogRewritePathTruncatePtrOutputWithContext(context.Context) LogRewritePathTruncatePtrOutput
+}
+
+type logRewritePathTruncatePtrType LogRewritePathTruncateArgs
+
+func LogRewritePathTruncatePtr(v *LogRewritePathTruncateArgs) LogRewritePathTruncatePtrInput {
+	return (*logRewritePathTruncatePtrType)(v)
+}
+
+func (*logRewritePathTruncatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**LogRewritePathTruncate)(nil)).Elem()
+}
+
+func (i *logRewritePathTruncatePtrType) ToLogRewritePathTruncatePtrOutput() LogRewritePathTruncatePtrOutput {
+	return i.ToLogRewritePathTruncatePtrOutputWithContext(context.Background())
+}
+
+func (i *logRewritePathTruncatePtrType) ToLogRewritePathTruncatePtrOutputWithContext(ctx context.Context) LogRewritePathTruncatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogRewritePathTruncatePtrOutput)
+}
+
+type LogRewritePathTruncateOutput struct{ *pulumi.OutputState }
+
+func (LogRewritePathTruncateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogRewritePathTruncate)(nil)).Elem()
+}
+
+func (o LogRewritePathTruncateOutput) ToLogRewritePathTruncateOutput() LogRewritePathTruncateOutput {
+	return o
+}
+
+func (o LogRewritePathTruncateOutput) ToLogRewritePathTruncateOutputWithContext(ctx context.Context) LogRewritePathTruncateOutput {
+	return o
+}
+
+func (o LogRewritePathTruncateOutput) ToLogRewritePathTruncatePtrOutput() LogRewritePathTruncatePtrOutput {
+	return o.ToLogRewritePathTruncatePtrOutputWithContext(context.Background())
+}
+
+func (o LogRewritePathTruncateOutput) ToLogRewritePathTruncatePtrOutputWithContext(ctx context.Context) LogRewritePathTruncatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LogRewritePathTruncate) *LogRewritePathTruncate {
+		return &v
+	}).(LogRewritePathTruncatePtrOutput)
+}
+
+// The maximum field size in bytes.
+func (o LogRewritePathTruncateOutput) MaxSizeBytes() pulumi.IntOutput {
+	return o.ApplyT(func(v LogRewritePathTruncate) int { return v.MaxSizeBytes }).(pulumi.IntOutput)
+}
+
+type LogRewritePathTruncatePtrOutput struct{ *pulumi.OutputState }
+
+func (LogRewritePathTruncatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**LogRewritePathTruncate)(nil)).Elem()
+}
+
+func (o LogRewritePathTruncatePtrOutput) ToLogRewritePathTruncatePtrOutput() LogRewritePathTruncatePtrOutput {
+	return o
+}
+
+func (o LogRewritePathTruncatePtrOutput) ToLogRewritePathTruncatePtrOutputWithContext(ctx context.Context) LogRewritePathTruncatePtrOutput {
+	return o
+}
+
+func (o LogRewritePathTruncatePtrOutput) Elem() LogRewritePathTruncateOutput {
+	return o.ApplyT(func(v *LogRewritePathTruncate) LogRewritePathTruncate {
+		if v != nil {
+			return *v
+		}
+		var ret LogRewritePathTruncate
+		return ret
+	}).(LogRewritePathTruncateOutput)
+}
+
+// The maximum field size in bytes.
+func (o LogRewritePathTruncatePtrOutput) MaxSizeBytes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *LogRewritePathTruncate) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.MaxSizeBytes
+	}).(pulumi.IntPtrOutput)
+}
+
 type NativeUserV3AwsIam struct {
 	// The database username mapped to the IAM identity.
 	Username string `pulumi:"username"`
@@ -9706,6 +9985,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationSessionPtrInput)(nil)).Elem(), LogConfigurationSessionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationStreamInput)(nil)).Elem(), LogConfigurationStreamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogConfigurationStreamPtrInput)(nil)).Elem(), LogConfigurationStreamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogRewritePathInput)(nil)).Elem(), LogRewritePathArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogRewritePathArrayInput)(nil)).Elem(), LogRewritePathArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogRewritePathTruncateInput)(nil)).Elem(), LogRewritePathTruncateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogRewritePathTruncatePtrInput)(nil)).Elem(), LogRewritePathTruncateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3AwsIamInput)(nil)).Elem(), NativeUserV3AwsIamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3AwsIamPtrInput)(nil)).Elem(), NativeUserV3AwsIamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3AwsIamRoleInput)(nil)).Elem(), NativeUserV3AwsIamRoleArgs{})
@@ -9818,6 +10101,10 @@ func init() {
 	pulumi.RegisterOutputType(LogConfigurationSessionPtrOutput{})
 	pulumi.RegisterOutputType(LogConfigurationStreamOutput{})
 	pulumi.RegisterOutputType(LogConfigurationStreamPtrOutput{})
+	pulumi.RegisterOutputType(LogRewritePathOutput{})
+	pulumi.RegisterOutputType(LogRewritePathArrayOutput{})
+	pulumi.RegisterOutputType(LogRewritePathTruncateOutput{})
+	pulumi.RegisterOutputType(LogRewritePathTruncatePtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3AwsIamOutput{})
 	pulumi.RegisterOutputType(NativeUserV3AwsIamPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3AwsIamRoleOutput{})

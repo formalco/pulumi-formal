@@ -45,6 +45,8 @@ __all__ = [
     'LogConfigurationScope',
     'LogConfigurationSession',
     'LogConfigurationStream',
+    'LogRewritePath',
+    'LogRewritePathTruncate',
     'NativeUserV3AwsIam',
     'NativeUserV3AwsIamRole',
     'NativeUserV3AzureIam',
@@ -1782,6 +1784,138 @@ class LogConfigurationStream(dict):
         Whether to encrypt stream data.
         """
         return pulumi.get(self, "encrypt")
+
+
+@pulumi.output_type
+class LogRewritePath(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "encryptSql":
+            suggest = "encrypt_sql"
+        elif key == "stripSql":
+            suggest = "strip_sql"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in LogRewritePath. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        LogRewritePath.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        LogRewritePath.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 drop: Optional[_builtins.bool] = None,
+                 encrypt: Optional[_builtins.bool] = None,
+                 encrypt_sql: Optional[_builtins.bool] = None,
+                 strip_sql: Optional[_builtins.bool] = None,
+                 truncate: Optional['outputs.LogRewritePathTruncate'] = None):
+        """
+        :param _builtins.str name: The protobuf field path, starting with `log`.
+        :param _builtins.bool drop: Whether to remove the field from the log.
+        :param _builtins.bool encrypt: Whether to encrypt the string field.
+        :param _builtins.bool encrypt_sql: Whether to encrypt literal values in a SQL query.
+        :param _builtins.bool strip_sql: Whether to remove literal values from a SQL query.
+        :param 'LogRewritePathTruncateArgs' truncate: Truncates the string field to a maximum UTF-8 byte length.
+        """
+        pulumi.set(__self__, "name", name)
+        if drop is not None:
+            pulumi.set(__self__, "drop", drop)
+        if encrypt is not None:
+            pulumi.set(__self__, "encrypt", encrypt)
+        if encrypt_sql is not None:
+            pulumi.set(__self__, "encrypt_sql", encrypt_sql)
+        if strip_sql is not None:
+            pulumi.set(__self__, "strip_sql", strip_sql)
+        if truncate is not None:
+            pulumi.set(__self__, "truncate", truncate)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The protobuf field path, starting with `log`.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def drop(self) -> Optional[_builtins.bool]:
+        """
+        Whether to remove the field from the log.
+        """
+        return pulumi.get(self, "drop")
+
+    @_builtins.property
+    @pulumi.getter
+    def encrypt(self) -> Optional[_builtins.bool]:
+        """
+        Whether to encrypt the string field.
+        """
+        return pulumi.get(self, "encrypt")
+
+    @_builtins.property
+    @pulumi.getter(name="encryptSql")
+    def encrypt_sql(self) -> Optional[_builtins.bool]:
+        """
+        Whether to encrypt literal values in a SQL query.
+        """
+        return pulumi.get(self, "encrypt_sql")
+
+    @_builtins.property
+    @pulumi.getter(name="stripSql")
+    def strip_sql(self) -> Optional[_builtins.bool]:
+        """
+        Whether to remove literal values from a SQL query.
+        """
+        return pulumi.get(self, "strip_sql")
+
+    @_builtins.property
+    @pulumi.getter
+    def truncate(self) -> Optional['outputs.LogRewritePathTruncate']:
+        """
+        Truncates the string field to a maximum UTF-8 byte length.
+        """
+        return pulumi.get(self, "truncate")
+
+
+@pulumi.output_type
+class LogRewritePathTruncate(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "maxSizeBytes":
+            suggest = "max_size_bytes"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in LogRewritePathTruncate. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        LogRewritePathTruncate.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        LogRewritePathTruncate.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 max_size_bytes: _builtins.int):
+        """
+        :param _builtins.int max_size_bytes: The maximum field size in bytes.
+        """
+        pulumi.set(__self__, "max_size_bytes", max_size_bytes)
+
+    @_builtins.property
+    @pulumi.getter(name="maxSizeBytes")
+    def max_size_bytes(self) -> _builtins.int:
+        """
+        The maximum field size in bytes.
+        """
+        return pulumi.get(self, "max_size_bytes")
 
 
 @pulumi.output_type
