@@ -463,6 +463,40 @@ export interface LogConfigurationStream {
     encrypt: pulumi.Input<boolean>;
 }
 
+export interface LogRewritePath {
+    /**
+     * Whether to remove the field from the log.
+     */
+    drop?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to encrypt the string field.
+     */
+    encrypt?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to encrypt literal values in a SQL query.
+     */
+    encryptSql?: pulumi.Input<boolean | undefined>;
+    /**
+     * The protobuf field path, starting with `log`.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Whether to remove literal values from a SQL query.
+     */
+    stripSql?: pulumi.Input<boolean | undefined>;
+    /**
+     * Truncates the string field to a maximum UTF-8 byte length.
+     */
+    truncate?: pulumi.Input<inputs.LogRewritePathTruncate | undefined>;
+}
+
+export interface LogRewritePathTruncate {
+    /**
+     * The maximum field size in bytes.
+     */
+    maxSizeBytes: pulumi.Input<number>;
+}
+
 export interface NativeUserV3AwsIam {
     /**
      * The database username mapped to the IAM identity.

@@ -73,6 +73,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &InventoryObjectDataLabelLink{}
 	case "formal:index/logConfiguration:LogConfiguration":
 		r = &LogConfiguration{}
+	case "formal:index/logRewrite:LogRewrite":
+		r = &LogRewrite{}
 	case "formal:index/nativeUser:NativeUser":
 		r = &NativeUser{}
 	case "formal:index/nativeUserLink:NativeUserLink":
@@ -274,6 +276,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/logConfiguration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/logRewrite",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
