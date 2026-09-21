@@ -266,8 +266,8 @@
                     }
                 }
             },
-            "formal_log_rewrite": {
-                "current": "formal:index/logRewrite:LogRewrite",
+            "formal_log_schema": {
+                "current": "formal:index/logSchema:LogSchema",
                 "majorVersion": 1,
                 "fields": {
                     "path": {
