@@ -266,6 +266,22 @@
                     }
                 }
             },
+            "formal_log_rewrite": {
+                "current": "formal:index/logRewrite:LogRewrite",
+                "majorVersion": 1,
+                "fields": {
+                    "path": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "truncate": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "formal_native_user": {
                 "current": "formal:index/nativeUser:NativeUser",
                 "majorVersion": 1
