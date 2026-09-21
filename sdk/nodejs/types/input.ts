@@ -463,7 +463,7 @@ export interface LogConfigurationStream {
     encrypt: pulumi.Input<boolean>;
 }
 
-export interface LogRewritePath {
+export interface LogSchemaPath {
     /**
      * Whether to remove the field from the log.
      */
@@ -487,10 +487,10 @@ export interface LogRewritePath {
     /**
      * Truncates the string field to a maximum UTF-8 byte length.
      */
-    truncate?: pulumi.Input<inputs.LogRewritePathTruncate | undefined>;
+    truncate?: pulumi.Input<inputs.LogSchemaPathTruncate | undefined>;
 }
 
-export interface LogRewritePathTruncate {
+export interface LogSchemaPathTruncate {
     /**
      * The maximum field size in bytes.
      */

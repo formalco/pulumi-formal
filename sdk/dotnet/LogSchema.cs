@@ -11,13 +11,13 @@ using Pulumi;
 namespace Formal.Pulumi
 {
     /// <summary>
-    /// Manages a rule that rewrites matching Formal logs before they are exported or stored.
+    /// Defines field-level actions for matching Formal logs before they are exported or stored.
     /// </summary>
-    [PulumiResourceType("formal:index/logRewrite:LogRewrite")]
-    public partial class LogRewrite : global::Pulumi.CustomResource
+    [PulumiResourceType("formal:index/logSchema:LogSchema")]
+    public partial class LogSchema : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// When the log rewrite was created.
+        /// When the log schema was created.
         /// </summary>
         [Output("createdAt")]
         public Output<string> CreatedAt { get; private set; } = null!;
@@ -29,7 +29,7 @@ namespace Formal.Pulumi
         public Output<string?> EncryptionKeyId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of this log rewrite.
+        /// The name of this log schema.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
@@ -38,35 +38,35 @@ namespace Formal.Pulumi
         /// A log field path and the actions to apply to it.
         /// </summary>
         [Output("paths")]
-        public Output<ImmutableArray<Outputs.LogRewritePath>> Paths { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.LogSchemaPath>> Paths { get; private set; } = null!;
 
         /// <summary>
-        /// A CEL expression that determines which logs this rewrite applies to.
+        /// A CEL expression that determines which logs this schema applies to.
         /// </summary>
         [Output("scopeCel")]
         public Output<string> ScopeCel { get; private set; } = null!;
 
         /// <summary>
-        /// When the log rewrite was last updated.
+        /// When the log schema was last updated.
         /// </summary>
         [Output("updatedAt")]
         public Output<string> UpdatedAt { get; private set; } = null!;
 
 
         /// <summary>
-        /// Create a LogRewrite resource with the given unique name, arguments, and options.
+        /// Create a LogSchema resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public LogRewrite(string name, LogRewriteArgs args, CustomResourceOptions? options = null)
-            : base("formal:index/logRewrite:LogRewrite", name, args ?? new LogRewriteArgs(), MakeResourceOptions(options, ""))
+        public LogSchema(string name, LogSchemaArgs args, CustomResourceOptions? options = null)
+            : base("formal:index/logSchema:LogSchema", name, args ?? new LogSchemaArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private LogRewrite(string name, Input<string> id, LogRewriteState? state = null, CustomResourceOptions? options = null)
-            : base("formal:index/logRewrite:LogRewrite", name, state, MakeResourceOptions(options, id))
+        private LogSchema(string name, Input<string> id, LogSchemaState? state = null, CustomResourceOptions? options = null)
+            : base("formal:index/logSchema:LogSchema", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -83,7 +83,7 @@ namespace Formal.Pulumi
             return merged;
         }
         /// <summary>
-        /// Get an existing LogRewrite resource's state with the given name, ID, and optional extra
+        /// Get an existing LogSchema resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -91,13 +91,13 @@ namespace Formal.Pulumi
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static LogRewrite Get(string name, Input<string> id, LogRewriteState? state = null, CustomResourceOptions? options = null)
+        public static LogSchema Get(string name, Input<string> id, LogSchemaState? state = null, CustomResourceOptions? options = null)
         {
-            return new LogRewrite(name, id, state, options);
+            return new LogSchema(name, id, state, options);
         }
     }
 
-    public sealed class LogRewriteArgs : global::Pulumi.ResourceArgs
+    public sealed class LogSchemaArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the asymmetric encryption key used by encrypt actions.
@@ -106,39 +106,39 @@ namespace Formal.Pulumi
         public Input<string>? EncryptionKeyId { get; set; }
 
         /// <summary>
-        /// The name of this log rewrite.
+        /// The name of this log schema.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         [Input("paths", required: true)]
-        private InputList<Inputs.LogRewritePathArgs>? _paths;
+        private InputList<Inputs.LogSchemaPathArgs>? _paths;
 
         /// <summary>
         /// A log field path and the actions to apply to it.
         /// </summary>
-        public InputList<Inputs.LogRewritePathArgs> Paths
+        public InputList<Inputs.LogSchemaPathArgs> Paths
         {
-            get => _paths ?? (_paths = new InputList<Inputs.LogRewritePathArgs>());
+            get => _paths ?? (_paths = new InputList<Inputs.LogSchemaPathArgs>());
             set => _paths = value;
         }
 
         /// <summary>
-        /// A CEL expression that determines which logs this rewrite applies to.
+        /// A CEL expression that determines which logs this schema applies to.
         /// </summary>
         [Input("scopeCel", required: true)]
         public Input<string> ScopeCel { get; set; } = null!;
 
-        public LogRewriteArgs()
+        public LogSchemaArgs()
         {
         }
-        public static new LogRewriteArgs Empty => new LogRewriteArgs();
+        public static new LogSchemaArgs Empty => new LogSchemaArgs();
     }
 
-    public sealed class LogRewriteState : global::Pulumi.ResourceArgs
+    public sealed class LogSchemaState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// When the log rewrite was created.
+        /// When the log schema was created.
         /// </summary>
         [Input("createdAt")]
         public Input<string>? CreatedAt { get; set; }
@@ -150,38 +150,38 @@ namespace Formal.Pulumi
         public Input<string>? EncryptionKeyId { get; set; }
 
         /// <summary>
-        /// The name of this log rewrite.
+        /// The name of this log schema.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         [Input("paths")]
-        private InputList<Inputs.LogRewritePathGetArgs>? _paths;
+        private InputList<Inputs.LogSchemaPathGetArgs>? _paths;
 
         /// <summary>
         /// A log field path and the actions to apply to it.
         /// </summary>
-        public InputList<Inputs.LogRewritePathGetArgs> Paths
+        public InputList<Inputs.LogSchemaPathGetArgs> Paths
         {
-            get => _paths ?? (_paths = new InputList<Inputs.LogRewritePathGetArgs>());
+            get => _paths ?? (_paths = new InputList<Inputs.LogSchemaPathGetArgs>());
             set => _paths = value;
         }
 
         /// <summary>
-        /// A CEL expression that determines which logs this rewrite applies to.
+        /// A CEL expression that determines which logs this schema applies to.
         /// </summary>
         [Input("scopeCel")]
         public Input<string>? ScopeCel { get; set; }
 
         /// <summary>
-        /// When the log rewrite was last updated.
+        /// When the log schema was last updated.
         /// </summary>
         [Input("updatedAt")]
         public Input<string>? UpdatedAt { get; set; }
 
-        public LogRewriteState()
+        public LogSchemaState()
         {
         }
-        public static new LogRewriteState Empty => new LogRewriteState();
+        public static new LogSchemaState Empty => new LogSchemaState();
     }
 }

@@ -73,10 +73,10 @@ __all__ = [
     'LogConfigurationSessionArgsDict',
     'LogConfigurationStreamArgs',
     'LogConfigurationStreamArgsDict',
-    'LogRewritePathArgs',
-    'LogRewritePathArgsDict',
-    'LogRewritePathTruncateArgs',
-    'LogRewritePathTruncateArgsDict',
+    'LogSchemaPathArgs',
+    'LogSchemaPathArgsDict',
+    'LogSchemaPathTruncateArgs',
+    'LogSchemaPathTruncateArgsDict',
     'NativeUserV3AwsIamArgs',
     'NativeUserV3AwsIamArgsDict',
     'NativeUserV3AwsIamRoleArgs',
@@ -2188,7 +2188,7 @@ class LogConfigurationStreamArgs:
         pulumi.set(self, "encrypt", value)
 
 
-class LogRewritePathArgsDict(TypedDict):
+class LogSchemaPathArgsDict(TypedDict):
     name: pulumi.Input[_builtins.str]
     """
     The protobuf field path, starting with `log`.
@@ -2209,27 +2209,27 @@ class LogRewritePathArgsDict(TypedDict):
     """
     Whether to remove literal values from a SQL query.
     """
-    truncate: NotRequired[pulumi.Input[Optional['LogRewritePathTruncateArgsDict']]]
+    truncate: NotRequired[pulumi.Input[Optional['LogSchemaPathTruncateArgsDict']]]
     """
     Truncates the string field to a maximum UTF-8 byte length.
     """
 
 @pulumi.input_type
-class LogRewritePathArgs:
+class LogSchemaPathArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[_builtins.str],
                  drop: pulumi.Input[Optional[_builtins.bool]] = None,
                  encrypt: pulumi.Input[Optional[_builtins.bool]] = None,
                  encrypt_sql: pulumi.Input[Optional[_builtins.bool]] = None,
                  strip_sql: pulumi.Input[Optional[_builtins.bool]] = None,
-                 truncate: pulumi.Input[Optional['LogRewritePathTruncateArgs']] = None):
+                 truncate: pulumi.Input[Optional['LogSchemaPathTruncateArgs']] = None):
         """
         :param pulumi.Input[_builtins.str] name: The protobuf field path, starting with `log`.
         :param pulumi.Input[_builtins.bool] drop: Whether to remove the field from the log.
         :param pulumi.Input[_builtins.bool] encrypt: Whether to encrypt the string field.
         :param pulumi.Input[_builtins.bool] encrypt_sql: Whether to encrypt literal values in a SQL query.
         :param pulumi.Input[_builtins.bool] strip_sql: Whether to remove literal values from a SQL query.
-        :param pulumi.Input['LogRewritePathTruncateArgs'] truncate: Truncates the string field to a maximum UTF-8 byte length.
+        :param pulumi.Input['LogSchemaPathTruncateArgs'] truncate: Truncates the string field to a maximum UTF-8 byte length.
         """
         pulumi.set(__self__, "name", name)
         if drop is not None:
@@ -2305,25 +2305,25 @@ class LogRewritePathArgs:
 
     @_builtins.property
     @pulumi.getter
-    def truncate(self) -> pulumi.Input[Optional['LogRewritePathTruncateArgs']]:
+    def truncate(self) -> pulumi.Input[Optional['LogSchemaPathTruncateArgs']]:
         """
         Truncates the string field to a maximum UTF-8 byte length.
         """
         return pulumi.get(self, "truncate")
 
     @truncate.setter
-    def truncate(self, value: pulumi.Input[Optional['LogRewritePathTruncateArgs']]):
+    def truncate(self, value: pulumi.Input[Optional['LogSchemaPathTruncateArgs']]):
         pulumi.set(self, "truncate", value)
 
 
-class LogRewritePathTruncateArgsDict(TypedDict):
+class LogSchemaPathTruncateArgsDict(TypedDict):
     max_size_bytes: pulumi.Input[_builtins.int]
     """
     The maximum field size in bytes.
     """
 
 @pulumi.input_type
-class LogRewritePathTruncateArgs:
+class LogSchemaPathTruncateArgs:
     def __init__(__self__, *,
                  max_size_bytes: pulumi.Input[_builtins.int]):
         """

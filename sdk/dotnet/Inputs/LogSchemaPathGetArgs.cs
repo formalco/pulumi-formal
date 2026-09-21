@@ -11,7 +11,7 @@ using Pulumi;
 namespace Formal.Pulumi.Inputs
 {
 
-    public sealed class LogRewritePathGetArgs : global::Pulumi.ResourceArgs
+    public sealed class LogSchemaPathGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to remove the field from the log.
@@ -47,11 +47,11 @@ namespace Formal.Pulumi.Inputs
         /// Truncates the string field to a maximum UTF-8 byte length.
         /// </summary>
         [Input("truncate")]
-        public Input<Inputs.LogRewritePathTruncateGetArgs>? Truncate { get; set; }
+        public Input<Inputs.LogSchemaPathTruncateGetArgs>? Truncate { get; set; }
 
-        public LogRewritePathGetArgs()
+        public LogSchemaPathGetArgs()
         {
         }
-        public static new LogRewritePathGetArgs Empty => new LogRewritePathGetArgs();
+        public static new LogSchemaPathGetArgs Empty => new LogSchemaPathGetArgs();
     }
 }

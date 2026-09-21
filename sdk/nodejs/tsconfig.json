@@ -53,7 +53,7 @@
         "inventoryObject.ts",
         "inventoryObjectDataLabelLink.ts",
         "logConfiguration.ts",
-        "logRewrite.ts",
+        "logSchema.ts",
         "nativeUser.ts",
         "nativeUserLink.ts",
         "nativeUserV3.ts",

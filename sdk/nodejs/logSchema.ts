@@ -7,11 +7,11 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Manages a rule that rewrites matching Formal logs before they are exported or stored.
+ * Defines field-level actions for matching Formal logs before they are exported or stored.
  */
-export class LogRewrite extends pulumi.CustomResource {
+export class LogSchema extends pulumi.CustomResource {
     /**
-     * Get an existing LogRewrite resource's state with the given name, ID, and optional extra
+     * Get an existing LogSchema resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -19,26 +19,26 @@ export class LogRewrite extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: LogRewriteState, opts?: pulumi.CustomResourceOptions): LogRewrite {
-        return new LogRewrite(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: LogSchemaState, opts?: pulumi.CustomResourceOptions): LogSchema {
+        return new LogSchema(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'formal:index/logRewrite:LogRewrite';
+    public static readonly __pulumiType = 'formal:index/logSchema:LogSchema';
 
     /**
-     * Returns true if the given object is an instance of LogRewrite.  This is designed to work even
+     * Returns true if the given object is an instance of LogSchema.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is LogRewrite {
+    public static isInstance(obj: any): obj is LogSchema {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === LogRewrite.__pulumiType;
+        return obj['__pulumiType'] === LogSchema.__pulumiType;
     }
 
     /**
-     * When the log rewrite was created.
+     * When the log schema was created.
      */
     declare public /*out*/ readonly createdAt: pulumi.Output<string>;
     /**
@@ -46,35 +46,35 @@ export class LogRewrite extends pulumi.CustomResource {
      */
     declare public readonly encryptionKeyId: pulumi.Output<string | undefined>;
     /**
-     * The name of this log rewrite.
+     * The name of this log schema.
      */
     declare public readonly name: pulumi.Output<string>;
     /**
      * A log field path and the actions to apply to it.
      */
-    declare public readonly paths: pulumi.Output<outputs.LogRewritePath[]>;
+    declare public readonly paths: pulumi.Output<outputs.LogSchemaPath[]>;
     /**
-     * A CEL expression that determines which logs this rewrite applies to.
+     * A CEL expression that determines which logs this schema applies to.
      */
     declare public readonly scopeCel: pulumi.Output<string>;
     /**
-     * When the log rewrite was last updated.
+     * When the log schema was last updated.
      */
     declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
 
     /**
-     * Create a LogRewrite resource with the given unique name, arguments, and options.
+     * Create a LogSchema resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: LogRewriteArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: LogRewriteArgs | LogRewriteState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: LogSchemaArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: LogSchemaArgs | LogSchemaState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as LogRewriteState | undefined;
+            const state = argsOrState as LogSchemaState | undefined;
             resourceInputs["createdAt"] = state?.createdAt;
             resourceInputs["encryptionKeyId"] = state?.encryptionKeyId;
             resourceInputs["name"] = state?.name;
@@ -82,7 +82,7 @@ export class LogRewrite extends pulumi.CustomResource {
             resourceInputs["scopeCel"] = state?.scopeCel;
             resourceInputs["updatedAt"] = state?.updatedAt;
         } else {
-            const args = argsOrState as LogRewriteArgs | undefined;
+            const args = argsOrState as LogSchemaArgs | undefined;
             if (args?.paths === undefined && !opts.urn) {
                 throw new Error("Missing required property 'paths'");
             }
@@ -97,16 +97,16 @@ export class LogRewrite extends pulumi.CustomResource {
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(LogRewrite.__pulumiType, name, resourceInputs, opts);
+        super(LogSchema.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering LogRewrite resources.
+ * Input properties used for looking up and filtering LogSchema resources.
  */
-export interface LogRewriteState {
+export interface LogSchemaState {
     /**
-     * When the log rewrite was created.
+     * When the log schema was created.
      */
     createdAt?: pulumi.Input<string | undefined>;
     /**
@@ -114,41 +114,41 @@ export interface LogRewriteState {
      */
     encryptionKeyId?: pulumi.Input<string | undefined>;
     /**
-     * The name of this log rewrite.
+     * The name of this log schema.
      */
     name?: pulumi.Input<string | undefined>;
     /**
      * A log field path and the actions to apply to it.
      */
-    paths?: pulumi.Input<pulumi.Input<inputs.LogRewritePath>[] | undefined>;
+    paths?: pulumi.Input<pulumi.Input<inputs.LogSchemaPath>[] | undefined>;
     /**
-     * A CEL expression that determines which logs this rewrite applies to.
+     * A CEL expression that determines which logs this schema applies to.
      */
     scopeCel?: pulumi.Input<string | undefined>;
     /**
-     * When the log rewrite was last updated.
+     * When the log schema was last updated.
      */
     updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**
- * The set of arguments for constructing a LogRewrite resource.
+ * The set of arguments for constructing a LogSchema resource.
  */
-export interface LogRewriteArgs {
+export interface LogSchemaArgs {
     /**
      * The ID of the asymmetric encryption key used by encrypt actions.
      */
     encryptionKeyId?: pulumi.Input<string | undefined>;
     /**
-     * The name of this log rewrite.
+     * The name of this log schema.
      */
     name?: pulumi.Input<string | undefined>;
     /**
      * A log field path and the actions to apply to it.
      */
-    paths: pulumi.Input<pulumi.Input<inputs.LogRewritePath>[]>;
+    paths: pulumi.Input<pulumi.Input<inputs.LogSchemaPath>[]>;
     /**
-     * A CEL expression that determines which logs this rewrite applies to.
+     * A CEL expression that determines which logs this schema applies to.
      */
     scopeCel: pulumi.Input<string>;
 }

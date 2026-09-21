@@ -11,7 +11,7 @@ using Pulumi;
 namespace Formal.Pulumi.Inputs
 {
 
-    public sealed class LogRewritePathTruncateGetArgs : global::Pulumi.ResourceArgs
+    public sealed class LogSchemaPathTruncateGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The maximum field size in bytes.
@@ -19,9 +19,9 @@ namespace Formal.Pulumi.Inputs
         [Input("maxSizeBytes", required: true)]
         public Input<int> MaxSizeBytes { get; set; } = null!;
 
-        public LogRewritePathTruncateGetArgs()
+        public LogSchemaPathTruncateGetArgs()
         {
         }
-        public static new LogRewritePathTruncateGetArgs Empty => new LogRewritePathTruncateGetArgs();
+        public static new LogSchemaPathTruncateGetArgs Empty => new LogSchemaPathTruncateGetArgs();
     }
 }

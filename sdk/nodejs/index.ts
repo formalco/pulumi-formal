@@ -160,10 +160,10 @@ export type LogConfiguration = import("./logConfiguration").LogConfiguration;
 export const LogConfiguration: typeof import("./logConfiguration").LogConfiguration = null as any;
 utilities.lazyLoad(exports, ["LogConfiguration"], () => require("./logConfiguration"));
 
-export { LogRewriteArgs, LogRewriteState } from "./logRewrite";
-export type LogRewrite = import("./logRewrite").LogRewrite;
-export const LogRewrite: typeof import("./logRewrite").LogRewrite = null as any;
-utilities.lazyLoad(exports, ["LogRewrite"], () => require("./logRewrite"));
+export { LogSchemaArgs, LogSchemaState } from "./logSchema";
+export type LogSchema = import("./logSchema").LogSchema;
+export const LogSchema: typeof import("./logSchema").LogSchema = null as any;
+utilities.lazyLoad(exports, ["LogSchema"], () => require("./logSchema"));
 
 export { NativeUserArgs, NativeUserState } from "./nativeUser";
 export type NativeUser = import("./nativeUser").NativeUser;
@@ -339,8 +339,8 @@ const _module = {
                 return new InventoryObjectDataLabelLink(name, <any>undefined, { urn })
             case "formal:index/logConfiguration:LogConfiguration":
                 return new LogConfiguration(name, <any>undefined, { urn })
-            case "formal:index/logRewrite:LogRewrite":
-                return new LogRewrite(name, <any>undefined, { urn })
+            case "formal:index/logSchema:LogSchema":
+                return new LogSchema(name, <any>undefined, { urn })
             case "formal:index/nativeUser:NativeUser":
                 return new NativeUser(name, <any>undefined, { urn })
             case "formal:index/nativeUserLink:NativeUserLink":
@@ -414,7 +414,7 @@ pulumi.runtime.registerResourceModule("formal", "index/integrationOidc", _module
 pulumi.runtime.registerResourceModule("formal", "index/inventoryObject", _module)
 pulumi.runtime.registerResourceModule("formal", "index/inventoryObjectDataLabelLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/logConfiguration", _module)
-pulumi.runtime.registerResourceModule("formal", "index/logRewrite", _module)
+pulumi.runtime.registerResourceModule("formal", "index/logSchema", _module)
 pulumi.runtime.registerResourceModule("formal", "index/nativeUser", _module)
 pulumi.runtime.registerResourceModule("formal", "index/nativeUserLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/nativeUserV3", _module)
