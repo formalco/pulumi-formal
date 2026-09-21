@@ -463,7 +463,7 @@ export interface LogConfigurationStream {
     encrypt: boolean;
 }
 
-export interface LogRewritePath {
+export interface LogSchemaPath {
     /**
      * Whether to remove the field from the log.
      */
@@ -487,10 +487,10 @@ export interface LogRewritePath {
     /**
      * Truncates the string field to a maximum UTF-8 byte length.
      */
-    truncate?: outputs.LogRewritePathTruncate;
+    truncate?: outputs.LogSchemaPathTruncate;
 }
 
-export interface LogRewritePathTruncate {
+export interface LogSchemaPathTruncate {
     /**
      * The maximum field size in bytes.
      */

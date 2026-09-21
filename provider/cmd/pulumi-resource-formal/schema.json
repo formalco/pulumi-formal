@@ -756,7 +756,7 @@
                 "encrypt"
             ]
         },
-        "formal:index/LogRewritePath:LogRewritePath": {
+        "formal:index/LogSchemaPath:LogSchemaPath": {
             "properties": {
                 "drop": {
                     "type": "boolean",
@@ -779,7 +779,7 @@
                     "description": "Whether to remove literal values from a SQL query.\n"
                 },
                 "truncate": {
-                    "$ref": "#/types/formal:index/LogRewritePathTruncate:LogRewritePathTruncate",
+                    "$ref": "#/types/formal:index/LogSchemaPathTruncate:LogSchemaPathTruncate",
                     "description": "Truncates the string field to a maximum UTF-8 byte length.\n"
                 }
             },
@@ -788,7 +788,7 @@
                 "name"
             ]
         },
-        "formal:index/LogRewritePathTruncate:LogRewritePathTruncate": {
+        "formal:index/LogSchemaPathTruncate:LogSchemaPathTruncate": {
             "properties": {
                 "maxSizeBytes": {
                     "type": "integer",
@@ -3929,12 +3929,12 @@
                 "type": "object"
             }
         },
-        "formal:index/logRewrite:LogRewrite": {
-            "description": "Manages a rule that rewrites matching Formal logs before they are exported or stored.\n",
+        "formal:index/logSchema:LogSchema": {
+            "description": "Defines field-level actions for matching Formal logs before they are exported or stored.\n",
             "properties": {
                 "createdAt": {
                     "type": "string",
-                    "description": "When the log rewrite was created.\n"
+                    "description": "When the log schema was created.\n"
                 },
                 "encryptionKeyId": {
                     "type": "string",
@@ -3942,22 +3942,22 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "The name of this log rewrite.\n"
+                    "description": "The name of this log schema.\n"
                 },
                 "paths": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/formal:index/LogRewritePath:LogRewritePath"
+                        "$ref": "#/types/formal:index/LogSchemaPath:LogSchemaPath"
                     },
                     "description": "A log field path and the actions to apply to it.\n"
                 },
                 "scopeCel": {
                     "type": "string",
-                    "description": "A CEL expression that determines which logs this rewrite applies to.\n"
+                    "description": "A CEL expression that determines which logs this schema applies to.\n"
                 },
                 "updatedAt": {
                     "type": "string",
-                    "description": "When the log rewrite was last updated.\n"
+                    "description": "When the log schema was last updated.\n"
                 }
             },
             "required": [
@@ -3974,18 +3974,18 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "The name of this log rewrite.\n"
+                    "description": "The name of this log schema.\n"
                 },
                 "paths": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/formal:index/LogRewritePath:LogRewritePath"
+                        "$ref": "#/types/formal:index/LogSchemaPath:LogSchemaPath"
                     },
                     "description": "A log field path and the actions to apply to it.\n"
                 },
                 "scopeCel": {
                     "type": "string",
-                    "description": "A CEL expression that determines which logs this rewrite applies to.\n"
+                    "description": "A CEL expression that determines which logs this schema applies to.\n"
                 }
             },
             "requiredInputs": [
@@ -3993,11 +3993,11 @@
                 "scopeCel"
             ],
             "stateInputs": {
-                "description": "Input properties used for looking up and filtering LogRewrite resources.\n",
+                "description": "Input properties used for looking up and filtering LogSchema resources.\n",
                 "properties": {
                     "createdAt": {
                         "type": "string",
-                        "description": "When the log rewrite was created.\n"
+                        "description": "When the log schema was created.\n"
                     },
                     "encryptionKeyId": {
                         "type": "string",
@@ -4005,22 +4005,22 @@
                     },
                     "name": {
                         "type": "string",
-                        "description": "The name of this log rewrite.\n"
+                        "description": "The name of this log schema.\n"
                     },
                     "paths": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/types/formal:index/LogRewritePath:LogRewritePath"
+                            "$ref": "#/types/formal:index/LogSchemaPath:LogSchemaPath"
                         },
                         "description": "A log field path and the actions to apply to it.\n"
                     },
                     "scopeCel": {
                         "type": "string",
-                        "description": "A CEL expression that determines which logs this rewrite applies to.\n"
+                        "description": "A CEL expression that determines which logs this schema applies to.\n"
                     },
                     "updatedAt": {
                         "type": "string",
-                        "description": "When the log rewrite was last updated.\n"
+                        "description": "When the log schema was last updated.\n"
                     }
                 },
                 "type": "object"

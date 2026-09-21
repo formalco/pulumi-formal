@@ -16,22 +16,22 @@ from . import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['LogRewriteArgs', 'LogRewrite']
+__all__ = ['LogSchemaArgs', 'LogSchema']
 
 @pulumi.input_type
-class LogRewriteArgs:
+class LogSchemaArgs:
     def __init__(__self__, *,
-                 paths: pulumi.Input[Sequence[pulumi.Input['LogRewritePathArgs']]],
+                 paths: pulumi.Input[Sequence[pulumi.Input['LogSchemaPathArgs']]],
                  scope_cel: pulumi.Input[_builtins.str],
                  encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None):
         """
-        The set of arguments for constructing a LogRewrite resource.
+        The set of arguments for constructing a LogSchema resource.
 
-        :param pulumi.Input[Sequence[pulumi.Input['LogRewritePathArgs']]] paths: A log field path and the actions to apply to it.
-        :param pulumi.Input[_builtins.str] scope_cel: A CEL expression that determines which logs this rewrite applies to.
+        :param pulumi.Input[Sequence[pulumi.Input['LogSchemaPathArgs']]] paths: A log field path and the actions to apply to it.
+        :param pulumi.Input[_builtins.str] scope_cel: A CEL expression that determines which logs this schema applies to.
         :param pulumi.Input[_builtins.str] encryption_key_id: The ID of the asymmetric encryption key used by encrypt actions.
-        :param pulumi.Input[_builtins.str] name: The name of this log rewrite.
+        :param pulumi.Input[_builtins.str] name: The name of this log schema.
         """
         pulumi.set(__self__, "paths", paths)
         pulumi.set(__self__, "scope_cel", scope_cel)
@@ -42,21 +42,21 @@ class LogRewriteArgs:
 
     @_builtins.property
     @pulumi.getter
-    def paths(self) -> pulumi.Input[Sequence[pulumi.Input['LogRewritePathArgs']]]:
+    def paths(self) -> pulumi.Input[Sequence[pulumi.Input['LogSchemaPathArgs']]]:
         """
         A log field path and the actions to apply to it.
         """
         return pulumi.get(self, "paths")
 
     @paths.setter
-    def paths(self, value: pulumi.Input[Sequence[pulumi.Input['LogRewritePathArgs']]]):
+    def paths(self, value: pulumi.Input[Sequence[pulumi.Input['LogSchemaPathArgs']]]):
         pulumi.set(self, "paths", value)
 
     @_builtins.property
     @pulumi.getter(name="scopeCel")
     def scope_cel(self) -> pulumi.Input[_builtins.str]:
         """
-        A CEL expression that determines which logs this rewrite applies to.
+        A CEL expression that determines which logs this schema applies to.
         """
         return pulumi.get(self, "scope_cel")
 
@@ -80,7 +80,7 @@ class LogRewriteArgs:
     @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The name of this log rewrite.
+        The name of this log schema.
         """
         return pulumi.get(self, "name")
 
@@ -90,23 +90,23 @@ class LogRewriteArgs:
 
 
 @pulumi.input_type
-class _LogRewriteState:
+class _LogSchemaState:
     def __init__(__self__, *,
                  created_at: pulumi.Input[Optional[_builtins.str]] = None,
                  encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 paths: pulumi.Input[Optional[Sequence[pulumi.Input['LogRewritePathArgs']]]] = None,
+                 paths: pulumi.Input[Optional[Sequence[pulumi.Input['LogSchemaPathArgs']]]] = None,
                  scope_cel: pulumi.Input[Optional[_builtins.str]] = None,
                  updated_at: pulumi.Input[Optional[_builtins.str]] = None):
         """
-        Input properties used for looking up and filtering LogRewrite resources.
+        Input properties used for looking up and filtering LogSchema resources.
 
-        :param pulumi.Input[_builtins.str] created_at: When the log rewrite was created.
+        :param pulumi.Input[_builtins.str] created_at: When the log schema was created.
         :param pulumi.Input[_builtins.str] encryption_key_id: The ID of the asymmetric encryption key used by encrypt actions.
-        :param pulumi.Input[_builtins.str] name: The name of this log rewrite.
-        :param pulumi.Input[Sequence[pulumi.Input['LogRewritePathArgs']]] paths: A log field path and the actions to apply to it.
-        :param pulumi.Input[_builtins.str] scope_cel: A CEL expression that determines which logs this rewrite applies to.
-        :param pulumi.Input[_builtins.str] updated_at: When the log rewrite was last updated.
+        :param pulumi.Input[_builtins.str] name: The name of this log schema.
+        :param pulumi.Input[Sequence[pulumi.Input['LogSchemaPathArgs']]] paths: A log field path and the actions to apply to it.
+        :param pulumi.Input[_builtins.str] scope_cel: A CEL expression that determines which logs this schema applies to.
+        :param pulumi.Input[_builtins.str] updated_at: When the log schema was last updated.
         """
         if created_at is not None:
             pulumi.set(__self__, "created_at", created_at)
@@ -125,7 +125,7 @@ class _LogRewriteState:
     @pulumi.getter(name="createdAt")
     def created_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        When the log rewrite was created.
+        When the log schema was created.
         """
         return pulumi.get(self, "created_at")
 
@@ -149,7 +149,7 @@ class _LogRewriteState:
     @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The name of this log rewrite.
+        The name of this log schema.
         """
         return pulumi.get(self, "name")
 
@@ -159,21 +159,21 @@ class _LogRewriteState:
 
     @_builtins.property
     @pulumi.getter
-    def paths(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['LogRewritePathArgs']]]]:
+    def paths(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['LogSchemaPathArgs']]]]:
         """
         A log field path and the actions to apply to it.
         """
         return pulumi.get(self, "paths")
 
     @paths.setter
-    def paths(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['LogRewritePathArgs']]]]):
+    def paths(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['LogSchemaPathArgs']]]]):
         pulumi.set(self, "paths", value)
 
     @_builtins.property
     @pulumi.getter(name="scopeCel")
     def scope_cel(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        A CEL expression that determines which logs this rewrite applies to.
+        A CEL expression that determines which logs this schema applies to.
         """
         return pulumi.get(self, "scope_cel")
 
@@ -185,7 +185,7 @@ class _LogRewriteState:
     @pulumi.getter(name="updatedAt")
     def updated_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        When the log rewrite was last updated.
+        When the log schema was last updated.
         """
         return pulumi.get(self, "updated_at")
 
@@ -194,45 +194,45 @@ class _LogRewriteState:
         pulumi.set(self, "updated_at", value)
 
 
-@pulumi.type_token("formal:index/logRewrite:LogRewrite")
-class LogRewrite(pulumi.CustomResource):
+@pulumi.type_token("formal:index/logSchema:LogSchema")
+class LogSchema(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogRewritePathArgs', 'LogRewritePathArgsDict']]]]] = None,
+                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict']]]]] = None,
                  scope_cel: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        Manages a rule that rewrites matching Formal logs before they are exported or stored.
+        Defines field-level actions for matching Formal logs before they are exported or stored.
 
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] encryption_key_id: The ID of the asymmetric encryption key used by encrypt actions.
-        :param pulumi.Input[_builtins.str] name: The name of this log rewrite.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['LogRewritePathArgs', 'LogRewritePathArgsDict']]]] paths: A log field path and the actions to apply to it.
-        :param pulumi.Input[_builtins.str] scope_cel: A CEL expression that determines which logs this rewrite applies to.
+        :param pulumi.Input[_builtins.str] name: The name of this log schema.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict']]]] paths: A log field path and the actions to apply to it.
+        :param pulumi.Input[_builtins.str] scope_cel: A CEL expression that determines which logs this schema applies to.
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: LogRewriteArgs,
+                 args: LogSchemaArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Manages a rule that rewrites matching Formal logs before they are exported or stored.
+        Defines field-level actions for matching Formal logs before they are exported or stored.
 
 
         :param str resource_name: The name of the resource.
-        :param LogRewriteArgs args: The arguments to use to populate this resource's properties.
+        :param LogSchemaArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(LogRewriteArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(LogSchemaArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -243,7 +243,7 @@ class LogRewrite(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogRewritePathArgs', 'LogRewritePathArgsDict']]]]] = None,
+                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict']]]]] = None,
                  scope_cel: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -252,7 +252,7 @@ class LogRewrite(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = LogRewriteArgs.__new__(LogRewriteArgs)
+            __props__ = LogSchemaArgs.__new__(LogSchemaArgs)
 
             __props__.__dict__["encryption_key_id"] = encryption_key_id
             __props__.__dict__["name"] = name
@@ -264,8 +264,8 @@ class LogRewrite(pulumi.CustomResource):
             __props__.__dict__["scope_cel"] = scope_cel
             __props__.__dict__["created_at"] = None
             __props__.__dict__["updated_at"] = None
-        super(LogRewrite, __self__).__init__(
-            'formal:index/logRewrite:LogRewrite',
+        super(LogSchema, __self__).__init__(
+            'formal:index/logSchema:LogSchema',
             resource_name,
             __props__,
             opts)
@@ -277,26 +277,26 @@ class LogRewrite(pulumi.CustomResource):
             created_at: pulumi.Input[Optional[_builtins.str]] = None,
             encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogRewritePathArgs', 'LogRewritePathArgsDict']]]]] = None,
+            paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict']]]]] = None,
             scope_cel: pulumi.Input[Optional[_builtins.str]] = None,
-            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'LogRewrite':
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'LogSchema':
         """
-        Get an existing LogRewrite resource's state with the given name, id, and optional extra
+        Get an existing LogSchema resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] created_at: When the log rewrite was created.
+        :param pulumi.Input[_builtins.str] created_at: When the log schema was created.
         :param pulumi.Input[_builtins.str] encryption_key_id: The ID of the asymmetric encryption key used by encrypt actions.
-        :param pulumi.Input[_builtins.str] name: The name of this log rewrite.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['LogRewritePathArgs', 'LogRewritePathArgsDict']]]] paths: A log field path and the actions to apply to it.
-        :param pulumi.Input[_builtins.str] scope_cel: A CEL expression that determines which logs this rewrite applies to.
-        :param pulumi.Input[_builtins.str] updated_at: When the log rewrite was last updated.
+        :param pulumi.Input[_builtins.str] name: The name of this log schema.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict']]]] paths: A log field path and the actions to apply to it.
+        :param pulumi.Input[_builtins.str] scope_cel: A CEL expression that determines which logs this schema applies to.
+        :param pulumi.Input[_builtins.str] updated_at: When the log schema was last updated.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _LogRewriteState.__new__(_LogRewriteState)
+        __props__ = _LogSchemaState.__new__(_LogSchemaState)
 
         __props__.__dict__["created_at"] = created_at
         __props__.__dict__["encryption_key_id"] = encryption_key_id
@@ -304,13 +304,13 @@ class LogRewrite(pulumi.CustomResource):
         __props__.__dict__["paths"] = paths
         __props__.__dict__["scope_cel"] = scope_cel
         __props__.__dict__["updated_at"] = updated_at
-        return LogRewrite(resource_name, opts=opts, __props__=__props__)
+        return LogSchema(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
     @pulumi.getter(name="createdAt")
     def created_at(self) -> pulumi.Output[_builtins.str]:
         """
-        When the log rewrite was created.
+        When the log schema was created.
         """
         return pulumi.get(self, "created_at")
 
@@ -326,13 +326,13 @@ class LogRewrite(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[_builtins.str]:
         """
-        The name of this log rewrite.
+        The name of this log schema.
         """
         return pulumi.get(self, "name")
 
     @_builtins.property
     @pulumi.getter
-    def paths(self) -> pulumi.Output[Sequence['outputs.LogRewritePath']]:
+    def paths(self) -> pulumi.Output[Sequence['outputs.LogSchemaPath']]:
         """
         A log field path and the actions to apply to it.
         """
@@ -342,7 +342,7 @@ class LogRewrite(pulumi.CustomResource):
     @pulumi.getter(name="scopeCel")
     def scope_cel(self) -> pulumi.Output[_builtins.str]:
         """
-        A CEL expression that determines which logs this rewrite applies to.
+        A CEL expression that determines which logs this schema applies to.
         """
         return pulumi.get(self, "scope_cel")
 
@@ -350,7 +350,7 @@ class LogRewrite(pulumi.CustomResource):
     @pulumi.getter(name="updatedAt")
     def updated_at(self) -> pulumi.Output[_builtins.str]:
         """
-        When the log rewrite was last updated.
+        When the log schema was last updated.
         """
         return pulumi.get(self, "updated_at")
 

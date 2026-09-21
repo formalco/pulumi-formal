@@ -8,57 +8,50 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace Formal.Pulumi.Outputs
+namespace Formal.Pulumi.Inputs
 {
 
-    [OutputType]
-    public sealed class LogRewritePath
+    public sealed class LogSchemaPathArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to remove the field from the log.
         /// </summary>
-        public readonly bool? Drop;
+        [Input("drop")]
+        public Input<bool>? Drop { get; set; }
+
         /// <summary>
         /// Whether to encrypt the string field.
         /// </summary>
-        public readonly bool? Encrypt;
+        [Input("encrypt")]
+        public Input<bool>? Encrypt { get; set; }
+
         /// <summary>
         /// Whether to encrypt literal values in a SQL query.
         /// </summary>
-        public readonly bool? EncryptSql;
+        [Input("encryptSql")]
+        public Input<bool>? EncryptSql { get; set; }
+
         /// <summary>
         /// The protobuf field path, starting with `Log`.
         /// </summary>
-        public readonly string Name;
+        [Input("name", required: true)]
+        public Input<string> Name { get; set; } = null!;
+
         /// <summary>
         /// Whether to remove literal values from a SQL query.
         /// </summary>
-        public readonly bool? StripSql;
+        [Input("stripSql")]
+        public Input<bool>? StripSql { get; set; }
+
         /// <summary>
         /// Truncates the string field to a maximum UTF-8 byte length.
         /// </summary>
-        public readonly Outputs.LogRewritePathTruncate? Truncate;
+        [Input("truncate")]
+        public Input<Inputs.LogSchemaPathTruncateArgs>? Truncate { get; set; }
 
-        [OutputConstructor]
-        private LogRewritePath(
-            bool? drop,
-
-            bool? encrypt,
-
-            bool? encryptSql,
-
-            string name,
-
-            bool? stripSql,
-
-            Outputs.LogRewritePathTruncate? truncate)
+        public LogSchemaPathArgs()
         {
-            Drop = drop;
-            Encrypt = encrypt;
-            EncryptSql = encryptSql;
-            Name = name;
-            StripSql = stripSql;
-            Truncate = truncate;
         }
+        public static new LogSchemaPathArgs Empty => new LogSchemaPathArgs();
     }
 }

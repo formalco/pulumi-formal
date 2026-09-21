@@ -8,50 +8,57 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace Formal.Pulumi.Inputs
+namespace Formal.Pulumi.Outputs
 {
 
-    public sealed class LogRewritePathArgs : global::Pulumi.ResourceArgs
+    [OutputType]
+    public sealed class LogSchemaPath
     {
         /// <summary>
         /// Whether to remove the field from the log.
         /// </summary>
-        [Input("drop")]
-        public Input<bool>? Drop { get; set; }
-
+        public readonly bool? Drop;
         /// <summary>
         /// Whether to encrypt the string field.
         /// </summary>
-        [Input("encrypt")]
-        public Input<bool>? Encrypt { get; set; }
-
+        public readonly bool? Encrypt;
         /// <summary>
         /// Whether to encrypt literal values in a SQL query.
         /// </summary>
-        [Input("encryptSql")]
-        public Input<bool>? EncryptSql { get; set; }
-
+        public readonly bool? EncryptSql;
         /// <summary>
         /// The protobuf field path, starting with `Log`.
         /// </summary>
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
-
+        public readonly string Name;
         /// <summary>
         /// Whether to remove literal values from a SQL query.
         /// </summary>
-        [Input("stripSql")]
-        public Input<bool>? StripSql { get; set; }
-
+        public readonly bool? StripSql;
         /// <summary>
         /// Truncates the string field to a maximum UTF-8 byte length.
         /// </summary>
-        [Input("truncate")]
-        public Input<Inputs.LogRewritePathTruncateArgs>? Truncate { get; set; }
+        public readonly Outputs.LogSchemaPathTruncate? Truncate;
 
-        public LogRewritePathArgs()
+        [OutputConstructor]
+        private LogSchemaPath(
+            bool? drop,
+
+            bool? encrypt,
+
+            bool? encryptSql,
+
+            string name,
+
+            bool? stripSql,
+
+            Outputs.LogSchemaPathTruncate? truncate)
         {
+            Drop = drop;
+            Encrypt = encrypt;
+            EncryptSql = encryptSql;
+            Name = name;
+            StripSql = stripSql;
+            Truncate = truncate;
         }
-        public static new LogRewritePathArgs Empty => new LogRewritePathArgs();
     }
 }

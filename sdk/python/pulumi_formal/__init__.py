@@ -37,7 +37,7 @@ from .integration_oidc import *
 from .inventory_object import *
 from .inventory_object_data_label_link import *
 from .log_configuration import *
-from .log_rewrite import *
+from .log_schema import *
 from .native_user import *
 from .native_user_link import *
 from .native_user_v3 import *
@@ -283,10 +283,10 @@ _utilities.register(
  },
  {
   "pkg": "formal",
-  "mod": "index/logRewrite",
+  "mod": "index/logSchema",
   "fqn": "pulumi_formal",
   "classes": {
-   "formal:index/logRewrite:LogRewrite": "LogRewrite"
+   "formal:index/logSchema:LogSchema": "LogSchema"
   }
  },
  {

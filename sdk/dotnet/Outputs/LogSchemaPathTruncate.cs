@@ -12,7 +12,7 @@ namespace Formal.Pulumi.Outputs
 {
 
     [OutputType]
-    public sealed class LogRewritePathTruncate
+    public sealed class LogSchemaPathTruncate
     {
         /// <summary>
         /// The maximum field size in bytes.
@@ -20,7 +20,7 @@ namespace Formal.Pulumi.Outputs
         public readonly int MaxSizeBytes;
 
         [OutputConstructor]
-        private LogRewritePathTruncate(int maxSizeBytes)
+        private LogSchemaPathTruncate(int maxSizeBytes)
         {
             MaxSizeBytes = maxSizeBytes;
         }
