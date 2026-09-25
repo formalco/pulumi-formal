@@ -153,6 +153,45 @@ export interface FormFieldConfigOptionsSourceCommand {
     name: string;
 }
 
+export interface GetUsersUser {
+    /**
+     * The identity the User uses to access Formal.
+     */
+    dbUsername: string;
+    /**
+     * The email of this User. Only set for human users.
+     */
+    email: string;
+    /**
+     * The first name of this User. Only set for human users.
+     */
+    firstName: string;
+    /**
+     * The full name of this User.
+     */
+    fullName: string;
+    /**
+     * The IDs of the Groups this User belongs to.
+     */
+    groupIds: string[];
+    /**
+     * The ID of the User.
+     */
+    id: string;
+    /**
+     * The last name of this User. Only set for human users.
+     */
+    lastName: string;
+    /**
+     * If set to true, this User cannot be deleted.
+     */
+    terminationProtection: boolean;
+    /**
+     * The type of this User, either `human` or `machine`.
+     */
+    type: string;
+}
+
 export interface IntegrationBiMetabase {
     /**
      * Metabase server hostname. Required when `sync=true`.

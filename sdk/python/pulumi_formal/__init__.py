@@ -24,6 +24,7 @@ from .get_group import *
 from .get_resource import *
 from .get_space import *
 from .get_user import *
+from .get_users import *
 from .group import *
 from .group_user_link import *
 from .hook import *
