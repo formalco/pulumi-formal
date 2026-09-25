@@ -71,6 +71,7 @@ __all__ = [
     'NativeUserV3SshKey',
     'NativeUserV3SshKeyCertificate',
     'NativeUserV3SshKeyKey',
+    'GetUsersUserResult',
 ]
 
 @pulumi.output_type
@@ -3132,5 +3133,111 @@ class NativeUserV3SshKeyKey(dict):
         Version trigger for `literal_wo`. Increment this value to update the secret.
         """
         return pulumi.get(self, "literal_wo_version")
+
+
+@pulumi.output_type
+class GetUsersUserResult(dict):
+    def __init__(__self__, *,
+                 db_username: _builtins.str,
+                 email: _builtins.str,
+                 first_name: _builtins.str,
+                 full_name: _builtins.str,
+                 group_ids: Sequence[_builtins.str],
+                 id: _builtins.str,
+                 last_name: _builtins.str,
+                 termination_protection: _builtins.bool,
+                 type: _builtins.str):
+        """
+        :param _builtins.str db_username: The identity the User uses to access Formal.
+        :param _builtins.str email: The email of this User. Only set for human users.
+        :param _builtins.str first_name: The first name of this User. Only set for human users.
+        :param _builtins.str full_name: The full name of this User.
+        :param Sequence[_builtins.str] group_ids: The IDs of the Groups this User belongs to.
+        :param _builtins.str id: The ID of the User.
+        :param _builtins.str last_name: The last name of this User. Only set for human users.
+        :param _builtins.bool termination_protection: If set to true, this User cannot be deleted.
+        :param _builtins.str type: The type of this User, either `human` or `machine`.
+        """
+        pulumi.set(__self__, "db_username", db_username)
+        pulumi.set(__self__, "email", email)
+        pulumi.set(__self__, "first_name", first_name)
+        pulumi.set(__self__, "full_name", full_name)
+        pulumi.set(__self__, "group_ids", group_ids)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "last_name", last_name)
+        pulumi.set(__self__, "termination_protection", termination_protection)
+        pulumi.set(__self__, "type", type)
+
+    @_builtins.property
+    @pulumi.getter(name="dbUsername")
+    def db_username(self) -> _builtins.str:
+        """
+        The identity the User uses to access Formal.
+        """
+        return pulumi.get(self, "db_username")
+
+    @_builtins.property
+    @pulumi.getter
+    def email(self) -> _builtins.str:
+        """
+        The email of this User. Only set for human users.
+        """
+        return pulumi.get(self, "email")
+
+    @_builtins.property
+    @pulumi.getter(name="firstName")
+    def first_name(self) -> _builtins.str:
+        """
+        The first name of this User. Only set for human users.
+        """
+        return pulumi.get(self, "first_name")
+
+    @_builtins.property
+    @pulumi.getter(name="fullName")
+    def full_name(self) -> _builtins.str:
+        """
+        The full name of this User.
+        """
+        return pulumi.get(self, "full_name")
+
+    @_builtins.property
+    @pulumi.getter(name="groupIds")
+    def group_ids(self) -> Sequence[_builtins.str]:
+        """
+        The IDs of the Groups this User belongs to.
+        """
+        return pulumi.get(self, "group_ids")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        The ID of the User.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="lastName")
+    def last_name(self) -> _builtins.str:
+        """
+        The last name of this User. Only set for human users.
+        """
+        return pulumi.get(self, "last_name")
+
+    @_builtins.property
+    @pulumi.getter(name="terminationProtection")
+    def termination_protection(self) -> _builtins.bool:
+        """
+        If set to true, this User cannot be deleted.
+        """
+        return pulumi.get(self, "termination_protection")
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> _builtins.str:
+        """
+        The type of this User, either `human` or `machine`.
+        """
+        return pulumi.get(self, "type")
 
 

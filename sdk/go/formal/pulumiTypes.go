@@ -9926,6 +9926,175 @@ func (o ProviderOidcAzurePtrOutput) Elem() ProviderOidcAzureOutput {
 	}).(ProviderOidcAzureOutput)
 }
 
+type GetUsersUser struct {
+	// The identity the User uses to access Formal.
+	DbUsername string `pulumi:"dbUsername"`
+	// The email of this User. Only set for human users.
+	Email string `pulumi:"email"`
+	// The first name of this User. Only set for human users.
+	FirstName string `pulumi:"firstName"`
+	// The full name of this User.
+	FullName string `pulumi:"fullName"`
+	// The IDs of the Groups this User belongs to.
+	GroupIds []string `pulumi:"groupIds"`
+	// The ID of the User.
+	Id string `pulumi:"id"`
+	// The last name of this User. Only set for human users.
+	LastName string `pulumi:"lastName"`
+	// If set to true, this User cannot be deleted.
+	TerminationProtection bool `pulumi:"terminationProtection"`
+	// The type of this User, either `human` or `machine`.
+	Type string `pulumi:"type"`
+}
+
+// GetUsersUserInput is an input type that accepts GetUsersUserArgs and GetUsersUserOutput values.
+// You can construct a concrete instance of `GetUsersUserInput` via:
+//
+//	GetUsersUserArgs{...}
+type GetUsersUserInput interface {
+	pulumi.Input
+
+	ToGetUsersUserOutput() GetUsersUserOutput
+	ToGetUsersUserOutputWithContext(context.Context) GetUsersUserOutput
+}
+
+type GetUsersUserArgs struct {
+	// The identity the User uses to access Formal.
+	DbUsername pulumi.StringInput `pulumi:"dbUsername"`
+	// The email of this User. Only set for human users.
+	Email pulumi.StringInput `pulumi:"email"`
+	// The first name of this User. Only set for human users.
+	FirstName pulumi.StringInput `pulumi:"firstName"`
+	// The full name of this User.
+	FullName pulumi.StringInput `pulumi:"fullName"`
+	// The IDs of the Groups this User belongs to.
+	GroupIds pulumi.StringArrayInput `pulumi:"groupIds"`
+	// The ID of the User.
+	Id pulumi.StringInput `pulumi:"id"`
+	// The last name of this User. Only set for human users.
+	LastName pulumi.StringInput `pulumi:"lastName"`
+	// If set to true, this User cannot be deleted.
+	TerminationProtection pulumi.BoolInput `pulumi:"terminationProtection"`
+	// The type of this User, either `human` or `machine`.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetUsersUserArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsersUser)(nil)).Elem()
+}
+
+func (i GetUsersUserArgs) ToGetUsersUserOutput() GetUsersUserOutput {
+	return i.ToGetUsersUserOutputWithContext(context.Background())
+}
+
+func (i GetUsersUserArgs) ToGetUsersUserOutputWithContext(ctx context.Context) GetUsersUserOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsersUserOutput)
+}
+
+// GetUsersUserArrayInput is an input type that accepts GetUsersUserArray and GetUsersUserArrayOutput values.
+// You can construct a concrete instance of `GetUsersUserArrayInput` via:
+//
+//	GetUsersUserArray{ GetUsersUserArgs{...} }
+type GetUsersUserArrayInput interface {
+	pulumi.Input
+
+	ToGetUsersUserArrayOutput() GetUsersUserArrayOutput
+	ToGetUsersUserArrayOutputWithContext(context.Context) GetUsersUserArrayOutput
+}
+
+type GetUsersUserArray []GetUsersUserInput
+
+func (GetUsersUserArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsersUser)(nil)).Elem()
+}
+
+func (i GetUsersUserArray) ToGetUsersUserArrayOutput() GetUsersUserArrayOutput {
+	return i.ToGetUsersUserArrayOutputWithContext(context.Background())
+}
+
+func (i GetUsersUserArray) ToGetUsersUserArrayOutputWithContext(ctx context.Context) GetUsersUserArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUsersUserArrayOutput)
+}
+
+type GetUsersUserOutput struct{ *pulumi.OutputState }
+
+func (GetUsersUserOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUsersUser)(nil)).Elem()
+}
+
+func (o GetUsersUserOutput) ToGetUsersUserOutput() GetUsersUserOutput {
+	return o
+}
+
+func (o GetUsersUserOutput) ToGetUsersUserOutputWithContext(ctx context.Context) GetUsersUserOutput {
+	return o
+}
+
+// The identity the User uses to access Formal.
+func (o GetUsersUserOutput) DbUsername() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsersUser) string { return v.DbUsername }).(pulumi.StringOutput)
+}
+
+// The email of this User. Only set for human users.
+func (o GetUsersUserOutput) Email() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsersUser) string { return v.Email }).(pulumi.StringOutput)
+}
+
+// The first name of this User. Only set for human users.
+func (o GetUsersUserOutput) FirstName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsersUser) string { return v.FirstName }).(pulumi.StringOutput)
+}
+
+// The full name of this User.
+func (o GetUsersUserOutput) FullName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsersUser) string { return v.FullName }).(pulumi.StringOutput)
+}
+
+// The IDs of the Groups this User belongs to.
+func (o GetUsersUserOutput) GroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetUsersUser) []string { return v.GroupIds }).(pulumi.StringArrayOutput)
+}
+
+// The ID of the User.
+func (o GetUsersUserOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsersUser) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The last name of this User. Only set for human users.
+func (o GetUsersUserOutput) LastName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsersUser) string { return v.LastName }).(pulumi.StringOutput)
+}
+
+// If set to true, this User cannot be deleted.
+func (o GetUsersUserOutput) TerminationProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetUsersUser) bool { return v.TerminationProtection }).(pulumi.BoolOutput)
+}
+
+// The type of this User, either `human` or `machine`.
+func (o GetUsersUserOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUsersUser) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetUsersUserArrayOutput struct{ *pulumi.OutputState }
+
+func (GetUsersUserArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUsersUser)(nil)).Elem()
+}
+
+func (o GetUsersUserArrayOutput) ToGetUsersUserArrayOutput() GetUsersUserArrayOutput {
+	return o
+}
+
+func (o GetUsersUserArrayOutput) ToGetUsersUserArrayOutputWithContext(ctx context.Context) GetUsersUserArrayOutput {
+	return o
+}
+
+func (o GetUsersUserArrayOutput) Index(i pulumi.IntInput) GetUsersUserOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetUsersUser {
+		return vs[0].([]GetUsersUser)[vs[1].(int)]
+	}).(GetUsersUserOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderAnthropicInput)(nil)).Elem(), ConnectorAiProviderAnthropicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConnectorAiProviderAnthropicPtrInput)(nil)).Elem(), ConnectorAiProviderAnthropicArgs{})
@@ -10043,6 +10212,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAwsPtrInput)(nil)).Elem(), ProviderOidcAwsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAzureInput)(nil)).Elem(), ProviderOidcAzureArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAzurePtrInput)(nil)).Elem(), ProviderOidcAzureArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserInput)(nil)).Elem(), GetUsersUserArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserArrayInput)(nil)).Elem(), GetUsersUserArray{})
 	pulumi.RegisterOutputType(ConnectorAiProviderAnthropicOutput{})
 	pulumi.RegisterOutputType(ConnectorAiProviderAnthropicPtrOutput{})
 	pulumi.RegisterOutputType(ConnectorAiProviderAwsBedrockOutput{})
@@ -10159,4 +10330,6 @@ func init() {
 	pulumi.RegisterOutputType(ProviderOidcAwsPtrOutput{})
 	pulumi.RegisterOutputType(ProviderOidcAzureOutput{})
 	pulumi.RegisterOutputType(ProviderOidcAzurePtrOutput{})
+	pulumi.RegisterOutputType(GetUsersUserOutput{})
+	pulumi.RegisterOutputType(GetUsersUserArrayOutput{})
 }

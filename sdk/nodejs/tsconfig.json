@@ -39,6 +39,7 @@
         "getResource.ts",
         "getSpace.ts",
         "getUser.ts",
+        "getUsers.ts",
         "group.ts",
         "groupUserLink.ts",
         "hook.ts",
