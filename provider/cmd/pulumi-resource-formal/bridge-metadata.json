@@ -517,6 +517,22 @@
                         "maxItemsOne": false
                     }
                 }
+            },
+            "formal_users": {
+                "current": "formal:index/getUsers:getUsers",
+                "majorVersion": 1,
+                "fields": {
+                    "users": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "group_ids": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     },

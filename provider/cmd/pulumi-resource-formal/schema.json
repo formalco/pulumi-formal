@@ -1293,6 +1293,66 @@
         },
         "formal:index/ProviderOidcAzure:ProviderOidcAzure": {
             "type": "object"
+        },
+        "formal:index/getUsersUser:getUsersUser": {
+            "properties": {
+                "dbUsername": {
+                    "type": "string",
+                    "description": "The identity the User uses to access Formal.\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "The email of this User. Only set for human users.\n"
+                },
+                "firstName": {
+                    "type": "string",
+                    "description": "The first name of this User. Only set for human users.\n"
+                },
+                "fullName": {
+                    "type": "string",
+                    "description": "The full name of this User.\n"
+                },
+                "groupIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The IDs of the Groups this User belongs to.\n"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "The ID of the User.\n"
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "The last name of this User. Only set for human users.\n"
+                },
+                "terminationProtection": {
+                    "type": "boolean",
+                    "description": "If set to true, this User cannot be deleted.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of this User, either \u003cspan pulumi-lang-nodejs=\"`human`\" pulumi-lang-dotnet=\"`Human`\" pulumi-lang-go=\"`human`\" pulumi-lang-python=\"`human`\" pulumi-lang-yaml=\"`human`\" pulumi-lang-java=\"`human`\" pulumi-lang-hcl=\"`human`\"\u003e`human`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`machine`\" pulumi-lang-dotnet=\"`Machine`\" pulumi-lang-go=\"`machine`\" pulumi-lang-python=\"`machine`\" pulumi-lang-yaml=\"`machine`\" pulumi-lang-java=\"`machine`\" pulumi-lang-hcl=\"`machine`\"\u003e`machine`\u003c/span\u003e.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "dbUsername",
+                "email",
+                "firstName",
+                "fullName",
+                "groupIds",
+                "id",
+                "lastName",
+                "terminationProtection",
+                "type"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
         }
     },
     "provider": {
@@ -6398,6 +6458,30 @@
                     "lastName",
                     "terminationProtection",
                     "type"
+                ],
+                "type": "object"
+            }
+        },
+        "formal:index/getUsers:getUsers": {
+            "description": "Data source for listing all Users in Formal.\n",
+            "outputs": {
+                "description": "A collection of values returned by getUsers.\n",
+                "properties": {
+                    "id": {
+                        "description": "The provider-assigned unique ID for this managed resource.",
+                        "type": "string"
+                    },
+                    "users": {
+                        "description": "All Users in Formal.\n",
+                        "items": {
+                            "$ref": "#/types/formal:index/getUsersUser:getUsersUser"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "users",
+                    "id"
                 ],
                 "type": "object"
             }
