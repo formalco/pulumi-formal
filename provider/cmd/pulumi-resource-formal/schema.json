@@ -88,9 +88,13 @@
                     "type": "string",
                     "description": "Name of an environment variable containing a pre-minted OIDC JWT.\n"
                 },
+                "gcp": {
+                    "$ref": "#/types/formal:config/oidcGcp:oidcGcp",
+                    "description": "Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.\n"
+                },
                 "integrationId": {
                     "type": "string",
-                    "description": "Formal OIDC integration ID. Required for \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`azure`\" pulumi-lang-dotnet=\"`Azure`\" pulumi-lang-go=\"`azure`\" pulumi-lang-python=\"`azure`\" pulumi-lang-yaml=\"`azure`\" pulumi-lang-java=\"`azure`\" pulumi-lang-hcl=\"`azure`\"\u003e`azure`\u003c/span\u003e; with \u003cspan pulumi-lang-nodejs=\"`env`\" pulumi-lang-dotnet=\"`Env`\" pulumi-lang-go=\"`env`\" pulumi-lang-python=\"`env`\" pulumi-lang-yaml=\"`env`\" pulumi-lang-java=\"`env`\" pulumi-lang-hcl=\"`env`\"\u003e`env`\u003c/span\u003e, selects the integration through `X-Formal-OIDC-Integration-Id`.\n"
+                    "description": "Formal OIDC integration ID. Required for \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`azure`\" pulumi-lang-dotnet=\"`Azure`\" pulumi-lang-go=\"`azure`\" pulumi-lang-python=\"`azure`\" pulumi-lang-yaml=\"`azure`\" pulumi-lang-java=\"`azure`\" pulumi-lang-hcl=\"`azure`\"\u003e`azure`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`gcp`\" pulumi-lang-dotnet=\"`Gcp`\" pulumi-lang-go=\"`gcp`\" pulumi-lang-python=\"`gcp`\" pulumi-lang-yaml=\"`gcp`\" pulumi-lang-java=\"`gcp`\" pulumi-lang-hcl=\"`gcp`\"\u003e`gcp`\u003c/span\u003e; with \u003cspan pulumi-lang-nodejs=\"`env`\" pulumi-lang-dotnet=\"`Env`\" pulumi-lang-go=\"`env`\" pulumi-lang-python=\"`env`\" pulumi-lang-yaml=\"`env`\" pulumi-lang-java=\"`env`\" pulumi-lang-hcl=\"`env`\"\u003e`env`\u003c/span\u003e, selects the integration through `X-Formal-OIDC-Integration-Id`.\n"
                 }
             },
             "type": "object"
@@ -99,6 +103,9 @@
             "type": "object"
         },
         "formal:config/oidcAzure:oidcAzure": {
+            "type": "object"
+        },
+        "formal:config/oidcGcp:oidcGcp": {
             "type": "object"
         },
         "formal:index/ConnectorAiProviderAnthropic:ConnectorAiProviderAnthropic": {
@@ -1281,9 +1288,13 @@
                     "type": "string",
                     "description": "Name of an environment variable containing a pre-minted OIDC JWT.\n"
                 },
+                "gcp": {
+                    "$ref": "#/types/formal:index/ProviderOidcGcp:ProviderOidcGcp",
+                    "description": "Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.\n"
+                },
                 "integrationId": {
                     "type": "string",
-                    "description": "Formal OIDC integration ID. Required for \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`azure`\" pulumi-lang-dotnet=\"`Azure`\" pulumi-lang-go=\"`azure`\" pulumi-lang-python=\"`azure`\" pulumi-lang-yaml=\"`azure`\" pulumi-lang-java=\"`azure`\" pulumi-lang-hcl=\"`azure`\"\u003e`azure`\u003c/span\u003e; with \u003cspan pulumi-lang-nodejs=\"`env`\" pulumi-lang-dotnet=\"`Env`\" pulumi-lang-go=\"`env`\" pulumi-lang-python=\"`env`\" pulumi-lang-yaml=\"`env`\" pulumi-lang-java=\"`env`\" pulumi-lang-hcl=\"`env`\"\u003e`env`\u003c/span\u003e, selects the integration through `X-Formal-OIDC-Integration-Id`.\n"
+                    "description": "Formal OIDC integration ID. Required for \u003cspan pulumi-lang-nodejs=\"`aws`\" pulumi-lang-dotnet=\"`Aws`\" pulumi-lang-go=\"`aws`\" pulumi-lang-python=\"`aws`\" pulumi-lang-yaml=\"`aws`\" pulumi-lang-java=\"`aws`\" pulumi-lang-hcl=\"`aws`\"\u003e`aws`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`azure`\" pulumi-lang-dotnet=\"`Azure`\" pulumi-lang-go=\"`azure`\" pulumi-lang-python=\"`azure`\" pulumi-lang-yaml=\"`azure`\" pulumi-lang-java=\"`azure`\" pulumi-lang-hcl=\"`azure`\"\u003e`azure`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`gcp`\" pulumi-lang-dotnet=\"`Gcp`\" pulumi-lang-go=\"`gcp`\" pulumi-lang-python=\"`gcp`\" pulumi-lang-yaml=\"`gcp`\" pulumi-lang-java=\"`gcp`\" pulumi-lang-hcl=\"`gcp`\"\u003e`gcp`\u003c/span\u003e; with \u003cspan pulumi-lang-nodejs=\"`env`\" pulumi-lang-dotnet=\"`Env`\" pulumi-lang-go=\"`env`\" pulumi-lang-python=\"`env`\" pulumi-lang-yaml=\"`env`\" pulumi-lang-java=\"`env`\" pulumi-lang-hcl=\"`env`\"\u003e`env`\u003c/span\u003e, selects the integration through `X-Formal-OIDC-Integration-Id`.\n"
                 }
             },
             "type": "object"
@@ -1292,6 +1303,9 @@
             "type": "object"
         },
         "formal:index/ProviderOidcAzure:ProviderOidcAzure": {
+            "type": "object"
+        },
+        "formal:index/ProviderOidcGcp:ProviderOidcGcp": {
             "type": "object"
         },
         "formal:index/getUsersUser:getUsersUser": {
