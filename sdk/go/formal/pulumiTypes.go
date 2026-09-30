@@ -9503,7 +9503,9 @@ type ProviderOidc struct {
 	Azure *ProviderOidcAzure `pulumi:"azure"`
 	// Name of an environment variable containing a pre-minted OIDC JWT.
 	Env *string `pulumi:"env"`
-	// Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+	// Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+	Gcp *ProviderOidcGcp `pulumi:"gcp"`
+	// Formal OIDC integration ID. Required for `aws`, `azure`, and `gcp`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
 	IntegrationId *string `pulumi:"integrationId"`
 }
 
@@ -9525,7 +9527,9 @@ type ProviderOidcArgs struct {
 	Azure ProviderOidcAzurePtrInput `pulumi:"azure"`
 	// Name of an environment variable containing a pre-minted OIDC JWT.
 	Env pulumi.StringPtrInput `pulumi:"env"`
-	// Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+	// Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+	Gcp ProviderOidcGcpPtrInput `pulumi:"gcp"`
+	// Formal OIDC integration ID. Required for `aws`, `azure`, and `gcp`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
 	IntegrationId pulumi.StringPtrInput `pulumi:"integrationId"`
 }
 
@@ -9621,7 +9625,12 @@ func (o ProviderOidcOutput) Env() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProviderOidc) *string { return v.Env }).(pulumi.StringPtrOutput)
 }
 
-// Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+// Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+func (o ProviderOidcOutput) Gcp() ProviderOidcGcpPtrOutput {
+	return o.ApplyT(func(v ProviderOidc) *ProviderOidcGcp { return v.Gcp }).(ProviderOidcGcpPtrOutput)
+}
+
+// Formal OIDC integration ID. Required for `aws`, `azure`, and `gcp`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
 func (o ProviderOidcOutput) IntegrationId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProviderOidc) *string { return v.IntegrationId }).(pulumi.StringPtrOutput)
 }
@@ -9680,7 +9689,17 @@ func (o ProviderOidcPtrOutput) Env() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+// Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+func (o ProviderOidcPtrOutput) Gcp() ProviderOidcGcpPtrOutput {
+	return o.ApplyT(func(v *ProviderOidc) *ProviderOidcGcp {
+		if v == nil {
+			return nil
+		}
+		return v.Gcp
+	}).(ProviderOidcGcpPtrOutput)
+}
+
+// Formal OIDC integration ID. Required for `aws`, `azure`, and `gcp`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
 func (o ProviderOidcPtrOutput) IntegrationId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderOidc) *string {
 		if v == nil {
@@ -9924,6 +9943,124 @@ func (o ProviderOidcAzurePtrOutput) Elem() ProviderOidcAzureOutput {
 		var ret ProviderOidcAzure
 		return ret
 	}).(ProviderOidcAzureOutput)
+}
+
+type ProviderOidcGcp struct {
+}
+
+// ProviderOidcGcpInput is an input type that accepts ProviderOidcGcpArgs and ProviderOidcGcpOutput values.
+// You can construct a concrete instance of `ProviderOidcGcpInput` via:
+//
+//	ProviderOidcGcpArgs{...}
+type ProviderOidcGcpInput interface {
+	pulumi.Input
+
+	ToProviderOidcGcpOutput() ProviderOidcGcpOutput
+	ToProviderOidcGcpOutputWithContext(context.Context) ProviderOidcGcpOutput
+}
+
+type ProviderOidcGcpArgs struct {
+}
+
+func (ProviderOidcGcpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderOidcGcp)(nil)).Elem()
+}
+
+func (i ProviderOidcGcpArgs) ToProviderOidcGcpOutput() ProviderOidcGcpOutput {
+	return i.ToProviderOidcGcpOutputWithContext(context.Background())
+}
+
+func (i ProviderOidcGcpArgs) ToProviderOidcGcpOutputWithContext(ctx context.Context) ProviderOidcGcpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcGcpOutput)
+}
+
+func (i ProviderOidcGcpArgs) ToProviderOidcGcpPtrOutput() ProviderOidcGcpPtrOutput {
+	return i.ToProviderOidcGcpPtrOutputWithContext(context.Background())
+}
+
+func (i ProviderOidcGcpArgs) ToProviderOidcGcpPtrOutputWithContext(ctx context.Context) ProviderOidcGcpPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcGcpOutput).ToProviderOidcGcpPtrOutputWithContext(ctx)
+}
+
+// ProviderOidcGcpPtrInput is an input type that accepts ProviderOidcGcpArgs, ProviderOidcGcpPtr and ProviderOidcGcpPtrOutput values.
+// You can construct a concrete instance of `ProviderOidcGcpPtrInput` via:
+//
+//	        ProviderOidcGcpArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProviderOidcGcpPtrInput interface {
+	pulumi.Input
+
+	ToProviderOidcGcpPtrOutput() ProviderOidcGcpPtrOutput
+	ToProviderOidcGcpPtrOutputWithContext(context.Context) ProviderOidcGcpPtrOutput
+}
+
+type providerOidcGcpPtrType ProviderOidcGcpArgs
+
+func ProviderOidcGcpPtr(v *ProviderOidcGcpArgs) ProviderOidcGcpPtrInput {
+	return (*providerOidcGcpPtrType)(v)
+}
+
+func (*providerOidcGcpPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderOidcGcp)(nil)).Elem()
+}
+
+func (i *providerOidcGcpPtrType) ToProviderOidcGcpPtrOutput() ProviderOidcGcpPtrOutput {
+	return i.ToProviderOidcGcpPtrOutputWithContext(context.Background())
+}
+
+func (i *providerOidcGcpPtrType) ToProviderOidcGcpPtrOutputWithContext(ctx context.Context) ProviderOidcGcpPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOidcGcpPtrOutput)
+}
+
+type ProviderOidcGcpOutput struct{ *pulumi.OutputState }
+
+func (ProviderOidcGcpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderOidcGcp)(nil)).Elem()
+}
+
+func (o ProviderOidcGcpOutput) ToProviderOidcGcpOutput() ProviderOidcGcpOutput {
+	return o
+}
+
+func (o ProviderOidcGcpOutput) ToProviderOidcGcpOutputWithContext(ctx context.Context) ProviderOidcGcpOutput {
+	return o
+}
+
+func (o ProviderOidcGcpOutput) ToProviderOidcGcpPtrOutput() ProviderOidcGcpPtrOutput {
+	return o.ToProviderOidcGcpPtrOutputWithContext(context.Background())
+}
+
+func (o ProviderOidcGcpOutput) ToProviderOidcGcpPtrOutputWithContext(ctx context.Context) ProviderOidcGcpPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProviderOidcGcp) *ProviderOidcGcp {
+		return &v
+	}).(ProviderOidcGcpPtrOutput)
+}
+
+type ProviderOidcGcpPtrOutput struct{ *pulumi.OutputState }
+
+func (ProviderOidcGcpPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderOidcGcp)(nil)).Elem()
+}
+
+func (o ProviderOidcGcpPtrOutput) ToProviderOidcGcpPtrOutput() ProviderOidcGcpPtrOutput {
+	return o
+}
+
+func (o ProviderOidcGcpPtrOutput) ToProviderOidcGcpPtrOutputWithContext(ctx context.Context) ProviderOidcGcpPtrOutput {
+	return o
+}
+
+func (o ProviderOidcGcpPtrOutput) Elem() ProviderOidcGcpOutput {
+	return o.ApplyT(func(v *ProviderOidcGcp) ProviderOidcGcp {
+		if v != nil {
+			return *v
+		}
+		var ret ProviderOidcGcp
+		return ret
+	}).(ProviderOidcGcpOutput)
 }
 
 type GetUsersUser struct {
@@ -10212,6 +10349,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAwsPtrInput)(nil)).Elem(), ProviderOidcAwsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAzureInput)(nil)).Elem(), ProviderOidcAzureArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAzurePtrInput)(nil)).Elem(), ProviderOidcAzureArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcGcpInput)(nil)).Elem(), ProviderOidcGcpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcGcpPtrInput)(nil)).Elem(), ProviderOidcGcpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserInput)(nil)).Elem(), GetUsersUserArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserArrayInput)(nil)).Elem(), GetUsersUserArray{})
 	pulumi.RegisterOutputType(ConnectorAiProviderAnthropicOutput{})
@@ -10330,6 +10469,8 @@ func init() {
 	pulumi.RegisterOutputType(ProviderOidcAwsPtrOutput{})
 	pulumi.RegisterOutputType(ProviderOidcAzureOutput{})
 	pulumi.RegisterOutputType(ProviderOidcAzurePtrOutput{})
+	pulumi.RegisterOutputType(ProviderOidcGcpOutput{})
+	pulumi.RegisterOutputType(ProviderOidcGcpPtrOutput{})
 	pulumi.RegisterOutputType(GetUsersUserOutput{})
 	pulumi.RegisterOutputType(GetUsersUserArrayOutput{})
 }

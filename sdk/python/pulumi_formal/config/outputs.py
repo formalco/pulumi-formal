@@ -19,6 +19,7 @@ __all__ = [
     'Oidc',
     'OidcAws',
     'OidcAzure',
+    'OidcGcp',
 ]
 
 @pulumi.output_type
@@ -27,12 +28,14 @@ class Oidc(dict):
                  aws: Optional['outputs.OidcAws'] = None,
                  azure: Optional['outputs.OidcAzure'] = None,
                  env: Optional[_builtins.str] = None,
+                 gcp: Optional['outputs.OidcGcp'] = None,
                  integration_id: Optional[_builtins.str] = None):
         """
         :param 'OidcAwsArgs' aws: Mint short-lived OIDC tokens using the AWS credential chain and STS.
         :param 'OidcAzureArgs' azure: Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
         :param _builtins.str env: Name of an environment variable containing a pre-minted OIDC JWT.
-        :param _builtins.str integration_id: Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+        :param 'OidcGcpArgs' gcp: Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+        :param _builtins.str integration_id: Formal OIDC integration ID. Required for `aws`, `azure`, and `gcp`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
         """
         if aws is not None:
             pulumi.set(__self__, "aws", aws)
@@ -40,6 +43,8 @@ class Oidc(dict):
             pulumi.set(__self__, "azure", azure)
         if env is not None:
             pulumi.set(__self__, "env", env)
+        if gcp is not None:
+            pulumi.set(__self__, "gcp", gcp)
         if integration_id is not None:
             pulumi.set(__self__, "integration_id", integration_id)
 
@@ -68,10 +73,18 @@ class Oidc(dict):
         return pulumi.get(self, "env")
 
     @_builtins.property
+    @pulumi.getter
+    def gcp(self) -> Optional['outputs.OidcGcp']:
+        """
+        Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+        """
+        return pulumi.get(self, "gcp")
+
+    @_builtins.property
     @pulumi.getter(name="integrationId")
     def integration_id(self) -> Optional[_builtins.str]:
         """
-        Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+        Formal OIDC integration ID. Required for `aws`, `azure`, and `gcp`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
         """
         return pulumi.get(self, "integration_id")
 
@@ -84,6 +97,12 @@ class OidcAws(dict):
 
 @pulumi.output_type
 class OidcAzure(dict):
+    def __init__(__self__):
+        pass
+
+
+@pulumi.output_type
+class OidcGcp(dict):
     def __init__(__self__):
         pass
 

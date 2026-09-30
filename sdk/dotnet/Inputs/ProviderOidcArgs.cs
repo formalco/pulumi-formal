@@ -32,7 +32,13 @@ namespace Formal.Pulumi.Inputs
         public Input<string>? Env { get; set; }
 
         /// <summary>
-        /// Formal OIDC integration ID. Required for `Aws` and `Azure`; with `Env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+        /// Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+        /// </summary>
+        [Input("gcp")]
+        public Input<Inputs.ProviderOidcGcpArgs>? Gcp { get; set; }
+
+        /// <summary>
+        /// Formal OIDC integration ID. Required for `Aws`, `Azure`, and `Gcp`; with `Env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
         /// </summary>
         [Input("integrationId")]
         public Input<string>? IntegrationId { get; set; }

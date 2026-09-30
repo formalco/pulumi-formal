@@ -901,7 +901,11 @@ export namespace config {
          */
         env?: string;
         /**
-         * Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+         * Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+         */
+        gcp?: outputs.config.OidcGcp;
+        /**
+         * Formal OIDC integration ID. Required for `aws`, `azure`, and `gcp`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
          */
         integrationId?: string;
     }
@@ -910,6 +914,9 @@ export namespace config {
     }
 
     export interface OidcAzure {
+    }
+
+    export interface OidcGcp {
     }
 
 }
