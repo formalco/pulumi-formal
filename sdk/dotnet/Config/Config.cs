@@ -87,7 +87,11 @@ namespace Formal.Pulumi
             /// </summary>
                 public string? Env { get; set; } = null!;
             /// <summary>
-            /// Formal OIDC integration ID. Required for `Aws` and `Azure`; with `Env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+            /// Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+            /// </summary>
+                public Formal.Pulumi.Config.Types.OidcGcp? Gcp { get; set; } = null!;
+            /// <summary>
+            /// Formal OIDC integration ID. Required for `Aws`, `Azure`, and `Gcp`; with `Env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
             /// </summary>
                 public string? IntegrationId { get; set; } = null!;
             }
@@ -97,6 +101,10 @@ namespace Formal.Pulumi
             }
 
              public class OidcAzure
+             {
+            }
+
+             public class OidcGcp
              {
             }
         }

@@ -131,6 +131,8 @@ __all__ = [
     'ProviderOidcAwsArgsDict',
     'ProviderOidcAzureArgs',
     'ProviderOidcAzureArgsDict',
+    'ProviderOidcGcpArgs',
+    'ProviderOidcGcpArgsDict',
 ]
 
 class ConnectorAiProviderAnthropicArgsDict(TypedDict):
@@ -3919,9 +3921,13 @@ class ProviderOidcArgsDict(TypedDict):
     """
     Name of an environment variable containing a pre-minted OIDC JWT.
     """
+    gcp: NotRequired[pulumi.Input[Optional['ProviderOidcGcpArgsDict']]]
+    """
+    Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+    """
     integration_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+    Formal OIDC integration ID. Required for `aws`, `azure`, and `gcp`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
     """
 
 @pulumi.input_type
@@ -3930,12 +3936,14 @@ class ProviderOidcArgs:
                  aws: pulumi.Input[Optional['ProviderOidcAwsArgs']] = None,
                  azure: pulumi.Input[Optional['ProviderOidcAzureArgs']] = None,
                  env: pulumi.Input[Optional[_builtins.str]] = None,
+                 gcp: pulumi.Input[Optional['ProviderOidcGcpArgs']] = None,
                  integration_id: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input['ProviderOidcAwsArgs'] aws: Mint short-lived OIDC tokens using the AWS credential chain and STS.
         :param pulumi.Input['ProviderOidcAzureArgs'] azure: Mint Microsoft Entra access tokens for Azure Resource Manager using AKS Workload Identity or managed identity through IMDS.
         :param pulumi.Input[_builtins.str] env: Name of an environment variable containing a pre-minted OIDC JWT.
-        :param pulumi.Input[_builtins.str] integration_id: Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+        :param pulumi.Input['ProviderOidcGcpArgs'] gcp: Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+        :param pulumi.Input[_builtins.str] integration_id: Formal OIDC integration ID. Required for `aws`, `azure`, and `gcp`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
         """
         if aws is not None:
             pulumi.set(__self__, "aws", aws)
@@ -3943,6 +3951,8 @@ class ProviderOidcArgs:
             pulumi.set(__self__, "azure", azure)
         if env is not None:
             pulumi.set(__self__, "env", env)
+        if gcp is not None:
+            pulumi.set(__self__, "gcp", gcp)
         if integration_id is not None:
             pulumi.set(__self__, "integration_id", integration_id)
 
@@ -3983,10 +3993,22 @@ class ProviderOidcArgs:
         pulumi.set(self, "env", value)
 
     @_builtins.property
+    @pulumi.getter
+    def gcp(self) -> pulumi.Input[Optional['ProviderOidcGcpArgs']]:
+        """
+        Mint Google-signed ID tokens using the GCP metadata server or Application Default Credentials.
+        """
+        return pulumi.get(self, "gcp")
+
+    @gcp.setter
+    def gcp(self, value: pulumi.Input[Optional['ProviderOidcGcpArgs']]):
+        pulumi.set(self, "gcp", value)
+
+    @_builtins.property
     @pulumi.getter(name="integrationId")
     def integration_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Formal OIDC integration ID. Required for `aws` and `azure`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
+        Formal OIDC integration ID. Required for `aws`, `azure`, and `gcp`; with `env`, selects the integration through `X-Formal-OIDC-Integration-Id`.
         """
         return pulumi.get(self, "integration_id")
 
@@ -4009,6 +4031,15 @@ class ProviderOidcAzureArgsDict(TypedDict):
 
 @pulumi.input_type
 class ProviderOidcAzureArgs:
+    def __init__(__self__):
+        pass
+
+
+class ProviderOidcGcpArgsDict(TypedDict):
+    pass
+
+@pulumi.input_type
+class ProviderOidcGcpArgs:
     def __init__(__self__):
         pass
 
