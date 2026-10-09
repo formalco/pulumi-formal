@@ -501,6 +501,15 @@
                 "current": "formal:index/getGroup:getGroup",
                 "majorVersion": 1
             },
+            "formal_groups": {
+                "current": "formal:index/getGroups:getGroups",
+                "majorVersion": 1,
+                "fields": {
+                    "groups": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "formal_resource": {
                 "current": "formal:index/getResource:getResource",
                 "majorVersion": 1
