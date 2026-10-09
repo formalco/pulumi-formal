@@ -71,6 +71,7 @@ __all__ = [
     'NativeUserV3SshKey',
     'NativeUserV3SshKeyCertificate',
     'NativeUserV3SshKeyKey',
+    'GetGroupsGroupResult',
     'GetUsersUserResult',
 ]
 
@@ -3133,6 +3134,57 @@ class NativeUserV3SshKeyKey(dict):
         Version trigger for `literal_wo`. Increment this value to update the secret.
         """
         return pulumi.get(self, "literal_wo_version")
+
+
+@pulumi.output_type
+class GetGroupsGroupResult(dict):
+    def __init__(__self__, *,
+                 description: _builtins.str,
+                 id: _builtins.str,
+                 name: _builtins.str,
+                 termination_protection: _builtins.bool):
+        """
+        :param _builtins.str description: Description for this Group.
+        :param _builtins.str id: The ID of the Group.
+        :param _builtins.str name: The name of the Group.
+        :param _builtins.bool termination_protection: If set to true, this Group cannot be deleted.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "termination_protection", termination_protection)
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        Description for this Group.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        The ID of the Group.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The name of the Group.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="terminationProtection")
+    def termination_protection(self) -> _builtins.bool:
+        """
+        If set to true, this Group cannot be deleted.
+        """
+        return pulumi.get(self, "termination_protection")
 
 
 @pulumi.output_type
