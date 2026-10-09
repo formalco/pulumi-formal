@@ -10063,6 +10063,130 @@ func (o ProviderOidcGcpPtrOutput) Elem() ProviderOidcGcpOutput {
 	}).(ProviderOidcGcpOutput)
 }
 
+type GetGroupsGroup struct {
+	// Description for this Group.
+	Description string `pulumi:"description"`
+	// The ID of the Group.
+	Id string `pulumi:"id"`
+	// The name of the Group.
+	Name string `pulumi:"name"`
+	// If set to true, this Group cannot be deleted.
+	TerminationProtection bool `pulumi:"terminationProtection"`
+}
+
+// GetGroupsGroupInput is an input type that accepts GetGroupsGroupArgs and GetGroupsGroupOutput values.
+// You can construct a concrete instance of `GetGroupsGroupInput` via:
+//
+//	GetGroupsGroupArgs{...}
+type GetGroupsGroupInput interface {
+	pulumi.Input
+
+	ToGetGroupsGroupOutput() GetGroupsGroupOutput
+	ToGetGroupsGroupOutputWithContext(context.Context) GetGroupsGroupOutput
+}
+
+type GetGroupsGroupArgs struct {
+	// Description for this Group.
+	Description pulumi.StringInput `pulumi:"description"`
+	// The ID of the Group.
+	Id pulumi.StringInput `pulumi:"id"`
+	// The name of the Group.
+	Name pulumi.StringInput `pulumi:"name"`
+	// If set to true, this Group cannot be deleted.
+	TerminationProtection pulumi.BoolInput `pulumi:"terminationProtection"`
+}
+
+func (GetGroupsGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsGroup)(nil)).Elem()
+}
+
+func (i GetGroupsGroupArgs) ToGetGroupsGroupOutput() GetGroupsGroupOutput {
+	return i.ToGetGroupsGroupOutputWithContext(context.Background())
+}
+
+func (i GetGroupsGroupArgs) ToGetGroupsGroupOutputWithContext(ctx context.Context) GetGroupsGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsGroupOutput)
+}
+
+// GetGroupsGroupArrayInput is an input type that accepts GetGroupsGroupArray and GetGroupsGroupArrayOutput values.
+// You can construct a concrete instance of `GetGroupsGroupArrayInput` via:
+//
+//	GetGroupsGroupArray{ GetGroupsGroupArgs{...} }
+type GetGroupsGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetGroupsGroupArrayOutput() GetGroupsGroupArrayOutput
+	ToGetGroupsGroupArrayOutputWithContext(context.Context) GetGroupsGroupArrayOutput
+}
+
+type GetGroupsGroupArray []GetGroupsGroupInput
+
+func (GetGroupsGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsGroup)(nil)).Elem()
+}
+
+func (i GetGroupsGroupArray) ToGetGroupsGroupArrayOutput() GetGroupsGroupArrayOutput {
+	return i.ToGetGroupsGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetGroupsGroupArray) ToGetGroupsGroupArrayOutputWithContext(ctx context.Context) GetGroupsGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsGroupArrayOutput)
+}
+
+type GetGroupsGroupOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGroupsGroup)(nil)).Elem()
+}
+
+func (o GetGroupsGroupOutput) ToGetGroupsGroupOutput() GetGroupsGroupOutput {
+	return o
+}
+
+func (o GetGroupsGroupOutput) ToGetGroupsGroupOutputWithContext(ctx context.Context) GetGroupsGroupOutput {
+	return o
+}
+
+// Description for this Group.
+func (o GetGroupsGroupOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsGroup) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// The ID of the Group.
+func (o GetGroupsGroupOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsGroup) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the Group.
+func (o GetGroupsGroupOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGroupsGroup) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// If set to true, this Group cannot be deleted.
+func (o GetGroupsGroupOutput) TerminationProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetGroupsGroup) bool { return v.TerminationProtection }).(pulumi.BoolOutput)
+}
+
+type GetGroupsGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGroupsGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGroupsGroup)(nil)).Elem()
+}
+
+func (o GetGroupsGroupArrayOutput) ToGetGroupsGroupArrayOutput() GetGroupsGroupArrayOutput {
+	return o
+}
+
+func (o GetGroupsGroupArrayOutput) ToGetGroupsGroupArrayOutputWithContext(ctx context.Context) GetGroupsGroupArrayOutput {
+	return o
+}
+
+func (o GetGroupsGroupArrayOutput) Index(i pulumi.IntInput) GetGroupsGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGroupsGroup {
+		return vs[0].([]GetGroupsGroup)[vs[1].(int)]
+	}).(GetGroupsGroupOutput)
+}
+
 type GetUsersUser struct {
 	// The identity the User uses to access Formal.
 	DbUsername string `pulumi:"dbUsername"`
@@ -10351,6 +10475,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAzurePtrInput)(nil)).Elem(), ProviderOidcAzureArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcGcpInput)(nil)).Elem(), ProviderOidcGcpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcGcpPtrInput)(nil)).Elem(), ProviderOidcGcpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsGroupInput)(nil)).Elem(), GetGroupsGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGroupsGroupArrayInput)(nil)).Elem(), GetGroupsGroupArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserInput)(nil)).Elem(), GetUsersUserArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserArrayInput)(nil)).Elem(), GetUsersUserArray{})
 	pulumi.RegisterOutputType(ConnectorAiProviderAnthropicOutput{})
@@ -10471,6 +10597,8 @@ func init() {
 	pulumi.RegisterOutputType(ProviderOidcAzurePtrOutput{})
 	pulumi.RegisterOutputType(ProviderOidcGcpOutput{})
 	pulumi.RegisterOutputType(ProviderOidcGcpPtrOutput{})
+	pulumi.RegisterOutputType(GetGroupsGroupOutput{})
+	pulumi.RegisterOutputType(GetGroupsGroupArrayOutput{})
 	pulumi.RegisterOutputType(GetUsersUserOutput{})
 	pulumi.RegisterOutputType(GetUsersUserArrayOutput{})
 }

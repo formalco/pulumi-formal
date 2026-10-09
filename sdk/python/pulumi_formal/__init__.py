@@ -21,6 +21,7 @@ from .encryption_key import *
 from .form import *
 from .get_connector import *
 from .get_group import *
+from .get_groups import *
 from .get_resource import *
 from .get_space import *
 from .get_user import *

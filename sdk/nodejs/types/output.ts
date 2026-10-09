@@ -153,6 +153,25 @@ export interface FormFieldConfigOptionsSourceCommand {
     name: string;
 }
 
+export interface GetGroupsGroup {
+    /**
+     * Description for this Group.
+     */
+    description: string;
+    /**
+     * The ID of the Group.
+     */
+    id: string;
+    /**
+     * The name of the Group.
+     */
+    name: string;
+    /**
+     * If set to true, this Group cannot be deleted.
+     */
+    terminationProtection: boolean;
+}
+
 export interface GetUsersUser {
     /**
      * The identity the User uses to access Formal.

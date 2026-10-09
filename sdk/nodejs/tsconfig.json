@@ -36,6 +36,7 @@
         "form.ts",
         "getConnector.ts",
         "getGroup.ts",
+        "getGroups.ts",
         "getResource.ts",
         "getSpace.ts",
         "getUser.ts",
