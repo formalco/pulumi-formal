@@ -418,6 +418,15 @@
                 "current": "formal:index/networkRule:NetworkRule",
                 "majorVersion": 1
             },
+            "formal_oauth_client": {
+                "current": "formal:index/oauthClient:OauthClient",
+                "majorVersion": 1,
+                "fields": {
+                    "redirect_uris": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "formal_permission": {
                 "current": "formal:index/permission:Permission",
                 "majorVersion": 1
@@ -458,6 +467,15 @@
             "formal_resource_native_user_selection": {
                 "current": "formal:index/resourceNativeUserSelection:ResourceNativeUserSelection",
                 "majorVersion": 1
+            },
+            "formal_resource_oauth_settings": {
+                "current": "formal:index/resourceOauthSettings:ResourceOauthSettings",
+                "majorVersion": 1,
+                "fields": {
+                    "requested_scopes": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "formal_resource_ssh_host_key": {
                 "current": "formal:index/resourceSshHostKey:ResourceSshHostKey",
