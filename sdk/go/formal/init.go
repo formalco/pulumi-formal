@@ -83,6 +83,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &NativeUserV3{}
 	case "formal:index/networkRule:NetworkRule":
 		r = &NetworkRule{}
+	case "formal:index/oauthClient:OauthClient":
+		r = &OauthClient{}
 	case "formal:index/permission:Permission":
 		r = &Permission{}
 	case "formal:index/policy:Policy":
@@ -101,6 +103,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ResourceHostname{}
 	case "formal:index/resourceNativeUserSelection:ResourceNativeUserSelection":
 		r = &ResourceNativeUserSelection{}
+	case "formal:index/resourceOauthSettings:ResourceOauthSettings":
+		r = &ResourceOauthSettings{}
 	case "formal:index/resourceSshHostKey:ResourceSshHostKey":
 		r = &ResourceSshHostKey{}
 	case "formal:index/resourceTlsConfiguration:ResourceTlsConfiguration":
@@ -305,6 +309,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
+		"index/oauthClient",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
 		"index/permission",
 		&module{version},
 	)
@@ -346,6 +355,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/resourceNativeUserSelection",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/resourceOauthSettings",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
