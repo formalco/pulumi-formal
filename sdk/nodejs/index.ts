@@ -195,6 +195,11 @@ export type NetworkRule = import("./networkRule").NetworkRule;
 export const NetworkRule: typeof import("./networkRule").NetworkRule = null as any;
 utilities.lazyLoad(exports, ["NetworkRule"], () => require("./networkRule"));
 
+export { OauthClientArgs, OauthClientState } from "./oauthClient";
+export type OauthClient = import("./oauthClient").OauthClient;
+export const OauthClient: typeof import("./oauthClient").OauthClient = null as any;
+utilities.lazyLoad(exports, ["OauthClient"], () => require("./oauthClient"));
+
 export { PermissionArgs, PermissionState } from "./permission";
 export type Permission = import("./permission").Permission;
 export const Permission: typeof import("./permission").Permission = null as any;
@@ -242,6 +247,11 @@ export { ResourceNativeUserSelectionArgs, ResourceNativeUserSelectionState } fro
 export type ResourceNativeUserSelection = import("./resourceNativeUserSelection").ResourceNativeUserSelection;
 export const ResourceNativeUserSelection: typeof import("./resourceNativeUserSelection").ResourceNativeUserSelection = null as any;
 utilities.lazyLoad(exports, ["ResourceNativeUserSelection"], () => require("./resourceNativeUserSelection"));
+
+export { ResourceOauthSettingsArgs, ResourceOauthSettingsState } from "./resourceOauthSettings";
+export type ResourceOauthSettings = import("./resourceOauthSettings").ResourceOauthSettings;
+export const ResourceOauthSettings: typeof import("./resourceOauthSettings").ResourceOauthSettings = null as any;
+utilities.lazyLoad(exports, ["ResourceOauthSettings"], () => require("./resourceOauthSettings"));
 
 export { ResourceSshHostKeyArgs, ResourceSshHostKeyState } from "./resourceSshHostKey";
 export type ResourceSshHostKey = import("./resourceSshHostKey").ResourceSshHostKey;
@@ -359,6 +369,8 @@ const _module = {
                 return new NativeUserV3(name, <any>undefined, { urn })
             case "formal:index/networkRule:NetworkRule":
                 return new NetworkRule(name, <any>undefined, { urn })
+            case "formal:index/oauthClient:OauthClient":
+                return new OauthClient(name, <any>undefined, { urn })
             case "formal:index/permission:Permission":
                 return new Permission(name, <any>undefined, { urn })
             case "formal:index/policy:Policy":
@@ -377,6 +389,8 @@ const _module = {
                 return new ResourceHostname(name, <any>undefined, { urn })
             case "formal:index/resourceNativeUserSelection:ResourceNativeUserSelection":
                 return new ResourceNativeUserSelection(name, <any>undefined, { urn })
+            case "formal:index/resourceOauthSettings:ResourceOauthSettings":
+                return new ResourceOauthSettings(name, <any>undefined, { urn })
             case "formal:index/resourceSshHostKey:ResourceSshHostKey":
                 return new ResourceSshHostKey(name, <any>undefined, { urn })
             case "formal:index/resourceTlsConfiguration:ResourceTlsConfiguration":
@@ -429,6 +443,7 @@ pulumi.runtime.registerResourceModule("formal", "index/nativeUser", _module)
 pulumi.runtime.registerResourceModule("formal", "index/nativeUserLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/nativeUserV3", _module)
 pulumi.runtime.registerResourceModule("formal", "index/networkRule", _module)
+pulumi.runtime.registerResourceModule("formal", "index/oauthClient", _module)
 pulumi.runtime.registerResourceModule("formal", "index/permission", _module)
 pulumi.runtime.registerResourceModule("formal", "index/policy", _module)
 pulumi.runtime.registerResourceModule("formal", "index/policyDataLoader", _module)
@@ -438,6 +453,7 @@ pulumi.runtime.registerResourceModule("formal", "index/resourceDialConfiguration
 pulumi.runtime.registerResourceModule("formal", "index/resourceHealthCheck", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceHostname", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceNativeUserSelection", _module)
+pulumi.runtime.registerResourceModule("formal", "index/resourceOauthSettings", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceSshHostKey", _module)
 pulumi.runtime.registerResourceModule("formal", "index/resourceTlsConfiguration", _module)
 pulumi.runtime.registerResourceModule("formal", "index/satellite", _module)

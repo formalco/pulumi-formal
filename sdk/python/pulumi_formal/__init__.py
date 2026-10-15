@@ -44,6 +44,7 @@ from .native_user import *
 from .native_user_link import *
 from .native_user_v3 import *
 from .network_rule import *
+from .oauth_client import *
 from .permission import *
 from .policy import *
 from .policy_data_loader import *
@@ -54,6 +55,7 @@ from .resource_dial_configuration import *
 from .resource_health_check import *
 from .resource_hostname import *
 from .resource_native_user_selection import *
+from .resource_oauth_settings import *
 from .resource_ssh_host_key import *
 from .resource_tls_configuration import *
 from .satellite import *
@@ -325,6 +327,14 @@ _utilities.register(
  },
  {
   "pkg": "formal",
+  "mod": "index/oauthClient",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/oauthClient:OauthClient": "OauthClient"
+  }
+ },
+ {
+  "pkg": "formal",
   "mod": "index/permission",
   "fqn": "pulumi_formal",
   "classes": {
@@ -393,6 +403,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/resourceNativeUserSelection:ResourceNativeUserSelection": "ResourceNativeUserSelection"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/resourceOauthSettings",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/resourceOauthSettings:ResourceOauthSettings": "ResourceOauthSettings"
   }
  },
  {
