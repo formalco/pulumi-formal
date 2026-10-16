@@ -17,6 +17,8 @@ type IntegrationLog struct {
 
 	// Configuration block for AWS S3 integration.
 	AwsS3 IntegrationLogAwsS3PtrOutput `pulumi:"awsS3"`
+	// Configuration block for Azure Blob Storage integration.
+	AzureBlob IntegrationLogAzureBlobPtrOutput `pulumi:"azureBlob"`
 	// Configuration block for Datadog integration.
 	Datadog IntegrationLogDatadogPtrOutput `pulumi:"datadog"`
 	// Configuration block for Google Cloud Storage integration.
@@ -59,6 +61,8 @@ func GetIntegrationLog(ctx *pulumi.Context,
 type integrationLogState struct {
 	// Configuration block for AWS S3 integration.
 	AwsS3 *IntegrationLogAwsS3 `pulumi:"awsS3"`
+	// Configuration block for Azure Blob Storage integration.
+	AzureBlob *IntegrationLogAzureBlob `pulumi:"azureBlob"`
 	// Configuration block for Datadog integration.
 	Datadog *IntegrationLogDatadog `pulumi:"datadog"`
 	// Configuration block for Google Cloud Storage integration.
@@ -72,6 +76,8 @@ type integrationLogState struct {
 type IntegrationLogState struct {
 	// Configuration block for AWS S3 integration.
 	AwsS3 IntegrationLogAwsS3PtrInput
+	// Configuration block for Azure Blob Storage integration.
+	AzureBlob IntegrationLogAzureBlobPtrInput
 	// Configuration block for Datadog integration.
 	Datadog IntegrationLogDatadogPtrInput
 	// Configuration block for Google Cloud Storage integration.
@@ -89,6 +95,8 @@ func (IntegrationLogState) ElementType() reflect.Type {
 type integrationLogArgs struct {
 	// Configuration block for AWS S3 integration.
 	AwsS3 *IntegrationLogAwsS3 `pulumi:"awsS3"`
+	// Configuration block for Azure Blob Storage integration.
+	AzureBlob *IntegrationLogAzureBlob `pulumi:"azureBlob"`
 	// Configuration block for Datadog integration.
 	Datadog *IntegrationLogDatadog `pulumi:"datadog"`
 	// Configuration block for Google Cloud Storage integration.
@@ -103,6 +111,8 @@ type integrationLogArgs struct {
 type IntegrationLogArgs struct {
 	// Configuration block for AWS S3 integration.
 	AwsS3 IntegrationLogAwsS3PtrInput
+	// Configuration block for Azure Blob Storage integration.
+	AzureBlob IntegrationLogAzureBlobPtrInput
 	// Configuration block for Datadog integration.
 	Datadog IntegrationLogDatadogPtrInput
 	// Configuration block for Google Cloud Storage integration.
@@ -203,6 +213,11 @@ func (o IntegrationLogOutput) ToIntegrationLogOutputWithContext(ctx context.Cont
 // Configuration block for AWS S3 integration.
 func (o IntegrationLogOutput) AwsS3() IntegrationLogAwsS3PtrOutput {
 	return o.ApplyT(func(v *IntegrationLog) IntegrationLogAwsS3PtrOutput { return v.AwsS3 }).(IntegrationLogAwsS3PtrOutput)
+}
+
+// Configuration block for Azure Blob Storage integration.
+func (o IntegrationLogOutput) AzureBlob() IntegrationLogAzureBlobPtrOutput {
+	return o.ApplyT(func(v *IntegrationLog) IntegrationLogAzureBlobPtrOutput { return v.AzureBlob }).(IntegrationLogAzureBlobPtrOutput)
 }
 
 // Configuration block for Datadog integration.

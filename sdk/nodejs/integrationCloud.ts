@@ -102,6 +102,10 @@ export class IntegrationCloud extends pulumi.CustomResource {
      */
     declare public readonly azure: pulumi.Output<outputs.IntegrationCloudAzure | undefined>;
     /**
+     * The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+     */
+    declare public /*out*/ readonly azureActions: pulumi.Output<string[]>;
+    /**
      * Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
      */
     declare public /*out*/ readonly azureAllowBlobAccess: pulumi.Output<boolean>;
@@ -113,6 +117,10 @@ export class IntegrationCloud extends pulumi.CustomResource {
      * The client id of the managed identity Formal authenticates as, reported back by `formal.IntegrationCloudAzureActivation`.
      */
     declare public /*out*/ readonly azureClientId: pulumi.Output<string>;
+    /**
+     * The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
+     */
+    declare public /*out*/ readonly azureDataActions: pulumi.Output<string[]>;
     /**
      * Whether AKS cluster autodiscovery is enabled or not.
      */
@@ -134,7 +142,9 @@ export class IntegrationCloud extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly azureResourceGroup: pulumi.Output<string>;
     /**
-     * The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+     * Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
+     *
+     * @deprecated Use azureActions and azureDataActions instead.
      */
     declare public /*out*/ readonly azureRoleDefinitions: pulumi.Output<string[]>;
     /**
@@ -235,9 +245,11 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["awsS3BucketArn"] = state?.awsS3BucketArn;
             resourceInputs["awsTemplateBody"] = state?.awsTemplateBody;
             resourceInputs["azure"] = state?.azure;
+            resourceInputs["azureActions"] = state?.azureActions;
             resourceInputs["azureAllowBlobAccess"] = state?.azureAllowBlobAccess;
             resourceInputs["azureBlobStorageAccounts"] = state?.azureBlobStorageAccounts;
             resourceInputs["azureClientId"] = state?.azureClientId;
+            resourceInputs["azureDataActions"] = state?.azureDataActions;
             resourceInputs["azureEnableAksAutodiscovery"] = state?.azureEnableAksAutodiscovery;
             resourceInputs["azureEnableDbAutodiscovery"] = state?.azureEnableDbAutodiscovery;
             resourceInputs["azureEnableVmAutodiscovery"] = state?.azureEnableVmAutodiscovery;
@@ -282,9 +294,11 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["awsFormalStackName"] = undefined /*out*/;
             resourceInputs["awsS3BucketArn"] = undefined /*out*/;
             resourceInputs["awsTemplateBody"] = undefined /*out*/;
+            resourceInputs["azureActions"] = undefined /*out*/;
             resourceInputs["azureAllowBlobAccess"] = undefined /*out*/;
             resourceInputs["azureBlobStorageAccounts"] = undefined /*out*/;
             resourceInputs["azureClientId"] = undefined /*out*/;
+            resourceInputs["azureDataActions"] = undefined /*out*/;
             resourceInputs["azureEnableAksAutodiscovery"] = undefined /*out*/;
             resourceInputs["azureEnableDbAutodiscovery"] = undefined /*out*/;
             resourceInputs["azureEnableVmAutodiscovery"] = undefined /*out*/;
@@ -378,6 +392,10 @@ export interface IntegrationCloudState {
      */
     azure?: pulumi.Input<inputs.IntegrationCloudAzure | undefined>;
     /**
+     * The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+     */
+    azureActions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
      * Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
      */
     azureAllowBlobAccess?: pulumi.Input<boolean | undefined>;
@@ -389,6 +407,10 @@ export interface IntegrationCloudState {
      * The client id of the managed identity Formal authenticates as, reported back by `formal.IntegrationCloudAzureActivation`.
      */
     azureClientId?: pulumi.Input<string | undefined>;
+    /**
+     * The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
+     */
+    azureDataActions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether AKS cluster autodiscovery is enabled or not.
      */
@@ -410,7 +432,9 @@ export interface IntegrationCloudState {
      */
     azureResourceGroup?: pulumi.Input<string | undefined>;
     /**
-     * The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+     * Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
+     *
+     * @deprecated Use azureActions and azureDataActions instead.
      */
     azureRoleDefinitions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**

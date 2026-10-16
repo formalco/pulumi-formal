@@ -523,6 +523,38 @@
                 }
             }
         },
+        "formal:index/IntegrationLogAzureBlob:IntegrationLogAzureBlob": {
+            "properties": {
+                "blobPrefix": {
+                    "type": "string",
+                    "description": "Blob name prefix to write logs under. Defaults to the container root.\n",
+                    "willReplaceOnChanges": true
+                },
+                "cloudIntegrationId": {
+                    "type": "string",
+                    "description": "Cloud Integration ID.\n"
+                },
+                "compression": {
+                    "type": "string",
+                    "description": "Codec each log object is compressed with, which also sets its file extension: \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\" pulumi-lang-hcl=\"`none`\"\u003e`none`\u003c/span\u003e (`.json`), \u003cspan pulumi-lang-nodejs=\"`gzip`\" pulumi-lang-dotnet=\"`Gzip`\" pulumi-lang-go=\"`gzip`\" pulumi-lang-python=\"`gzip`\" pulumi-lang-yaml=\"`gzip`\" pulumi-lang-java=\"`gzip`\" pulumi-lang-hcl=\"`gzip`\"\u003e`gzip`\u003c/span\u003e (`.json.gz`) or \u003cspan pulumi-lang-nodejs=\"`zstd`\" pulumi-lang-dotnet=\"`Zstd`\" pulumi-lang-go=\"`zstd`\" pulumi-lang-python=\"`zstd`\" pulumi-lang-yaml=\"`zstd`\" pulumi-lang-java=\"`zstd`\" pulumi-lang-hcl=\"`zstd`\"\u003e`zstd`\u003c/span\u003e (`.json.zst`).\n",
+                    "willReplaceOnChanges": true
+                },
+                "containerName": {
+                    "type": "string",
+                    "description": "Azure Blob Storage container name.\n"
+                },
+                "storageAccount": {
+                    "type": "string",
+                    "description": "Azure storage account name.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "cloudIntegrationId",
+                "containerName",
+                "storageAccount"
+            ]
+        },
         "formal:index/IntegrationLogDatadog:IntegrationLogDatadog": {
             "properties": {
                 "accountId": {
@@ -2945,6 +2977,13 @@
                     "$ref": "#/types/formal:index/IntegrationCloudAzure:IntegrationCloudAzure",
                     "description": "Configuration block for Azure integration.\n"
                 },
+                "azureActions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.\n"
+                },
                 "azureAllowBlobAccess": {
                     "type": "boolean",
                     "description": "Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.\n"
@@ -2959,6 +2998,13 @@
                 "azureClientId": {
                     "type": "string",
                     "description": "The client id of the managed identity Formal authenticates as, reported back by \u003cspan pulumi-lang-nodejs=\"`formal.IntegrationCloudAzureActivation`\" pulumi-lang-dotnet=\"`formal.IntegrationCloudAzureActivation`\" pulumi-lang-go=\"`IntegrationCloudAzureActivation`\" pulumi-lang-python=\"`IntegrationCloudAzureActivation`\" pulumi-lang-yaml=\"`formal.IntegrationCloudAzureActivation`\" pulumi-lang-java=\"`formal.IntegrationCloudAzureActivation`\" pulumi-lang-hcl=\"`formal_integration_cloud_azure_activation`\"\u003e`formal.IntegrationCloudAzureActivation`\u003c/span\u003e.\n"
+                },
+                "azureDataActions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.\n"
                 },
                 "azureEnableAksAutodiscovery": {
                     "type": "boolean",
@@ -2985,7 +3031,8 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.\n"
+                    "description": "Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.\n",
+                    "deprecationMessage": "Use\u003cspan pulumi-lang-nodejs=\" azureActions \" pulumi-lang-dotnet=\" AzureActions \" pulumi-lang-go=\" azureActions \" pulumi-lang-python=\" azure_actions \" pulumi-lang-yaml=\" azureActions \" pulumi-lang-java=\" azureActions \" pulumi-lang-hcl=\" azure_actions \"\u003e azureActions \u003c/span\u003eand\u003cspan pulumi-lang-nodejs=\" azureDataActions \" pulumi-lang-dotnet=\" AzureDataActions \" pulumi-lang-go=\" azureDataActions \" pulumi-lang-python=\" azure_data_actions \" pulumi-lang-yaml=\" azureDataActions \" pulumi-lang-java=\" azureDataActions \" pulumi-lang-hcl=\" azure_data_actions \"\u003e azureDataActions \u003c/span\u003einstead."
                 },
                 "azureSubscriptionId": {
                     "type": "string",
@@ -3078,9 +3125,11 @@
                 "awsFormalStackName",
                 "awsS3BucketArn",
                 "awsTemplateBody",
+                "azureActions",
                 "azureAllowBlobAccess",
                 "azureBlobStorageAccounts",
                 "azureClientId",
+                "azureDataActions",
                 "azureEnableAksAutodiscovery",
                 "azureEnableDbAutodiscovery",
                 "azureEnableVmAutodiscovery",
@@ -3198,6 +3247,13 @@
                         "$ref": "#/types/formal:index/IntegrationCloudAzure:IntegrationCloudAzure",
                         "description": "Configuration block for Azure integration.\n"
                     },
+                    "azureActions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.\n"
+                    },
                     "azureAllowBlobAccess": {
                         "type": "boolean",
                         "description": "Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.\n"
@@ -3212,6 +3268,13 @@
                     "azureClientId": {
                         "type": "string",
                         "description": "The client id of the managed identity Formal authenticates as, reported back by \u003cspan pulumi-lang-nodejs=\"`formal.IntegrationCloudAzureActivation`\" pulumi-lang-dotnet=\"`formal.IntegrationCloudAzureActivation`\" pulumi-lang-go=\"`IntegrationCloudAzureActivation`\" pulumi-lang-python=\"`IntegrationCloudAzureActivation`\" pulumi-lang-yaml=\"`formal.IntegrationCloudAzureActivation`\" pulumi-lang-java=\"`formal.IntegrationCloudAzureActivation`\" pulumi-lang-hcl=\"`formal_integration_cloud_azure_activation`\"\u003e`formal.IntegrationCloudAzureActivation`\u003c/span\u003e.\n"
+                    },
+                    "azureDataActions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.\n"
                     },
                     "azureEnableAksAutodiscovery": {
                         "type": "boolean",
@@ -3238,7 +3301,8 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.\n"
+                        "description": "Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.\n",
+                        "deprecationMessage": "Use\u003cspan pulumi-lang-nodejs=\" azureActions \" pulumi-lang-dotnet=\" AzureActions \" pulumi-lang-go=\" azureActions \" pulumi-lang-python=\" azure_actions \" pulumi-lang-yaml=\" azureActions \" pulumi-lang-java=\" azureActions \" pulumi-lang-hcl=\" azure_actions \"\u003e azureActions \u003c/span\u003eand\u003cspan pulumi-lang-nodejs=\" azureDataActions \" pulumi-lang-dotnet=\" AzureDataActions \" pulumi-lang-go=\" azureDataActions \" pulumi-lang-python=\" azure_data_actions \" pulumi-lang-yaml=\" azureDataActions \" pulumi-lang-java=\" azureDataActions \" pulumi-lang-hcl=\" azure_data_actions \"\u003e azureDataActions \u003c/span\u003einstead."
                     },
                     "azureSubscriptionId": {
                         "type": "string",
@@ -3450,6 +3514,10 @@
                     "$ref": "#/types/formal:index/IntegrationLogAwsS3:IntegrationLogAwsS3",
                     "description": "Configuration block for AWS S3 integration.\n"
                 },
+                "azureBlob": {
+                    "$ref": "#/types/formal:index/IntegrationLogAzureBlob:IntegrationLogAzureBlob",
+                    "description": "Configuration block for Azure Blob Storage integration.\n"
+                },
                 "datadog": {
                     "$ref": "#/types/formal:index/IntegrationLogDatadog:IntegrationLogDatadog",
                     "description": "Configuration block for Datadog integration.\n"
@@ -3474,6 +3542,11 @@
                 "awsS3": {
                     "$ref": "#/types/formal:index/IntegrationLogAwsS3:IntegrationLogAwsS3",
                     "description": "Configuration block for AWS S3 integration.\n",
+                    "willReplaceOnChanges": true
+                },
+                "azureBlob": {
+                    "$ref": "#/types/formal:index/IntegrationLogAzureBlob:IntegrationLogAzureBlob",
+                    "description": "Configuration block for Azure Blob Storage integration.\n",
                     "willReplaceOnChanges": true
                 },
                 "datadog": {
@@ -3503,6 +3576,11 @@
                     "awsS3": {
                         "$ref": "#/types/formal:index/IntegrationLogAwsS3:IntegrationLogAwsS3",
                         "description": "Configuration block for AWS S3 integration.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "azureBlob": {
+                        "$ref": "#/types/formal:index/IntegrationLogAzureBlob:IntegrationLogAzureBlob",
+                        "description": "Configuration block for Azure Blob Storage integration.\n",
                         "willReplaceOnChanges": true
                     },
                     "datadog": {

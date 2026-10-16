@@ -47,12 +47,16 @@ type IntegrationCloud struct {
 	AwsTemplateBody pulumi.StringOutput `pulumi:"awsTemplateBody"`
 	// Configuration block for Azure integration.
 	Azure IntegrationCloudAzurePtrOutput `pulumi:"azure"`
+	// The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+	AzureActions pulumi.StringArrayOutput `pulumi:"azureActions"`
 	// Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
 	AzureAllowBlobAccess pulumi.BoolOutput `pulumi:"azureAllowBlobAccess"`
 	// The storage accounts this Cloud Integration is allowed to write logs to.
 	AzureBlobStorageAccounts pulumi.StringArrayOutput `pulumi:"azureBlobStorageAccounts"`
 	// The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
 	AzureClientId pulumi.StringOutput `pulumi:"azureClientId"`
+	// The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
+	AzureDataActions pulumi.StringArrayOutput `pulumi:"azureDataActions"`
 	// Whether AKS cluster autodiscovery is enabled or not.
 	AzureEnableAksAutodiscovery pulumi.BoolOutput `pulumi:"azureEnableAksAutodiscovery"`
 	// Whether Azure managed database server autodiscovery is enabled or not.
@@ -63,7 +67,9 @@ type IntegrationCloud struct {
 	AzureIssuer pulumi.StringOutput `pulumi:"azureIssuer"`
 	// The resource group discovery is narrowed to. Empty covers the whole subscription.
 	AzureResourceGroup pulumi.StringOutput `pulumi:"azureResourceGroup"`
-	// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+	// Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
+	//
+	// Deprecated: Use azureActions and azureDataActions instead.
 	AzureRoleDefinitions pulumi.StringArrayOutput `pulumi:"azureRoleDefinitions"`
 	// The Azure subscription this integration grants Formal access to.
 	AzureSubscriptionId pulumi.StringOutput `pulumi:"azureSubscriptionId"`
@@ -165,12 +171,16 @@ type integrationCloudState struct {
 	AwsTemplateBody *string `pulumi:"awsTemplateBody"`
 	// Configuration block for Azure integration.
 	Azure *IntegrationCloudAzure `pulumi:"azure"`
+	// The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+	AzureActions []string `pulumi:"azureActions"`
 	// Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
 	AzureAllowBlobAccess *bool `pulumi:"azureAllowBlobAccess"`
 	// The storage accounts this Cloud Integration is allowed to write logs to.
 	AzureBlobStorageAccounts []string `pulumi:"azureBlobStorageAccounts"`
 	// The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
 	AzureClientId *string `pulumi:"azureClientId"`
+	// The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
+	AzureDataActions []string `pulumi:"azureDataActions"`
 	// Whether AKS cluster autodiscovery is enabled or not.
 	AzureEnableAksAutodiscovery *bool `pulumi:"azureEnableAksAutodiscovery"`
 	// Whether Azure managed database server autodiscovery is enabled or not.
@@ -181,7 +191,9 @@ type integrationCloudState struct {
 	AzureIssuer *string `pulumi:"azureIssuer"`
 	// The resource group discovery is narrowed to. Empty covers the whole subscription.
 	AzureResourceGroup *string `pulumi:"azureResourceGroup"`
-	// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+	// Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
+	//
+	// Deprecated: Use azureActions and azureDataActions instead.
 	AzureRoleDefinitions []string `pulumi:"azureRoleDefinitions"`
 	// The Azure subscription this integration grants Formal access to.
 	AzureSubscriptionId *string `pulumi:"azureSubscriptionId"`
@@ -254,12 +266,16 @@ type IntegrationCloudState struct {
 	AwsTemplateBody pulumi.StringPtrInput
 	// Configuration block for Azure integration.
 	Azure IntegrationCloudAzurePtrInput
+	// The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+	AzureActions pulumi.StringArrayInput
 	// Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
 	AzureAllowBlobAccess pulumi.BoolPtrInput
 	// The storage accounts this Cloud Integration is allowed to write logs to.
 	AzureBlobStorageAccounts pulumi.StringArrayInput
 	// The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
 	AzureClientId pulumi.StringPtrInput
+	// The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
+	AzureDataActions pulumi.StringArrayInput
 	// Whether AKS cluster autodiscovery is enabled or not.
 	AzureEnableAksAutodiscovery pulumi.BoolPtrInput
 	// Whether Azure managed database server autodiscovery is enabled or not.
@@ -270,7 +286,9 @@ type IntegrationCloudState struct {
 	AzureIssuer pulumi.StringPtrInput
 	// The resource group discovery is narrowed to. Empty covers the whole subscription.
 	AzureResourceGroup pulumi.StringPtrInput
-	// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+	// Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
+	//
+	// Deprecated: Use azureActions and azureDataActions instead.
 	AzureRoleDefinitions pulumi.StringArrayInput
 	// The Azure subscription this integration grants Formal access to.
 	AzureSubscriptionId pulumi.StringPtrInput
@@ -516,6 +534,11 @@ func (o IntegrationCloudOutput) Azure() IntegrationCloudAzurePtrOutput {
 	return o.ApplyT(func(v *IntegrationCloud) IntegrationCloudAzurePtrOutput { return v.Azure }).(IntegrationCloudAzurePtrOutput)
 }
 
+// The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+func (o IntegrationCloudOutput) AzureActions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringArrayOutput { return v.AzureActions }).(pulumi.StringArrayOutput)
+}
+
 // Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
 func (o IntegrationCloudOutput) AzureAllowBlobAccess() pulumi.BoolOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.AzureAllowBlobAccess }).(pulumi.BoolOutput)
@@ -529,6 +552,11 @@ func (o IntegrationCloudOutput) AzureBlobStorageAccounts() pulumi.StringArrayOut
 // The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
 func (o IntegrationCloudOutput) AzureClientId() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AzureClientId }).(pulumi.StringOutput)
+}
+
+// The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
+func (o IntegrationCloudOutput) AzureDataActions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringArrayOutput { return v.AzureDataActions }).(pulumi.StringArrayOutput)
 }
 
 // Whether AKS cluster autodiscovery is enabled or not.
@@ -556,7 +584,9 @@ func (o IntegrationCloudOutput) AzureResourceGroup() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.AzureResourceGroup }).(pulumi.StringOutput)
 }
 
-// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+// Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
+//
+// Deprecated: Use azureActions and azureDataActions instead.
 func (o IntegrationCloudOutput) AzureRoleDefinitions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringArrayOutput { return v.AzureRoleDefinitions }).(pulumi.StringArrayOutput)
 }

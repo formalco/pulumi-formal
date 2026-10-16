@@ -296,6 +296,29 @@ export interface IntegrationLogAwsS3 {
     s3BucketPrefix?: pulumi.Input<string | undefined>;
 }
 
+export interface IntegrationLogAzureBlob {
+    /**
+     * Blob name prefix to write logs under. Defaults to the container root.
+     */
+    blobPrefix?: pulumi.Input<string | undefined>;
+    /**
+     * Cloud Integration ID.
+     */
+    cloudIntegrationId: pulumi.Input<string>;
+    /**
+     * Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+     */
+    compression?: pulumi.Input<string | undefined>;
+    /**
+     * Azure Blob Storage container name.
+     */
+    containerName: pulumi.Input<string>;
+    /**
+     * Azure storage account name.
+     */
+    storageAccount: pulumi.Input<string>;
+}
+
 export interface IntegrationLogDatadog {
     /**
      * Account ID of Datadog.

@@ -158,7 +158,13 @@
                             }
                         }
                     },
+                    "azure_actions": {
+                        "maxItemsOne": false
+                    },
                     "azure_blob_storage_accounts": {
+                        "maxItemsOne": false
+                    },
+                    "azure_data_actions": {
                         "maxItemsOne": false
                     },
                     "azure_role_definitions": {
@@ -198,6 +204,9 @@
                 "majorVersion": 1,
                 "fields": {
                     "aws_s3": {
+                        "maxItemsOne": true
+                    },
+                    "azure_blob": {
                         "maxItemsOne": true
                     },
                     "datadog": {
