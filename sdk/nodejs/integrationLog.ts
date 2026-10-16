@@ -42,6 +42,10 @@ export class IntegrationLog extends pulumi.CustomResource {
      */
     declare public readonly awsS3: pulumi.Output<outputs.IntegrationLogAwsS3 | undefined>;
     /**
+     * Configuration block for Azure Blob Storage integration.
+     */
+    declare public readonly azureBlob: pulumi.Output<outputs.IntegrationLogAzureBlob | undefined>;
+    /**
      * Configuration block for Datadog integration.
      */
     declare public readonly datadog: pulumi.Output<outputs.IntegrationLogDatadog | undefined>;
@@ -72,6 +76,7 @@ export class IntegrationLog extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as IntegrationLogState | undefined;
             resourceInputs["awsS3"] = state?.awsS3;
+            resourceInputs["azureBlob"] = state?.azureBlob;
             resourceInputs["datadog"] = state?.datadog;
             resourceInputs["gcs"] = state?.gcs;
             resourceInputs["name"] = state?.name;
@@ -79,6 +84,7 @@ export class IntegrationLog extends pulumi.CustomResource {
         } else {
             const args = argsOrState as IntegrationLogArgs | undefined;
             resourceInputs["awsS3"] = args?.awsS3;
+            resourceInputs["azureBlob"] = args?.azureBlob;
             resourceInputs["datadog"] = args?.datadog;
             resourceInputs["gcs"] = args?.gcs;
             resourceInputs["name"] = args?.name;
@@ -97,6 +103,10 @@ export interface IntegrationLogState {
      * Configuration block for AWS S3 integration.
      */
     awsS3?: pulumi.Input<inputs.IntegrationLogAwsS3 | undefined>;
+    /**
+     * Configuration block for Azure Blob Storage integration.
+     */
+    azureBlob?: pulumi.Input<inputs.IntegrationLogAzureBlob | undefined>;
     /**
      * Configuration block for Datadog integration.
      */
@@ -123,6 +133,10 @@ export interface IntegrationLogArgs {
      * Configuration block for AWS S3 integration.
      */
     awsS3?: pulumi.Input<inputs.IntegrationLogAwsS3 | undefined>;
+    /**
+     * Configuration block for Azure Blob Storage integration.
+     */
+    azureBlob?: pulumi.Input<inputs.IntegrationLogAzureBlob | undefined>;
     /**
      * Configuration block for Datadog integration.
      */

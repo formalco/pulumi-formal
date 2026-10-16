@@ -3036,6 +3036,219 @@ func (o IntegrationLogAwsS3PtrOutput) S3BucketPrefix() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type IntegrationLogAzureBlob struct {
+	// Blob name prefix to write logs under. Defaults to the container root.
+	BlobPrefix *string `pulumi:"blobPrefix"`
+	// Cloud Integration ID.
+	CloudIntegrationId string `pulumi:"cloudIntegrationId"`
+	// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+	Compression *string `pulumi:"compression"`
+	// Azure Blob Storage container name.
+	ContainerName string `pulumi:"containerName"`
+	// Azure storage account name.
+	StorageAccount string `pulumi:"storageAccount"`
+}
+
+// IntegrationLogAzureBlobInput is an input type that accepts IntegrationLogAzureBlobArgs and IntegrationLogAzureBlobOutput values.
+// You can construct a concrete instance of `IntegrationLogAzureBlobInput` via:
+//
+//	IntegrationLogAzureBlobArgs{...}
+type IntegrationLogAzureBlobInput interface {
+	pulumi.Input
+
+	ToIntegrationLogAzureBlobOutput() IntegrationLogAzureBlobOutput
+	ToIntegrationLogAzureBlobOutputWithContext(context.Context) IntegrationLogAzureBlobOutput
+}
+
+type IntegrationLogAzureBlobArgs struct {
+	// Blob name prefix to write logs under. Defaults to the container root.
+	BlobPrefix pulumi.StringPtrInput `pulumi:"blobPrefix"`
+	// Cloud Integration ID.
+	CloudIntegrationId pulumi.StringInput `pulumi:"cloudIntegrationId"`
+	// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+	Compression pulumi.StringPtrInput `pulumi:"compression"`
+	// Azure Blob Storage container name.
+	ContainerName pulumi.StringInput `pulumi:"containerName"`
+	// Azure storage account name.
+	StorageAccount pulumi.StringInput `pulumi:"storageAccount"`
+}
+
+func (IntegrationLogAzureBlobArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationLogAzureBlob)(nil)).Elem()
+}
+
+func (i IntegrationLogAzureBlobArgs) ToIntegrationLogAzureBlobOutput() IntegrationLogAzureBlobOutput {
+	return i.ToIntegrationLogAzureBlobOutputWithContext(context.Background())
+}
+
+func (i IntegrationLogAzureBlobArgs) ToIntegrationLogAzureBlobOutputWithContext(ctx context.Context) IntegrationLogAzureBlobOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationLogAzureBlobOutput)
+}
+
+func (i IntegrationLogAzureBlobArgs) ToIntegrationLogAzureBlobPtrOutput() IntegrationLogAzureBlobPtrOutput {
+	return i.ToIntegrationLogAzureBlobPtrOutputWithContext(context.Background())
+}
+
+func (i IntegrationLogAzureBlobArgs) ToIntegrationLogAzureBlobPtrOutputWithContext(ctx context.Context) IntegrationLogAzureBlobPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationLogAzureBlobOutput).ToIntegrationLogAzureBlobPtrOutputWithContext(ctx)
+}
+
+// IntegrationLogAzureBlobPtrInput is an input type that accepts IntegrationLogAzureBlobArgs, IntegrationLogAzureBlobPtr and IntegrationLogAzureBlobPtrOutput values.
+// You can construct a concrete instance of `IntegrationLogAzureBlobPtrInput` via:
+//
+//	        IntegrationLogAzureBlobArgs{...}
+//
+//	or:
+//
+//	        nil
+type IntegrationLogAzureBlobPtrInput interface {
+	pulumi.Input
+
+	ToIntegrationLogAzureBlobPtrOutput() IntegrationLogAzureBlobPtrOutput
+	ToIntegrationLogAzureBlobPtrOutputWithContext(context.Context) IntegrationLogAzureBlobPtrOutput
+}
+
+type integrationLogAzureBlobPtrType IntegrationLogAzureBlobArgs
+
+func IntegrationLogAzureBlobPtr(v *IntegrationLogAzureBlobArgs) IntegrationLogAzureBlobPtrInput {
+	return (*integrationLogAzureBlobPtrType)(v)
+}
+
+func (*integrationLogAzureBlobPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationLogAzureBlob)(nil)).Elem()
+}
+
+func (i *integrationLogAzureBlobPtrType) ToIntegrationLogAzureBlobPtrOutput() IntegrationLogAzureBlobPtrOutput {
+	return i.ToIntegrationLogAzureBlobPtrOutputWithContext(context.Background())
+}
+
+func (i *integrationLogAzureBlobPtrType) ToIntegrationLogAzureBlobPtrOutputWithContext(ctx context.Context) IntegrationLogAzureBlobPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationLogAzureBlobPtrOutput)
+}
+
+type IntegrationLogAzureBlobOutput struct{ *pulumi.OutputState }
+
+func (IntegrationLogAzureBlobOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationLogAzureBlob)(nil)).Elem()
+}
+
+func (o IntegrationLogAzureBlobOutput) ToIntegrationLogAzureBlobOutput() IntegrationLogAzureBlobOutput {
+	return o
+}
+
+func (o IntegrationLogAzureBlobOutput) ToIntegrationLogAzureBlobOutputWithContext(ctx context.Context) IntegrationLogAzureBlobOutput {
+	return o
+}
+
+func (o IntegrationLogAzureBlobOutput) ToIntegrationLogAzureBlobPtrOutput() IntegrationLogAzureBlobPtrOutput {
+	return o.ToIntegrationLogAzureBlobPtrOutputWithContext(context.Background())
+}
+
+func (o IntegrationLogAzureBlobOutput) ToIntegrationLogAzureBlobPtrOutputWithContext(ctx context.Context) IntegrationLogAzureBlobPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IntegrationLogAzureBlob) *IntegrationLogAzureBlob {
+		return &v
+	}).(IntegrationLogAzureBlobPtrOutput)
+}
+
+// Blob name prefix to write logs under. Defaults to the container root.
+func (o IntegrationLogAzureBlobOutput) BlobPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IntegrationLogAzureBlob) *string { return v.BlobPrefix }).(pulumi.StringPtrOutput)
+}
+
+// Cloud Integration ID.
+func (o IntegrationLogAzureBlobOutput) CloudIntegrationId() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationLogAzureBlob) string { return v.CloudIntegrationId }).(pulumi.StringOutput)
+}
+
+// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+func (o IntegrationLogAzureBlobOutput) Compression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IntegrationLogAzureBlob) *string { return v.Compression }).(pulumi.StringPtrOutput)
+}
+
+// Azure Blob Storage container name.
+func (o IntegrationLogAzureBlobOutput) ContainerName() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationLogAzureBlob) string { return v.ContainerName }).(pulumi.StringOutput)
+}
+
+// Azure storage account name.
+func (o IntegrationLogAzureBlobOutput) StorageAccount() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationLogAzureBlob) string { return v.StorageAccount }).(pulumi.StringOutput)
+}
+
+type IntegrationLogAzureBlobPtrOutput struct{ *pulumi.OutputState }
+
+func (IntegrationLogAzureBlobPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationLogAzureBlob)(nil)).Elem()
+}
+
+func (o IntegrationLogAzureBlobPtrOutput) ToIntegrationLogAzureBlobPtrOutput() IntegrationLogAzureBlobPtrOutput {
+	return o
+}
+
+func (o IntegrationLogAzureBlobPtrOutput) ToIntegrationLogAzureBlobPtrOutputWithContext(ctx context.Context) IntegrationLogAzureBlobPtrOutput {
+	return o
+}
+
+func (o IntegrationLogAzureBlobPtrOutput) Elem() IntegrationLogAzureBlobOutput {
+	return o.ApplyT(func(v *IntegrationLogAzureBlob) IntegrationLogAzureBlob {
+		if v != nil {
+			return *v
+		}
+		var ret IntegrationLogAzureBlob
+		return ret
+	}).(IntegrationLogAzureBlobOutput)
+}
+
+// Blob name prefix to write logs under. Defaults to the container root.
+func (o IntegrationLogAzureBlobPtrOutput) BlobPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogAzureBlob) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlobPrefix
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cloud Integration ID.
+func (o IntegrationLogAzureBlobPtrOutput) CloudIntegrationId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogAzureBlob) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CloudIntegrationId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+func (o IntegrationLogAzureBlobPtrOutput) Compression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogAzureBlob) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Compression
+	}).(pulumi.StringPtrOutput)
+}
+
+// Azure Blob Storage container name.
+func (o IntegrationLogAzureBlobPtrOutput) ContainerName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogAzureBlob) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ContainerName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Azure storage account name.
+func (o IntegrationLogAzureBlobPtrOutput) StorageAccount() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogAzureBlob) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.StorageAccount
+	}).(pulumi.StringPtrOutput)
+}
+
 type IntegrationLogDatadog struct {
 	// Account ID of Datadog.
 	AccountId string `pulumi:"accountId"`
@@ -10391,6 +10604,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudGcpPtrInput)(nil)).Elem(), IntegrationCloudGcpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogAwsS3Input)(nil)).Elem(), IntegrationLogAwsS3Args{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogAwsS3PtrInput)(nil)).Elem(), IntegrationLogAwsS3Args{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogAzureBlobInput)(nil)).Elem(), IntegrationLogAzureBlobArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogAzureBlobPtrInput)(nil)).Elem(), IntegrationLogAzureBlobArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogDatadogInput)(nil)).Elem(), IntegrationLogDatadogArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogDatadogPtrInput)(nil)).Elem(), IntegrationLogDatadogArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogGcsInput)(nil)).Elem(), IntegrationLogGcsArgs{})
@@ -10513,6 +10728,8 @@ func init() {
 	pulumi.RegisterOutputType(IntegrationCloudGcpPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogAwsS3Output{})
 	pulumi.RegisterOutputType(IntegrationLogAwsS3PtrOutput{})
+	pulumi.RegisterOutputType(IntegrationLogAzureBlobOutput{})
+	pulumi.RegisterOutputType(IntegrationLogAzureBlobPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogDatadogOutput{})
 	pulumi.RegisterOutputType(IntegrationLogDatadogPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogGcsOutput{})

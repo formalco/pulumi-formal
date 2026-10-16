@@ -113,6 +113,12 @@ namespace Formal.Pulumi
         public Output<Outputs.IntegrationCloudAzure?> Azure { get; private set; } = null!;
 
         /// <summary>
+        /// The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        /// </summary>
+        [Output("azureActions")]
+        public Output<ImmutableArray<string>> AzureActions { get; private set; } = null!;
+
+        /// <summary>
         /// Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
         /// </summary>
         [Output("azureAllowBlobAccess")]
@@ -129,6 +135,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Output("azureClientId")]
         public Output<string> AzureClientId { get; private set; } = null!;
+
+        /// <summary>
+        /// The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
+        /// </summary>
+        [Output("azureDataActions")]
+        public Output<ImmutableArray<string>> AzureDataActions { get; private set; } = null!;
 
         /// <summary>
         /// Whether AKS cluster autodiscovery is enabled or not.
@@ -161,7 +173,7 @@ namespace Formal.Pulumi
         public Output<string> AzureResourceGroup { get; private set; } = null!;
 
         /// <summary>
-        /// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        /// Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
         /// </summary>
         [Output("azureRoleDefinitions")]
         public Output<ImmutableArray<string>> AzureRoleDefinitions { get; private set; } = null!;
@@ -449,6 +461,18 @@ namespace Formal.Pulumi
         [Input("azure")]
         public Input<Inputs.IntegrationCloudAzureGetArgs>? Azure { get; set; }
 
+        [Input("azureActions")]
+        private InputList<string>? _azureActions;
+
+        /// <summary>
+        /// The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        /// </summary>
+        public InputList<string> AzureActions
+        {
+            get => _azureActions ?? (_azureActions = new InputList<string>());
+            set => _azureActions = value;
+        }
+
         /// <summary>
         /// Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
         /// </summary>
@@ -472,6 +496,18 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("azureClientId")]
         public Input<string>? AzureClientId { get; set; }
+
+        [Input("azureDataActions")]
+        private InputList<string>? _azureDataActions;
+
+        /// <summary>
+        /// The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
+        /// </summary>
+        public InputList<string> AzureDataActions
+        {
+            get => _azureDataActions ?? (_azureDataActions = new InputList<string>());
+            set => _azureDataActions = value;
+        }
 
         /// <summary>
         /// Whether AKS cluster autodiscovery is enabled or not.
@@ -507,8 +543,9 @@ namespace Formal.Pulumi
         private InputList<string>? _azureRoleDefinitions;
 
         /// <summary>
-        /// The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        /// Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
         /// </summary>
+        [Obsolete(@"Use AzureActions and AzureDataActions instead.")]
         public InputList<string> AzureRoleDefinitions
         {
             get => _azureRoleDefinitions ?? (_azureRoleDefinitions = new InputList<string>());

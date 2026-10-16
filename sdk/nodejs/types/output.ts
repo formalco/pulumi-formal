@@ -354,6 +354,29 @@ export interface IntegrationLogAwsS3 {
     s3BucketPrefix?: string;
 }
 
+export interface IntegrationLogAzureBlob {
+    /**
+     * Blob name prefix to write logs under. Defaults to the container root.
+     */
+    blobPrefix?: string;
+    /**
+     * Cloud Integration ID.
+     */
+    cloudIntegrationId: string;
+    /**
+     * Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+     */
+    compression?: string;
+    /**
+     * Azure Blob Storage container name.
+     */
+    containerName: string;
+    /**
+     * Azure storage account name.
+     */
+    storageAccount: string;
+}
+
 export interface IntegrationLogDatadog {
     /**
      * Account ID of Datadog.

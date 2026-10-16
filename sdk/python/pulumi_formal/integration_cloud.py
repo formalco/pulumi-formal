@@ -146,9 +146,11 @@ class _IntegrationCloudState:
                  aws_s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None,
                  aws_template_body: pulumi.Input[Optional[_builtins.str]] = None,
                  azure: pulumi.Input[Optional['IntegrationCloudAzureArgs']] = None,
+                 azure_actions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  azure_allow_blob_access: pulumi.Input[Optional[_builtins.bool]] = None,
                  azure_blob_storage_accounts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  azure_client_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 azure_data_actions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  azure_enable_aks_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  azure_enable_db_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  azure_enable_vm_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -190,15 +192,17 @@ class _IntegrationCloudState:
         :param pulumi.Input[_builtins.str] aws_s3_bucket_arn: The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
         :param pulumi.Input[_builtins.str] aws_template_body: The template body of the CloudFormation stack.
         :param pulumi.Input['IntegrationCloudAzureArgs'] azure: Configuration block for Azure integration.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_actions: The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
         :param pulumi.Input[_builtins.bool] azure_allow_blob_access: Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_blob_storage_accounts: The storage accounts this Cloud Integration is allowed to write logs to.
         :param pulumi.Input[_builtins.str] azure_client_id: The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_data_actions: The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
         :param pulumi.Input[_builtins.bool] azure_enable_aks_autodiscovery: Whether AKS cluster autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] azure_enable_db_autodiscovery: Whether Azure managed database server autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] azure_enable_vm_autodiscovery: Whether Azure virtual machine autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.str] azure_issuer: The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
         :param pulumi.Input[_builtins.str] azure_resource_group: The resource group discovery is narrowed to. Empty covers the whole subscription.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_role_definitions: The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_role_definitions: Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
         :param pulumi.Input[_builtins.str] azure_subscription_id: The Azure subscription this integration grants Formal access to.
         :param pulumi.Input[_builtins.str] azure_tenant_id: The Entra tenant of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
         :param pulumi.Input[_builtins.str] cloud_region: Region of the cloud provider. (AWS only)
@@ -248,12 +252,16 @@ class _IntegrationCloudState:
             pulumi.set(__self__, "aws_template_body", aws_template_body)
         if azure is not None:
             pulumi.set(__self__, "azure", azure)
+        if azure_actions is not None:
+            pulumi.set(__self__, "azure_actions", azure_actions)
         if azure_allow_blob_access is not None:
             pulumi.set(__self__, "azure_allow_blob_access", azure_allow_blob_access)
         if azure_blob_storage_accounts is not None:
             pulumi.set(__self__, "azure_blob_storage_accounts", azure_blob_storage_accounts)
         if azure_client_id is not None:
             pulumi.set(__self__, "azure_client_id", azure_client_id)
+        if azure_data_actions is not None:
+            pulumi.set(__self__, "azure_data_actions", azure_data_actions)
         if azure_enable_aks_autodiscovery is not None:
             pulumi.set(__self__, "azure_enable_aks_autodiscovery", azure_enable_aks_autodiscovery)
         if azure_enable_db_autodiscovery is not None:
@@ -264,6 +272,9 @@ class _IntegrationCloudState:
             pulumi.set(__self__, "azure_issuer", azure_issuer)
         if azure_resource_group is not None:
             pulumi.set(__self__, "azure_resource_group", azure_resource_group)
+        if azure_role_definitions is not None:
+            warnings.warn("""Use azure_actions and azure_data_actions instead.""", DeprecationWarning)
+            pulumi.log.warn("""azure_role_definitions is deprecated: Use azure_actions and azure_data_actions instead.""")
         if azure_role_definitions is not None:
             pulumi.set(__self__, "azure_role_definitions", azure_role_definitions)
         if azure_subscription_id is not None:
@@ -498,6 +509,18 @@ class _IntegrationCloudState:
         pulumi.set(self, "azure", value)
 
     @_builtins.property
+    @pulumi.getter(name="azureActions")
+    def azure_actions(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        """
+        return pulumi.get(self, "azure_actions")
+
+    @azure_actions.setter
+    def azure_actions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "azure_actions", value)
+
+    @_builtins.property
     @pulumi.getter(name="azureAllowBlobAccess")
     def azure_allow_blob_access(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -532,6 +555,18 @@ class _IntegrationCloudState:
     @azure_client_id.setter
     def azure_client_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "azure_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="azureDataActions")
+    def azure_data_actions(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
+        """
+        return pulumi.get(self, "azure_data_actions")
+
+    @azure_data_actions.setter
+    def azure_data_actions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "azure_data_actions", value)
 
     @_builtins.property
     @pulumi.getter(name="azureEnableAksAutodiscovery")
@@ -595,9 +630,10 @@ class _IntegrationCloudState:
 
     @_builtins.property
     @pulumi.getter(name="azureRoleDefinitions")
+    @_utilities.deprecated("""Use azure_actions and azure_data_actions instead.""")
     def azure_role_definitions(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
-        The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
         """
         return pulumi.get(self, "azure_role_definitions")
 
@@ -886,9 +922,11 @@ class IntegrationCloud(pulumi.CustomResource):
             __props__.__dict__["aws_formal_stack_name"] = None
             __props__.__dict__["aws_s3_bucket_arn"] = None
             __props__.__dict__["aws_template_body"] = None
+            __props__.__dict__["azure_actions"] = None
             __props__.__dict__["azure_allow_blob_access"] = None
             __props__.__dict__["azure_blob_storage_accounts"] = None
             __props__.__dict__["azure_client_id"] = None
+            __props__.__dict__["azure_data_actions"] = None
             __props__.__dict__["azure_enable_aks_autodiscovery"] = None
             __props__.__dict__["azure_enable_db_autodiscovery"] = None
             __props__.__dict__["azure_enable_vm_autodiscovery"] = None
@@ -933,9 +971,11 @@ class IntegrationCloud(pulumi.CustomResource):
             aws_s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None,
             aws_template_body: pulumi.Input[Optional[_builtins.str]] = None,
             azure: pulumi.Input[Optional[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']]] = None,
+            azure_actions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             azure_allow_blob_access: pulumi.Input[Optional[_builtins.bool]] = None,
             azure_blob_storage_accounts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             azure_client_id: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_data_actions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             azure_enable_aks_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             azure_enable_db_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             azure_enable_vm_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -981,15 +1021,17 @@ class IntegrationCloud(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] aws_s3_bucket_arn: The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
         :param pulumi.Input[_builtins.str] aws_template_body: The template body of the CloudFormation stack.
         :param pulumi.Input[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']] azure: Configuration block for Azure integration.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_actions: The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
         :param pulumi.Input[_builtins.bool] azure_allow_blob_access: Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_blob_storage_accounts: The storage accounts this Cloud Integration is allowed to write logs to.
         :param pulumi.Input[_builtins.str] azure_client_id: The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_data_actions: The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
         :param pulumi.Input[_builtins.bool] azure_enable_aks_autodiscovery: Whether AKS cluster autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] azure_enable_db_autodiscovery: Whether Azure managed database server autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] azure_enable_vm_autodiscovery: Whether Azure virtual machine autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.str] azure_issuer: The OIDC issuer URL of Formal's AWS account. Pass this to the Azure Terraform module, which pins it on the federated identity credential.
         :param pulumi.Input[_builtins.str] azure_resource_group: The resource group discovery is narrowed to. Empty covers the whole subscription.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_role_definitions: The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_role_definitions: Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
         :param pulumi.Input[_builtins.str] azure_subscription_id: The Azure subscription this integration grants Formal access to.
         :param pulumi.Input[_builtins.str] azure_tenant_id: The Entra tenant of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
         :param pulumi.Input[_builtins.str] cloud_region: Region of the cloud provider. (AWS only)
@@ -1027,9 +1069,11 @@ class IntegrationCloud(pulumi.CustomResource):
         __props__.__dict__["aws_s3_bucket_arn"] = aws_s3_bucket_arn
         __props__.__dict__["aws_template_body"] = aws_template_body
         __props__.__dict__["azure"] = azure
+        __props__.__dict__["azure_actions"] = azure_actions
         __props__.__dict__["azure_allow_blob_access"] = azure_allow_blob_access
         __props__.__dict__["azure_blob_storage_accounts"] = azure_blob_storage_accounts
         __props__.__dict__["azure_client_id"] = azure_client_id
+        __props__.__dict__["azure_data_actions"] = azure_data_actions
         __props__.__dict__["azure_enable_aks_autodiscovery"] = azure_enable_aks_autodiscovery
         __props__.__dict__["azure_enable_db_autodiscovery"] = azure_enable_db_autodiscovery
         __props__.__dict__["azure_enable_vm_autodiscovery"] = azure_enable_vm_autodiscovery
@@ -1183,6 +1227,14 @@ class IntegrationCloud(pulumi.CustomResource):
         return pulumi.get(self, "azure")
 
     @_builtins.property
+    @pulumi.getter(name="azureActions")
+    def azure_actions(self) -> pulumi.Output[Sequence[_builtins.str]]:
+        """
+        The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        """
+        return pulumi.get(self, "azure_actions")
+
+    @_builtins.property
     @pulumi.getter(name="azureAllowBlobAccess")
     def azure_allow_blob_access(self) -> pulumi.Output[_builtins.bool]:
         """
@@ -1205,6 +1257,14 @@ class IntegrationCloud(pulumi.CustomResource):
         The client id of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
         """
         return pulumi.get(self, "azure_client_id")
+
+    @_builtins.property
+    @pulumi.getter(name="azureDataActions")
+    def azure_data_actions(self) -> pulumi.Output[Sequence[_builtins.str]]:
+        """
+        The Azure data-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Empty when blob*storage*accounts names specific accounts, because blob writes are then granted per account. Pass these to the Azure Terraform module.
+        """
+        return pulumi.get(self, "azure_data_actions")
 
     @_builtins.property
     @pulumi.getter(name="azureEnableAksAutodiscovery")
@@ -1248,9 +1308,10 @@ class IntegrationCloud(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="azureRoleDefinitions")
+    @_utilities.deprecated("""Use azure_actions and azure_data_actions instead.""")
     def azure_role_definitions(self) -> pulumi.Output[Sequence[_builtins.str]]:
         """
-        The Azure built-in roles to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
+        Deprecated: superseded by azure*actions and azure*data_actions, which the Azure Terraform module grants through a single custom role.
         """
         return pulumi.get(self, "azure_role_definitions")
 

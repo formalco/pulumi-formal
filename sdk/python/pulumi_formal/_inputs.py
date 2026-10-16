@@ -49,6 +49,8 @@ __all__ = [
     'IntegrationCloudGcpArgsDict',
     'IntegrationLogAwsS3Args',
     'IntegrationLogAwsS3ArgsDict',
+    'IntegrationLogAzureBlobArgs',
+    'IntegrationLogAzureBlobArgsDict',
     'IntegrationLogDatadogArgs',
     'IntegrationLogDatadogArgsDict',
     'IntegrationLogGcsArgs',
@@ -1452,6 +1454,112 @@ class IntegrationLogAwsS3Args:
     @s3_bucket_prefix.setter
     def s3_bucket_prefix(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "s3_bucket_prefix", value)
+
+
+class IntegrationLogAzureBlobArgsDict(TypedDict):
+    cloud_integration_id: pulumi.Input[_builtins.str]
+    """
+    Cloud Integration ID.
+    """
+    container_name: pulumi.Input[_builtins.str]
+    """
+    Azure Blob Storage container name.
+    """
+    storage_account: pulumi.Input[_builtins.str]
+    """
+    Azure storage account name.
+    """
+    blob_prefix: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Blob name prefix to write logs under. Defaults to the container root.
+    """
+    compression: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+    """
+
+@pulumi.input_type
+class IntegrationLogAzureBlobArgs:
+    def __init__(__self__, *,
+                 cloud_integration_id: pulumi.Input[_builtins.str],
+                 container_name: pulumi.Input[_builtins.str],
+                 storage_account: pulumi.Input[_builtins.str],
+                 blob_prefix: pulumi.Input[Optional[_builtins.str]] = None,
+                 compression: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] cloud_integration_id: Cloud Integration ID.
+        :param pulumi.Input[_builtins.str] container_name: Azure Blob Storage container name.
+        :param pulumi.Input[_builtins.str] storage_account: Azure storage account name.
+        :param pulumi.Input[_builtins.str] blob_prefix: Blob name prefix to write logs under. Defaults to the container root.
+        :param pulumi.Input[_builtins.str] compression: Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+        """
+        pulumi.set(__self__, "cloud_integration_id", cloud_integration_id)
+        pulumi.set(__self__, "container_name", container_name)
+        pulumi.set(__self__, "storage_account", storage_account)
+        if blob_prefix is not None:
+            pulumi.set(__self__, "blob_prefix", blob_prefix)
+        if compression is not None:
+            pulumi.set(__self__, "compression", compression)
+
+    @_builtins.property
+    @pulumi.getter(name="cloudIntegrationId")
+    def cloud_integration_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        Cloud Integration ID.
+        """
+        return pulumi.get(self, "cloud_integration_id")
+
+    @cloud_integration_id.setter
+    def cloud_integration_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "cloud_integration_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="containerName")
+    def container_name(self) -> pulumi.Input[_builtins.str]:
+        """
+        Azure Blob Storage container name.
+        """
+        return pulumi.get(self, "container_name")
+
+    @container_name.setter
+    def container_name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "container_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="storageAccount")
+    def storage_account(self) -> pulumi.Input[_builtins.str]:
+        """
+        Azure storage account name.
+        """
+        return pulumi.get(self, "storage_account")
+
+    @storage_account.setter
+    def storage_account(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "storage_account", value)
+
+    @_builtins.property
+    @pulumi.getter(name="blobPrefix")
+    def blob_prefix(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Blob name prefix to write logs under. Defaults to the container root.
+        """
+        return pulumi.get(self, "blob_prefix")
+
+    @blob_prefix.setter
+    def blob_prefix(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "blob_prefix", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def compression(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Codec each log object is compressed with, which also sets its file extension: `none` (`.json`), `gzip` (`.json.gz`) or `zstd` (`.json.zst`).
+        """
+        return pulumi.get(self, "compression")
+
+    @compression.setter
+    def compression(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "compression", value)
 
 
 class IntegrationLogDatadogArgsDict(TypedDict):

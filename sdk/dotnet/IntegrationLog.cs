@@ -23,6 +23,12 @@ namespace Formal.Pulumi
         public Output<Outputs.IntegrationLogAwsS3?> AwsS3 { get; private set; } = null!;
 
         /// <summary>
+        /// Configuration block for Azure Blob Storage integration.
+        /// </summary>
+        [Output("azureBlob")]
+        public Output<Outputs.IntegrationLogAzureBlob?> AzureBlob { get; private set; } = null!;
+
+        /// <summary>
         /// Configuration block for Datadog integration.
         /// </summary>
         [Output("datadog")]
@@ -100,6 +106,12 @@ namespace Formal.Pulumi
         public Input<Inputs.IntegrationLogAwsS3Args>? AwsS3 { get; set; }
 
         /// <summary>
+        /// Configuration block for Azure Blob Storage integration.
+        /// </summary>
+        [Input("azureBlob")]
+        public Input<Inputs.IntegrationLogAzureBlobArgs>? AzureBlob { get; set; }
+
+        /// <summary>
         /// Configuration block for Datadog integration.
         /// </summary>
         [Input("datadog")]
@@ -136,6 +148,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("awsS3")]
         public Input<Inputs.IntegrationLogAwsS3GetArgs>? AwsS3 { get; set; }
+
+        /// <summary>
+        /// Configuration block for Azure Blob Storage integration.
+        /// </summary>
+        [Input("azureBlob")]
+        public Input<Inputs.IntegrationLogAzureBlobGetArgs>? AzureBlob { get; set; }
 
         /// <summary>
         /// Configuration block for Datadog integration.
