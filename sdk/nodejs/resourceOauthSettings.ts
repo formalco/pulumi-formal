@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Enables OAuth on an MCP, HTTP, gRPC or LLM Resource. OAuth clients (see `formal.OauthClient`) can then connect to the Resource through the Connector and, unless `upstreamOauthMode` is `none`, users link their own upstream accounts, whose access tokens the Connector sends upstream in place of native user credentials. Every argument forces replacement, and replacing or destroying this resource deletes every user's linked account and every OAuth client's authorization for the Resource.
+ * Enables OAuth on an MCP, HTTP, gRPC or LLM Resource. OAuth clients (see `formal.OauthClient`) can then connect to the Resource through the Connector and, unless `upstreamOauthMode` is `none`, users link their own upstream accounts, whose access tokens the Connector sends upstream in place of native user credentials. `requestedScopes` and the client secret update in place and leave linked accounts and OAuth clients' authorizations as they are. `requestedScopes` apply to future links. Changing `resourceId`, `upstreamOauthMode`, `clientId`, or `issuer`, or destroying this resource, deletes every user's linked account and every OAuth client's authorization for the Resource.
  *
  * ## Example Usage
  *
@@ -34,12 +34,14 @@ import * as utilities from "./utilities";
  * const githubOauthAppClientId = config.require("githubOauthAppClientId");
  * const githubOauthAppClientSecret = config.require("githubOauthAppClientSecret");
  * // Users link their GitHub accounts with your own GitHub OAuth app. GitHub
- * // publishes no protected resource metadata, so set its issuer.
+ * // publishes no protected resource metadata, so set its issuer. Increment
+ * // client_secret_wo_version to rotate the secret; it is not stored in state.
  * const githubResourceOauthSettings = new formal.ResourceOauthSettings("github", {
  *     resourceId: github.id,
  *     upstreamOauthMode: "pre_registered",
  *     clientId: githubOauthAppClientId,
- *     clientSecret: githubOauthAppClientSecret,
+ *     clientSecretWo: githubOauthAppClientSecret,
+ *     clientSecretWoVersion: 1,
  *     issuer: "https://github.com/login/oauth",
  *     requestedScopes: [
  *         "repo",
@@ -52,8 +54,9 @@ import * as utilities from "./utilities";
  *
  * The `pulumi import` command can be used, for example:
  *
- * OAuth settings are imported by the ID of their Resource. clientSecret is
- * never returned; keeping it in config after import doesn't replace the settings.
+ * OAuth settings are imported by the ID of their Resource. The client secret is
+ * never returned. clientSecretWo stays out of state; increment
+ * clientSecretWoVersion to send it.
  *
  * ```sh
  * $ pulumi import formal:index/resourceOauthSettings:ResourceOauthSettings github <resource_id>
@@ -92,13 +95,22 @@ export class ResourceOauthSettings extends pulumi.CustomResource {
      */
     declare public readonly clientId: pulumi.Output<string | undefined>;
     /**
-     * The client secret of your OAuth app. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstreamOauthMode` is `preRegistered`. The API never returns it, so it is not read back after creation, and setting it on imported settings that already have a secret does not replace them.
+     * The client secret of your OAuth app. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstreamOauthMode` is `preRegistered`. The API never returns it, so it is not read back, and Terraform only sends it when it changes. Rotating or removing it keeps linked accounts. Prefer `clientSecretWo` to keep the secret out of Terraform state.
      */
     declare public readonly clientSecret: pulumi.Output<string | undefined>;
     /**
      * Whether the OAuth app has a client secret.
      */
     declare public /*out*/ readonly clientSecretSet: pulumi.Output<boolean>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only client secret of your OAuth app. This value is not stored in Terraform state, so it must stay in the configuration. Requires Terraform 1.11+ and `clientSecretWoVersion`. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstreamOauthMode` is `preRegistered`. Set it to an empty string and increment `clientSecretWoVersion` to make the client public. Rotating or removing the secret keeps linked accounts.
+     */
+    declare public readonly clientSecretWo: pulumi.Output<string | undefined>;
+    /**
+     * Version trigger for `clientSecretWo`. Increment this value to update the secret.
+     */
+    declare public readonly clientSecretWoVersion: pulumi.Output<number | undefined>;
     /**
      * When the OAuth settings were created.
      */
@@ -112,7 +124,7 @@ export class ResourceOauthSettings extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly oauthSettingsId: pulumi.Output<string>;
     /**
-     * Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstreamOauthMode` is `none`.
+     * Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstreamOauthMode` is `none`. Existing linked accounts keep the scopes they were granted; users get these scopes the next time they link.
      */
     declare public readonly requestedScopes: pulumi.Output<string[] | undefined>;
     /**
@@ -124,7 +136,7 @@ export class ResourceOauthSettings extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
     /**
-     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret` or `clientSecretWo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
      */
     declare public readonly upstreamOauthMode: pulumi.Output<string | undefined>;
 
@@ -144,6 +156,8 @@ export class ResourceOauthSettings extends pulumi.CustomResource {
             resourceInputs["clientId"] = state?.clientId;
             resourceInputs["clientSecret"] = state?.clientSecret;
             resourceInputs["clientSecretSet"] = state?.clientSecretSet;
+            resourceInputs["clientSecretWo"] = state?.clientSecretWo;
+            resourceInputs["clientSecretWoVersion"] = state?.clientSecretWoVersion;
             resourceInputs["createdAt"] = state?.createdAt;
             resourceInputs["issuer"] = state?.issuer;
             resourceInputs["oauthSettingsId"] = state?.oauthSettingsId;
@@ -158,6 +172,8 @@ export class ResourceOauthSettings extends pulumi.CustomResource {
             }
             resourceInputs["clientId"] = args?.clientId;
             resourceInputs["clientSecret"] = args?.clientSecret ? pulumi.secret(args.clientSecret) : undefined;
+            resourceInputs["clientSecretWo"] = args?.clientSecretWo ? pulumi.secret(args.clientSecretWo) : undefined;
+            resourceInputs["clientSecretWoVersion"] = args?.clientSecretWoVersion;
             resourceInputs["issuer"] = args?.issuer;
             resourceInputs["requestedScopes"] = args?.requestedScopes;
             resourceInputs["resourceId"] = args?.resourceId;
@@ -168,7 +184,7 @@ export class ResourceOauthSettings extends pulumi.CustomResource {
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["clientSecret"] };
+        const secretOpts = { additionalSecretOutputs: ["clientSecret", "clientSecretWo"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(ResourceOauthSettings.__pulumiType, name, resourceInputs, opts);
     }
@@ -183,13 +199,22 @@ export interface ResourceOauthSettingsState {
      */
     clientId?: pulumi.Input<string | undefined>;
     /**
-     * The client secret of your OAuth app. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstreamOauthMode` is `preRegistered`. The API never returns it, so it is not read back after creation, and setting it on imported settings that already have a secret does not replace them.
+     * The client secret of your OAuth app. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstreamOauthMode` is `preRegistered`. The API never returns it, so it is not read back, and Terraform only sends it when it changes. Rotating or removing it keeps linked accounts. Prefer `clientSecretWo` to keep the secret out of Terraform state.
      */
     clientSecret?: pulumi.Input<string | undefined>;
     /**
      * Whether the OAuth app has a client secret.
      */
     clientSecretSet?: pulumi.Input<boolean | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only client secret of your OAuth app. This value is not stored in Terraform state, so it must stay in the configuration. Requires Terraform 1.11+ and `clientSecretWoVersion`. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstreamOauthMode` is `preRegistered`. Set it to an empty string and increment `clientSecretWoVersion` to make the client public. Rotating or removing the secret keeps linked accounts.
+     */
+    clientSecretWo?: pulumi.Input<string | undefined>;
+    /**
+     * Version trigger for `clientSecretWo`. Increment this value to update the secret.
+     */
+    clientSecretWoVersion?: pulumi.Input<number | undefined>;
     /**
      * When the OAuth settings were created.
      */
@@ -203,7 +228,7 @@ export interface ResourceOauthSettingsState {
      */
     oauthSettingsId?: pulumi.Input<string | undefined>;
     /**
-     * Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstreamOauthMode` is `none`.
+     * Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstreamOauthMode` is `none`. Existing linked accounts keep the scopes they were granted; users get these scopes the next time they link.
      */
     requestedScopes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
@@ -215,7 +240,7 @@ export interface ResourceOauthSettingsState {
      */
     updatedAt?: pulumi.Input<string | undefined>;
     /**
-     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret` or `clientSecretWo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
      */
     upstreamOauthMode?: pulumi.Input<string | undefined>;
 }
@@ -229,15 +254,24 @@ export interface ResourceOauthSettingsArgs {
      */
     clientId?: pulumi.Input<string | undefined>;
     /**
-     * The client secret of your OAuth app. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstreamOauthMode` is `preRegistered`. The API never returns it, so it is not read back after creation, and setting it on imported settings that already have a secret does not replace them.
+     * The client secret of your OAuth app. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstreamOauthMode` is `preRegistered`. The API never returns it, so it is not read back, and Terraform only sends it when it changes. Rotating or removing it keeps linked accounts. Prefer `clientSecretWo` to keep the secret out of Terraform state.
      */
     clientSecret?: pulumi.Input<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only client secret of your OAuth app. This value is not stored in Terraform state, so it must stay in the configuration. Requires Terraform 1.11+ and `clientSecretWoVersion`. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstreamOauthMode` is `preRegistered`. Set it to an empty string and increment `clientSecretWoVersion` to make the client public. Rotating or removing the secret keeps linked accounts.
+     */
+    clientSecretWo?: pulumi.Input<string | undefined>;
+    /**
+     * Version trigger for `clientSecretWo`. Increment this value to update the secret.
+     */
+    clientSecretWoVersion?: pulumi.Input<number | undefined>;
     /**
      * The upstream authorization server's issuer, such as `https://github.com/login/oauth` for the GitHub REST API. Set it when the upstream publishes no protected resource metadata (RFC 9728): Formal then reads the issuer's authorization server metadata directly. It must use https, have no query or fragment, and exactly match the issuer the metadata reports. When unset, the authorization server is discovered from the upstream itself. Not allowed when `upstreamOauthMode` is `none`.
      */
     issuer?: pulumi.Input<string | undefined>;
     /**
-     * Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstreamOauthMode` is `none`.
+     * Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstreamOauthMode` is `none`. Existing linked accounts keep the scopes they were granted; users get these scopes the next time they link.
      */
     requestedScopes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
@@ -245,7 +279,7 @@ export interface ResourceOauthSettingsArgs {
      */
     resourceId: pulumi.Input<string>;
     /**
-     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret` or `clientSecretWo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
      */
     upstreamOauthMode?: pulumi.Input<string | undefined>;
 }

@@ -44,7 +44,7 @@ export class DataDiscovery extends pulumi.CustomResource {
      */
     declare public readonly deletionPolicy: pulumi.Output<string>;
     /**
-     * Native user ID linked to this Data Discovery.
+     * Native user ID linked to this Data Discovery. Must be a `formal.NativeUserV3` ID if the resource has native users v3 enabled, and a `formal.NativeUser` ID otherwise.
      */
     declare public readonly nativeUserId: pulumi.Output<string>;
     /**
@@ -118,7 +118,7 @@ export interface DataDiscoveryState {
      */
     deletionPolicy?: pulumi.Input<string | undefined>;
     /**
-     * Native user ID linked to this Data Discovery.
+     * Native user ID linked to this Data Discovery. Must be a `formal.NativeUserV3` ID if the resource has native users v3 enabled, and a `formal.NativeUser` ID otherwise.
      */
     nativeUserId?: pulumi.Input<string | undefined>;
     /**
@@ -144,7 +144,7 @@ export interface DataDiscoveryArgs {
      */
     deletionPolicy: pulumi.Input<string>;
     /**
-     * Native user ID linked to this Data Discovery.
+     * Native user ID linked to this Data Discovery. Must be a `formal.NativeUserV3` ID if the resource has native users v3 enabled, and a `formal.NativeUser` ID otherwise.
      */
     nativeUserId: pulumi.Input<string>;
     /**

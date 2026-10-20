@@ -29,7 +29,7 @@ namespace Formal.Pulumi
         public Output<string> DeletionPolicy { get; private set; } = null!;
 
         /// <summary>
-        /// Native user ID linked to this Data Discovery.
+        /// Native user ID linked to this Data Discovery. Must be a `formal.NativeUserV3` ID if the resource has native users v3 enabled, and a `formal.NativeUser` ID otherwise.
         /// </summary>
         [Output("nativeUserId")]
         public Output<string> NativeUserId { get; private set; } = null!;
@@ -106,7 +106,7 @@ namespace Formal.Pulumi
         public Input<string> DeletionPolicy { get; set; } = null!;
 
         /// <summary>
-        /// Native user ID linked to this Data Discovery.
+        /// Native user ID linked to this Data Discovery. Must be a `formal.NativeUserV3` ID if the resource has native users v3 enabled, and a `formal.NativeUser` ID otherwise.
         /// </summary>
         [Input("nativeUserId", required: true)]
         public Input<string> NativeUserId { get; set; } = null!;
@@ -150,7 +150,7 @@ namespace Formal.Pulumi
         public Input<string>? DeletionPolicy { get; set; }
 
         /// <summary>
-        /// Native user ID linked to this Data Discovery.
+        /// Native user ID linked to this Data Discovery. Must be a `formal.NativeUserV3` ID if the resource has native users v3 enabled, and a `formal.NativeUser` ID otherwise.
         /// </summary>
         [Input("nativeUserId")]
         public Input<string>? NativeUserId { get; set; }
