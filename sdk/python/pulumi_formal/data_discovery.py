@@ -28,7 +28,7 @@ class DataDiscoveryArgs:
         The set of arguments for constructing a DataDiscovery resource.
 
         :param pulumi.Input[_builtins.str] deletion_policy: Deletion policy of the Data Discovery. Possible values: `delete`, `mark_for_deletion`.
-        :param pulumi.Input[_builtins.str] native_user_id: Native user ID linked to this Data Discovery.
+        :param pulumi.Input[_builtins.str] native_user_id: Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID linked to this Data Discovery.
         :param pulumi.Input[_builtins.str] schedule: Schedule at which the Data Discovery will be executed. Possible values: `6h`, `12h`, `18h`, `24h` or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.
         :param pulumi.Input[_builtins.str] path: Path of the inventory object.
@@ -56,7 +56,7 @@ class DataDiscoveryArgs:
     @pulumi.getter(name="nativeUserId")
     def native_user_id(self) -> pulumi.Input[_builtins.str]:
         """
-        Native user ID linked to this Data Discovery.
+        Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
         """
         return pulumi.get(self, "native_user_id")
 
@@ -115,7 +115,7 @@ class _DataDiscoveryState:
 
         :param pulumi.Input[_builtins.int] created_at: Creation time of the Data Discovery.
         :param pulumi.Input[_builtins.str] deletion_policy: Deletion policy of the Data Discovery. Possible values: `delete`, `mark_for_deletion`.
-        :param pulumi.Input[_builtins.str] native_user_id: Native user ID linked to this Data Discovery.
+        :param pulumi.Input[_builtins.str] native_user_id: Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
         :param pulumi.Input[_builtins.str] path: Path of the inventory object.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID linked to this Data Discovery.
         :param pulumi.Input[_builtins.str] schedule: Schedule at which the Data Discovery will be executed. Possible values: `6h`, `12h`, `18h`, `24h` or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.
@@ -161,7 +161,7 @@ class _DataDiscoveryState:
     @pulumi.getter(name="nativeUserId")
     def native_user_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Native user ID linked to this Data Discovery.
+        Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
         """
         return pulumi.get(self, "native_user_id")
 
@@ -225,7 +225,7 @@ class DataDiscovery(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] deletion_policy: Deletion policy of the Data Discovery. Possible values: `delete`, `mark_for_deletion`.
-        :param pulumi.Input[_builtins.str] native_user_id: Native user ID linked to this Data Discovery.
+        :param pulumi.Input[_builtins.str] native_user_id: Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
         :param pulumi.Input[_builtins.str] path: Path of the inventory object.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID linked to this Data Discovery.
         :param pulumi.Input[_builtins.str] schedule: Schedule at which the Data Discovery will be executed. Possible values: `6h`, `12h`, `18h`, `24h` or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.
@@ -308,7 +308,7 @@ class DataDiscovery(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.int] created_at: Creation time of the Data Discovery.
         :param pulumi.Input[_builtins.str] deletion_policy: Deletion policy of the Data Discovery. Possible values: `delete`, `mark_for_deletion`.
-        :param pulumi.Input[_builtins.str] native_user_id: Native user ID linked to this Data Discovery.
+        :param pulumi.Input[_builtins.str] native_user_id: Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
         :param pulumi.Input[_builtins.str] path: Path of the inventory object.
         :param pulumi.Input[_builtins.str] resource_id: Resource ID linked to this Data Discovery.
         :param pulumi.Input[_builtins.str] schedule: Schedule at which the Data Discovery will be executed. Possible values: `6h`, `12h`, `18h`, `24h` or a valid cron expression, for example `0 4,16 * * *` to run daily at 04:00 and 16:00 UTC.
@@ -345,7 +345,7 @@ class DataDiscovery(pulumi.CustomResource):
     @pulumi.getter(name="nativeUserId")
     def native_user_id(self) -> pulumi.Output[_builtins.str]:
         """
-        Native user ID linked to this Data Discovery.
+        Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
         """
         return pulumi.get(self, "native_user_id")
 

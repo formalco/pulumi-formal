@@ -20,7 +20,7 @@ type DataDiscovery struct {
 	CreatedAt pulumi.IntOutput `pulumi:"createdAt"`
 	// Deletion policy of the Data Discovery. Possible values: `delete`, `markForDeletion`.
 	DeletionPolicy pulumi.StringOutput `pulumi:"deletionPolicy"`
-	// Native user ID linked to this Data Discovery.
+	// Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
 	NativeUserId pulumi.StringOutput `pulumi:"nativeUserId"`
 	// Path of the inventory object.
 	Path pulumi.StringPtrOutput `pulumi:"path"`
@@ -76,7 +76,7 @@ type dataDiscoveryState struct {
 	CreatedAt *int `pulumi:"createdAt"`
 	// Deletion policy of the Data Discovery. Possible values: `delete`, `markForDeletion`.
 	DeletionPolicy *string `pulumi:"deletionPolicy"`
-	// Native user ID linked to this Data Discovery.
+	// Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
 	NativeUserId *string `pulumi:"nativeUserId"`
 	// Path of the inventory object.
 	Path *string `pulumi:"path"`
@@ -91,7 +91,7 @@ type DataDiscoveryState struct {
 	CreatedAt pulumi.IntPtrInput
 	// Deletion policy of the Data Discovery. Possible values: `delete`, `markForDeletion`.
 	DeletionPolicy pulumi.StringPtrInput
-	// Native user ID linked to this Data Discovery.
+	// Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
 	NativeUserId pulumi.StringPtrInput
 	// Path of the inventory object.
 	Path pulumi.StringPtrInput
@@ -108,7 +108,7 @@ func (DataDiscoveryState) ElementType() reflect.Type {
 type dataDiscoveryArgs struct {
 	// Deletion policy of the Data Discovery. Possible values: `delete`, `markForDeletion`.
 	DeletionPolicy string `pulumi:"deletionPolicy"`
-	// Native user ID linked to this Data Discovery.
+	// Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
 	NativeUserId string `pulumi:"nativeUserId"`
 	// Path of the inventory object.
 	Path *string `pulumi:"path"`
@@ -122,7 +122,7 @@ type dataDiscoveryArgs struct {
 type DataDiscoveryArgs struct {
 	// Deletion policy of the Data Discovery. Possible values: `delete`, `markForDeletion`.
 	DeletionPolicy pulumi.StringInput
-	// Native user ID linked to this Data Discovery.
+	// Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
 	NativeUserId pulumi.StringInput
 	// Path of the inventory object.
 	Path pulumi.StringPtrInput
@@ -229,7 +229,7 @@ func (o DataDiscoveryOutput) DeletionPolicy() pulumi.StringOutput {
 	return o.ApplyT(func(v *DataDiscovery) pulumi.StringOutput { return v.DeletionPolicy }).(pulumi.StringOutput)
 }
 
-// Native user ID linked to this Data Discovery.
+// Native user ID linked to this Data Discovery. Must be a `NativeUserV3` ID if the resource has native users v3 enabled, and a `NativeUser` ID otherwise.
 func (o DataDiscoveryOutput) NativeUserId() pulumi.StringOutput {
 	return o.ApplyT(func(v *DataDiscovery) pulumi.StringOutput { return v.NativeUserId }).(pulumi.StringOutput)
 }
