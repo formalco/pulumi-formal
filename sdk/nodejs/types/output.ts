@@ -482,7 +482,7 @@ export interface LogConfigurationRequest {
     /**
      * SQL logging configuration for requests.
      */
-    sql?: outputs.LogConfigurationRequestSql;
+    sql: outputs.LogConfigurationRequestSql;
 }
 
 export interface LogConfigurationRequestSql {

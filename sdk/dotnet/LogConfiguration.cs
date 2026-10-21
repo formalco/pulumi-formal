@@ -62,7 +62,7 @@ namespace Formal.Pulumi
         /// Stream logging configuration.
         /// </summary>
         [Output("stream")]
-        public Output<Outputs.LogConfigurationStream?> Stream { get; private set; } = null!;
+        public Output<Outputs.LogConfigurationStream> Stream { get; private set; } = null!;
 
         /// <summary>
         /// Last update time.
