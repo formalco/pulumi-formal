@@ -711,7 +711,15 @@
             "type": "object",
             "required": [
                 "encrypt"
-            ]
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "encrypt",
+                        "sql"
+                    ]
+                }
+            }
         },
         "formal:index/LogConfigurationRequestSql:LogConfigurationRequestSql": {
             "properties": {
@@ -4031,6 +4039,7 @@
                 "request",
                 "response",
                 "scope",
+                "stream",
                 "updatedAt"
             ],
             "inputProperties": {
