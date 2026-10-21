@@ -68,7 +68,7 @@ export class LogConfiguration extends pulumi.CustomResource {
     /**
      * Stream logging configuration.
      */
-    declare public readonly stream: pulumi.Output<outputs.LogConfigurationStream | undefined>;
+    declare public readonly stream: pulumi.Output<outputs.LogConfigurationStream>;
     /**
      * Last update time.
      */

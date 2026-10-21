@@ -482,7 +482,7 @@ class LogConfiguration(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter
-    def stream(self) -> pulumi.Output[Optional['outputs.LogConfigurationStream']]:
+    def stream(self) -> pulumi.Output['outputs.LogConfigurationStream']:
         """
         Stream logging configuration.
         """

@@ -31,7 +31,7 @@ type LogConfiguration struct {
 	// Session logging configuration.
 	Session LogConfigurationSessionPtrOutput `pulumi:"session"`
 	// Stream logging configuration.
-	Stream LogConfigurationStreamPtrOutput `pulumi:"stream"`
+	Stream LogConfigurationStreamOutput `pulumi:"stream"`
 	// Last update time.
 	UpdatedAt pulumi.StringOutput `pulumi:"updatedAt"`
 }
@@ -278,8 +278,8 @@ func (o LogConfigurationOutput) Session() LogConfigurationSessionPtrOutput {
 }
 
 // Stream logging configuration.
-func (o LogConfigurationOutput) Stream() LogConfigurationStreamPtrOutput {
-	return o.ApplyT(func(v *LogConfiguration) LogConfigurationStreamPtrOutput { return v.Stream }).(LogConfigurationStreamPtrOutput)
+func (o LogConfigurationOutput) Stream() LogConfigurationStreamOutput {
+	return o.ApplyT(func(v *LogConfiguration) LogConfigurationStreamOutput { return v.Stream }).(LogConfigurationStreamOutput)
 }
 
 // Last update time.
