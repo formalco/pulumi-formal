@@ -231,9 +231,21 @@
                     "type": "string",
                     "description": "Display name of the field.\n"
                 },
+                "optional": {
+                    "type": "boolean",
+                    "description": "Whether the field can be left empty.\n"
+                },
                 "type": {
                     "type": "string",
                     "description": "Field type.\n"
+                },
+                "validation": {
+                    "$ref": "#/types/formal:index/FormFieldValidation:FormFieldValidation",
+                    "description": "Rule checked when the form is submitted.\n"
+                },
+                "visibleIf": {
+                    "type": "string",
+                    "description": "CEL condition on earlier choice fields (e.g. \u003cspan pulumi-lang-nodejs=\"`fieldEnv \" pulumi-lang-dotnet=\"`FieldEnv \" pulumi-lang-go=\"`fieldEnv \" pulumi-lang-python=\"`field_env \" pulumi-lang-yaml=\"`fieldEnv \" pulumi-lang-java=\"`fieldEnv \" pulumi-lang-hcl=\"`field_env \"\u003e`fieldEnv \u003c/span\u003e== \"prod\"`). The field is shown only when true.\n"
                 }
             },
             "type": "object",
@@ -268,6 +280,10 @@
                 "value": {
                     "type": "string",
                     "description": "Option value.\n"
+                },
+                "visibleIf": {
+                    "type": "string",
+                    "description": "CEL condition on earlier choice fields. The option is offered only when true.\n"
                 }
             },
             "type": "object",
@@ -291,7 +307,7 @@
                     "additionalProperties": {
                         "type": "string"
                     },
-                    "description": "Optional payload for options retrieval.\n"
+                    "description": "Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_\u003cid\u003e }}`.\n"
                 },
                 "inputJson": {
                     "type": "string",
@@ -324,6 +340,22 @@
             "type": "object",
             "required": [
                 "name"
+            ]
+        },
+        "formal:index/FormFieldValidation:FormFieldValidation": {
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": "Error shown when the rule does not hold.\n"
+                },
+                "rule": {
+                    "type": "string",
+                    "description": "CEL expression that must be true (e.g. `field_ticket.matches(\"^INC-[0-9]+$\")`).\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "rule"
             ]
         },
         "formal:index/IntegrationBiMetabase:IntegrationBiMetabase": {
@@ -5120,7 +5152,7 @@
                 },
                 "workerRuntime": {
                     "type": "string",
-                    "description": "The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.\n"
+                    "description": "The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.\n"
                 },
                 "workerSchedule": {
                     "type": "string",
@@ -5165,7 +5197,7 @@
                 },
                 "workerRuntime": {
                     "type": "string",
-                    "description": "The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.\n"
+                    "description": "The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.\n"
                 },
                 "workerSchedule": {
                     "type": "string",
@@ -5217,7 +5249,7 @@
                     },
                     "workerRuntime": {
                         "type": "string",
-                        "description": "The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.\n"
+                        "description": "The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.\n"
                     },
                     "workerSchedule": {
                         "type": "string",
