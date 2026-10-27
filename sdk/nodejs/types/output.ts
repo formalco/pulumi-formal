@@ -92,9 +92,21 @@ export interface FormField {
      */
     name: string;
     /**
+     * Whether the field can be left empty.
+     */
+    optional?: boolean;
+    /**
      * Field type.
      */
     type: string;
+    /**
+     * Rule checked when the form is submitted.
+     */
+    validation?: outputs.FormFieldValidation;
+    /**
+     * CEL condition on earlier choice fields (e.g. `fieldEnv == "prod"`). The field is shown only when true.
+     */
+    visibleIf?: string;
 }
 
 export interface FormFieldConfig {
@@ -117,6 +129,10 @@ export interface FormFieldConfigOption {
      * Option value.
      */
     value: string;
+    /**
+     * CEL condition on earlier choice fields. The option is offered only when true.
+     */
+    visibleIf?: string;
 }
 
 export interface FormFieldConfigOptionsSource {
@@ -129,7 +145,7 @@ export interface FormFieldConfigOptionsSource {
      */
     command: outputs.FormFieldConfigOptionsSourceCommand;
     /**
-     * Optional payload for options retrieval.
+     * Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_<id> }}`.
      */
     input?: {[key: string]: string};
     /**
@@ -151,6 +167,17 @@ export interface FormFieldConfigOptionsSourceCommand {
      * Command name.
      */
     name: string;
+}
+
+export interface FormFieldValidation {
+    /**
+     * Error shown when the rule does not hold.
+     */
+    message?: string;
+    /**
+     * CEL expression that must be true (e.g. `field_ticket.matches("^INC-[0-9]+$")`).
+     */
+    rule: string;
 }
 
 export interface GetGroupsGroup {

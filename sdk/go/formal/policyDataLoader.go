@@ -32,7 +32,7 @@ type PolicyDataLoader struct {
 	UpdatedAt pulumi.StringOutput `pulumi:"updatedAt"`
 	// The code that will be executed to fetch and output the data.
 	WorkerCode pulumi.StringOutput `pulumi:"workerCode"`
-	// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+	// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
 	WorkerRuntime pulumi.StringOutput `pulumi:"workerRuntime"`
 	// Second-based 'cron' expression specifying when the data should be fetched. For example, use '*/10 * * * * *' to run the code every 10 seconds.
 	WorkerSchedule pulumi.StringOutput `pulumi:"workerSchedule"`
@@ -102,7 +102,7 @@ type policyDataLoaderState struct {
 	UpdatedAt *string `pulumi:"updatedAt"`
 	// The code that will be executed to fetch and output the data.
 	WorkerCode *string `pulumi:"workerCode"`
-	// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+	// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
 	WorkerRuntime *string `pulumi:"workerRuntime"`
 	// Second-based 'cron' expression specifying when the data should be fetched. For example, use '*/10 * * * * *' to run the code every 10 seconds.
 	WorkerSchedule *string `pulumi:"workerSchedule"`
@@ -125,7 +125,7 @@ type PolicyDataLoaderState struct {
 	UpdatedAt pulumi.StringPtrInput
 	// The code that will be executed to fetch and output the data.
 	WorkerCode pulumi.StringPtrInput
-	// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+	// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
 	WorkerRuntime pulumi.StringPtrInput
 	// Second-based 'cron' expression specifying when the data should be fetched. For example, use '*/10 * * * * *' to run the code every 10 seconds.
 	WorkerSchedule pulumi.StringPtrInput
@@ -148,7 +148,7 @@ type policyDataLoaderArgs struct {
 	TerminationProtection *bool `pulumi:"terminationProtection"`
 	// The code that will be executed to fetch and output the data.
 	WorkerCode string `pulumi:"workerCode"`
-	// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+	// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
 	WorkerRuntime string `pulumi:"workerRuntime"`
 	// Second-based 'cron' expression specifying when the data should be fetched. For example, use '*/10 * * * * *' to run the code every 10 seconds.
 	WorkerSchedule string `pulumi:"workerSchedule"`
@@ -168,7 +168,7 @@ type PolicyDataLoaderArgs struct {
 	TerminationProtection pulumi.BoolPtrInput
 	// The code that will be executed to fetch and output the data.
 	WorkerCode pulumi.StringInput
-	// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+	// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
 	WorkerRuntime pulumi.StringInput
 	// Second-based 'cron' expression specifying when the data should be fetched. For example, use '*/10 * * * * *' to run the code every 10 seconds.
 	WorkerSchedule pulumi.StringInput
@@ -301,7 +301,7 @@ func (o PolicyDataLoaderOutput) WorkerCode() pulumi.StringOutput {
 	return o.ApplyT(func(v *PolicyDataLoader) pulumi.StringOutput { return v.WorkerCode }).(pulumi.StringOutput)
 }
 
-// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
 func (o PolicyDataLoaderOutput) WorkerRuntime() pulumi.StringOutput {
 	return o.ApplyT(func(v *PolicyDataLoader) pulumi.StringOutput { return v.WorkerRuntime }).(pulumi.StringOutput)
 }

@@ -23,7 +23,7 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly Outputs.FormFieldConfigOptionsSourceCommand Command;
         /// <summary>
-        /// Optional payload for options retrieval.
+        /// Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_&lt;id&gt; }}`.
         /// </summary>
         public readonly ImmutableDictionary<string, string>? Input;
         /// <summary>

@@ -32,10 +32,28 @@ namespace Formal.Pulumi.Inputs
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
+        /// Whether the field can be left empty.
+        /// </summary>
+        [Input("optional")]
+        public Input<bool>? Optional { get; set; }
+
+        /// <summary>
         /// Field type.
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
+
+        /// <summary>
+        /// Rule checked when the form is submitted.
+        /// </summary>
+        [Input("validation")]
+        public Input<Inputs.FormFieldValidationGetArgs>? Validation { get; set; }
+
+        /// <summary>
+        /// CEL condition on earlier choice fields (e.g. `FieldEnv == "prod"`). The field is shown only when true.
+        /// </summary>
+        [Input("visibleIf")]
+        public Input<string>? VisibleIf { get; set; }
 
         public FormFieldGetArgs()
         {

@@ -65,7 +65,7 @@ namespace Formal.Pulumi
         public Output<string> WorkerCode { get; private set; } = null!;
 
         /// <summary>
-        /// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+        /// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
         /// </summary>
         [Output("workerRuntime")]
         public Output<string> WorkerRuntime { get; private set; } = null!;
@@ -160,7 +160,7 @@ namespace Formal.Pulumi
         public Input<string> WorkerCode { get; set; } = null!;
 
         /// <summary>
-        /// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+        /// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
         /// </summary>
         [Input("workerRuntime", required: true)]
         public Input<string> WorkerRuntime { get; set; } = null!;
@@ -228,7 +228,7 @@ namespace Formal.Pulumi
         public Input<string>? WorkerCode { get; set; }
 
         /// <summary>
-        /// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+        /// The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
         /// </summary>
         [Input("workerRuntime")]
         public Input<string>? WorkerRuntime { get; set; }

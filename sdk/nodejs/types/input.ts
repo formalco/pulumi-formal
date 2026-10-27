@@ -92,9 +92,21 @@ export interface FormField {
      */
     name: pulumi.Input<string>;
     /**
+     * Whether the field can be left empty.
+     */
+    optional?: pulumi.Input<boolean | undefined>;
+    /**
      * Field type.
      */
     type: pulumi.Input<string>;
+    /**
+     * Rule checked when the form is submitted.
+     */
+    validation?: pulumi.Input<inputs.FormFieldValidation | undefined>;
+    /**
+     * CEL condition on earlier choice fields (e.g. `fieldEnv == "prod"`). The field is shown only when true.
+     */
+    visibleIf?: pulumi.Input<string | undefined>;
 }
 
 export interface FormFieldConfig {
@@ -117,6 +129,10 @@ export interface FormFieldConfigOption {
      * Option value.
      */
     value: pulumi.Input<string>;
+    /**
+     * CEL condition on earlier choice fields. The option is offered only when true.
+     */
+    visibleIf?: pulumi.Input<string | undefined>;
 }
 
 export interface FormFieldConfigOptionsSource {
@@ -129,7 +145,7 @@ export interface FormFieldConfigOptionsSource {
      */
     command: pulumi.Input<inputs.FormFieldConfigOptionsSourceCommand>;
     /**
-     * Optional payload for options retrieval.
+     * Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_<id> }}`.
      */
     input?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
@@ -151,6 +167,17 @@ export interface FormFieldConfigOptionsSourceCommand {
      * Command name.
      */
     name: pulumi.Input<string>;
+}
+
+export interface FormFieldValidation {
+    /**
+     * Error shown when the rule does not hold.
+     */
+    message?: pulumi.Input<string | undefined>;
+    /**
+     * CEL expression that must be true (e.g. `field_ticket.matches("^INC-[0-9]+$")`).
+     */
+    rule: pulumi.Input<string>;
 }
 
 export interface IntegrationBiMetabase {

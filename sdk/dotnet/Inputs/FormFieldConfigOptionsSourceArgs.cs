@@ -29,7 +29,7 @@ namespace Formal.Pulumi.Inputs
         private InputMap<string>? _input;
 
         /// <summary>
-        /// Optional payload for options retrieval.
+        /// Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_&lt;id&gt; }}`.
         /// </summary>
         public InputMap<string> Input
         {
