@@ -39,6 +39,8 @@ __all__ = [
     'FormFieldConfigOptionsSourceArgsDict',
     'FormFieldConfigOptionsSourceCommandArgs',
     'FormFieldConfigOptionsSourceCommandArgsDict',
+    'FormFieldValidationArgs',
+    'FormFieldValidationArgsDict',
     'IntegrationBiMetabaseArgs',
     'IntegrationBiMetabaseArgsDict',
     'IntegrationCloudAwsArgs',
@@ -457,6 +459,18 @@ class FormFieldArgsDict(TypedDict):
     """
     Optional field configuration for select-like field types.
     """
+    optional: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether the field can be left empty.
+    """
+    validation: NotRequired[pulumi.Input[Optional['FormFieldValidationArgsDict']]]
+    """
+    Rule checked when the form is submitted.
+    """
+    visible_if: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    CEL condition on earlier choice fields (e.g. `field_env == "prod"`). The field is shown only when true.
+    """
 
 @pulumi.input_type
 class FormFieldArgs:
@@ -464,18 +478,30 @@ class FormFieldArgs:
                  id: pulumi.Input[_builtins.str],
                  name: pulumi.Input[_builtins.str],
                  type: pulumi.Input[_builtins.str],
-                 config: pulumi.Input[Optional['FormFieldConfigArgs']] = None):
+                 config: pulumi.Input[Optional['FormFieldConfigArgs']] = None,
+                 optional: pulumi.Input[Optional[_builtins.bool]] = None,
+                 validation: pulumi.Input[Optional['FormFieldValidationArgs']] = None,
+                 visible_if: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] id: Unique field identifier.
         :param pulumi.Input[_builtins.str] name: Display name of the field.
         :param pulumi.Input[_builtins.str] type: Field type.
         :param pulumi.Input['FormFieldConfigArgs'] config: Optional field configuration for select-like field types.
+        :param pulumi.Input[_builtins.bool] optional: Whether the field can be left empty.
+        :param pulumi.Input['FormFieldValidationArgs'] validation: Rule checked when the form is submitted.
+        :param pulumi.Input[_builtins.str] visible_if: CEL condition on earlier choice fields (e.g. `field_env == "prod"`). The field is shown only when true.
         """
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
         if config is not None:
             pulumi.set(__self__, "config", config)
+        if optional is not None:
+            pulumi.set(__self__, "optional", optional)
+        if validation is not None:
+            pulumi.set(__self__, "validation", validation)
+        if visible_if is not None:
+            pulumi.set(__self__, "visible_if", visible_if)
 
     @_builtins.property
     @pulumi.getter
@@ -524,6 +550,42 @@ class FormFieldArgs:
     @config.setter
     def config(self, value: pulumi.Input[Optional['FormFieldConfigArgs']]):
         pulumi.set(self, "config", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def optional(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether the field can be left empty.
+        """
+        return pulumi.get(self, "optional")
+
+    @optional.setter
+    def optional(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "optional", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def validation(self) -> pulumi.Input[Optional['FormFieldValidationArgs']]:
+        """
+        Rule checked when the form is submitted.
+        """
+        return pulumi.get(self, "validation")
+
+    @validation.setter
+    def validation(self, value: pulumi.Input[Optional['FormFieldValidationArgs']]):
+        pulumi.set(self, "validation", value)
+
+    @_builtins.property
+    @pulumi.getter(name="visibleIf")
+    def visible_if(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        CEL condition on earlier choice fields (e.g. `field_env == "prod"`). The field is shown only when true.
+        """
+        return pulumi.get(self, "visible_if")
+
+    @visible_if.setter
+    def visible_if(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "visible_if", value)
 
 
 class FormFieldConfigArgsDict(TypedDict):
@@ -584,18 +646,26 @@ class FormFieldConfigOptionArgsDict(TypedDict):
     """
     Option value.
     """
+    visible_if: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    CEL condition on earlier choice fields. The option is offered only when true.
+    """
 
 @pulumi.input_type
 class FormFieldConfigOptionArgs:
     def __init__(__self__, *,
                  label: pulumi.Input[_builtins.str],
-                 value: pulumi.Input[_builtins.str]):
+                 value: pulumi.Input[_builtins.str],
+                 visible_if: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] label: Option label.
         :param pulumi.Input[_builtins.str] value: Option value.
+        :param pulumi.Input[_builtins.str] visible_if: CEL condition on earlier choice fields. The option is offered only when true.
         """
         pulumi.set(__self__, "label", label)
         pulumi.set(__self__, "value", value)
+        if visible_if is not None:
+            pulumi.set(__self__, "visible_if", visible_if)
 
     @_builtins.property
     @pulumi.getter
@@ -621,6 +691,18 @@ class FormFieldConfigOptionArgs:
     def value(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "value", value)
 
+    @_builtins.property
+    @pulumi.getter(name="visibleIf")
+    def visible_if(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        CEL condition on earlier choice fields. The option is offered only when true.
+        """
+        return pulumi.get(self, "visible_if")
+
+    @visible_if.setter
+    def visible_if(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "visible_if", value)
+
 
 class FormFieldConfigOptionsSourceArgsDict(TypedDict):
     app: pulumi.Input[_builtins.str]
@@ -641,7 +723,7 @@ class FormFieldConfigOptionsSourceArgsDict(TypedDict):
     """
     input: NotRequired[pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]]
     """
-    Optional payload for options retrieval.
+    Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_<id> }}`.
     """
     input_json: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -662,7 +744,7 @@ class FormFieldConfigOptionsSourceArgs:
         :param pulumi.Input['FormFieldConfigOptionsSourceCommandArgs'] command: Command configuration for options retrieval.
         :param pulumi.Input[_builtins.str] machine_user_id: Machine user used to authenticate options retrieval.
         :param pulumi.Input[_builtins.str] transform: CEL expression that transforms the response into options.
-        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] input: Optional payload for options retrieval.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] input: Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_<id> }}`.
         :param pulumi.Input[_builtins.str] input_json: Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
         """
         pulumi.set(__self__, "app", app)
@@ -726,7 +808,7 @@ class FormFieldConfigOptionsSourceArgs:
     @pulumi.getter
     def input(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
         """
-        Optional payload for options retrieval.
+        Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_<id> }}`.
         """
         return pulumi.get(self, "input")
 
@@ -773,6 +855,54 @@ class FormFieldConfigOptionsSourceCommandArgs:
     @name.setter
     def name(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "name", value)
+
+
+class FormFieldValidationArgsDict(TypedDict):
+    rule: pulumi.Input[_builtins.str]
+    """
+    CEL expression that must be true (e.g. `field_ticket.matches("^INC-[0-9]+$")`).
+    """
+    message: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Error shown when the rule does not hold.
+    """
+
+@pulumi.input_type
+class FormFieldValidationArgs:
+    def __init__(__self__, *,
+                 rule: pulumi.Input[_builtins.str],
+                 message: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] rule: CEL expression that must be true (e.g. `field_ticket.matches("^INC-[0-9]+$")`).
+        :param pulumi.Input[_builtins.str] message: Error shown when the rule does not hold.
+        """
+        pulumi.set(__self__, "rule", rule)
+        if message is not None:
+            pulumi.set(__self__, "message", message)
+
+    @_builtins.property
+    @pulumi.getter
+    def rule(self) -> pulumi.Input[_builtins.str]:
+        """
+        CEL expression that must be true (e.g. `field_ticket.matches("^INC-[0-9]+$")`).
+        """
+        return pulumi.get(self, "rule")
+
+    @rule.setter
+    def rule(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "rule", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def message(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Error shown when the rule does not hold.
+        """
+        return pulumi.get(self, "message")
+
+    @message.setter
+    def message(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "message", value)
 
 
 class IntegrationBiMetabaseArgsDict(TypedDict):

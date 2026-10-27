@@ -68,7 +68,7 @@ export class PolicyDataLoader extends pulumi.CustomResource {
      */
     declare public readonly workerCode: pulumi.Output<string>;
     /**
-     * The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+     * The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
      */
     declare public readonly workerRuntime: pulumi.Output<string>;
     /**
@@ -172,7 +172,7 @@ export interface PolicyDataLoaderState {
      */
     workerCode?: pulumi.Input<string | undefined>;
     /**
-     * The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+     * The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
      */
     workerRuntime?: pulumi.Input<string | undefined>;
     /**
@@ -210,7 +210,7 @@ export interface PolicyDataLoaderArgs {
      */
     workerCode: pulumi.Input<string>;
     /**
-     * The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+     * The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
      */
     workerRuntime: pulumi.Input<string>;
     /**

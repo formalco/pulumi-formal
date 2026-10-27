@@ -34,7 +34,7 @@ class PolicyDataLoaderArgs:
         :param pulumi.Input[_builtins.str] key: The key to access the output data of this policy data loader.
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy data loader. It can be one of the following: 'draft' or 'active'.
         :param pulumi.Input[_builtins.str] worker_code: The code that will be executed to fetch and output the data.
-        :param pulumi.Input[_builtins.str] worker_runtime: The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+        :param pulumi.Input[_builtins.str] worker_runtime: The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
         :param pulumi.Input[_builtins.str] worker_schedule: Second-based 'cron' expression specifying when the data should be fetched. For example, use '*/10 * * * * *' to run the code every 10 seconds.
         :param pulumi.Input[_builtins.str] name: Friendly name for this policy data loader.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this policy data loader cannot be deleted.
@@ -102,7 +102,7 @@ class PolicyDataLoaderArgs:
     @pulumi.getter(name="workerRuntime")
     def worker_runtime(self) -> pulumi.Input[_builtins.str]:
         """
-        The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+        The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
         """
         return pulumi.get(self, "worker_runtime")
 
@@ -171,7 +171,7 @@ class _PolicyDataLoaderState:
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this policy data loader cannot be deleted.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         :param pulumi.Input[_builtins.str] worker_code: The code that will be executed to fetch and output the data.
-        :param pulumi.Input[_builtins.str] worker_runtime: The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+        :param pulumi.Input[_builtins.str] worker_runtime: The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
         :param pulumi.Input[_builtins.str] worker_schedule: Second-based 'cron' expression specifying when the data should be fetched. For example, use '*/10 * * * * *' to run the code every 10 seconds.
         """
         if created_at is not None:
@@ -295,7 +295,7 @@ class _PolicyDataLoaderState:
     @pulumi.getter(name="workerRuntime")
     def worker_runtime(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+        The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
         """
         return pulumi.get(self, "worker_runtime")
 
@@ -343,7 +343,7 @@ class PolicyDataLoader(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] status: Defines the current status of the policy data loader. It can be one of the following: 'draft' or 'active'.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this policy data loader cannot be deleted.
         :param pulumi.Input[_builtins.str] worker_code: The code that will be executed to fetch and output the data.
-        :param pulumi.Input[_builtins.str] worker_runtime: The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+        :param pulumi.Input[_builtins.str] worker_runtime: The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
         :param pulumi.Input[_builtins.str] worker_schedule: Second-based 'cron' expression specifying when the data should be fetched. For example, use '*/10 * * * * *' to run the code every 10 seconds.
         """
         ...
@@ -445,7 +445,7 @@ class PolicyDataLoader(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this policy data loader cannot be deleted.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         :param pulumi.Input[_builtins.str] worker_code: The code that will be executed to fetch and output the data.
-        :param pulumi.Input[_builtins.str] worker_runtime: The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+        :param pulumi.Input[_builtins.str] worker_runtime: The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
         :param pulumi.Input[_builtins.str] worker_schedule: Second-based 'cron' expression specifying when the data should be fetched. For example, use '*/10 * * * * *' to run the code every 10 seconds.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -532,7 +532,7 @@ class PolicyDataLoader(pulumi.CustomResource):
     @pulumi.getter(name="workerRuntime")
     def worker_runtime(self) -> pulumi.Output[_builtins.str]:
         """
-        The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs18.x'.
+        The execution environment for the code. It can be one of the following: 'python3.11' or 'nodejs24.x'.
         """
         return pulumi.get(self, "worker_runtime")
 

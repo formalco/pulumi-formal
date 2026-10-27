@@ -22,15 +22,22 @@ namespace Formal.Pulumi.Outputs
         /// Option value.
         /// </summary>
         public readonly string Value;
+        /// <summary>
+        /// CEL condition on earlier choice fields. The option is offered only when true.
+        /// </summary>
+        public readonly string? VisibleIf;
 
         [OutputConstructor]
         private FormFieldConfigOption(
             string label,
 
-            string value)
+            string value,
+
+            string? visibleIf)
         {
             Label = label;
             Value = value;
+            VisibleIf = visibleIf;
         }
     }
 }

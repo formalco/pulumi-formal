@@ -1090,8 +1090,14 @@ type FormField struct {
 	Id string `pulumi:"id"`
 	// Display name of the field.
 	Name string `pulumi:"name"`
+	// Whether the field can be left empty.
+	Optional *bool `pulumi:"optional"`
 	// Field type.
 	Type string `pulumi:"type"`
+	// Rule checked when the form is submitted.
+	Validation *FormFieldValidation `pulumi:"validation"`
+	// CEL condition on earlier choice fields (e.g. `fieldEnv == "prod"`). The field is shown only when true.
+	VisibleIf *string `pulumi:"visibleIf"`
 }
 
 // FormFieldInput is an input type that accepts FormFieldArgs and FormFieldOutput values.
@@ -1112,8 +1118,14 @@ type FormFieldArgs struct {
 	Id pulumi.StringInput `pulumi:"id"`
 	// Display name of the field.
 	Name pulumi.StringInput `pulumi:"name"`
+	// Whether the field can be left empty.
+	Optional pulumi.BoolPtrInput `pulumi:"optional"`
 	// Field type.
 	Type pulumi.StringInput `pulumi:"type"`
+	// Rule checked when the form is submitted.
+	Validation FormFieldValidationPtrInput `pulumi:"validation"`
+	// CEL condition on earlier choice fields (e.g. `fieldEnv == "prod"`). The field is shown only when true.
+	VisibleIf pulumi.StringPtrInput `pulumi:"visibleIf"`
 }
 
 func (FormFieldArgs) ElementType() reflect.Type {
@@ -1182,9 +1194,24 @@ func (o FormFieldOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v FormField) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Whether the field can be left empty.
+func (o FormFieldOutput) Optional() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v FormField) *bool { return v.Optional }).(pulumi.BoolPtrOutput)
+}
+
 // Field type.
 func (o FormFieldOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v FormField) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Rule checked when the form is submitted.
+func (o FormFieldOutput) Validation() FormFieldValidationPtrOutput {
+	return o.ApplyT(func(v FormField) *FormFieldValidation { return v.Validation }).(FormFieldValidationPtrOutput)
+}
+
+// CEL condition on earlier choice fields (e.g. `fieldEnv == "prod"`). The field is shown only when true.
+func (o FormFieldOutput) VisibleIf() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FormField) *string { return v.VisibleIf }).(pulumi.StringPtrOutput)
 }
 
 type FormFieldArrayOutput struct{ *pulumi.OutputState }
@@ -1368,6 +1395,8 @@ type FormFieldConfigOption struct {
 	Label string `pulumi:"label"`
 	// Option value.
 	Value string `pulumi:"value"`
+	// CEL condition on earlier choice fields. The option is offered only when true.
+	VisibleIf *string `pulumi:"visibleIf"`
 }
 
 // FormFieldConfigOptionInput is an input type that accepts FormFieldConfigOptionArgs and FormFieldConfigOptionOutput values.
@@ -1386,6 +1415,8 @@ type FormFieldConfigOptionArgs struct {
 	Label pulumi.StringInput `pulumi:"label"`
 	// Option value.
 	Value pulumi.StringInput `pulumi:"value"`
+	// CEL condition on earlier choice fields. The option is offered only when true.
+	VisibleIf pulumi.StringPtrInput `pulumi:"visibleIf"`
 }
 
 func (FormFieldConfigOptionArgs) ElementType() reflect.Type {
@@ -1449,6 +1480,11 @@ func (o FormFieldConfigOptionOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v FormFieldConfigOption) string { return v.Value }).(pulumi.StringOutput)
 }
 
+// CEL condition on earlier choice fields. The option is offered only when true.
+func (o FormFieldConfigOptionOutput) VisibleIf() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FormFieldConfigOption) *string { return v.VisibleIf }).(pulumi.StringPtrOutput)
+}
+
 type FormFieldConfigOptionArrayOutput struct{ *pulumi.OutputState }
 
 func (FormFieldConfigOptionArrayOutput) ElementType() reflect.Type {
@@ -1474,7 +1510,7 @@ type FormFieldConfigOptionsSource struct {
 	App string `pulumi:"app"`
 	// Command configuration for options retrieval.
 	Command FormFieldConfigOptionsSourceCommand `pulumi:"command"`
-	// Optional payload for options retrieval.
+	// Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_<id> }}`.
 	Input map[string]string `pulumi:"input"`
 	// Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
 	InputJson *string `pulumi:"inputJson"`
@@ -1500,7 +1536,7 @@ type FormFieldConfigOptionsSourceArgs struct {
 	App pulumi.StringInput `pulumi:"app"`
 	// Command configuration for options retrieval.
 	Command FormFieldConfigOptionsSourceCommandInput `pulumi:"command"`
-	// Optional payload for options retrieval.
+	// Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_<id> }}`.
 	Input pulumi.StringMapInput `pulumi:"input"`
 	// Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
 	InputJson pulumi.StringPtrInput `pulumi:"inputJson"`
@@ -1597,7 +1633,7 @@ func (o FormFieldConfigOptionsSourceOutput) Command() FormFieldConfigOptionsSour
 	return o.ApplyT(func(v FormFieldConfigOptionsSource) FormFieldConfigOptionsSourceCommand { return v.Command }).(FormFieldConfigOptionsSourceCommandOutput)
 }
 
-// Optional payload for options retrieval.
+// Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_<id> }}`.
 func (o FormFieldConfigOptionsSourceOutput) Input() pulumi.StringMapOutput {
 	return o.ApplyT(func(v FormFieldConfigOptionsSource) map[string]string { return v.Input }).(pulumi.StringMapOutput)
 }
@@ -1661,7 +1697,7 @@ func (o FormFieldConfigOptionsSourcePtrOutput) Command() FormFieldConfigOptionsS
 	}).(FormFieldConfigOptionsSourceCommandPtrOutput)
 }
 
-// Optional payload for options retrieval.
+// Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_<id> }}`.
 func (o FormFieldConfigOptionsSourcePtrOutput) Input() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *FormFieldConfigOptionsSource) map[string]string {
 		if v == nil {
@@ -1835,6 +1871,162 @@ func (o FormFieldConfigOptionsSourceCommandPtrOutput) Name() pulumi.StringPtrOut
 			return nil
 		}
 		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+type FormFieldValidation struct {
+	// Error shown when the rule does not hold.
+	Message *string `pulumi:"message"`
+	// CEL expression that must be true (e.g. `field_ticket.matches("^INC-[0-9]+$")`).
+	Rule string `pulumi:"rule"`
+}
+
+// FormFieldValidationInput is an input type that accepts FormFieldValidationArgs and FormFieldValidationOutput values.
+// You can construct a concrete instance of `FormFieldValidationInput` via:
+//
+//	FormFieldValidationArgs{...}
+type FormFieldValidationInput interface {
+	pulumi.Input
+
+	ToFormFieldValidationOutput() FormFieldValidationOutput
+	ToFormFieldValidationOutputWithContext(context.Context) FormFieldValidationOutput
+}
+
+type FormFieldValidationArgs struct {
+	// Error shown when the rule does not hold.
+	Message pulumi.StringPtrInput `pulumi:"message"`
+	// CEL expression that must be true (e.g. `field_ticket.matches("^INC-[0-9]+$")`).
+	Rule pulumi.StringInput `pulumi:"rule"`
+}
+
+func (FormFieldValidationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormFieldValidation)(nil)).Elem()
+}
+
+func (i FormFieldValidationArgs) ToFormFieldValidationOutput() FormFieldValidationOutput {
+	return i.ToFormFieldValidationOutputWithContext(context.Background())
+}
+
+func (i FormFieldValidationArgs) ToFormFieldValidationOutputWithContext(ctx context.Context) FormFieldValidationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldValidationOutput)
+}
+
+func (i FormFieldValidationArgs) ToFormFieldValidationPtrOutput() FormFieldValidationPtrOutput {
+	return i.ToFormFieldValidationPtrOutputWithContext(context.Background())
+}
+
+func (i FormFieldValidationArgs) ToFormFieldValidationPtrOutputWithContext(ctx context.Context) FormFieldValidationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldValidationOutput).ToFormFieldValidationPtrOutputWithContext(ctx)
+}
+
+// FormFieldValidationPtrInput is an input type that accepts FormFieldValidationArgs, FormFieldValidationPtr and FormFieldValidationPtrOutput values.
+// You can construct a concrete instance of `FormFieldValidationPtrInput` via:
+//
+//	        FormFieldValidationArgs{...}
+//
+//	or:
+//
+//	        nil
+type FormFieldValidationPtrInput interface {
+	pulumi.Input
+
+	ToFormFieldValidationPtrOutput() FormFieldValidationPtrOutput
+	ToFormFieldValidationPtrOutputWithContext(context.Context) FormFieldValidationPtrOutput
+}
+
+type formFieldValidationPtrType FormFieldValidationArgs
+
+func FormFieldValidationPtr(v *FormFieldValidationArgs) FormFieldValidationPtrInput {
+	return (*formFieldValidationPtrType)(v)
+}
+
+func (*formFieldValidationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FormFieldValidation)(nil)).Elem()
+}
+
+func (i *formFieldValidationPtrType) ToFormFieldValidationPtrOutput() FormFieldValidationPtrOutput {
+	return i.ToFormFieldValidationPtrOutputWithContext(context.Background())
+}
+
+func (i *formFieldValidationPtrType) ToFormFieldValidationPtrOutputWithContext(ctx context.Context) FormFieldValidationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FormFieldValidationPtrOutput)
+}
+
+type FormFieldValidationOutput struct{ *pulumi.OutputState }
+
+func (FormFieldValidationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FormFieldValidation)(nil)).Elem()
+}
+
+func (o FormFieldValidationOutput) ToFormFieldValidationOutput() FormFieldValidationOutput {
+	return o
+}
+
+func (o FormFieldValidationOutput) ToFormFieldValidationOutputWithContext(ctx context.Context) FormFieldValidationOutput {
+	return o
+}
+
+func (o FormFieldValidationOutput) ToFormFieldValidationPtrOutput() FormFieldValidationPtrOutput {
+	return o.ToFormFieldValidationPtrOutputWithContext(context.Background())
+}
+
+func (o FormFieldValidationOutput) ToFormFieldValidationPtrOutputWithContext(ctx context.Context) FormFieldValidationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FormFieldValidation) *FormFieldValidation {
+		return &v
+	}).(FormFieldValidationPtrOutput)
+}
+
+// Error shown when the rule does not hold.
+func (o FormFieldValidationOutput) Message() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FormFieldValidation) *string { return v.Message }).(pulumi.StringPtrOutput)
+}
+
+// CEL expression that must be true (e.g. `field_ticket.matches("^INC-[0-9]+$")`).
+func (o FormFieldValidationOutput) Rule() pulumi.StringOutput {
+	return o.ApplyT(func(v FormFieldValidation) string { return v.Rule }).(pulumi.StringOutput)
+}
+
+type FormFieldValidationPtrOutput struct{ *pulumi.OutputState }
+
+func (FormFieldValidationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FormFieldValidation)(nil)).Elem()
+}
+
+func (o FormFieldValidationPtrOutput) ToFormFieldValidationPtrOutput() FormFieldValidationPtrOutput {
+	return o
+}
+
+func (o FormFieldValidationPtrOutput) ToFormFieldValidationPtrOutputWithContext(ctx context.Context) FormFieldValidationPtrOutput {
+	return o
+}
+
+func (o FormFieldValidationPtrOutput) Elem() FormFieldValidationOutput {
+	return o.ApplyT(func(v *FormFieldValidation) FormFieldValidation {
+		if v != nil {
+			return *v
+		}
+		var ret FormFieldValidation
+		return ret
+	}).(FormFieldValidationOutput)
+}
+
+// Error shown when the rule does not hold.
+func (o FormFieldValidationPtrOutput) Message() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FormFieldValidation) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Message
+	}).(pulumi.StringPtrOutput)
+}
+
+// CEL expression that must be true (e.g. `field_ticket.matches("^INC-[0-9]+$")`).
+func (o FormFieldValidationPtrOutput) Rule() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FormFieldValidation) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Rule
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -10594,6 +10786,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldConfigOptionsSourcePtrInput)(nil)).Elem(), FormFieldConfigOptionsSourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldConfigOptionsSourceCommandInput)(nil)).Elem(), FormFieldConfigOptionsSourceCommandArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldConfigOptionsSourceCommandPtrInput)(nil)).Elem(), FormFieldConfigOptionsSourceCommandArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldValidationInput)(nil)).Elem(), FormFieldValidationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FormFieldValidationPtrInput)(nil)).Elem(), FormFieldValidationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationBiMetabaseInput)(nil)).Elem(), IntegrationBiMetabaseArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationBiMetabasePtrInput)(nil)).Elem(), IntegrationBiMetabaseArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationCloudAwsInput)(nil)).Elem(), IntegrationCloudAwsArgs{})
@@ -10718,6 +10912,8 @@ func init() {
 	pulumi.RegisterOutputType(FormFieldConfigOptionsSourcePtrOutput{})
 	pulumi.RegisterOutputType(FormFieldConfigOptionsSourceCommandOutput{})
 	pulumi.RegisterOutputType(FormFieldConfigOptionsSourceCommandPtrOutput{})
+	pulumi.RegisterOutputType(FormFieldValidationOutput{})
+	pulumi.RegisterOutputType(FormFieldValidationPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationBiMetabaseOutput{})
 	pulumi.RegisterOutputType(IntegrationBiMetabasePtrOutput{})
 	pulumi.RegisterOutputType(IntegrationCloudAwsOutput{})

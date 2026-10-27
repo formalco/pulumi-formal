@@ -27,9 +27,21 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
+        /// Whether the field can be left empty.
+        /// </summary>
+        public readonly bool? Optional;
+        /// <summary>
         /// Field type.
         /// </summary>
         public readonly string Type;
+        /// <summary>
+        /// Rule checked when the form is submitted.
+        /// </summary>
+        public readonly Outputs.FormFieldValidation? Validation;
+        /// <summary>
+        /// CEL condition on earlier choice fields (e.g. `FieldEnv == "prod"`). The field is shown only when true.
+        /// </summary>
+        public readonly string? VisibleIf;
 
         [OutputConstructor]
         private FormField(
@@ -39,12 +51,21 @@ namespace Formal.Pulumi.Outputs
 
             string name,
 
-            string type)
+            bool? optional,
+
+            string type,
+
+            Outputs.FormFieldValidation? validation,
+
+            string? visibleIf)
         {
             Config = config;
             Id = id;
             Name = name;
+            Optional = optional;
             Type = type;
+            Validation = validation;
+            VisibleIf = visibleIf;
         }
     }
 }

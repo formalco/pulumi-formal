@@ -25,6 +25,12 @@ namespace Formal.Pulumi.Inputs
         [Input("value", required: true)]
         public Input<string> Value { get; set; } = null!;
 
+        /// <summary>
+        /// CEL condition on earlier choice fields. The option is offered only when true.
+        /// </summary>
+        [Input("visibleIf")]
+        public Input<string>? VisibleIf { get; set; }
+
         public FormFieldConfigOptionArgs()
         {
         }

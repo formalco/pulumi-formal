@@ -28,6 +28,7 @@ __all__ = [
     'FormFieldConfigOption',
     'FormFieldConfigOptionsSource',
     'FormFieldConfigOptionsSourceCommand',
+    'FormFieldValidation',
     'IntegrationBiMetabase',
     'IntegrationCloudAws',
     'IntegrationCloudAzure',
@@ -359,22 +360,51 @@ class ConnectorAiProviderOpenai(dict):
 
 @pulumi.output_type
 class FormField(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "visibleIf":
+            suggest = "visible_if"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FormField. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FormField.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FormField.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  id: _builtins.str,
                  name: _builtins.str,
                  type: _builtins.str,
-                 config: Optional['outputs.FormFieldConfig'] = None):
+                 config: Optional['outputs.FormFieldConfig'] = None,
+                 optional: Optional[_builtins.bool] = None,
+                 validation: Optional['outputs.FormFieldValidation'] = None,
+                 visible_if: Optional[_builtins.str] = None):
         """
         :param _builtins.str id: Unique field identifier.
         :param _builtins.str name: Display name of the field.
         :param _builtins.str type: Field type.
         :param 'FormFieldConfigArgs' config: Optional field configuration for select-like field types.
+        :param _builtins.bool optional: Whether the field can be left empty.
+        :param 'FormFieldValidationArgs' validation: Rule checked when the form is submitted.
+        :param _builtins.str visible_if: CEL condition on earlier choice fields (e.g. `field_env == "prod"`). The field is shown only when true.
         """
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
         if config is not None:
             pulumi.set(__self__, "config", config)
+        if optional is not None:
+            pulumi.set(__self__, "optional", optional)
+        if validation is not None:
+            pulumi.set(__self__, "validation", validation)
+        if visible_if is not None:
+            pulumi.set(__self__, "visible_if", visible_if)
 
     @_builtins.property
     @pulumi.getter
@@ -407,6 +437,30 @@ class FormField(dict):
         Optional field configuration for select-like field types.
         """
         return pulumi.get(self, "config")
+
+    @_builtins.property
+    @pulumi.getter
+    def optional(self) -> Optional[_builtins.bool]:
+        """
+        Whether the field can be left empty.
+        """
+        return pulumi.get(self, "optional")
+
+    @_builtins.property
+    @pulumi.getter
+    def validation(self) -> Optional['outputs.FormFieldValidation']:
+        """
+        Rule checked when the form is submitted.
+        """
+        return pulumi.get(self, "validation")
+
+    @_builtins.property
+    @pulumi.getter(name="visibleIf")
+    def visible_if(self) -> Optional[_builtins.str]:
+        """
+        CEL condition on earlier choice fields (e.g. `field_env == "prod"`). The field is shown only when true.
+        """
+        return pulumi.get(self, "visible_if")
 
 
 @pulumi.output_type
@@ -459,15 +513,36 @@ class FormFieldConfig(dict):
 
 @pulumi.output_type
 class FormFieldConfigOption(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "visibleIf":
+            suggest = "visible_if"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FormFieldConfigOption. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FormFieldConfigOption.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FormFieldConfigOption.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  label: _builtins.str,
-                 value: _builtins.str):
+                 value: _builtins.str,
+                 visible_if: Optional[_builtins.str] = None):
         """
         :param _builtins.str label: Option label.
         :param _builtins.str value: Option value.
+        :param _builtins.str visible_if: CEL condition on earlier choice fields. The option is offered only when true.
         """
         pulumi.set(__self__, "label", label)
         pulumi.set(__self__, "value", value)
+        if visible_if is not None:
+            pulumi.set(__self__, "visible_if", visible_if)
 
     @_builtins.property
     @pulumi.getter
@@ -484,6 +559,14 @@ class FormFieldConfigOption(dict):
         Option value.
         """
         return pulumi.get(self, "value")
+
+    @_builtins.property
+    @pulumi.getter(name="visibleIf")
+    def visible_if(self) -> Optional[_builtins.str]:
+        """
+        CEL condition on earlier choice fields. The option is offered only when true.
+        """
+        return pulumi.get(self, "visible_if")
 
 
 @pulumi.output_type
@@ -519,7 +602,7 @@ class FormFieldConfigOptionsSource(dict):
         :param 'FormFieldConfigOptionsSourceCommandArgs' command: Command configuration for options retrieval.
         :param _builtins.str machine_user_id: Machine user used to authenticate options retrieval.
         :param _builtins.str transform: CEL expression that transforms the response into options.
-        :param Mapping[str, _builtins.str] input: Optional payload for options retrieval.
+        :param Mapping[str, _builtins.str] input: Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_<id> }}`.
         :param _builtins.str input_json: Optional payload for options retrieval as a JSON object string. Use this when the payload contains non-string JSON values such as numbers, booleans, arrays, or nested objects. Mutually exclusive with input.
         """
         pulumi.set(__self__, "app", app)
@@ -567,7 +650,7 @@ class FormFieldConfigOptionsSource(dict):
     @pulumi.getter
     def input(self) -> Optional[Mapping[str, _builtins.str]]:
         """
-        Optional payload for options retrieval.
+        Optional payload for options retrieval. Supports `${{ query }}` and `${{ field_<id> }}`.
         """
         return pulumi.get(self, "input")
 
@@ -596,6 +679,36 @@ class FormFieldConfigOptionsSourceCommand(dict):
         Command name.
         """
         return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class FormFieldValidation(dict):
+    def __init__(__self__, *,
+                 rule: _builtins.str,
+                 message: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str rule: CEL expression that must be true (e.g. `field_ticket.matches("^INC-[0-9]+$")`).
+        :param _builtins.str message: Error shown when the rule does not hold.
+        """
+        pulumi.set(__self__, "rule", rule)
+        if message is not None:
+            pulumi.set(__self__, "message", message)
+
+    @_builtins.property
+    @pulumi.getter
+    def rule(self) -> _builtins.str:
+        """
+        CEL expression that must be true (e.g. `field_ticket.matches("^INC-[0-9]+$")`).
+        """
+        return pulumi.get(self, "rule")
+
+    @_builtins.property
+    @pulumi.getter
+    def message(self) -> Optional[_builtins.str]:
+        """
+        Error shown when the rule does not hold.
+        """
+        return pulumi.get(self, "message")
 
 
 @pulumi.output_type
