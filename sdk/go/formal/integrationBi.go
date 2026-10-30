@@ -20,7 +20,7 @@ type IntegrationBi struct {
 	Metabase IntegrationBiMetabasePtrOutput `pulumi:"metabase"`
 	// Friendly name for this app.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+	// Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
 	Sync pulumi.BoolOutput `pulumi:"sync"`
 }
 
@@ -61,7 +61,7 @@ type integrationBiState struct {
 	Metabase *IntegrationBiMetabase `pulumi:"metabase"`
 	// Friendly name for this app.
 	Name *string `pulumi:"name"`
-	// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+	// Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
 	Sync *bool `pulumi:"sync"`
 }
 
@@ -70,7 +70,7 @@ type IntegrationBiState struct {
 	Metabase IntegrationBiMetabasePtrInput
 	// Friendly name for this app.
 	Name pulumi.StringPtrInput
-	// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+	// Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
 	Sync pulumi.BoolPtrInput
 }
 
@@ -83,7 +83,7 @@ type integrationBiArgs struct {
 	Metabase *IntegrationBiMetabase `pulumi:"metabase"`
 	// Friendly name for this app.
 	Name *string `pulumi:"name"`
-	// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+	// Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
 	Sync bool `pulumi:"sync"`
 }
 
@@ -93,7 +93,7 @@ type IntegrationBiArgs struct {
 	Metabase IntegrationBiMetabasePtrInput
 	// Friendly name for this app.
 	Name pulumi.StringPtrInput
-	// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+	// Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
 	Sync pulumi.BoolInput
 }
 
@@ -194,7 +194,7 @@ func (o IntegrationBiOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationBi) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+// Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
 func (o IntegrationBiOutput) Sync() pulumi.BoolOutput {
 	return o.ApplyT(func(v *IntegrationBi) pulumi.BoolOutput { return v.Sync }).(pulumi.BoolOutput)
 }

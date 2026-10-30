@@ -29,7 +29,7 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+        /// Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         /// </summary>
         [Output("sync")]
         public Output<bool> Sync { get; private set; } = null!;
@@ -94,7 +94,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+        /// Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         /// </summary>
         [Input("sync", required: true)]
         public Input<bool> Sync { get; set; } = null!;
@@ -120,7 +120,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+        /// Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         /// </summary>
         [Input("sync")]
         public Input<bool>? Sync { get; set; }

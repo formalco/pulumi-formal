@@ -19,6 +19,8 @@ type LogConfiguration struct {
 	// When the log configuration was created.
 	CreatedAt pulumi.StringOutput `pulumi:"createdAt"`
 	// The ID of the encryption key to use for this log configuration.
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 	EncryptionKeyId pulumi.StringPtrOutput `pulumi:"encryptionKeyId"`
 	// The name of this log configuration.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -31,6 +33,8 @@ type LogConfiguration struct {
 	// Session logging configuration.
 	Session LogConfigurationSessionPtrOutput `pulumi:"session"`
 	// Stream logging configuration.
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 	Stream LogConfigurationStreamOutput `pulumi:"stream"`
 	// Last update time.
 	UpdatedAt pulumi.StringOutput `pulumi:"updatedAt"`
@@ -78,6 +82,8 @@ type logConfigurationState struct {
 	// When the log configuration was created.
 	CreatedAt *string `pulumi:"createdAt"`
 	// The ID of the encryption key to use for this log configuration.
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 	EncryptionKeyId *string `pulumi:"encryptionKeyId"`
 	// The name of this log configuration.
 	Name *string `pulumi:"name"`
@@ -90,6 +96,8 @@ type logConfigurationState struct {
 	// Session logging configuration.
 	Session *LogConfigurationSession `pulumi:"session"`
 	// Stream logging configuration.
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 	Stream *LogConfigurationStream `pulumi:"stream"`
 	// Last update time.
 	UpdatedAt *string `pulumi:"updatedAt"`
@@ -99,6 +107,8 @@ type LogConfigurationState struct {
 	// When the log configuration was created.
 	CreatedAt pulumi.StringPtrInput
 	// The ID of the encryption key to use for this log configuration.
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 	EncryptionKeyId pulumi.StringPtrInput
 	// The name of this log configuration.
 	Name pulumi.StringPtrInput
@@ -111,6 +121,8 @@ type LogConfigurationState struct {
 	// Session logging configuration.
 	Session LogConfigurationSessionPtrInput
 	// Stream logging configuration.
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 	Stream LogConfigurationStreamPtrInput
 	// Last update time.
 	UpdatedAt pulumi.StringPtrInput
@@ -122,6 +134,8 @@ func (LogConfigurationState) ElementType() reflect.Type {
 
 type logConfigurationArgs struct {
 	// The ID of the encryption key to use for this log configuration.
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 	EncryptionKeyId *string `pulumi:"encryptionKeyId"`
 	// The name of this log configuration.
 	Name *string `pulumi:"name"`
@@ -134,12 +148,16 @@ type logConfigurationArgs struct {
 	// Session logging configuration.
 	Session *LogConfigurationSession `pulumi:"session"`
 	// Stream logging configuration.
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 	Stream *LogConfigurationStream `pulumi:"stream"`
 }
 
 // The set of arguments for constructing a LogConfiguration resource.
 type LogConfigurationArgs struct {
 	// The ID of the encryption key to use for this log configuration.
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 	EncryptionKeyId pulumi.StringPtrInput
 	// The name of this log configuration.
 	Name pulumi.StringPtrInput
@@ -152,6 +170,8 @@ type LogConfigurationArgs struct {
 	// Session logging configuration.
 	Session LogConfigurationSessionPtrInput
 	// Stream logging configuration.
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 	Stream LogConfigurationStreamPtrInput
 }
 
@@ -248,6 +268,8 @@ func (o LogConfigurationOutput) CreatedAt() pulumi.StringOutput {
 }
 
 // The ID of the encryption key to use for this log configuration.
+//
+// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 func (o LogConfigurationOutput) EncryptionKeyId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LogConfiguration) pulumi.StringPtrOutput { return v.EncryptionKeyId }).(pulumi.StringPtrOutput)
 }
@@ -278,6 +300,8 @@ func (o LogConfigurationOutput) Session() LogConfigurationSessionPtrOutput {
 }
 
 // Stream logging configuration.
+//
+// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 func (o LogConfigurationOutput) Stream() LogConfigurationStreamOutput {
 	return o.ApplyT(func(v *LogConfiguration) LogConfigurationStreamOutput { return v.Stream }).(LogConfigurationStreamOutput)
 }

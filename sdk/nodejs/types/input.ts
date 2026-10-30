@@ -438,10 +438,14 @@ export interface IntegrationMdmKandji {
 export interface LogConfigurationRequest {
     /**
      * Whether to encrypt request payloads.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
-    encrypt: pulumi.Input<boolean>;
+    encrypt?: pulumi.Input<boolean | undefined>;
     /**
      * Maximum size of request payloads to log.
+     *
+     * @deprecated Log configuration payload truncation and SQL value stripping are deprecated. Use formal.LogSchema to truncate payloads or strip SQL values instead.
      */
     maxPayloadSize?: pulumi.Input<number | undefined>;
     /**
@@ -450,6 +454,8 @@ export interface LogConfigurationRequest {
     policyEvalInputRetention?: pulumi.Input<string | undefined>;
     /**
      * SQL logging configuration for requests.
+     *
+     * @deprecated Log configuration payload truncation and SQL value stripping are deprecated. Use formal.LogSchema to truncate payloads or strip SQL values instead.
      */
     sql?: pulumi.Input<inputs.LogConfigurationRequestSql | undefined>;
 }
@@ -457,21 +463,29 @@ export interface LogConfigurationRequest {
 export interface LogConfigurationRequestSql {
     /**
      * Whether to encrypt SQL queries in logs.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
-    encrypt: pulumi.Input<boolean>;
+    encrypt?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to obfuscate SQL queries in logs.
+     *
+     * @deprecated Log configuration payload truncation and SQL value stripping are deprecated. Use formal.LogSchema to truncate payloads or strip SQL values instead.
      */
-    stripValues: pulumi.Input<boolean>;
+    stripValues?: pulumi.Input<boolean | undefined>;
 }
 
 export interface LogConfigurationResponse {
     /**
      * Whether to encrypt response payloads.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
-    encrypt: pulumi.Input<boolean>;
+    encrypt?: pulumi.Input<boolean | undefined>;
     /**
      * Maximum size of response payloads to log.
+     *
+     * @deprecated Log configuration payload truncation and SQL value stripping are deprecated. Use formal.LogSchema to truncate payloads or strip SQL values instead.
      */
     maxPayloadSize?: pulumi.Input<number | undefined>;
     /**

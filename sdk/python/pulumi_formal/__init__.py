@@ -61,6 +61,7 @@ from .resource_tls_configuration import *
 from .satellite import *
 from .satellite_hostname import *
 from .satellite_link import *
+from .skill import *
 from .space import *
 from .user import *
 from .workflow import *
@@ -451,6 +452,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/satelliteLink:SatelliteLink": "SatelliteLink"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/skill",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/skill:Skill": "Skill"
   }
  },
  {

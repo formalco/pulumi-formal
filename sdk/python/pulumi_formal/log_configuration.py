@@ -43,11 +43,17 @@ class LogConfigurationArgs:
         pulumi.set(__self__, "response", response)
         pulumi.set(__self__, "scope", scope)
         if encryption_key_id is not None:
+            warnings.warn("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""", DeprecationWarning)
+            pulumi.log.warn("""encryption_key_id is deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
+        if encryption_key_id is not None:
             pulumi.set(__self__, "encryption_key_id", encryption_key_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if session is not None:
             pulumi.set(__self__, "session", session)
+        if stream is not None:
+            warnings.warn("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""", DeprecationWarning)
+            pulumi.log.warn("""stream is deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
         if stream is not None:
             pulumi.set(__self__, "stream", stream)
 
@@ -89,6 +95,7 @@ class LogConfigurationArgs:
 
     @_builtins.property
     @pulumi.getter(name="encryptionKeyId")
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
     def encryption_key_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the encryption key to use for this log configuration.
@@ -125,6 +132,7 @@ class LogConfigurationArgs:
 
     @_builtins.property
     @pulumi.getter
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
     def stream(self) -> pulumi.Input[Optional['LogConfigurationStreamArgs']]:
         """
         Stream logging configuration.
@@ -164,6 +172,9 @@ class _LogConfigurationState:
         if created_at is not None:
             pulumi.set(__self__, "created_at", created_at)
         if encryption_key_id is not None:
+            warnings.warn("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""", DeprecationWarning)
+            pulumi.log.warn("""encryption_key_id is deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
+        if encryption_key_id is not None:
             pulumi.set(__self__, "encryption_key_id", encryption_key_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
@@ -175,6 +186,9 @@ class _LogConfigurationState:
             pulumi.set(__self__, "scope", scope)
         if session is not None:
             pulumi.set(__self__, "session", session)
+        if stream is not None:
+            warnings.warn("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""", DeprecationWarning)
+            pulumi.log.warn("""stream is deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
         if stream is not None:
             pulumi.set(__self__, "stream", stream)
         if updated_at is not None:
@@ -194,6 +208,7 @@ class _LogConfigurationState:
 
     @_builtins.property
     @pulumi.getter(name="encryptionKeyId")
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
     def encryption_key_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the encryption key to use for this log configuration.
@@ -266,6 +281,7 @@ class _LogConfigurationState:
 
     @_builtins.property
     @pulumi.getter
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
     def stream(self) -> pulumi.Input[Optional['LogConfigurationStreamArgs']]:
         """
         Stream logging configuration.
@@ -434,6 +450,7 @@ class LogConfiguration(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="encryptionKeyId")
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
     def encryption_key_id(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
         The ID of the encryption key to use for this log configuration.
@@ -482,6 +499,7 @@ class LogConfiguration(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
     def stream(self) -> pulumi.Output['outputs.LogConfigurationStream']:
         """
         Stream logging configuration.

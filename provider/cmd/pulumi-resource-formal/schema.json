@@ -725,11 +725,13 @@
             "properties": {
                 "encrypt": {
                     "type": "boolean",
-                    "description": "Whether to encrypt request payloads.\n"
+                    "description": "Whether to encrypt request payloads.\n",
+                    "deprecationMessage": "Log configuration encryption is deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto encrypt log fields instead."
                 },
                 "maxPayloadSize": {
                     "type": "integer",
-                    "description": "Maximum size of request payloads to log.\n"
+                    "description": "Maximum size of request payloads to log.\n",
+                    "deprecationMessage": "Log configuration payload truncation and SQL value stripping are deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto truncate payloads or strip SQL values instead."
                 },
                 "policyEvalInputRetention": {
                     "type": "string",
@@ -737,17 +739,14 @@
                 },
                 "sql": {
                     "$ref": "#/types/formal:index/LogConfigurationRequestSql:LogConfigurationRequestSql",
-                    "description": "SQL logging configuration for requests.\n"
+                    "description": "SQL logging configuration for requests.\n",
+                    "deprecationMessage": "Log configuration payload truncation and SQL value stripping are deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto truncate payloads or strip SQL values instead."
                 }
             },
             "type": "object",
-            "required": [
-                "encrypt"
-            ],
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
-                        "encrypt",
                         "sql"
                     ]
                 }
@@ -757,38 +756,35 @@
             "properties": {
                 "encrypt": {
                     "type": "boolean",
-                    "description": "Whether to encrypt SQL queries in logs.\n"
+                    "description": "Whether to encrypt SQL queries in logs.\n",
+                    "deprecationMessage": "Log configuration encryption is deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto encrypt log fields instead."
                 },
                 "stripValues": {
                     "type": "boolean",
-                    "description": "Whether to obfuscate SQL queries in logs.\n"
+                    "description": "Whether to obfuscate SQL queries in logs.\n",
+                    "deprecationMessage": "Log configuration payload truncation and SQL value stripping are deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto truncate payloads or strip SQL values instead."
                 }
             },
-            "type": "object",
-            "required": [
-                "encrypt",
-                "stripValues"
-            ]
+            "type": "object"
         },
         "formal:index/LogConfigurationResponse:LogConfigurationResponse": {
             "properties": {
                 "encrypt": {
                     "type": "boolean",
-                    "description": "Whether to encrypt response payloads.\n"
+                    "description": "Whether to encrypt response payloads.\n",
+                    "deprecationMessage": "Log configuration encryption is deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto encrypt log fields instead."
                 },
                 "maxPayloadSize": {
                     "type": "integer",
-                    "description": "Maximum size of response payloads to log.\n"
+                    "description": "Maximum size of response payloads to log.\n",
+                    "deprecationMessage": "Log configuration payload truncation and SQL value stripping are deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto truncate payloads or strip SQL values instead."
                 },
                 "policyEvalInputRetention": {
                     "type": "string",
                     "description": "Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.\n"
                 }
             },
-            "type": "object",
-            "required": [
-                "encrypt"
-            ]
+            "type": "object"
         },
         "formal:index/LogConfigurationScope:LogConfigurationScope": {
             "properties": {
@@ -2899,7 +2895,7 @@
                 },
                 "sync": {
                     "type": "boolean",
-                    "description": "Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.\n"
+                    "description": "Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.\n"
                 }
             },
             "required": [
@@ -2919,7 +2915,7 @@
                 },
                 "sync": {
                     "type": "boolean",
-                    "description": "Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.\n",
+                    "description": "Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.\n",
                     "willReplaceOnChanges": true
                 }
             },
@@ -2941,7 +2937,7 @@
                     },
                     "sync": {
                         "type": "boolean",
-                        "description": "Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.\n",
+                        "description": "Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.\n",
                         "willReplaceOnChanges": true
                     }
                 },
@@ -4034,7 +4030,8 @@
                 },
                 "encryptionKeyId": {
                     "type": "string",
-                    "description": "The ID of the encryption key to use for this log configuration.\n"
+                    "description": "The ID of the encryption key to use for this log configuration.\n",
+                    "deprecationMessage": "Log configuration encryption is deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto encrypt log fields instead."
                 },
                 "name": {
                     "type": "string",
@@ -4058,7 +4055,8 @@
                 },
                 "stream": {
                     "$ref": "#/types/formal:index/LogConfigurationStream:LogConfigurationStream",
-                    "description": "Stream logging configuration.\n"
+                    "description": "Stream logging configuration.\n",
+                    "deprecationMessage": "Log configuration encryption is deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto encrypt log fields instead."
                 },
                 "updatedAt": {
                     "type": "string",
@@ -4077,7 +4075,8 @@
             "inputProperties": {
                 "encryptionKeyId": {
                     "type": "string",
-                    "description": "The ID of the encryption key to use for this log configuration.\n"
+                    "description": "The ID of the encryption key to use for this log configuration.\n",
+                    "deprecationMessage": "Log configuration encryption is deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto encrypt log fields instead."
                 },
                 "name": {
                     "type": "string",
@@ -4101,7 +4100,8 @@
                 },
                 "stream": {
                     "$ref": "#/types/formal:index/LogConfigurationStream:LogConfigurationStream",
-                    "description": "Stream logging configuration.\n"
+                    "description": "Stream logging configuration.\n",
+                    "deprecationMessage": "Log configuration encryption is deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto encrypt log fields instead."
                 }
             },
             "requiredInputs": [
@@ -4118,7 +4118,8 @@
                     },
                     "encryptionKeyId": {
                         "type": "string",
-                        "description": "The ID of the encryption key to use for this log configuration.\n"
+                        "description": "The ID of the encryption key to use for this log configuration.\n",
+                        "deprecationMessage": "Log configuration encryption is deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto encrypt log fields instead."
                     },
                     "name": {
                         "type": "string",
@@ -4142,7 +4143,8 @@
                     },
                     "stream": {
                         "$ref": "#/types/formal:index/LogConfigurationStream:LogConfigurationStream",
-                        "description": "Stream logging configuration.\n"
+                        "description": "Stream logging configuration.\n",
+                        "deprecationMessage": "Log configuration encryption is deprecated. Use\u003cspan pulumi-lang-nodejs=\" formal.LogSchema \" pulumi-lang-dotnet=\" formal.LogSchema \" pulumi-lang-go=\" LogSchema \" pulumi-lang-python=\" LogSchema \" pulumi-lang-yaml=\" formal.LogSchema \" pulumi-lang-java=\" formal.LogSchema \" pulumi-lang-hcl=\" formal_log_schema \"\u003e formal.LogSchema \u003c/span\u003eto encrypt log fields instead."
                     },
                     "updatedAt": {
                         "type": "string",
@@ -6373,6 +6375,57 @@
                     "updatedAt": {
                         "type": "string",
                         "description": "The timestamp when the satellite link was last updated.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "formal:index/skill:Skill": {
+            "description": "Registering a Skill in the Formal Catalog from its `SKILL.md`. Skill names are unique, and changing \u003cspan pulumi-lang-nodejs=\"`skillMd`\" pulumi-lang-dotnet=\"`SkillMd`\" pulumi-lang-go=\"`skillMd`\" pulumi-lang-python=\"`skill_md`\" pulumi-lang-yaml=\"`skillMd`\" pulumi-lang-java=\"`skillMd`\" pulumi-lang-hcl=\"`skill_md`\"\u003e`skillMd`\u003c/span\u003e replaces the skill.\n\n## Import\n\nThe `pulumi import` command can be used, for example:\n\nSkills are imported by name.\n\n```sh\n$ pulumi import formal:index/skill:Skill repo[\"release-notes/SKILL.md\"]' release-notes\n```\n\n",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "Description of the Skill, from the `SKILL.md` frontmatter.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the Skill, from the `SKILL.md` frontmatter.\n"
+                },
+                "skillMd": {
+                    "type": "string",
+                    "description": "Contents of the `SKILL.md` file, including its \u003cspan pulumi-lang-nodejs=\"`name`\" pulumi-lang-dotnet=\"`Name`\" pulumi-lang-go=\"`name`\" pulumi-lang-python=\"`name`\" pulumi-lang-yaml=\"`name`\" pulumi-lang-java=\"`name`\" pulumi-lang-hcl=\"`name`\"\u003e`name`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`description`\" pulumi-lang-dotnet=\"`Description`\" pulumi-lang-go=\"`description`\" pulumi-lang-python=\"`description`\" pulumi-lang-yaml=\"`description`\" pulumi-lang-java=\"`description`\" pulumi-lang-hcl=\"`description`\"\u003e`description`\u003c/span\u003e frontmatter. Formatting-only changes are ignored.\n"
+                }
+            },
+            "required": [
+                "description",
+                "name",
+                "skillMd"
+            ],
+            "inputProperties": {
+                "skillMd": {
+                    "type": "string",
+                    "description": "Contents of the `SKILL.md` file, including its \u003cspan pulumi-lang-nodejs=\"`name`\" pulumi-lang-dotnet=\"`Name`\" pulumi-lang-go=\"`name`\" pulumi-lang-python=\"`name`\" pulumi-lang-yaml=\"`name`\" pulumi-lang-java=\"`name`\" pulumi-lang-hcl=\"`name`\"\u003e`name`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`description`\" pulumi-lang-dotnet=\"`Description`\" pulumi-lang-go=\"`description`\" pulumi-lang-python=\"`description`\" pulumi-lang-yaml=\"`description`\" pulumi-lang-java=\"`description`\" pulumi-lang-hcl=\"`description`\"\u003e`description`\u003c/span\u003e frontmatter. Formatting-only changes are ignored.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "skillMd"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Skill resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the Skill, from the `SKILL.md` frontmatter.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the Skill, from the `SKILL.md` frontmatter.\n"
+                    },
+                    "skillMd": {
+                        "type": "string",
+                        "description": "Contents of the `SKILL.md` file, including its \u003cspan pulumi-lang-nodejs=\"`name`\" pulumi-lang-dotnet=\"`Name`\" pulumi-lang-go=\"`name`\" pulumi-lang-python=\"`name`\" pulumi-lang-yaml=\"`name`\" pulumi-lang-java=\"`name`\" pulumi-lang-hcl=\"`name`\"\u003e`name`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`description`\" pulumi-lang-dotnet=\"`Description`\" pulumi-lang-go=\"`description`\" pulumi-lang-python=\"`description`\" pulumi-lang-yaml=\"`description`\" pulumi-lang-java=\"`description`\" pulumi-lang-hcl=\"`description`\"\u003e`description`\u003c/span\u003e frontmatter. Formatting-only changes are ignored.\n",
+                        "willReplaceOnChanges": true
                     }
                 },
                 "type": "object"

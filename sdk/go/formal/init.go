@@ -115,6 +115,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &SatelliteHostname{}
 	case "formal:index/satelliteLink:SatelliteLink":
 		r = &SatelliteLink{}
+	case "formal:index/skill:Skill":
+		r = &Skill{}
 	case "formal:index/space:Space":
 		r = &Space{}
 	case "formal:index/user:User":
@@ -385,6 +387,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/satelliteLink",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/skill",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

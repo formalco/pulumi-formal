@@ -46,7 +46,7 @@ export class IntegrationBi extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
-     * Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+     * Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
      */
     declare public readonly sync: pulumi.Output<boolean>;
 
@@ -93,7 +93,7 @@ export interface IntegrationBiState {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+     * Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
      */
     sync?: pulumi.Input<boolean | undefined>;
 }
@@ -111,7 +111,7 @@ export interface IntegrationBiArgs {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+     * Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
      */
     sync: pulumi.Input<boolean>;
 }

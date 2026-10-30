@@ -16,14 +16,14 @@ namespace Formal.Pulumi.Inputs
         /// <summary>
         /// Whether to encrypt SQL queries in logs.
         /// </summary>
-        [Input("encrypt", required: true)]
-        public Input<bool> Encrypt { get; set; } = null!;
+        [Input("encrypt")]
+        public Input<bool>? Encrypt { get; set; }
 
         /// <summary>
         /// Whether to obfuscate SQL queries in logs.
         /// </summary>
-        [Input("stripValues", required: true)]
-        public Input<bool> StripValues { get; set; } = null!;
+        [Input("stripValues")]
+        public Input<bool>? StripValues { get; set; }
 
         public LogConfigurationRequestSqlGetArgs()
         {

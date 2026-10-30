@@ -17,7 +17,7 @@ namespace Formal.Pulumi.Outputs
         /// <summary>
         /// Whether to encrypt response payloads.
         /// </summary>
-        public readonly bool Encrypt;
+        public readonly bool? Encrypt;
         /// <summary>
         /// Maximum size of response payloads to log.
         /// </summary>
@@ -29,7 +29,7 @@ namespace Formal.Pulumi.Outputs
 
         [OutputConstructor]
         private LogConfigurationResponse(
-            bool encrypt,
+            bool? encrypt,
 
             int? maxPayloadSize,
 

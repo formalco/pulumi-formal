@@ -1702,7 +1702,7 @@ class LogConfigurationRequest(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 encrypt: _builtins.bool,
+                 encrypt: Optional[_builtins.bool] = None,
                  max_payload_size: Optional[_builtins.int] = None,
                  policy_eval_input_retention: Optional[_builtins.str] = None,
                  sql: Optional['outputs.LogConfigurationRequestSql'] = None):
@@ -1712,7 +1712,8 @@ class LogConfigurationRequest(dict):
         :param _builtins.str policy_eval_input_retention: Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         :param 'LogConfigurationRequestSqlArgs' sql: SQL logging configuration for requests.
         """
-        pulumi.set(__self__, "encrypt", encrypt)
+        if encrypt is not None:
+            pulumi.set(__self__, "encrypt", encrypt)
         if max_payload_size is not None:
             pulumi.set(__self__, "max_payload_size", max_payload_size)
         if policy_eval_input_retention is not None:
@@ -1722,7 +1723,8 @@ class LogConfigurationRequest(dict):
 
     @_builtins.property
     @pulumi.getter
-    def encrypt(self) -> _builtins.bool:
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
+    def encrypt(self) -> Optional[_builtins.bool]:
         """
         Whether to encrypt request payloads.
         """
@@ -1730,6 +1732,7 @@ class LogConfigurationRequest(dict):
 
     @_builtins.property
     @pulumi.getter(name="maxPayloadSize")
+    @_utilities.deprecated("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
     def max_payload_size(self) -> Optional[_builtins.int]:
         """
         Maximum size of request payloads to log.
@@ -1746,6 +1749,7 @@ class LogConfigurationRequest(dict):
 
     @_builtins.property
     @pulumi.getter
+    @_utilities.deprecated("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
     def sql(self) -> Optional['outputs.LogConfigurationRequestSql']:
         """
         SQL logging configuration for requests.
@@ -1773,18 +1777,21 @@ class LogConfigurationRequestSql(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 encrypt: _builtins.bool,
-                 strip_values: _builtins.bool):
+                 encrypt: Optional[_builtins.bool] = None,
+                 strip_values: Optional[_builtins.bool] = None):
         """
         :param _builtins.bool encrypt: Whether to encrypt SQL queries in logs.
         :param _builtins.bool strip_values: Whether to obfuscate SQL queries in logs.
         """
-        pulumi.set(__self__, "encrypt", encrypt)
-        pulumi.set(__self__, "strip_values", strip_values)
+        if encrypt is not None:
+            pulumi.set(__self__, "encrypt", encrypt)
+        if strip_values is not None:
+            pulumi.set(__self__, "strip_values", strip_values)
 
     @_builtins.property
     @pulumi.getter
-    def encrypt(self) -> _builtins.bool:
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
+    def encrypt(self) -> Optional[_builtins.bool]:
         """
         Whether to encrypt SQL queries in logs.
         """
@@ -1792,7 +1799,8 @@ class LogConfigurationRequestSql(dict):
 
     @_builtins.property
     @pulumi.getter(name="stripValues")
-    def strip_values(self) -> _builtins.bool:
+    @_utilities.deprecated("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
+    def strip_values(self) -> Optional[_builtins.bool]:
         """
         Whether to obfuscate SQL queries in logs.
         """
@@ -1821,7 +1829,7 @@ class LogConfigurationResponse(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 encrypt: _builtins.bool,
+                 encrypt: Optional[_builtins.bool] = None,
                  max_payload_size: Optional[_builtins.int] = None,
                  policy_eval_input_retention: Optional[_builtins.str] = None):
         """
@@ -1829,7 +1837,8 @@ class LogConfigurationResponse(dict):
         :param _builtins.int max_payload_size: Maximum size of response payloads to log.
         :param _builtins.str policy_eval_input_retention: Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         """
-        pulumi.set(__self__, "encrypt", encrypt)
+        if encrypt is not None:
+            pulumi.set(__self__, "encrypt", encrypt)
         if max_payload_size is not None:
             pulumi.set(__self__, "max_payload_size", max_payload_size)
         if policy_eval_input_retention is not None:
@@ -1837,7 +1846,8 @@ class LogConfigurationResponse(dict):
 
     @_builtins.property
     @pulumi.getter
-    def encrypt(self) -> _builtins.bool:
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
+    def encrypt(self) -> Optional[_builtins.bool]:
         """
         Whether to encrypt response payloads.
         """
@@ -1845,6 +1855,7 @@ class LogConfigurationResponse(dict):
 
     @_builtins.property
     @pulumi.getter(name="maxPayloadSize")
+    @_utilities.deprecated("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
     def max_payload_size(self) -> Optional[_builtins.int]:
         """
         Maximum size of response payloads to log.

@@ -496,10 +496,14 @@ export interface IntegrationMdmKandji {
 export interface LogConfigurationRequest {
     /**
      * Whether to encrypt request payloads.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
-    encrypt: boolean;
+    encrypt?: boolean;
     /**
      * Maximum size of request payloads to log.
+     *
+     * @deprecated Log configuration payload truncation and SQL value stripping are deprecated. Use formal.LogSchema to truncate payloads or strip SQL values instead.
      */
     maxPayloadSize?: number;
     /**
@@ -508,6 +512,8 @@ export interface LogConfigurationRequest {
     policyEvalInputRetention?: string;
     /**
      * SQL logging configuration for requests.
+     *
+     * @deprecated Log configuration payload truncation and SQL value stripping are deprecated. Use formal.LogSchema to truncate payloads or strip SQL values instead.
      */
     sql: outputs.LogConfigurationRequestSql;
 }
@@ -515,21 +521,29 @@ export interface LogConfigurationRequest {
 export interface LogConfigurationRequestSql {
     /**
      * Whether to encrypt SQL queries in logs.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
-    encrypt: boolean;
+    encrypt?: boolean;
     /**
      * Whether to obfuscate SQL queries in logs.
+     *
+     * @deprecated Log configuration payload truncation and SQL value stripping are deprecated. Use formal.LogSchema to truncate payloads or strip SQL values instead.
      */
-    stripValues: boolean;
+    stripValues?: boolean;
 }
 
 export interface LogConfigurationResponse {
     /**
      * Whether to encrypt response payloads.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
-    encrypt: boolean;
+    encrypt?: boolean;
     /**
      * Maximum size of response payloads to log.
+     *
+     * @deprecated Log configuration payload truncation and SQL value stripping are deprecated. Use formal.LogSchema to truncate payloads or strip SQL values instead.
      */
     maxPayloadSize?: number;
     /**

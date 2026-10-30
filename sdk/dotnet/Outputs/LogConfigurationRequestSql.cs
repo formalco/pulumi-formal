@@ -17,17 +17,17 @@ namespace Formal.Pulumi.Outputs
         /// <summary>
         /// Whether to encrypt SQL queries in logs.
         /// </summary>
-        public readonly bool Encrypt;
+        public readonly bool? Encrypt;
         /// <summary>
         /// Whether to obfuscate SQL queries in logs.
         /// </summary>
-        public readonly bool StripValues;
+        public readonly bool? StripValues;
 
         [OutputConstructor]
         private LogConfigurationRequestSql(
-            bool encrypt,
+            bool? encrypt,
 
-            bool stripValues)
+            bool? stripValues)
         {
             Encrypt = encrypt;
             StripValues = stripValues;

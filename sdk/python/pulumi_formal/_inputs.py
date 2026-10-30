@@ -2081,7 +2081,7 @@ class IntegrationMdmKandjiArgs:
 
 
 class LogConfigurationRequestArgsDict(TypedDict):
-    encrypt: pulumi.Input[_builtins.bool]
+    encrypt: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
     Whether to encrypt request payloads.
     """
@@ -2101,7 +2101,7 @@ class LogConfigurationRequestArgsDict(TypedDict):
 @pulumi.input_type
 class LogConfigurationRequestArgs:
     def __init__(__self__, *,
-                 encrypt: pulumi.Input[_builtins.bool],
+                 encrypt: pulumi.Input[Optional[_builtins.bool]] = None,
                  max_payload_size: pulumi.Input[Optional[_builtins.int]] = None,
                  policy_eval_input_retention: pulumi.Input[Optional[_builtins.str]] = None,
                  sql: pulumi.Input[Optional['LogConfigurationRequestSqlArgs']] = None):
@@ -2111,28 +2111,40 @@ class LogConfigurationRequestArgs:
         :param pulumi.Input[_builtins.str] policy_eval_input_retention: Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         :param pulumi.Input['LogConfigurationRequestSqlArgs'] sql: SQL logging configuration for requests.
         """
-        pulumi.set(__self__, "encrypt", encrypt)
+        if encrypt is not None:
+            warnings.warn("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""", DeprecationWarning)
+            pulumi.log.warn("""encrypt is deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
+        if encrypt is not None:
+            pulumi.set(__self__, "encrypt", encrypt)
+        if max_payload_size is not None:
+            warnings.warn("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""", DeprecationWarning)
+            pulumi.log.warn("""max_payload_size is deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
         if max_payload_size is not None:
             pulumi.set(__self__, "max_payload_size", max_payload_size)
         if policy_eval_input_retention is not None:
             pulumi.set(__self__, "policy_eval_input_retention", policy_eval_input_retention)
         if sql is not None:
+            warnings.warn("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""", DeprecationWarning)
+            pulumi.log.warn("""sql is deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
+        if sql is not None:
             pulumi.set(__self__, "sql", sql)
 
     @_builtins.property
     @pulumi.getter
-    def encrypt(self) -> pulumi.Input[_builtins.bool]:
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
+    def encrypt(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to encrypt request payloads.
         """
         return pulumi.get(self, "encrypt")
 
     @encrypt.setter
-    def encrypt(self, value: pulumi.Input[_builtins.bool]):
+    def encrypt(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "encrypt", value)
 
     @_builtins.property
     @pulumi.getter(name="maxPayloadSize")
+    @_utilities.deprecated("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
     def max_payload_size(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Maximum size of request payloads to log.
@@ -2157,6 +2169,7 @@ class LogConfigurationRequestArgs:
 
     @_builtins.property
     @pulumi.getter
+    @_utilities.deprecated("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
     def sql(self) -> pulumi.Input[Optional['LogConfigurationRequestSqlArgs']]:
         """
         SQL logging configuration for requests.
@@ -2169,11 +2182,11 @@ class LogConfigurationRequestArgs:
 
 
 class LogConfigurationRequestSqlArgsDict(TypedDict):
-    encrypt: pulumi.Input[_builtins.bool]
+    encrypt: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
     Whether to encrypt SQL queries in logs.
     """
-    strip_values: pulumi.Input[_builtins.bool]
+    strip_values: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
     Whether to obfuscate SQL queries in logs.
     """
@@ -2181,42 +2194,52 @@ class LogConfigurationRequestSqlArgsDict(TypedDict):
 @pulumi.input_type
 class LogConfigurationRequestSqlArgs:
     def __init__(__self__, *,
-                 encrypt: pulumi.Input[_builtins.bool],
-                 strip_values: pulumi.Input[_builtins.bool]):
+                 encrypt: pulumi.Input[Optional[_builtins.bool]] = None,
+                 strip_values: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         :param pulumi.Input[_builtins.bool] encrypt: Whether to encrypt SQL queries in logs.
         :param pulumi.Input[_builtins.bool] strip_values: Whether to obfuscate SQL queries in logs.
         """
-        pulumi.set(__self__, "encrypt", encrypt)
-        pulumi.set(__self__, "strip_values", strip_values)
+        if encrypt is not None:
+            warnings.warn("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""", DeprecationWarning)
+            pulumi.log.warn("""encrypt is deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
+        if encrypt is not None:
+            pulumi.set(__self__, "encrypt", encrypt)
+        if strip_values is not None:
+            warnings.warn("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""", DeprecationWarning)
+            pulumi.log.warn("""strip_values is deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
+        if strip_values is not None:
+            pulumi.set(__self__, "strip_values", strip_values)
 
     @_builtins.property
     @pulumi.getter
-    def encrypt(self) -> pulumi.Input[_builtins.bool]:
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
+    def encrypt(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to encrypt SQL queries in logs.
         """
         return pulumi.get(self, "encrypt")
 
     @encrypt.setter
-    def encrypt(self, value: pulumi.Input[_builtins.bool]):
+    def encrypt(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "encrypt", value)
 
     @_builtins.property
     @pulumi.getter(name="stripValues")
-    def strip_values(self) -> pulumi.Input[_builtins.bool]:
+    @_utilities.deprecated("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
+    def strip_values(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to obfuscate SQL queries in logs.
         """
         return pulumi.get(self, "strip_values")
 
     @strip_values.setter
-    def strip_values(self, value: pulumi.Input[_builtins.bool]):
+    def strip_values(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "strip_values", value)
 
 
 class LogConfigurationResponseArgsDict(TypedDict):
-    encrypt: pulumi.Input[_builtins.bool]
+    encrypt: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
     Whether to encrypt response payloads.
     """
@@ -2232,7 +2255,7 @@ class LogConfigurationResponseArgsDict(TypedDict):
 @pulumi.input_type
 class LogConfigurationResponseArgs:
     def __init__(__self__, *,
-                 encrypt: pulumi.Input[_builtins.bool],
+                 encrypt: pulumi.Input[Optional[_builtins.bool]] = None,
                  max_payload_size: pulumi.Input[Optional[_builtins.int]] = None,
                  policy_eval_input_retention: pulumi.Input[Optional[_builtins.str]] = None):
         """
@@ -2240,7 +2263,14 @@ class LogConfigurationResponseArgs:
         :param pulumi.Input[_builtins.int] max_payload_size: Maximum size of response payloads to log.
         :param pulumi.Input[_builtins.str] policy_eval_input_retention: Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
         """
-        pulumi.set(__self__, "encrypt", encrypt)
+        if encrypt is not None:
+            warnings.warn("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""", DeprecationWarning)
+            pulumi.log.warn("""encrypt is deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
+        if encrypt is not None:
+            pulumi.set(__self__, "encrypt", encrypt)
+        if max_payload_size is not None:
+            warnings.warn("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""", DeprecationWarning)
+            pulumi.log.warn("""max_payload_size is deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
         if max_payload_size is not None:
             pulumi.set(__self__, "max_payload_size", max_payload_size)
         if policy_eval_input_retention is not None:
@@ -2248,18 +2278,20 @@ class LogConfigurationResponseArgs:
 
     @_builtins.property
     @pulumi.getter
-    def encrypt(self) -> pulumi.Input[_builtins.bool]:
+    @_utilities.deprecated("""Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.""")
+    def encrypt(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether to encrypt response payloads.
         """
         return pulumi.get(self, "encrypt")
 
     @encrypt.setter
-    def encrypt(self, value: pulumi.Input[_builtins.bool]):
+    def encrypt(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "encrypt", value)
 
     @_builtins.property
     @pulumi.getter(name="maxPayloadSize")
+    @_utilities.deprecated("""Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.""")
     def max_payload_size(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Maximum size of response payloads to log.
