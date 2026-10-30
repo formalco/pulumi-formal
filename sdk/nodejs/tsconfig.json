@@ -77,6 +77,7 @@
         "satellite.ts",
         "satelliteHostname.ts",
         "satelliteLink.ts",
+        "skill.ts",
         "space.ts",
         "types/index.ts",
         "types/input.ts",

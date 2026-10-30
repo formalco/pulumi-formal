@@ -4486,12 +4486,18 @@ func (o IntegrationMdmKandjiPtrOutput) ApiUrl() pulumi.StringPtrOutput {
 
 type LogConfigurationRequest struct {
 	// Whether to encrypt request payloads.
-	Encrypt bool `pulumi:"encrypt"`
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
+	Encrypt *bool `pulumi:"encrypt"`
 	// Maximum size of request payloads to log.
+	//
+	// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 	MaxPayloadSize *int `pulumi:"maxPayloadSize"`
 	// Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
 	PolicyEvalInputRetention *string `pulumi:"policyEvalInputRetention"`
 	// SQL logging configuration for requests.
+	//
+	// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 	Sql *LogConfigurationRequestSql `pulumi:"sql"`
 }
 
@@ -4508,12 +4514,18 @@ type LogConfigurationRequestInput interface {
 
 type LogConfigurationRequestArgs struct {
 	// Whether to encrypt request payloads.
-	Encrypt pulumi.BoolInput `pulumi:"encrypt"`
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
+	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
 	// Maximum size of request payloads to log.
+	//
+	// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 	MaxPayloadSize pulumi.IntPtrInput `pulumi:"maxPayloadSize"`
 	// Duration to retain policy evaluation inputs for requests. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
 	PolicyEvalInputRetention pulumi.StringPtrInput `pulumi:"policyEvalInputRetention"`
 	// SQL logging configuration for requests.
+	//
+	// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 	Sql LogConfigurationRequestSqlPtrInput `pulumi:"sql"`
 }
 
@@ -4595,11 +4607,15 @@ func (o LogConfigurationRequestOutput) ToLogConfigurationRequestPtrOutputWithCon
 }
 
 // Whether to encrypt request payloads.
-func (o LogConfigurationRequestOutput) Encrypt() pulumi.BoolOutput {
-	return o.ApplyT(func(v LogConfigurationRequest) bool { return v.Encrypt }).(pulumi.BoolOutput)
+//
+// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
+func (o LogConfigurationRequestOutput) Encrypt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v LogConfigurationRequest) *bool { return v.Encrypt }).(pulumi.BoolPtrOutput)
 }
 
 // Maximum size of request payloads to log.
+//
+// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 func (o LogConfigurationRequestOutput) MaxPayloadSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LogConfigurationRequest) *int { return v.MaxPayloadSize }).(pulumi.IntPtrOutput)
 }
@@ -4610,6 +4626,8 @@ func (o LogConfigurationRequestOutput) PolicyEvalInputRetention() pulumi.StringP
 }
 
 // SQL logging configuration for requests.
+//
+// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 func (o LogConfigurationRequestOutput) Sql() LogConfigurationRequestSqlPtrOutput {
 	return o.ApplyT(func(v LogConfigurationRequest) *LogConfigurationRequestSql { return v.Sql }).(LogConfigurationRequestSqlPtrOutput)
 }
@@ -4639,16 +4657,20 @@ func (o LogConfigurationRequestPtrOutput) Elem() LogConfigurationRequestOutput {
 }
 
 // Whether to encrypt request payloads.
+//
+// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 func (o LogConfigurationRequestPtrOutput) Encrypt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *LogConfigurationRequest) *bool {
 		if v == nil {
 			return nil
 		}
-		return &v.Encrypt
+		return v.Encrypt
 	}).(pulumi.BoolPtrOutput)
 }
 
 // Maximum size of request payloads to log.
+//
+// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 func (o LogConfigurationRequestPtrOutput) MaxPayloadSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *LogConfigurationRequest) *int {
 		if v == nil {
@@ -4669,6 +4691,8 @@ func (o LogConfigurationRequestPtrOutput) PolicyEvalInputRetention() pulumi.Stri
 }
 
 // SQL logging configuration for requests.
+//
+// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 func (o LogConfigurationRequestPtrOutput) Sql() LogConfigurationRequestSqlPtrOutput {
 	return o.ApplyT(func(v *LogConfigurationRequest) *LogConfigurationRequestSql {
 		if v == nil {
@@ -4680,9 +4704,13 @@ func (o LogConfigurationRequestPtrOutput) Sql() LogConfigurationRequestSqlPtrOut
 
 type LogConfigurationRequestSql struct {
 	// Whether to encrypt SQL queries in logs.
-	Encrypt bool `pulumi:"encrypt"`
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
+	Encrypt *bool `pulumi:"encrypt"`
 	// Whether to obfuscate SQL queries in logs.
-	StripValues bool `pulumi:"stripValues"`
+	//
+	// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
+	StripValues *bool `pulumi:"stripValues"`
 }
 
 // LogConfigurationRequestSqlInput is an input type that accepts LogConfigurationRequestSqlArgs and LogConfigurationRequestSqlOutput values.
@@ -4698,9 +4726,13 @@ type LogConfigurationRequestSqlInput interface {
 
 type LogConfigurationRequestSqlArgs struct {
 	// Whether to encrypt SQL queries in logs.
-	Encrypt pulumi.BoolInput `pulumi:"encrypt"`
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
+	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
 	// Whether to obfuscate SQL queries in logs.
-	StripValues pulumi.BoolInput `pulumi:"stripValues"`
+	//
+	// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
+	StripValues pulumi.BoolPtrInput `pulumi:"stripValues"`
 }
 
 func (LogConfigurationRequestSqlArgs) ElementType() reflect.Type {
@@ -4781,13 +4813,17 @@ func (o LogConfigurationRequestSqlOutput) ToLogConfigurationRequestSqlPtrOutputW
 }
 
 // Whether to encrypt SQL queries in logs.
-func (o LogConfigurationRequestSqlOutput) Encrypt() pulumi.BoolOutput {
-	return o.ApplyT(func(v LogConfigurationRequestSql) bool { return v.Encrypt }).(pulumi.BoolOutput)
+//
+// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
+func (o LogConfigurationRequestSqlOutput) Encrypt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v LogConfigurationRequestSql) *bool { return v.Encrypt }).(pulumi.BoolPtrOutput)
 }
 
 // Whether to obfuscate SQL queries in logs.
-func (o LogConfigurationRequestSqlOutput) StripValues() pulumi.BoolOutput {
-	return o.ApplyT(func(v LogConfigurationRequestSql) bool { return v.StripValues }).(pulumi.BoolOutput)
+//
+// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
+func (o LogConfigurationRequestSqlOutput) StripValues() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v LogConfigurationRequestSql) *bool { return v.StripValues }).(pulumi.BoolPtrOutput)
 }
 
 type LogConfigurationRequestSqlPtrOutput struct{ *pulumi.OutputState }
@@ -4815,29 +4851,37 @@ func (o LogConfigurationRequestSqlPtrOutput) Elem() LogConfigurationRequestSqlOu
 }
 
 // Whether to encrypt SQL queries in logs.
+//
+// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 func (o LogConfigurationRequestSqlPtrOutput) Encrypt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *LogConfigurationRequestSql) *bool {
 		if v == nil {
 			return nil
 		}
-		return &v.Encrypt
+		return v.Encrypt
 	}).(pulumi.BoolPtrOutput)
 }
 
 // Whether to obfuscate SQL queries in logs.
+//
+// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 func (o LogConfigurationRequestSqlPtrOutput) StripValues() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *LogConfigurationRequestSql) *bool {
 		if v == nil {
 			return nil
 		}
-		return &v.StripValues
+		return v.StripValues
 	}).(pulumi.BoolPtrOutput)
 }
 
 type LogConfigurationResponse struct {
 	// Whether to encrypt response payloads.
-	Encrypt bool `pulumi:"encrypt"`
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
+	Encrypt *bool `pulumi:"encrypt"`
 	// Maximum size of response payloads to log.
+	//
+	// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 	MaxPayloadSize *int `pulumi:"maxPayloadSize"`
 	// Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
 	PolicyEvalInputRetention *string `pulumi:"policyEvalInputRetention"`
@@ -4856,8 +4900,12 @@ type LogConfigurationResponseInput interface {
 
 type LogConfigurationResponseArgs struct {
 	// Whether to encrypt response payloads.
-	Encrypt pulumi.BoolInput `pulumi:"encrypt"`
+	//
+	// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
+	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
 	// Maximum size of response payloads to log.
+	//
+	// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 	MaxPayloadSize pulumi.IntPtrInput `pulumi:"maxPayloadSize"`
 	// Duration to retain policy evaluation inputs for responses. Valid values: 1d, 2d, 3d, 7d, 14d, 21d, 30d.
 	PolicyEvalInputRetention pulumi.StringPtrInput `pulumi:"policyEvalInputRetention"`
@@ -4941,11 +4989,15 @@ func (o LogConfigurationResponseOutput) ToLogConfigurationResponsePtrOutputWithC
 }
 
 // Whether to encrypt response payloads.
-func (o LogConfigurationResponseOutput) Encrypt() pulumi.BoolOutput {
-	return o.ApplyT(func(v LogConfigurationResponse) bool { return v.Encrypt }).(pulumi.BoolOutput)
+//
+// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
+func (o LogConfigurationResponseOutput) Encrypt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v LogConfigurationResponse) *bool { return v.Encrypt }).(pulumi.BoolPtrOutput)
 }
 
 // Maximum size of response payloads to log.
+//
+// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 func (o LogConfigurationResponseOutput) MaxPayloadSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LogConfigurationResponse) *int { return v.MaxPayloadSize }).(pulumi.IntPtrOutput)
 }
@@ -4980,16 +5032,20 @@ func (o LogConfigurationResponsePtrOutput) Elem() LogConfigurationResponseOutput
 }
 
 // Whether to encrypt response payloads.
+//
+// Deprecated: Log configuration encryption is deprecated. Use LogSchema to encrypt log fields instead.
 func (o LogConfigurationResponsePtrOutput) Encrypt() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *LogConfigurationResponse) *bool {
 		if v == nil {
 			return nil
 		}
-		return &v.Encrypt
+		return v.Encrypt
 	}).(pulumi.BoolPtrOutput)
 }
 
 // Maximum size of response payloads to log.
+//
+// Deprecated: Log configuration payload truncation and SQL value stripping are deprecated. Use LogSchema to truncate payloads or strip SQL values instead.
 func (o LogConfigurationResponsePtrOutput) MaxPayloadSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *LogConfigurationResponse) *int {
 		if v == nil {

@@ -16,8 +16,8 @@ namespace Formal.Pulumi.Inputs
         /// <summary>
         /// Whether to encrypt response payloads.
         /// </summary>
-        [Input("encrypt", required: true)]
-        public Input<bool> Encrypt { get; set; } = null!;
+        [Input("encrypt")]
+        public Input<bool>? Encrypt { get; set; }
 
         /// <summary>
         /// Maximum size of response payloads to log.

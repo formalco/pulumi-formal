@@ -27,7 +27,7 @@ class IntegrationBiArgs:
         """
         The set of arguments for constructing a IntegrationBi resource.
 
-        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+        :param pulumi.Input[_builtins.bool] sync: Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         :param pulumi.Input['IntegrationBiMetabaseArgs'] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for this app.
         """
@@ -41,7 +41,7 @@ class IntegrationBiArgs:
     @pulumi.getter
     def sync(self) -> pulumi.Input[_builtins.bool]:
         """
-        Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+        Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         """
         return pulumi.get(self, "sync")
 
@@ -85,7 +85,7 @@ class _IntegrationBiState:
 
         :param pulumi.Input['IntegrationBiMetabaseArgs'] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for this app.
-        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+        :param pulumi.Input[_builtins.bool] sync: Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         """
         if metabase is not None:
             pulumi.set(__self__, "metabase", metabase)
@@ -122,7 +122,7 @@ class _IntegrationBiState:
     @pulumi.getter
     def sync(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+        Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         """
         return pulumi.get(self, "sync")
 
@@ -149,7 +149,7 @@ class IntegrationBi(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for this app.
-        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+        :param pulumi.Input[_builtins.bool] sync: Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         """
         ...
     @overload
@@ -215,7 +215,7 @@ class IntegrationBi(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for this app.
-        :param pulumi.Input[_builtins.bool] sync: Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+        :param pulumi.Input[_builtins.bool] sync: Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -246,7 +246,7 @@ class IntegrationBi(pulumi.CustomResource):
     @pulumi.getter
     def sync(self) -> pulumi.Output[_builtins.bool]:
         """
-        Auto synchronize users from Metabase to Formal (occurs every hour). When disabled, a worker will need to be deployed in your infrastructure to synchronise users.
+        Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         """
         return pulumi.get(self, "sync")
 

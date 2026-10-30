@@ -43,6 +43,8 @@ export class LogConfiguration extends pulumi.CustomResource {
     declare public /*out*/ readonly createdAt: pulumi.Output<string>;
     /**
      * The ID of the encryption key to use for this log configuration.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
     declare public readonly encryptionKeyId: pulumi.Output<string | undefined>;
     /**
@@ -67,6 +69,8 @@ export class LogConfiguration extends pulumi.CustomResource {
     declare public readonly session: pulumi.Output<outputs.LogConfigurationSession | undefined>;
     /**
      * Stream logging configuration.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
     declare public readonly stream: pulumi.Output<outputs.LogConfigurationStream>;
     /**
@@ -132,6 +136,8 @@ export interface LogConfigurationState {
     createdAt?: pulumi.Input<string | undefined>;
     /**
      * The ID of the encryption key to use for this log configuration.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
     encryptionKeyId?: pulumi.Input<string | undefined>;
     /**
@@ -156,6 +162,8 @@ export interface LogConfigurationState {
     session?: pulumi.Input<inputs.LogConfigurationSession | undefined>;
     /**
      * Stream logging configuration.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
     stream?: pulumi.Input<inputs.LogConfigurationStream | undefined>;
     /**
@@ -170,6 +178,8 @@ export interface LogConfigurationState {
 export interface LogConfigurationArgs {
     /**
      * The ID of the encryption key to use for this log configuration.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
     encryptionKeyId?: pulumi.Input<string | undefined>;
     /**
@@ -194,6 +204,8 @@ export interface LogConfigurationArgs {
     session?: pulumi.Input<inputs.LogConfigurationSession | undefined>;
     /**
      * Stream logging configuration.
+     *
+     * @deprecated Log configuration encryption is deprecated. Use formal.LogSchema to encrypt log fields instead.
      */
     stream?: pulumi.Input<inputs.LogConfigurationStream | undefined>;
 }

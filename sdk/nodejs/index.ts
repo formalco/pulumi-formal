@@ -278,6 +278,11 @@ export type SatelliteLink = import("./satelliteLink").SatelliteLink;
 export const SatelliteLink: typeof import("./satelliteLink").SatelliteLink = null as any;
 utilities.lazyLoad(exports, ["SatelliteLink"], () => require("./satelliteLink"));
 
+export { SkillArgs, SkillState } from "./skill";
+export type Skill = import("./skill").Skill;
+export const Skill: typeof import("./skill").Skill = null as any;
+utilities.lazyLoad(exports, ["Skill"], () => require("./skill"));
+
 export { SpaceArgs, SpaceState } from "./space";
 export type Space = import("./space").Space;
 export const Space: typeof import("./space").Space = null as any;
@@ -401,6 +406,8 @@ const _module = {
                 return new SatelliteHostname(name, <any>undefined, { urn })
             case "formal:index/satelliteLink:SatelliteLink":
                 return new SatelliteLink(name, <any>undefined, { urn })
+            case "formal:index/skill:Skill":
+                return new Skill(name, <any>undefined, { urn })
             case "formal:index/space:Space":
                 return new Space(name, <any>undefined, { urn })
             case "formal:index/user:User":
@@ -459,6 +466,7 @@ pulumi.runtime.registerResourceModule("formal", "index/resourceTlsConfiguration"
 pulumi.runtime.registerResourceModule("formal", "index/satellite", _module)
 pulumi.runtime.registerResourceModule("formal", "index/satelliteHostname", _module)
 pulumi.runtime.registerResourceModule("formal", "index/satelliteLink", _module)
+pulumi.runtime.registerResourceModule("formal", "index/skill", _module)
 pulumi.runtime.registerResourceModule("formal", "index/space", _module)
 pulumi.runtime.registerResourceModule("formal", "index/user", _module)
 pulumi.runtime.registerResourceModule("formal", "index/workflow", _module)
