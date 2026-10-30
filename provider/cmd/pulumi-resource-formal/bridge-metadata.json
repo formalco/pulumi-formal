@@ -509,6 +509,10 @@
                 "current": "formal:index/satelliteLink:SatelliteLink",
                 "majorVersion": 1
             },
+            "formal_skill": {
+                "current": "formal:index/skill:Skill",
+                "majorVersion": 1
+            },
             "formal_space": {
                 "current": "formal:index/space:Space",
                 "majorVersion": 1
