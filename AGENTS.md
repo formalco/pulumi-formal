@@ -190,7 +190,7 @@ Caller workflows (`main.yml`, `prerelease.yml`, `release.yml`, `run-acceptance-t
 
 - **Upstream commit in release notes:** `publish.yml` has a repo-owned `Get upstream provider commit` step that reads the `upstream` submodule commit and prepends a linked "Wraps upstream terraform-provider-formal COMMIT" line to the GitHub release body. Running `make ci-mgmt` overwrites `publish.yml`, so re-apply this step (and the `body:` reference to its output) afterward — same class of manual patch as the `GITHUB_TOKEN` one above.
 
-- **NuGet/PyPI trusted publishing:** both `Publish SDKs` steps in `publish.yml` pin `formalco/pulumi-package-publisher` (a fork carrying [pulumi/pulumi-package-publisher#53](https://github.com/pulumi/pulumi-package-publisher/pull/53)) with `nugetTrustedPublishing`/`pypiTrustedPublishing` enabled, and blank `NUGET_PUBLISH_KEY`/drop `PYPI_PASSWORD` so the OIDC path is used. The trusted publisher policies on PyPI and NuGet reference `publish.yml`, since that's the reusable workflow in the OIDC `job_workflow_ref` claim. `make ci-mgmt` overwrites this, so re-apply it afterward. Switch back to `pulumi/pulumi-package-publisher` once #53 ships in a release.
+- **Trusted publishing (npm/NuGet/PyPI):** both `Publish SDKs` steps in `publish.yml` pin `formalco/pulumi-package-publisher` (a fork carrying [pulumi/pulumi-package-publisher#53](https://github.com/pulumi/pulumi-package-publisher/pull/53)) with `npmTrustedPublishing`/`nugetTrustedPublishing`/`pypiTrustedPublishing` enabled, and blank `NODE_AUTH_TOKEN`/`NUGET_PUBLISH_KEY`/drop `PYPI_PASSWORD` so the OIDC path is used. PyPI and NuGet match the OIDC `job_workflow_ref` claim, so their policies reference `publish.yml`; npm checks the calling workflow, so its trusted publishers reference `release.yml` (and `prerelease.yml`). npm also needs Pulumi CLI >= 3.274.1, pinned in the root `mise.toml`. `make ci-mgmt` overwrites `publish.yml`, so re-apply it afterward. Switch back to `pulumi/pulumi-package-publisher` once #53 ships in a release.
 
 ## Provider Configuration
 
@@ -204,7 +204,4 @@ Key settings in `provider/resources.go`:
 
 ## Repository Secrets
 
-Required GitHub repository secrets (check with `gh secret list`):
-- `NPM_TOKEN` - npm publish token
-
-NuGet and PyPI use trusted publishing (OIDC), so `NUGET_PUBLISH_KEY` and `PYPI_API_TOKEN` are no longer needed.
+No publish-token secrets are required: npm, NuGet and PyPI use trusted publishing (OIDC), so `NPM_TOKEN`, `NUGET_PUBLISH_KEY` and `PYPI_API_TOKEN` are no longer needed.

@@ -10,3 +10,8 @@ golangci-lint = "2.13.2"
 # that newer config also switches to `{{ env.GO_VERSION_MISE }}` syntax which the
 # pinned mise (2026.1.1) can't render (the var isn't set at parse time).
 node = "24.18.0"
+# Override the go.mod-derived Pulumi CLI (vfox-pulumi PULUMI_VERSION_MISE) —
+# npm trusted publishing needs >= 3.274.1, which skips the `npm whoami`
+# preflight in `pulumi package publish-sdk nodejs`. Drop once provider/go.mod's
+# pulumi/pkg is >= 3.274.1.
+"github:pulumi/pulumi" = "3.274.1"
