@@ -60,6 +60,10 @@
                 "current": "formal:index/connectorTokenEncryptionKey:ConnectorTokenEncryptionKey",
                 "majorVersion": 1
             },
+            "formal_dashboard": {
+                "current": "formal:index/dashboard:Dashboard",
+                "majorVersion": 1
+            },
             "formal_data_discovery": {
                 "current": "formal:index/dataDiscovery:DataDiscovery",
                 "majorVersion": 1
@@ -320,7 +324,27 @@
                         "elem": {
                             "fields": {
                                 "password": {
-                                    "maxItemsOne": true
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "secret_manager": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "aws_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "azure_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "gcp_secret": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -337,6 +361,22 @@
                                 },
                                 "allowlisted_network_hosts": {
                                     "maxItemsOne": false
+                                },
+                                "secret": {
+                                    "maxItemsOne": false,
+                                    "elem": {
+                                        "fields": {
+                                            "aws_secret": {
+                                                "maxItemsOne": true
+                                            },
+                                            "azure_secret": {
+                                                "maxItemsOne": true
+                                            },
+                                            "gcp_secret": {
+                                                "maxItemsOne": true
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -346,7 +386,27 @@
                         "elem": {
                             "fields": {
                                 "value": {
-                                    "maxItemsOne": true
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "secret_manager": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "aws_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "azure_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "gcp_secret": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -356,7 +416,27 @@
                         "elem": {
                             "fields": {
                                 "value": {
-                                    "maxItemsOne": true
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "secret_manager": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "aws_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "azure_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "gcp_secret": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -366,7 +446,27 @@
                         "elem": {
                             "fields": {
                                 "password": {
-                                    "maxItemsOne": true
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "secret_manager": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "aws_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "azure_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "gcp_secret": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -376,7 +476,27 @@
                         "elem": {
                             "fields": {
                                 "token": {
-                                    "maxItemsOne": true
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "secret_manager": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "aws_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "azure_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "gcp_secret": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -386,7 +506,27 @@
                         "elem": {
                             "fields": {
                                 "kubeconfig": {
-                                    "maxItemsOne": true
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "secret_manager": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "aws_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "azure_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "gcp_secret": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -396,17 +536,66 @@
                         "elem": {
                             "fields": {
                                 "kubeconfig_path": {
-                                    "maxItemsOne": true
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "secret_manager": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "aws_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "azure_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "gcp_secret": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
+                    },
+                    "linked_http_basic": {
+                        "maxItemsOne": true
+                    },
+                    "linked_http_bearer": {
+                        "maxItemsOne": true
+                    },
+                    "passthrough": {
+                        "maxItemsOne": true
                     },
                     "snowflake_key": {
                         "maxItemsOne": true,
                         "elem": {
                             "fields": {
                                 "key": {
-                                    "maxItemsOne": true
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "secret_manager": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "aws_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "azure_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "gcp_secret": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -416,10 +605,50 @@
                         "elem": {
                             "fields": {
                                 "certificate": {
-                                    "maxItemsOne": true
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "secret_manager": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "aws_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "azure_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "gcp_secret": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 },
                                 "key": {
-                                    "maxItemsOne": true
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "secret_manager": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "aws_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "azure_secret": {
+                                                            "maxItemsOne": true
+                                                        },
+                                                        "gcp_secret": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -438,6 +667,10 @@
                         "maxItemsOne": false
                     }
                 }
+            },
+            "formal_org_theme": {
+                "current": "formal:index/orgTheme:OrgTheme",
+                "majorVersion": 1
             },
             "formal_permission": {
                 "current": "formal:index/permission:Permission",
@@ -523,6 +756,10 @@
             },
             "formal_workflow": {
                 "current": "formal:index/workflow:Workflow",
+                "majorVersion": 1
+            },
+            "formal_workflow_secret": {
+                "current": "formal:index/workflowSecret:WorkflowSecret",
                 "majorVersion": 1
             }
         },
