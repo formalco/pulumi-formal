@@ -15,7 +15,7 @@ namespace Formal.Pulumi.Outputs
     public sealed class NativeUserV3SnowflakeKey
     {
         /// <summary>
-        /// The private key. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The private key. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         public readonly Outputs.NativeUserV3SnowflakeKeyKey Key;
         /// <summary>

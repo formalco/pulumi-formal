@@ -38,7 +38,7 @@ class ResourceOauthSettingsArgs:
         :param pulumi.Input[_builtins.int] client_secret_wo_version: Version trigger for `client_secret_wo`. Increment this value to update the secret.
         :param pulumi.Input[_builtins.str] issuer: The upstream authorization server's issuer, such as `https://github.com/login/oauth` for the GitHub REST API. Set it when the upstream publishes no protected resource metadata (RFC 9728): Formal then reads the issuer's authorization server metadata directly. It must use https, have no query or fragment, and exactly match the issuer the metadata reports. When unset, the authorization server is discovered from the upstream itself. Not allowed when `upstream_oauth_mode` is `none`.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] requested_scopes: Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstream_oauth_mode` is `none`. Existing linked accounts keep the scopes they were granted; users get these scopes the next time they link.
-        :param pulumi.Input[_builtins.str] upstream_oauth_mode: How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+        :param pulumi.Input[_builtins.str] upstream_oauth_mode: How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `registered_client_id`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
         """
         pulumi.set(__self__, "resource_id", resource_id)
         if client_id is not None:
@@ -145,7 +145,7 @@ class ResourceOauthSettingsArgs:
     @pulumi.getter(name="upstreamOauthMode")
     def upstream_oauth_mode(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+        How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `registered_client_id`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
         """
         return pulumi.get(self, "upstream_oauth_mode")
 
@@ -165,6 +165,7 @@ class _ResourceOauthSettingsState:
                  created_at: pulumi.Input[Optional[_builtins.str]] = None,
                  issuer: pulumi.Input[Optional[_builtins.str]] = None,
                  oauth_settings_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 registered_client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  requested_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
                  updated_at: pulumi.Input[Optional[_builtins.str]] = None,
@@ -174,17 +175,18 @@ class _ResourceOauthSettingsState:
 
         :param pulumi.Input[_builtins.str] client_id: The client ID of your OAuth app. Required when `upstream_oauth_mode` is `pre_registered`, and not allowed otherwise. Register the Formal redirect URI shown in the console with the authorization server.
         :param pulumi.Input[_builtins.str] client_secret: The client secret of your OAuth app. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstream_oauth_mode` is `pre_registered`. The API never returns it, so it is not read back, and Terraform only sends it when it changes. Rotating or removing it keeps linked accounts. Prefer `client_secret_wo` to keep the secret out of Terraform state.
-        :param pulumi.Input[_builtins.bool] client_secret_set: Whether the OAuth app has a client secret.
+        :param pulumi.Input[_builtins.bool] client_secret_set: Whether the OAuth app, or the dynamically registered client, has a client secret.
         :param pulumi.Input[_builtins.str] client_secret_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only client secret of your OAuth app. This value is not stored in Terraform state, so it must stay in the configuration. Requires Terraform 1.11+ and `client_secret_wo_version`. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstream_oauth_mode` is `pre_registered`. Set it to an empty string and increment `client_secret_wo_version` to make the client public. Rotating or removing the secret keeps linked accounts.
         :param pulumi.Input[_builtins.int] client_secret_wo_version: Version trigger for `client_secret_wo`. Increment this value to update the secret.
         :param pulumi.Input[_builtins.str] created_at: When the OAuth settings were created.
         :param pulumi.Input[_builtins.str] issuer: The upstream authorization server's issuer, such as `https://github.com/login/oauth` for the GitHub REST API. Set it when the upstream publishes no protected resource metadata (RFC 9728): Formal then reads the issuer's authorization server metadata directly. It must use https, have no query or fragment, and exactly match the issuer the metadata reports. When unset, the authorization server is discovered from the upstream itself. Not allowed when `upstream_oauth_mode` is `none`.
         :param pulumi.Input[_builtins.str] oauth_settings_id: The ID of the OAuth settings.
+        :param pulumi.Input[_builtins.str] registered_client_id: The client ID the authorization server issued when `upstream_oauth_mode` is `dcr`; empty otherwise.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] requested_scopes: Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstream_oauth_mode` is `none`. Existing linked accounts keep the scopes they were granted; users get these scopes the next time they link.
         :param pulumi.Input[_builtins.str] resource_id: The ID of the Resource to enable OAuth on. Its technology must be `mcp`, `http`, `grpc` or `llm`.
         :param pulumi.Input[_builtins.str] updated_at: When the OAuth settings were last updated.
-        :param pulumi.Input[_builtins.str] upstream_oauth_mode: How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+        :param pulumi.Input[_builtins.str] upstream_oauth_mode: How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `registered_client_id`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
         """
         if client_id is not None:
             pulumi.set(__self__, "client_id", client_id)
@@ -202,6 +204,8 @@ class _ResourceOauthSettingsState:
             pulumi.set(__self__, "issuer", issuer)
         if oauth_settings_id is not None:
             pulumi.set(__self__, "oauth_settings_id", oauth_settings_id)
+        if registered_client_id is not None:
+            pulumi.set(__self__, "registered_client_id", registered_client_id)
         if requested_scopes is not None:
             pulumi.set(__self__, "requested_scopes", requested_scopes)
         if resource_id is not None:
@@ -239,7 +243,7 @@ class _ResourceOauthSettingsState:
     @pulumi.getter(name="clientSecretSet")
     def client_secret_set(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        Whether the OAuth app has a client secret.
+        Whether the OAuth app, or the dynamically registered client, has a client secret.
         """
         return pulumi.get(self, "client_secret_set")
 
@@ -309,6 +313,18 @@ class _ResourceOauthSettingsState:
         pulumi.set(self, "oauth_settings_id", value)
 
     @_builtins.property
+    @pulumi.getter(name="registeredClientId")
+    def registered_client_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The client ID the authorization server issued when `upstream_oauth_mode` is `dcr`; empty otherwise.
+        """
+        return pulumi.get(self, "registered_client_id")
+
+    @registered_client_id.setter
+    def registered_client_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "registered_client_id", value)
+
+    @_builtins.property
     @pulumi.getter(name="requestedScopes")
     def requested_scopes(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
@@ -348,7 +364,7 @@ class _ResourceOauthSettingsState:
     @pulumi.getter(name="upstreamOauthMode")
     def upstream_oauth_mode(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+        How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `registered_client_id`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
         """
         return pulumi.get(self, "upstream_oauth_mode")
 
@@ -373,7 +389,7 @@ class ResourceOauthSettings(pulumi.CustomResource):
                  upstream_oauth_mode: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        Enables OAuth on an MCP, HTTP, gRPC or LLM Resource. OAuth clients (see `OauthClient`) can then connect to the Resource through the Connector and, unless `upstream_oauth_mode` is `none`, users link their own upstream accounts, whose access tokens the Connector sends upstream in place of native user credentials. `requested_scopes` and the client secret update in place and leave linked accounts and OAuth clients' authorizations as they are. `requested_scopes` apply to future links. Changing `resource_id`, `upstream_oauth_mode`, `client_id`, or `issuer`, or destroying this resource, deletes every user's linked account and every OAuth client's authorization for the Resource.
+        Enables OAuth on an MCP, HTTP, gRPC or LLM Resource. OAuth clients (see `OauthClient`) can then connect to the Resource through the Connector and, unless `upstream_oauth_mode` is `none`, users link their own upstream accounts, whose access tokens the Connector sends upstream in place of native user credentials. `requested_scopes` and the client secret update in place and leave linked accounts and OAuth clients' authorizations as they are. `requested_scopes` apply to future links. Changing `resource_id`, `upstream_oauth_mode`, `client_id`, or `issuer`, or destroying this resource, deletes every user's linked account and every OAuth client's authorization for the Resource. In `dcr` mode, Formal registers its client once, on create; to register a new one, for example after the authorization server forgot the registration, replace this resource with `pulumi up -replace`.
 
         ## Example Usage
 
@@ -438,7 +454,7 @@ class ResourceOauthSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] issuer: The upstream authorization server's issuer, such as `https://github.com/login/oauth` for the GitHub REST API. Set it when the upstream publishes no protected resource metadata (RFC 9728): Formal then reads the issuer's authorization server metadata directly. It must use https, have no query or fragment, and exactly match the issuer the metadata reports. When unset, the authorization server is discovered from the upstream itself. Not allowed when `upstream_oauth_mode` is `none`.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] requested_scopes: Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstream_oauth_mode` is `none`. Existing linked accounts keep the scopes they were granted; users get these scopes the next time they link.
         :param pulumi.Input[_builtins.str] resource_id: The ID of the Resource to enable OAuth on. Its technology must be `mcp`, `http`, `grpc` or `llm`.
-        :param pulumi.Input[_builtins.str] upstream_oauth_mode: How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+        :param pulumi.Input[_builtins.str] upstream_oauth_mode: How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `registered_client_id`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
         """
         ...
     @overload
@@ -447,7 +463,7 @@ class ResourceOauthSettings(pulumi.CustomResource):
                  args: ResourceOauthSettingsArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Enables OAuth on an MCP, HTTP, gRPC or LLM Resource. OAuth clients (see `OauthClient`) can then connect to the Resource through the Connector and, unless `upstream_oauth_mode` is `none`, users link their own upstream accounts, whose access tokens the Connector sends upstream in place of native user credentials. `requested_scopes` and the client secret update in place and leave linked accounts and OAuth clients' authorizations as they are. `requested_scopes` apply to future links. Changing `resource_id`, `upstream_oauth_mode`, `client_id`, or `issuer`, or destroying this resource, deletes every user's linked account and every OAuth client's authorization for the Resource.
+        Enables OAuth on an MCP, HTTP, gRPC or LLM Resource. OAuth clients (see `OauthClient`) can then connect to the Resource through the Connector and, unless `upstream_oauth_mode` is `none`, users link their own upstream accounts, whose access tokens the Connector sends upstream in place of native user credentials. `requested_scopes` and the client secret update in place and leave linked accounts and OAuth clients' authorizations as they are. `requested_scopes` apply to future links. Changing `resource_id`, `upstream_oauth_mode`, `client_id`, or `issuer`, or destroying this resource, deletes every user's linked account and every OAuth client's authorization for the Resource. In `dcr` mode, Formal registers its client once, on create; to register a new one, for example after the authorization server forgot the registration, replace this resource with `pulumi up -replace`.
 
         ## Example Usage
 
@@ -547,6 +563,7 @@ class ResourceOauthSettings(pulumi.CustomResource):
             __props__.__dict__["client_secret_set"] = None
             __props__.__dict__["created_at"] = None
             __props__.__dict__["oauth_settings_id"] = None
+            __props__.__dict__["registered_client_id"] = None
             __props__.__dict__["updated_at"] = None
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientSecret", "clientSecretWo"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
@@ -568,6 +585,7 @@ class ResourceOauthSettings(pulumi.CustomResource):
             created_at: pulumi.Input[Optional[_builtins.str]] = None,
             issuer: pulumi.Input[Optional[_builtins.str]] = None,
             oauth_settings_id: pulumi.Input[Optional[_builtins.str]] = None,
+            registered_client_id: pulumi.Input[Optional[_builtins.str]] = None,
             requested_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             resource_id: pulumi.Input[Optional[_builtins.str]] = None,
             updated_at: pulumi.Input[Optional[_builtins.str]] = None,
@@ -581,17 +599,18 @@ class ResourceOauthSettings(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] client_id: The client ID of your OAuth app. Required when `upstream_oauth_mode` is `pre_registered`, and not allowed otherwise. Register the Formal redirect URI shown in the console with the authorization server.
         :param pulumi.Input[_builtins.str] client_secret: The client secret of your OAuth app. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstream_oauth_mode` is `pre_registered`. The API never returns it, so it is not read back, and Terraform only sends it when it changes. Rotating or removing it keeps linked accounts. Prefer `client_secret_wo` to keep the secret out of Terraform state.
-        :param pulumi.Input[_builtins.bool] client_secret_set: Whether the OAuth app has a client secret.
+        :param pulumi.Input[_builtins.bool] client_secret_set: Whether the OAuth app, or the dynamically registered client, has a client secret.
         :param pulumi.Input[_builtins.str] client_secret_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only client secret of your OAuth app. This value is not stored in Terraform state, so it must stay in the configuration. Requires Terraform 1.11+ and `client_secret_wo_version`. Leave unset for a public client, which authenticates with PKCE alone. Only allowed when `upstream_oauth_mode` is `pre_registered`. Set it to an empty string and increment `client_secret_wo_version` to make the client public. Rotating or removing the secret keeps linked accounts.
         :param pulumi.Input[_builtins.int] client_secret_wo_version: Version trigger for `client_secret_wo`. Increment this value to update the secret.
         :param pulumi.Input[_builtins.str] created_at: When the OAuth settings were created.
         :param pulumi.Input[_builtins.str] issuer: The upstream authorization server's issuer, such as `https://github.com/login/oauth` for the GitHub REST API. Set it when the upstream publishes no protected resource metadata (RFC 9728): Formal then reads the issuer's authorization server metadata directly. It must use https, have no query or fragment, and exactly match the issuer the metadata reports. When unset, the authorization server is discovered from the upstream itself. Not allowed when `upstream_oauth_mode` is `none`.
         :param pulumi.Input[_builtins.str] oauth_settings_id: The ID of the OAuth settings.
+        :param pulumi.Input[_builtins.str] registered_client_id: The client ID the authorization server issued when `upstream_oauth_mode` is `dcr`; empty otherwise.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] requested_scopes: Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstream_oauth_mode` is `none`. Existing linked accounts keep the scopes they were granted; users get these scopes the next time they link.
         :param pulumi.Input[_builtins.str] resource_id: The ID of the Resource to enable OAuth on. Its technology must be `mcp`, `http`, `grpc` or `llm`.
         :param pulumi.Input[_builtins.str] updated_at: When the OAuth settings were last updated.
-        :param pulumi.Input[_builtins.str] upstream_oauth_mode: How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+        :param pulumi.Input[_builtins.str] upstream_oauth_mode: How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `registered_client_id`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -605,6 +624,7 @@ class ResourceOauthSettings(pulumi.CustomResource):
         __props__.__dict__["created_at"] = created_at
         __props__.__dict__["issuer"] = issuer
         __props__.__dict__["oauth_settings_id"] = oauth_settings_id
+        __props__.__dict__["registered_client_id"] = registered_client_id
         __props__.__dict__["requested_scopes"] = requested_scopes
         __props__.__dict__["resource_id"] = resource_id
         __props__.__dict__["updated_at"] = updated_at
@@ -631,7 +651,7 @@ class ResourceOauthSettings(pulumi.CustomResource):
     @pulumi.getter(name="clientSecretSet")
     def client_secret_set(self) -> pulumi.Output[_builtins.bool]:
         """
-        Whether the OAuth app has a client secret.
+        Whether the OAuth app, or the dynamically registered client, has a client secret.
         """
         return pulumi.get(self, "client_secret_set")
 
@@ -677,6 +697,14 @@ class ResourceOauthSettings(pulumi.CustomResource):
         return pulumi.get(self, "oauth_settings_id")
 
     @_builtins.property
+    @pulumi.getter(name="registeredClientId")
+    def registered_client_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        The client ID the authorization server issued when `upstream_oauth_mode` is `dcr`; empty otherwise.
+        """
+        return pulumi.get(self, "registered_client_id")
+
+    @_builtins.property
     @pulumi.getter(name="requestedScopes")
     def requested_scopes(self) -> pulumi.Output[Optional[Sequence[_builtins.str]]]:
         """
@@ -704,7 +732,7 @@ class ResourceOauthSettings(pulumi.CustomResource):
     @pulumi.getter(name="upstreamOauthMode")
     def upstream_oauth_mode(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+        How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `pre_registered` uses an OAuth app your organization registered with the authorization server, set with `client_id` and `client_secret` or `client_secret_wo`. `dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `registered_client_id`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
         """
         return pulumi.get(self, "upstream_oauth_mode")
 

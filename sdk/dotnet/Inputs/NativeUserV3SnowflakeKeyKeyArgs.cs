@@ -58,6 +58,12 @@ namespace Formal.Pulumi.Inputs
         [Input("literalWoVersion")]
         public Input<int>? LiteralWoVersion { get; set; }
 
+        /// <summary>
+        /// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        /// </summary>
+        [Input("secretManager")]
+        public Input<Inputs.NativeUserV3SnowflakeKeyKeySecretManagerArgs>? SecretManager { get; set; }
+
         public NativeUserV3SnowflakeKeyKeyArgs()
         {
         }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace Formal.Pulumi
 {
     /// <summary>
-    /// Enables OAuth on an MCP, HTTP, gRPC or LLM Resource. OAuth clients (see `formal.OauthClient`) can then connect to the Resource through the Connector and, unless `UpstreamOauthMode` is `None`, users link their own upstream accounts, whose access tokens the Connector sends upstream in place of native user credentials. `RequestedScopes` and the client secret update in place and leave linked accounts and OAuth clients' authorizations as they are. `RequestedScopes` apply to future links. Changing `ResourceId`, `UpstreamOauthMode`, `ClientId`, or `Issuer`, or destroying this resource, deletes every user's linked account and every OAuth client's authorization for the Resource.
+    /// Enables OAuth on an MCP, HTTP, gRPC or LLM Resource. OAuth clients (see `formal.OauthClient`) can then connect to the Resource through the Connector and, unless `UpstreamOauthMode` is `None`, users link their own upstream accounts, whose access tokens the Connector sends upstream in place of native user credentials. `RequestedScopes` and the client secret update in place and leave linked accounts and OAuth clients' authorizations as they are. `RequestedScopes` apply to future links. Changing `ResourceId`, `UpstreamOauthMode`, `ClientId`, or `Issuer`, or destroying this resource, deletes every user's linked account and every OAuth client's authorization for the Resource. In `Dcr` mode, Formal registers its client once, on create; to register a new one, for example after the authorization server forgot the registration, replace this resource with `pulumi up -replace`.
     /// 
     /// ## Example Usage
     /// 
@@ -101,7 +101,7 @@ namespace Formal.Pulumi
         public Output<string?> ClientSecret { get; private set; } = null!;
 
         /// <summary>
-        /// Whether the OAuth app has a client secret.
+        /// Whether the OAuth app, or the dynamically registered client, has a client secret.
         /// </summary>
         [Output("clientSecretSet")]
         public Output<bool> ClientSecretSet { get; private set; } = null!;
@@ -138,6 +138,12 @@ namespace Formal.Pulumi
         public Output<string> OauthSettingsId { get; private set; } = null!;
 
         /// <summary>
+        /// The client ID the authorization server issued when `UpstreamOauthMode` is `Dcr`; empty otherwise.
+        /// </summary>
+        [Output("registeredClientId")]
+        public Output<string> RegisteredClientId { get; private set; } = null!;
+
+        /// <summary>
         /// Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `UpstreamOauthMode` is `None`. Existing linked accounts keep the scopes they were granted; users get these scopes the next time they link.
         /// </summary>
         [Output("requestedScopes")]
@@ -156,7 +162,7 @@ namespace Formal.Pulumi
         public Output<string> UpdatedAt { get; private set; } = null!;
 
         /// <summary>
-        /// How Formal identifies itself to the upstream authorization server when users link their accounts. `Formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `PreRegistered` uses an OAuth app your organization registered with the authorization server, set with `ClientId` and `ClientSecret` or `ClientSecretWo`. `None` links no upstream account: the Connector authenticates upstream with the user's native user.
+        /// How Formal identifies itself to the upstream authorization server when users link their accounts. `Formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `PreRegistered` uses an OAuth app your organization registered with the authorization server, set with `ClientId` and `ClientSecret` or `ClientSecretWo`. `Dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `RegisteredClientId`. `None` links no upstream account: the Connector authenticates upstream with the user's native user.
         /// </summary>
         [Output("upstreamOauthMode")]
         public Output<string?> UpstreamOauthMode { get; private set; } = null!;
@@ -283,7 +289,7 @@ namespace Formal.Pulumi
         public Input<string> ResourceId { get; set; } = null!;
 
         /// <summary>
-        /// How Formal identifies itself to the upstream authorization server when users link their accounts. `Formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `PreRegistered` uses an OAuth app your organization registered with the authorization server, set with `ClientId` and `ClientSecret` or `ClientSecretWo`. `None` links no upstream account: the Connector authenticates upstream with the user's native user.
+        /// How Formal identifies itself to the upstream authorization server when users link their accounts. `Formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `PreRegistered` uses an OAuth app your organization registered with the authorization server, set with `ClientId` and `ClientSecret` or `ClientSecretWo`. `Dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `RegisteredClientId`. `None` links no upstream account: the Connector authenticates upstream with the user's native user.
         /// </summary>
         [Input("upstreamOauthMode")]
         public Input<string>? UpstreamOauthMode { get; set; }
@@ -319,7 +325,7 @@ namespace Formal.Pulumi
         }
 
         /// <summary>
-        /// Whether the OAuth app has a client secret.
+        /// Whether the OAuth app, or the dynamically registered client, has a client secret.
         /// </summary>
         [Input("clientSecretSet")]
         public Input<bool>? ClientSecretSet { get; set; }
@@ -365,6 +371,12 @@ namespace Formal.Pulumi
         [Input("oauthSettingsId")]
         public Input<string>? OauthSettingsId { get; set; }
 
+        /// <summary>
+        /// The client ID the authorization server issued when `UpstreamOauthMode` is `Dcr`; empty otherwise.
+        /// </summary>
+        [Input("registeredClientId")]
+        public Input<string>? RegisteredClientId { get; set; }
+
         [Input("requestedScopes")]
         private InputList<string>? _requestedScopes;
 
@@ -390,7 +402,7 @@ namespace Formal.Pulumi
         public Input<string>? UpdatedAt { get; set; }
 
         /// <summary>
-        /// How Formal identifies itself to the upstream authorization server when users link their accounts. `Formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `PreRegistered` uses an OAuth app your organization registered with the authorization server, set with `ClientId` and `ClientSecret` or `ClientSecretWo`. `None` links no upstream account: the Connector authenticates upstream with the user's native user.
+        /// How Formal identifies itself to the upstream authorization server when users link their accounts. `Formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `PreRegistered` uses an OAuth app your organization registered with the authorization server, set with `ClientId` and `ClientSecret` or `ClientSecretWo`. `Dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `RegisteredClientId`. `None` links no upstream account: the Connector authenticates upstream with the user's native user.
         /// </summary>
         [Input("upstreamOauthMode")]
         public Input<string>? UpstreamOauthMode { get; set; }

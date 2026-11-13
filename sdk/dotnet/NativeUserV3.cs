@@ -49,6 +49,29 @@ namespace Formal.Pulumi
     ///         Label = "admin",
     ///     });
     /// 
+    ///     // Username and password, with the password read from AWS Secrets Manager by the
+    ///     // connector using its own IAM role. gcp_secret { name = ... } and
+    ///     // azure_secret { url = ... } work the same way for GCP Secret Manager and Azure Key Vault.
+    ///     var basicSecretManager = new Pulumi.NativeUserV3("basic_secret_manager", new()
+    ///     {
+    ///         Basic = new Pulumi.Inputs.NativeUserV3BasicArgs
+    ///         {
+    ///             Password = new Pulumi.Inputs.NativeUserV3BasicPasswordArgs
+    ///             {
+    ///                 SecretManager = new Pulumi.Inputs.NativeUserV3BasicPasswordSecretManagerArgs
+    ///                 {
+    ///                     AwsSecret = new Pulumi.Inputs.NativeUserV3BasicPasswordSecretManagerAwsSecretArgs
+    ///                     {
+    ///                         Arn = "arn:aws:secretsmanager:us-east-1:123456789012:secret:analytics-admin-AbCdEf:password::",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Username = "app_admin",
+    ///         },
+    ///         ResourceId = db.Id,
+    ///         Label = "admin-secret-manager",
+    ///     });
+    /// 
     ///     // Username and password, with the password passed as a write-only value so it
     ///     // never lands in Terraform state. Increment literal_wo_version to rotate it.
     ///     var basicWriteOnly = new Pulumi.NativeUserV3("basic_write_only", new()
@@ -64,6 +87,14 @@ namespace Formal.Pulumi
     ///         },
     ///         ResourceId = db.Id,
     ///         Label = "admin-write-only",
+    ///     });
+    /// 
+    ///     // The client's own credentials, sent as is to the Resource.
+    ///     var passthrough = new Pulumi.NativeUserV3("passthrough", new()
+    ///     {
+    ///         Passthrough = null,
+    ///         ResourceId = db.Id,
+    ///         Label = "passthrough",
     ///     });
     /// 
     ///     // AWS IAM, inheriting the role from the connector's environment.
@@ -122,6 +153,53 @@ namespace Formal.Pulumi
     ///         },
     ///         ResourceId = db.Id,
     ///         Label = "dynamic",
+    ///     });
+    /// 
+    ///     // A hook that receives secret manager references as its fourth argument,
+    ///     // resolved by the connector before the hook runs.
+    ///     var fromHookWithSecrets = new Pulumi.NativeUserV3("from_hook_with_secrets", new()
+    ///     {
+    ///         Hook = new Pulumi.Inputs.NativeUserV3HookArgs
+    ///         {
+    ///             Secrets = new[]
+    ///             {
+    ///                 new Pulumi.Inputs.NativeUserV3HookSecretArgs
+    ///                 {
+    ///                     GcpSecret = new Pulumi.Inputs.NativeUserV3HookSecretGcpSecretArgs
+    ///                     {
+    ///                         Name = "projects/analytics/secrets/db-password/versions/latest",
+    ///                     },
+    ///                     Name = "DB_PASSWORD",
+    ///                 },
+    ///             },
+    ///             OutputType = "basic",
+    ///             Code = @"export default async function (_input, _env, _cache, secrets) {
+    ///   return {
+    ///     username: \""app_admin\"",
+    ///     password: secrets.DB_PASSWORD,
+    ///   };
+    /// }
+    /// ",
+    ///         },
+    ///         ResourceId = db.Id,
+    ///         Label = "dynamic-with-secrets",
+    ///     });
+    /// 
+    ///     // The requesting user's linked upstream account token, sent as a bearer token.
+    ///     // The Resource must link upstream accounts through formal_resource_oauth_settings.
+    ///     var apiResourceOauthSettings = new Pulumi.ResourceOauthSettings("api", new()
+    ///     {
+    ///         ResourceId = api.Id,
+    ///     });
+    /// 
+    ///     var linkedAccount = new Pulumi.NativeUserV3("linked_account", new()
+    ///     {
+    ///         LinkedHttpBearer = new Pulumi.Inputs.NativeUserV3LinkedHttpBearerArgs
+    ///         {
+    ///             Header = "Authorization",
+    ///         },
+    ///         ResourceId = apiResourceOauthSettings.ResourceId,
+    ///         Label = "linked-account",
     ///     });
     /// 
     /// });
@@ -213,6 +291,24 @@ namespace Formal.Pulumi
         /// </summary>
         [Output("label")]
         public Output<string> Label { get; private set; } = null!;
+
+        /// <summary>
+        /// HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+        /// </summary>
+        [Output("linkedHttpBasic")]
+        public Output<Outputs.NativeUserV3LinkedHttpBasic?> LinkedHttpBasic { get; private set; } = null!;
+
+        /// <summary>
+        /// HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+        /// </summary>
+        [Output("linkedHttpBearer")]
+        public Output<Outputs.NativeUserV3LinkedHttpBearer?> LinkedHttpBearer { get; private set; } = null!;
+
+        /// <summary>
+        /// Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+        /// </summary>
+        [Output("passthrough")]
+        public Output<Outputs.NativeUserV3Passthrough?> Passthrough { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the Resource this Native User authenticates to.
@@ -370,6 +466,24 @@ namespace Formal.Pulumi
         public Input<string> Label { get; set; } = null!;
 
         /// <summary>
+        /// HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+        /// </summary>
+        [Input("linkedHttpBasic")]
+        public Input<Inputs.NativeUserV3LinkedHttpBasicArgs>? LinkedHttpBasic { get; set; }
+
+        /// <summary>
+        /// HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+        /// </summary>
+        [Input("linkedHttpBearer")]
+        public Input<Inputs.NativeUserV3LinkedHttpBearerArgs>? LinkedHttpBearer { get; set; }
+
+        /// <summary>
+        /// Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+        /// </summary>
+        [Input("passthrough")]
+        public Input<Inputs.NativeUserV3PassthroughArgs>? Passthrough { get; set; }
+
+        /// <summary>
         /// The ID of the Resource this Native User authenticates to.
         /// </summary>
         [Input("resourceId", required: true)]
@@ -484,6 +598,24 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("label")]
         public Input<string>? Label { get; set; }
+
+        /// <summary>
+        /// HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+        /// </summary>
+        [Input("linkedHttpBasic")]
+        public Input<Inputs.NativeUserV3LinkedHttpBasicGetArgs>? LinkedHttpBasic { get; set; }
+
+        /// <summary>
+        /// HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+        /// </summary>
+        [Input("linkedHttpBearer")]
+        public Input<Inputs.NativeUserV3LinkedHttpBearerGetArgs>? LinkedHttpBearer { get; set; }
+
+        /// <summary>
+        /// Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+        /// </summary>
+        [Input("passthrough")]
+        public Input<Inputs.NativeUserV3PassthroughGetArgs>? Passthrough { get; set; }
 
         /// <summary>
         /// The ID of the Resource this Native User authenticates to.

@@ -20,7 +20,7 @@ namespace Formal.Pulumi.Inputs
         public Input<string> Header { get; set; } = null!;
 
         /// <summary>
-        /// The bearer token. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The bearer token. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         [Input("token", required: true)]
         public Input<Inputs.NativeUserV3HttpBearerTokenGetArgs> Token { get; set; } = null!;

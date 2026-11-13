@@ -6243,7 +6243,7 @@ func (o NativeUserV3AzureIamPtrOutput) Username() pulumi.StringPtrOutput {
 }
 
 type NativeUserV3Basic struct {
-	// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Password NativeUserV3BasicPassword `pulumi:"password"`
 	// The username to authenticate as.
 	Username string `pulumi:"username"`
@@ -6261,7 +6261,7 @@ type NativeUserV3BasicInput interface {
 }
 
 type NativeUserV3BasicArgs struct {
-	// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Password NativeUserV3BasicPasswordInput `pulumi:"password"`
 	// The username to authenticate as.
 	Username pulumi.StringInput `pulumi:"username"`
@@ -6344,7 +6344,7 @@ func (o NativeUserV3BasicOutput) ToNativeUserV3BasicPtrOutputWithContext(ctx con
 	}).(NativeUserV3BasicPtrOutput)
 }
 
-// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3BasicOutput) Password() NativeUserV3BasicPasswordOutput {
 	return o.ApplyT(func(v NativeUserV3Basic) NativeUserV3BasicPassword { return v.Password }).(NativeUserV3BasicPasswordOutput)
 }
@@ -6378,7 +6378,7 @@ func (o NativeUserV3BasicPtrOutput) Elem() NativeUserV3BasicOutput {
 	}).(NativeUserV3BasicOutput)
 }
 
-// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3BasicPtrOutput) Password() NativeUserV3BasicPasswordPtrOutput {
 	return o.ApplyT(func(v *NativeUserV3Basic) *NativeUserV3BasicPassword {
 		if v == nil {
@@ -6408,6 +6408,8 @@ type NativeUserV3BasicPassword struct {
 	LiteralWo *string `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager *NativeUserV3BasicPasswordSecretManager `pulumi:"secretManager"`
 }
 
 // NativeUserV3BasicPasswordInput is an input type that accepts NativeUserV3BasicPasswordArgs and NativeUserV3BasicPasswordOutput values.
@@ -6431,6 +6433,8 @@ type NativeUserV3BasicPasswordArgs struct {
 	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager NativeUserV3BasicPasswordSecretManagerPtrInput `pulumi:"secretManager"`
 }
 
 func (NativeUserV3BasicPasswordArgs) ElementType() reflect.Type {
@@ -6531,6 +6535,11 @@ func (o NativeUserV3BasicPasswordOutput) LiteralWoVersion() pulumi.IntPtrOutput 
 	return o.ApplyT(func(v NativeUserV3BasicPassword) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3BasicPasswordOutput) SecretManager() NativeUserV3BasicPasswordSecretManagerPtrOutput {
+	return o.ApplyT(func(v NativeUserV3BasicPassword) *NativeUserV3BasicPasswordSecretManager { return v.SecretManager }).(NativeUserV3BasicPasswordSecretManagerPtrOutput)
+}
+
 type NativeUserV3BasicPasswordPtrOutput struct{ *pulumi.OutputState }
 
 func (NativeUserV3BasicPasswordPtrOutput) ElementType() reflect.Type {
@@ -6594,6 +6603,608 @@ func (o NativeUserV3BasicPasswordPtrOutput) LiteralWoVersion() pulumi.IntPtrOutp
 		}
 		return v.LiteralWoVersion
 	}).(pulumi.IntPtrOutput)
+}
+
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3BasicPasswordPtrOutput) SecretManager() NativeUserV3BasicPasswordSecretManagerPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPassword) *NativeUserV3BasicPasswordSecretManager {
+		if v == nil {
+			return nil
+		}
+		return v.SecretManager
+	}).(NativeUserV3BasicPasswordSecretManagerPtrOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManager struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret *NativeUserV3BasicPasswordSecretManagerAwsSecret `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret *NativeUserV3BasicPasswordSecretManagerAzureSecret `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret *NativeUserV3BasicPasswordSecretManagerGcpSecret `pulumi:"gcpSecret"`
+}
+
+// NativeUserV3BasicPasswordSecretManagerInput is an input type that accepts NativeUserV3BasicPasswordSecretManagerArgs and NativeUserV3BasicPasswordSecretManagerOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicPasswordSecretManagerInput` via:
+//
+//	NativeUserV3BasicPasswordSecretManagerArgs{...}
+type NativeUserV3BasicPasswordSecretManagerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicPasswordSecretManagerOutput() NativeUserV3BasicPasswordSecretManagerOutput
+	ToNativeUserV3BasicPasswordSecretManagerOutputWithContext(context.Context) NativeUserV3BasicPasswordSecretManagerOutput
+}
+
+type NativeUserV3BasicPasswordSecretManagerArgs struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret NativeUserV3BasicPasswordSecretManagerAwsSecretPtrInput `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret NativeUserV3BasicPasswordSecretManagerAzureSecretPtrInput `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret NativeUserV3BasicPasswordSecretManagerGcpSecretPtrInput `pulumi:"gcpSecret"`
+}
+
+func (NativeUserV3BasicPasswordSecretManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3BasicPasswordSecretManager)(nil)).Elem()
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerArgs) ToNativeUserV3BasicPasswordSecretManagerOutput() NativeUserV3BasicPasswordSecretManagerOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerArgs) ToNativeUserV3BasicPasswordSecretManagerOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerOutput)
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerArgs) ToNativeUserV3BasicPasswordSecretManagerPtrOutput() NativeUserV3BasicPasswordSecretManagerPtrOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerArgs) ToNativeUserV3BasicPasswordSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerOutput).ToNativeUserV3BasicPasswordSecretManagerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3BasicPasswordSecretManagerPtrInput is an input type that accepts NativeUserV3BasicPasswordSecretManagerArgs, NativeUserV3BasicPasswordSecretManagerPtr and NativeUserV3BasicPasswordSecretManagerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicPasswordSecretManagerPtrInput` via:
+//
+//	        NativeUserV3BasicPasswordSecretManagerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3BasicPasswordSecretManagerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicPasswordSecretManagerPtrOutput() NativeUserV3BasicPasswordSecretManagerPtrOutput
+	ToNativeUserV3BasicPasswordSecretManagerPtrOutputWithContext(context.Context) NativeUserV3BasicPasswordSecretManagerPtrOutput
+}
+
+type nativeUserV3BasicPasswordSecretManagerPtrType NativeUserV3BasicPasswordSecretManagerArgs
+
+func NativeUserV3BasicPasswordSecretManagerPtr(v *NativeUserV3BasicPasswordSecretManagerArgs) NativeUserV3BasicPasswordSecretManagerPtrInput {
+	return (*nativeUserV3BasicPasswordSecretManagerPtrType)(v)
+}
+
+func (*nativeUserV3BasicPasswordSecretManagerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3BasicPasswordSecretManager)(nil)).Elem()
+}
+
+func (i *nativeUserV3BasicPasswordSecretManagerPtrType) ToNativeUserV3BasicPasswordSecretManagerPtrOutput() NativeUserV3BasicPasswordSecretManagerPtrOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3BasicPasswordSecretManagerPtrType) ToNativeUserV3BasicPasswordSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerPtrOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManagerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicPasswordSecretManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3BasicPasswordSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerOutput) ToNativeUserV3BasicPasswordSecretManagerOutput() NativeUserV3BasicPasswordSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerOutput) ToNativeUserV3BasicPasswordSecretManagerOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerOutput) ToNativeUserV3BasicPasswordSecretManagerPtrOutput() NativeUserV3BasicPasswordSecretManagerPtrOutput {
+	return o.ToNativeUserV3BasicPasswordSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerOutput) ToNativeUserV3BasicPasswordSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3BasicPasswordSecretManager) *NativeUserV3BasicPasswordSecretManager {
+		return &v
+	}).(NativeUserV3BasicPasswordSecretManagerPtrOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3BasicPasswordSecretManagerOutput) AwsSecret() NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3BasicPasswordSecretManager) *NativeUserV3BasicPasswordSecretManagerAwsSecret {
+		return v.AwsSecret
+	}).(NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3BasicPasswordSecretManagerOutput) AzureSecret() NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3BasicPasswordSecretManager) *NativeUserV3BasicPasswordSecretManagerAzureSecret {
+		return v.AzureSecret
+	}).(NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3BasicPasswordSecretManagerOutput) GcpSecret() NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3BasicPasswordSecretManager) *NativeUserV3BasicPasswordSecretManagerGcpSecret {
+		return v.GcpSecret
+	}).(NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManagerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicPasswordSecretManagerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3BasicPasswordSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerPtrOutput) ToNativeUserV3BasicPasswordSecretManagerPtrOutput() NativeUserV3BasicPasswordSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerPtrOutput) ToNativeUserV3BasicPasswordSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerPtrOutput) Elem() NativeUserV3BasicPasswordSecretManagerOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPasswordSecretManager) NativeUserV3BasicPasswordSecretManager {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3BasicPasswordSecretManager
+		return ret
+	}).(NativeUserV3BasicPasswordSecretManagerOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3BasicPasswordSecretManagerPtrOutput) AwsSecret() NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPasswordSecretManager) *NativeUserV3BasicPasswordSecretManagerAwsSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AwsSecret
+	}).(NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3BasicPasswordSecretManagerPtrOutput) AzureSecret() NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPasswordSecretManager) *NativeUserV3BasicPasswordSecretManagerAzureSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AzureSecret
+	}).(NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3BasicPasswordSecretManagerPtrOutput) GcpSecret() NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPasswordSecretManager) *NativeUserV3BasicPasswordSecretManagerGcpSecret {
+		if v == nil {
+			return nil
+		}
+		return v.GcpSecret
+	}).(NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManagerAwsSecret struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn string `pulumi:"arn"`
+}
+
+// NativeUserV3BasicPasswordSecretManagerAwsSecretInput is an input type that accepts NativeUserV3BasicPasswordSecretManagerAwsSecretArgs and NativeUserV3BasicPasswordSecretManagerAwsSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicPasswordSecretManagerAwsSecretInput` via:
+//
+//	NativeUserV3BasicPasswordSecretManagerAwsSecretArgs{...}
+type NativeUserV3BasicPasswordSecretManagerAwsSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicPasswordSecretManagerAwsSecretOutput() NativeUserV3BasicPasswordSecretManagerAwsSecretOutput
+	ToNativeUserV3BasicPasswordSecretManagerAwsSecretOutputWithContext(context.Context) NativeUserV3BasicPasswordSecretManagerAwsSecretOutput
+}
+
+type NativeUserV3BasicPasswordSecretManagerAwsSecretArgs struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn pulumi.StringInput `pulumi:"arn"`
+}
+
+func (NativeUserV3BasicPasswordSecretManagerAwsSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerAwsSecretArgs) ToNativeUserV3BasicPasswordSecretManagerAwsSecretOutput() NativeUserV3BasicPasswordSecretManagerAwsSecretOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerAwsSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerAwsSecretArgs) ToNativeUserV3BasicPasswordSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAwsSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerAwsSecretOutput)
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerAwsSecretArgs) ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerAwsSecretArgs) ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerAwsSecretOutput).ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3BasicPasswordSecretManagerAwsSecretPtrInput is an input type that accepts NativeUserV3BasicPasswordSecretManagerAwsSecretArgs, NativeUserV3BasicPasswordSecretManagerAwsSecretPtr and NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicPasswordSecretManagerAwsSecretPtrInput` via:
+//
+//	        NativeUserV3BasicPasswordSecretManagerAwsSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3BasicPasswordSecretManagerAwsSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput
+	ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutputWithContext(context.Context) NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput
+}
+
+type nativeUserV3BasicPasswordSecretManagerAwsSecretPtrType NativeUserV3BasicPasswordSecretManagerAwsSecretArgs
+
+func NativeUserV3BasicPasswordSecretManagerAwsSecretPtr(v *NativeUserV3BasicPasswordSecretManagerAwsSecretArgs) NativeUserV3BasicPasswordSecretManagerAwsSecretPtrInput {
+	return (*nativeUserV3BasicPasswordSecretManagerAwsSecretPtrType)(v)
+}
+
+func (*nativeUserV3BasicPasswordSecretManagerAwsSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3BasicPasswordSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3BasicPasswordSecretManagerAwsSecretPtrType) ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3BasicPasswordSecretManagerAwsSecretPtrType) ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManagerAwsSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicPasswordSecretManagerAwsSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAwsSecretOutput) ToNativeUserV3BasicPasswordSecretManagerAwsSecretOutput() NativeUserV3BasicPasswordSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAwsSecretOutput) ToNativeUserV3BasicPasswordSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAwsSecretOutput) ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o.ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAwsSecretOutput) ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3BasicPasswordSecretManagerAwsSecret) *NativeUserV3BasicPasswordSecretManagerAwsSecret {
+		return &v
+	}).(NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3BasicPasswordSecretManagerAwsSecretOutput) Arn() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3BasicPasswordSecretManagerAwsSecret) string { return v.Arn }).(pulumi.StringOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3BasicPasswordSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput) ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput) ToNativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput) Elem() NativeUserV3BasicPasswordSecretManagerAwsSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPasswordSecretManagerAwsSecret) NativeUserV3BasicPasswordSecretManagerAwsSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3BasicPasswordSecretManagerAwsSecret
+		return ret
+	}).(NativeUserV3BasicPasswordSecretManagerAwsSecretOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput) Arn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPasswordSecretManagerAwsSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Arn
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManagerAzureSecret struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url string `pulumi:"url"`
+}
+
+// NativeUserV3BasicPasswordSecretManagerAzureSecretInput is an input type that accepts NativeUserV3BasicPasswordSecretManagerAzureSecretArgs and NativeUserV3BasicPasswordSecretManagerAzureSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicPasswordSecretManagerAzureSecretInput` via:
+//
+//	NativeUserV3BasicPasswordSecretManagerAzureSecretArgs{...}
+type NativeUserV3BasicPasswordSecretManagerAzureSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicPasswordSecretManagerAzureSecretOutput() NativeUserV3BasicPasswordSecretManagerAzureSecretOutput
+	ToNativeUserV3BasicPasswordSecretManagerAzureSecretOutputWithContext(context.Context) NativeUserV3BasicPasswordSecretManagerAzureSecretOutput
+}
+
+type NativeUserV3BasicPasswordSecretManagerAzureSecretArgs struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (NativeUserV3BasicPasswordSecretManagerAzureSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerAzureSecretArgs) ToNativeUserV3BasicPasswordSecretManagerAzureSecretOutput() NativeUserV3BasicPasswordSecretManagerAzureSecretOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerAzureSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerAzureSecretArgs) ToNativeUserV3BasicPasswordSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAzureSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerAzureSecretOutput)
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerAzureSecretArgs) ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerAzureSecretArgs) ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerAzureSecretOutput).ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3BasicPasswordSecretManagerAzureSecretPtrInput is an input type that accepts NativeUserV3BasicPasswordSecretManagerAzureSecretArgs, NativeUserV3BasicPasswordSecretManagerAzureSecretPtr and NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicPasswordSecretManagerAzureSecretPtrInput` via:
+//
+//	        NativeUserV3BasicPasswordSecretManagerAzureSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3BasicPasswordSecretManagerAzureSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput
+	ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutputWithContext(context.Context) NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput
+}
+
+type nativeUserV3BasicPasswordSecretManagerAzureSecretPtrType NativeUserV3BasicPasswordSecretManagerAzureSecretArgs
+
+func NativeUserV3BasicPasswordSecretManagerAzureSecretPtr(v *NativeUserV3BasicPasswordSecretManagerAzureSecretArgs) NativeUserV3BasicPasswordSecretManagerAzureSecretPtrInput {
+	return (*nativeUserV3BasicPasswordSecretManagerAzureSecretPtrType)(v)
+}
+
+func (*nativeUserV3BasicPasswordSecretManagerAzureSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3BasicPasswordSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3BasicPasswordSecretManagerAzureSecretPtrType) ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3BasicPasswordSecretManagerAzureSecretPtrType) ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManagerAzureSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicPasswordSecretManagerAzureSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAzureSecretOutput) ToNativeUserV3BasicPasswordSecretManagerAzureSecretOutput() NativeUserV3BasicPasswordSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAzureSecretOutput) ToNativeUserV3BasicPasswordSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAzureSecretOutput) ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o.ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAzureSecretOutput) ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3BasicPasswordSecretManagerAzureSecret) *NativeUserV3BasicPasswordSecretManagerAzureSecret {
+		return &v
+	}).(NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3BasicPasswordSecretManagerAzureSecretOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3BasicPasswordSecretManagerAzureSecret) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3BasicPasswordSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput) ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput) ToNativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput) Elem() NativeUserV3BasicPasswordSecretManagerAzureSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPasswordSecretManagerAzureSecret) NativeUserV3BasicPasswordSecretManagerAzureSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3BasicPasswordSecretManagerAzureSecret
+		return ret
+	}).(NativeUserV3BasicPasswordSecretManagerAzureSecretOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPasswordSecretManagerAzureSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManagerGcpSecret struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3BasicPasswordSecretManagerGcpSecretInput is an input type that accepts NativeUserV3BasicPasswordSecretManagerGcpSecretArgs and NativeUserV3BasicPasswordSecretManagerGcpSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicPasswordSecretManagerGcpSecretInput` via:
+//
+//	NativeUserV3BasicPasswordSecretManagerGcpSecretArgs{...}
+type NativeUserV3BasicPasswordSecretManagerGcpSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicPasswordSecretManagerGcpSecretOutput() NativeUserV3BasicPasswordSecretManagerGcpSecretOutput
+	ToNativeUserV3BasicPasswordSecretManagerGcpSecretOutputWithContext(context.Context) NativeUserV3BasicPasswordSecretManagerGcpSecretOutput
+}
+
+type NativeUserV3BasicPasswordSecretManagerGcpSecretArgs struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3BasicPasswordSecretManagerGcpSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerGcpSecretArgs) ToNativeUserV3BasicPasswordSecretManagerGcpSecretOutput() NativeUserV3BasicPasswordSecretManagerGcpSecretOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerGcpSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerGcpSecretArgs) ToNativeUserV3BasicPasswordSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerGcpSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerGcpSecretOutput)
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerGcpSecretArgs) ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3BasicPasswordSecretManagerGcpSecretArgs) ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerGcpSecretOutput).ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3BasicPasswordSecretManagerGcpSecretPtrInput is an input type that accepts NativeUserV3BasicPasswordSecretManagerGcpSecretArgs, NativeUserV3BasicPasswordSecretManagerGcpSecretPtr and NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3BasicPasswordSecretManagerGcpSecretPtrInput` via:
+//
+//	        NativeUserV3BasicPasswordSecretManagerGcpSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3BasicPasswordSecretManagerGcpSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput
+	ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutputWithContext(context.Context) NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput
+}
+
+type nativeUserV3BasicPasswordSecretManagerGcpSecretPtrType NativeUserV3BasicPasswordSecretManagerGcpSecretArgs
+
+func NativeUserV3BasicPasswordSecretManagerGcpSecretPtr(v *NativeUserV3BasicPasswordSecretManagerGcpSecretArgs) NativeUserV3BasicPasswordSecretManagerGcpSecretPtrInput {
+	return (*nativeUserV3BasicPasswordSecretManagerGcpSecretPtrType)(v)
+}
+
+func (*nativeUserV3BasicPasswordSecretManagerGcpSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3BasicPasswordSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3BasicPasswordSecretManagerGcpSecretPtrType) ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3BasicPasswordSecretManagerGcpSecretPtrType) ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManagerGcpSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicPasswordSecretManagerGcpSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerGcpSecretOutput) ToNativeUserV3BasicPasswordSecretManagerGcpSecretOutput() NativeUserV3BasicPasswordSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerGcpSecretOutput) ToNativeUserV3BasicPasswordSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerGcpSecretOutput) ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o.ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerGcpSecretOutput) ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3BasicPasswordSecretManagerGcpSecret) *NativeUserV3BasicPasswordSecretManagerGcpSecret {
+		return &v
+	}).(NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3BasicPasswordSecretManagerGcpSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3BasicPasswordSecretManagerGcpSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3BasicPasswordSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput) ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput() NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput) ToNativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput) Elem() NativeUserV3BasicPasswordSecretManagerGcpSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPasswordSecretManagerGcpSecret) NativeUserV3BasicPasswordSecretManagerGcpSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3BasicPasswordSecretManagerGcpSecret
+		return ret
+	}).(NativeUserV3BasicPasswordSecretManagerGcpSecretOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3BasicPasswordSecretManagerGcpSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
 }
 
 type NativeUserV3GcpIam struct {
@@ -6742,6 +7353,8 @@ type NativeUserV3Hook struct {
 	Code string `pulumi:"code"`
 	// The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `awsIam`, `awsIamRole`, `gcpIam`, `azureIam`, `kubernetesPath`, `kubernetesInline`, `sshKey`, `snowflakeKey`, `httpBasic`, `httpBearer`, `httpApiKeyHeader`, `httpApiKeyQuery`.
 	OutputType string `pulumi:"outputType"`
+	// A secret manager reference the connector resolves and passes to the hook as its fourth argument, `secrets`, keyed by `name`.
+	Secrets []NativeUserV3HookSecret `pulumi:"secrets"`
 }
 
 // NativeUserV3HookInput is an input type that accepts NativeUserV3HookArgs and NativeUserV3HookOutput values.
@@ -6764,6 +7377,8 @@ type NativeUserV3HookArgs struct {
 	Code pulumi.StringInput `pulumi:"code"`
 	// The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `awsIam`, `awsIamRole`, `gcpIam`, `azureIam`, `kubernetesPath`, `kubernetesInline`, `sshKey`, `snowflakeKey`, `httpBasic`, `httpBearer`, `httpApiKeyHeader`, `httpApiKeyQuery`.
 	OutputType pulumi.StringInput `pulumi:"outputType"`
+	// A secret manager reference the connector resolves and passes to the hook as its fourth argument, `secrets`, keyed by `name`.
+	Secrets NativeUserV3HookSecretArrayInput `pulumi:"secrets"`
 }
 
 func (NativeUserV3HookArgs) ElementType() reflect.Type {
@@ -6863,6 +7478,11 @@ func (o NativeUserV3HookOutput) OutputType() pulumi.StringOutput {
 	return o.ApplyT(func(v NativeUserV3Hook) string { return v.OutputType }).(pulumi.StringOutput)
 }
 
+// A secret manager reference the connector resolves and passes to the hook as its fourth argument, `secrets`, keyed by `name`.
+func (o NativeUserV3HookOutput) Secrets() NativeUserV3HookSecretArrayOutput {
+	return o.ApplyT(func(v NativeUserV3Hook) []NativeUserV3HookSecret { return v.Secrets }).(NativeUserV3HookSecretArrayOutput)
+}
+
 type NativeUserV3HookPtrOutput struct{ *pulumi.OutputState }
 
 func (NativeUserV3HookPtrOutput) ElementType() reflect.Type {
@@ -6927,10 +7547,555 @@ func (o NativeUserV3HookPtrOutput) OutputType() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// A secret manager reference the connector resolves and passes to the hook as its fourth argument, `secrets`, keyed by `name`.
+func (o NativeUserV3HookPtrOutput) Secrets() NativeUserV3HookSecretArrayOutput {
+	return o.ApplyT(func(v *NativeUserV3Hook) []NativeUserV3HookSecret {
+		if v == nil {
+			return nil
+		}
+		return v.Secrets
+	}).(NativeUserV3HookSecretArrayOutput)
+}
+
+type NativeUserV3HookSecret struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret *NativeUserV3HookSecretAwsSecret `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret *NativeUserV3HookSecretAzureSecret `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret *NativeUserV3HookSecretGcpSecret `pulumi:"gcpSecret"`
+	// The key the resolved value has in the hook's `secrets` argument.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3HookSecretInput is an input type that accepts NativeUserV3HookSecretArgs and NativeUserV3HookSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HookSecretInput` via:
+//
+//	NativeUserV3HookSecretArgs{...}
+type NativeUserV3HookSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HookSecretOutput() NativeUserV3HookSecretOutput
+	ToNativeUserV3HookSecretOutputWithContext(context.Context) NativeUserV3HookSecretOutput
+}
+
+type NativeUserV3HookSecretArgs struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret NativeUserV3HookSecretAwsSecretPtrInput `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret NativeUserV3HookSecretAzureSecretPtrInput `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret NativeUserV3HookSecretGcpSecretPtrInput `pulumi:"gcpSecret"`
+	// The key the resolved value has in the hook's `secrets` argument.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3HookSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HookSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HookSecretArgs) ToNativeUserV3HookSecretOutput() NativeUserV3HookSecretOutput {
+	return i.ToNativeUserV3HookSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HookSecretArgs) ToNativeUserV3HookSecretOutputWithContext(ctx context.Context) NativeUserV3HookSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookSecretOutput)
+}
+
+// NativeUserV3HookSecretArrayInput is an input type that accepts NativeUserV3HookSecretArray and NativeUserV3HookSecretArrayOutput values.
+// You can construct a concrete instance of `NativeUserV3HookSecretArrayInput` via:
+//
+//	NativeUserV3HookSecretArray{ NativeUserV3HookSecretArgs{...} }
+type NativeUserV3HookSecretArrayInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HookSecretArrayOutput() NativeUserV3HookSecretArrayOutput
+	ToNativeUserV3HookSecretArrayOutputWithContext(context.Context) NativeUserV3HookSecretArrayOutput
+}
+
+type NativeUserV3HookSecretArray []NativeUserV3HookSecretInput
+
+func (NativeUserV3HookSecretArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeUserV3HookSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HookSecretArray) ToNativeUserV3HookSecretArrayOutput() NativeUserV3HookSecretArrayOutput {
+	return i.ToNativeUserV3HookSecretArrayOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HookSecretArray) ToNativeUserV3HookSecretArrayOutputWithContext(ctx context.Context) NativeUserV3HookSecretArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookSecretArrayOutput)
+}
+
+type NativeUserV3HookSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HookSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HookSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HookSecretOutput) ToNativeUserV3HookSecretOutput() NativeUserV3HookSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretOutput) ToNativeUserV3HookSecretOutputWithContext(ctx context.Context) NativeUserV3HookSecretOutput {
+	return o
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HookSecretOutput) AwsSecret() NativeUserV3HookSecretAwsSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HookSecret) *NativeUserV3HookSecretAwsSecret { return v.AwsSecret }).(NativeUserV3HookSecretAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HookSecretOutput) AzureSecret() NativeUserV3HookSecretAzureSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HookSecret) *NativeUserV3HookSecretAzureSecret { return v.AzureSecret }).(NativeUserV3HookSecretAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HookSecretOutput) GcpSecret() NativeUserV3HookSecretGcpSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HookSecret) *NativeUserV3HookSecretGcpSecret { return v.GcpSecret }).(NativeUserV3HookSecretGcpSecretPtrOutput)
+}
+
+// The key the resolved value has in the hook's `secrets` argument.
+func (o NativeUserV3HookSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HookSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HookSecretArrayOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HookSecretArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeUserV3HookSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HookSecretArrayOutput) ToNativeUserV3HookSecretArrayOutput() NativeUserV3HookSecretArrayOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretArrayOutput) ToNativeUserV3HookSecretArrayOutputWithContext(ctx context.Context) NativeUserV3HookSecretArrayOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretArrayOutput) Index(i pulumi.IntInput) NativeUserV3HookSecretOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NativeUserV3HookSecret {
+		return vs[0].([]NativeUserV3HookSecret)[vs[1].(int)]
+	}).(NativeUserV3HookSecretOutput)
+}
+
+type NativeUserV3HookSecretAwsSecret struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn string `pulumi:"arn"`
+}
+
+// NativeUserV3HookSecretAwsSecretInput is an input type that accepts NativeUserV3HookSecretAwsSecretArgs and NativeUserV3HookSecretAwsSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HookSecretAwsSecretInput` via:
+//
+//	NativeUserV3HookSecretAwsSecretArgs{...}
+type NativeUserV3HookSecretAwsSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HookSecretAwsSecretOutput() NativeUserV3HookSecretAwsSecretOutput
+	ToNativeUserV3HookSecretAwsSecretOutputWithContext(context.Context) NativeUserV3HookSecretAwsSecretOutput
+}
+
+type NativeUserV3HookSecretAwsSecretArgs struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn pulumi.StringInput `pulumi:"arn"`
+}
+
+func (NativeUserV3HookSecretAwsSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HookSecretAwsSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HookSecretAwsSecretArgs) ToNativeUserV3HookSecretAwsSecretOutput() NativeUserV3HookSecretAwsSecretOutput {
+	return i.ToNativeUserV3HookSecretAwsSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HookSecretAwsSecretArgs) ToNativeUserV3HookSecretAwsSecretOutputWithContext(ctx context.Context) NativeUserV3HookSecretAwsSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookSecretAwsSecretOutput)
+}
+
+func (i NativeUserV3HookSecretAwsSecretArgs) ToNativeUserV3HookSecretAwsSecretPtrOutput() NativeUserV3HookSecretAwsSecretPtrOutput {
+	return i.ToNativeUserV3HookSecretAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HookSecretAwsSecretArgs) ToNativeUserV3HookSecretAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookSecretAwsSecretOutput).ToNativeUserV3HookSecretAwsSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HookSecretAwsSecretPtrInput is an input type that accepts NativeUserV3HookSecretAwsSecretArgs, NativeUserV3HookSecretAwsSecretPtr and NativeUserV3HookSecretAwsSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HookSecretAwsSecretPtrInput` via:
+//
+//	        NativeUserV3HookSecretAwsSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HookSecretAwsSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HookSecretAwsSecretPtrOutput() NativeUserV3HookSecretAwsSecretPtrOutput
+	ToNativeUserV3HookSecretAwsSecretPtrOutputWithContext(context.Context) NativeUserV3HookSecretAwsSecretPtrOutput
+}
+
+type nativeUserV3HookSecretAwsSecretPtrType NativeUserV3HookSecretAwsSecretArgs
+
+func NativeUserV3HookSecretAwsSecretPtr(v *NativeUserV3HookSecretAwsSecretArgs) NativeUserV3HookSecretAwsSecretPtrInput {
+	return (*nativeUserV3HookSecretAwsSecretPtrType)(v)
+}
+
+func (*nativeUserV3HookSecretAwsSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HookSecretAwsSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HookSecretAwsSecretPtrType) ToNativeUserV3HookSecretAwsSecretPtrOutput() NativeUserV3HookSecretAwsSecretPtrOutput {
+	return i.ToNativeUserV3HookSecretAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HookSecretAwsSecretPtrType) ToNativeUserV3HookSecretAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookSecretAwsSecretPtrOutput)
+}
+
+type NativeUserV3HookSecretAwsSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HookSecretAwsSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HookSecretAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HookSecretAwsSecretOutput) ToNativeUserV3HookSecretAwsSecretOutput() NativeUserV3HookSecretAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretAwsSecretOutput) ToNativeUserV3HookSecretAwsSecretOutputWithContext(ctx context.Context) NativeUserV3HookSecretAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretAwsSecretOutput) ToNativeUserV3HookSecretAwsSecretPtrOutput() NativeUserV3HookSecretAwsSecretPtrOutput {
+	return o.ToNativeUserV3HookSecretAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HookSecretAwsSecretOutput) ToNativeUserV3HookSecretAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretAwsSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HookSecretAwsSecret) *NativeUserV3HookSecretAwsSecret {
+		return &v
+	}).(NativeUserV3HookSecretAwsSecretPtrOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3HookSecretAwsSecretOutput) Arn() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HookSecretAwsSecret) string { return v.Arn }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HookSecretAwsSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HookSecretAwsSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HookSecretAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HookSecretAwsSecretPtrOutput) ToNativeUserV3HookSecretAwsSecretPtrOutput() NativeUserV3HookSecretAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretAwsSecretPtrOutput) ToNativeUserV3HookSecretAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretAwsSecretPtrOutput) Elem() NativeUserV3HookSecretAwsSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HookSecretAwsSecret) NativeUserV3HookSecretAwsSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HookSecretAwsSecret
+		return ret
+	}).(NativeUserV3HookSecretAwsSecretOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3HookSecretAwsSecretPtrOutput) Arn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HookSecretAwsSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Arn
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HookSecretAzureSecret struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url string `pulumi:"url"`
+}
+
+// NativeUserV3HookSecretAzureSecretInput is an input type that accepts NativeUserV3HookSecretAzureSecretArgs and NativeUserV3HookSecretAzureSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HookSecretAzureSecretInput` via:
+//
+//	NativeUserV3HookSecretAzureSecretArgs{...}
+type NativeUserV3HookSecretAzureSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HookSecretAzureSecretOutput() NativeUserV3HookSecretAzureSecretOutput
+	ToNativeUserV3HookSecretAzureSecretOutputWithContext(context.Context) NativeUserV3HookSecretAzureSecretOutput
+}
+
+type NativeUserV3HookSecretAzureSecretArgs struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (NativeUserV3HookSecretAzureSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HookSecretAzureSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HookSecretAzureSecretArgs) ToNativeUserV3HookSecretAzureSecretOutput() NativeUserV3HookSecretAzureSecretOutput {
+	return i.ToNativeUserV3HookSecretAzureSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HookSecretAzureSecretArgs) ToNativeUserV3HookSecretAzureSecretOutputWithContext(ctx context.Context) NativeUserV3HookSecretAzureSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookSecretAzureSecretOutput)
+}
+
+func (i NativeUserV3HookSecretAzureSecretArgs) ToNativeUserV3HookSecretAzureSecretPtrOutput() NativeUserV3HookSecretAzureSecretPtrOutput {
+	return i.ToNativeUserV3HookSecretAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HookSecretAzureSecretArgs) ToNativeUserV3HookSecretAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookSecretAzureSecretOutput).ToNativeUserV3HookSecretAzureSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HookSecretAzureSecretPtrInput is an input type that accepts NativeUserV3HookSecretAzureSecretArgs, NativeUserV3HookSecretAzureSecretPtr and NativeUserV3HookSecretAzureSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HookSecretAzureSecretPtrInput` via:
+//
+//	        NativeUserV3HookSecretAzureSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HookSecretAzureSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HookSecretAzureSecretPtrOutput() NativeUserV3HookSecretAzureSecretPtrOutput
+	ToNativeUserV3HookSecretAzureSecretPtrOutputWithContext(context.Context) NativeUserV3HookSecretAzureSecretPtrOutput
+}
+
+type nativeUserV3HookSecretAzureSecretPtrType NativeUserV3HookSecretAzureSecretArgs
+
+func NativeUserV3HookSecretAzureSecretPtr(v *NativeUserV3HookSecretAzureSecretArgs) NativeUserV3HookSecretAzureSecretPtrInput {
+	return (*nativeUserV3HookSecretAzureSecretPtrType)(v)
+}
+
+func (*nativeUserV3HookSecretAzureSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HookSecretAzureSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HookSecretAzureSecretPtrType) ToNativeUserV3HookSecretAzureSecretPtrOutput() NativeUserV3HookSecretAzureSecretPtrOutput {
+	return i.ToNativeUserV3HookSecretAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HookSecretAzureSecretPtrType) ToNativeUserV3HookSecretAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookSecretAzureSecretPtrOutput)
+}
+
+type NativeUserV3HookSecretAzureSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HookSecretAzureSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HookSecretAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HookSecretAzureSecretOutput) ToNativeUserV3HookSecretAzureSecretOutput() NativeUserV3HookSecretAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretAzureSecretOutput) ToNativeUserV3HookSecretAzureSecretOutputWithContext(ctx context.Context) NativeUserV3HookSecretAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretAzureSecretOutput) ToNativeUserV3HookSecretAzureSecretPtrOutput() NativeUserV3HookSecretAzureSecretPtrOutput {
+	return o.ToNativeUserV3HookSecretAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HookSecretAzureSecretOutput) ToNativeUserV3HookSecretAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretAzureSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HookSecretAzureSecret) *NativeUserV3HookSecretAzureSecret {
+		return &v
+	}).(NativeUserV3HookSecretAzureSecretPtrOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3HookSecretAzureSecretOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HookSecretAzureSecret) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HookSecretAzureSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HookSecretAzureSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HookSecretAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HookSecretAzureSecretPtrOutput) ToNativeUserV3HookSecretAzureSecretPtrOutput() NativeUserV3HookSecretAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretAzureSecretPtrOutput) ToNativeUserV3HookSecretAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretAzureSecretPtrOutput) Elem() NativeUserV3HookSecretAzureSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HookSecretAzureSecret) NativeUserV3HookSecretAzureSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HookSecretAzureSecret
+		return ret
+	}).(NativeUserV3HookSecretAzureSecretOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3HookSecretAzureSecretPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HookSecretAzureSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HookSecretGcpSecret struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3HookSecretGcpSecretInput is an input type that accepts NativeUserV3HookSecretGcpSecretArgs and NativeUserV3HookSecretGcpSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HookSecretGcpSecretInput` via:
+//
+//	NativeUserV3HookSecretGcpSecretArgs{...}
+type NativeUserV3HookSecretGcpSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HookSecretGcpSecretOutput() NativeUserV3HookSecretGcpSecretOutput
+	ToNativeUserV3HookSecretGcpSecretOutputWithContext(context.Context) NativeUserV3HookSecretGcpSecretOutput
+}
+
+type NativeUserV3HookSecretGcpSecretArgs struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3HookSecretGcpSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HookSecretGcpSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HookSecretGcpSecretArgs) ToNativeUserV3HookSecretGcpSecretOutput() NativeUserV3HookSecretGcpSecretOutput {
+	return i.ToNativeUserV3HookSecretGcpSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HookSecretGcpSecretArgs) ToNativeUserV3HookSecretGcpSecretOutputWithContext(ctx context.Context) NativeUserV3HookSecretGcpSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookSecretGcpSecretOutput)
+}
+
+func (i NativeUserV3HookSecretGcpSecretArgs) ToNativeUserV3HookSecretGcpSecretPtrOutput() NativeUserV3HookSecretGcpSecretPtrOutput {
+	return i.ToNativeUserV3HookSecretGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HookSecretGcpSecretArgs) ToNativeUserV3HookSecretGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookSecretGcpSecretOutput).ToNativeUserV3HookSecretGcpSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HookSecretGcpSecretPtrInput is an input type that accepts NativeUserV3HookSecretGcpSecretArgs, NativeUserV3HookSecretGcpSecretPtr and NativeUserV3HookSecretGcpSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HookSecretGcpSecretPtrInput` via:
+//
+//	        NativeUserV3HookSecretGcpSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HookSecretGcpSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HookSecretGcpSecretPtrOutput() NativeUserV3HookSecretGcpSecretPtrOutput
+	ToNativeUserV3HookSecretGcpSecretPtrOutputWithContext(context.Context) NativeUserV3HookSecretGcpSecretPtrOutput
+}
+
+type nativeUserV3HookSecretGcpSecretPtrType NativeUserV3HookSecretGcpSecretArgs
+
+func NativeUserV3HookSecretGcpSecretPtr(v *NativeUserV3HookSecretGcpSecretArgs) NativeUserV3HookSecretGcpSecretPtrInput {
+	return (*nativeUserV3HookSecretGcpSecretPtrType)(v)
+}
+
+func (*nativeUserV3HookSecretGcpSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HookSecretGcpSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HookSecretGcpSecretPtrType) ToNativeUserV3HookSecretGcpSecretPtrOutput() NativeUserV3HookSecretGcpSecretPtrOutput {
+	return i.ToNativeUserV3HookSecretGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HookSecretGcpSecretPtrType) ToNativeUserV3HookSecretGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HookSecretGcpSecretPtrOutput)
+}
+
+type NativeUserV3HookSecretGcpSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HookSecretGcpSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HookSecretGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HookSecretGcpSecretOutput) ToNativeUserV3HookSecretGcpSecretOutput() NativeUserV3HookSecretGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretGcpSecretOutput) ToNativeUserV3HookSecretGcpSecretOutputWithContext(ctx context.Context) NativeUserV3HookSecretGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretGcpSecretOutput) ToNativeUserV3HookSecretGcpSecretPtrOutput() NativeUserV3HookSecretGcpSecretPtrOutput {
+	return o.ToNativeUserV3HookSecretGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HookSecretGcpSecretOutput) ToNativeUserV3HookSecretGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretGcpSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HookSecretGcpSecret) *NativeUserV3HookSecretGcpSecret {
+		return &v
+	}).(NativeUserV3HookSecretGcpSecretPtrOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3HookSecretGcpSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HookSecretGcpSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HookSecretGcpSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HookSecretGcpSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HookSecretGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HookSecretGcpSecretPtrOutput) ToNativeUserV3HookSecretGcpSecretPtrOutput() NativeUserV3HookSecretGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretGcpSecretPtrOutput) ToNativeUserV3HookSecretGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HookSecretGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HookSecretGcpSecretPtrOutput) Elem() NativeUserV3HookSecretGcpSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HookSecretGcpSecret) NativeUserV3HookSecretGcpSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HookSecretGcpSecret
+		return ret
+	}).(NativeUserV3HookSecretGcpSecretOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3HookSecretGcpSecretPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HookSecretGcpSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
 type NativeUserV3HttpApiKeyHeader struct {
 	// The name of the header carrying the API key.
 	Key string `pulumi:"key"`
-	// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Value NativeUserV3HttpApiKeyHeaderValue `pulumi:"value"`
 }
 
@@ -6948,7 +8113,7 @@ type NativeUserV3HttpApiKeyHeaderInput interface {
 type NativeUserV3HttpApiKeyHeaderArgs struct {
 	// The name of the header carrying the API key.
 	Key pulumi.StringInput `pulumi:"key"`
-	// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Value NativeUserV3HttpApiKeyHeaderValueInput `pulumi:"value"`
 }
 
@@ -7034,7 +8199,7 @@ func (o NativeUserV3HttpApiKeyHeaderOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeader) string { return v.Key }).(pulumi.StringOutput)
 }
 
-// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3HttpApiKeyHeaderOutput) Value() NativeUserV3HttpApiKeyHeaderValueOutput {
 	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeader) NativeUserV3HttpApiKeyHeaderValue { return v.Value }).(NativeUserV3HttpApiKeyHeaderValueOutput)
 }
@@ -7073,7 +8238,7 @@ func (o NativeUserV3HttpApiKeyHeaderPtrOutput) Key() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3HttpApiKeyHeaderPtrOutput) Value() NativeUserV3HttpApiKeyHeaderValuePtrOutput {
 	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeader) *NativeUserV3HttpApiKeyHeaderValue {
 		if v == nil {
@@ -7093,6 +8258,8 @@ type NativeUserV3HttpApiKeyHeaderValue struct {
 	LiteralWo *string `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager *NativeUserV3HttpApiKeyHeaderValueSecretManager `pulumi:"secretManager"`
 }
 
 // NativeUserV3HttpApiKeyHeaderValueInput is an input type that accepts NativeUserV3HttpApiKeyHeaderValueArgs and NativeUserV3HttpApiKeyHeaderValueOutput values.
@@ -7116,6 +8283,8 @@ type NativeUserV3HttpApiKeyHeaderValueArgs struct {
 	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrInput `pulumi:"secretManager"`
 }
 
 func (NativeUserV3HttpApiKeyHeaderValueArgs) ElementType() reflect.Type {
@@ -7216,6 +8385,13 @@ func (o NativeUserV3HttpApiKeyHeaderValueOutput) LiteralWoVersion() pulumi.IntPt
 	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValue) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3HttpApiKeyHeaderValueOutput) SecretManager() NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValue) *NativeUserV3HttpApiKeyHeaderValueSecretManager {
+		return v.SecretManager
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput)
+}
+
 type NativeUserV3HttpApiKeyHeaderValuePtrOutput struct{ *pulumi.OutputState }
 
 func (NativeUserV3HttpApiKeyHeaderValuePtrOutput) ElementType() reflect.Type {
@@ -7281,10 +8457,612 @@ func (o NativeUserV3HttpApiKeyHeaderValuePtrOutput) LiteralWoVersion() pulumi.In
 	}).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3HttpApiKeyHeaderValuePtrOutput) SecretManager() NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValue) *NativeUserV3HttpApiKeyHeaderValueSecretManager {
+		if v == nil {
+			return nil
+		}
+		return v.SecretManager
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManager struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret *NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret *NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret *NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret `pulumi:"gcpSecret"`
+}
+
+// NativeUserV3HttpApiKeyHeaderValueSecretManagerInput is an input type that accepts NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs and NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderValueSecretManagerInput` via:
+//
+//	NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs{...}
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrInput `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrInput `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrInput `pulumi:"gcpSecret"`
+}
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManager)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput)
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput).ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrInput is an input type that accepts NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs, NativeUserV3HttpApiKeyHeaderValueSecretManagerPtr and NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput
+}
+
+type nativeUserV3HttpApiKeyHeaderValueSecretManagerPtrType NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs
+
+func NativeUserV3HttpApiKeyHeaderValueSecretManagerPtr(v *NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs) NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrInput {
+	return (*nativeUserV3HttpApiKeyHeaderValueSecretManagerPtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyHeaderValueSecretManagerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeaderValueSecretManager)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderValueSecretManagerPtrType) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderValueSecretManagerPtrType) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput {
+	return o.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyHeaderValueSecretManager) *NativeUserV3HttpApiKeyHeaderValueSecretManager {
+		return &v
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput) AwsSecret() NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValueSecretManager) *NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret {
+		return v.AwsSecret
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput) AzureSecret() NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValueSecretManager) *NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret {
+		return v.AzureSecret
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput) GcpSecret() NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValueSecretManager) *NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret {
+		return v.GcpSecret
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeaderValueSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput) Elem() NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValueSecretManager) NativeUserV3HttpApiKeyHeaderValueSecretManager {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyHeaderValueSecretManager
+		return ret
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput) AwsSecret() NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValueSecretManager) *NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AwsSecret
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput) AzureSecret() NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValueSecretManager) *NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AzureSecret
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput) GcpSecret() NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValueSecretManager) *NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret {
+		if v == nil {
+			return nil
+		}
+		return v.GcpSecret
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn string `pulumi:"arn"`
+}
+
+// NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretInput is an input type that accepts NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs and NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretInput` via:
+//
+//	NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs{...}
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn pulumi.StringInput `pulumi:"arn"`
+}
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput)
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput).ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrInput is an input type that accepts NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs, NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtr and NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput
+}
+
+type nativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrType NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs
+
+func NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtr(v *NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs) NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrInput {
+	return (*nativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrType) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrType) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput {
+	return o.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret) *NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret {
+		return &v
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput) Arn() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret) string { return v.Arn }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput) Elem() NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret) NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret
+		return ret
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput) Arn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Arn
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url string `pulumi:"url"`
+}
+
+// NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretInput is an input type that accepts NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs and NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretInput` via:
+//
+//	NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs{...}
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput)
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput).ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrInput is an input type that accepts NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs, NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtr and NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput
+}
+
+type nativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrType NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs
+
+func NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtr(v *NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs) NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrInput {
+	return (*nativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrType) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrType) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput {
+	return o.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret) *NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret {
+		return &v
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput) Elem() NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret) NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret
+		return ret
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretInput is an input type that accepts NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs and NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretInput` via:
+//
+//	NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs{...}
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput)
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput).ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrInput is an input type that accepts NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs, NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtr and NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput
+	ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput
+}
+
+type nativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrType NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs
+
+func NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtr(v *NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs) NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrInput {
+	return (*nativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrType) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrType) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput {
+	return o.ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret) *NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret {
+		return &v
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput() NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput) ToNativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput) Elem() NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret) NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret
+		return ret
+	}).(NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
 type NativeUserV3HttpApiKeyQuery struct {
 	// The name of the query parameter carrying the API key.
 	Key string `pulumi:"key"`
-	// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Value NativeUserV3HttpApiKeyQueryValue `pulumi:"value"`
 }
 
@@ -7302,7 +9080,7 @@ type NativeUserV3HttpApiKeyQueryInput interface {
 type NativeUserV3HttpApiKeyQueryArgs struct {
 	// The name of the query parameter carrying the API key.
 	Key pulumi.StringInput `pulumi:"key"`
-	// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Value NativeUserV3HttpApiKeyQueryValueInput `pulumi:"value"`
 }
 
@@ -7388,7 +9166,7 @@ func (o NativeUserV3HttpApiKeyQueryOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v NativeUserV3HttpApiKeyQuery) string { return v.Key }).(pulumi.StringOutput)
 }
 
-// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3HttpApiKeyQueryOutput) Value() NativeUserV3HttpApiKeyQueryValueOutput {
 	return o.ApplyT(func(v NativeUserV3HttpApiKeyQuery) NativeUserV3HttpApiKeyQueryValue { return v.Value }).(NativeUserV3HttpApiKeyQueryValueOutput)
 }
@@ -7427,7 +9205,7 @@ func (o NativeUserV3HttpApiKeyQueryPtrOutput) Key() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3HttpApiKeyQueryPtrOutput) Value() NativeUserV3HttpApiKeyQueryValuePtrOutput {
 	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQuery) *NativeUserV3HttpApiKeyQueryValue {
 		if v == nil {
@@ -7447,6 +9225,8 @@ type NativeUserV3HttpApiKeyQueryValue struct {
 	LiteralWo *string `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager *NativeUserV3HttpApiKeyQueryValueSecretManager `pulumi:"secretManager"`
 }
 
 // NativeUserV3HttpApiKeyQueryValueInput is an input type that accepts NativeUserV3HttpApiKeyQueryValueArgs and NativeUserV3HttpApiKeyQueryValueOutput values.
@@ -7470,6 +9250,8 @@ type NativeUserV3HttpApiKeyQueryValueArgs struct {
 	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager NativeUserV3HttpApiKeyQueryValueSecretManagerPtrInput `pulumi:"secretManager"`
 }
 
 func (NativeUserV3HttpApiKeyQueryValueArgs) ElementType() reflect.Type {
@@ -7570,6 +9352,13 @@ func (o NativeUserV3HttpApiKeyQueryValueOutput) LiteralWoVersion() pulumi.IntPtr
 	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValue) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3HttpApiKeyQueryValueOutput) SecretManager() NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValue) *NativeUserV3HttpApiKeyQueryValueSecretManager {
+		return v.SecretManager
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput)
+}
+
 type NativeUserV3HttpApiKeyQueryValuePtrOutput struct{ *pulumi.OutputState }
 
 func (NativeUserV3HttpApiKeyQueryValuePtrOutput) ElementType() reflect.Type {
@@ -7635,10 +9424,612 @@ func (o NativeUserV3HttpApiKeyQueryValuePtrOutput) LiteralWoVersion() pulumi.Int
 	}).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3HttpApiKeyQueryValuePtrOutput) SecretManager() NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValue) *NativeUserV3HttpApiKeyQueryValueSecretManager {
+		if v == nil {
+			return nil
+		}
+		return v.SecretManager
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManager struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret *NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret *NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret *NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret `pulumi:"gcpSecret"`
+}
+
+// NativeUserV3HttpApiKeyQueryValueSecretManagerInput is an input type that accepts NativeUserV3HttpApiKeyQueryValueSecretManagerArgs and NativeUserV3HttpApiKeyQueryValueSecretManagerOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryValueSecretManagerInput` via:
+//
+//	NativeUserV3HttpApiKeyQueryValueSecretManagerArgs{...}
+type NativeUserV3HttpApiKeyQueryValueSecretManagerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerOutput
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerOutput
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerArgs struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrInput `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrInput `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrInput `pulumi:"gcpSecret"`
+}
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManager)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerOutput)
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerOutput).ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyQueryValueSecretManagerPtrInput is an input type that accepts NativeUserV3HttpApiKeyQueryValueSecretManagerArgs, NativeUserV3HttpApiKeyQueryValueSecretManagerPtr and NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryValueSecretManagerPtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyQueryValueSecretManagerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyQueryValueSecretManagerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput
+}
+
+type nativeUserV3HttpApiKeyQueryValueSecretManagerPtrType NativeUserV3HttpApiKeyQueryValueSecretManagerArgs
+
+func NativeUserV3HttpApiKeyQueryValueSecretManagerPtr(v *NativeUserV3HttpApiKeyQueryValueSecretManagerArgs) NativeUserV3HttpApiKeyQueryValueSecretManagerPtrInput {
+	return (*nativeUserV3HttpApiKeyQueryValueSecretManagerPtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyQueryValueSecretManagerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQueryValueSecretManager)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyQueryValueSecretManagerPtrType) ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyQueryValueSecretManagerPtrType) ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput {
+	return o.ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyQueryValueSecretManager) *NativeUserV3HttpApiKeyQueryValueSecretManager {
+		return &v
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerOutput) AwsSecret() NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValueSecretManager) *NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret {
+		return v.AwsSecret
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerOutput) AzureSecret() NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValueSecretManager) *NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret {
+		return v.AzureSecret
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerOutput) GcpSecret() NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValueSecretManager) *NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret {
+		return v.GcpSecret
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQueryValueSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput) Elem() NativeUserV3HttpApiKeyQueryValueSecretManagerOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValueSecretManager) NativeUserV3HttpApiKeyQueryValueSecretManager {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyQueryValueSecretManager
+		return ret
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput) AwsSecret() NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValueSecretManager) *NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AwsSecret
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput) AzureSecret() NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValueSecretManager) *NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AzureSecret
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput) GcpSecret() NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValueSecretManager) *NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret {
+		if v == nil {
+			return nil
+		}
+		return v.GcpSecret
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn string `pulumi:"arn"`
+}
+
+// NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretInput is an input type that accepts NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs and NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretInput` via:
+//
+//	NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs{...}
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn pulumi.StringInput `pulumi:"arn"`
+}
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput)
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput).ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrInput is an input type that accepts NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs, NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtr and NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput
+}
+
+type nativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrType NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs
+
+func NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtr(v *NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs) NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrInput {
+	return (*nativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrType) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrType) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput {
+	return o.ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret) *NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret {
+		return &v
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput) Arn() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret) string { return v.Arn }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput) Elem() NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret) NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret
+		return ret
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput) Arn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Arn
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url string `pulumi:"url"`
+}
+
+// NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretInput is an input type that accepts NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs and NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretInput` via:
+//
+//	NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs{...}
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput)
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput).ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrInput is an input type that accepts NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs, NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtr and NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput
+}
+
+type nativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrType NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs
+
+func NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtr(v *NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs) NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrInput {
+	return (*nativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrType) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrType) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput {
+	return o.ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret) *NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret {
+		return &v
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput) Elem() NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret) NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret
+		return ret
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretInput is an input type that accepts NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs and NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretInput` via:
+//
+//	NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs{...}
+type NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput)
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput).ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrInput is an input type that accepts NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs, NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtr and NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrInput` via:
+//
+//	        NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput
+	ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutputWithContext(context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput
+}
+
+type nativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrType NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs
+
+func NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtr(v *NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs) NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrInput {
+	return (*nativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrType) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrType) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput {
+	return o.ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret) *NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret {
+		return &v
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput() NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput) ToNativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput) Elem() NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret) NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret
+		return ret
+	}).(NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
 type NativeUserV3HttpBasic struct {
 	// The header to inject the credentials on, for example `Authorization`.
 	Header string `pulumi:"header"`
-	// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Password NativeUserV3HttpBasicPassword `pulumi:"password"`
 	// The username to authenticate as.
 	Username string `pulumi:"username"`
@@ -7658,7 +10049,7 @@ type NativeUserV3HttpBasicInput interface {
 type NativeUserV3HttpBasicArgs struct {
 	// The header to inject the credentials on, for example `Authorization`.
 	Header pulumi.StringInput `pulumi:"header"`
-	// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Password NativeUserV3HttpBasicPasswordInput `pulumi:"password"`
 	// The username to authenticate as.
 	Username pulumi.StringInput `pulumi:"username"`
@@ -7746,7 +10137,7 @@ func (o NativeUserV3HttpBasicOutput) Header() pulumi.StringOutput {
 	return o.ApplyT(func(v NativeUserV3HttpBasic) string { return v.Header }).(pulumi.StringOutput)
 }
 
-// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3HttpBasicOutput) Password() NativeUserV3HttpBasicPasswordOutput {
 	return o.ApplyT(func(v NativeUserV3HttpBasic) NativeUserV3HttpBasicPassword { return v.Password }).(NativeUserV3HttpBasicPasswordOutput)
 }
@@ -7790,7 +10181,7 @@ func (o NativeUserV3HttpBasicPtrOutput) Header() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3HttpBasicPtrOutput) Password() NativeUserV3HttpBasicPasswordPtrOutput {
 	return o.ApplyT(func(v *NativeUserV3HttpBasic) *NativeUserV3HttpBasicPassword {
 		if v == nil {
@@ -7820,6 +10211,8 @@ type NativeUserV3HttpBasicPassword struct {
 	LiteralWo *string `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager *NativeUserV3HttpBasicPasswordSecretManager `pulumi:"secretManager"`
 }
 
 // NativeUserV3HttpBasicPasswordInput is an input type that accepts NativeUserV3HttpBasicPasswordArgs and NativeUserV3HttpBasicPasswordOutput values.
@@ -7843,6 +10236,8 @@ type NativeUserV3HttpBasicPasswordArgs struct {
 	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager NativeUserV3HttpBasicPasswordSecretManagerPtrInput `pulumi:"secretManager"`
 }
 
 func (NativeUserV3HttpBasicPasswordArgs) ElementType() reflect.Type {
@@ -7943,6 +10338,13 @@ func (o NativeUserV3HttpBasicPasswordOutput) LiteralWoVersion() pulumi.IntPtrOut
 	return o.ApplyT(func(v NativeUserV3HttpBasicPassword) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3HttpBasicPasswordOutput) SecretManager() NativeUserV3HttpBasicPasswordSecretManagerPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasicPassword) *NativeUserV3HttpBasicPasswordSecretManager {
+		return v.SecretManager
+	}).(NativeUserV3HttpBasicPasswordSecretManagerPtrOutput)
+}
+
 type NativeUserV3HttpBasicPasswordPtrOutput struct{ *pulumi.OutputState }
 
 func (NativeUserV3HttpBasicPasswordPtrOutput) ElementType() reflect.Type {
@@ -8008,10 +10410,612 @@ func (o NativeUserV3HttpBasicPasswordPtrOutput) LiteralWoVersion() pulumi.IntPtr
 	}).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3HttpBasicPasswordPtrOutput) SecretManager() NativeUserV3HttpBasicPasswordSecretManagerPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPassword) *NativeUserV3HttpBasicPasswordSecretManager {
+		if v == nil {
+			return nil
+		}
+		return v.SecretManager
+	}).(NativeUserV3HttpBasicPasswordSecretManagerPtrOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManager struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret *NativeUserV3HttpBasicPasswordSecretManagerAwsSecret `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret *NativeUserV3HttpBasicPasswordSecretManagerAzureSecret `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret *NativeUserV3HttpBasicPasswordSecretManagerGcpSecret `pulumi:"gcpSecret"`
+}
+
+// NativeUserV3HttpBasicPasswordSecretManagerInput is an input type that accepts NativeUserV3HttpBasicPasswordSecretManagerArgs and NativeUserV3HttpBasicPasswordSecretManagerOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicPasswordSecretManagerInput` via:
+//
+//	NativeUserV3HttpBasicPasswordSecretManagerArgs{...}
+type NativeUserV3HttpBasicPasswordSecretManagerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicPasswordSecretManagerOutput() NativeUserV3HttpBasicPasswordSecretManagerOutput
+	ToNativeUserV3HttpBasicPasswordSecretManagerOutputWithContext(context.Context) NativeUserV3HttpBasicPasswordSecretManagerOutput
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerArgs struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrInput `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrInput `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrInput `pulumi:"gcpSecret"`
+}
+
+func (NativeUserV3HttpBasicPasswordSecretManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManager)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerArgs) ToNativeUserV3HttpBasicPasswordSecretManagerOutput() NativeUserV3HttpBasicPasswordSecretManagerOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerArgs) ToNativeUserV3HttpBasicPasswordSecretManagerOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerOutput)
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerArgs) ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerPtrOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerArgs) ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerOutput).ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBasicPasswordSecretManagerPtrInput is an input type that accepts NativeUserV3HttpBasicPasswordSecretManagerArgs, NativeUserV3HttpBasicPasswordSecretManagerPtr and NativeUserV3HttpBasicPasswordSecretManagerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicPasswordSecretManagerPtrInput` via:
+//
+//	        NativeUserV3HttpBasicPasswordSecretManagerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBasicPasswordSecretManagerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerPtrOutput
+	ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutputWithContext(context.Context) NativeUserV3HttpBasicPasswordSecretManagerPtrOutput
+}
+
+type nativeUserV3HttpBasicPasswordSecretManagerPtrType NativeUserV3HttpBasicPasswordSecretManagerArgs
+
+func NativeUserV3HttpBasicPasswordSecretManagerPtr(v *NativeUserV3HttpBasicPasswordSecretManagerArgs) NativeUserV3HttpBasicPasswordSecretManagerPtrInput {
+	return (*nativeUserV3HttpBasicPasswordSecretManagerPtrType)(v)
+}
+
+func (*nativeUserV3HttpBasicPasswordSecretManagerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasicPasswordSecretManager)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBasicPasswordSecretManagerPtrType) ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerPtrOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBasicPasswordSecretManagerPtrType) ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerPtrOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicPasswordSecretManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerOutput) ToNativeUserV3HttpBasicPasswordSecretManagerOutput() NativeUserV3HttpBasicPasswordSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerOutput) ToNativeUserV3HttpBasicPasswordSecretManagerOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerOutput) ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerPtrOutput {
+	return o.ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerOutput) ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBasicPasswordSecretManager) *NativeUserV3HttpBasicPasswordSecretManager {
+		return &v
+	}).(NativeUserV3HttpBasicPasswordSecretManagerPtrOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBasicPasswordSecretManagerOutput) AwsSecret() NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasicPasswordSecretManager) *NativeUserV3HttpBasicPasswordSecretManagerAwsSecret {
+		return v.AwsSecret
+	}).(NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBasicPasswordSecretManagerOutput) AzureSecret() NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasicPasswordSecretManager) *NativeUserV3HttpBasicPasswordSecretManagerAzureSecret {
+		return v.AzureSecret
+	}).(NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBasicPasswordSecretManagerOutput) GcpSecret() NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasicPasswordSecretManager) *NativeUserV3HttpBasicPasswordSecretManagerGcpSecret {
+		return v.GcpSecret
+	}).(NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicPasswordSecretManagerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasicPasswordSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerPtrOutput) ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerPtrOutput) ToNativeUserV3HttpBasicPasswordSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerPtrOutput) Elem() NativeUserV3HttpBasicPasswordSecretManagerOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPasswordSecretManager) NativeUserV3HttpBasicPasswordSecretManager {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBasicPasswordSecretManager
+		return ret
+	}).(NativeUserV3HttpBasicPasswordSecretManagerOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBasicPasswordSecretManagerPtrOutput) AwsSecret() NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPasswordSecretManager) *NativeUserV3HttpBasicPasswordSecretManagerAwsSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AwsSecret
+	}).(NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBasicPasswordSecretManagerPtrOutput) AzureSecret() NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPasswordSecretManager) *NativeUserV3HttpBasicPasswordSecretManagerAzureSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AzureSecret
+	}).(NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBasicPasswordSecretManagerPtrOutput) GcpSecret() NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPasswordSecretManager) *NativeUserV3HttpBasicPasswordSecretManagerGcpSecret {
+		if v == nil {
+			return nil
+		}
+		return v.GcpSecret
+	}).(NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerAwsSecret struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn string `pulumi:"arn"`
+}
+
+// NativeUserV3HttpBasicPasswordSecretManagerAwsSecretInput is an input type that accepts NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs and NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicPasswordSecretManagerAwsSecretInput` via:
+//
+//	NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs{...}
+type NativeUserV3HttpBasicPasswordSecretManagerAwsSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput() NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput
+	ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutputWithContext(context.Context) NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn pulumi.StringInput `pulumi:"arn"`
+}
+
+func (NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput() NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput)
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput).ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrInput is an input type that accepts NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs, NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtr and NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrInput` via:
+//
+//	        NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput
+	ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutputWithContext(context.Context) NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput
+}
+
+type nativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrType NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs
+
+func NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtr(v *NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs) NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrInput {
+	return (*nativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasicPasswordSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrType) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrType) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput() NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o.ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBasicPasswordSecretManagerAwsSecret) *NativeUserV3HttpBasicPasswordSecretManagerAwsSecret {
+		return &v
+	}).(NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput) Arn() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasicPasswordSecretManagerAwsSecret) string { return v.Arn }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasicPasswordSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput) Elem() NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPasswordSecretManagerAwsSecret) NativeUserV3HttpBasicPasswordSecretManagerAwsSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBasicPasswordSecretManagerAwsSecret
+		return ret
+	}).(NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput) Arn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPasswordSecretManagerAwsSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Arn
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerAzureSecret struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url string `pulumi:"url"`
+}
+
+// NativeUserV3HttpBasicPasswordSecretManagerAzureSecretInput is an input type that accepts NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs and NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicPasswordSecretManagerAzureSecretInput` via:
+//
+//	NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs{...}
+type NativeUserV3HttpBasicPasswordSecretManagerAzureSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput() NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput
+	ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutputWithContext(context.Context) NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput() NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput)
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput).ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrInput is an input type that accepts NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs, NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtr and NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrInput` via:
+//
+//	        NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput
+	ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutputWithContext(context.Context) NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput
+}
+
+type nativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrType NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs
+
+func NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtr(v *NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs) NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrInput {
+	return (*nativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasicPasswordSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrType) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrType) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput() NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o.ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBasicPasswordSecretManagerAzureSecret) *NativeUserV3HttpBasicPasswordSecretManagerAzureSecret {
+		return &v
+	}).(NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasicPasswordSecretManagerAzureSecret) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasicPasswordSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput) ToNativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput) Elem() NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPasswordSecretManagerAzureSecret) NativeUserV3HttpBasicPasswordSecretManagerAzureSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBasicPasswordSecretManagerAzureSecret
+		return ret
+	}).(NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPasswordSecretManagerAzureSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerGcpSecret struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3HttpBasicPasswordSecretManagerGcpSecretInput is an input type that accepts NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs and NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicPasswordSecretManagerGcpSecretInput` via:
+//
+//	NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs{...}
+type NativeUserV3HttpBasicPasswordSecretManagerGcpSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput() NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput
+	ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutputWithContext(context.Context) NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput() NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput)
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput).ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrInput is an input type that accepts NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs, NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtr and NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrInput` via:
+//
+//	        NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput
+	ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutputWithContext(context.Context) NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput
+}
+
+type nativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrType NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs
+
+func NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtr(v *NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs) NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrInput {
+	return (*nativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasicPasswordSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrType) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrType) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput() NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o.ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBasicPasswordSecretManagerGcpSecret) *NativeUserV3HttpBasicPasswordSecretManagerGcpSecret {
+		return &v
+	}).(NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBasicPasswordSecretManagerGcpSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBasicPasswordSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput() NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput) ToNativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput) Elem() NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPasswordSecretManagerGcpSecret) NativeUserV3HttpBasicPasswordSecretManagerGcpSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBasicPasswordSecretManagerGcpSecret
+		return ret
+	}).(NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBasicPasswordSecretManagerGcpSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
 type NativeUserV3HttpBearer struct {
 	// The header to inject the token on, for example `Authorization`.
 	Header string `pulumi:"header"`
-	// The bearer token. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The bearer token. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Token NativeUserV3HttpBearerToken `pulumi:"token"`
 }
 
@@ -8029,7 +11033,7 @@ type NativeUserV3HttpBearerInput interface {
 type NativeUserV3HttpBearerArgs struct {
 	// The header to inject the token on, for example `Authorization`.
 	Header pulumi.StringInput `pulumi:"header"`
-	// The bearer token. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The bearer token. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Token NativeUserV3HttpBearerTokenInput `pulumi:"token"`
 }
 
@@ -8115,7 +11119,7 @@ func (o NativeUserV3HttpBearerOutput) Header() pulumi.StringOutput {
 	return o.ApplyT(func(v NativeUserV3HttpBearer) string { return v.Header }).(pulumi.StringOutput)
 }
 
-// The bearer token. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The bearer token. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3HttpBearerOutput) Token() NativeUserV3HttpBearerTokenOutput {
 	return o.ApplyT(func(v NativeUserV3HttpBearer) NativeUserV3HttpBearerToken { return v.Token }).(NativeUserV3HttpBearerTokenOutput)
 }
@@ -8154,7 +11158,7 @@ func (o NativeUserV3HttpBearerPtrOutput) Header() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// The bearer token. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The bearer token. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3HttpBearerPtrOutput) Token() NativeUserV3HttpBearerTokenPtrOutput {
 	return o.ApplyT(func(v *NativeUserV3HttpBearer) *NativeUserV3HttpBearerToken {
 		if v == nil {
@@ -8174,6 +11178,8 @@ type NativeUserV3HttpBearerToken struct {
 	LiteralWo *string `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager *NativeUserV3HttpBearerTokenSecretManager `pulumi:"secretManager"`
 }
 
 // NativeUserV3HttpBearerTokenInput is an input type that accepts NativeUserV3HttpBearerTokenArgs and NativeUserV3HttpBearerTokenOutput values.
@@ -8197,6 +11203,8 @@ type NativeUserV3HttpBearerTokenArgs struct {
 	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager NativeUserV3HttpBearerTokenSecretManagerPtrInput `pulumi:"secretManager"`
 }
 
 func (NativeUserV3HttpBearerTokenArgs) ElementType() reflect.Type {
@@ -8297,6 +11305,11 @@ func (o NativeUserV3HttpBearerTokenOutput) LiteralWoVersion() pulumi.IntPtrOutpu
 	return o.ApplyT(func(v NativeUserV3HttpBearerToken) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3HttpBearerTokenOutput) SecretManager() NativeUserV3HttpBearerTokenSecretManagerPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearerToken) *NativeUserV3HttpBearerTokenSecretManager { return v.SecretManager }).(NativeUserV3HttpBearerTokenSecretManagerPtrOutput)
+}
+
 type NativeUserV3HttpBearerTokenPtrOutput struct{ *pulumi.OutputState }
 
 func (NativeUserV3HttpBearerTokenPtrOutput) ElementType() reflect.Type {
@@ -8362,8 +11375,610 @@ func (o NativeUserV3HttpBearerTokenPtrOutput) LiteralWoVersion() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3HttpBearerTokenPtrOutput) SecretManager() NativeUserV3HttpBearerTokenSecretManagerPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerToken) *NativeUserV3HttpBearerTokenSecretManager {
+		if v == nil {
+			return nil
+		}
+		return v.SecretManager
+	}).(NativeUserV3HttpBearerTokenSecretManagerPtrOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManager struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret *NativeUserV3HttpBearerTokenSecretManagerAwsSecret `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret *NativeUserV3HttpBearerTokenSecretManagerAzureSecret `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret *NativeUserV3HttpBearerTokenSecretManagerGcpSecret `pulumi:"gcpSecret"`
+}
+
+// NativeUserV3HttpBearerTokenSecretManagerInput is an input type that accepts NativeUserV3HttpBearerTokenSecretManagerArgs and NativeUserV3HttpBearerTokenSecretManagerOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerTokenSecretManagerInput` via:
+//
+//	NativeUserV3HttpBearerTokenSecretManagerArgs{...}
+type NativeUserV3HttpBearerTokenSecretManagerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerTokenSecretManagerOutput() NativeUserV3HttpBearerTokenSecretManagerOutput
+	ToNativeUserV3HttpBearerTokenSecretManagerOutputWithContext(context.Context) NativeUserV3HttpBearerTokenSecretManagerOutput
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerArgs struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrInput `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrInput `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrInput `pulumi:"gcpSecret"`
+}
+
+func (NativeUserV3HttpBearerTokenSecretManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManager)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerArgs) ToNativeUserV3HttpBearerTokenSecretManagerOutput() NativeUserV3HttpBearerTokenSecretManagerOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerArgs) ToNativeUserV3HttpBearerTokenSecretManagerOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerOutput)
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerArgs) ToNativeUserV3HttpBearerTokenSecretManagerPtrOutput() NativeUserV3HttpBearerTokenSecretManagerPtrOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerArgs) ToNativeUserV3HttpBearerTokenSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerOutput).ToNativeUserV3HttpBearerTokenSecretManagerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBearerTokenSecretManagerPtrInput is an input type that accepts NativeUserV3HttpBearerTokenSecretManagerArgs, NativeUserV3HttpBearerTokenSecretManagerPtr and NativeUserV3HttpBearerTokenSecretManagerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerTokenSecretManagerPtrInput` via:
+//
+//	        NativeUserV3HttpBearerTokenSecretManagerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBearerTokenSecretManagerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerTokenSecretManagerPtrOutput() NativeUserV3HttpBearerTokenSecretManagerPtrOutput
+	ToNativeUserV3HttpBearerTokenSecretManagerPtrOutputWithContext(context.Context) NativeUserV3HttpBearerTokenSecretManagerPtrOutput
+}
+
+type nativeUserV3HttpBearerTokenSecretManagerPtrType NativeUserV3HttpBearerTokenSecretManagerArgs
+
+func NativeUserV3HttpBearerTokenSecretManagerPtr(v *NativeUserV3HttpBearerTokenSecretManagerArgs) NativeUserV3HttpBearerTokenSecretManagerPtrInput {
+	return (*nativeUserV3HttpBearerTokenSecretManagerPtrType)(v)
+}
+
+func (*nativeUserV3HttpBearerTokenSecretManagerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearerTokenSecretManager)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBearerTokenSecretManagerPtrType) ToNativeUserV3HttpBearerTokenSecretManagerPtrOutput() NativeUserV3HttpBearerTokenSecretManagerPtrOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBearerTokenSecretManagerPtrType) ToNativeUserV3HttpBearerTokenSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerPtrOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerTokenSecretManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerOutput) ToNativeUserV3HttpBearerTokenSecretManagerOutput() NativeUserV3HttpBearerTokenSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerOutput) ToNativeUserV3HttpBearerTokenSecretManagerOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerOutput) ToNativeUserV3HttpBearerTokenSecretManagerPtrOutput() NativeUserV3HttpBearerTokenSecretManagerPtrOutput {
+	return o.ToNativeUserV3HttpBearerTokenSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerOutput) ToNativeUserV3HttpBearerTokenSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBearerTokenSecretManager) *NativeUserV3HttpBearerTokenSecretManager {
+		return &v
+	}).(NativeUserV3HttpBearerTokenSecretManagerPtrOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBearerTokenSecretManagerOutput) AwsSecret() NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearerTokenSecretManager) *NativeUserV3HttpBearerTokenSecretManagerAwsSecret {
+		return v.AwsSecret
+	}).(NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBearerTokenSecretManagerOutput) AzureSecret() NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearerTokenSecretManager) *NativeUserV3HttpBearerTokenSecretManagerAzureSecret {
+		return v.AzureSecret
+	}).(NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBearerTokenSecretManagerOutput) GcpSecret() NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearerTokenSecretManager) *NativeUserV3HttpBearerTokenSecretManagerGcpSecret {
+		return v.GcpSecret
+	}).(NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerTokenSecretManagerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearerTokenSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerPtrOutput) ToNativeUserV3HttpBearerTokenSecretManagerPtrOutput() NativeUserV3HttpBearerTokenSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerPtrOutput) ToNativeUserV3HttpBearerTokenSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerPtrOutput) Elem() NativeUserV3HttpBearerTokenSecretManagerOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerTokenSecretManager) NativeUserV3HttpBearerTokenSecretManager {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBearerTokenSecretManager
+		return ret
+	}).(NativeUserV3HttpBearerTokenSecretManagerOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBearerTokenSecretManagerPtrOutput) AwsSecret() NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerTokenSecretManager) *NativeUserV3HttpBearerTokenSecretManagerAwsSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AwsSecret
+	}).(NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBearerTokenSecretManagerPtrOutput) AzureSecret() NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerTokenSecretManager) *NativeUserV3HttpBearerTokenSecretManagerAzureSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AzureSecret
+	}).(NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3HttpBearerTokenSecretManagerPtrOutput) GcpSecret() NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerTokenSecretManager) *NativeUserV3HttpBearerTokenSecretManagerGcpSecret {
+		if v == nil {
+			return nil
+		}
+		return v.GcpSecret
+	}).(NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerAwsSecret struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn string `pulumi:"arn"`
+}
+
+// NativeUserV3HttpBearerTokenSecretManagerAwsSecretInput is an input type that accepts NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs and NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerTokenSecretManagerAwsSecretInput` via:
+//
+//	NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs{...}
+type NativeUserV3HttpBearerTokenSecretManagerAwsSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput() NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput
+	ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretOutputWithContext(context.Context) NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn pulumi.StringInput `pulumi:"arn"`
+}
+
+func (NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput() NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput)
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput).ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrInput is an input type that accepts NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs, NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtr and NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrInput` via:
+//
+//	        NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput
+	ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutputWithContext(context.Context) NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput
+}
+
+type nativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrType NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs
+
+func NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtr(v *NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs) NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrInput {
+	return (*nativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearerTokenSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrType) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrType) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput() NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput {
+	return o.ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBearerTokenSecretManagerAwsSecret) *NativeUserV3HttpBearerTokenSecretManagerAwsSecret {
+		return &v
+	}).(NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput) Arn() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearerTokenSecretManagerAwsSecret) string { return v.Arn }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearerTokenSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput) ToNativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput) Elem() NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerTokenSecretManagerAwsSecret) NativeUserV3HttpBearerTokenSecretManagerAwsSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBearerTokenSecretManagerAwsSecret
+		return ret
+	}).(NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput) Arn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerTokenSecretManagerAwsSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Arn
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerAzureSecret struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url string `pulumi:"url"`
+}
+
+// NativeUserV3HttpBearerTokenSecretManagerAzureSecretInput is an input type that accepts NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs and NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerTokenSecretManagerAzureSecretInput` via:
+//
+//	NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs{...}
+type NativeUserV3HttpBearerTokenSecretManagerAzureSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput() NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput
+	ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretOutputWithContext(context.Context) NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput() NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput)
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput).ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrInput is an input type that accepts NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs, NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtr and NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrInput` via:
+//
+//	        NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput
+	ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutputWithContext(context.Context) NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput
+}
+
+type nativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrType NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs
+
+func NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtr(v *NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs) NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrInput {
+	return (*nativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearerTokenSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrType) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrType) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput() NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput {
+	return o.ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBearerTokenSecretManagerAzureSecret) *NativeUserV3HttpBearerTokenSecretManagerAzureSecret {
+		return &v
+	}).(NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearerTokenSecretManagerAzureSecret) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearerTokenSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput) ToNativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput) Elem() NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerTokenSecretManagerAzureSecret) NativeUserV3HttpBearerTokenSecretManagerAzureSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBearerTokenSecretManagerAzureSecret
+		return ret
+	}).(NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerTokenSecretManagerAzureSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerGcpSecret struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3HttpBearerTokenSecretManagerGcpSecretInput is an input type that accepts NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs and NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerTokenSecretManagerGcpSecretInput` via:
+//
+//	NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs{...}
+type NativeUserV3HttpBearerTokenSecretManagerGcpSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput() NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput
+	ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretOutputWithContext(context.Context) NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput() NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput)
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput).ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrInput is an input type that accepts NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs, NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtr and NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrInput` via:
+//
+//	        NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput
+	ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutputWithContext(context.Context) NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput
+}
+
+type nativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrType NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs
+
+func NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtr(v *NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs) NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrInput {
+	return (*nativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrType)(v)
+}
+
+func (*nativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearerTokenSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrType) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrType) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput() NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput {
+	return o.ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3HttpBearerTokenSecretManagerGcpSecret) *NativeUserV3HttpBearerTokenSecretManagerGcpSecret {
+		return &v
+	}).(NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3HttpBearerTokenSecretManagerGcpSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3HttpBearerTokenSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput() NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput) ToNativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput) Elem() NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerTokenSecretManagerGcpSecret) NativeUserV3HttpBearerTokenSecretManagerGcpSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3HttpBearerTokenSecretManagerGcpSecret
+		return ret
+	}).(NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3HttpBearerTokenSecretManagerGcpSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
 type NativeUserV3KubernetesInline struct {
-	// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Kubeconfig NativeUserV3KubernetesInlineKubeconfig `pulumi:"kubeconfig"`
 }
 
@@ -8379,7 +11994,7 @@ type NativeUserV3KubernetesInlineInput interface {
 }
 
 type NativeUserV3KubernetesInlineArgs struct {
-	// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Kubeconfig NativeUserV3KubernetesInlineKubeconfigInput `pulumi:"kubeconfig"`
 }
 
@@ -8460,7 +12075,7 @@ func (o NativeUserV3KubernetesInlineOutput) ToNativeUserV3KubernetesInlinePtrOut
 	}).(NativeUserV3KubernetesInlinePtrOutput)
 }
 
-// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3KubernetesInlineOutput) Kubeconfig() NativeUserV3KubernetesInlineKubeconfigOutput {
 	return o.ApplyT(func(v NativeUserV3KubernetesInline) NativeUserV3KubernetesInlineKubeconfig { return v.Kubeconfig }).(NativeUserV3KubernetesInlineKubeconfigOutput)
 }
@@ -8489,7 +12104,7 @@ func (o NativeUserV3KubernetesInlinePtrOutput) Elem() NativeUserV3KubernetesInli
 	}).(NativeUserV3KubernetesInlineOutput)
 }
 
-// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The kubeconfig YAML document. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3KubernetesInlinePtrOutput) Kubeconfig() NativeUserV3KubernetesInlineKubeconfigPtrOutput {
 	return o.ApplyT(func(v *NativeUserV3KubernetesInline) *NativeUserV3KubernetesInlineKubeconfig {
 		if v == nil {
@@ -8509,6 +12124,8 @@ type NativeUserV3KubernetesInlineKubeconfig struct {
 	LiteralWo *string `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager *NativeUserV3KubernetesInlineKubeconfigSecretManager `pulumi:"secretManager"`
 }
 
 // NativeUserV3KubernetesInlineKubeconfigInput is an input type that accepts NativeUserV3KubernetesInlineKubeconfigArgs and NativeUserV3KubernetesInlineKubeconfigOutput values.
@@ -8532,6 +12149,8 @@ type NativeUserV3KubernetesInlineKubeconfigArgs struct {
 	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrInput `pulumi:"secretManager"`
 }
 
 func (NativeUserV3KubernetesInlineKubeconfigArgs) ElementType() reflect.Type {
@@ -8632,6 +12251,13 @@ func (o NativeUserV3KubernetesInlineKubeconfigOutput) LiteralWoVersion() pulumi.
 	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfig) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3KubernetesInlineKubeconfigOutput) SecretManager() NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfig) *NativeUserV3KubernetesInlineKubeconfigSecretManager {
+		return v.SecretManager
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput)
+}
+
 type NativeUserV3KubernetesInlineKubeconfigPtrOutput struct{ *pulumi.OutputState }
 
 func (NativeUserV3KubernetesInlineKubeconfigPtrOutput) ElementType() reflect.Type {
@@ -8697,8 +12323,610 @@ func (o NativeUserV3KubernetesInlineKubeconfigPtrOutput) LiteralWoVersion() pulu
 	}).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3KubernetesInlineKubeconfigPtrOutput) SecretManager() NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfig) *NativeUserV3KubernetesInlineKubeconfigSecretManager {
+		if v == nil {
+			return nil
+		}
+		return v.SecretManager
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManager struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret *NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret *NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret *NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret `pulumi:"gcpSecret"`
+}
+
+// NativeUserV3KubernetesInlineKubeconfigSecretManagerInput is an input type that accepts NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs and NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlineKubeconfigSecretManagerInput` via:
+//
+//	NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs{...}
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerOutputWithContext(context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrInput `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrInput `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrInput `pulumi:"gcpSecret"`
+}
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManager)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput)
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput).ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrInput is an input type that accepts NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs, NativeUserV3KubernetesInlineKubeconfigSecretManagerPtr and NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrInput` via:
+//
+//	        NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutputWithContext(context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput
+}
+
+type nativeUserV3KubernetesInlineKubeconfigSecretManagerPtrType NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs
+
+func NativeUserV3KubernetesInlineKubeconfigSecretManagerPtr(v *NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs) NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrInput {
+	return (*nativeUserV3KubernetesInlineKubeconfigSecretManagerPtrType)(v)
+}
+
+func (*nativeUserV3KubernetesInlineKubeconfigSecretManagerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInlineKubeconfigSecretManager)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesInlineKubeconfigSecretManagerPtrType) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesInlineKubeconfigSecretManagerPtrType) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput {
+	return o.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesInlineKubeconfigSecretManager) *NativeUserV3KubernetesInlineKubeconfigSecretManager {
+		return &v
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput) AwsSecret() NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfigSecretManager) *NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret {
+		return v.AwsSecret
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput) AzureSecret() NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfigSecretManager) *NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret {
+		return v.AzureSecret
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput) GcpSecret() NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfigSecretManager) *NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret {
+		return v.GcpSecret
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInlineKubeconfigSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput) Elem() NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfigSecretManager) NativeUserV3KubernetesInlineKubeconfigSecretManager {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesInlineKubeconfigSecretManager
+		return ret
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput) AwsSecret() NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfigSecretManager) *NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AwsSecret
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput) AzureSecret() NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfigSecretManager) *NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AzureSecret
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput) GcpSecret() NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfigSecretManager) *NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret {
+		if v == nil {
+			return nil
+		}
+		return v.GcpSecret
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn string `pulumi:"arn"`
+}
+
+// NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretInput is an input type that accepts NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs and NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretInput` via:
+//
+//	NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs{...}
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutputWithContext(context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn pulumi.StringInput `pulumi:"arn"`
+}
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput)
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput).ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrInput is an input type that accepts NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs, NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtr and NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrInput` via:
+//
+//	        NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutputWithContext(context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput
+}
+
+type nativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrType NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs
+
+func NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtr(v *NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs) NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrInput {
+	return (*nativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrType)(v)
+}
+
+func (*nativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrType) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrType) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput {
+	return o.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret) *NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret {
+		return &v
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput) Arn() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret) string { return v.Arn }).(pulumi.StringOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput) Elem() NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret) NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret
+		return ret
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput) Arn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Arn
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url string `pulumi:"url"`
+}
+
+// NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretInput is an input type that accepts NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs and NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretInput` via:
+//
+//	NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs{...}
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutputWithContext(context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput)
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput).ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrInput is an input type that accepts NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs, NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtr and NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrInput` via:
+//
+//	        NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutputWithContext(context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput
+}
+
+type nativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrType NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs
+
+func NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtr(v *NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs) NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrInput {
+	return (*nativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrType)(v)
+}
+
+func (*nativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrType) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrType) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput {
+	return o.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret) *NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret {
+		return &v
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput) Elem() NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret) NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret
+		return ret
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretInput is an input type that accepts NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs and NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretInput` via:
+//
+//	NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs{...}
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutputWithContext(context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput)
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput).ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrInput is an input type that accepts NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs, NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtr and NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrInput` via:
+//
+//	        NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput
+	ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutputWithContext(context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput
+}
+
+type nativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrType NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs
+
+func NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtr(v *NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs) NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrInput {
+	return (*nativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrType)(v)
+}
+
+func (*nativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrType) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrType) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput {
+	return o.ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret) *NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret {
+		return &v
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput() NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput) ToNativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput) Elem() NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret) NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret
+		return ret
+	}).(NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
 type NativeUserV3KubernetesPath struct {
-	// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	KubeconfigPath NativeUserV3KubernetesPathKubeconfigPath `pulumi:"kubeconfigPath"`
 }
 
@@ -8714,7 +12942,7 @@ type NativeUserV3KubernetesPathInput interface {
 }
 
 type NativeUserV3KubernetesPathArgs struct {
-	// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	KubeconfigPath NativeUserV3KubernetesPathKubeconfigPathInput `pulumi:"kubeconfigPath"`
 }
 
@@ -8795,7 +13023,7 @@ func (o NativeUserV3KubernetesPathOutput) ToNativeUserV3KubernetesPathPtrOutputW
 	}).(NativeUserV3KubernetesPathPtrOutput)
 }
 
-// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3KubernetesPathOutput) KubeconfigPath() NativeUserV3KubernetesPathKubeconfigPathOutput {
 	return o.ApplyT(func(v NativeUserV3KubernetesPath) NativeUserV3KubernetesPathKubeconfigPath { return v.KubeconfigPath }).(NativeUserV3KubernetesPathKubeconfigPathOutput)
 }
@@ -8824,7 +13052,7 @@ func (o NativeUserV3KubernetesPathPtrOutput) Elem() NativeUserV3KubernetesPathOu
 	}).(NativeUserV3KubernetesPathOutput)
 }
 
-// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3KubernetesPathPtrOutput) KubeconfigPath() NativeUserV3KubernetesPathKubeconfigPathPtrOutput {
 	return o.ApplyT(func(v *NativeUserV3KubernetesPath) *NativeUserV3KubernetesPathKubeconfigPath {
 		if v == nil {
@@ -8844,6 +13072,8 @@ type NativeUserV3KubernetesPathKubeconfigPath struct {
 	LiteralWo *string `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager *NativeUserV3KubernetesPathKubeconfigPathSecretManager `pulumi:"secretManager"`
 }
 
 // NativeUserV3KubernetesPathKubeconfigPathInput is an input type that accepts NativeUserV3KubernetesPathKubeconfigPathArgs and NativeUserV3KubernetesPathKubeconfigPathOutput values.
@@ -8867,6 +13097,8 @@ type NativeUserV3KubernetesPathKubeconfigPathArgs struct {
 	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrInput `pulumi:"secretManager"`
 }
 
 func (NativeUserV3KubernetesPathKubeconfigPathArgs) ElementType() reflect.Type {
@@ -8967,6 +13199,13 @@ func (o NativeUserV3KubernetesPathKubeconfigPathOutput) LiteralWoVersion() pulum
 	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPath) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3KubernetesPathKubeconfigPathOutput) SecretManager() NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPath) *NativeUserV3KubernetesPathKubeconfigPathSecretManager {
+		return v.SecretManager
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput)
+}
+
 type NativeUserV3KubernetesPathKubeconfigPathPtrOutput struct{ *pulumi.OutputState }
 
 func (NativeUserV3KubernetesPathKubeconfigPathPtrOutput) ElementType() reflect.Type {
@@ -9032,8 +13271,1021 @@ func (o NativeUserV3KubernetesPathKubeconfigPathPtrOutput) LiteralWoVersion() pu
 	}).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3KubernetesPathKubeconfigPathPtrOutput) SecretManager() NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPath) *NativeUserV3KubernetesPathKubeconfigPathSecretManager {
+		if v == nil {
+			return nil
+		}
+		return v.SecretManager
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManager struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret *NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret `pulumi:"gcpSecret"`
+}
+
+// NativeUserV3KubernetesPathKubeconfigPathSecretManagerInput is an input type that accepts NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs and NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathKubeconfigPathSecretManagerInput` via:
+//
+//	NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs{...}
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerOutputWithContext(context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrInput `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrInput `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrInput `pulumi:"gcpSecret"`
+}
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManager)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput)
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput).ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrInput is an input type that accepts NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs, NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtr and NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrInput` via:
+//
+//	        NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutputWithContext(context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput
+}
+
+type nativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrType NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs
+
+func NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtr(v *NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs) NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrInput {
+	return (*nativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrType)(v)
+}
+
+func (*nativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPathKubeconfigPathSecretManager)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrType) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrType) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput {
+	return o.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesPathKubeconfigPathSecretManager) *NativeUserV3KubernetesPathKubeconfigPathSecretManager {
+		return &v
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput) AwsSecret() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPathSecretManager) *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret {
+		return v.AwsSecret
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput) AzureSecret() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPathSecretManager) *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret {
+		return v.AzureSecret
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput) GcpSecret() NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPathSecretManager) *NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret {
+		return v.GcpSecret
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPathKubeconfigPathSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput) Elem() NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPathSecretManager) NativeUserV3KubernetesPathKubeconfigPathSecretManager {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesPathKubeconfigPathSecretManager
+		return ret
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput) AwsSecret() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPathSecretManager) *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AwsSecret
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput) AzureSecret() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPathSecretManager) *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AzureSecret
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput) GcpSecret() NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPathSecretManager) *NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret {
+		if v == nil {
+			return nil
+		}
+		return v.GcpSecret
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn string `pulumi:"arn"`
+}
+
+// NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretInput is an input type that accepts NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs and NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretInput` via:
+//
+//	NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs{...}
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutputWithContext(context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn pulumi.StringInput `pulumi:"arn"`
+}
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput)
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput).ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrInput is an input type that accepts NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs, NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtr and NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrInput` via:
+//
+//	        NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutputWithContext(context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput
+}
+
+type nativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrType NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs
+
+func NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtr(v *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrInput {
+	return (*nativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrType)(v)
+}
+
+func (*nativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrType) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrType) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput {
+	return o.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret) *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret {
+		return &v
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput) Arn() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret) string { return v.Arn }).(pulumi.StringOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput) Elem() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret
+		return ret
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput) Arn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Arn
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url string `pulumi:"url"`
+}
+
+// NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretInput is an input type that accepts NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs and NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretInput` via:
+//
+//	NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs{...}
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutputWithContext(context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput)
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput).ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrInput is an input type that accepts NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs, NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtr and NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrInput` via:
+//
+//	        NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutputWithContext(context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput
+}
+
+type nativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrType NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs
+
+func NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtr(v *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrInput {
+	return (*nativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrType)(v)
+}
+
+func (*nativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrType) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrType) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput {
+	return o.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret) *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret {
+		return &v
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput) Elem() NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret) NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret
+		return ret
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretInput is an input type that accepts NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs and NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretInput` via:
+//
+//	NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs{...}
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutputWithContext(context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput)
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput).ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrInput is an input type that accepts NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs, NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtr and NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrInput` via:
+//
+//	        NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput
+	ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutputWithContext(context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput
+}
+
+type nativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrType NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs
+
+func NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtr(v *NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs) NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrInput {
+	return (*nativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrType)(v)
+}
+
+func (*nativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrType) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrType) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput {
+	return o.ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret) *NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret {
+		return &v
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput() NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput) ToNativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput) Elem() NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret) NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret
+		return ret
+	}).(NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3LinkedHttpBasic struct {
+	// The header to inject the credentials on, for example `Authorization`.
+	Header string `pulumi:"header"`
+	// The username to authenticate as.
+	Username string `pulumi:"username"`
+}
+
+// NativeUserV3LinkedHttpBasicInput is an input type that accepts NativeUserV3LinkedHttpBasicArgs and NativeUserV3LinkedHttpBasicOutput values.
+// You can construct a concrete instance of `NativeUserV3LinkedHttpBasicInput` via:
+//
+//	NativeUserV3LinkedHttpBasicArgs{...}
+type NativeUserV3LinkedHttpBasicInput interface {
+	pulumi.Input
+
+	ToNativeUserV3LinkedHttpBasicOutput() NativeUserV3LinkedHttpBasicOutput
+	ToNativeUserV3LinkedHttpBasicOutputWithContext(context.Context) NativeUserV3LinkedHttpBasicOutput
+}
+
+type NativeUserV3LinkedHttpBasicArgs struct {
+	// The header to inject the credentials on, for example `Authorization`.
+	Header pulumi.StringInput `pulumi:"header"`
+	// The username to authenticate as.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (NativeUserV3LinkedHttpBasicArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3LinkedHttpBasic)(nil)).Elem()
+}
+
+func (i NativeUserV3LinkedHttpBasicArgs) ToNativeUserV3LinkedHttpBasicOutput() NativeUserV3LinkedHttpBasicOutput {
+	return i.ToNativeUserV3LinkedHttpBasicOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3LinkedHttpBasicArgs) ToNativeUserV3LinkedHttpBasicOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBasicOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3LinkedHttpBasicOutput)
+}
+
+func (i NativeUserV3LinkedHttpBasicArgs) ToNativeUserV3LinkedHttpBasicPtrOutput() NativeUserV3LinkedHttpBasicPtrOutput {
+	return i.ToNativeUserV3LinkedHttpBasicPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3LinkedHttpBasicArgs) ToNativeUserV3LinkedHttpBasicPtrOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBasicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3LinkedHttpBasicOutput).ToNativeUserV3LinkedHttpBasicPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3LinkedHttpBasicPtrInput is an input type that accepts NativeUserV3LinkedHttpBasicArgs, NativeUserV3LinkedHttpBasicPtr and NativeUserV3LinkedHttpBasicPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3LinkedHttpBasicPtrInput` via:
+//
+//	        NativeUserV3LinkedHttpBasicArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3LinkedHttpBasicPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3LinkedHttpBasicPtrOutput() NativeUserV3LinkedHttpBasicPtrOutput
+	ToNativeUserV3LinkedHttpBasicPtrOutputWithContext(context.Context) NativeUserV3LinkedHttpBasicPtrOutput
+}
+
+type nativeUserV3LinkedHttpBasicPtrType NativeUserV3LinkedHttpBasicArgs
+
+func NativeUserV3LinkedHttpBasicPtr(v *NativeUserV3LinkedHttpBasicArgs) NativeUserV3LinkedHttpBasicPtrInput {
+	return (*nativeUserV3LinkedHttpBasicPtrType)(v)
+}
+
+func (*nativeUserV3LinkedHttpBasicPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3LinkedHttpBasic)(nil)).Elem()
+}
+
+func (i *nativeUserV3LinkedHttpBasicPtrType) ToNativeUserV3LinkedHttpBasicPtrOutput() NativeUserV3LinkedHttpBasicPtrOutput {
+	return i.ToNativeUserV3LinkedHttpBasicPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3LinkedHttpBasicPtrType) ToNativeUserV3LinkedHttpBasicPtrOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBasicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3LinkedHttpBasicPtrOutput)
+}
+
+type NativeUserV3LinkedHttpBasicOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3LinkedHttpBasicOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3LinkedHttpBasic)(nil)).Elem()
+}
+
+func (o NativeUserV3LinkedHttpBasicOutput) ToNativeUserV3LinkedHttpBasicOutput() NativeUserV3LinkedHttpBasicOutput {
+	return o
+}
+
+func (o NativeUserV3LinkedHttpBasicOutput) ToNativeUserV3LinkedHttpBasicOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBasicOutput {
+	return o
+}
+
+func (o NativeUserV3LinkedHttpBasicOutput) ToNativeUserV3LinkedHttpBasicPtrOutput() NativeUserV3LinkedHttpBasicPtrOutput {
+	return o.ToNativeUserV3LinkedHttpBasicPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3LinkedHttpBasicOutput) ToNativeUserV3LinkedHttpBasicPtrOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBasicPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3LinkedHttpBasic) *NativeUserV3LinkedHttpBasic {
+		return &v
+	}).(NativeUserV3LinkedHttpBasicPtrOutput)
+}
+
+// The header to inject the credentials on, for example `Authorization`.
+func (o NativeUserV3LinkedHttpBasicOutput) Header() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3LinkedHttpBasic) string { return v.Header }).(pulumi.StringOutput)
+}
+
+// The username to authenticate as.
+func (o NativeUserV3LinkedHttpBasicOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3LinkedHttpBasic) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type NativeUserV3LinkedHttpBasicPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3LinkedHttpBasicPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3LinkedHttpBasic)(nil)).Elem()
+}
+
+func (o NativeUserV3LinkedHttpBasicPtrOutput) ToNativeUserV3LinkedHttpBasicPtrOutput() NativeUserV3LinkedHttpBasicPtrOutput {
+	return o
+}
+
+func (o NativeUserV3LinkedHttpBasicPtrOutput) ToNativeUserV3LinkedHttpBasicPtrOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBasicPtrOutput {
+	return o
+}
+
+func (o NativeUserV3LinkedHttpBasicPtrOutput) Elem() NativeUserV3LinkedHttpBasicOutput {
+	return o.ApplyT(func(v *NativeUserV3LinkedHttpBasic) NativeUserV3LinkedHttpBasic {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3LinkedHttpBasic
+		return ret
+	}).(NativeUserV3LinkedHttpBasicOutput)
+}
+
+// The header to inject the credentials on, for example `Authorization`.
+func (o NativeUserV3LinkedHttpBasicPtrOutput) Header() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3LinkedHttpBasic) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Header
+	}).(pulumi.StringPtrOutput)
+}
+
+// The username to authenticate as.
+func (o NativeUserV3LinkedHttpBasicPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3LinkedHttpBasic) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3LinkedHttpBearer struct {
+	// The header to inject the token on, for example `Authorization`.
+	Header string `pulumi:"header"`
+}
+
+// NativeUserV3LinkedHttpBearerInput is an input type that accepts NativeUserV3LinkedHttpBearerArgs and NativeUserV3LinkedHttpBearerOutput values.
+// You can construct a concrete instance of `NativeUserV3LinkedHttpBearerInput` via:
+//
+//	NativeUserV3LinkedHttpBearerArgs{...}
+type NativeUserV3LinkedHttpBearerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3LinkedHttpBearerOutput() NativeUserV3LinkedHttpBearerOutput
+	ToNativeUserV3LinkedHttpBearerOutputWithContext(context.Context) NativeUserV3LinkedHttpBearerOutput
+}
+
+type NativeUserV3LinkedHttpBearerArgs struct {
+	// The header to inject the token on, for example `Authorization`.
+	Header pulumi.StringInput `pulumi:"header"`
+}
+
+func (NativeUserV3LinkedHttpBearerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3LinkedHttpBearer)(nil)).Elem()
+}
+
+func (i NativeUserV3LinkedHttpBearerArgs) ToNativeUserV3LinkedHttpBearerOutput() NativeUserV3LinkedHttpBearerOutput {
+	return i.ToNativeUserV3LinkedHttpBearerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3LinkedHttpBearerArgs) ToNativeUserV3LinkedHttpBearerOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBearerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3LinkedHttpBearerOutput)
+}
+
+func (i NativeUserV3LinkedHttpBearerArgs) ToNativeUserV3LinkedHttpBearerPtrOutput() NativeUserV3LinkedHttpBearerPtrOutput {
+	return i.ToNativeUserV3LinkedHttpBearerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3LinkedHttpBearerArgs) ToNativeUserV3LinkedHttpBearerPtrOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBearerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3LinkedHttpBearerOutput).ToNativeUserV3LinkedHttpBearerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3LinkedHttpBearerPtrInput is an input type that accepts NativeUserV3LinkedHttpBearerArgs, NativeUserV3LinkedHttpBearerPtr and NativeUserV3LinkedHttpBearerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3LinkedHttpBearerPtrInput` via:
+//
+//	        NativeUserV3LinkedHttpBearerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3LinkedHttpBearerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3LinkedHttpBearerPtrOutput() NativeUserV3LinkedHttpBearerPtrOutput
+	ToNativeUserV3LinkedHttpBearerPtrOutputWithContext(context.Context) NativeUserV3LinkedHttpBearerPtrOutput
+}
+
+type nativeUserV3LinkedHttpBearerPtrType NativeUserV3LinkedHttpBearerArgs
+
+func NativeUserV3LinkedHttpBearerPtr(v *NativeUserV3LinkedHttpBearerArgs) NativeUserV3LinkedHttpBearerPtrInput {
+	return (*nativeUserV3LinkedHttpBearerPtrType)(v)
+}
+
+func (*nativeUserV3LinkedHttpBearerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3LinkedHttpBearer)(nil)).Elem()
+}
+
+func (i *nativeUserV3LinkedHttpBearerPtrType) ToNativeUserV3LinkedHttpBearerPtrOutput() NativeUserV3LinkedHttpBearerPtrOutput {
+	return i.ToNativeUserV3LinkedHttpBearerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3LinkedHttpBearerPtrType) ToNativeUserV3LinkedHttpBearerPtrOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBearerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3LinkedHttpBearerPtrOutput)
+}
+
+type NativeUserV3LinkedHttpBearerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3LinkedHttpBearerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3LinkedHttpBearer)(nil)).Elem()
+}
+
+func (o NativeUserV3LinkedHttpBearerOutput) ToNativeUserV3LinkedHttpBearerOutput() NativeUserV3LinkedHttpBearerOutput {
+	return o
+}
+
+func (o NativeUserV3LinkedHttpBearerOutput) ToNativeUserV3LinkedHttpBearerOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBearerOutput {
+	return o
+}
+
+func (o NativeUserV3LinkedHttpBearerOutput) ToNativeUserV3LinkedHttpBearerPtrOutput() NativeUserV3LinkedHttpBearerPtrOutput {
+	return o.ToNativeUserV3LinkedHttpBearerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3LinkedHttpBearerOutput) ToNativeUserV3LinkedHttpBearerPtrOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBearerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3LinkedHttpBearer) *NativeUserV3LinkedHttpBearer {
+		return &v
+	}).(NativeUserV3LinkedHttpBearerPtrOutput)
+}
+
+// The header to inject the token on, for example `Authorization`.
+func (o NativeUserV3LinkedHttpBearerOutput) Header() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3LinkedHttpBearer) string { return v.Header }).(pulumi.StringOutput)
+}
+
+type NativeUserV3LinkedHttpBearerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3LinkedHttpBearerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3LinkedHttpBearer)(nil)).Elem()
+}
+
+func (o NativeUserV3LinkedHttpBearerPtrOutput) ToNativeUserV3LinkedHttpBearerPtrOutput() NativeUserV3LinkedHttpBearerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3LinkedHttpBearerPtrOutput) ToNativeUserV3LinkedHttpBearerPtrOutputWithContext(ctx context.Context) NativeUserV3LinkedHttpBearerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3LinkedHttpBearerPtrOutput) Elem() NativeUserV3LinkedHttpBearerOutput {
+	return o.ApplyT(func(v *NativeUserV3LinkedHttpBearer) NativeUserV3LinkedHttpBearer {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3LinkedHttpBearer
+		return ret
+	}).(NativeUserV3LinkedHttpBearerOutput)
+}
+
+// The header to inject the token on, for example `Authorization`.
+func (o NativeUserV3LinkedHttpBearerPtrOutput) Header() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3LinkedHttpBearer) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Header
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3Passthrough struct {
+}
+
+// NativeUserV3PassthroughInput is an input type that accepts NativeUserV3PassthroughArgs and NativeUserV3PassthroughOutput values.
+// You can construct a concrete instance of `NativeUserV3PassthroughInput` via:
+//
+//	NativeUserV3PassthroughArgs{...}
+type NativeUserV3PassthroughInput interface {
+	pulumi.Input
+
+	ToNativeUserV3PassthroughOutput() NativeUserV3PassthroughOutput
+	ToNativeUserV3PassthroughOutputWithContext(context.Context) NativeUserV3PassthroughOutput
+}
+
+type NativeUserV3PassthroughArgs struct {
+}
+
+func (NativeUserV3PassthroughArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3Passthrough)(nil)).Elem()
+}
+
+func (i NativeUserV3PassthroughArgs) ToNativeUserV3PassthroughOutput() NativeUserV3PassthroughOutput {
+	return i.ToNativeUserV3PassthroughOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3PassthroughArgs) ToNativeUserV3PassthroughOutputWithContext(ctx context.Context) NativeUserV3PassthroughOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3PassthroughOutput)
+}
+
+func (i NativeUserV3PassthroughArgs) ToNativeUserV3PassthroughPtrOutput() NativeUserV3PassthroughPtrOutput {
+	return i.ToNativeUserV3PassthroughPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3PassthroughArgs) ToNativeUserV3PassthroughPtrOutputWithContext(ctx context.Context) NativeUserV3PassthroughPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3PassthroughOutput).ToNativeUserV3PassthroughPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3PassthroughPtrInput is an input type that accepts NativeUserV3PassthroughArgs, NativeUserV3PassthroughPtr and NativeUserV3PassthroughPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3PassthroughPtrInput` via:
+//
+//	        NativeUserV3PassthroughArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3PassthroughPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3PassthroughPtrOutput() NativeUserV3PassthroughPtrOutput
+	ToNativeUserV3PassthroughPtrOutputWithContext(context.Context) NativeUserV3PassthroughPtrOutput
+}
+
+type nativeUserV3PassthroughPtrType NativeUserV3PassthroughArgs
+
+func NativeUserV3PassthroughPtr(v *NativeUserV3PassthroughArgs) NativeUserV3PassthroughPtrInput {
+	return (*nativeUserV3PassthroughPtrType)(v)
+}
+
+func (*nativeUserV3PassthroughPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3Passthrough)(nil)).Elem()
+}
+
+func (i *nativeUserV3PassthroughPtrType) ToNativeUserV3PassthroughPtrOutput() NativeUserV3PassthroughPtrOutput {
+	return i.ToNativeUserV3PassthroughPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3PassthroughPtrType) ToNativeUserV3PassthroughPtrOutputWithContext(ctx context.Context) NativeUserV3PassthroughPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3PassthroughPtrOutput)
+}
+
+type NativeUserV3PassthroughOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3PassthroughOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3Passthrough)(nil)).Elem()
+}
+
+func (o NativeUserV3PassthroughOutput) ToNativeUserV3PassthroughOutput() NativeUserV3PassthroughOutput {
+	return o
+}
+
+func (o NativeUserV3PassthroughOutput) ToNativeUserV3PassthroughOutputWithContext(ctx context.Context) NativeUserV3PassthroughOutput {
+	return o
+}
+
+func (o NativeUserV3PassthroughOutput) ToNativeUserV3PassthroughPtrOutput() NativeUserV3PassthroughPtrOutput {
+	return o.ToNativeUserV3PassthroughPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3PassthroughOutput) ToNativeUserV3PassthroughPtrOutputWithContext(ctx context.Context) NativeUserV3PassthroughPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3Passthrough) *NativeUserV3Passthrough {
+		return &v
+	}).(NativeUserV3PassthroughPtrOutput)
+}
+
+type NativeUserV3PassthroughPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3PassthroughPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3Passthrough)(nil)).Elem()
+}
+
+func (o NativeUserV3PassthroughPtrOutput) ToNativeUserV3PassthroughPtrOutput() NativeUserV3PassthroughPtrOutput {
+	return o
+}
+
+func (o NativeUserV3PassthroughPtrOutput) ToNativeUserV3PassthroughPtrOutputWithContext(ctx context.Context) NativeUserV3PassthroughPtrOutput {
+	return o
+}
+
+func (o NativeUserV3PassthroughPtrOutput) Elem() NativeUserV3PassthroughOutput {
+	return o.ApplyT(func(v *NativeUserV3Passthrough) NativeUserV3Passthrough {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3Passthrough
+		return ret
+	}).(NativeUserV3PassthroughOutput)
+}
+
 type NativeUserV3SnowflakeKey struct {
-	// The private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Key NativeUserV3SnowflakeKeyKey `pulumi:"key"`
 	// The Snowflake username to authenticate as.
 	Username string `pulumi:"username"`
@@ -9051,7 +14303,7 @@ type NativeUserV3SnowflakeKeyInput interface {
 }
 
 type NativeUserV3SnowflakeKeyArgs struct {
-	// The private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Key NativeUserV3SnowflakeKeyKeyInput `pulumi:"key"`
 	// The Snowflake username to authenticate as.
 	Username pulumi.StringInput `pulumi:"username"`
@@ -9134,7 +14386,7 @@ func (o NativeUserV3SnowflakeKeyOutput) ToNativeUserV3SnowflakeKeyPtrOutputWithC
 	}).(NativeUserV3SnowflakeKeyPtrOutput)
 }
 
-// The private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3SnowflakeKeyOutput) Key() NativeUserV3SnowflakeKeyKeyOutput {
 	return o.ApplyT(func(v NativeUserV3SnowflakeKey) NativeUserV3SnowflakeKeyKey { return v.Key }).(NativeUserV3SnowflakeKeyKeyOutput)
 }
@@ -9168,7 +14420,7 @@ func (o NativeUserV3SnowflakeKeyPtrOutput) Elem() NativeUserV3SnowflakeKeyOutput
 	}).(NativeUserV3SnowflakeKeyOutput)
 }
 
-// The private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3SnowflakeKeyPtrOutput) Key() NativeUserV3SnowflakeKeyKeyPtrOutput {
 	return o.ApplyT(func(v *NativeUserV3SnowflakeKey) *NativeUserV3SnowflakeKeyKey {
 		if v == nil {
@@ -9198,6 +14450,8 @@ type NativeUserV3SnowflakeKeyKey struct {
 	LiteralWo *string `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager *NativeUserV3SnowflakeKeyKeySecretManager `pulumi:"secretManager"`
 }
 
 // NativeUserV3SnowflakeKeyKeyInput is an input type that accepts NativeUserV3SnowflakeKeyKeyArgs and NativeUserV3SnowflakeKeyKeyOutput values.
@@ -9221,6 +14475,8 @@ type NativeUserV3SnowflakeKeyKeyArgs struct {
 	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager NativeUserV3SnowflakeKeyKeySecretManagerPtrInput `pulumi:"secretManager"`
 }
 
 func (NativeUserV3SnowflakeKeyKeyArgs) ElementType() reflect.Type {
@@ -9321,6 +14577,11 @@ func (o NativeUserV3SnowflakeKeyKeyOutput) LiteralWoVersion() pulumi.IntPtrOutpu
 	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKey) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3SnowflakeKeyKeyOutput) SecretManager() NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKey) *NativeUserV3SnowflakeKeyKeySecretManager { return v.SecretManager }).(NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput)
+}
+
 type NativeUserV3SnowflakeKeyKeyPtrOutput struct{ *pulumi.OutputState }
 
 func (NativeUserV3SnowflakeKeyKeyPtrOutput) ElementType() reflect.Type {
@@ -9386,10 +14647,612 @@ func (o NativeUserV3SnowflakeKeyKeyPtrOutput) LiteralWoVersion() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3SnowflakeKeyKeyPtrOutput) SecretManager() NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKey) *NativeUserV3SnowflakeKeyKeySecretManager {
+		if v == nil {
+			return nil
+		}
+		return v.SecretManager
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManager struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret *NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret *NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret *NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret `pulumi:"gcpSecret"`
+}
+
+// NativeUserV3SnowflakeKeyKeySecretManagerInput is an input type that accepts NativeUserV3SnowflakeKeyKeySecretManagerArgs and NativeUserV3SnowflakeKeyKeySecretManagerOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyKeySecretManagerInput` via:
+//
+//	NativeUserV3SnowflakeKeyKeySecretManagerArgs{...}
+type NativeUserV3SnowflakeKeyKeySecretManagerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyKeySecretManagerOutput() NativeUserV3SnowflakeKeyKeySecretManagerOutput
+	ToNativeUserV3SnowflakeKeyKeySecretManagerOutputWithContext(context.Context) NativeUserV3SnowflakeKeyKeySecretManagerOutput
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerArgs struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrInput `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrInput `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrInput `pulumi:"gcpSecret"`
+}
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManager)(nil)).Elem()
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerOutput() NativeUserV3SnowflakeKeyKeySecretManagerOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerOutput)
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerOutput).ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SnowflakeKeyKeySecretManagerPtrInput is an input type that accepts NativeUserV3SnowflakeKeyKeySecretManagerArgs, NativeUserV3SnowflakeKeyKeySecretManagerPtr and NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyKeySecretManagerPtrInput` via:
+//
+//	        NativeUserV3SnowflakeKeyKeySecretManagerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SnowflakeKeyKeySecretManagerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput
+	ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutputWithContext(context.Context) NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput
+}
+
+type nativeUserV3SnowflakeKeyKeySecretManagerPtrType NativeUserV3SnowflakeKeyKeySecretManagerArgs
+
+func NativeUserV3SnowflakeKeyKeySecretManagerPtr(v *NativeUserV3SnowflakeKeyKeySecretManagerArgs) NativeUserV3SnowflakeKeyKeySecretManagerPtrInput {
+	return (*nativeUserV3SnowflakeKeyKeySecretManagerPtrType)(v)
+}
+
+func (*nativeUserV3SnowflakeKeyKeySecretManagerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKeyKeySecretManager)(nil)).Elem()
+}
+
+func (i *nativeUserV3SnowflakeKeyKeySecretManagerPtrType) ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SnowflakeKeyKeySecretManagerPtrType) ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerOutput() NativeUserV3SnowflakeKeyKeySecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput {
+	return o.ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SnowflakeKeyKeySecretManager) *NativeUserV3SnowflakeKeyKeySecretManager {
+		return &v
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerOutput) AwsSecret() NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKeySecretManager) *NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret {
+		return v.AwsSecret
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerOutput) AzureSecret() NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKeySecretManager) *NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret {
+		return v.AzureSecret
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerOutput) GcpSecret() NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKeySecretManager) *NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret {
+		return v.GcpSecret
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKeyKeySecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput) Elem() NativeUserV3SnowflakeKeyKeySecretManagerOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKeySecretManager) NativeUserV3SnowflakeKeyKeySecretManager {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SnowflakeKeyKeySecretManager
+		return ret
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput) AwsSecret() NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKeySecretManager) *NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AwsSecret
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput) AzureSecret() NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKeySecretManager) *NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AzureSecret
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput) GcpSecret() NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKeySecretManager) *NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret {
+		if v == nil {
+			return nil
+		}
+		return v.GcpSecret
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn string `pulumi:"arn"`
+}
+
+// NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretInput is an input type that accepts NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs and NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretInput` via:
+//
+//	NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs{...}
+type NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput() NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput
+	ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutputWithContext(context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn pulumi.StringInput `pulumi:"arn"`
+}
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput() NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput)
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput).ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrInput is an input type that accepts NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs, NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtr and NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrInput` via:
+//
+//	        NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput
+	ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutputWithContext(context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput
+}
+
+type nativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrType NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs
+
+func NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtr(v *NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs) NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrInput {
+	return (*nativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrType)(v)
+}
+
+func (*nativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrType) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrType) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput() NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput {
+	return o.ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret) *NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret {
+		return &v
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput) Arn() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret) string { return v.Arn }).(pulumi.StringOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput) Elem() NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret) NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret
+		return ret
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput) Arn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Arn
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url string `pulumi:"url"`
+}
+
+// NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretInput is an input type that accepts NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs and NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretInput` via:
+//
+//	NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs{...}
+type NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput() NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput
+	ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutputWithContext(context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput() NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput)
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput).ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrInput is an input type that accepts NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs, NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtr and NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrInput` via:
+//
+//	        NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput
+	ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutputWithContext(context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput
+}
+
+type nativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrType NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs
+
+func NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtr(v *NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs) NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrInput {
+	return (*nativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrType)(v)
+}
+
+func (*nativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrType) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrType) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput() NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput {
+	return o.ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret) *NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret {
+		return &v
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput) Elem() NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret) NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret
+		return ret
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretInput is an input type that accepts NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs and NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretInput` via:
+//
+//	NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs{...}
+type NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput() NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput
+	ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutputWithContext(context.Context) NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput() NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput)
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput).ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrInput is an input type that accepts NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs, NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtr and NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrInput` via:
+//
+//	        NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput
+	ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutputWithContext(context.Context) NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput
+}
+
+type nativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrType NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs
+
+func NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtr(v *NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs) NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrInput {
+	return (*nativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrType)(v)
+}
+
+func (*nativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrType) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrType) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput() NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput {
+	return o.ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret) *NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret {
+		return &v
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput() NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput) ToNativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput) Elem() NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret) NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret
+		return ret
+	}).(NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
 type NativeUserV3SshKey struct {
-	// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Certificate *NativeUserV3SshKeyCertificate `pulumi:"certificate"`
-	// The SSH private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The SSH private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Key NativeUserV3SshKeyKey `pulumi:"key"`
 	// The username to authenticate as.
 	Username string `pulumi:"username"`
@@ -9407,9 +15270,9 @@ type NativeUserV3SshKeyInput interface {
 }
 
 type NativeUserV3SshKeyArgs struct {
-	// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Certificate NativeUserV3SshKeyCertificatePtrInput `pulumi:"certificate"`
-	// The SSH private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+	// The SSH private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 	Key NativeUserV3SshKeyKeyInput `pulumi:"key"`
 	// The username to authenticate as.
 	Username pulumi.StringInput `pulumi:"username"`
@@ -9492,12 +15355,12 @@ func (o NativeUserV3SshKeyOutput) ToNativeUserV3SshKeyPtrOutputWithContext(ctx c
 	}).(NativeUserV3SshKeyPtrOutput)
 }
 
-// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3SshKeyOutput) Certificate() NativeUserV3SshKeyCertificatePtrOutput {
 	return o.ApplyT(func(v NativeUserV3SshKey) *NativeUserV3SshKeyCertificate { return v.Certificate }).(NativeUserV3SshKeyCertificatePtrOutput)
 }
 
-// The SSH private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The SSH private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3SshKeyOutput) Key() NativeUserV3SshKeyKeyOutput {
 	return o.ApplyT(func(v NativeUserV3SshKey) NativeUserV3SshKeyKey { return v.Key }).(NativeUserV3SshKeyKeyOutput)
 }
@@ -9531,7 +15394,7 @@ func (o NativeUserV3SshKeyPtrOutput) Elem() NativeUserV3SshKeyOutput {
 	}).(NativeUserV3SshKeyOutput)
 }
 
-// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3SshKeyPtrOutput) Certificate() NativeUserV3SshKeyCertificatePtrOutput {
 	return o.ApplyT(func(v *NativeUserV3SshKey) *NativeUserV3SshKeyCertificate {
 		if v == nil {
@@ -9541,7 +15404,7 @@ func (o NativeUserV3SshKeyPtrOutput) Certificate() NativeUserV3SshKeyCertificate
 	}).(NativeUserV3SshKeyCertificatePtrOutput)
 }
 
-// The SSH private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+// The SSH private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
 func (o NativeUserV3SshKeyPtrOutput) Key() NativeUserV3SshKeyKeyPtrOutput {
 	return o.ApplyT(func(v *NativeUserV3SshKey) *NativeUserV3SshKeyKey {
 		if v == nil {
@@ -9571,6 +15434,8 @@ type NativeUserV3SshKeyCertificate struct {
 	LiteralWo *string `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager *NativeUserV3SshKeyCertificateSecretManager `pulumi:"secretManager"`
 }
 
 // NativeUserV3SshKeyCertificateInput is an input type that accepts NativeUserV3SshKeyCertificateArgs and NativeUserV3SshKeyCertificateOutput values.
@@ -9594,6 +15459,8 @@ type NativeUserV3SshKeyCertificateArgs struct {
 	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager NativeUserV3SshKeyCertificateSecretManagerPtrInput `pulumi:"secretManager"`
 }
 
 func (NativeUserV3SshKeyCertificateArgs) ElementType() reflect.Type {
@@ -9694,6 +15561,13 @@ func (o NativeUserV3SshKeyCertificateOutput) LiteralWoVersion() pulumi.IntPtrOut
 	return o.ApplyT(func(v NativeUserV3SshKeyCertificate) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3SshKeyCertificateOutput) SecretManager() NativeUserV3SshKeyCertificateSecretManagerPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyCertificate) *NativeUserV3SshKeyCertificateSecretManager {
+		return v.SecretManager
+	}).(NativeUserV3SshKeyCertificateSecretManagerPtrOutput)
+}
+
 type NativeUserV3SshKeyCertificatePtrOutput struct{ *pulumi.OutputState }
 
 func (NativeUserV3SshKeyCertificatePtrOutput) ElementType() reflect.Type {
@@ -9759,6 +15633,608 @@ func (o NativeUserV3SshKeyCertificatePtrOutput) LiteralWoVersion() pulumi.IntPtr
 	}).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3SshKeyCertificatePtrOutput) SecretManager() NativeUserV3SshKeyCertificateSecretManagerPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificate) *NativeUserV3SshKeyCertificateSecretManager {
+		if v == nil {
+			return nil
+		}
+		return v.SecretManager
+	}).(NativeUserV3SshKeyCertificateSecretManagerPtrOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManager struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret *NativeUserV3SshKeyCertificateSecretManagerAwsSecret `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret *NativeUserV3SshKeyCertificateSecretManagerAzureSecret `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret *NativeUserV3SshKeyCertificateSecretManagerGcpSecret `pulumi:"gcpSecret"`
+}
+
+// NativeUserV3SshKeyCertificateSecretManagerInput is an input type that accepts NativeUserV3SshKeyCertificateSecretManagerArgs and NativeUserV3SshKeyCertificateSecretManagerOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyCertificateSecretManagerInput` via:
+//
+//	NativeUserV3SshKeyCertificateSecretManagerArgs{...}
+type NativeUserV3SshKeyCertificateSecretManagerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyCertificateSecretManagerOutput() NativeUserV3SshKeyCertificateSecretManagerOutput
+	ToNativeUserV3SshKeyCertificateSecretManagerOutputWithContext(context.Context) NativeUserV3SshKeyCertificateSecretManagerOutput
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerArgs struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrInput `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrInput `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrInput `pulumi:"gcpSecret"`
+}
+
+func (NativeUserV3SshKeyCertificateSecretManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManager)(nil)).Elem()
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerArgs) ToNativeUserV3SshKeyCertificateSecretManagerOutput() NativeUserV3SshKeyCertificateSecretManagerOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerArgs) ToNativeUserV3SshKeyCertificateSecretManagerOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerOutput)
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerArgs) ToNativeUserV3SshKeyCertificateSecretManagerPtrOutput() NativeUserV3SshKeyCertificateSecretManagerPtrOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerArgs) ToNativeUserV3SshKeyCertificateSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerOutput).ToNativeUserV3SshKeyCertificateSecretManagerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SshKeyCertificateSecretManagerPtrInput is an input type that accepts NativeUserV3SshKeyCertificateSecretManagerArgs, NativeUserV3SshKeyCertificateSecretManagerPtr and NativeUserV3SshKeyCertificateSecretManagerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyCertificateSecretManagerPtrInput` via:
+//
+//	        NativeUserV3SshKeyCertificateSecretManagerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SshKeyCertificateSecretManagerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyCertificateSecretManagerPtrOutput() NativeUserV3SshKeyCertificateSecretManagerPtrOutput
+	ToNativeUserV3SshKeyCertificateSecretManagerPtrOutputWithContext(context.Context) NativeUserV3SshKeyCertificateSecretManagerPtrOutput
+}
+
+type nativeUserV3SshKeyCertificateSecretManagerPtrType NativeUserV3SshKeyCertificateSecretManagerArgs
+
+func NativeUserV3SshKeyCertificateSecretManagerPtr(v *NativeUserV3SshKeyCertificateSecretManagerArgs) NativeUserV3SshKeyCertificateSecretManagerPtrInput {
+	return (*nativeUserV3SshKeyCertificateSecretManagerPtrType)(v)
+}
+
+func (*nativeUserV3SshKeyCertificateSecretManagerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyCertificateSecretManager)(nil)).Elem()
+}
+
+func (i *nativeUserV3SshKeyCertificateSecretManagerPtrType) ToNativeUserV3SshKeyCertificateSecretManagerPtrOutput() NativeUserV3SshKeyCertificateSecretManagerPtrOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SshKeyCertificateSecretManagerPtrType) ToNativeUserV3SshKeyCertificateSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerPtrOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyCertificateSecretManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerOutput) ToNativeUserV3SshKeyCertificateSecretManagerOutput() NativeUserV3SshKeyCertificateSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerOutput) ToNativeUserV3SshKeyCertificateSecretManagerOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerOutput) ToNativeUserV3SshKeyCertificateSecretManagerPtrOutput() NativeUserV3SshKeyCertificateSecretManagerPtrOutput {
+	return o.ToNativeUserV3SshKeyCertificateSecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerOutput) ToNativeUserV3SshKeyCertificateSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SshKeyCertificateSecretManager) *NativeUserV3SshKeyCertificateSecretManager {
+		return &v
+	}).(NativeUserV3SshKeyCertificateSecretManagerPtrOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyCertificateSecretManagerOutput) AwsSecret() NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyCertificateSecretManager) *NativeUserV3SshKeyCertificateSecretManagerAwsSecret {
+		return v.AwsSecret
+	}).(NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyCertificateSecretManagerOutput) AzureSecret() NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyCertificateSecretManager) *NativeUserV3SshKeyCertificateSecretManagerAzureSecret {
+		return v.AzureSecret
+	}).(NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyCertificateSecretManagerOutput) GcpSecret() NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyCertificateSecretManager) *NativeUserV3SshKeyCertificateSecretManagerGcpSecret {
+		return v.GcpSecret
+	}).(NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyCertificateSecretManagerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyCertificateSecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerPtrOutput) ToNativeUserV3SshKeyCertificateSecretManagerPtrOutput() NativeUserV3SshKeyCertificateSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerPtrOutput) ToNativeUserV3SshKeyCertificateSecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerPtrOutput) Elem() NativeUserV3SshKeyCertificateSecretManagerOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificateSecretManager) NativeUserV3SshKeyCertificateSecretManager {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SshKeyCertificateSecretManager
+		return ret
+	}).(NativeUserV3SshKeyCertificateSecretManagerOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyCertificateSecretManagerPtrOutput) AwsSecret() NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificateSecretManager) *NativeUserV3SshKeyCertificateSecretManagerAwsSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AwsSecret
+	}).(NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyCertificateSecretManagerPtrOutput) AzureSecret() NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificateSecretManager) *NativeUserV3SshKeyCertificateSecretManagerAzureSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AzureSecret
+	}).(NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyCertificateSecretManagerPtrOutput) GcpSecret() NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificateSecretManager) *NativeUserV3SshKeyCertificateSecretManagerGcpSecret {
+		if v == nil {
+			return nil
+		}
+		return v.GcpSecret
+	}).(NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerAwsSecret struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn string `pulumi:"arn"`
+}
+
+// NativeUserV3SshKeyCertificateSecretManagerAwsSecretInput is an input type that accepts NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs and NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyCertificateSecretManagerAwsSecretInput` via:
+//
+//	NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs{...}
+type NativeUserV3SshKeyCertificateSecretManagerAwsSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput() NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput
+	ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretOutputWithContext(context.Context) NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn pulumi.StringInput `pulumi:"arn"`
+}
+
+func (NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput() NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput)
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput).ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrInput is an input type that accepts NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs, NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtr and NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrInput` via:
+//
+//	        NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput
+	ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutputWithContext(context.Context) NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput
+}
+
+type nativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrType NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs
+
+func NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtr(v *NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs) NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrInput {
+	return (*nativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrType)(v)
+}
+
+func (*nativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyCertificateSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrType) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrType) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput() NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput {
+	return o.ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SshKeyCertificateSecretManagerAwsSecret) *NativeUserV3SshKeyCertificateSecretManagerAwsSecret {
+		return &v
+	}).(NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput) Arn() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyCertificateSecretManagerAwsSecret) string { return v.Arn }).(pulumi.StringOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyCertificateSecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput) ToNativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput) Elem() NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificateSecretManagerAwsSecret) NativeUserV3SshKeyCertificateSecretManagerAwsSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SshKeyCertificateSecretManagerAwsSecret
+		return ret
+	}).(NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput) Arn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificateSecretManagerAwsSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Arn
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerAzureSecret struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url string `pulumi:"url"`
+}
+
+// NativeUserV3SshKeyCertificateSecretManagerAzureSecretInput is an input type that accepts NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs and NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyCertificateSecretManagerAzureSecretInput` via:
+//
+//	NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs{...}
+type NativeUserV3SshKeyCertificateSecretManagerAzureSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput() NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput
+	ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretOutputWithContext(context.Context) NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput() NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput)
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput).ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrInput is an input type that accepts NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs, NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtr and NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrInput` via:
+//
+//	        NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput
+	ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutputWithContext(context.Context) NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput
+}
+
+type nativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrType NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs
+
+func NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtr(v *NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs) NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrInput {
+	return (*nativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrType)(v)
+}
+
+func (*nativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyCertificateSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrType) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrType) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput() NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput {
+	return o.ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SshKeyCertificateSecretManagerAzureSecret) *NativeUserV3SshKeyCertificateSecretManagerAzureSecret {
+		return &v
+	}).(NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyCertificateSecretManagerAzureSecret) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyCertificateSecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput) ToNativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput) Elem() NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificateSecretManagerAzureSecret) NativeUserV3SshKeyCertificateSecretManagerAzureSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SshKeyCertificateSecretManagerAzureSecret
+		return ret
+	}).(NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificateSecretManagerAzureSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerGcpSecret struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3SshKeyCertificateSecretManagerGcpSecretInput is an input type that accepts NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs and NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyCertificateSecretManagerGcpSecretInput` via:
+//
+//	NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs{...}
+type NativeUserV3SshKeyCertificateSecretManagerGcpSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput() NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput
+	ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretOutputWithContext(context.Context) NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput() NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput)
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput).ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrInput is an input type that accepts NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs, NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtr and NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrInput` via:
+//
+//	        NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput
+	ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutputWithContext(context.Context) NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput
+}
+
+type nativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrType NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs
+
+func NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtr(v *NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs) NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrInput {
+	return (*nativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrType)(v)
+}
+
+func (*nativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyCertificateSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrType) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrType) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput() NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput {
+	return o.ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SshKeyCertificateSecretManagerGcpSecret) *NativeUserV3SshKeyCertificateSecretManagerGcpSecret {
+		return &v
+	}).(NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyCertificateSecretManagerGcpSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyCertificateSecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput() NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput) ToNativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput) Elem() NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificateSecretManagerGcpSecret) NativeUserV3SshKeyCertificateSecretManagerGcpSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SshKeyCertificateSecretManagerGcpSecret
+		return ret
+	}).(NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyCertificateSecretManagerGcpSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
 type NativeUserV3SshKeyKey struct {
 	// The name of an environment variable the connector reads the secret from.
 	EnvironmentVariable *string `pulumi:"environmentVariable"`
@@ -9769,6 +16245,8 @@ type NativeUserV3SshKeyKey struct {
 	LiteralWo *string `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion *int `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager *NativeUserV3SshKeyKeySecretManager `pulumi:"secretManager"`
 }
 
 // NativeUserV3SshKeyKeyInput is an input type that accepts NativeUserV3SshKeyKeyArgs and NativeUserV3SshKeyKeyOutput values.
@@ -9792,6 +16270,8 @@ type NativeUserV3SshKeyKeyArgs struct {
 	LiteralWo pulumi.StringPtrInput `pulumi:"literalWo"`
 	// Version trigger for `literalWo`. Increment this value to update the secret.
 	LiteralWoVersion pulumi.IntPtrInput `pulumi:"literalWoVersion"`
+	// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+	SecretManager NativeUserV3SshKeyKeySecretManagerPtrInput `pulumi:"secretManager"`
 }
 
 func (NativeUserV3SshKeyKeyArgs) ElementType() reflect.Type {
@@ -9892,6 +16372,11 @@ func (o NativeUserV3SshKeyKeyOutput) LiteralWoVersion() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v NativeUserV3SshKeyKey) *int { return v.LiteralWoVersion }).(pulumi.IntPtrOutput)
 }
 
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3SshKeyKeyOutput) SecretManager() NativeUserV3SshKeyKeySecretManagerPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyKey) *NativeUserV3SshKeyKeySecretManager { return v.SecretManager }).(NativeUserV3SshKeyKeySecretManagerPtrOutput)
+}
+
 type NativeUserV3SshKeyKeyPtrOutput struct{ *pulumi.OutputState }
 
 func (NativeUserV3SshKeyKeyPtrOutput) ElementType() reflect.Type {
@@ -9955,6 +16440,608 @@ func (o NativeUserV3SshKeyKeyPtrOutput) LiteralWoVersion() pulumi.IntPtrOutput {
 		}
 		return v.LiteralWoVersion
 	}).(pulumi.IntPtrOutput)
+}
+
+// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+func (o NativeUserV3SshKeyKeyPtrOutput) SecretManager() NativeUserV3SshKeyKeySecretManagerPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKey) *NativeUserV3SshKeyKeySecretManager {
+		if v == nil {
+			return nil
+		}
+		return v.SecretManager
+	}).(NativeUserV3SshKeyKeySecretManagerPtrOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManager struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret *NativeUserV3SshKeyKeySecretManagerAwsSecret `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret *NativeUserV3SshKeyKeySecretManagerAzureSecret `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret *NativeUserV3SshKeyKeySecretManagerGcpSecret `pulumi:"gcpSecret"`
+}
+
+// NativeUserV3SshKeyKeySecretManagerInput is an input type that accepts NativeUserV3SshKeyKeySecretManagerArgs and NativeUserV3SshKeyKeySecretManagerOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyKeySecretManagerInput` via:
+//
+//	NativeUserV3SshKeyKeySecretManagerArgs{...}
+type NativeUserV3SshKeyKeySecretManagerInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyKeySecretManagerOutput() NativeUserV3SshKeyKeySecretManagerOutput
+	ToNativeUserV3SshKeyKeySecretManagerOutputWithContext(context.Context) NativeUserV3SshKeyKeySecretManagerOutput
+}
+
+type NativeUserV3SshKeyKeySecretManagerArgs struct {
+	// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AwsSecret NativeUserV3SshKeyKeySecretManagerAwsSecretPtrInput `pulumi:"awsSecret"`
+	// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	AzureSecret NativeUserV3SshKeyKeySecretManagerAzureSecretPtrInput `pulumi:"azureSecret"`
+	// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+	GcpSecret NativeUserV3SshKeyKeySecretManagerGcpSecretPtrInput `pulumi:"gcpSecret"`
+}
+
+func (NativeUserV3SshKeyKeySecretManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyKeySecretManager)(nil)).Elem()
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerArgs) ToNativeUserV3SshKeyKeySecretManagerOutput() NativeUserV3SshKeyKeySecretManagerOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerArgs) ToNativeUserV3SshKeyKeySecretManagerOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerOutput)
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerArgs) ToNativeUserV3SshKeyKeySecretManagerPtrOutput() NativeUserV3SshKeyKeySecretManagerPtrOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerArgs) ToNativeUserV3SshKeyKeySecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerOutput).ToNativeUserV3SshKeyKeySecretManagerPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SshKeyKeySecretManagerPtrInput is an input type that accepts NativeUserV3SshKeyKeySecretManagerArgs, NativeUserV3SshKeyKeySecretManagerPtr and NativeUserV3SshKeyKeySecretManagerPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyKeySecretManagerPtrInput` via:
+//
+//	        NativeUserV3SshKeyKeySecretManagerArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SshKeyKeySecretManagerPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyKeySecretManagerPtrOutput() NativeUserV3SshKeyKeySecretManagerPtrOutput
+	ToNativeUserV3SshKeyKeySecretManagerPtrOutputWithContext(context.Context) NativeUserV3SshKeyKeySecretManagerPtrOutput
+}
+
+type nativeUserV3SshKeyKeySecretManagerPtrType NativeUserV3SshKeyKeySecretManagerArgs
+
+func NativeUserV3SshKeyKeySecretManagerPtr(v *NativeUserV3SshKeyKeySecretManagerArgs) NativeUserV3SshKeyKeySecretManagerPtrInput {
+	return (*nativeUserV3SshKeyKeySecretManagerPtrType)(v)
+}
+
+func (*nativeUserV3SshKeyKeySecretManagerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyKeySecretManager)(nil)).Elem()
+}
+
+func (i *nativeUserV3SshKeyKeySecretManagerPtrType) ToNativeUserV3SshKeyKeySecretManagerPtrOutput() NativeUserV3SshKeyKeySecretManagerPtrOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SshKeyKeySecretManagerPtrType) ToNativeUserV3SshKeyKeySecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerPtrOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManagerOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyKeySecretManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyKeySecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerOutput) ToNativeUserV3SshKeyKeySecretManagerOutput() NativeUserV3SshKeyKeySecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerOutput) ToNativeUserV3SshKeyKeySecretManagerOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerOutput) ToNativeUserV3SshKeyKeySecretManagerPtrOutput() NativeUserV3SshKeyKeySecretManagerPtrOutput {
+	return o.ToNativeUserV3SshKeyKeySecretManagerPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerOutput) ToNativeUserV3SshKeyKeySecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SshKeyKeySecretManager) *NativeUserV3SshKeyKeySecretManager {
+		return &v
+	}).(NativeUserV3SshKeyKeySecretManagerPtrOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyKeySecretManagerOutput) AwsSecret() NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyKeySecretManager) *NativeUserV3SshKeyKeySecretManagerAwsSecret {
+		return v.AwsSecret
+	}).(NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyKeySecretManagerOutput) AzureSecret() NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyKeySecretManager) *NativeUserV3SshKeyKeySecretManagerAzureSecret {
+		return v.AzureSecret
+	}).(NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyKeySecretManagerOutput) GcpSecret() NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyKeySecretManager) *NativeUserV3SshKeyKeySecretManagerGcpSecret {
+		return v.GcpSecret
+	}).(NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManagerPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyKeySecretManagerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyKeySecretManager)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerPtrOutput) ToNativeUserV3SshKeyKeySecretManagerPtrOutput() NativeUserV3SshKeyKeySecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerPtrOutput) ToNativeUserV3SshKeyKeySecretManagerPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerPtrOutput) Elem() NativeUserV3SshKeyKeySecretManagerOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKeySecretManager) NativeUserV3SshKeyKeySecretManager {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SshKeyKeySecretManager
+		return ret
+	}).(NativeUserV3SshKeyKeySecretManagerOutput)
+}
+
+// An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyKeySecretManagerPtrOutput) AwsSecret() NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKeySecretManager) *NativeUserV3SshKeyKeySecretManagerAwsSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AwsSecret
+	}).(NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput)
+}
+
+// An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyKeySecretManagerPtrOutput) AzureSecret() NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKeySecretManager) *NativeUserV3SshKeyKeySecretManagerAzureSecret {
+		if v == nil {
+			return nil
+		}
+		return v.AzureSecret
+	}).(NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput)
+}
+
+// A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+func (o NativeUserV3SshKeyKeySecretManagerPtrOutput) GcpSecret() NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKeySecretManager) *NativeUserV3SshKeyKeySecretManagerGcpSecret {
+		if v == nil {
+			return nil
+		}
+		return v.GcpSecret
+	}).(NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManagerAwsSecret struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn string `pulumi:"arn"`
+}
+
+// NativeUserV3SshKeyKeySecretManagerAwsSecretInput is an input type that accepts NativeUserV3SshKeyKeySecretManagerAwsSecretArgs and NativeUserV3SshKeyKeySecretManagerAwsSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyKeySecretManagerAwsSecretInput` via:
+//
+//	NativeUserV3SshKeyKeySecretManagerAwsSecretArgs{...}
+type NativeUserV3SshKeyKeySecretManagerAwsSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyKeySecretManagerAwsSecretOutput() NativeUserV3SshKeyKeySecretManagerAwsSecretOutput
+	ToNativeUserV3SshKeyKeySecretManagerAwsSecretOutputWithContext(context.Context) NativeUserV3SshKeyKeySecretManagerAwsSecretOutput
+}
+
+type NativeUserV3SshKeyKeySecretManagerAwsSecretArgs struct {
+	// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+	Arn pulumi.StringInput `pulumi:"arn"`
+}
+
+func (NativeUserV3SshKeyKeySecretManagerAwsSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerAwsSecretArgs) ToNativeUserV3SshKeyKeySecretManagerAwsSecretOutput() NativeUserV3SshKeyKeySecretManagerAwsSecretOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerAwsSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerAwsSecretArgs) ToNativeUserV3SshKeyKeySecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAwsSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerAwsSecretOutput)
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerAwsSecretArgs) ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerAwsSecretArgs) ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerAwsSecretOutput).ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SshKeyKeySecretManagerAwsSecretPtrInput is an input type that accepts NativeUserV3SshKeyKeySecretManagerAwsSecretArgs, NativeUserV3SshKeyKeySecretManagerAwsSecretPtr and NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyKeySecretManagerAwsSecretPtrInput` via:
+//
+//	        NativeUserV3SshKeyKeySecretManagerAwsSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SshKeyKeySecretManagerAwsSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput
+	ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutputWithContext(context.Context) NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput
+}
+
+type nativeUserV3SshKeyKeySecretManagerAwsSecretPtrType NativeUserV3SshKeyKeySecretManagerAwsSecretArgs
+
+func NativeUserV3SshKeyKeySecretManagerAwsSecretPtr(v *NativeUserV3SshKeyKeySecretManagerAwsSecretArgs) NativeUserV3SshKeyKeySecretManagerAwsSecretPtrInput {
+	return (*nativeUserV3SshKeyKeySecretManagerAwsSecretPtrType)(v)
+}
+
+func (*nativeUserV3SshKeyKeySecretManagerAwsSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyKeySecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3SshKeyKeySecretManagerAwsSecretPtrType) ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SshKeyKeySecretManagerAwsSecretPtrType) ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManagerAwsSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyKeySecretManagerAwsSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAwsSecretOutput) ToNativeUserV3SshKeyKeySecretManagerAwsSecretOutput() NativeUserV3SshKeyKeySecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAwsSecretOutput) ToNativeUserV3SshKeyKeySecretManagerAwsSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAwsSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAwsSecretOutput) ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput {
+	return o.ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAwsSecretOutput) ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SshKeyKeySecretManagerAwsSecret) *NativeUserV3SshKeyKeySecretManagerAwsSecret {
+		return &v
+	}).(NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3SshKeyKeySecretManagerAwsSecretOutput) Arn() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyKeySecretManagerAwsSecret) string { return v.Arn }).(pulumi.StringOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyKeySecretManagerAwsSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput) ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput) ToNativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput) Elem() NativeUserV3SshKeyKeySecretManagerAwsSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKeySecretManagerAwsSecret) NativeUserV3SshKeyKeySecretManagerAwsSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SshKeyKeySecretManagerAwsSecret
+		return ret
+	}).(NativeUserV3SshKeyKeySecretManagerAwsSecretOutput)
+}
+
+// The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+func (o NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput) Arn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKeySecretManagerAwsSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Arn
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManagerAzureSecret struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url string `pulumi:"url"`
+}
+
+// NativeUserV3SshKeyKeySecretManagerAzureSecretInput is an input type that accepts NativeUserV3SshKeyKeySecretManagerAzureSecretArgs and NativeUserV3SshKeyKeySecretManagerAzureSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyKeySecretManagerAzureSecretInput` via:
+//
+//	NativeUserV3SshKeyKeySecretManagerAzureSecretArgs{...}
+type NativeUserV3SshKeyKeySecretManagerAzureSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyKeySecretManagerAzureSecretOutput() NativeUserV3SshKeyKeySecretManagerAzureSecretOutput
+	ToNativeUserV3SshKeyKeySecretManagerAzureSecretOutputWithContext(context.Context) NativeUserV3SshKeyKeySecretManagerAzureSecretOutput
+}
+
+type NativeUserV3SshKeyKeySecretManagerAzureSecretArgs struct {
+	// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (NativeUserV3SshKeyKeySecretManagerAzureSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerAzureSecretArgs) ToNativeUserV3SshKeyKeySecretManagerAzureSecretOutput() NativeUserV3SshKeyKeySecretManagerAzureSecretOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerAzureSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerAzureSecretArgs) ToNativeUserV3SshKeyKeySecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAzureSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerAzureSecretOutput)
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerAzureSecretArgs) ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerAzureSecretArgs) ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerAzureSecretOutput).ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SshKeyKeySecretManagerAzureSecretPtrInput is an input type that accepts NativeUserV3SshKeyKeySecretManagerAzureSecretArgs, NativeUserV3SshKeyKeySecretManagerAzureSecretPtr and NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyKeySecretManagerAzureSecretPtrInput` via:
+//
+//	        NativeUserV3SshKeyKeySecretManagerAzureSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SshKeyKeySecretManagerAzureSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput
+	ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutputWithContext(context.Context) NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput
+}
+
+type nativeUserV3SshKeyKeySecretManagerAzureSecretPtrType NativeUserV3SshKeyKeySecretManagerAzureSecretArgs
+
+func NativeUserV3SshKeyKeySecretManagerAzureSecretPtr(v *NativeUserV3SshKeyKeySecretManagerAzureSecretArgs) NativeUserV3SshKeyKeySecretManagerAzureSecretPtrInput {
+	return (*nativeUserV3SshKeyKeySecretManagerAzureSecretPtrType)(v)
+}
+
+func (*nativeUserV3SshKeyKeySecretManagerAzureSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyKeySecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3SshKeyKeySecretManagerAzureSecretPtrType) ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SshKeyKeySecretManagerAzureSecretPtrType) ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManagerAzureSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyKeySecretManagerAzureSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAzureSecretOutput) ToNativeUserV3SshKeyKeySecretManagerAzureSecretOutput() NativeUserV3SshKeyKeySecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAzureSecretOutput) ToNativeUserV3SshKeyKeySecretManagerAzureSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAzureSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAzureSecretOutput) ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput {
+	return o.ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAzureSecretOutput) ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SshKeyKeySecretManagerAzureSecret) *NativeUserV3SshKeyKeySecretManagerAzureSecret {
+		return &v
+	}).(NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3SshKeyKeySecretManagerAzureSecretOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyKeySecretManagerAzureSecret) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyKeySecretManagerAzureSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput) ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput) ToNativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput) Elem() NativeUserV3SshKeyKeySecretManagerAzureSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKeySecretManagerAzureSecret) NativeUserV3SshKeyKeySecretManagerAzureSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SshKeyKeySecretManagerAzureSecret
+		return ret
+	}).(NativeUserV3SshKeyKeySecretManagerAzureSecretOutput)
+}
+
+// The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+func (o NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKeySecretManagerAzureSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManagerGcpSecret struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name string `pulumi:"name"`
+}
+
+// NativeUserV3SshKeyKeySecretManagerGcpSecretInput is an input type that accepts NativeUserV3SshKeyKeySecretManagerGcpSecretArgs and NativeUserV3SshKeyKeySecretManagerGcpSecretOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyKeySecretManagerGcpSecretInput` via:
+//
+//	NativeUserV3SshKeyKeySecretManagerGcpSecretArgs{...}
+type NativeUserV3SshKeyKeySecretManagerGcpSecretInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyKeySecretManagerGcpSecretOutput() NativeUserV3SshKeyKeySecretManagerGcpSecretOutput
+	ToNativeUserV3SshKeyKeySecretManagerGcpSecretOutputWithContext(context.Context) NativeUserV3SshKeyKeySecretManagerGcpSecretOutput
+}
+
+type NativeUserV3SshKeyKeySecretManagerGcpSecretArgs struct {
+	// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NativeUserV3SshKeyKeySecretManagerGcpSecretArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerGcpSecretArgs) ToNativeUserV3SshKeyKeySecretManagerGcpSecretOutput() NativeUserV3SshKeyKeySecretManagerGcpSecretOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerGcpSecretOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerGcpSecretArgs) ToNativeUserV3SshKeyKeySecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerGcpSecretOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerGcpSecretOutput)
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerGcpSecretArgs) ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i NativeUserV3SshKeyKeySecretManagerGcpSecretArgs) ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerGcpSecretOutput).ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutputWithContext(ctx)
+}
+
+// NativeUserV3SshKeyKeySecretManagerGcpSecretPtrInput is an input type that accepts NativeUserV3SshKeyKeySecretManagerGcpSecretArgs, NativeUserV3SshKeyKeySecretManagerGcpSecretPtr and NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput values.
+// You can construct a concrete instance of `NativeUserV3SshKeyKeySecretManagerGcpSecretPtrInput` via:
+//
+//	        NativeUserV3SshKeyKeySecretManagerGcpSecretArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeUserV3SshKeyKeySecretManagerGcpSecretPtrInput interface {
+	pulumi.Input
+
+	ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput
+	ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutputWithContext(context.Context) NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput
+}
+
+type nativeUserV3SshKeyKeySecretManagerGcpSecretPtrType NativeUserV3SshKeyKeySecretManagerGcpSecretArgs
+
+func NativeUserV3SshKeyKeySecretManagerGcpSecretPtr(v *NativeUserV3SshKeyKeySecretManagerGcpSecretArgs) NativeUserV3SshKeyKeySecretManagerGcpSecretPtrInput {
+	return (*nativeUserV3SshKeyKeySecretManagerGcpSecretPtrType)(v)
+}
+
+func (*nativeUserV3SshKeyKeySecretManagerGcpSecretPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyKeySecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (i *nativeUserV3SshKeyKeySecretManagerGcpSecretPtrType) ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput {
+	return i.ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeUserV3SshKeyKeySecretManagerGcpSecretPtrType) ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManagerGcpSecretOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyKeySecretManagerGcpSecretOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerGcpSecretOutput) ToNativeUserV3SshKeyKeySecretManagerGcpSecretOutput() NativeUserV3SshKeyKeySecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerGcpSecretOutput) ToNativeUserV3SshKeyKeySecretManagerGcpSecretOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerGcpSecretOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerGcpSecretOutput) ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput {
+	return o.ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutputWithContext(context.Background())
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerGcpSecretOutput) ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeUserV3SshKeyKeySecretManagerGcpSecret) *NativeUserV3SshKeyKeySecretManagerGcpSecret {
+		return &v
+	}).(NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3SshKeyKeySecretManagerGcpSecretOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeUserV3SshKeyKeySecretManagerGcpSecret) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeUserV3SshKeyKeySecretManagerGcpSecret)(nil)).Elem()
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput) ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput() NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput) ToNativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutputWithContext(ctx context.Context) NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput {
+	return o
+}
+
+func (o NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput) Elem() NativeUserV3SshKeyKeySecretManagerGcpSecretOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKeySecretManagerGcpSecret) NativeUserV3SshKeyKeySecretManagerGcpSecret {
+		if v != nil {
+			return *v
+		}
+		var ret NativeUserV3SshKeyKeySecretManagerGcpSecret
+		return ret
+	}).(NativeUserV3SshKeyKeySecretManagerGcpSecretOutput)
+}
+
+// The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+func (o NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3SshKeyKeySecretManagerGcpSecret) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
 }
 
 type ProviderOidc struct {
@@ -10894,44 +17981,138 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPtrInput)(nil)).Elem(), NativeUserV3BasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordInput)(nil)).Elem(), NativeUserV3BasicPasswordArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordPtrInput)(nil)).Elem(), NativeUserV3BasicPasswordArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerInput)(nil)).Elem(), NativeUserV3BasicPasswordSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerPtrInput)(nil)).Elem(), NativeUserV3BasicPasswordSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerAwsSecretInput)(nil)).Elem(), NativeUserV3BasicPasswordSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerAwsSecretPtrInput)(nil)).Elem(), NativeUserV3BasicPasswordSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerAzureSecretInput)(nil)).Elem(), NativeUserV3BasicPasswordSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerAzureSecretPtrInput)(nil)).Elem(), NativeUserV3BasicPasswordSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerGcpSecretInput)(nil)).Elem(), NativeUserV3BasicPasswordSecretManagerGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3BasicPasswordSecretManagerGcpSecretPtrInput)(nil)).Elem(), NativeUserV3BasicPasswordSecretManagerGcpSecretArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3GcpIamInput)(nil)).Elem(), NativeUserV3GcpIamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3GcpIamPtrInput)(nil)).Elem(), NativeUserV3GcpIamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookInput)(nil)).Elem(), NativeUserV3HookArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookPtrInput)(nil)).Elem(), NativeUserV3HookArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookSecretInput)(nil)).Elem(), NativeUserV3HookSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookSecretArrayInput)(nil)).Elem(), NativeUserV3HookSecretArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookSecretAwsSecretInput)(nil)).Elem(), NativeUserV3HookSecretAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookSecretAwsSecretPtrInput)(nil)).Elem(), NativeUserV3HookSecretAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookSecretAzureSecretInput)(nil)).Elem(), NativeUserV3HookSecretAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookSecretAzureSecretPtrInput)(nil)).Elem(), NativeUserV3HookSecretAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookSecretGcpSecretInput)(nil)).Elem(), NativeUserV3HookSecretGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HookSecretGcpSecretPtrInput)(nil)).Elem(), NativeUserV3HookSecretGcpSecretArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValuePtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValuePtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrInput)(nil)).Elem(), NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicInput)(nil)).Elem(), NativeUserV3HttpBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPtrInput)(nil)).Elem(), NativeUserV3HttpBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordPtrInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerPtrInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerAwsSecretInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerAzureSecretInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerGcpSecretInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrInput)(nil)).Elem(), NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerInput)(nil)).Elem(), NativeUserV3HttpBearerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerPtrInput)(nil)).Elem(), NativeUserV3HttpBearerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenInput)(nil)).Elem(), NativeUserV3HttpBearerTokenArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenPtrInput)(nil)).Elem(), NativeUserV3HttpBearerTokenArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerInput)(nil)).Elem(), NativeUserV3HttpBearerTokenSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerPtrInput)(nil)).Elem(), NativeUserV3HttpBearerTokenSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerAwsSecretInput)(nil)).Elem(), NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrInput)(nil)).Elem(), NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerAzureSecretInput)(nil)).Elem(), NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrInput)(nil)).Elem(), NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerGcpSecretInput)(nil)).Elem(), NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrInput)(nil)).Elem(), NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineInput)(nil)).Elem(), NativeUserV3KubernetesInlineArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlinePtrInput)(nil)).Elem(), NativeUserV3KubernetesInlineArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigPtrInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrInput)(nil)).Elem(), NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathInput)(nil)).Elem(), NativeUserV3KubernetesPathArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathPtrInput)(nil)).Elem(), NativeUserV3KubernetesPathArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathPtrInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrInput)(nil)).Elem(), NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3LinkedHttpBasicInput)(nil)).Elem(), NativeUserV3LinkedHttpBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3LinkedHttpBasicPtrInput)(nil)).Elem(), NativeUserV3LinkedHttpBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3LinkedHttpBearerInput)(nil)).Elem(), NativeUserV3LinkedHttpBearerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3LinkedHttpBearerPtrInput)(nil)).Elem(), NativeUserV3LinkedHttpBearerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3PassthroughInput)(nil)).Elem(), NativeUserV3PassthroughArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3PassthroughPtrInput)(nil)).Elem(), NativeUserV3PassthroughArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyInput)(nil)).Elem(), NativeUserV3SnowflakeKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyPtrInput)(nil)).Elem(), NativeUserV3SnowflakeKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeyInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeyPtrInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeySecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerPtrInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeySecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrInput)(nil)).Elem(), NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyInput)(nil)).Elem(), NativeUserV3SshKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyPtrInput)(nil)).Elem(), NativeUserV3SshKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificateInput)(nil)).Elem(), NativeUserV3SshKeyCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificatePtrInput)(nil)).Elem(), NativeUserV3SshKeyCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerInput)(nil)).Elem(), NativeUserV3SshKeyCertificateSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerPtrInput)(nil)).Elem(), NativeUserV3SshKeyCertificateSecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerAwsSecretInput)(nil)).Elem(), NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrInput)(nil)).Elem(), NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerAzureSecretInput)(nil)).Elem(), NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrInput)(nil)).Elem(), NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerGcpSecretInput)(nil)).Elem(), NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrInput)(nil)).Elem(), NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeyInput)(nil)).Elem(), NativeUserV3SshKeyKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeyPtrInput)(nil)).Elem(), NativeUserV3SshKeyKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerInput)(nil)).Elem(), NativeUserV3SshKeyKeySecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerPtrInput)(nil)).Elem(), NativeUserV3SshKeyKeySecretManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerAwsSecretInput)(nil)).Elem(), NativeUserV3SshKeyKeySecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerAwsSecretPtrInput)(nil)).Elem(), NativeUserV3SshKeyKeySecretManagerAwsSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerAzureSecretInput)(nil)).Elem(), NativeUserV3SshKeyKeySecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerAzureSecretPtrInput)(nil)).Elem(), NativeUserV3SshKeyKeySecretManagerAzureSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerGcpSecretInput)(nil)).Elem(), NativeUserV3SshKeyKeySecretManagerGcpSecretArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeUserV3SshKeyKeySecretManagerGcpSecretPtrInput)(nil)).Elem(), NativeUserV3SshKeyKeySecretManagerGcpSecretArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcInput)(nil)).Elem(), ProviderOidcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcPtrInput)(nil)).Elem(), ProviderOidcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderOidcAwsInput)(nil)).Elem(), ProviderOidcAwsArgs{})
@@ -11020,44 +18201,138 @@ func init() {
 	pulumi.RegisterOutputType(NativeUserV3BasicPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3BasicPasswordOutput{})
 	pulumi.RegisterOutputType(NativeUserV3BasicPasswordPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicPasswordSecretManagerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicPasswordSecretManagerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicPasswordSecretManagerAwsSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicPasswordSecretManagerAwsSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicPasswordSecretManagerAzureSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicPasswordSecretManagerAzureSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicPasswordSecretManagerGcpSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3BasicPasswordSecretManagerGcpSecretPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3GcpIamOutput{})
 	pulumi.RegisterOutputType(NativeUserV3GcpIamPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HookOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HookPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HookSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HookSecretArrayOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HookSecretAwsSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HookSecretAwsSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HookSecretAzureSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HookSecretAzureSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HookSecretGcpSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HookSecretGcpSecretPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValueOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValuePtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValueSecretManagerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValueSecretManagerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValueOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValuePtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValueSecretManagerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValueSecretManagerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpBasicOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpBasicPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordSecretManagerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordSecretManagerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordSecretManagerAwsSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordSecretManagerAwsSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordSecretManagerAzureSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordSecretManagerAzureSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordSecretManagerGcpSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBasicPasswordSecretManagerGcpSecretPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpBearerOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpBearerPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenOutput{})
 	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenSecretManagerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenSecretManagerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenSecretManagerAwsSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenSecretManagerAwsSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenSecretManagerAzureSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenSecretManagerAzureSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenSecretManagerGcpSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3HttpBearerTokenSecretManagerGcpSecretPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineOutput{})
 	pulumi.RegisterOutputType(NativeUserV3KubernetesInlinePtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigOutput{})
 	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigSecretManagerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigSecretManagerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3KubernetesPathOutput{})
 	pulumi.RegisterOutputType(NativeUserV3KubernetesPathPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathOutput{})
 	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathSecretManagerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathSecretManagerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3LinkedHttpBasicOutput{})
+	pulumi.RegisterOutputType(NativeUserV3LinkedHttpBasicPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3LinkedHttpBearerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3LinkedHttpBearerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3PassthroughOutput{})
+	pulumi.RegisterOutputType(NativeUserV3PassthroughPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyOutput{})
 	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeyOutput{})
 	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeyPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeySecretManagerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeySecretManagerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3SshKeyOutput{})
 	pulumi.RegisterOutputType(NativeUserV3SshKeyPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificateOutput{})
 	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificatePtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificateSecretManagerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificateSecretManagerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificateSecretManagerAwsSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificateSecretManagerAwsSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificateSecretManagerAzureSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificateSecretManagerAzureSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificateSecretManagerGcpSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyCertificateSecretManagerGcpSecretPtrOutput{})
 	pulumi.RegisterOutputType(NativeUserV3SshKeyKeyOutput{})
 	pulumi.RegisterOutputType(NativeUserV3SshKeyKeyPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyKeySecretManagerOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyKeySecretManagerPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyKeySecretManagerAwsSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyKeySecretManagerAwsSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyKeySecretManagerAzureSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyKeySecretManagerAzureSecretPtrOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyKeySecretManagerGcpSecretOutput{})
+	pulumi.RegisterOutputType(NativeUserV3SshKeyKeySecretManagerGcpSecretPtrOutput{})
 	pulumi.RegisterOutputType(ProviderOidcOutput{})
 	pulumi.RegisterOutputType(ProviderOidcPtrOutput{})
 	pulumi.RegisterOutputType(ProviderOidcAwsOutput{})

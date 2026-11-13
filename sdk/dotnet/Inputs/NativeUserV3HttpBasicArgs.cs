@@ -20,7 +20,7 @@ namespace Formal.Pulumi.Inputs
         public Input<string> Header { get; set; } = null!;
 
         /// <summary>
-        /// The password to authenticate with. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The password to authenticate with. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         [Input("password", required: true)]
         public Input<Inputs.NativeUserV3HttpBasicPasswordArgs> Password { get; set; } = null!;

@@ -48,7 +48,7 @@ export class ConnectorSatelliteLink extends pulumi.CustomResource {
      */
     declare public readonly satelliteId: pulumi.Output<string>;
     /**
-     * The type of satellite being linked. Must be one of: `ai`, `dataClassifier` or `policyDataLoader`.
+     * The type of satellite being linked. For new links, use `ai` or `policyDataLoader`. `dataClassifier` is deprecated and cannot be used for new links.
      */
     declare public readonly satelliteType: pulumi.Output<string>;
     /**
@@ -113,7 +113,7 @@ export interface ConnectorSatelliteLinkState {
      */
     satelliteId?: pulumi.Input<string | undefined>;
     /**
-     * The type of satellite being linked. Must be one of: `ai`, `dataClassifier` or `policyDataLoader`.
+     * The type of satellite being linked. For new links, use `ai` or `policyDataLoader`. `dataClassifier` is deprecated and cannot be used for new links.
      */
     satelliteType?: pulumi.Input<string | undefined>;
     /**
@@ -135,7 +135,7 @@ export interface ConnectorSatelliteLinkArgs {
      */
     satelliteId: pulumi.Input<string>;
     /**
-     * The type of satellite being linked. Must be one of: `ai`, `dataClassifier` or `policyDataLoader`.
+     * The type of satellite being linked. For new links, use `ai` or `policyDataLoader`. `dataClassifier` is deprecated and cannot be used for new links.
      */
     satelliteType: pulumi.Input<string>;
 }

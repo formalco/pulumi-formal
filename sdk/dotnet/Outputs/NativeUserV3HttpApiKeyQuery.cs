@@ -19,7 +19,7 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly string Key;
         /// <summary>
-        /// The API key. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The API key. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         public readonly Outputs.NativeUserV3HttpApiKeyQueryValue Value;
 

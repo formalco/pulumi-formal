@@ -14,7 +14,7 @@ namespace Formal.Pulumi.Inputs
     public sealed class NativeUserV3SnowflakeKeyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The private key. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The private key. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         [Input("key", required: true)]
         public Input<Inputs.NativeUserV3SnowflakeKeyKeyGetArgs> Key { get; set; } = null!;

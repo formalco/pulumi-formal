@@ -26,7 +26,7 @@ class SatelliteArgs:
         """
         The set of arguments for constructing a Satellite resource.
 
-        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, or `policy_data_loader`.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Satellite.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Satellite in.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Satellite cannot be deleted.
@@ -43,7 +43,7 @@ class SatelliteArgs:
     @pulumi.getter(name="satelliteType")
     def satellite_type(self) -> pulumi.Input[_builtins.str]:
         """
-        The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        The type of satellite. Must be one of: `ai`, `data_discovery`, or `policy_data_loader`.
         """
         return pulumi.get(self, "satellite_type")
 
@@ -102,7 +102,7 @@ class _SatelliteState:
 
         :param pulumi.Input[_builtins.str] api_key: Api key of the Satellite.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Satellite.
-        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, or `policy_data_loader`.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Satellite in.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Satellite cannot be deleted.
         :param pulumi.Input[_builtins.str] tls_cert: TLS certificate of the Satellite.
@@ -148,7 +148,7 @@ class _SatelliteState:
     @pulumi.getter(name="satelliteType")
     def satellite_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        The type of satellite. Must be one of: `ai`, `data_discovery`, or `policy_data_loader`.
         """
         return pulumi.get(self, "satellite_type")
 
@@ -211,7 +211,7 @@ class Satellite(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Satellite.
-        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, or `policy_data_loader`.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Satellite in.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Satellite cannot be deleted.
         """
@@ -288,7 +288,7 @@ class Satellite(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] api_key: Api key of the Satellite.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Satellite.
-        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        :param pulumi.Input[_builtins.str] satellite_type: The type of satellite. Must be one of: `ai`, `data_discovery`, or `policy_data_loader`.
         :param pulumi.Input[_builtins.str] space_id: The ID of the Space to create the Satellite in.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Satellite cannot be deleted.
         :param pulumi.Input[_builtins.str] tls_cert: TLS certificate of the Satellite.
@@ -325,7 +325,7 @@ class Satellite(pulumi.CustomResource):
     @pulumi.getter(name="satelliteType")
     def satellite_type(self) -> pulumi.Output[_builtins.str]:
         """
-        The type of satellite. Must be one of: `ai`, `data_discovery`, `data_classifier` (deprecated), or `policy_data_loader`.
+        The type of satellite. Must be one of: `ai`, `data_discovery`, or `policy_data_loader`.
         """
         return pulumi.get(self, "satellite_type")
 

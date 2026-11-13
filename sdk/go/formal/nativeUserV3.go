@@ -55,6 +55,26 @@ import (
 //			if err != nil {
 //				return err
 //			}
+//			// Username and password, with the password read from AWS Secrets Manager by the
+//			// connector using its own IAM role. gcp_secret { name = ... } and
+//			// azure_secret { url = ... } work the same way for GCP Secret Manager and Azure Key Vault.
+//			_, err = formal.NewNativeUserV3(ctx, "basic_secret_manager", &formal.NativeUserV3Args{
+//				Basic: &formal.NativeUserV3BasicArgs{
+//					Password: &formal.NativeUserV3BasicPasswordArgs{
+//						SecretManager: &formal.NativeUserV3BasicPasswordSecretManagerArgs{
+//							AwsSecret: &formal.NativeUserV3BasicPasswordSecretManagerAwsSecretArgs{
+//								Arn: pulumi.String("arn:aws:secretsmanager:us-east-1:123456789012:secret:analytics-admin-AbCdEf:password::"),
+//							},
+//						},
+//					},
+//					Username: pulumi.String("app_admin"),
+//				},
+//				ResourceId: db.ID(),
+//				Label:      pulumi.String("admin-secret-manager"),
+//			})
+//			if err != nil {
+//				return err
+//			}
 //			// Username and password, with the password passed as a write-only value so it
 //			// never lands in Terraform state. Increment literal_wo_version to rotate it.
 //			_, err = formal.NewNativeUserV3(ctx, "basic_write_only", &formal.NativeUserV3Args{
@@ -67,6 +87,15 @@ import (
 //				},
 //				ResourceId: db.ID(),
 //				Label:      pulumi.String("admin-write-only"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// The client's own credentials, sent as is to the Resource.
+//			_, err = formal.NewNativeUserV3(ctx, "passthrough", &formal.NativeUserV3Args{
+//				Passthrough: &formal.NativeUserV3PassthroughArgs{},
+//				ResourceId:  db.ID(),
+//				Label:       pulumi.String("passthrough"),
 //			})
 //			if err != nil {
 //				return err
@@ -130,6 +159,53 @@ import (
 //			if err != nil {
 //				return err
 //			}
+//			// A hook that receives secret manager references as its fourth argument,
+//			// resolved by the connector before the hook runs.
+//			_, err = formal.NewNativeUserV3(ctx, "from_hook_with_secrets", &formal.NativeUserV3Args{
+//				Hook: &formal.NativeUserV3HookArgs{
+//					Secrets: formal.NativeUserV3HookSecretArray{
+//						&formal.NativeUserV3HookSecretArgs{
+//							GcpSecret: &formal.NativeUserV3HookSecretGcpSecretArgs{
+//								Name: pulumi.String("projects/analytics/secrets/db-password/versions/latest"),
+//							},
+//							Name: pulumi.String("DB_PASSWORD"),
+//						},
+//					},
+//					OutputType: pulumi.String("basic"),
+//					Code: pulumi.String(`export default async function (_input, _env, _cache, secrets) {
+//	  return {
+//	    username: \"app_admin\",
+//	    password: secrets.DB_PASSWORD,
+//	  };
+//	}
+//
+// `),
+//
+//				},
+//				ResourceId: db.ID(),
+//				Label:      pulumi.String("dynamic-with-secrets"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// The requesting user's linked upstream account token, sent as a bearer token.
+//			// The Resource must link upstream accounts through formal_resource_oauth_settings.
+//			apiResourceOauthSettings, err := formal.NewResourceOauthSettings(ctx, "api", &formal.ResourceOauthSettingsArgs{
+//				ResourceId: api.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = formal.NewNativeUserV3(ctx, "linked_account", &formal.NativeUserV3Args{
+//				LinkedHttpBearer: &formal.NativeUserV3LinkedHttpBearerArgs{
+//					Header: pulumi.String("Authorization"),
+//				},
+//				ResourceId: apiResourceOauthSettings.ResourceId,
+//				Label:      pulumi.String("linked-account"),
+//			})
+//			if err != nil {
+//				return err
+//			}
 //			return nil
 //		})
 //	}
@@ -166,6 +242,12 @@ type NativeUserV3 struct {
 	KubernetesPath NativeUserV3KubernetesPathPtrOutput `pulumi:"kubernetesPath"`
 	// A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
 	Label pulumi.StringOutput `pulumi:"label"`
+	// HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+	LinkedHttpBasic NativeUserV3LinkedHttpBasicPtrOutput `pulumi:"linkedHttpBasic"`
+	// HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+	LinkedHttpBearer NativeUserV3LinkedHttpBearerPtrOutput `pulumi:"linkedHttpBearer"`
+	// Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+	Passthrough NativeUserV3PassthroughPtrOutput `pulumi:"passthrough"`
 	// The ID of the Resource this Native User authenticates to.
 	ResourceId pulumi.StringOutput `pulumi:"resourceId"`
 	// Snowflake key-pair authentication.
@@ -242,6 +324,12 @@ type nativeUserV3State struct {
 	KubernetesPath *NativeUserV3KubernetesPath `pulumi:"kubernetesPath"`
 	// A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
 	Label *string `pulumi:"label"`
+	// HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+	LinkedHttpBasic *NativeUserV3LinkedHttpBasic `pulumi:"linkedHttpBasic"`
+	// HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+	LinkedHttpBearer *NativeUserV3LinkedHttpBearer `pulumi:"linkedHttpBearer"`
+	// Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+	Passthrough *NativeUserV3Passthrough `pulumi:"passthrough"`
 	// The ID of the Resource this Native User authenticates to.
 	ResourceId *string `pulumi:"resourceId"`
 	// Snowflake key-pair authentication.
@@ -283,6 +371,12 @@ type NativeUserV3State struct {
 	KubernetesPath NativeUserV3KubernetesPathPtrInput
 	// A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
 	Label pulumi.StringPtrInput
+	// HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+	LinkedHttpBasic NativeUserV3LinkedHttpBasicPtrInput
+	// HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+	LinkedHttpBearer NativeUserV3LinkedHttpBearerPtrInput
+	// Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+	Passthrough NativeUserV3PassthroughPtrInput
 	// The ID of the Resource this Native User authenticates to.
 	ResourceId pulumi.StringPtrInput
 	// Snowflake key-pair authentication.
@@ -326,6 +420,12 @@ type nativeUserV3Args struct {
 	KubernetesPath *NativeUserV3KubernetesPath `pulumi:"kubernetesPath"`
 	// A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
 	Label string `pulumi:"label"`
+	// HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+	LinkedHttpBasic *NativeUserV3LinkedHttpBasic `pulumi:"linkedHttpBasic"`
+	// HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+	LinkedHttpBearer *NativeUserV3LinkedHttpBearer `pulumi:"linkedHttpBearer"`
+	// Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+	Passthrough *NativeUserV3Passthrough `pulumi:"passthrough"`
 	// The ID of the Resource this Native User authenticates to.
 	ResourceId string `pulumi:"resourceId"`
 	// Snowflake key-pair authentication.
@@ -364,6 +464,12 @@ type NativeUserV3Args struct {
 	KubernetesPath NativeUserV3KubernetesPathPtrInput
 	// A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
 	Label pulumi.StringInput
+	// HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+	LinkedHttpBasic NativeUserV3LinkedHttpBasicPtrInput
+	// HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+	LinkedHttpBearer NativeUserV3LinkedHttpBearerPtrInput
+	// Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+	Passthrough NativeUserV3PassthroughPtrInput
 	// The ID of the Resource this Native User authenticates to.
 	ResourceId pulumi.StringInput
 	// Snowflake key-pair authentication.
@@ -529,6 +635,21 @@ func (o NativeUserV3Output) KubernetesPath() NativeUserV3KubernetesPathPtrOutput
 // A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
 func (o NativeUserV3Output) Label() pulumi.StringOutput {
 	return o.ApplyT(func(v *NativeUserV3) pulumi.StringOutput { return v.Label }).(pulumi.StringOutput)
+}
+
+// HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+func (o NativeUserV3Output) LinkedHttpBasic() NativeUserV3LinkedHttpBasicPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3) NativeUserV3LinkedHttpBasicPtrOutput { return v.LinkedHttpBasic }).(NativeUserV3LinkedHttpBasicPtrOutput)
+}
+
+// HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+func (o NativeUserV3Output) LinkedHttpBearer() NativeUserV3LinkedHttpBearerPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3) NativeUserV3LinkedHttpBearerPtrOutput { return v.LinkedHttpBearer }).(NativeUserV3LinkedHttpBearerPtrOutput)
+}
+
+// Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+func (o NativeUserV3Output) Passthrough() NativeUserV3PassthroughPtrOutput {
+	return o.ApplyT(func(v *NativeUserV3) NativeUserV3PassthroughPtrOutput { return v.Passthrough }).(NativeUserV3PassthroughPtrOutput)
 }
 
 // The ID of the Resource this Native User authenticates to.

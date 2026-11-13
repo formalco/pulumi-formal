@@ -605,7 +605,7 @@ class Resource(pulumi.CustomResource):
     @_builtins.property
     @pulumi.getter
     @_utilities.deprecated("""This field is deprecated and will be removed in a future release.""")
-    def environment(self) -> pulumi.Output[Optional[_builtins.str]]:
+    def environment(self) -> pulumi.Output[_builtins.str]:
         """
         Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         """

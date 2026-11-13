@@ -54,25 +54,72 @@ __all__ = [
     'NativeUserV3AzureIam',
     'NativeUserV3Basic',
     'NativeUserV3BasicPassword',
+    'NativeUserV3BasicPasswordSecretManager',
+    'NativeUserV3BasicPasswordSecretManagerAwsSecret',
+    'NativeUserV3BasicPasswordSecretManagerAzureSecret',
+    'NativeUserV3BasicPasswordSecretManagerGcpSecret',
     'NativeUserV3GcpIam',
     'NativeUserV3Hook',
+    'NativeUserV3HookSecret',
+    'NativeUserV3HookSecretAwsSecret',
+    'NativeUserV3HookSecretAzureSecret',
+    'NativeUserV3HookSecretGcpSecret',
     'NativeUserV3HttpApiKeyHeader',
     'NativeUserV3HttpApiKeyHeaderValue',
+    'NativeUserV3HttpApiKeyHeaderValueSecretManager',
+    'NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret',
+    'NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret',
+    'NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret',
     'NativeUserV3HttpApiKeyQuery',
     'NativeUserV3HttpApiKeyQueryValue',
+    'NativeUserV3HttpApiKeyQueryValueSecretManager',
+    'NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret',
+    'NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret',
+    'NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret',
     'NativeUserV3HttpBasic',
     'NativeUserV3HttpBasicPassword',
+    'NativeUserV3HttpBasicPasswordSecretManager',
+    'NativeUserV3HttpBasicPasswordSecretManagerAwsSecret',
+    'NativeUserV3HttpBasicPasswordSecretManagerAzureSecret',
+    'NativeUserV3HttpBasicPasswordSecretManagerGcpSecret',
     'NativeUserV3HttpBearer',
     'NativeUserV3HttpBearerToken',
+    'NativeUserV3HttpBearerTokenSecretManager',
+    'NativeUserV3HttpBearerTokenSecretManagerAwsSecret',
+    'NativeUserV3HttpBearerTokenSecretManagerAzureSecret',
+    'NativeUserV3HttpBearerTokenSecretManagerGcpSecret',
     'NativeUserV3KubernetesInline',
     'NativeUserV3KubernetesInlineKubeconfig',
+    'NativeUserV3KubernetesInlineKubeconfigSecretManager',
+    'NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret',
+    'NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret',
+    'NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret',
     'NativeUserV3KubernetesPath',
     'NativeUserV3KubernetesPathKubeconfigPath',
+    'NativeUserV3KubernetesPathKubeconfigPathSecretManager',
+    'NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret',
+    'NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret',
+    'NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret',
+    'NativeUserV3LinkedHttpBasic',
+    'NativeUserV3LinkedHttpBearer',
+    'NativeUserV3Passthrough',
     'NativeUserV3SnowflakeKey',
     'NativeUserV3SnowflakeKeyKey',
+    'NativeUserV3SnowflakeKeyKeySecretManager',
+    'NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret',
+    'NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret',
+    'NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret',
     'NativeUserV3SshKey',
     'NativeUserV3SshKeyCertificate',
+    'NativeUserV3SshKeyCertificateSecretManager',
+    'NativeUserV3SshKeyCertificateSecretManagerAwsSecret',
+    'NativeUserV3SshKeyCertificateSecretManagerAzureSecret',
+    'NativeUserV3SshKeyCertificateSecretManagerGcpSecret',
     'NativeUserV3SshKeyKey',
+    'NativeUserV3SshKeyKeySecretManager',
+    'NativeUserV3SshKeyKeySecretManagerAwsSecret',
+    'NativeUserV3SshKeyKeySecretManagerAzureSecret',
+    'NativeUserV3SshKeyKeySecretManagerGcpSecret',
     'GetGroupsGroupResult',
     'GetUsersUserResult',
 ]
@@ -2203,7 +2250,7 @@ class NativeUserV3Basic(dict):
                  password: 'outputs.NativeUserV3BasicPassword',
                  username: _builtins.str):
         """
-        :param 'NativeUserV3BasicPasswordArgs' password: The password to authenticate with. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param 'NativeUserV3BasicPasswordArgs' password: The password to authenticate with. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         :param _builtins.str username: The username to authenticate as.
         """
         pulumi.set(__self__, "password", password)
@@ -2213,7 +2260,7 @@ class NativeUserV3Basic(dict):
     @pulumi.getter
     def password(self) -> 'outputs.NativeUserV3BasicPassword':
         """
-        The password to authenticate with. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        The password to authenticate with. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         return pulumi.get(self, "password")
 
@@ -2237,6 +2284,8 @@ class NativeUserV3BasicPassword(dict):
             suggest = "literal_wo"
         elif key == "literalWoVersion":
             suggest = "literal_wo_version"
+        elif key == "secretManager":
+            suggest = "secret_manager"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in NativeUserV3BasicPassword. Access the value via the '{suggest}' property getter instead.")
@@ -2253,13 +2302,15 @@ class NativeUserV3BasicPassword(dict):
                  environment_variable: Optional[_builtins.str] = None,
                  literal: Optional[_builtins.str] = None,
                  literal_wo: Optional[_builtins.str] = None,
-                 literal_wo_version: Optional[_builtins.int] = None):
+                 literal_wo_version: Optional[_builtins.int] = None,
+                 secret_manager: Optional['outputs.NativeUserV3BasicPasswordSecretManager'] = None):
         """
         :param _builtins.str environment_variable: The name of an environment variable the connector reads the secret from.
         :param _builtins.str literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
         :param _builtins.str literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
         :param _builtins.int literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        :param 'NativeUserV3BasicPasswordSecretManagerArgs' secret_manager: A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
         """
         if environment_variable is not None:
             pulumi.set(__self__, "environment_variable", environment_variable)
@@ -2269,6 +2320,8 @@ class NativeUserV3BasicPassword(dict):
             pulumi.set(__self__, "literal_wo", literal_wo)
         if literal_wo_version is not None:
             pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+        if secret_manager is not None:
+            pulumi.set(__self__, "secret_manager", secret_manager)
 
     @_builtins.property
     @pulumi.getter(name="environmentVariable")
@@ -2302,6 +2355,132 @@ class NativeUserV3BasicPassword(dict):
         Version trigger for `literal_wo`. Increment this value to update the secret.
         """
         return pulumi.get(self, "literal_wo_version")
+
+    @_builtins.property
+    @pulumi.getter(name="secretManager")
+    def secret_manager(self) -> Optional['outputs.NativeUserV3BasicPasswordSecretManager']:
+        """
+        A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        """
+        return pulumi.get(self, "secret_manager")
+
+
+@pulumi.output_type
+class NativeUserV3BasicPasswordSecretManager(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "awsSecret":
+            suggest = "aws_secret"
+        elif key == "azureSecret":
+            suggest = "azure_secret"
+        elif key == "gcpSecret":
+            suggest = "gcp_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeUserV3BasicPasswordSecretManager. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeUserV3BasicPasswordSecretManager.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeUserV3BasicPasswordSecretManager.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 aws_secret: Optional['outputs.NativeUserV3BasicPasswordSecretManagerAwsSecret'] = None,
+                 azure_secret: Optional['outputs.NativeUserV3BasicPasswordSecretManagerAzureSecret'] = None,
+                 gcp_secret: Optional['outputs.NativeUserV3BasicPasswordSecretManagerGcpSecret'] = None):
+        """
+        :param 'NativeUserV3BasicPasswordSecretManagerAwsSecretArgs' aws_secret: An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3BasicPasswordSecretManagerAzureSecretArgs' azure_secret: An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3BasicPasswordSecretManagerGcpSecretArgs' gcp_secret: A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        if aws_secret is not None:
+            pulumi.set(__self__, "aws_secret", aws_secret)
+        if azure_secret is not None:
+            pulumi.set(__self__, "azure_secret", azure_secret)
+        if gcp_secret is not None:
+            pulumi.set(__self__, "gcp_secret", gcp_secret)
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecret")
+    def aws_secret(self) -> Optional['outputs.NativeUserV3BasicPasswordSecretManagerAwsSecret']:
+        """
+        An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "aws_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSecret")
+    def azure_secret(self) -> Optional['outputs.NativeUserV3BasicPasswordSecretManagerAzureSecret']:
+        """
+        An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "azure_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpSecret")
+    def gcp_secret(self) -> Optional['outputs.NativeUserV3BasicPasswordSecretManagerGcpSecret']:
+        """
+        A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "gcp_secret")
+
+
+@pulumi.output_type
+class NativeUserV3BasicPasswordSecretManagerAwsSecret(dict):
+    def __init__(__self__, *,
+                 arn: _builtins.str):
+        """
+        :param _builtins.str arn: The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        pulumi.set(__self__, "arn", arn)
+
+    @_builtins.property
+    @pulumi.getter
+    def arn(self) -> _builtins.str:
+        """
+        The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        return pulumi.get(self, "arn")
+
+
+@pulumi.output_type
+class NativeUserV3BasicPasswordSecretManagerAzureSecret(dict):
+    def __init__(__self__, *,
+                 url: _builtins.str):
+        """
+        :param _builtins.str url: The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> _builtins.str:
+        """
+        The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class NativeUserV3BasicPasswordSecretManagerGcpSecret(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        return pulumi.get(self, "name")
 
 
 @pulumi.output_type
@@ -2349,12 +2528,14 @@ class NativeUserV3Hook(dict):
                  code: _builtins.str,
                  output_type: _builtins.str,
                  allowlisted_env_variables: Optional[Sequence[_builtins.str]] = None,
-                 allowlisted_network_hosts: Optional[Sequence[_builtins.str]] = None):
+                 allowlisted_network_hosts: Optional[Sequence[_builtins.str]] = None,
+                 secrets: Optional[Sequence['outputs.NativeUserV3HookSecret']] = None):
         """
         :param _builtins.str code: The TypeScript or JavaScript source of the hook, in the same form as `formal_hook.code`.
         :param _builtins.str output_type: The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `aws_iam`, `aws_iam_role`, `gcp_iam`, `azure_iam`, `kubernetes_path`, `kubernetes_inline`, `ssh_key`, `snowflake_key`, `http_basic`, `http_bearer`, `http_api_key_header`, `http_api_key_query`.
         :param Sequence[_builtins.str] allowlisted_env_variables: Environment variables the hook may read.
         :param Sequence[_builtins.str] allowlisted_network_hosts: Network hosts the hook may access.
+        :param Sequence['NativeUserV3HookSecretArgs'] secrets: A secret manager reference the connector resolves and passes to the hook as its fourth argument, `secrets`, keyed by `name`.
         """
         pulumi.set(__self__, "code", code)
         pulumi.set(__self__, "output_type", output_type)
@@ -2362,6 +2543,8 @@ class NativeUserV3Hook(dict):
             pulumi.set(__self__, "allowlisted_env_variables", allowlisted_env_variables)
         if allowlisted_network_hosts is not None:
             pulumi.set(__self__, "allowlisted_network_hosts", allowlisted_network_hosts)
+        if secrets is not None:
+            pulumi.set(__self__, "secrets", secrets)
 
     @_builtins.property
     @pulumi.getter
@@ -2395,6 +2578,143 @@ class NativeUserV3Hook(dict):
         """
         return pulumi.get(self, "allowlisted_network_hosts")
 
+    @_builtins.property
+    @pulumi.getter
+    def secrets(self) -> Optional[Sequence['outputs.NativeUserV3HookSecret']]:
+        """
+        A secret manager reference the connector resolves and passes to the hook as its fourth argument, `secrets`, keyed by `name`.
+        """
+        return pulumi.get(self, "secrets")
+
+
+@pulumi.output_type
+class NativeUserV3HookSecret(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "awsSecret":
+            suggest = "aws_secret"
+        elif key == "azureSecret":
+            suggest = "azure_secret"
+        elif key == "gcpSecret":
+            suggest = "gcp_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeUserV3HookSecret. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeUserV3HookSecret.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeUserV3HookSecret.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 aws_secret: Optional['outputs.NativeUserV3HookSecretAwsSecret'] = None,
+                 azure_secret: Optional['outputs.NativeUserV3HookSecretAzureSecret'] = None,
+                 gcp_secret: Optional['outputs.NativeUserV3HookSecretGcpSecret'] = None):
+        """
+        :param _builtins.str name: The key the resolved value has in the hook's `secrets` argument.
+        :param 'NativeUserV3HookSecretAwsSecretArgs' aws_secret: An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3HookSecretAzureSecretArgs' azure_secret: An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3HookSecretGcpSecretArgs' gcp_secret: A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        pulumi.set(__self__, "name", name)
+        if aws_secret is not None:
+            pulumi.set(__self__, "aws_secret", aws_secret)
+        if azure_secret is not None:
+            pulumi.set(__self__, "azure_secret", azure_secret)
+        if gcp_secret is not None:
+            pulumi.set(__self__, "gcp_secret", gcp_secret)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The key the resolved value has in the hook's `secrets` argument.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecret")
+    def aws_secret(self) -> Optional['outputs.NativeUserV3HookSecretAwsSecret']:
+        """
+        An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "aws_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSecret")
+    def azure_secret(self) -> Optional['outputs.NativeUserV3HookSecretAzureSecret']:
+        """
+        An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "azure_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpSecret")
+    def gcp_secret(self) -> Optional['outputs.NativeUserV3HookSecretGcpSecret']:
+        """
+        A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "gcp_secret")
+
+
+@pulumi.output_type
+class NativeUserV3HookSecretAwsSecret(dict):
+    def __init__(__self__, *,
+                 arn: _builtins.str):
+        """
+        :param _builtins.str arn: The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        pulumi.set(__self__, "arn", arn)
+
+    @_builtins.property
+    @pulumi.getter
+    def arn(self) -> _builtins.str:
+        """
+        The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        return pulumi.get(self, "arn")
+
+
+@pulumi.output_type
+class NativeUserV3HookSecretAzureSecret(dict):
+    def __init__(__self__, *,
+                 url: _builtins.str):
+        """
+        :param _builtins.str url: The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> _builtins.str:
+        """
+        The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class NativeUserV3HookSecretGcpSecret(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        return pulumi.get(self, "name")
+
 
 @pulumi.output_type
 class NativeUserV3HttpApiKeyHeader(dict):
@@ -2403,7 +2723,7 @@ class NativeUserV3HttpApiKeyHeader(dict):
                  value: 'outputs.NativeUserV3HttpApiKeyHeaderValue'):
         """
         :param _builtins.str key: The name of the header carrying the API key.
-        :param 'NativeUserV3HttpApiKeyHeaderValueArgs' value: The API key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param 'NativeUserV3HttpApiKeyHeaderValueArgs' value: The API key. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "value", value)
@@ -2420,7 +2740,7 @@ class NativeUserV3HttpApiKeyHeader(dict):
     @pulumi.getter
     def value(self) -> 'outputs.NativeUserV3HttpApiKeyHeaderValue':
         """
-        The API key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        The API key. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         return pulumi.get(self, "value")
 
@@ -2436,6 +2756,8 @@ class NativeUserV3HttpApiKeyHeaderValue(dict):
             suggest = "literal_wo"
         elif key == "literalWoVersion":
             suggest = "literal_wo_version"
+        elif key == "secretManager":
+            suggest = "secret_manager"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in NativeUserV3HttpApiKeyHeaderValue. Access the value via the '{suggest}' property getter instead.")
@@ -2452,13 +2774,15 @@ class NativeUserV3HttpApiKeyHeaderValue(dict):
                  environment_variable: Optional[_builtins.str] = None,
                  literal: Optional[_builtins.str] = None,
                  literal_wo: Optional[_builtins.str] = None,
-                 literal_wo_version: Optional[_builtins.int] = None):
+                 literal_wo_version: Optional[_builtins.int] = None,
+                 secret_manager: Optional['outputs.NativeUserV3HttpApiKeyHeaderValueSecretManager'] = None):
         """
         :param _builtins.str environment_variable: The name of an environment variable the connector reads the secret from.
         :param _builtins.str literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
         :param _builtins.str literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
         :param _builtins.int literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        :param 'NativeUserV3HttpApiKeyHeaderValueSecretManagerArgs' secret_manager: A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
         """
         if environment_variable is not None:
             pulumi.set(__self__, "environment_variable", environment_variable)
@@ -2468,6 +2792,8 @@ class NativeUserV3HttpApiKeyHeaderValue(dict):
             pulumi.set(__self__, "literal_wo", literal_wo)
         if literal_wo_version is not None:
             pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+        if secret_manager is not None:
+            pulumi.set(__self__, "secret_manager", secret_manager)
 
     @_builtins.property
     @pulumi.getter(name="environmentVariable")
@@ -2502,6 +2828,132 @@ class NativeUserV3HttpApiKeyHeaderValue(dict):
         """
         return pulumi.get(self, "literal_wo_version")
 
+    @_builtins.property
+    @pulumi.getter(name="secretManager")
+    def secret_manager(self) -> Optional['outputs.NativeUserV3HttpApiKeyHeaderValueSecretManager']:
+        """
+        A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        """
+        return pulumi.get(self, "secret_manager")
+
+
+@pulumi.output_type
+class NativeUserV3HttpApiKeyHeaderValueSecretManager(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "awsSecret":
+            suggest = "aws_secret"
+        elif key == "azureSecret":
+            suggest = "azure_secret"
+        elif key == "gcpSecret":
+            suggest = "gcp_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeUserV3HttpApiKeyHeaderValueSecretManager. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeUserV3HttpApiKeyHeaderValueSecretManager.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeUserV3HttpApiKeyHeaderValueSecretManager.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 aws_secret: Optional['outputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret'] = None,
+                 azure_secret: Optional['outputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret'] = None,
+                 gcp_secret: Optional['outputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret'] = None):
+        """
+        :param 'NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecretArgs' aws_secret: An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecretArgs' azure_secret: An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecretArgs' gcp_secret: A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        if aws_secret is not None:
+            pulumi.set(__self__, "aws_secret", aws_secret)
+        if azure_secret is not None:
+            pulumi.set(__self__, "azure_secret", azure_secret)
+        if gcp_secret is not None:
+            pulumi.set(__self__, "gcp_secret", gcp_secret)
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecret")
+    def aws_secret(self) -> Optional['outputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret']:
+        """
+        An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "aws_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSecret")
+    def azure_secret(self) -> Optional['outputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret']:
+        """
+        An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "azure_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpSecret")
+    def gcp_secret(self) -> Optional['outputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret']:
+        """
+        A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "gcp_secret")
+
+
+@pulumi.output_type
+class NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret(dict):
+    def __init__(__self__, *,
+                 arn: _builtins.str):
+        """
+        :param _builtins.str arn: The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        pulumi.set(__self__, "arn", arn)
+
+    @_builtins.property
+    @pulumi.getter
+    def arn(self) -> _builtins.str:
+        """
+        The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        return pulumi.get(self, "arn")
+
+
+@pulumi.output_type
+class NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret(dict):
+    def __init__(__self__, *,
+                 url: _builtins.str):
+        """
+        :param _builtins.str url: The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> _builtins.str:
+        """
+        The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        return pulumi.get(self, "name")
+
 
 @pulumi.output_type
 class NativeUserV3HttpApiKeyQuery(dict):
@@ -2510,7 +2962,7 @@ class NativeUserV3HttpApiKeyQuery(dict):
                  value: 'outputs.NativeUserV3HttpApiKeyQueryValue'):
         """
         :param _builtins.str key: The name of the query parameter carrying the API key.
-        :param 'NativeUserV3HttpApiKeyQueryValueArgs' value: The API key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param 'NativeUserV3HttpApiKeyQueryValueArgs' value: The API key. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "value", value)
@@ -2527,7 +2979,7 @@ class NativeUserV3HttpApiKeyQuery(dict):
     @pulumi.getter
     def value(self) -> 'outputs.NativeUserV3HttpApiKeyQueryValue':
         """
-        The API key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        The API key. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         return pulumi.get(self, "value")
 
@@ -2543,6 +2995,8 @@ class NativeUserV3HttpApiKeyQueryValue(dict):
             suggest = "literal_wo"
         elif key == "literalWoVersion":
             suggest = "literal_wo_version"
+        elif key == "secretManager":
+            suggest = "secret_manager"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in NativeUserV3HttpApiKeyQueryValue. Access the value via the '{suggest}' property getter instead.")
@@ -2559,13 +3013,15 @@ class NativeUserV3HttpApiKeyQueryValue(dict):
                  environment_variable: Optional[_builtins.str] = None,
                  literal: Optional[_builtins.str] = None,
                  literal_wo: Optional[_builtins.str] = None,
-                 literal_wo_version: Optional[_builtins.int] = None):
+                 literal_wo_version: Optional[_builtins.int] = None,
+                 secret_manager: Optional['outputs.NativeUserV3HttpApiKeyQueryValueSecretManager'] = None):
         """
         :param _builtins.str environment_variable: The name of an environment variable the connector reads the secret from.
         :param _builtins.str literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
         :param _builtins.str literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
         :param _builtins.int literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        :param 'NativeUserV3HttpApiKeyQueryValueSecretManagerArgs' secret_manager: A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
         """
         if environment_variable is not None:
             pulumi.set(__self__, "environment_variable", environment_variable)
@@ -2575,6 +3031,8 @@ class NativeUserV3HttpApiKeyQueryValue(dict):
             pulumi.set(__self__, "literal_wo", literal_wo)
         if literal_wo_version is not None:
             pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+        if secret_manager is not None:
+            pulumi.set(__self__, "secret_manager", secret_manager)
 
     @_builtins.property
     @pulumi.getter(name="environmentVariable")
@@ -2609,6 +3067,132 @@ class NativeUserV3HttpApiKeyQueryValue(dict):
         """
         return pulumi.get(self, "literal_wo_version")
 
+    @_builtins.property
+    @pulumi.getter(name="secretManager")
+    def secret_manager(self) -> Optional['outputs.NativeUserV3HttpApiKeyQueryValueSecretManager']:
+        """
+        A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        """
+        return pulumi.get(self, "secret_manager")
+
+
+@pulumi.output_type
+class NativeUserV3HttpApiKeyQueryValueSecretManager(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "awsSecret":
+            suggest = "aws_secret"
+        elif key == "azureSecret":
+            suggest = "azure_secret"
+        elif key == "gcpSecret":
+            suggest = "gcp_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeUserV3HttpApiKeyQueryValueSecretManager. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeUserV3HttpApiKeyQueryValueSecretManager.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeUserV3HttpApiKeyQueryValueSecretManager.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 aws_secret: Optional['outputs.NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret'] = None,
+                 azure_secret: Optional['outputs.NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret'] = None,
+                 gcp_secret: Optional['outputs.NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret'] = None):
+        """
+        :param 'NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecretArgs' aws_secret: An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecretArgs' azure_secret: An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecretArgs' gcp_secret: A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        if aws_secret is not None:
+            pulumi.set(__self__, "aws_secret", aws_secret)
+        if azure_secret is not None:
+            pulumi.set(__self__, "azure_secret", azure_secret)
+        if gcp_secret is not None:
+            pulumi.set(__self__, "gcp_secret", gcp_secret)
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecret")
+    def aws_secret(self) -> Optional['outputs.NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret']:
+        """
+        An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "aws_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSecret")
+    def azure_secret(self) -> Optional['outputs.NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret']:
+        """
+        An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "azure_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpSecret")
+    def gcp_secret(self) -> Optional['outputs.NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret']:
+        """
+        A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "gcp_secret")
+
+
+@pulumi.output_type
+class NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret(dict):
+    def __init__(__self__, *,
+                 arn: _builtins.str):
+        """
+        :param _builtins.str arn: The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        pulumi.set(__self__, "arn", arn)
+
+    @_builtins.property
+    @pulumi.getter
+    def arn(self) -> _builtins.str:
+        """
+        The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        return pulumi.get(self, "arn")
+
+
+@pulumi.output_type
+class NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret(dict):
+    def __init__(__self__, *,
+                 url: _builtins.str):
+        """
+        :param _builtins.str url: The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> _builtins.str:
+        """
+        The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        return pulumi.get(self, "name")
+
 
 @pulumi.output_type
 class NativeUserV3HttpBasic(dict):
@@ -2618,7 +3202,7 @@ class NativeUserV3HttpBasic(dict):
                  username: _builtins.str):
         """
         :param _builtins.str header: The header to inject the credentials on, for example `Authorization`.
-        :param 'NativeUserV3HttpBasicPasswordArgs' password: The password to authenticate with. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param 'NativeUserV3HttpBasicPasswordArgs' password: The password to authenticate with. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         :param _builtins.str username: The username to authenticate as.
         """
         pulumi.set(__self__, "header", header)
@@ -2637,7 +3221,7 @@ class NativeUserV3HttpBasic(dict):
     @pulumi.getter
     def password(self) -> 'outputs.NativeUserV3HttpBasicPassword':
         """
-        The password to authenticate with. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        The password to authenticate with. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         return pulumi.get(self, "password")
 
@@ -2661,6 +3245,8 @@ class NativeUserV3HttpBasicPassword(dict):
             suggest = "literal_wo"
         elif key == "literalWoVersion":
             suggest = "literal_wo_version"
+        elif key == "secretManager":
+            suggest = "secret_manager"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in NativeUserV3HttpBasicPassword. Access the value via the '{suggest}' property getter instead.")
@@ -2677,13 +3263,15 @@ class NativeUserV3HttpBasicPassword(dict):
                  environment_variable: Optional[_builtins.str] = None,
                  literal: Optional[_builtins.str] = None,
                  literal_wo: Optional[_builtins.str] = None,
-                 literal_wo_version: Optional[_builtins.int] = None):
+                 literal_wo_version: Optional[_builtins.int] = None,
+                 secret_manager: Optional['outputs.NativeUserV3HttpBasicPasswordSecretManager'] = None):
         """
         :param _builtins.str environment_variable: The name of an environment variable the connector reads the secret from.
         :param _builtins.str literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
         :param _builtins.str literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
         :param _builtins.int literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        :param 'NativeUserV3HttpBasicPasswordSecretManagerArgs' secret_manager: A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
         """
         if environment_variable is not None:
             pulumi.set(__self__, "environment_variable", environment_variable)
@@ -2693,6 +3281,8 @@ class NativeUserV3HttpBasicPassword(dict):
             pulumi.set(__self__, "literal_wo", literal_wo)
         if literal_wo_version is not None:
             pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+        if secret_manager is not None:
+            pulumi.set(__self__, "secret_manager", secret_manager)
 
     @_builtins.property
     @pulumi.getter(name="environmentVariable")
@@ -2727,6 +3317,132 @@ class NativeUserV3HttpBasicPassword(dict):
         """
         return pulumi.get(self, "literal_wo_version")
 
+    @_builtins.property
+    @pulumi.getter(name="secretManager")
+    def secret_manager(self) -> Optional['outputs.NativeUserV3HttpBasicPasswordSecretManager']:
+        """
+        A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        """
+        return pulumi.get(self, "secret_manager")
+
+
+@pulumi.output_type
+class NativeUserV3HttpBasicPasswordSecretManager(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "awsSecret":
+            suggest = "aws_secret"
+        elif key == "azureSecret":
+            suggest = "azure_secret"
+        elif key == "gcpSecret":
+            suggest = "gcp_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeUserV3HttpBasicPasswordSecretManager. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeUserV3HttpBasicPasswordSecretManager.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeUserV3HttpBasicPasswordSecretManager.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 aws_secret: Optional['outputs.NativeUserV3HttpBasicPasswordSecretManagerAwsSecret'] = None,
+                 azure_secret: Optional['outputs.NativeUserV3HttpBasicPasswordSecretManagerAzureSecret'] = None,
+                 gcp_secret: Optional['outputs.NativeUserV3HttpBasicPasswordSecretManagerGcpSecret'] = None):
+        """
+        :param 'NativeUserV3HttpBasicPasswordSecretManagerAwsSecretArgs' aws_secret: An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3HttpBasicPasswordSecretManagerAzureSecretArgs' azure_secret: An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3HttpBasicPasswordSecretManagerGcpSecretArgs' gcp_secret: A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        if aws_secret is not None:
+            pulumi.set(__self__, "aws_secret", aws_secret)
+        if azure_secret is not None:
+            pulumi.set(__self__, "azure_secret", azure_secret)
+        if gcp_secret is not None:
+            pulumi.set(__self__, "gcp_secret", gcp_secret)
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecret")
+    def aws_secret(self) -> Optional['outputs.NativeUserV3HttpBasicPasswordSecretManagerAwsSecret']:
+        """
+        An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "aws_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSecret")
+    def azure_secret(self) -> Optional['outputs.NativeUserV3HttpBasicPasswordSecretManagerAzureSecret']:
+        """
+        An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "azure_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpSecret")
+    def gcp_secret(self) -> Optional['outputs.NativeUserV3HttpBasicPasswordSecretManagerGcpSecret']:
+        """
+        A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "gcp_secret")
+
+
+@pulumi.output_type
+class NativeUserV3HttpBasicPasswordSecretManagerAwsSecret(dict):
+    def __init__(__self__, *,
+                 arn: _builtins.str):
+        """
+        :param _builtins.str arn: The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        pulumi.set(__self__, "arn", arn)
+
+    @_builtins.property
+    @pulumi.getter
+    def arn(self) -> _builtins.str:
+        """
+        The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        return pulumi.get(self, "arn")
+
+
+@pulumi.output_type
+class NativeUserV3HttpBasicPasswordSecretManagerAzureSecret(dict):
+    def __init__(__self__, *,
+                 url: _builtins.str):
+        """
+        :param _builtins.str url: The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> _builtins.str:
+        """
+        The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class NativeUserV3HttpBasicPasswordSecretManagerGcpSecret(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        return pulumi.get(self, "name")
+
 
 @pulumi.output_type
 class NativeUserV3HttpBearer(dict):
@@ -2735,7 +3451,7 @@ class NativeUserV3HttpBearer(dict):
                  token: 'outputs.NativeUserV3HttpBearerToken'):
         """
         :param _builtins.str header: The header to inject the token on, for example `Authorization`.
-        :param 'NativeUserV3HttpBearerTokenArgs' token: The bearer token. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param 'NativeUserV3HttpBearerTokenArgs' token: The bearer token. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         pulumi.set(__self__, "header", header)
         pulumi.set(__self__, "token", token)
@@ -2752,7 +3468,7 @@ class NativeUserV3HttpBearer(dict):
     @pulumi.getter
     def token(self) -> 'outputs.NativeUserV3HttpBearerToken':
         """
-        The bearer token. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        The bearer token. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         return pulumi.get(self, "token")
 
@@ -2768,6 +3484,8 @@ class NativeUserV3HttpBearerToken(dict):
             suggest = "literal_wo"
         elif key == "literalWoVersion":
             suggest = "literal_wo_version"
+        elif key == "secretManager":
+            suggest = "secret_manager"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in NativeUserV3HttpBearerToken. Access the value via the '{suggest}' property getter instead.")
@@ -2784,13 +3502,15 @@ class NativeUserV3HttpBearerToken(dict):
                  environment_variable: Optional[_builtins.str] = None,
                  literal: Optional[_builtins.str] = None,
                  literal_wo: Optional[_builtins.str] = None,
-                 literal_wo_version: Optional[_builtins.int] = None):
+                 literal_wo_version: Optional[_builtins.int] = None,
+                 secret_manager: Optional['outputs.NativeUserV3HttpBearerTokenSecretManager'] = None):
         """
         :param _builtins.str environment_variable: The name of an environment variable the connector reads the secret from.
         :param _builtins.str literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
         :param _builtins.str literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
         :param _builtins.int literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        :param 'NativeUserV3HttpBearerTokenSecretManagerArgs' secret_manager: A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
         """
         if environment_variable is not None:
             pulumi.set(__self__, "environment_variable", environment_variable)
@@ -2800,6 +3520,8 @@ class NativeUserV3HttpBearerToken(dict):
             pulumi.set(__self__, "literal_wo", literal_wo)
         if literal_wo_version is not None:
             pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+        if secret_manager is not None:
+            pulumi.set(__self__, "secret_manager", secret_manager)
 
     @_builtins.property
     @pulumi.getter(name="environmentVariable")
@@ -2834,13 +3556,139 @@ class NativeUserV3HttpBearerToken(dict):
         """
         return pulumi.get(self, "literal_wo_version")
 
+    @_builtins.property
+    @pulumi.getter(name="secretManager")
+    def secret_manager(self) -> Optional['outputs.NativeUserV3HttpBearerTokenSecretManager']:
+        """
+        A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        """
+        return pulumi.get(self, "secret_manager")
+
+
+@pulumi.output_type
+class NativeUserV3HttpBearerTokenSecretManager(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "awsSecret":
+            suggest = "aws_secret"
+        elif key == "azureSecret":
+            suggest = "azure_secret"
+        elif key == "gcpSecret":
+            suggest = "gcp_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeUserV3HttpBearerTokenSecretManager. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeUserV3HttpBearerTokenSecretManager.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeUserV3HttpBearerTokenSecretManager.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 aws_secret: Optional['outputs.NativeUserV3HttpBearerTokenSecretManagerAwsSecret'] = None,
+                 azure_secret: Optional['outputs.NativeUserV3HttpBearerTokenSecretManagerAzureSecret'] = None,
+                 gcp_secret: Optional['outputs.NativeUserV3HttpBearerTokenSecretManagerGcpSecret'] = None):
+        """
+        :param 'NativeUserV3HttpBearerTokenSecretManagerAwsSecretArgs' aws_secret: An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3HttpBearerTokenSecretManagerAzureSecretArgs' azure_secret: An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3HttpBearerTokenSecretManagerGcpSecretArgs' gcp_secret: A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        if aws_secret is not None:
+            pulumi.set(__self__, "aws_secret", aws_secret)
+        if azure_secret is not None:
+            pulumi.set(__self__, "azure_secret", azure_secret)
+        if gcp_secret is not None:
+            pulumi.set(__self__, "gcp_secret", gcp_secret)
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecret")
+    def aws_secret(self) -> Optional['outputs.NativeUserV3HttpBearerTokenSecretManagerAwsSecret']:
+        """
+        An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "aws_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSecret")
+    def azure_secret(self) -> Optional['outputs.NativeUserV3HttpBearerTokenSecretManagerAzureSecret']:
+        """
+        An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "azure_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpSecret")
+    def gcp_secret(self) -> Optional['outputs.NativeUserV3HttpBearerTokenSecretManagerGcpSecret']:
+        """
+        A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "gcp_secret")
+
+
+@pulumi.output_type
+class NativeUserV3HttpBearerTokenSecretManagerAwsSecret(dict):
+    def __init__(__self__, *,
+                 arn: _builtins.str):
+        """
+        :param _builtins.str arn: The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        pulumi.set(__self__, "arn", arn)
+
+    @_builtins.property
+    @pulumi.getter
+    def arn(self) -> _builtins.str:
+        """
+        The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        return pulumi.get(self, "arn")
+
+
+@pulumi.output_type
+class NativeUserV3HttpBearerTokenSecretManagerAzureSecret(dict):
+    def __init__(__self__, *,
+                 url: _builtins.str):
+        """
+        :param _builtins.str url: The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> _builtins.str:
+        """
+        The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class NativeUserV3HttpBearerTokenSecretManagerGcpSecret(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        return pulumi.get(self, "name")
+
 
 @pulumi.output_type
 class NativeUserV3KubernetesInline(dict):
     def __init__(__self__, *,
                  kubeconfig: 'outputs.NativeUserV3KubernetesInlineKubeconfig'):
         """
-        :param 'NativeUserV3KubernetesInlineKubeconfigArgs' kubeconfig: The kubeconfig YAML document. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param 'NativeUserV3KubernetesInlineKubeconfigArgs' kubeconfig: The kubeconfig YAML document. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         pulumi.set(__self__, "kubeconfig", kubeconfig)
 
@@ -2848,7 +3696,7 @@ class NativeUserV3KubernetesInline(dict):
     @pulumi.getter
     def kubeconfig(self) -> 'outputs.NativeUserV3KubernetesInlineKubeconfig':
         """
-        The kubeconfig YAML document. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        The kubeconfig YAML document. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         return pulumi.get(self, "kubeconfig")
 
@@ -2864,6 +3712,8 @@ class NativeUserV3KubernetesInlineKubeconfig(dict):
             suggest = "literal_wo"
         elif key == "literalWoVersion":
             suggest = "literal_wo_version"
+        elif key == "secretManager":
+            suggest = "secret_manager"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in NativeUserV3KubernetesInlineKubeconfig. Access the value via the '{suggest}' property getter instead.")
@@ -2880,13 +3730,15 @@ class NativeUserV3KubernetesInlineKubeconfig(dict):
                  environment_variable: Optional[_builtins.str] = None,
                  literal: Optional[_builtins.str] = None,
                  literal_wo: Optional[_builtins.str] = None,
-                 literal_wo_version: Optional[_builtins.int] = None):
+                 literal_wo_version: Optional[_builtins.int] = None,
+                 secret_manager: Optional['outputs.NativeUserV3KubernetesInlineKubeconfigSecretManager'] = None):
         """
         :param _builtins.str environment_variable: The name of an environment variable the connector reads the secret from.
         :param _builtins.str literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
         :param _builtins.str literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
         :param _builtins.int literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        :param 'NativeUserV3KubernetesInlineKubeconfigSecretManagerArgs' secret_manager: A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
         """
         if environment_variable is not None:
             pulumi.set(__self__, "environment_variable", environment_variable)
@@ -2896,6 +3748,8 @@ class NativeUserV3KubernetesInlineKubeconfig(dict):
             pulumi.set(__self__, "literal_wo", literal_wo)
         if literal_wo_version is not None:
             pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+        if secret_manager is not None:
+            pulumi.set(__self__, "secret_manager", secret_manager)
 
     @_builtins.property
     @pulumi.getter(name="environmentVariable")
@@ -2929,6 +3783,132 @@ class NativeUserV3KubernetesInlineKubeconfig(dict):
         Version trigger for `literal_wo`. Increment this value to update the secret.
         """
         return pulumi.get(self, "literal_wo_version")
+
+    @_builtins.property
+    @pulumi.getter(name="secretManager")
+    def secret_manager(self) -> Optional['outputs.NativeUserV3KubernetesInlineKubeconfigSecretManager']:
+        """
+        A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        """
+        return pulumi.get(self, "secret_manager")
+
+
+@pulumi.output_type
+class NativeUserV3KubernetesInlineKubeconfigSecretManager(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "awsSecret":
+            suggest = "aws_secret"
+        elif key == "azureSecret":
+            suggest = "azure_secret"
+        elif key == "gcpSecret":
+            suggest = "gcp_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeUserV3KubernetesInlineKubeconfigSecretManager. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeUserV3KubernetesInlineKubeconfigSecretManager.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeUserV3KubernetesInlineKubeconfigSecretManager.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 aws_secret: Optional['outputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret'] = None,
+                 azure_secret: Optional['outputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret'] = None,
+                 gcp_secret: Optional['outputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret'] = None):
+        """
+        :param 'NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecretArgs' aws_secret: An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecretArgs' azure_secret: An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecretArgs' gcp_secret: A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        if aws_secret is not None:
+            pulumi.set(__self__, "aws_secret", aws_secret)
+        if azure_secret is not None:
+            pulumi.set(__self__, "azure_secret", azure_secret)
+        if gcp_secret is not None:
+            pulumi.set(__self__, "gcp_secret", gcp_secret)
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecret")
+    def aws_secret(self) -> Optional['outputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret']:
+        """
+        An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "aws_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSecret")
+    def azure_secret(self) -> Optional['outputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret']:
+        """
+        An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "azure_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpSecret")
+    def gcp_secret(self) -> Optional['outputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret']:
+        """
+        A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "gcp_secret")
+
+
+@pulumi.output_type
+class NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret(dict):
+    def __init__(__self__, *,
+                 arn: _builtins.str):
+        """
+        :param _builtins.str arn: The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        pulumi.set(__self__, "arn", arn)
+
+    @_builtins.property
+    @pulumi.getter
+    def arn(self) -> _builtins.str:
+        """
+        The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        return pulumi.get(self, "arn")
+
+
+@pulumi.output_type
+class NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret(dict):
+    def __init__(__self__, *,
+                 url: _builtins.str):
+        """
+        :param _builtins.str url: The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> _builtins.str:
+        """
+        The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        return pulumi.get(self, "name")
 
 
 @pulumi.output_type
@@ -2953,7 +3933,7 @@ class NativeUserV3KubernetesPath(dict):
     def __init__(__self__, *,
                  kubeconfig_path: 'outputs.NativeUserV3KubernetesPathKubeconfigPath'):
         """
-        :param 'NativeUserV3KubernetesPathKubeconfigPathArgs' kubeconfig_path: Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param 'NativeUserV3KubernetesPathKubeconfigPathArgs' kubeconfig_path: Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         pulumi.set(__self__, "kubeconfig_path", kubeconfig_path)
 
@@ -2961,7 +3941,7 @@ class NativeUserV3KubernetesPath(dict):
     @pulumi.getter(name="kubeconfigPath")
     def kubeconfig_path(self) -> 'outputs.NativeUserV3KubernetesPathKubeconfigPath':
         """
-        Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         return pulumi.get(self, "kubeconfig_path")
 
@@ -2977,6 +3957,8 @@ class NativeUserV3KubernetesPathKubeconfigPath(dict):
             suggest = "literal_wo"
         elif key == "literalWoVersion":
             suggest = "literal_wo_version"
+        elif key == "secretManager":
+            suggest = "secret_manager"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in NativeUserV3KubernetesPathKubeconfigPath. Access the value via the '{suggest}' property getter instead.")
@@ -2993,13 +3975,15 @@ class NativeUserV3KubernetesPathKubeconfigPath(dict):
                  environment_variable: Optional[_builtins.str] = None,
                  literal: Optional[_builtins.str] = None,
                  literal_wo: Optional[_builtins.str] = None,
-                 literal_wo_version: Optional[_builtins.int] = None):
+                 literal_wo_version: Optional[_builtins.int] = None,
+                 secret_manager: Optional['outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManager'] = None):
         """
         :param _builtins.str environment_variable: The name of an environment variable the connector reads the secret from.
         :param _builtins.str literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
         :param _builtins.str literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
         :param _builtins.int literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        :param 'NativeUserV3KubernetesPathKubeconfigPathSecretManagerArgs' secret_manager: A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
         """
         if environment_variable is not None:
             pulumi.set(__self__, "environment_variable", environment_variable)
@@ -3009,6 +3993,8 @@ class NativeUserV3KubernetesPathKubeconfigPath(dict):
             pulumi.set(__self__, "literal_wo", literal_wo)
         if literal_wo_version is not None:
             pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+        if secret_manager is not None:
+            pulumi.set(__self__, "secret_manager", secret_manager)
 
     @_builtins.property
     @pulumi.getter(name="environmentVariable")
@@ -3043,6 +4029,185 @@ class NativeUserV3KubernetesPathKubeconfigPath(dict):
         """
         return pulumi.get(self, "literal_wo_version")
 
+    @_builtins.property
+    @pulumi.getter(name="secretManager")
+    def secret_manager(self) -> Optional['outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManager']:
+        """
+        A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        """
+        return pulumi.get(self, "secret_manager")
+
+
+@pulumi.output_type
+class NativeUserV3KubernetesPathKubeconfigPathSecretManager(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "awsSecret":
+            suggest = "aws_secret"
+        elif key == "azureSecret":
+            suggest = "azure_secret"
+        elif key == "gcpSecret":
+            suggest = "gcp_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeUserV3KubernetesPathKubeconfigPathSecretManager. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeUserV3KubernetesPathKubeconfigPathSecretManager.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeUserV3KubernetesPathKubeconfigPathSecretManager.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 aws_secret: Optional['outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret'] = None,
+                 azure_secret: Optional['outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret'] = None,
+                 gcp_secret: Optional['outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret'] = None):
+        """
+        :param 'NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecretArgs' aws_secret: An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecretArgs' azure_secret: An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecretArgs' gcp_secret: A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        if aws_secret is not None:
+            pulumi.set(__self__, "aws_secret", aws_secret)
+        if azure_secret is not None:
+            pulumi.set(__self__, "azure_secret", azure_secret)
+        if gcp_secret is not None:
+            pulumi.set(__self__, "gcp_secret", gcp_secret)
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecret")
+    def aws_secret(self) -> Optional['outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret']:
+        """
+        An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "aws_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSecret")
+    def azure_secret(self) -> Optional['outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret']:
+        """
+        An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "azure_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpSecret")
+    def gcp_secret(self) -> Optional['outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret']:
+        """
+        A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "gcp_secret")
+
+
+@pulumi.output_type
+class NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret(dict):
+    def __init__(__self__, *,
+                 arn: _builtins.str):
+        """
+        :param _builtins.str arn: The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        pulumi.set(__self__, "arn", arn)
+
+    @_builtins.property
+    @pulumi.getter
+    def arn(self) -> _builtins.str:
+        """
+        The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        return pulumi.get(self, "arn")
+
+
+@pulumi.output_type
+class NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret(dict):
+    def __init__(__self__, *,
+                 url: _builtins.str):
+        """
+        :param _builtins.str url: The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> _builtins.str:
+        """
+        The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class NativeUserV3LinkedHttpBasic(dict):
+    def __init__(__self__, *,
+                 header: _builtins.str,
+                 username: _builtins.str):
+        """
+        :param _builtins.str header: The header to inject the credentials on, for example `Authorization`.
+        :param _builtins.str username: The username to authenticate as.
+        """
+        pulumi.set(__self__, "header", header)
+        pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def header(self) -> _builtins.str:
+        """
+        The header to inject the credentials on, for example `Authorization`.
+        """
+        return pulumi.get(self, "header")
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> _builtins.str:
+        """
+        The username to authenticate as.
+        """
+        return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class NativeUserV3LinkedHttpBearer(dict):
+    def __init__(__self__, *,
+                 header: _builtins.str):
+        """
+        :param _builtins.str header: The header to inject the token on, for example `Authorization`.
+        """
+        pulumi.set(__self__, "header", header)
+
+    @_builtins.property
+    @pulumi.getter
+    def header(self) -> _builtins.str:
+        """
+        The header to inject the token on, for example `Authorization`.
+        """
+        return pulumi.get(self, "header")
+
+
+@pulumi.output_type
+class NativeUserV3Passthrough(dict):
+    def __init__(__self__):
+        pass
+
 
 @pulumi.output_type
 class NativeUserV3SnowflakeKey(dict):
@@ -3050,7 +4215,7 @@ class NativeUserV3SnowflakeKey(dict):
                  key: 'outputs.NativeUserV3SnowflakeKeyKey',
                  username: _builtins.str):
         """
-        :param 'NativeUserV3SnowflakeKeyKeyArgs' key: The private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param 'NativeUserV3SnowflakeKeyKeyArgs' key: The private key. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         :param _builtins.str username: The Snowflake username to authenticate as.
         """
         pulumi.set(__self__, "key", key)
@@ -3060,7 +4225,7 @@ class NativeUserV3SnowflakeKey(dict):
     @pulumi.getter
     def key(self) -> 'outputs.NativeUserV3SnowflakeKeyKey':
         """
-        The private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        The private key. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         return pulumi.get(self, "key")
 
@@ -3084,6 +4249,8 @@ class NativeUserV3SnowflakeKeyKey(dict):
             suggest = "literal_wo"
         elif key == "literalWoVersion":
             suggest = "literal_wo_version"
+        elif key == "secretManager":
+            suggest = "secret_manager"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in NativeUserV3SnowflakeKeyKey. Access the value via the '{suggest}' property getter instead.")
@@ -3100,13 +4267,15 @@ class NativeUserV3SnowflakeKeyKey(dict):
                  environment_variable: Optional[_builtins.str] = None,
                  literal: Optional[_builtins.str] = None,
                  literal_wo: Optional[_builtins.str] = None,
-                 literal_wo_version: Optional[_builtins.int] = None):
+                 literal_wo_version: Optional[_builtins.int] = None,
+                 secret_manager: Optional['outputs.NativeUserV3SnowflakeKeyKeySecretManager'] = None):
         """
         :param _builtins.str environment_variable: The name of an environment variable the connector reads the secret from.
         :param _builtins.str literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
         :param _builtins.str literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
         :param _builtins.int literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        :param 'NativeUserV3SnowflakeKeyKeySecretManagerArgs' secret_manager: A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
         """
         if environment_variable is not None:
             pulumi.set(__self__, "environment_variable", environment_variable)
@@ -3116,6 +4285,8 @@ class NativeUserV3SnowflakeKeyKey(dict):
             pulumi.set(__self__, "literal_wo", literal_wo)
         if literal_wo_version is not None:
             pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+        if secret_manager is not None:
+            pulumi.set(__self__, "secret_manager", secret_manager)
 
     @_builtins.property
     @pulumi.getter(name="environmentVariable")
@@ -3150,6 +4321,132 @@ class NativeUserV3SnowflakeKeyKey(dict):
         """
         return pulumi.get(self, "literal_wo_version")
 
+    @_builtins.property
+    @pulumi.getter(name="secretManager")
+    def secret_manager(self) -> Optional['outputs.NativeUserV3SnowflakeKeyKeySecretManager']:
+        """
+        A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        """
+        return pulumi.get(self, "secret_manager")
+
+
+@pulumi.output_type
+class NativeUserV3SnowflakeKeyKeySecretManager(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "awsSecret":
+            suggest = "aws_secret"
+        elif key == "azureSecret":
+            suggest = "azure_secret"
+        elif key == "gcpSecret":
+            suggest = "gcp_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeUserV3SnowflakeKeyKeySecretManager. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeUserV3SnowflakeKeyKeySecretManager.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeUserV3SnowflakeKeyKeySecretManager.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 aws_secret: Optional['outputs.NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret'] = None,
+                 azure_secret: Optional['outputs.NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret'] = None,
+                 gcp_secret: Optional['outputs.NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret'] = None):
+        """
+        :param 'NativeUserV3SnowflakeKeyKeySecretManagerAwsSecretArgs' aws_secret: An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3SnowflakeKeyKeySecretManagerAzureSecretArgs' azure_secret: An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3SnowflakeKeyKeySecretManagerGcpSecretArgs' gcp_secret: A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        if aws_secret is not None:
+            pulumi.set(__self__, "aws_secret", aws_secret)
+        if azure_secret is not None:
+            pulumi.set(__self__, "azure_secret", azure_secret)
+        if gcp_secret is not None:
+            pulumi.set(__self__, "gcp_secret", gcp_secret)
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecret")
+    def aws_secret(self) -> Optional['outputs.NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret']:
+        """
+        An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "aws_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSecret")
+    def azure_secret(self) -> Optional['outputs.NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret']:
+        """
+        An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "azure_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpSecret")
+    def gcp_secret(self) -> Optional['outputs.NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret']:
+        """
+        A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "gcp_secret")
+
+
+@pulumi.output_type
+class NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret(dict):
+    def __init__(__self__, *,
+                 arn: _builtins.str):
+        """
+        :param _builtins.str arn: The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        pulumi.set(__self__, "arn", arn)
+
+    @_builtins.property
+    @pulumi.getter
+    def arn(self) -> _builtins.str:
+        """
+        The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        return pulumi.get(self, "arn")
+
+
+@pulumi.output_type
+class NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret(dict):
+    def __init__(__self__, *,
+                 url: _builtins.str):
+        """
+        :param _builtins.str url: The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> _builtins.str:
+        """
+        The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        return pulumi.get(self, "name")
+
 
 @pulumi.output_type
 class NativeUserV3SshKey(dict):
@@ -3158,9 +4455,9 @@ class NativeUserV3SshKey(dict):
                  username: _builtins.str,
                  certificate: Optional['outputs.NativeUserV3SshKeyCertificate'] = None):
         """
-        :param 'NativeUserV3SshKeyKeyArgs' key: The SSH private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param 'NativeUserV3SshKeyKeyArgs' key: The SSH private key. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         :param _builtins.str username: The username to authenticate as.
-        :param 'NativeUserV3SshKeyCertificateArgs' certificate: The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        :param 'NativeUserV3SshKeyCertificateArgs' certificate: The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "username", username)
@@ -3171,7 +4468,7 @@ class NativeUserV3SshKey(dict):
     @pulumi.getter
     def key(self) -> 'outputs.NativeUserV3SshKeyKey':
         """
-        The SSH private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        The SSH private key. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         return pulumi.get(self, "key")
 
@@ -3187,7 +4484,7 @@ class NativeUserV3SshKey(dict):
     @pulumi.getter
     def certificate(self) -> Optional['outputs.NativeUserV3SshKeyCertificate']:
         """
-        The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literal_wo` or `environment_variable`.
+        The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literal_wo`, `environment_variable` or `secret_manager`.
         """
         return pulumi.get(self, "certificate")
 
@@ -3203,6 +4500,8 @@ class NativeUserV3SshKeyCertificate(dict):
             suggest = "literal_wo"
         elif key == "literalWoVersion":
             suggest = "literal_wo_version"
+        elif key == "secretManager":
+            suggest = "secret_manager"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in NativeUserV3SshKeyCertificate. Access the value via the '{suggest}' property getter instead.")
@@ -3219,13 +4518,15 @@ class NativeUserV3SshKeyCertificate(dict):
                  environment_variable: Optional[_builtins.str] = None,
                  literal: Optional[_builtins.str] = None,
                  literal_wo: Optional[_builtins.str] = None,
-                 literal_wo_version: Optional[_builtins.int] = None):
+                 literal_wo_version: Optional[_builtins.int] = None,
+                 secret_manager: Optional['outputs.NativeUserV3SshKeyCertificateSecretManager'] = None):
         """
         :param _builtins.str environment_variable: The name of an environment variable the connector reads the secret from.
         :param _builtins.str literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
         :param _builtins.str literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
         :param _builtins.int literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        :param 'NativeUserV3SshKeyCertificateSecretManagerArgs' secret_manager: A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
         """
         if environment_variable is not None:
             pulumi.set(__self__, "environment_variable", environment_variable)
@@ -3235,6 +4536,8 @@ class NativeUserV3SshKeyCertificate(dict):
             pulumi.set(__self__, "literal_wo", literal_wo)
         if literal_wo_version is not None:
             pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+        if secret_manager is not None:
+            pulumi.set(__self__, "secret_manager", secret_manager)
 
     @_builtins.property
     @pulumi.getter(name="environmentVariable")
@@ -3269,6 +4572,132 @@ class NativeUserV3SshKeyCertificate(dict):
         """
         return pulumi.get(self, "literal_wo_version")
 
+    @_builtins.property
+    @pulumi.getter(name="secretManager")
+    def secret_manager(self) -> Optional['outputs.NativeUserV3SshKeyCertificateSecretManager']:
+        """
+        A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        """
+        return pulumi.get(self, "secret_manager")
+
+
+@pulumi.output_type
+class NativeUserV3SshKeyCertificateSecretManager(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "awsSecret":
+            suggest = "aws_secret"
+        elif key == "azureSecret":
+            suggest = "azure_secret"
+        elif key == "gcpSecret":
+            suggest = "gcp_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeUserV3SshKeyCertificateSecretManager. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeUserV3SshKeyCertificateSecretManager.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeUserV3SshKeyCertificateSecretManager.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 aws_secret: Optional['outputs.NativeUserV3SshKeyCertificateSecretManagerAwsSecret'] = None,
+                 azure_secret: Optional['outputs.NativeUserV3SshKeyCertificateSecretManagerAzureSecret'] = None,
+                 gcp_secret: Optional['outputs.NativeUserV3SshKeyCertificateSecretManagerGcpSecret'] = None):
+        """
+        :param 'NativeUserV3SshKeyCertificateSecretManagerAwsSecretArgs' aws_secret: An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3SshKeyCertificateSecretManagerAzureSecretArgs' azure_secret: An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3SshKeyCertificateSecretManagerGcpSecretArgs' gcp_secret: A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        if aws_secret is not None:
+            pulumi.set(__self__, "aws_secret", aws_secret)
+        if azure_secret is not None:
+            pulumi.set(__self__, "azure_secret", azure_secret)
+        if gcp_secret is not None:
+            pulumi.set(__self__, "gcp_secret", gcp_secret)
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecret")
+    def aws_secret(self) -> Optional['outputs.NativeUserV3SshKeyCertificateSecretManagerAwsSecret']:
+        """
+        An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "aws_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSecret")
+    def azure_secret(self) -> Optional['outputs.NativeUserV3SshKeyCertificateSecretManagerAzureSecret']:
+        """
+        An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "azure_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpSecret")
+    def gcp_secret(self) -> Optional['outputs.NativeUserV3SshKeyCertificateSecretManagerGcpSecret']:
+        """
+        A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "gcp_secret")
+
+
+@pulumi.output_type
+class NativeUserV3SshKeyCertificateSecretManagerAwsSecret(dict):
+    def __init__(__self__, *,
+                 arn: _builtins.str):
+        """
+        :param _builtins.str arn: The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        pulumi.set(__self__, "arn", arn)
+
+    @_builtins.property
+    @pulumi.getter
+    def arn(self) -> _builtins.str:
+        """
+        The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        return pulumi.get(self, "arn")
+
+
+@pulumi.output_type
+class NativeUserV3SshKeyCertificateSecretManagerAzureSecret(dict):
+    def __init__(__self__, *,
+                 url: _builtins.str):
+        """
+        :param _builtins.str url: The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> _builtins.str:
+        """
+        The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class NativeUserV3SshKeyCertificateSecretManagerGcpSecret(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        return pulumi.get(self, "name")
+
 
 @pulumi.output_type
 class NativeUserV3SshKeyKey(dict):
@@ -3281,6 +4710,8 @@ class NativeUserV3SshKeyKey(dict):
             suggest = "literal_wo"
         elif key == "literalWoVersion":
             suggest = "literal_wo_version"
+        elif key == "secretManager":
+            suggest = "secret_manager"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in NativeUserV3SshKeyKey. Access the value via the '{suggest}' property getter instead.")
@@ -3297,13 +4728,15 @@ class NativeUserV3SshKeyKey(dict):
                  environment_variable: Optional[_builtins.str] = None,
                  literal: Optional[_builtins.str] = None,
                  literal_wo: Optional[_builtins.str] = None,
-                 literal_wo_version: Optional[_builtins.int] = None):
+                 literal_wo_version: Optional[_builtins.int] = None,
+                 secret_manager: Optional['outputs.NativeUserV3SshKeyKeySecretManager'] = None):
         """
         :param _builtins.str environment_variable: The name of an environment variable the connector reads the secret from.
         :param _builtins.str literal: The secret value itself. Stored in Terraform state; prefer `literal_wo` or `environment_variable` where possible.
         :param _builtins.str literal_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only secret value. This value is not stored in Terraform state, so it must stay in the configuration: any later change to this credential resends it. Requires Terraform 1.11+ and `literal_wo_version`.
         :param _builtins.int literal_wo_version: Version trigger for `literal_wo`. Increment this value to update the secret.
+        :param 'NativeUserV3SshKeyKeySecretManagerArgs' secret_manager: A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
         """
         if environment_variable is not None:
             pulumi.set(__self__, "environment_variable", environment_variable)
@@ -3313,6 +4746,8 @@ class NativeUserV3SshKeyKey(dict):
             pulumi.set(__self__, "literal_wo", literal_wo)
         if literal_wo_version is not None:
             pulumi.set(__self__, "literal_wo_version", literal_wo_version)
+        if secret_manager is not None:
+            pulumi.set(__self__, "secret_manager", secret_manager)
 
     @_builtins.property
     @pulumi.getter(name="environmentVariable")
@@ -3346,6 +4781,132 @@ class NativeUserV3SshKeyKey(dict):
         Version trigger for `literal_wo`. Increment this value to update the secret.
         """
         return pulumi.get(self, "literal_wo_version")
+
+    @_builtins.property
+    @pulumi.getter(name="secretManager")
+    def secret_manager(self) -> Optional['outputs.NativeUserV3SshKeyKeySecretManager']:
+        """
+        A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        """
+        return pulumi.get(self, "secret_manager")
+
+
+@pulumi.output_type
+class NativeUserV3SshKeyKeySecretManager(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "awsSecret":
+            suggest = "aws_secret"
+        elif key == "azureSecret":
+            suggest = "azure_secret"
+        elif key == "gcpSecret":
+            suggest = "gcp_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeUserV3SshKeyKeySecretManager. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeUserV3SshKeyKeySecretManager.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeUserV3SshKeyKeySecretManager.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 aws_secret: Optional['outputs.NativeUserV3SshKeyKeySecretManagerAwsSecret'] = None,
+                 azure_secret: Optional['outputs.NativeUserV3SshKeyKeySecretManagerAzureSecret'] = None,
+                 gcp_secret: Optional['outputs.NativeUserV3SshKeyKeySecretManagerGcpSecret'] = None):
+        """
+        :param 'NativeUserV3SshKeyKeySecretManagerAwsSecretArgs' aws_secret: An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3SshKeyKeySecretManagerAzureSecretArgs' azure_secret: An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        :param 'NativeUserV3SshKeyKeySecretManagerGcpSecretArgs' gcp_secret: A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        if aws_secret is not None:
+            pulumi.set(__self__, "aws_secret", aws_secret)
+        if azure_secret is not None:
+            pulumi.set(__self__, "azure_secret", azure_secret)
+        if gcp_secret is not None:
+            pulumi.set(__self__, "gcp_secret", gcp_secret)
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecret")
+    def aws_secret(self) -> Optional['outputs.NativeUserV3SshKeyKeySecretManagerAwsSecret']:
+        """
+        An AWS Secrets Manager secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "aws_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="azureSecret")
+    def azure_secret(self) -> Optional['outputs.NativeUserV3SshKeyKeySecretManagerAzureSecret']:
+        """
+        An Azure Key Vault secret. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "azure_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpSecret")
+    def gcp_secret(self) -> Optional['outputs.NativeUserV3SshKeyKeySecretManagerGcpSecret']:
+        """
+        A GCP Secret Manager secret version. Set exactly one of `aws_secret`, `gcp_secret` or `azure_secret`.
+        """
+        return pulumi.get(self, "gcp_secret")
+
+
+@pulumi.output_type
+class NativeUserV3SshKeyKeySecretManagerAwsSecret(dict):
+    def __init__(__self__, *,
+                 arn: _builtins.str):
+        """
+        :param _builtins.str arn: The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        pulumi.set(__self__, "arn", arn)
+
+    @_builtins.property
+    @pulumi.getter
+    def arn(self) -> _builtins.str:
+        """
+        The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+        """
+        return pulumi.get(self, "arn")
+
+
+@pulumi.output_type
+class NativeUserV3SshKeyKeySecretManagerAzureSecret(dict):
+    def __init__(__self__, *,
+                 url: _builtins.str):
+        """
+        :param _builtins.str url: The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> _builtins.str:
+        """
+        The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class NativeUserV3SshKeyKeySecretManagerGcpSecret(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str):
+        """
+        :param _builtins.str name: The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The resource name of the secret version, as `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
+        """
+        return pulumi.get(self, "name")
 
 
 @pulumi.output_type

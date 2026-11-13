@@ -20,7 +20,7 @@ type Satellite struct {
 	ApiKey pulumi.StringOutput `pulumi:"apiKey"`
 	// Friendly name for the Satellite.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, or `policyDataLoader`.
 	SatelliteType pulumi.StringOutput `pulumi:"satelliteType"`
 	// The ID of the Space to create the Satellite in.
 	SpaceId pulumi.StringPtrOutput `pulumi:"spaceId"`
@@ -71,7 +71,7 @@ type satelliteState struct {
 	ApiKey *string `pulumi:"apiKey"`
 	// Friendly name for the Satellite.
 	Name *string `pulumi:"name"`
-	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, or `policyDataLoader`.
 	SatelliteType *string `pulumi:"satelliteType"`
 	// The ID of the Space to create the Satellite in.
 	SpaceId *string `pulumi:"spaceId"`
@@ -86,7 +86,7 @@ type SatelliteState struct {
 	ApiKey pulumi.StringPtrInput
 	// Friendly name for the Satellite.
 	Name pulumi.StringPtrInput
-	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, or `policyDataLoader`.
 	SatelliteType pulumi.StringPtrInput
 	// The ID of the Space to create the Satellite in.
 	SpaceId pulumi.StringPtrInput
@@ -103,7 +103,7 @@ func (SatelliteState) ElementType() reflect.Type {
 type satelliteArgs struct {
 	// Friendly name for the Satellite.
 	Name *string `pulumi:"name"`
-	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, or `policyDataLoader`.
 	SatelliteType string `pulumi:"satelliteType"`
 	// The ID of the Space to create the Satellite in.
 	SpaceId *string `pulumi:"spaceId"`
@@ -115,7 +115,7 @@ type satelliteArgs struct {
 type SatelliteArgs struct {
 	// Friendly name for the Satellite.
 	Name pulumi.StringPtrInput
-	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+	// The type of satellite. Must be one of: `ai`, `dataDiscovery`, or `policyDataLoader`.
 	SatelliteType pulumi.StringInput
 	// The ID of the Space to create the Satellite in.
 	SpaceId pulumi.StringPtrInput
@@ -220,7 +220,7 @@ func (o SatelliteOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Satellite) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+// The type of satellite. Must be one of: `ai`, `dataDiscovery`, or `policyDataLoader`.
 func (o SatelliteOutput) SatelliteType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Satellite) pulumi.StringOutput { return v.SatelliteType }).(pulumi.StringOutput)
 }

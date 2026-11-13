@@ -19,7 +19,7 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly string Header;
         /// <summary>
-        /// The password to authenticate with. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The password to authenticate with. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         public readonly Outputs.NativeUserV3HttpBasicPassword Password;
         /// <summary>

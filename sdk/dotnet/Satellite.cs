@@ -29,7 +29,7 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The type of satellite. Must be one of: `Ai`, `DataDiscovery`, `DataClassifier` (deprecated), or `PolicyDataLoader`.
+        /// The type of satellite. Must be one of: `Ai`, `DataDiscovery`, or `PolicyDataLoader`.
         /// </summary>
         [Output("satelliteType")]
         public Output<string> SatelliteType { get; private set; } = null!;
@@ -110,7 +110,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The type of satellite. Must be one of: `Ai`, `DataDiscovery`, `DataClassifier` (deprecated), or `PolicyDataLoader`.
+        /// The type of satellite. Must be one of: `Ai`, `DataDiscovery`, or `PolicyDataLoader`.
         /// </summary>
         [Input("satelliteType", required: true)]
         public Input<string> SatelliteType { get; set; } = null!;
@@ -158,7 +158,7 @@ namespace Formal.Pulumi
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The type of satellite. Must be one of: `Ai`, `DataDiscovery`, `DataClassifier` (deprecated), or `PolicyDataLoader`.
+        /// The type of satellite. Must be one of: `Ai`, `DataDiscovery`, or `PolicyDataLoader`.
         /// </summary>
         [Input("satelliteType")]
         public Input<string>? SatelliteType { get; set; }

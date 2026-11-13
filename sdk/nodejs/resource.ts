@@ -48,7 +48,7 @@ export class Resource extends pulumi.CustomResource {
      *
      * @deprecated This field is deprecated and will be removed in a future release.
      */
-    declare public readonly environment: pulumi.Output<string | undefined>;
+    declare public readonly environment: pulumi.Output<string>;
     /**
      * Hostname of the Resource.
      */

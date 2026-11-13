@@ -20,7 +20,7 @@ namespace Formal.Pulumi.Inputs
         public Input<string> Key { get; set; } = null!;
 
         /// <summary>
-        /// The API key. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The API key. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         [Input("value", required: true)]
         public Input<Inputs.NativeUserV3HttpApiKeyHeaderValueGetArgs> Value { get; set; } = null!;

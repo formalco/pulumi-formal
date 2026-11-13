@@ -44,7 +44,7 @@ export class Satellite extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
-     * The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+     * The type of satellite. Must be one of: `ai`, `dataDiscovery`, or `policyDataLoader`.
      */
     declare public readonly satelliteType: pulumi.Output<string>;
     /**
@@ -111,7 +111,7 @@ export interface SatelliteState {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+     * The type of satellite. Must be one of: `ai`, `dataDiscovery`, or `policyDataLoader`.
      */
     satelliteType?: pulumi.Input<string | undefined>;
     /**
@@ -137,7 +137,7 @@ export interface SatelliteArgs {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * The type of satellite. Must be one of: `ai`, `dataDiscovery`, `dataClassifier` (deprecated), or `policyDataLoader`.
+     * The type of satellite. Must be one of: `ai`, `dataDiscovery`, or `policyDataLoader`.
      */
     satelliteType: pulumi.Input<string>;
     /**

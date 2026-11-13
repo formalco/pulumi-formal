@@ -14,7 +14,7 @@ namespace Formal.Pulumi.Inputs
     public sealed class NativeUserV3KubernetesPathArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Path to the kubeconfig file on the connector. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// Path to the kubeconfig file on the connector. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         [Input("kubeconfigPath", required: true)]
         public Input<Inputs.NativeUserV3KubernetesPathKubeconfigPathArgs> KubeconfigPath { get; set; } = null!;
