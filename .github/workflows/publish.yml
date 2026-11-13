@@ -173,7 +173,7 @@ jobs:
         sdk: python,nodejs,dotnet
         version: ${{ inputs.version }}
         nugetTrustedPublishing: true
-        nugetUser: formal
+        nugetUser: eric-formal
         pypiTrustedPublishing: true
       env:
         NODE_AUTH_TOKEN: ${{ steps.esc-secrets.outputs.NPM_TOKEN }}
@@ -193,7 +193,7 @@ jobs:
         sdk: python,nodejs,dotnet,!java
         version: ${{ inputs.version }}
         nugetTrustedPublishing: true
-        nugetUser: formal
+        nugetUser: eric-formal
         pypiTrustedPublishing: true
       env:
         NODE_AUTH_TOKEN: ${{ steps.esc-secrets.outputs.NPM_TOKEN }}
