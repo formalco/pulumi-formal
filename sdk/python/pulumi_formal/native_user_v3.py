@@ -35,6 +35,9 @@ class NativeUserV3Args:
                  http_bearer: pulumi.Input[Optional['NativeUserV3HttpBearerArgs']] = None,
                  kubernetes_inline: pulumi.Input[Optional['NativeUserV3KubernetesInlineArgs']] = None,
                  kubernetes_path: pulumi.Input[Optional['NativeUserV3KubernetesPathArgs']] = None,
+                 linked_http_basic: pulumi.Input[Optional['NativeUserV3LinkedHttpBasicArgs']] = None,
+                 linked_http_bearer: pulumi.Input[Optional['NativeUserV3LinkedHttpBearerArgs']] = None,
+                 passthrough: pulumi.Input[Optional['NativeUserV3PassthroughArgs']] = None,
                  snowflake_key: pulumi.Input[Optional['NativeUserV3SnowflakeKeyArgs']] = None,
                  ssh_key: pulumi.Input[Optional['NativeUserV3SshKeyArgs']] = None,
                  termination_protection: pulumi.Input[Optional[_builtins.bool]] = None):
@@ -55,6 +58,9 @@ class NativeUserV3Args:
         :param pulumi.Input['NativeUserV3HttpBearerArgs'] http_bearer: HTTP Bearer token authentication, injected on a named header.
         :param pulumi.Input['NativeUserV3KubernetesInlineArgs'] kubernetes_inline: Kubernetes authentication using an inline kubeconfig document.
         :param pulumi.Input['NativeUserV3KubernetesPathArgs'] kubernetes_path: Kubernetes authentication using a kubeconfig file path on the connector.
+        :param pulumi.Input['NativeUserV3LinkedHttpBasicArgs'] linked_http_basic: HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input['NativeUserV3LinkedHttpBearerArgs'] linked_http_bearer: HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input['NativeUserV3PassthroughArgs'] passthrough: Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
         :param pulumi.Input['NativeUserV3SnowflakeKeyArgs'] snowflake_key: Snowflake key-pair authentication.
         :param pulumi.Input['NativeUserV3SshKeyArgs'] ssh_key: SSH private key authentication.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Native User cannot be deleted.
@@ -85,6 +91,12 @@ class NativeUserV3Args:
             pulumi.set(__self__, "kubernetes_inline", kubernetes_inline)
         if kubernetes_path is not None:
             pulumi.set(__self__, "kubernetes_path", kubernetes_path)
+        if linked_http_basic is not None:
+            pulumi.set(__self__, "linked_http_basic", linked_http_basic)
+        if linked_http_bearer is not None:
+            pulumi.set(__self__, "linked_http_bearer", linked_http_bearer)
+        if passthrough is not None:
+            pulumi.set(__self__, "passthrough", passthrough)
         if snowflake_key is not None:
             pulumi.set(__self__, "snowflake_key", snowflake_key)
         if ssh_key is not None:
@@ -261,6 +273,42 @@ class NativeUserV3Args:
         pulumi.set(self, "kubernetes_path", value)
 
     @_builtins.property
+    @pulumi.getter(name="linkedHttpBasic")
+    def linked_http_basic(self) -> pulumi.Input[Optional['NativeUserV3LinkedHttpBasicArgs']]:
+        """
+        HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        """
+        return pulumi.get(self, "linked_http_basic")
+
+    @linked_http_basic.setter
+    def linked_http_basic(self, value: pulumi.Input[Optional['NativeUserV3LinkedHttpBasicArgs']]):
+        pulumi.set(self, "linked_http_basic", value)
+
+    @_builtins.property
+    @pulumi.getter(name="linkedHttpBearer")
+    def linked_http_bearer(self) -> pulumi.Input[Optional['NativeUserV3LinkedHttpBearerArgs']]:
+        """
+        HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        """
+        return pulumi.get(self, "linked_http_bearer")
+
+    @linked_http_bearer.setter
+    def linked_http_bearer(self, value: pulumi.Input[Optional['NativeUserV3LinkedHttpBearerArgs']]):
+        pulumi.set(self, "linked_http_bearer", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def passthrough(self) -> pulumi.Input[Optional['NativeUserV3PassthroughArgs']]:
+        """
+        Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+        """
+        return pulumi.get(self, "passthrough")
+
+    @passthrough.setter
+    def passthrough(self, value: pulumi.Input[Optional['NativeUserV3PassthroughArgs']]):
+        pulumi.set(self, "passthrough", value)
+
+    @_builtins.property
     @pulumi.getter(name="snowflakeKey")
     def snowflake_key(self) -> pulumi.Input[Optional['NativeUserV3SnowflakeKeyArgs']]:
         """
@@ -314,6 +362,9 @@ class _NativeUserV3State:
                  kubernetes_inline: pulumi.Input[Optional['NativeUserV3KubernetesInlineArgs']] = None,
                  kubernetes_path: pulumi.Input[Optional['NativeUserV3KubernetesPathArgs']] = None,
                  label: pulumi.Input[Optional[_builtins.str]] = None,
+                 linked_http_basic: pulumi.Input[Optional['NativeUserV3LinkedHttpBasicArgs']] = None,
+                 linked_http_bearer: pulumi.Input[Optional['NativeUserV3LinkedHttpBearerArgs']] = None,
+                 passthrough: pulumi.Input[Optional['NativeUserV3PassthroughArgs']] = None,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
                  snowflake_key: pulumi.Input[Optional['NativeUserV3SnowflakeKeyArgs']] = None,
                  ssh_key: pulumi.Input[Optional['NativeUserV3SshKeyArgs']] = None,
@@ -336,6 +387,9 @@ class _NativeUserV3State:
         :param pulumi.Input['NativeUserV3KubernetesInlineArgs'] kubernetes_inline: Kubernetes authentication using an inline kubeconfig document.
         :param pulumi.Input['NativeUserV3KubernetesPathArgs'] kubernetes_path: Kubernetes authentication using a kubeconfig file path on the connector.
         :param pulumi.Input[_builtins.str] label: A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
+        :param pulumi.Input['NativeUserV3LinkedHttpBasicArgs'] linked_http_basic: HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input['NativeUserV3LinkedHttpBearerArgs'] linked_http_bearer: HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input['NativeUserV3PassthroughArgs'] passthrough: Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
         :param pulumi.Input[_builtins.str] resource_id: The ID of the Resource this Native User authenticates to.
         :param pulumi.Input['NativeUserV3SnowflakeKeyArgs'] snowflake_key: Snowflake key-pair authentication.
         :param pulumi.Input['NativeUserV3SshKeyArgs'] ssh_key: SSH private key authentication.
@@ -370,6 +424,12 @@ class _NativeUserV3State:
             pulumi.set(__self__, "kubernetes_path", kubernetes_path)
         if label is not None:
             pulumi.set(__self__, "label", label)
+        if linked_http_basic is not None:
+            pulumi.set(__self__, "linked_http_basic", linked_http_basic)
+        if linked_http_bearer is not None:
+            pulumi.set(__self__, "linked_http_bearer", linked_http_bearer)
+        if passthrough is not None:
+            pulumi.set(__self__, "passthrough", passthrough)
         if resource_id is not None:
             pulumi.set(__self__, "resource_id", resource_id)
         if snowflake_key is not None:
@@ -550,6 +610,42 @@ class _NativeUserV3State:
         pulumi.set(self, "label", value)
 
     @_builtins.property
+    @pulumi.getter(name="linkedHttpBasic")
+    def linked_http_basic(self) -> pulumi.Input[Optional['NativeUserV3LinkedHttpBasicArgs']]:
+        """
+        HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        """
+        return pulumi.get(self, "linked_http_basic")
+
+    @linked_http_basic.setter
+    def linked_http_basic(self, value: pulumi.Input[Optional['NativeUserV3LinkedHttpBasicArgs']]):
+        pulumi.set(self, "linked_http_basic", value)
+
+    @_builtins.property
+    @pulumi.getter(name="linkedHttpBearer")
+    def linked_http_bearer(self) -> pulumi.Input[Optional['NativeUserV3LinkedHttpBearerArgs']]:
+        """
+        HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        """
+        return pulumi.get(self, "linked_http_bearer")
+
+    @linked_http_bearer.setter
+    def linked_http_bearer(self, value: pulumi.Input[Optional['NativeUserV3LinkedHttpBearerArgs']]):
+        pulumi.set(self, "linked_http_bearer", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def passthrough(self) -> pulumi.Input[Optional['NativeUserV3PassthroughArgs']]:
+        """
+        Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+        """
+        return pulumi.get(self, "passthrough")
+
+    @passthrough.setter
+    def passthrough(self, value: pulumi.Input[Optional['NativeUserV3PassthroughArgs']]):
+        pulumi.set(self, "passthrough", value)
+
+    @_builtins.property
     @pulumi.getter(name="resourceId")
     def resource_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -629,6 +725,9 @@ class NativeUserV3(pulumi.CustomResource):
                  kubernetes_inline: pulumi.Input[Optional[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict']]] = None,
                  kubernetes_path: pulumi.Input[Optional[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict']]] = None,
                  label: pulumi.Input[Optional[_builtins.str]] = None,
+                 linked_http_basic: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict']]] = None,
+                 linked_http_bearer: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict']]] = None,
+                 passthrough: pulumi.Input[Optional[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict']]] = None,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
                  snowflake_key: pulumi.Input[Optional[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict']]] = None,
                  ssh_key: pulumi.Input[Optional[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict']]] = None,
@@ -661,6 +760,22 @@ class NativeUserV3(pulumi.CustomResource):
             },
             resource_id=db.id,
             label="admin")
+        # Username and password, with the password read from AWS Secrets Manager by the
+        # connector using its own IAM role. gcp_secret { name = ... } and
+        # azure_secret { url = ... } work the same way for GCP Secret Manager and Azure Key Vault.
+        basic_secret_manager = formal.NativeUserV3("basic_secret_manager",
+            basic={
+                "password": {
+                    "secret_manager": {
+                        "aws_secret": {
+                            "arn": "arn:aws:secretsmanager:us-east-1:123456789012:secret:analytics-admin-AbCdEf:password::",
+                        },
+                    },
+                },
+                "username": "app_admin",
+            },
+            resource_id=db.id,
+            label="admin-secret-manager")
         # Username and password, with the password passed as a write-only value so it
         # never lands in Terraform state. Increment literal_wo_version to rotate it.
         basic_write_only = formal.NativeUserV3("basic_write_only",
@@ -673,6 +788,11 @@ class NativeUserV3(pulumi.CustomResource):
             },
             resource_id=db.id,
             label="admin-write-only")
+        # The client's own credentials, sent as is to the Resource.
+        passthrough = formal.NativeUserV3("passthrough",
+            passthrough={},
+            resource_id=db.id,
+            label="passthrough")
         # AWS IAM, inheriting the role from the connector's environment.
         aws_iam = formal.NativeUserV3("aws_iam",
             aws_iam={
@@ -714,6 +834,36 @@ class NativeUserV3(pulumi.CustomResource):
             },
             resource_id=db.id,
             label="dynamic")
+        # A hook that receives secret manager references as its fourth argument,
+        # resolved by the connector before the hook runs.
+        from_hook_with_secrets = formal.NativeUserV3("from_hook_with_secrets",
+            hook={
+                "secrets": [{
+                    "gcp_secret": {
+                        "name": "projects/analytics/secrets/db-password/versions/latest",
+                    },
+                    "name": "DB_PASSWORD",
+                }],
+                "output_type": "basic",
+                "code": \"\"\"export default async function (_input, _env, _cache, secrets) {
+          return {
+            username: \\"app_admin\\",
+            password: secrets.DB_PASSWORD,
+          };
+        }
+        \"\"\",
+            },
+            resource_id=db.id,
+            label="dynamic-with-secrets")
+        # The requesting user's linked upstream account token, sent as a bearer token.
+        # The Resource must link upstream accounts through formal_resource_oauth_settings.
+        api_resource_oauth_settings = formal.ResourceOauthSettings("api", resource_id=api.id)
+        linked_account = formal.NativeUserV3("linked_account",
+            linked_http_bearer={
+                "header": "Authorization",
+            },
+            resource_id=api_resource_oauth_settings.resource_id,
+            label="linked-account")
         ```
 
 
@@ -732,6 +882,9 @@ class NativeUserV3(pulumi.CustomResource):
         :param pulumi.Input[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict']] kubernetes_inline: Kubernetes authentication using an inline kubeconfig document.
         :param pulumi.Input[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict']] kubernetes_path: Kubernetes authentication using a kubeconfig file path on the connector.
         :param pulumi.Input[_builtins.str] label: A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
+        :param pulumi.Input[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict']] linked_http_basic: HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict']] linked_http_bearer: HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict']] passthrough: Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
         :param pulumi.Input[_builtins.str] resource_id: The ID of the Resource this Native User authenticates to.
         :param pulumi.Input[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict']] snowflake_key: Snowflake key-pair authentication.
         :param pulumi.Input[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict']] ssh_key: SSH private key authentication.
@@ -770,6 +923,22 @@ class NativeUserV3(pulumi.CustomResource):
             },
             resource_id=db.id,
             label="admin")
+        # Username and password, with the password read from AWS Secrets Manager by the
+        # connector using its own IAM role. gcp_secret { name = ... } and
+        # azure_secret { url = ... } work the same way for GCP Secret Manager and Azure Key Vault.
+        basic_secret_manager = formal.NativeUserV3("basic_secret_manager",
+            basic={
+                "password": {
+                    "secret_manager": {
+                        "aws_secret": {
+                            "arn": "arn:aws:secretsmanager:us-east-1:123456789012:secret:analytics-admin-AbCdEf:password::",
+                        },
+                    },
+                },
+                "username": "app_admin",
+            },
+            resource_id=db.id,
+            label="admin-secret-manager")
         # Username and password, with the password passed as a write-only value so it
         # never lands in Terraform state. Increment literal_wo_version to rotate it.
         basic_write_only = formal.NativeUserV3("basic_write_only",
@@ -782,6 +951,11 @@ class NativeUserV3(pulumi.CustomResource):
             },
             resource_id=db.id,
             label="admin-write-only")
+        # The client's own credentials, sent as is to the Resource.
+        passthrough = formal.NativeUserV3("passthrough",
+            passthrough={},
+            resource_id=db.id,
+            label="passthrough")
         # AWS IAM, inheriting the role from the connector's environment.
         aws_iam = formal.NativeUserV3("aws_iam",
             aws_iam={
@@ -823,6 +997,36 @@ class NativeUserV3(pulumi.CustomResource):
             },
             resource_id=db.id,
             label="dynamic")
+        # A hook that receives secret manager references as its fourth argument,
+        # resolved by the connector before the hook runs.
+        from_hook_with_secrets = formal.NativeUserV3("from_hook_with_secrets",
+            hook={
+                "secrets": [{
+                    "gcp_secret": {
+                        "name": "projects/analytics/secrets/db-password/versions/latest",
+                    },
+                    "name": "DB_PASSWORD",
+                }],
+                "output_type": "basic",
+                "code": \"\"\"export default async function (_input, _env, _cache, secrets) {
+          return {
+            username: \\"app_admin\\",
+            password: secrets.DB_PASSWORD,
+          };
+        }
+        \"\"\",
+            },
+            resource_id=db.id,
+            label="dynamic-with-secrets")
+        # The requesting user's linked upstream account token, sent as a bearer token.
+        # The Resource must link upstream accounts through formal_resource_oauth_settings.
+        api_resource_oauth_settings = formal.ResourceOauthSettings("api", resource_id=api.id)
+        linked_account = formal.NativeUserV3("linked_account",
+            linked_http_bearer={
+                "header": "Authorization",
+            },
+            resource_id=api_resource_oauth_settings.resource_id,
+            label="linked-account")
         ```
 
 
@@ -854,6 +1058,9 @@ class NativeUserV3(pulumi.CustomResource):
                  kubernetes_inline: pulumi.Input[Optional[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict']]] = None,
                  kubernetes_path: pulumi.Input[Optional[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict']]] = None,
                  label: pulumi.Input[Optional[_builtins.str]] = None,
+                 linked_http_basic: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict']]] = None,
+                 linked_http_bearer: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict']]] = None,
+                 passthrough: pulumi.Input[Optional[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict']]] = None,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
                  snowflake_key: pulumi.Input[Optional[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict']]] = None,
                  ssh_key: pulumi.Input[Optional[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict']]] = None,
@@ -882,6 +1089,9 @@ class NativeUserV3(pulumi.CustomResource):
             if label is None and not opts.urn:
                 raise TypeError("Missing required property 'label'")
             __props__.__dict__["label"] = label
+            __props__.__dict__["linked_http_basic"] = linked_http_basic
+            __props__.__dict__["linked_http_bearer"] = linked_http_bearer
+            __props__.__dict__["passthrough"] = passthrough
             if resource_id is None and not opts.urn:
                 raise TypeError("Missing required property 'resource_id'")
             __props__.__dict__["resource_id"] = resource_id
@@ -914,6 +1124,9 @@ class NativeUserV3(pulumi.CustomResource):
             kubernetes_inline: pulumi.Input[Optional[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict']]] = None,
             kubernetes_path: pulumi.Input[Optional[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict']]] = None,
             label: pulumi.Input[Optional[_builtins.str]] = None,
+            linked_http_basic: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict']]] = None,
+            linked_http_bearer: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict']]] = None,
+            passthrough: pulumi.Input[Optional[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict']]] = None,
             resource_id: pulumi.Input[Optional[_builtins.str]] = None,
             snowflake_key: pulumi.Input[Optional[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict']]] = None,
             ssh_key: pulumi.Input[Optional[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict']]] = None,
@@ -940,6 +1153,9 @@ class NativeUserV3(pulumi.CustomResource):
         :param pulumi.Input[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict']] kubernetes_inline: Kubernetes authentication using an inline kubeconfig document.
         :param pulumi.Input[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict']] kubernetes_path: Kubernetes authentication using a kubeconfig file path on the connector.
         :param pulumi.Input[_builtins.str] label: A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
+        :param pulumi.Input[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict']] linked_http_basic: HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict']] linked_http_bearer: HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict']] passthrough: Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
         :param pulumi.Input[_builtins.str] resource_id: The ID of the Resource this Native User authenticates to.
         :param pulumi.Input[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict']] snowflake_key: Snowflake key-pair authentication.
         :param pulumi.Input[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict']] ssh_key: SSH private key authentication.
@@ -964,6 +1180,9 @@ class NativeUserV3(pulumi.CustomResource):
         __props__.__dict__["kubernetes_inline"] = kubernetes_inline
         __props__.__dict__["kubernetes_path"] = kubernetes_path
         __props__.__dict__["label"] = label
+        __props__.__dict__["linked_http_basic"] = linked_http_basic
+        __props__.__dict__["linked_http_bearer"] = linked_http_bearer
+        __props__.__dict__["passthrough"] = passthrough
         __props__.__dict__["resource_id"] = resource_id
         __props__.__dict__["snowflake_key"] = snowflake_key
         __props__.__dict__["ssh_key"] = ssh_key
@@ -1082,6 +1301,30 @@ class NativeUserV3(pulumi.CustomResource):
         A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
         """
         return pulumi.get(self, "label")
+
+    @_builtins.property
+    @pulumi.getter(name="linkedHttpBasic")
+    def linked_http_basic(self) -> pulumi.Output[Optional['outputs.NativeUserV3LinkedHttpBasic']]:
+        """
+        HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        """
+        return pulumi.get(self, "linked_http_basic")
+
+    @_builtins.property
+    @pulumi.getter(name="linkedHttpBearer")
+    def linked_http_bearer(self) -> pulumi.Output[Optional['outputs.NativeUserV3LinkedHttpBearer']]:
+        """
+        HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        """
+        return pulumi.get(self, "linked_http_bearer")
+
+    @_builtins.property
+    @pulumi.getter
+    def passthrough(self) -> pulumi.Output[Optional['outputs.NativeUserV3Passthrough']]:
+        """
+        Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+        """
+        return pulumi.get(self, "passthrough")
 
     @_builtins.property
     @pulumi.getter(name="resourceId")

@@ -646,7 +646,7 @@ export interface NativeUserV3AzureIam {
 
 export interface NativeUserV3Basic {
     /**
-     * The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     password: outputs.NativeUserV3BasicPassword;
     /**
@@ -673,6 +673,46 @@ export interface NativeUserV3BasicPassword {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: number;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: outputs.NativeUserV3BasicPasswordSecretManager;
+}
+
+export interface NativeUserV3BasicPasswordSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: outputs.NativeUserV3BasicPasswordSecretManagerAwsSecret;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: outputs.NativeUserV3BasicPasswordSecretManagerAzureSecret;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: outputs.NativeUserV3BasicPasswordSecretManagerGcpSecret;
+}
+
+export interface NativeUserV3BasicPasswordSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: string;
+}
+
+export interface NativeUserV3BasicPasswordSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: string;
+}
+
+export interface NativeUserV3BasicPasswordSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: string;
 }
 
 export interface NativeUserV3GcpIam {
@@ -699,6 +739,50 @@ export interface NativeUserV3Hook {
      * The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `awsIam`, `awsIamRole`, `gcpIam`, `azureIam`, `kubernetesPath`, `kubernetesInline`, `sshKey`, `snowflakeKey`, `httpBasic`, `httpBearer`, `httpApiKeyHeader`, `httpApiKeyQuery`.
      */
     outputType: string;
+    /**
+     * A secret manager reference the connector resolves and passes to the hook as its fourth argument, `secrets`, keyed by `name`.
+     */
+    secrets?: outputs.NativeUserV3HookSecret[];
+}
+
+export interface NativeUserV3HookSecret {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: outputs.NativeUserV3HookSecretAwsSecret;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: outputs.NativeUserV3HookSecretAzureSecret;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: outputs.NativeUserV3HookSecretGcpSecret;
+    /**
+     * The key the resolved value has in the hook's `secrets` argument.
+     */
+    name: string;
+}
+
+export interface NativeUserV3HookSecretAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: string;
+}
+
+export interface NativeUserV3HookSecretAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: string;
+}
+
+export interface NativeUserV3HookSecretGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: string;
 }
 
 export interface NativeUserV3HttpApiKeyHeader {
@@ -707,7 +791,7 @@ export interface NativeUserV3HttpApiKeyHeader {
      */
     key: string;
     /**
-     * The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     value: outputs.NativeUserV3HttpApiKeyHeaderValue;
 }
@@ -730,6 +814,46 @@ export interface NativeUserV3HttpApiKeyHeaderValue {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: number;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: outputs.NativeUserV3HttpApiKeyHeaderValueSecretManager;
+}
+
+export interface NativeUserV3HttpApiKeyHeaderValueSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: outputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: outputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: outputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret;
+}
+
+export interface NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: string;
+}
+
+export interface NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: string;
+}
+
+export interface NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: string;
 }
 
 export interface NativeUserV3HttpApiKeyQuery {
@@ -738,7 +862,7 @@ export interface NativeUserV3HttpApiKeyQuery {
      */
     key: string;
     /**
-     * The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     value: outputs.NativeUserV3HttpApiKeyQueryValue;
 }
@@ -761,6 +885,46 @@ export interface NativeUserV3HttpApiKeyQueryValue {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: number;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: outputs.NativeUserV3HttpApiKeyQueryValueSecretManager;
+}
+
+export interface NativeUserV3HttpApiKeyQueryValueSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: outputs.NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: outputs.NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: outputs.NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret;
+}
+
+export interface NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: string;
+}
+
+export interface NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: string;
+}
+
+export interface NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: string;
 }
 
 export interface NativeUserV3HttpBasic {
@@ -769,7 +933,7 @@ export interface NativeUserV3HttpBasic {
      */
     header: string;
     /**
-     * The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     password: outputs.NativeUserV3HttpBasicPassword;
     /**
@@ -796,6 +960,46 @@ export interface NativeUserV3HttpBasicPassword {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: number;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: outputs.NativeUserV3HttpBasicPasswordSecretManager;
+}
+
+export interface NativeUserV3HttpBasicPasswordSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: outputs.NativeUserV3HttpBasicPasswordSecretManagerAwsSecret;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: outputs.NativeUserV3HttpBasicPasswordSecretManagerAzureSecret;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: outputs.NativeUserV3HttpBasicPasswordSecretManagerGcpSecret;
+}
+
+export interface NativeUserV3HttpBasicPasswordSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: string;
+}
+
+export interface NativeUserV3HttpBasicPasswordSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: string;
+}
+
+export interface NativeUserV3HttpBasicPasswordSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: string;
 }
 
 export interface NativeUserV3HttpBearer {
@@ -804,7 +1008,7 @@ export interface NativeUserV3HttpBearer {
      */
     header: string;
     /**
-     * The bearer token. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The bearer token. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     token: outputs.NativeUserV3HttpBearerToken;
 }
@@ -827,11 +1031,51 @@ export interface NativeUserV3HttpBearerToken {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: number;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: outputs.NativeUserV3HttpBearerTokenSecretManager;
+}
+
+export interface NativeUserV3HttpBearerTokenSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: outputs.NativeUserV3HttpBearerTokenSecretManagerAwsSecret;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: outputs.NativeUserV3HttpBearerTokenSecretManagerAzureSecret;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: outputs.NativeUserV3HttpBearerTokenSecretManagerGcpSecret;
+}
+
+export interface NativeUserV3HttpBearerTokenSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: string;
+}
+
+export interface NativeUserV3HttpBearerTokenSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: string;
+}
+
+export interface NativeUserV3HttpBearerTokenSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: string;
 }
 
 export interface NativeUserV3KubernetesInline {
     /**
-     * The kubeconfig YAML document. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The kubeconfig YAML document. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     kubeconfig: outputs.NativeUserV3KubernetesInlineKubeconfig;
 }
@@ -854,11 +1098,51 @@ export interface NativeUserV3KubernetesInlineKubeconfig {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: number;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: outputs.NativeUserV3KubernetesInlineKubeconfigSecretManager;
+}
+
+export interface NativeUserV3KubernetesInlineKubeconfigSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: outputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: outputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: outputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret;
+}
+
+export interface NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: string;
+}
+
+export interface NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: string;
+}
+
+export interface NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: string;
 }
 
 export interface NativeUserV3KubernetesPath {
     /**
-     * Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     kubeconfigPath: outputs.NativeUserV3KubernetesPathKubeconfigPath;
 }
@@ -881,11 +1165,72 @@ export interface NativeUserV3KubernetesPathKubeconfigPath {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: number;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManager;
+}
+
+export interface NativeUserV3KubernetesPathKubeconfigPathSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: outputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret;
+}
+
+export interface NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: string;
+}
+
+export interface NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: string;
+}
+
+export interface NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: string;
+}
+
+export interface NativeUserV3LinkedHttpBasic {
+    /**
+     * The header to inject the credentials on, for example `Authorization`.
+     */
+    header: string;
+    /**
+     * The username to authenticate as.
+     */
+    username: string;
+}
+
+export interface NativeUserV3LinkedHttpBearer {
+    /**
+     * The header to inject the token on, for example `Authorization`.
+     */
+    header: string;
+}
+
+export interface NativeUserV3Passthrough {
 }
 
 export interface NativeUserV3SnowflakeKey {
     /**
-     * The private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     key: outputs.NativeUserV3SnowflakeKeyKey;
     /**
@@ -912,15 +1257,55 @@ export interface NativeUserV3SnowflakeKeyKey {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: number;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: outputs.NativeUserV3SnowflakeKeyKeySecretManager;
+}
+
+export interface NativeUserV3SnowflakeKeyKeySecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: outputs.NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: outputs.NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: outputs.NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret;
+}
+
+export interface NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: string;
+}
+
+export interface NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: string;
+}
+
+export interface NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: string;
 }
 
 export interface NativeUserV3SshKey {
     /**
-     * The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     certificate?: outputs.NativeUserV3SshKeyCertificate;
     /**
-     * The SSH private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The SSH private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     key: outputs.NativeUserV3SshKeyKey;
     /**
@@ -947,6 +1332,46 @@ export interface NativeUserV3SshKeyCertificate {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: number;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: outputs.NativeUserV3SshKeyCertificateSecretManager;
+}
+
+export interface NativeUserV3SshKeyCertificateSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: outputs.NativeUserV3SshKeyCertificateSecretManagerAwsSecret;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: outputs.NativeUserV3SshKeyCertificateSecretManagerAzureSecret;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: outputs.NativeUserV3SshKeyCertificateSecretManagerGcpSecret;
+}
+
+export interface NativeUserV3SshKeyCertificateSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: string;
+}
+
+export interface NativeUserV3SshKeyCertificateSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: string;
+}
+
+export interface NativeUserV3SshKeyCertificateSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: string;
 }
 
 export interface NativeUserV3SshKeyKey {
@@ -967,6 +1392,46 @@ export interface NativeUserV3SshKeyKey {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: number;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: outputs.NativeUserV3SshKeyKeySecretManager;
+}
+
+export interface NativeUserV3SshKeyKeySecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: outputs.NativeUserV3SshKeyKeySecretManagerAwsSecret;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: outputs.NativeUserV3SshKeyKeySecretManagerAzureSecret;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: outputs.NativeUserV3SshKeyKeySecretManagerGcpSecret;
+}
+
+export interface NativeUserV3SshKeyKeySecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: string;
+}
+
+export interface NativeUserV3SshKeyKeySecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: string;
+}
+
+export interface NativeUserV3SshKeyKeySecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: string;
 }
 
 export namespace config {

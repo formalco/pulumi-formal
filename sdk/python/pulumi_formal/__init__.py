@@ -15,6 +15,7 @@ from .connector_listener_link import *
 from .connector_listener_rule import *
 from .connector_satellite_link import *
 from .connector_token_encryption_key import *
+from .dashboard import *
 from .data_discovery import *
 from .data_label import *
 from .encryption_key import *
@@ -45,6 +46,7 @@ from .native_user_link import *
 from .native_user_v3 import *
 from .network_rule import *
 from .oauth_client import *
+from .org_theme import *
 from .permission import *
 from .policy import *
 from .policy_data_loader import *
@@ -65,6 +67,7 @@ from .skill import *
 from .space import *
 from .user import *
 from .workflow import *
+from .workflow_secret import *
 from ._inputs import *
 from . import outputs
 
@@ -148,6 +151,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/connectorTokenEncryptionKey:ConnectorTokenEncryptionKey": "ConnectorTokenEncryptionKey"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/dashboard",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/dashboard:Dashboard": "Dashboard"
   }
  },
  {
@@ -336,6 +347,14 @@ _utilities.register(
  },
  {
   "pkg": "formal",
+  "mod": "index/orgTheme",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/orgTheme:OrgTheme": "OrgTheme"
+  }
+ },
+ {
+  "pkg": "formal",
   "mod": "index/permission",
   "fqn": "pulumi_formal",
   "classes": {
@@ -484,6 +503,14 @@ _utilities.register(
   "fqn": "pulumi_formal",
   "classes": {
    "formal:index/workflow:Workflow": "Workflow"
+  }
+ },
+ {
+  "pkg": "formal",
+  "mod": "index/workflowSecret",
+  "fqn": "pulumi_formal",
+  "classes": {
+   "formal:index/workflowSecret:WorkflowSecret": "WorkflowSecret"
   }
  }
 ]

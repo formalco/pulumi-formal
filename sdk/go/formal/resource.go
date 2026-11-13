@@ -23,7 +23,7 @@ type Resource struct {
 	// Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
 	//
 	// Deprecated: This field is deprecated and will be removed in a future release.
-	Environment pulumi.StringPtrOutput `pulumi:"environment"`
+	Environment pulumi.StringOutput `pulumi:"environment"`
 	// Hostname of the Resource.
 	Hostname pulumi.StringOutput `pulumi:"hostname"`
 	// Friendly name for the Resource.
@@ -305,8 +305,8 @@ func (o ResourceOutput) CreatedAt() pulumi.IntOutput {
 // Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
 //
 // Deprecated: This field is deprecated and will be removed in a future release.
-func (o ResourceOutput) Environment() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Resource) pulumi.StringPtrOutput { return v.Environment }).(pulumi.StringPtrOutput)
+func (o ResourceOutput) Environment() pulumi.StringOutput {
+	return o.ApplyT(func(v *Resource) pulumi.StringOutput { return v.Environment }).(pulumi.StringOutput)
 }
 
 // Hostname of the Resource.

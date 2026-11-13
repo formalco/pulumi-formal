@@ -14,13 +14,13 @@ namespace Formal.Pulumi.Inputs
     public sealed class NativeUserV3SshKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The optional SSH certificate paired with the private key. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The optional SSH certificate paired with the private key. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         [Input("certificate")]
         public Input<Inputs.NativeUserV3SshKeyCertificateArgs>? Certificate { get; set; }
 
         /// <summary>
-        /// The SSH private key. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The SSH private key. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         [Input("key", required: true)]
         public Input<Inputs.NativeUserV3SshKeyKeyArgs> Key { get; set; } = null!;

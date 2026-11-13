@@ -15,7 +15,7 @@ namespace Formal.Pulumi.Outputs
     public sealed class NativeUserV3KubernetesInline
     {
         /// <summary>
-        /// The kubeconfig YAML document. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The kubeconfig YAML document. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         public readonly Outputs.NativeUserV3KubernetesInlineKubeconfig Kubeconfig;
 

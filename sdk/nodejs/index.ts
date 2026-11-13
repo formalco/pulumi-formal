@@ -50,6 +50,11 @@ export type ConnectorTokenEncryptionKey = import("./connectorTokenEncryptionKey"
 export const ConnectorTokenEncryptionKey: typeof import("./connectorTokenEncryptionKey").ConnectorTokenEncryptionKey = null as any;
 utilities.lazyLoad(exports, ["ConnectorTokenEncryptionKey"], () => require("./connectorTokenEncryptionKey"));
 
+export { DashboardArgs, DashboardState } from "./dashboard";
+export type Dashboard = import("./dashboard").Dashboard;
+export const Dashboard: typeof import("./dashboard").Dashboard = null as any;
+utilities.lazyLoad(exports, ["Dashboard"], () => require("./dashboard"));
+
 export { DataDiscoveryArgs, DataDiscoveryState } from "./dataDiscovery";
 export type DataDiscovery = import("./dataDiscovery").DataDiscovery;
 export const DataDiscovery: typeof import("./dataDiscovery").DataDiscovery = null as any;
@@ -200,6 +205,11 @@ export type OauthClient = import("./oauthClient").OauthClient;
 export const OauthClient: typeof import("./oauthClient").OauthClient = null as any;
 utilities.lazyLoad(exports, ["OauthClient"], () => require("./oauthClient"));
 
+export { OrgThemeArgs, OrgThemeState } from "./orgTheme";
+export type OrgTheme = import("./orgTheme").OrgTheme;
+export const OrgTheme: typeof import("./orgTheme").OrgTheme = null as any;
+utilities.lazyLoad(exports, ["OrgTheme"], () => require("./orgTheme"));
+
 export { PermissionArgs, PermissionState } from "./permission";
 export type Permission = import("./permission").Permission;
 export const Permission: typeof import("./permission").Permission = null as any;
@@ -298,6 +308,11 @@ export type Workflow = import("./workflow").Workflow;
 export const Workflow: typeof import("./workflow").Workflow = null as any;
 utilities.lazyLoad(exports, ["Workflow"], () => require("./workflow"));
 
+export { WorkflowSecretArgs, WorkflowSecretState } from "./workflowSecret";
+export type WorkflowSecret = import("./workflowSecret").WorkflowSecret;
+export const WorkflowSecret: typeof import("./workflowSecret").WorkflowSecret = null as any;
+utilities.lazyLoad(exports, ["WorkflowSecret"], () => require("./workflowSecret"));
+
 
 // Export sub-modules:
 import * as config from "./config";
@@ -330,6 +345,8 @@ const _module = {
                 return new ConnectorSatelliteLink(name, <any>undefined, { urn })
             case "formal:index/connectorTokenEncryptionKey:ConnectorTokenEncryptionKey":
                 return new ConnectorTokenEncryptionKey(name, <any>undefined, { urn })
+            case "formal:index/dashboard:Dashboard":
+                return new Dashboard(name, <any>undefined, { urn })
             case "formal:index/dataDiscovery:DataDiscovery":
                 return new DataDiscovery(name, <any>undefined, { urn })
             case "formal:index/dataLabel:DataLabel":
@@ -376,6 +393,8 @@ const _module = {
                 return new NetworkRule(name, <any>undefined, { urn })
             case "formal:index/oauthClient:OauthClient":
                 return new OauthClient(name, <any>undefined, { urn })
+            case "formal:index/orgTheme:OrgTheme":
+                return new OrgTheme(name, <any>undefined, { urn })
             case "formal:index/permission:Permission":
                 return new Permission(name, <any>undefined, { urn })
             case "formal:index/policy:Policy":
@@ -414,6 +433,8 @@ const _module = {
                 return new User(name, <any>undefined, { urn })
             case "formal:index/workflow:Workflow":
                 return new Workflow(name, <any>undefined, { urn })
+            case "formal:index/workflowSecret:WorkflowSecret":
+                return new WorkflowSecret(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -428,6 +449,7 @@ pulumi.runtime.registerResourceModule("formal", "index/connectorListenerLink", _
 pulumi.runtime.registerResourceModule("formal", "index/connectorListenerRule", _module)
 pulumi.runtime.registerResourceModule("formal", "index/connectorSatelliteLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/connectorTokenEncryptionKey", _module)
+pulumi.runtime.registerResourceModule("formal", "index/dashboard", _module)
 pulumi.runtime.registerResourceModule("formal", "index/dataDiscovery", _module)
 pulumi.runtime.registerResourceModule("formal", "index/dataLabel", _module)
 pulumi.runtime.registerResourceModule("formal", "index/encryptionKey", _module)
@@ -451,6 +473,7 @@ pulumi.runtime.registerResourceModule("formal", "index/nativeUserLink", _module)
 pulumi.runtime.registerResourceModule("formal", "index/nativeUserV3", _module)
 pulumi.runtime.registerResourceModule("formal", "index/networkRule", _module)
 pulumi.runtime.registerResourceModule("formal", "index/oauthClient", _module)
+pulumi.runtime.registerResourceModule("formal", "index/orgTheme", _module)
 pulumi.runtime.registerResourceModule("formal", "index/permission", _module)
 pulumi.runtime.registerResourceModule("formal", "index/policy", _module)
 pulumi.runtime.registerResourceModule("formal", "index/policyDataLoader", _module)
@@ -470,6 +493,7 @@ pulumi.runtime.registerResourceModule("formal", "index/skill", _module)
 pulumi.runtime.registerResourceModule("formal", "index/space", _module)
 pulumi.runtime.registerResourceModule("formal", "index/user", _module)
 pulumi.runtime.registerResourceModule("formal", "index/workflow", _module)
+pulumi.runtime.registerResourceModule("formal", "index/workflowSecret", _module)
 pulumi.runtime.registerResourcePackage("formal", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

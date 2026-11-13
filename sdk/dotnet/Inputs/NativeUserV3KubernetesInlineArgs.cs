@@ -14,7 +14,7 @@ namespace Formal.Pulumi.Inputs
     public sealed class NativeUserV3KubernetesInlineArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The kubeconfig YAML document. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The kubeconfig YAML document. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         [Input("kubeconfig", required: true)]
         public Input<Inputs.NativeUserV3KubernetesInlineKubeconfigArgs> Kubeconfig { get; set; } = null!;

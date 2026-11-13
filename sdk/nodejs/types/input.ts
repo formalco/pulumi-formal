@@ -588,7 +588,7 @@ export interface NativeUserV3AzureIam {
 
 export interface NativeUserV3Basic {
     /**
-     * The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     password: pulumi.Input<inputs.NativeUserV3BasicPassword>;
     /**
@@ -615,6 +615,46 @@ export interface NativeUserV3BasicPassword {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: pulumi.Input<number | undefined>;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: pulumi.Input<inputs.NativeUserV3BasicPasswordSecretManager | undefined>;
+}
+
+export interface NativeUserV3BasicPasswordSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: pulumi.Input<inputs.NativeUserV3BasicPasswordSecretManagerAwsSecret | undefined>;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: pulumi.Input<inputs.NativeUserV3BasicPasswordSecretManagerAzureSecret | undefined>;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: pulumi.Input<inputs.NativeUserV3BasicPasswordSecretManagerGcpSecret | undefined>;
+}
+
+export interface NativeUserV3BasicPasswordSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: pulumi.Input<string>;
+}
+
+export interface NativeUserV3BasicPasswordSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: pulumi.Input<string>;
+}
+
+export interface NativeUserV3BasicPasswordSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface NativeUserV3GcpIam {
@@ -641,6 +681,50 @@ export interface NativeUserV3Hook {
      * The credential shape the hook must return, so the connector can validate its result. One of: `basic`, `awsIam`, `awsIamRole`, `gcpIam`, `azureIam`, `kubernetesPath`, `kubernetesInline`, `sshKey`, `snowflakeKey`, `httpBasic`, `httpBearer`, `httpApiKeyHeader`, `httpApiKeyQuery`.
      */
     outputType: pulumi.Input<string>;
+    /**
+     * A secret manager reference the connector resolves and passes to the hook as its fourth argument, `secrets`, keyed by `name`.
+     */
+    secrets?: pulumi.Input<pulumi.Input<inputs.NativeUserV3HookSecret>[] | undefined>;
+}
+
+export interface NativeUserV3HookSecret {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: pulumi.Input<inputs.NativeUserV3HookSecretAwsSecret | undefined>;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: pulumi.Input<inputs.NativeUserV3HookSecretAzureSecret | undefined>;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: pulumi.Input<inputs.NativeUserV3HookSecretGcpSecret | undefined>;
+    /**
+     * The key the resolved value has in the hook's `secrets` argument.
+     */
+    name: pulumi.Input<string>;
+}
+
+export interface NativeUserV3HookSecretAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: pulumi.Input<string>;
+}
+
+export interface NativeUserV3HookSecretAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: pulumi.Input<string>;
+}
+
+export interface NativeUserV3HookSecretGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface NativeUserV3HttpApiKeyHeader {
@@ -649,7 +733,7 @@ export interface NativeUserV3HttpApiKeyHeader {
      */
     key: pulumi.Input<string>;
     /**
-     * The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     value: pulumi.Input<inputs.NativeUserV3HttpApiKeyHeaderValue>;
 }
@@ -672,6 +756,46 @@ export interface NativeUserV3HttpApiKeyHeaderValue {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: pulumi.Input<number | undefined>;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: pulumi.Input<inputs.NativeUserV3HttpApiKeyHeaderValueSecretManager | undefined>;
+}
+
+export interface NativeUserV3HttpApiKeyHeaderValueSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: pulumi.Input<inputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret | undefined>;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: pulumi.Input<inputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret | undefined>;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: pulumi.Input<inputs.NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret | undefined>;
+}
+
+export interface NativeUserV3HttpApiKeyHeaderValueSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: pulumi.Input<string>;
+}
+
+export interface NativeUserV3HttpApiKeyHeaderValueSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: pulumi.Input<string>;
+}
+
+export interface NativeUserV3HttpApiKeyHeaderValueSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface NativeUserV3HttpApiKeyQuery {
@@ -680,7 +804,7 @@ export interface NativeUserV3HttpApiKeyQuery {
      */
     key: pulumi.Input<string>;
     /**
-     * The API key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The API key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     value: pulumi.Input<inputs.NativeUserV3HttpApiKeyQueryValue>;
 }
@@ -703,6 +827,46 @@ export interface NativeUserV3HttpApiKeyQueryValue {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: pulumi.Input<number | undefined>;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: pulumi.Input<inputs.NativeUserV3HttpApiKeyQueryValueSecretManager | undefined>;
+}
+
+export interface NativeUserV3HttpApiKeyQueryValueSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: pulumi.Input<inputs.NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret | undefined>;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: pulumi.Input<inputs.NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret | undefined>;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: pulumi.Input<inputs.NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret | undefined>;
+}
+
+export interface NativeUserV3HttpApiKeyQueryValueSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: pulumi.Input<string>;
+}
+
+export interface NativeUserV3HttpApiKeyQueryValueSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: pulumi.Input<string>;
+}
+
+export interface NativeUserV3HttpApiKeyQueryValueSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface NativeUserV3HttpBasic {
@@ -711,7 +875,7 @@ export interface NativeUserV3HttpBasic {
      */
     header: pulumi.Input<string>;
     /**
-     * The password to authenticate with. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The password to authenticate with. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     password: pulumi.Input<inputs.NativeUserV3HttpBasicPassword>;
     /**
@@ -738,6 +902,46 @@ export interface NativeUserV3HttpBasicPassword {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: pulumi.Input<number | undefined>;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: pulumi.Input<inputs.NativeUserV3HttpBasicPasswordSecretManager | undefined>;
+}
+
+export interface NativeUserV3HttpBasicPasswordSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: pulumi.Input<inputs.NativeUserV3HttpBasicPasswordSecretManagerAwsSecret | undefined>;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: pulumi.Input<inputs.NativeUserV3HttpBasicPasswordSecretManagerAzureSecret | undefined>;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: pulumi.Input<inputs.NativeUserV3HttpBasicPasswordSecretManagerGcpSecret | undefined>;
+}
+
+export interface NativeUserV3HttpBasicPasswordSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: pulumi.Input<string>;
+}
+
+export interface NativeUserV3HttpBasicPasswordSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: pulumi.Input<string>;
+}
+
+export interface NativeUserV3HttpBasicPasswordSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface NativeUserV3HttpBearer {
@@ -746,7 +950,7 @@ export interface NativeUserV3HttpBearer {
      */
     header: pulumi.Input<string>;
     /**
-     * The bearer token. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The bearer token. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     token: pulumi.Input<inputs.NativeUserV3HttpBearerToken>;
 }
@@ -769,11 +973,51 @@ export interface NativeUserV3HttpBearerToken {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: pulumi.Input<number | undefined>;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: pulumi.Input<inputs.NativeUserV3HttpBearerTokenSecretManager | undefined>;
+}
+
+export interface NativeUserV3HttpBearerTokenSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: pulumi.Input<inputs.NativeUserV3HttpBearerTokenSecretManagerAwsSecret | undefined>;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: pulumi.Input<inputs.NativeUserV3HttpBearerTokenSecretManagerAzureSecret | undefined>;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: pulumi.Input<inputs.NativeUserV3HttpBearerTokenSecretManagerGcpSecret | undefined>;
+}
+
+export interface NativeUserV3HttpBearerTokenSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: pulumi.Input<string>;
+}
+
+export interface NativeUserV3HttpBearerTokenSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: pulumi.Input<string>;
+}
+
+export interface NativeUserV3HttpBearerTokenSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface NativeUserV3KubernetesInline {
     /**
-     * The kubeconfig YAML document. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The kubeconfig YAML document. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     kubeconfig: pulumi.Input<inputs.NativeUserV3KubernetesInlineKubeconfig>;
 }
@@ -796,11 +1040,51 @@ export interface NativeUserV3KubernetesInlineKubeconfig {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: pulumi.Input<number | undefined>;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: pulumi.Input<inputs.NativeUserV3KubernetesInlineKubeconfigSecretManager | undefined>;
+}
+
+export interface NativeUserV3KubernetesInlineKubeconfigSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: pulumi.Input<inputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret | undefined>;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: pulumi.Input<inputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret | undefined>;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: pulumi.Input<inputs.NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret | undefined>;
+}
+
+export interface NativeUserV3KubernetesInlineKubeconfigSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: pulumi.Input<string>;
+}
+
+export interface NativeUserV3KubernetesInlineKubeconfigSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: pulumi.Input<string>;
+}
+
+export interface NativeUserV3KubernetesInlineKubeconfigSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface NativeUserV3KubernetesPath {
     /**
-     * Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * Path to the kubeconfig file on the connector. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     kubeconfigPath: pulumi.Input<inputs.NativeUserV3KubernetesPathKubeconfigPath>;
 }
@@ -823,11 +1107,72 @@ export interface NativeUserV3KubernetesPathKubeconfigPath {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: pulumi.Input<number | undefined>;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: pulumi.Input<inputs.NativeUserV3KubernetesPathKubeconfigPathSecretManager | undefined>;
+}
+
+export interface NativeUserV3KubernetesPathKubeconfigPathSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: pulumi.Input<inputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret | undefined>;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: pulumi.Input<inputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret | undefined>;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: pulumi.Input<inputs.NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret | undefined>;
+}
+
+export interface NativeUserV3KubernetesPathKubeconfigPathSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: pulumi.Input<string>;
+}
+
+export interface NativeUserV3KubernetesPathKubeconfigPathSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: pulumi.Input<string>;
+}
+
+export interface NativeUserV3KubernetesPathKubeconfigPathSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: pulumi.Input<string>;
+}
+
+export interface NativeUserV3LinkedHttpBasic {
+    /**
+     * The header to inject the credentials on, for example `Authorization`.
+     */
+    header: pulumi.Input<string>;
+    /**
+     * The username to authenticate as.
+     */
+    username: pulumi.Input<string>;
+}
+
+export interface NativeUserV3LinkedHttpBearer {
+    /**
+     * The header to inject the token on, for example `Authorization`.
+     */
+    header: pulumi.Input<string>;
+}
+
+export interface NativeUserV3Passthrough {
 }
 
 export interface NativeUserV3SnowflakeKey {
     /**
-     * The private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     key: pulumi.Input<inputs.NativeUserV3SnowflakeKeyKey>;
     /**
@@ -854,15 +1199,55 @@ export interface NativeUserV3SnowflakeKeyKey {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: pulumi.Input<number | undefined>;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: pulumi.Input<inputs.NativeUserV3SnowflakeKeyKeySecretManager | undefined>;
+}
+
+export interface NativeUserV3SnowflakeKeyKeySecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: pulumi.Input<inputs.NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret | undefined>;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: pulumi.Input<inputs.NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret | undefined>;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: pulumi.Input<inputs.NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret | undefined>;
+}
+
+export interface NativeUserV3SnowflakeKeyKeySecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: pulumi.Input<string>;
+}
+
+export interface NativeUserV3SnowflakeKeyKeySecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: pulumi.Input<string>;
+}
+
+export interface NativeUserV3SnowflakeKeyKeySecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface NativeUserV3SshKey {
     /**
-     * The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The optional SSH certificate paired with the private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     certificate?: pulumi.Input<inputs.NativeUserV3SshKeyCertificate | undefined>;
     /**
-     * The SSH private key. Set exactly one of `literal`, `literalWo` or `environmentVariable`.
+     * The SSH private key. Set exactly one of `literal`, `literalWo`, `environmentVariable` or `secretManager`.
      */
     key: pulumi.Input<inputs.NativeUserV3SshKeyKey>;
     /**
@@ -889,6 +1274,46 @@ export interface NativeUserV3SshKeyCertificate {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: pulumi.Input<number | undefined>;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: pulumi.Input<inputs.NativeUserV3SshKeyCertificateSecretManager | undefined>;
+}
+
+export interface NativeUserV3SshKeyCertificateSecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: pulumi.Input<inputs.NativeUserV3SshKeyCertificateSecretManagerAwsSecret | undefined>;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: pulumi.Input<inputs.NativeUserV3SshKeyCertificateSecretManagerAzureSecret | undefined>;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: pulumi.Input<inputs.NativeUserV3SshKeyCertificateSecretManagerGcpSecret | undefined>;
+}
+
+export interface NativeUserV3SshKeyCertificateSecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: pulumi.Input<string>;
+}
+
+export interface NativeUserV3SshKeyCertificateSecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: pulumi.Input<string>;
+}
+
+export interface NativeUserV3SshKeyCertificateSecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface NativeUserV3SshKeyKey {
@@ -909,6 +1334,46 @@ export interface NativeUserV3SshKeyKey {
      * Version trigger for `literalWo`. Increment this value to update the secret.
      */
     literalWoVersion?: pulumi.Input<number | undefined>;
+    /**
+     * A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+     */
+    secretManager?: pulumi.Input<inputs.NativeUserV3SshKeyKeySecretManager | undefined>;
+}
+
+export interface NativeUserV3SshKeyKeySecretManager {
+    /**
+     * An AWS Secrets Manager secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    awsSecret?: pulumi.Input<inputs.NativeUserV3SshKeyKeySecretManagerAwsSecret | undefined>;
+    /**
+     * An Azure Key Vault secret. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    azureSecret?: pulumi.Input<inputs.NativeUserV3SshKeyKeySecretManagerAzureSecret | undefined>;
+    /**
+     * A GCP Secret Manager secret version. Set exactly one of `awsSecret`, `gcpSecret` or `azureSecret`.
+     */
+    gcpSecret?: pulumi.Input<inputs.NativeUserV3SshKeyKeySecretManagerGcpSecret | undefined>;
+}
+
+export interface NativeUserV3SshKeyKeySecretManagerAwsSecret {
+    /**
+     * The ARN of the secret. Use the extended form `<arn>:<json-key>:<version-stage>:<version-id>`, as in ECS task definitions, to select a JSON key or a version.
+     */
+    arn: pulumi.Input<string>;
+}
+
+export interface NativeUserV3SshKeyKeySecretManagerAzureSecret {
+    /**
+     * The secret identifier, as `https://<vault-name>.vault.azure.net/secrets/<name>[/<version>]`. Omitting the version reads the latest version.
+     */
+    url: pulumi.Input<string>;
+}
+
+export interface NativeUserV3SshKeyKeySecretManagerGcpSecret {
+    /**
+     * The resource name of the secret version, as `projects/*&#47;secrets/*&#47;versions/*` or `projects/*&#47;locations/*&#47;secrets/*&#47;versions/*`.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface ProviderOidc {

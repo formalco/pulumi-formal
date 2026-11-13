@@ -49,6 +49,18 @@ namespace Formal.Pulumi.Inputs
         [Input("outputType", required: true)]
         public Input<string> OutputType { get; set; } = null!;
 
+        [Input("secrets")]
+        private InputList<Inputs.NativeUserV3HookSecretArgs>? _secrets;
+
+        /// <summary>
+        /// A secret manager reference the connector resolves and passes to the hook as its fourth argument, `Secrets`, keyed by `Name`.
+        /// </summary>
+        public InputList<Inputs.NativeUserV3HookSecretArgs> Secrets
+        {
+            get => _secrets ?? (_secrets = new InputList<Inputs.NativeUserV3HookSecretArgs>());
+            set => _secrets = value;
+        }
+
         public NativeUserV3HookArgs()
         {
         }

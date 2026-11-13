@@ -35,6 +35,23 @@ import * as utilities from "./utilities";
  *     resourceId: db.id,
  *     label: "admin",
  * });
+ * // Username and password, with the password read from AWS Secrets Manager by the
+ * // connector using its own IAM role. gcp_secret { name = ... } and
+ * // azure_secret { url = ... } work the same way for GCP Secret Manager and Azure Key Vault.
+ * const basicSecretManager = new formal.NativeUserV3("basic_secret_manager", {
+ *     basic: {
+ *         password: {
+ *             secretManager: {
+ *                 awsSecret: {
+ *                     arn: "arn:aws:secretsmanager:us-east-1:123456789012:secret:analytics-admin-AbCdEf:password::",
+ *                 },
+ *             },
+ *         },
+ *         username: "app_admin",
+ *     },
+ *     resourceId: db.id,
+ *     label: "admin-secret-manager",
+ * });
  * // Username and password, with the password passed as a write-only value so it
  * // never lands in Terraform state. Increment literal_wo_version to rotate it.
  * const basicWriteOnly = new formal.NativeUserV3("basic_write_only", {
@@ -47,6 +64,12 @@ import * as utilities from "./utilities";
  *     },
  *     resourceId: db.id,
  *     label: "admin-write-only",
+ * });
+ * // The client's own credentials, sent as is to the Resource.
+ * const passthrough = new formal.NativeUserV3("passthrough", {
+ *     passthrough: {},
+ *     resourceId: db.id,
+ *     label: "passthrough",
  * });
  * // AWS IAM, inheriting the role from the connector's environment.
  * const awsIam = new formal.NativeUserV3("aws_iam", {
@@ -92,6 +115,38 @@ import * as utilities from "./utilities";
  *     },
  *     resourceId: db.id,
  *     label: "dynamic",
+ * });
+ * // A hook that receives secret manager references as its fourth argument,
+ * // resolved by the connector before the hook runs.
+ * const fromHookWithSecrets = new formal.NativeUserV3("from_hook_with_secrets", {
+ *     hook: {
+ *         secrets: [{
+ *             gcpSecret: {
+ *                 name: "projects/analytics/secrets/db-password/versions/latest",
+ *             },
+ *             name: "DB_PASSWORD",
+ *         }],
+ *         outputType: "basic",
+ *         code: `export default async function (_input, _env, _cache, secrets) {
+ *   return {
+ *     username: \\"app_admin\\",
+ *     password: secrets.DB_PASSWORD,
+ *   };
+ * }
+ * `,
+ *     },
+ *     resourceId: db.id,
+ *     label: "dynamic-with-secrets",
+ * });
+ * // The requesting user's linked upstream account token, sent as a bearer token.
+ * // The Resource must link upstream accounts through formal_resource_oauth_settings.
+ * const apiResourceOauthSettings = new formal.ResourceOauthSettings("api", {resourceId: api.id});
+ * const linkedAccount = new formal.NativeUserV3("linked_account", {
+ *     linkedHttpBearer: {
+ *         header: "Authorization",
+ *     },
+ *     resourceId: apiResourceOauthSettings.resourceId,
+ *     label: "linked-account",
  * });
  * ```
  */
@@ -180,6 +235,18 @@ export class NativeUserV3 extends pulumi.CustomResource {
      */
     declare public readonly label: pulumi.Output<string>;
     /**
+     * HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+     */
+    declare public readonly linkedHttpBasic: pulumi.Output<outputs.NativeUserV3LinkedHttpBasic | undefined>;
+    /**
+     * HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+     */
+    declare public readonly linkedHttpBearer: pulumi.Output<outputs.NativeUserV3LinkedHttpBearer | undefined>;
+    /**
+     * Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+     */
+    declare public readonly passthrough: pulumi.Output<outputs.NativeUserV3Passthrough | undefined>;
+    /**
      * The ID of the Resource this Native User authenticates to.
      */
     declare public readonly resourceId: pulumi.Output<string>;
@@ -227,6 +294,9 @@ export class NativeUserV3 extends pulumi.CustomResource {
             resourceInputs["kubernetesInline"] = state?.kubernetesInline;
             resourceInputs["kubernetesPath"] = state?.kubernetesPath;
             resourceInputs["label"] = state?.label;
+            resourceInputs["linkedHttpBasic"] = state?.linkedHttpBasic;
+            resourceInputs["linkedHttpBearer"] = state?.linkedHttpBearer;
+            resourceInputs["passthrough"] = state?.passthrough;
             resourceInputs["resourceId"] = state?.resourceId;
             resourceInputs["snowflakeKey"] = state?.snowflakeKey;
             resourceInputs["sshKey"] = state?.sshKey;
@@ -253,6 +323,9 @@ export class NativeUserV3 extends pulumi.CustomResource {
             resourceInputs["kubernetesInline"] = args?.kubernetesInline;
             resourceInputs["kubernetesPath"] = args?.kubernetesPath;
             resourceInputs["label"] = args?.label;
+            resourceInputs["linkedHttpBasic"] = args?.linkedHttpBasic;
+            resourceInputs["linkedHttpBearer"] = args?.linkedHttpBearer;
+            resourceInputs["passthrough"] = args?.passthrough;
             resourceInputs["resourceId"] = args?.resourceId;
             resourceInputs["snowflakeKey"] = args?.snowflakeKey;
             resourceInputs["sshKey"] = args?.sshKey;
@@ -325,6 +398,18 @@ export interface NativeUserV3State {
      * A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
      */
     label?: pulumi.Input<string | undefined>;
+    /**
+     * HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+     */
+    linkedHttpBasic?: pulumi.Input<inputs.NativeUserV3LinkedHttpBasic | undefined>;
+    /**
+     * HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+     */
+    linkedHttpBearer?: pulumi.Input<inputs.NativeUserV3LinkedHttpBearer | undefined>;
+    /**
+     * Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+     */
+    passthrough?: pulumi.Input<inputs.NativeUserV3Passthrough | undefined>;
     /**
      * The ID of the Resource this Native User authenticates to.
      */
@@ -403,6 +488,18 @@ export interface NativeUserV3Args {
      * A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
      */
     label: pulumi.Input<string>;
+    /**
+     * HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+     */
+    linkedHttpBasic?: pulumi.Input<inputs.NativeUserV3LinkedHttpBasic | undefined>;
+    /**
+     * HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `formal.ResourceOauthSettings`.
+     */
+    linkedHttpBearer?: pulumi.Input<inputs.NativeUserV3LinkedHttpBearer | undefined>;
+    /**
+     * Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+     */
+    passthrough?: pulumi.Input<inputs.NativeUserV3Passthrough | undefined>;
     /**
      * The ID of the Resource this Native User authenticates to.
      */

@@ -15,7 +15,7 @@ namespace Formal.Pulumi.Outputs
     public sealed class NativeUserV3Basic
     {
         /// <summary>
-        /// The password to authenticate with. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The password to authenticate with. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         public readonly Outputs.NativeUserV3BasicPassword Password;
         /// <summary>

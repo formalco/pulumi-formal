@@ -15,11 +15,11 @@ namespace Formal.Pulumi.Outputs
     public sealed class NativeUserV3SshKey
     {
         /// <summary>
-        /// The optional SSH certificate paired with the private key. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The optional SSH certificate paired with the private key. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         public readonly Outputs.NativeUserV3SshKeyCertificate? Certificate;
         /// <summary>
-        /// The SSH private key. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The SSH private key. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         public readonly Outputs.NativeUserV3SshKeyKey Key;
         /// <summary>

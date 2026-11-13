@@ -14,7 +14,7 @@ namespace Formal.Pulumi.Inputs
     public sealed class NativeUserV3BasicGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The password to authenticate with. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The password to authenticate with. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         [Input("password", required: true)]
         public Input<Inputs.NativeUserV3BasicPasswordGetArgs> Password { get; set; } = null!;

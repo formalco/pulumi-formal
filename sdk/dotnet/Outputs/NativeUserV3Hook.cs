@@ -30,6 +30,10 @@ namespace Formal.Pulumi.Outputs
         /// The credential shape the hook must return, so the connector can validate its result. One of: `Basic`, `AwsIam`, `AwsIamRole`, `GcpIam`, `AzureIam`, `KubernetesPath`, `KubernetesInline`, `SshKey`, `SnowflakeKey`, `HttpBasic`, `HttpBearer`, `HttpApiKeyHeader`, `HttpApiKeyQuery`.
         /// </summary>
         public readonly string OutputType;
+        /// <summary>
+        /// A secret manager reference the connector resolves and passes to the hook as its fourth argument, `Secrets`, keyed by `Name`.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.NativeUserV3HookSecret> Secrets;
 
         [OutputConstructor]
         private NativeUserV3Hook(
@@ -39,12 +43,15 @@ namespace Formal.Pulumi.Outputs
 
             string code,
 
-            string outputType)
+            string outputType,
+
+            ImmutableArray<Outputs.NativeUserV3HookSecret> secrets)
         {
             AllowlistedEnvVariables = allowlistedEnvVariables;
             AllowlistedNetworkHosts = allowlistedNetworkHosts;
             Code = code;
             OutputType = outputType;
+            Secrets = secrets;
         }
     }
 }

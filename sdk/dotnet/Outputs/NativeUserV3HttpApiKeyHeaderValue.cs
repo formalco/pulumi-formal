@@ -31,6 +31,10 @@ namespace Formal.Pulumi.Outputs
         /// Version trigger for `LiteralWo`. Increment this value to update the secret.
         /// </summary>
         public readonly int? LiteralWoVersion;
+        /// <summary>
+        /// A secret held in a cloud secret manager, fetched by the connector using its own cloud identity.
+        /// </summary>
+        public readonly Outputs.NativeUserV3HttpApiKeyHeaderValueSecretManager? SecretManager;
 
         [OutputConstructor]
         private NativeUserV3HttpApiKeyHeaderValue(
@@ -40,12 +44,15 @@ namespace Formal.Pulumi.Outputs
 
             string? literalWo,
 
-            int? literalWoVersion)
+            int? literalWoVersion,
+
+            Outputs.NativeUserV3HttpApiKeyHeaderValueSecretManager? secretManager)
         {
             EnvironmentVariable = environmentVariable;
             Literal = literal;
             LiteralWo = literalWo;
             LiteralWoVersion = literalWoVersion;
+            SecretManager = secretManager;
         }
     }
 }

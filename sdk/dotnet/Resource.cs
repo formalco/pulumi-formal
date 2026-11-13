@@ -32,7 +32,7 @@ namespace Formal.Pulumi
         /// Environment for the Resource, options: DEV, TEST, QA, UAT, EI, PRE, STG, NON_PROD, PROD, CORP.
         /// </summary>
         [Output("environment")]
-        public Output<string?> Environment { get; private set; } = null!;
+        public Output<string> Environment { get; private set; } = null!;
 
         /// <summary>
         /// Hostname of the Resource.

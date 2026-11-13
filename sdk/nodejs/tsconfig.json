@@ -30,6 +30,7 @@
         "connectorListenerRule.ts",
         "connectorSatelliteLink.ts",
         "connectorTokenEncryptionKey.ts",
+        "dashboard.ts",
         "dataDiscovery.ts",
         "dataLabel.ts",
         "encryptionKey.ts",
@@ -61,6 +62,7 @@
         "nativeUserV3.ts",
         "networkRule.ts",
         "oauthClient.ts",
+        "orgTheme.ts",
         "permission.ts",
         "policy.ts",
         "policyDataLoader.ts",
@@ -84,6 +86,7 @@
         "types/output.ts",
         "user.ts",
         "utilities.ts",
-        "workflow.ts"
+        "workflow.ts",
+        "workflowSecret.ts"
     ]
 }

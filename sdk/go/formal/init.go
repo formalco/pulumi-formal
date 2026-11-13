@@ -39,6 +39,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ConnectorSatelliteLink{}
 	case "formal:index/connectorTokenEncryptionKey:ConnectorTokenEncryptionKey":
 		r = &ConnectorTokenEncryptionKey{}
+	case "formal:index/dashboard:Dashboard":
+		r = &Dashboard{}
 	case "formal:index/dataDiscovery:DataDiscovery":
 		r = &DataDiscovery{}
 	case "formal:index/dataLabel:DataLabel":
@@ -85,6 +87,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &NetworkRule{}
 	case "formal:index/oauthClient:OauthClient":
 		r = &OauthClient{}
+	case "formal:index/orgTheme:OrgTheme":
+		r = &OrgTheme{}
 	case "formal:index/permission:Permission":
 		r = &Permission{}
 	case "formal:index/policy:Policy":
@@ -123,6 +127,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &User{}
 	case "formal:index/workflow:Workflow":
 		r = &Workflow{}
+	case "formal:index/workflowSecret:WorkflowSecret":
+		r = &WorkflowSecret{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -197,6 +203,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/connectorTokenEncryptionKey",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/dashboard",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -316,6 +327,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"formal",
+		"index/orgTheme",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
 		"index/permission",
 		&module{version},
 	)
@@ -407,6 +423,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"formal",
 		"index/workflow",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"formal",
+		"index/workflowSecret",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

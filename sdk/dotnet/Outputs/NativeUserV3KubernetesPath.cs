@@ -15,7 +15,7 @@ namespace Formal.Pulumi.Outputs
     public sealed class NativeUserV3KubernetesPath
     {
         /// <summary>
-        /// Path to the kubeconfig file on the connector. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// Path to the kubeconfig file on the connector. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         public readonly Outputs.NativeUserV3KubernetesPathKubeconfigPath KubeconfigPath;
 

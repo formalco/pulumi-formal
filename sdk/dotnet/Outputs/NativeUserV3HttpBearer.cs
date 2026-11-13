@@ -19,7 +19,7 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly string Header;
         /// <summary>
-        /// The bearer token. Set exactly one of `Literal`, `LiteralWo` or `EnvironmentVariable`.
+        /// The bearer token. Set exactly one of `Literal`, `LiteralWo`, `EnvironmentVariable` or `SecretManager`.
         /// </summary>
         public readonly Outputs.NativeUserV3HttpBearerToken Token;
 

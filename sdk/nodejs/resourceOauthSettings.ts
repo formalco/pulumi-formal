@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Enables OAuth on an MCP, HTTP, gRPC or LLM Resource. OAuth clients (see `formal.OauthClient`) can then connect to the Resource through the Connector and, unless `upstreamOauthMode` is `none`, users link their own upstream accounts, whose access tokens the Connector sends upstream in place of native user credentials. `requestedScopes` and the client secret update in place and leave linked accounts and OAuth clients' authorizations as they are. `requestedScopes` apply to future links. Changing `resourceId`, `upstreamOauthMode`, `clientId`, or `issuer`, or destroying this resource, deletes every user's linked account and every OAuth client's authorization for the Resource.
+ * Enables OAuth on an MCP, HTTP, gRPC or LLM Resource. OAuth clients (see `formal.OauthClient`) can then connect to the Resource through the Connector and, unless `upstreamOauthMode` is `none`, users link their own upstream accounts, whose access tokens the Connector sends upstream in place of native user credentials. `requestedScopes` and the client secret update in place and leave linked accounts and OAuth clients' authorizations as they are. `requestedScopes` apply to future links. Changing `resourceId`, `upstreamOauthMode`, `clientId`, or `issuer`, or destroying this resource, deletes every user's linked account and every OAuth client's authorization for the Resource. In `dcr` mode, Formal registers its client once, on create; to register a new one, for example after the authorization server forgot the registration, replace this resource with `pulumi up -replace`.
  *
  * ## Example Usage
  *
@@ -99,7 +99,7 @@ export class ResourceOauthSettings extends pulumi.CustomResource {
      */
     declare public readonly clientSecret: pulumi.Output<string | undefined>;
     /**
-     * Whether the OAuth app has a client secret.
+     * Whether the OAuth app, or the dynamically registered client, has a client secret.
      */
     declare public /*out*/ readonly clientSecretSet: pulumi.Output<boolean>;
     /**
@@ -124,6 +124,10 @@ export class ResourceOauthSettings extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly oauthSettingsId: pulumi.Output<string>;
     /**
+     * The client ID the authorization server issued when `upstreamOauthMode` is `dcr`; empty otherwise.
+     */
+    declare public /*out*/ readonly registeredClientId: pulumi.Output<string>;
+    /**
      * Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstreamOauthMode` is `none`. Existing linked accounts keep the scopes they were granted; users get these scopes the next time they link.
      */
     declare public readonly requestedScopes: pulumi.Output<string[] | undefined>;
@@ -136,7 +140,7 @@ export class ResourceOauthSettings extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
     /**
-     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret` or `clientSecretWo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret` or `clientSecretWo`. `dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `registeredClientId`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
      */
     declare public readonly upstreamOauthMode: pulumi.Output<string | undefined>;
 
@@ -161,6 +165,7 @@ export class ResourceOauthSettings extends pulumi.CustomResource {
             resourceInputs["createdAt"] = state?.createdAt;
             resourceInputs["issuer"] = state?.issuer;
             resourceInputs["oauthSettingsId"] = state?.oauthSettingsId;
+            resourceInputs["registeredClientId"] = state?.registeredClientId;
             resourceInputs["requestedScopes"] = state?.requestedScopes;
             resourceInputs["resourceId"] = state?.resourceId;
             resourceInputs["updatedAt"] = state?.updatedAt;
@@ -181,6 +186,7 @@ export class ResourceOauthSettings extends pulumi.CustomResource {
             resourceInputs["clientSecretSet"] = undefined /*out*/;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["oauthSettingsId"] = undefined /*out*/;
+            resourceInputs["registeredClientId"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -203,7 +209,7 @@ export interface ResourceOauthSettingsState {
      */
     clientSecret?: pulumi.Input<string | undefined>;
     /**
-     * Whether the OAuth app has a client secret.
+     * Whether the OAuth app, or the dynamically registered client, has a client secret.
      */
     clientSecretSet?: pulumi.Input<boolean | undefined>;
     /**
@@ -228,6 +234,10 @@ export interface ResourceOauthSettingsState {
      */
     oauthSettingsId?: pulumi.Input<string | undefined>;
     /**
+     * The client ID the authorization server issued when `upstreamOauthMode` is `dcr`; empty otherwise.
+     */
+    registeredClientId?: pulumi.Input<string | undefined>;
+    /**
      * Scopes to request from the upstream authorization server. When empty, the scope parameter is omitted and the provider's defaults apply. Must be empty when `upstreamOauthMode` is `none`. Existing linked accounts keep the scopes they were granted; users get these scopes the next time they link.
      */
     requestedScopes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
@@ -240,7 +250,7 @@ export interface ResourceOauthSettingsState {
      */
     updatedAt?: pulumi.Input<string | undefined>;
     /**
-     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret` or `clientSecretWo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret` or `clientSecretWo`. `dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `registeredClientId`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
      */
     upstreamOauthMode?: pulumi.Input<string | undefined>;
 }
@@ -279,7 +289,7 @@ export interface ResourceOauthSettingsArgs {
      */
     resourceId: pulumi.Input<string>;
     /**
-     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret` or `clientSecretWo`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
+     * How Formal identifies itself to the upstream authorization server when users link their accounts. `formal` (the default) uses Formal's OAuth app: a client Formal registered with the authorization server when there is one, and otherwise its Client ID Metadata Document client. `preRegistered` uses an OAuth app your organization registered with the authorization server, set with `clientId` and `clientSecret` or `clientSecretWo`. `dcr` registers a client for these settings with the authorization server's dynamic client registration endpoint (RFC 7591) on create, and fails if the server offers none or rejects the registration; its ID is `registeredClientId`. `none` links no upstream account: the Connector authenticates upstream with the user's native user.
      */
     upstreamOauthMode?: pulumi.Input<string | undefined>;
 }
