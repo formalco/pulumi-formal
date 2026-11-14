@@ -168,7 +168,7 @@ jobs:
       if: inputs.skipJavaSdk == false
       # REPO-OWNED PATCH (re-apply after `make ci-mgmt`): formalco fork with
       # npm/NuGet/PyPI trusted publishing (pulumi/pulumi-package-publisher#53). See AGENTS.md.
-      uses: formalco/pulumi-package-publisher@7d9f7efb3b11a44087b35bd8ee2977dbdc3a8ac4 # nuget-pypi-trusted-publishing
+      uses: formalco/pulumi-package-publisher@ab67415ce62fd608ee2977518d6a47da8443c54f # nuget-pypi-trusted-publishing
       with:
         sdk: python,nodejs,dotnet
         version: ${{ inputs.version }}
@@ -190,7 +190,7 @@ jobs:
       if: inputs.skipJavaSdk == true
       # REPO-OWNED PATCH (re-apply after `make ci-mgmt`): formalco fork with
       # npm/NuGet/PyPI trusted publishing (pulumi/pulumi-package-publisher#53). See AGENTS.md.
-      uses: formalco/pulumi-package-publisher@7d9f7efb3b11a44087b35bd8ee2977dbdc3a8ac4 # nuget-pypi-trusted-publishing
+      uses: formalco/pulumi-package-publisher@ab67415ce62fd608ee2977518d6a47da8443c54f # nuget-pypi-trusted-publishing
       with:
         sdk: python,nodejs,dotnet,!java
         version: ${{ inputs.version }}
