@@ -100,6 +100,12 @@ func (SatelliteState) ElementType() reflect.Type {
 	return reflect.TypeOf((*satelliteState)(nil)).Elem()
 }
 
+// SatelliteExists checks whether an existing Satellite resource with the given ID exists.
+func SatelliteExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *SatelliteState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/satellite:Satellite", id, state, "", opts...)
+}
+
 type satelliteArgs struct {
 	// Friendly name for the Satellite.
 	Name *string `pulumi:"name"`

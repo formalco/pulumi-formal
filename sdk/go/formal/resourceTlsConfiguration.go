@@ -118,6 +118,12 @@ func (ResourceTlsConfigurationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*resourceTlsConfigurationState)(nil)).Elem()
 }
 
+// ResourceTlsConfigurationExists checks whether an existing ResourceTlsConfiguration resource with the given ID exists.
+func ResourceTlsConfigurationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ResourceTlsConfigurationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/resourceTlsConfiguration:ResourceTlsConfiguration", id, state, "", opts...)
+}
+
 type resourceTlsConfigurationArgs struct {
 	// Resource ID for which the TLS configuration is applied to.
 	ResourceId string `pulumi:"resourceId"`

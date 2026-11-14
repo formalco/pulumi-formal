@@ -81,6 +81,12 @@ func (ResourceHealthCheckState) ElementType() reflect.Type {
 	return reflect.TypeOf((*resourceHealthCheckState)(nil)).Elem()
 }
 
+// ResourceHealthCheckExists checks whether an existing ResourceHealthCheck resource with the given ID exists.
+func ResourceHealthCheckExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ResourceHealthCheckState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/resourceHealthCheck:ResourceHealthCheck", id, state, "", opts...)
+}
+
 type resourceHealthCheckArgs struct {
 	// Database associated with the health check.
 	DatabaseName string `pulumi:"databaseName"`

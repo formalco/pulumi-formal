@@ -302,6 +302,22 @@ class ConnectorConfiguration(pulumi.CustomResource):
         __props__.__dict__["resources_health_checks_frequency"] = resources_health_checks_frequency
         return ConnectorConfiguration(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+            log_level: pulumi.Input[Optional[_builtins.str]] = None,
+            otel_endpoint_hostname: pulumi.Input[Optional[_builtins.str]] = None,
+            otel_endpoint_port: pulumi.Input[Optional[_builtins.int]] = None,
+            resources_health_checks_frequency: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["connectorId"] = connector_id
+        __props__["logLevel"] = log_level
+        __props__["otelEndpointHostname"] = otel_endpoint_hostname
+        __props__["otelEndpointPort"] = otel_endpoint_port
+        __props__["resourcesHealthChecksFrequency"] = resources_health_checks_frequency
+        return pulumi.runtime.exists_resource(None, 'formal:index/connectorConfiguration:ConnectorConfiguration', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="connectorId")
     def connector_id(self) -> pulumi.Output[_builtins.str]:

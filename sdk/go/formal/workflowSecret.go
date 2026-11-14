@@ -127,6 +127,12 @@ func (WorkflowSecretState) ElementType() reflect.Type {
 	return reflect.TypeOf((*workflowSecretState)(nil)).Elem()
 }
 
+// WorkflowSecretExists checks whether an existing WorkflowSecret resource with the given ID exists.
+func WorkflowSecretExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *WorkflowSecretState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/workflowSecret:WorkflowSecret", id, state, "", opts...)
+}
+
 type workflowSecretArgs struct {
 	// The name workflows reference the secret by, as `secrets.<name>`. Must be unique within the workflow, start with a letter or underscore, and contain only letters, digits and underscores.
 	Name *string `pulumi:"name"`

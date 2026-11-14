@@ -87,6 +87,12 @@ func (SatelliteLinkState) ElementType() reflect.Type {
 	return reflect.TypeOf((*satelliteLinkState)(nil)).Elem()
 }
 
+// SatelliteLinkExists checks whether an existing SatelliteLink resource with the given ID exists.
+func SatelliteLinkExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *SatelliteLinkState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/satelliteLink:SatelliteLink", id, state, "", opts...)
+}
+
 type satelliteLinkArgs struct {
 	// The ID of the source Satellite (e.g., Data Discovery Satellite).
 	SourceSatelliteId string `pulumi:"sourceSatelliteId"`

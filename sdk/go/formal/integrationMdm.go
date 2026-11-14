@@ -80,6 +80,12 @@ func (IntegrationMdmState) ElementType() reflect.Type {
 	return reflect.TypeOf((*integrationMdmState)(nil)).Elem()
 }
 
+// IntegrationMdmExists checks whether an existing IntegrationMdm resource with the given ID exists.
+func IntegrationMdmExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *IntegrationMdmState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/integrationMdm:IntegrationMdm", id, state, "", opts...)
+}
+
 type integrationMdmArgs struct {
 	// Configuration block for Fleet integration.
 	Fleet *IntegrationMdmFleet `pulumi:"fleet"`

@@ -87,6 +87,12 @@ func (ResourceHostnameState) ElementType() reflect.Type {
 	return reflect.TypeOf((*resourceHostnameState)(nil)).Elem()
 }
 
+// ResourceHostnameExists checks whether an existing ResourceHostname resource with the given ID exists.
+func ResourceHostnameExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ResourceHostnameState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/resourceHostname:ResourceHostname", id, state, "", opts...)
+}
+
 type resourceHostnameArgs struct {
 	// The hostname for this Resource hostname.
 	Hostname string `pulumi:"hostname"`

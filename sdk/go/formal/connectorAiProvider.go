@@ -108,6 +108,12 @@ func (ConnectorAiProviderState) ElementType() reflect.Type {
 	return reflect.TypeOf((*connectorAiProviderState)(nil)).Elem()
 }
 
+// ConnectorAiProviderExists checks whether an existing ConnectorAiProvider resource with the given ID exists.
+func ConnectorAiProviderExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConnectorAiProviderState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/connectorAiProvider:ConnectorAiProvider", id, state, "", opts...)
+}
+
 type connectorAiProviderArgs struct {
 	// Use Anthropic as the provider.
 	Anthropic *ConnectorAiProviderAnthropic `pulumi:"anthropic"`

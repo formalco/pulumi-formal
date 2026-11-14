@@ -31,13 +31,13 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			tmpJSON0, err := json.Marshal(map[string]interface{}{
-//				"layout": map[string]interface{}{
+//				"layout": map[string]int{
 //					"columns": 1,
 //				},
 //				"widgets": []map[string]interface{}{
 //					map[string]interface{}{
 //						"key": "providers",
-//						"layout": map[string]interface{}{
+//						"layout": map[string]int{
 //							"span": 1,
 //						},
 //						"logs": map[string]interface{}{
@@ -55,7 +55,7 @@ import (
 //			json0 := string(tmpJSON0)
 //			_, err = formal.NewDashboard(ctx, "ai_usage", &formal.DashboardArgs{
 //				Name:       pulumi.String("AI usage"),
-//				Definition: pulumi.String(pulumi.String(json0)),
+//				Definition: pulumi.String(json0),
 //			})
 //			if err != nil {
 //				return err
@@ -136,6 +136,12 @@ type DashboardState struct {
 
 func (DashboardState) ElementType() reflect.Type {
 	return reflect.TypeOf((*dashboardState)(nil)).Elem()
+}
+
+// DashboardExists checks whether an existing Dashboard resource with the given ID exists.
+func DashboardExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *DashboardState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/dashboard:Dashboard", id, state, "", opts...)
 }
 
 type dashboardArgs struct {

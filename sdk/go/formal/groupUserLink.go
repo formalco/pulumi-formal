@@ -81,6 +81,12 @@ func (GroupUserLinkState) ElementType() reflect.Type {
 	return reflect.TypeOf((*groupUserLinkState)(nil)).Elem()
 }
 
+// GroupUserLinkExists checks whether an existing GroupUserLink resource with the given ID exists.
+func GroupUserLinkExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *GroupUserLinkState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/groupUserLink:GroupUserLink", id, state, "", opts...)
+}
+
 type groupUserLinkArgs struct {
 	// The Formal ID for the group to be linked.
 	GroupId string `pulumi:"groupId"`

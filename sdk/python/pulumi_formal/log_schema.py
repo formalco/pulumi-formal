@@ -202,7 +202,7 @@ class LogSchema(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict']]]]] = None,
+                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict', 'outputs.LogSchemaPath']]]]] = None,
                  scope_cel: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
@@ -213,7 +213,7 @@ class LogSchema(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] encryption_key_id: The ID of the asymmetric encryption key used by encrypt actions.
         :param pulumi.Input[_builtins.str] name: The name of this log schema.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict']]]] paths: A log field path and the actions to apply to it.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict', 'outputs.LogSchemaPath']]]] paths: A log field path and the actions to apply to it.
         :param pulumi.Input[_builtins.str] scope_cel: A CEL expression that determines which logs this schema applies to.
         """
         ...
@@ -243,7 +243,7 @@ class LogSchema(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict']]]]] = None,
+                 paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict', 'outputs.LogSchemaPath']]]]] = None,
                  scope_cel: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -277,7 +277,7 @@ class LogSchema(pulumi.CustomResource):
             created_at: pulumi.Input[Optional[_builtins.str]] = None,
             encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict']]]]] = None,
+            paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict', 'outputs.LogSchemaPath']]]]] = None,
             scope_cel: pulumi.Input[Optional[_builtins.str]] = None,
             updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'LogSchema':
         """
@@ -290,7 +290,7 @@ class LogSchema(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] created_at: When the log schema was created.
         :param pulumi.Input[_builtins.str] encryption_key_id: The ID of the asymmetric encryption key used by encrypt actions.
         :param pulumi.Input[_builtins.str] name: The name of this log schema.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict']]]] paths: A log field path and the actions to apply to it.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict', 'outputs.LogSchemaPath']]]] paths: A log field path and the actions to apply to it.
         :param pulumi.Input[_builtins.str] scope_cel: A CEL expression that determines which logs this schema applies to.
         :param pulumi.Input[_builtins.str] updated_at: When the log schema was last updated.
         """
@@ -305,6 +305,24 @@ class LogSchema(pulumi.CustomResource):
         __props__.__dict__["scope_cel"] = scope_cel
         __props__.__dict__["updated_at"] = updated_at
         return LogSchema(resource_name, opts=opts, __props__=__props__)
+
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            encryption_key_id: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            paths: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogSchemaPathArgs', 'LogSchemaPathArgsDict', 'outputs.LogSchemaPath']]]]] = None,
+            scope_cel: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["createdAt"] = created_at
+        __props__["encryptionKeyId"] = encryption_key_id
+        __props__["name"] = name
+        __props__["paths"] = paths
+        __props__["scopeCel"] = scope_cel
+        __props__["updatedAt"] = updated_at
+        return pulumi.runtime.exists_resource(None, 'formal:index/logSchema:LogSchema', id, __props__, opts or pulumi.ResourceOptions())
 
     @_builtins.property
     @pulumi.getter(name="createdAt")

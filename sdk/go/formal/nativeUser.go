@@ -119,6 +119,12 @@ func (NativeUserState) ElementType() reflect.Type {
 	return reflect.TypeOf((*nativeUserState)(nil)).Elem()
 }
 
+// NativeUserExists checks whether an existing NativeUser resource with the given ID exists.
+func NativeUserExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *NativeUserState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/nativeUser:NativeUser", id, state, "", opts...)
+}
+
 type nativeUserArgs struct {
 	// The username of the Native User.
 	NativeUserId string `pulumi:"nativeUserId"`

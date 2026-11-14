@@ -102,6 +102,12 @@ func (InventoryObjectState) ElementType() reflect.Type {
 	return reflect.TypeOf((*inventoryObjectState)(nil)).Elem()
 }
 
+// InventoryObjectExists checks whether an existing InventoryObject resource with the given ID exists.
+func InventoryObjectExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *InventoryObjectState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/inventoryObject:InventoryObject", id, state, "", opts...)
+}
+
 type inventoryObjectArgs struct {
 	// Column data type (e.g. `varchar`). Required when `type` is `column`, ignored otherwise.
 	DataType *string `pulumi:"dataType"`

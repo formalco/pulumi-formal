@@ -266,6 +266,20 @@ class InventoryObjectDataLabelLink(pulumi.CustomResource):
         __props__.__dict__["resource_id"] = resource_id
         return InventoryObjectDataLabelLink(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            data_label: pulumi.Input[Optional[_builtins.str]] = None,
+            locked: pulumi.Input[Optional[_builtins.bool]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["dataLabel"] = data_label
+        __props__["locked"] = locked
+        __props__["path"] = path
+        __props__["resourceId"] = resource_id
+        return pulumi.runtime.exists_resource(None, 'formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="dataLabel")
     def data_label(self) -> pulumi.Output[_builtins.str]:

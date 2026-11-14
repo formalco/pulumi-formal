@@ -285,6 +285,22 @@ class NativeUserLink(pulumi.CustomResource):
         __props__.__dict__["termination_protection"] = termination_protection
         return NativeUserLink(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            formal_identity_id: pulumi.Input[Optional[_builtins.str]] = None,
+            formal_identity_type: pulumi.Input[Optional[_builtins.str]] = None,
+            native_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["formalIdentityId"] = formal_identity_id
+        __props__["formalIdentityType"] = formal_identity_type
+        __props__["nativeUserId"] = native_user_id
+        __props__["resourceId"] = resource_id
+        __props__["terminationProtection"] = termination_protection
+        return pulumi.runtime.exists_resource(None, 'formal:index/nativeUserLink:NativeUserLink', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="formalIdentityId")
     def formal_identity_id(self) -> pulumi.Output[_builtins.str]:

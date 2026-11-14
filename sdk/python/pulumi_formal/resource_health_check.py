@@ -225,6 +225,18 @@ class ResourceHealthCheck(pulumi.CustomResource):
         __props__.__dict__["termination_protection"] = termination_protection
         return ResourceHealthCheck(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            database_name: pulumi.Input[Optional[_builtins.str]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["databaseName"] = database_name
+        __props__["resourceId"] = resource_id
+        __props__["terminationProtection"] = termination_protection
+        return pulumi.runtime.exists_resource(None, 'formal:index/resourceHealthCheck:ResourceHealthCheck', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="databaseName")
     def database_name(self) -> pulumi.Output[_builtins.str]:

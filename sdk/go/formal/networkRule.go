@@ -102,6 +102,12 @@ func (NetworkRuleState) ElementType() reflect.Type {
 	return reflect.TypeOf((*networkRuleState)(nil)).Elem()
 }
 
+// NetworkRuleExists checks whether an existing NetworkRule resource with the given ID exists.
+func NetworkRuleExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *NetworkRuleState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/networkRule:NetworkRule", id, state, "", opts...)
+}
+
 type networkRuleArgs struct {
 	// The CEL expression describing how this Network Rule matches and routes traffic.
 	CelExpression string `pulumi:"celExpression"`

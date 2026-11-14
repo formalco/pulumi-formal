@@ -114,6 +114,12 @@ func (HookState) ElementType() reflect.Type {
 	return reflect.TypeOf((*hookState)(nil)).Elem()
 }
 
+// HookExists checks whether an existing Hook resource with the given ID exists.
+func HookExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *HookState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/hook:Hook", id, state, "", opts...)
+}
+
 type hookArgs struct {
 	// Names of process environment variables the hook may read via its second `env` argument at evaluation time. Each name must match `^[A-Za-z_][A-Za-z0-9_]*$`. Variables that are unset on the connector or desktop process are omitted from `env`.
 	AllowlistedEnvironmentVariables []string `pulumi:"allowlistedEnvironmentVariables"`

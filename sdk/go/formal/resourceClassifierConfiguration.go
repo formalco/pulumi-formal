@@ -111,6 +111,12 @@ func (ResourceClassifierConfigurationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*resourceClassifierConfigurationState)(nil)).Elem()
 }
 
+// ResourceClassifierConfigurationExists checks whether an existing ResourceClassifierConfiguration resource with the given ID exists.
+func ResourceClassifierConfigurationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ResourceClassifierConfigurationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/resourceClassifierConfiguration:ResourceClassifierConfiguration", id, state, "", opts...)
+}
+
 type resourceClassifierConfigurationArgs struct {
 	// Which direction to apply AI analysis. Required. Supported values are `request` or `response`. Use preference=none to disable AI analysis entirely.
 	AiAnalysisScope string `pulumi:"aiAnalysisScope"`

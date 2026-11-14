@@ -345,6 +345,26 @@ class ResourceClassifierConfiguration(pulumi.CustomResource):
         __props__.__dict__["updated_at"] = updated_at
         return ResourceClassifierConfiguration(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            ai_analysis_scope: pulumi.Input[Optional[_builtins.str]] = None,
+            ai_analysis_timeout_seconds: pulumi.Input[Optional[_builtins.int]] = None,
+            created_at: pulumi.Input[Optional[_builtins.int]] = None,
+            enforce_strict_classifier_result_count: pulumi.Input[Optional[_builtins.bool]] = None,
+            preference: pulumi.Input[Optional[_builtins.str]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["aiAnalysisScope"] = ai_analysis_scope
+        __props__["aiAnalysisTimeoutSeconds"] = ai_analysis_timeout_seconds
+        __props__["createdAt"] = created_at
+        __props__["enforceStrictClassifierResultCount"] = enforce_strict_classifier_result_count
+        __props__["preference"] = preference
+        __props__["resourceId"] = resource_id
+        __props__["updatedAt"] = updated_at
+        return pulumi.runtime.exists_resource(None, 'formal:index/resourceClassifierConfiguration:ResourceClassifierConfiguration', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="aiAnalysisScope")
     def ai_analysis_scope(self) -> pulumi.Output[_builtins.str]:

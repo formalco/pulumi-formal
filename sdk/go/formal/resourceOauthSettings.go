@@ -66,8 +66,8 @@ import (
 //			_, err = formal.NewResourceOauthSettings(ctx, "github", &formal.ResourceOauthSettingsArgs{
 //				ResourceId:            github.ID(),
 //				UpstreamOauthMode:     pulumi.String("pre_registered"),
-//				ClientId:              pulumi.String(pulumi.String(githubOauthAppClientId)),
-//				ClientSecretWo:        pulumi.String(pulumi.String(githubOauthAppClientSecret)),
+//				ClientId:              pulumi.String(githubOauthAppClientId),
+//				ClientSecretWo:        pulumi.String(githubOauthAppClientSecret),
 //				ClientSecretWoVersion: pulumi.Int(1),
 //				Issuer:                pulumi.String("https://github.com/login/oauth"),
 //				RequestedScopes: pulumi.StringArray{
@@ -232,6 +232,12 @@ type ResourceOauthSettingsState struct {
 
 func (ResourceOauthSettingsState) ElementType() reflect.Type {
 	return reflect.TypeOf((*resourceOauthSettingsState)(nil)).Elem()
+}
+
+// ResourceOauthSettingsExists checks whether an existing ResourceOauthSettings resource with the given ID exists.
+func ResourceOauthSettingsExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ResourceOauthSettingsState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/resourceOauthSettings:ResourceOauthSettings", id, state, "", opts...)
 }
 
 type resourceOauthSettingsArgs struct {

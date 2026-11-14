@@ -93,6 +93,12 @@ func (SatelliteHostnameState) ElementType() reflect.Type {
 	return reflect.TypeOf((*satelliteHostnameState)(nil)).Elem()
 }
 
+// SatelliteHostnameExists checks whether an existing SatelliteHostname resource with the given ID exists.
+func SatelliteHostnameExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *SatelliteHostnameState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/satelliteHostname:SatelliteHostname", id, state, "", opts...)
+}
+
 type satelliteHostnameArgs struct {
 	// The hostname for the satellite.
 	Hostname string `pulumi:"hostname"`

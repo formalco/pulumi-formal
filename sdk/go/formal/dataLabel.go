@@ -81,6 +81,12 @@ func (DataLabelState) ElementType() reflect.Type {
 	return reflect.TypeOf((*dataLabelState)(nil)).Elem()
 }
 
+// DataLabelExists checks whether an existing DataLabel resource with the given ID exists.
+func DataLabelExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *DataLabelState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/dataLabel:DataLabel", id, state, "", opts...)
+}
+
 type dataLabelArgs struct {
 	// Data for the classifier (pattern for regex or label name for prompt).
 	ClassifierData string `pulumi:"classifierData"`

@@ -186,6 +186,16 @@ class ResourceSshHostKey(pulumi.CustomResource):
         __props__.__dict__["resource_id"] = resource_id
         return ResourceSshHostKey(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            public_key: pulumi.Input[Optional[_builtins.str]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["publicKey"] = public_key
+        __props__["resourceId"] = resource_id
+        return pulumi.runtime.exists_resource(None, 'formal:index/resourceSshHostKey:ResourceSshHostKey', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="publicKey")
     def public_key(self) -> pulumi.Output[_builtins.str]:

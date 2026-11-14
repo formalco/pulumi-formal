@@ -431,6 +431,30 @@ class ConnectorHostname(pulumi.CustomResource):
         __props__.__dict__["tls_certificate_status"] = tls_certificate_status
         return ConnectorHostname(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            certificate: pulumi.Input[Optional[_builtins.str]] = None,
+            connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+            dns_record: pulumi.Input[Optional[_builtins.str]] = None,
+            dns_record_status: pulumi.Input[Optional[_builtins.str]] = None,
+            hostname: pulumi.Input[Optional[_builtins.str]] = None,
+            managed_tls: pulumi.Input[Optional[_builtins.bool]] = None,
+            private_key: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+            tls_certificate_status: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["certificate"] = certificate
+        __props__["connectorId"] = connector_id
+        __props__["dnsRecord"] = dns_record
+        __props__["dnsRecordStatus"] = dns_record_status
+        __props__["hostname"] = hostname
+        __props__["managedTls"] = managed_tls
+        __props__["privateKey"] = private_key
+        __props__["terminationProtection"] = termination_protection
+        __props__["tlsCertificateStatus"] = tls_certificate_status
+        return pulumi.runtime.exists_resource(None, 'formal:index/connectorHostname:ConnectorHostname', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def certificate(self) -> pulumi.Output[Optional[_builtins.str]]:

@@ -96,6 +96,12 @@ func (PermissionState) ElementType() reflect.Type {
 	return reflect.TypeOf((*permissionState)(nil)).Elem()
 }
 
+// PermissionExists checks whether an existing Permission resource with the given ID exists.
+func PermissionExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *PermissionState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/permission:Permission", id, state, "", opts...)
+}
+
 type permissionArgs struct {
 	// The code describing how the permission works. Create one in the Formal Console.
 	Code string `pulumi:"code"`

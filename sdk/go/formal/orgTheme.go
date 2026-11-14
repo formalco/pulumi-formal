@@ -106,6 +106,12 @@ func (OrgThemeState) ElementType() reflect.Type {
 	return reflect.TypeOf((*orgThemeState)(nil)).Elem()
 }
 
+// OrgThemeExists checks whether an existing OrgTheme resource with the given ID exists.
+func OrgThemeExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *OrgThemeState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/orgTheme:OrgTheme", id, state, "", opts...)
+}
+
 type orgThemeArgs struct {
 	// The name shown in the Catalog header and browser tab. At most 60 characters.
 	DisplayName string `pulumi:"displayName"`

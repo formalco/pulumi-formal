@@ -81,6 +81,12 @@ func (ResourceDialConfigurationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*resourceDialConfigurationState)(nil)).Elem()
 }
 
+// ResourceDialConfigurationExists checks whether an existing ResourceDialConfiguration resource with the given ID exists.
+func ResourceDialConfigurationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ResourceDialConfigurationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/resourceDialConfiguration:ResourceDialConfiguration", id, state, "", opts...)
+}
+
 type resourceDialConfigurationArgs struct {
 	// How the connector dials this resource's upstream. Supported values: `tcp` (direct TCP via the resource's hostname and port), `gcpCloudsql` (dial via the GCP Cloud SQL connector library; set `dialTarget` to the `project:region:instance` connection name), `gcpConnectgateway` (reach a Kubernetes cluster through GKE Connect Gateway; set `dialTarget` to the `projects/<project-number>/locations/<location>/memberships/<membership>` fleet membership name), `awsSsm` (dial via AWS Systems Manager; set `dialTarget` to the target instance or cluster ARN).
 	DialMethod string `pulumi:"dialMethod"`

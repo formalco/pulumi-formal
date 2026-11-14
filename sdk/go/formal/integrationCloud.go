@@ -332,6 +332,12 @@ func (IntegrationCloudState) ElementType() reflect.Type {
 	return reflect.TypeOf((*integrationCloudState)(nil)).Elem()
 }
 
+// IntegrationCloudExists checks whether an existing IntegrationCloud resource with the given ID exists.
+func IntegrationCloudExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *IntegrationCloudState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/integrationCloud:IntegrationCloud", id, state, "", opts...)
+}
+
 type integrationCloudArgs struct {
 	// Configuration block for AWS integration.
 	Aws *IntegrationCloudAws `pulumi:"aws"`

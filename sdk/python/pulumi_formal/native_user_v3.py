@@ -712,25 +712,25 @@ class NativeUserV3(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aws_iam: pulumi.Input[Optional[Union['NativeUserV3AwsIamArgs', 'NativeUserV3AwsIamArgsDict']]] = None,
-                 aws_iam_role: pulumi.Input[Optional[Union['NativeUserV3AwsIamRoleArgs', 'NativeUserV3AwsIamRoleArgsDict']]] = None,
-                 azure_iam: pulumi.Input[Optional[Union['NativeUserV3AzureIamArgs', 'NativeUserV3AzureIamArgsDict']]] = None,
-                 basic: pulumi.Input[Optional[Union['NativeUserV3BasicArgs', 'NativeUserV3BasicArgsDict']]] = None,
-                 gcp_iam: pulumi.Input[Optional[Union['NativeUserV3GcpIamArgs', 'NativeUserV3GcpIamArgsDict']]] = None,
-                 hook: pulumi.Input[Optional[Union['NativeUserV3HookArgs', 'NativeUserV3HookArgsDict']]] = None,
-                 http_api_key_header: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyHeaderArgs', 'NativeUserV3HttpApiKeyHeaderArgsDict']]] = None,
-                 http_api_key_query: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyQueryArgs', 'NativeUserV3HttpApiKeyQueryArgsDict']]] = None,
-                 http_basic: pulumi.Input[Optional[Union['NativeUserV3HttpBasicArgs', 'NativeUserV3HttpBasicArgsDict']]] = None,
-                 http_bearer: pulumi.Input[Optional[Union['NativeUserV3HttpBearerArgs', 'NativeUserV3HttpBearerArgsDict']]] = None,
-                 kubernetes_inline: pulumi.Input[Optional[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict']]] = None,
-                 kubernetes_path: pulumi.Input[Optional[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict']]] = None,
+                 aws_iam: pulumi.Input[Optional[Union['NativeUserV3AwsIamArgs', 'NativeUserV3AwsIamArgsDict', 'outputs.NativeUserV3AwsIam']]] = None,
+                 aws_iam_role: pulumi.Input[Optional[Union['NativeUserV3AwsIamRoleArgs', 'NativeUserV3AwsIamRoleArgsDict', 'outputs.NativeUserV3AwsIamRole']]] = None,
+                 azure_iam: pulumi.Input[Optional[Union['NativeUserV3AzureIamArgs', 'NativeUserV3AzureIamArgsDict', 'outputs.NativeUserV3AzureIam']]] = None,
+                 basic: pulumi.Input[Optional[Union['NativeUserV3BasicArgs', 'NativeUserV3BasicArgsDict', 'outputs.NativeUserV3Basic']]] = None,
+                 gcp_iam: pulumi.Input[Optional[Union['NativeUserV3GcpIamArgs', 'NativeUserV3GcpIamArgsDict', 'outputs.NativeUserV3GcpIam']]] = None,
+                 hook: pulumi.Input[Optional[Union['NativeUserV3HookArgs', 'NativeUserV3HookArgsDict', 'outputs.NativeUserV3Hook']]] = None,
+                 http_api_key_header: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyHeaderArgs', 'NativeUserV3HttpApiKeyHeaderArgsDict', 'outputs.NativeUserV3HttpApiKeyHeader']]] = None,
+                 http_api_key_query: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyQueryArgs', 'NativeUserV3HttpApiKeyQueryArgsDict', 'outputs.NativeUserV3HttpApiKeyQuery']]] = None,
+                 http_basic: pulumi.Input[Optional[Union['NativeUserV3HttpBasicArgs', 'NativeUserV3HttpBasicArgsDict', 'outputs.NativeUserV3HttpBasic']]] = None,
+                 http_bearer: pulumi.Input[Optional[Union['NativeUserV3HttpBearerArgs', 'NativeUserV3HttpBearerArgsDict', 'outputs.NativeUserV3HttpBearer']]] = None,
+                 kubernetes_inline: pulumi.Input[Optional[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict', 'outputs.NativeUserV3KubernetesInline']]] = None,
+                 kubernetes_path: pulumi.Input[Optional[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict', 'outputs.NativeUserV3KubernetesPath']]] = None,
                  label: pulumi.Input[Optional[_builtins.str]] = None,
-                 linked_http_basic: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict']]] = None,
-                 linked_http_bearer: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict']]] = None,
-                 passthrough: pulumi.Input[Optional[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict']]] = None,
+                 linked_http_basic: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict', 'outputs.NativeUserV3LinkedHttpBasic']]] = None,
+                 linked_http_bearer: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict', 'outputs.NativeUserV3LinkedHttpBearer']]] = None,
+                 passthrough: pulumi.Input[Optional[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict', 'outputs.NativeUserV3Passthrough']]] = None,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 snowflake_key: pulumi.Input[Optional[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict']]] = None,
-                 ssh_key: pulumi.Input[Optional[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict']]] = None,
+                 snowflake_key: pulumi.Input[Optional[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict', 'outputs.NativeUserV3SnowflakeKey']]] = None,
+                 ssh_key: pulumi.Input[Optional[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict', 'outputs.NativeUserV3SshKey']]] = None,
                  termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
@@ -777,7 +777,7 @@ class NativeUserV3(pulumi.CustomResource):
             resource_id=db.id,
             label="admin-secret-manager")
         # Username and password, with the password passed as a write-only value so it
-        # never lands in Terraform state. Increment literal_wo_version to rotate it.
+        # never lands in Pulumi state. Increment literal_wo_version to rotate it.
         basic_write_only = formal.NativeUserV3("basic_write_only",
             basic={
                 "password": {
@@ -869,25 +869,25 @@ class NativeUserV3(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['NativeUserV3AwsIamArgs', 'NativeUserV3AwsIamArgsDict']] aws_iam: AWS IAM authentication.
-        :param pulumi.Input[Union['NativeUserV3AwsIamRoleArgs', 'NativeUserV3AwsIamRoleArgsDict']] aws_iam_role: AWS IAM authentication using an assumed role.
-        :param pulumi.Input[Union['NativeUserV3AzureIamArgs', 'NativeUserV3AzureIamArgsDict']] azure_iam: Azure IAM authentication.
-        :param pulumi.Input[Union['NativeUserV3BasicArgs', 'NativeUserV3BasicArgsDict']] basic: Username and password authentication, for example Postgres or MySQL.
-        :param pulumi.Input[Union['NativeUserV3GcpIamArgs', 'NativeUserV3GcpIamArgsDict']] gcp_iam: GCP IAM authentication.
-        :param pulumi.Input[Union['NativeUserV3HookArgs', 'NativeUserV3HookArgsDict']] hook: Credentials resolved on the connector by running a hook.
-        :param pulumi.Input[Union['NativeUserV3HttpApiKeyHeaderArgs', 'NativeUserV3HttpApiKeyHeaderArgsDict']] http_api_key_header: HTTP API key authentication, sent as a header.
-        :param pulumi.Input[Union['NativeUserV3HttpApiKeyQueryArgs', 'NativeUserV3HttpApiKeyQueryArgsDict']] http_api_key_query: HTTP API key authentication, sent as a query parameter.
-        :param pulumi.Input[Union['NativeUserV3HttpBasicArgs', 'NativeUserV3HttpBasicArgsDict']] http_basic: HTTP Basic authentication, injected on a named header.
-        :param pulumi.Input[Union['NativeUserV3HttpBearerArgs', 'NativeUserV3HttpBearerArgsDict']] http_bearer: HTTP Bearer token authentication, injected on a named header.
-        :param pulumi.Input[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict']] kubernetes_inline: Kubernetes authentication using an inline kubeconfig document.
-        :param pulumi.Input[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict']] kubernetes_path: Kubernetes authentication using a kubeconfig file path on the connector.
+        :param pulumi.Input[Union['NativeUserV3AwsIamArgs', 'NativeUserV3AwsIamArgsDict', 'outputs.NativeUserV3AwsIam']] aws_iam: AWS IAM authentication.
+        :param pulumi.Input[Union['NativeUserV3AwsIamRoleArgs', 'NativeUserV3AwsIamRoleArgsDict', 'outputs.NativeUserV3AwsIamRole']] aws_iam_role: AWS IAM authentication using an assumed role.
+        :param pulumi.Input[Union['NativeUserV3AzureIamArgs', 'NativeUserV3AzureIamArgsDict', 'outputs.NativeUserV3AzureIam']] azure_iam: Azure IAM authentication.
+        :param pulumi.Input[Union['NativeUserV3BasicArgs', 'NativeUserV3BasicArgsDict', 'outputs.NativeUserV3Basic']] basic: Username and password authentication, for example Postgres or MySQL.
+        :param pulumi.Input[Union['NativeUserV3GcpIamArgs', 'NativeUserV3GcpIamArgsDict', 'outputs.NativeUserV3GcpIam']] gcp_iam: GCP IAM authentication.
+        :param pulumi.Input[Union['NativeUserV3HookArgs', 'NativeUserV3HookArgsDict', 'outputs.NativeUserV3Hook']] hook: Credentials resolved on the connector by running a hook.
+        :param pulumi.Input[Union['NativeUserV3HttpApiKeyHeaderArgs', 'NativeUserV3HttpApiKeyHeaderArgsDict', 'outputs.NativeUserV3HttpApiKeyHeader']] http_api_key_header: HTTP API key authentication, sent as a header.
+        :param pulumi.Input[Union['NativeUserV3HttpApiKeyQueryArgs', 'NativeUserV3HttpApiKeyQueryArgsDict', 'outputs.NativeUserV3HttpApiKeyQuery']] http_api_key_query: HTTP API key authentication, sent as a query parameter.
+        :param pulumi.Input[Union['NativeUserV3HttpBasicArgs', 'NativeUserV3HttpBasicArgsDict', 'outputs.NativeUserV3HttpBasic']] http_basic: HTTP Basic authentication, injected on a named header.
+        :param pulumi.Input[Union['NativeUserV3HttpBearerArgs', 'NativeUserV3HttpBearerArgsDict', 'outputs.NativeUserV3HttpBearer']] http_bearer: HTTP Bearer token authentication, injected on a named header.
+        :param pulumi.Input[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict', 'outputs.NativeUserV3KubernetesInline']] kubernetes_inline: Kubernetes authentication using an inline kubeconfig document.
+        :param pulumi.Input[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict', 'outputs.NativeUserV3KubernetesPath']] kubernetes_path: Kubernetes authentication using a kubeconfig file path on the connector.
         :param pulumi.Input[_builtins.str] label: A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
-        :param pulumi.Input[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict']] linked_http_basic: HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
-        :param pulumi.Input[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict']] linked_http_bearer: HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
-        :param pulumi.Input[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict']] passthrough: Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+        :param pulumi.Input[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict', 'outputs.NativeUserV3LinkedHttpBasic']] linked_http_basic: HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict', 'outputs.NativeUserV3LinkedHttpBearer']] linked_http_bearer: HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict', 'outputs.NativeUserV3Passthrough']] passthrough: Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
         :param pulumi.Input[_builtins.str] resource_id: The ID of the Resource this Native User authenticates to.
-        :param pulumi.Input[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict']] snowflake_key: Snowflake key-pair authentication.
-        :param pulumi.Input[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict']] ssh_key: SSH private key authentication.
+        :param pulumi.Input[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict', 'outputs.NativeUserV3SnowflakeKey']] snowflake_key: Snowflake key-pair authentication.
+        :param pulumi.Input[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict', 'outputs.NativeUserV3SshKey']] ssh_key: SSH private key authentication.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Native User cannot be deleted.
         """
         ...
@@ -940,7 +940,7 @@ class NativeUserV3(pulumi.CustomResource):
             resource_id=db.id,
             label="admin-secret-manager")
         # Username and password, with the password passed as a write-only value so it
-        # never lands in Terraform state. Increment literal_wo_version to rotate it.
+        # never lands in Pulumi state. Increment literal_wo_version to rotate it.
         basic_write_only = formal.NativeUserV3("basic_write_only",
             basic={
                 "password": {
@@ -1045,25 +1045,25 @@ class NativeUserV3(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aws_iam: pulumi.Input[Optional[Union['NativeUserV3AwsIamArgs', 'NativeUserV3AwsIamArgsDict']]] = None,
-                 aws_iam_role: pulumi.Input[Optional[Union['NativeUserV3AwsIamRoleArgs', 'NativeUserV3AwsIamRoleArgsDict']]] = None,
-                 azure_iam: pulumi.Input[Optional[Union['NativeUserV3AzureIamArgs', 'NativeUserV3AzureIamArgsDict']]] = None,
-                 basic: pulumi.Input[Optional[Union['NativeUserV3BasicArgs', 'NativeUserV3BasicArgsDict']]] = None,
-                 gcp_iam: pulumi.Input[Optional[Union['NativeUserV3GcpIamArgs', 'NativeUserV3GcpIamArgsDict']]] = None,
-                 hook: pulumi.Input[Optional[Union['NativeUserV3HookArgs', 'NativeUserV3HookArgsDict']]] = None,
-                 http_api_key_header: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyHeaderArgs', 'NativeUserV3HttpApiKeyHeaderArgsDict']]] = None,
-                 http_api_key_query: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyQueryArgs', 'NativeUserV3HttpApiKeyQueryArgsDict']]] = None,
-                 http_basic: pulumi.Input[Optional[Union['NativeUserV3HttpBasicArgs', 'NativeUserV3HttpBasicArgsDict']]] = None,
-                 http_bearer: pulumi.Input[Optional[Union['NativeUserV3HttpBearerArgs', 'NativeUserV3HttpBearerArgsDict']]] = None,
-                 kubernetes_inline: pulumi.Input[Optional[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict']]] = None,
-                 kubernetes_path: pulumi.Input[Optional[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict']]] = None,
+                 aws_iam: pulumi.Input[Optional[Union['NativeUserV3AwsIamArgs', 'NativeUserV3AwsIamArgsDict', 'outputs.NativeUserV3AwsIam']]] = None,
+                 aws_iam_role: pulumi.Input[Optional[Union['NativeUserV3AwsIamRoleArgs', 'NativeUserV3AwsIamRoleArgsDict', 'outputs.NativeUserV3AwsIamRole']]] = None,
+                 azure_iam: pulumi.Input[Optional[Union['NativeUserV3AzureIamArgs', 'NativeUserV3AzureIamArgsDict', 'outputs.NativeUserV3AzureIam']]] = None,
+                 basic: pulumi.Input[Optional[Union['NativeUserV3BasicArgs', 'NativeUserV3BasicArgsDict', 'outputs.NativeUserV3Basic']]] = None,
+                 gcp_iam: pulumi.Input[Optional[Union['NativeUserV3GcpIamArgs', 'NativeUserV3GcpIamArgsDict', 'outputs.NativeUserV3GcpIam']]] = None,
+                 hook: pulumi.Input[Optional[Union['NativeUserV3HookArgs', 'NativeUserV3HookArgsDict', 'outputs.NativeUserV3Hook']]] = None,
+                 http_api_key_header: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyHeaderArgs', 'NativeUserV3HttpApiKeyHeaderArgsDict', 'outputs.NativeUserV3HttpApiKeyHeader']]] = None,
+                 http_api_key_query: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyQueryArgs', 'NativeUserV3HttpApiKeyQueryArgsDict', 'outputs.NativeUserV3HttpApiKeyQuery']]] = None,
+                 http_basic: pulumi.Input[Optional[Union['NativeUserV3HttpBasicArgs', 'NativeUserV3HttpBasicArgsDict', 'outputs.NativeUserV3HttpBasic']]] = None,
+                 http_bearer: pulumi.Input[Optional[Union['NativeUserV3HttpBearerArgs', 'NativeUserV3HttpBearerArgsDict', 'outputs.NativeUserV3HttpBearer']]] = None,
+                 kubernetes_inline: pulumi.Input[Optional[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict', 'outputs.NativeUserV3KubernetesInline']]] = None,
+                 kubernetes_path: pulumi.Input[Optional[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict', 'outputs.NativeUserV3KubernetesPath']]] = None,
                  label: pulumi.Input[Optional[_builtins.str]] = None,
-                 linked_http_basic: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict']]] = None,
-                 linked_http_bearer: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict']]] = None,
-                 passthrough: pulumi.Input[Optional[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict']]] = None,
+                 linked_http_basic: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict', 'outputs.NativeUserV3LinkedHttpBasic']]] = None,
+                 linked_http_bearer: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict', 'outputs.NativeUserV3LinkedHttpBearer']]] = None,
+                 passthrough: pulumi.Input[Optional[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict', 'outputs.NativeUserV3Passthrough']]] = None,
                  resource_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 snowflake_key: pulumi.Input[Optional[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict']]] = None,
-                 ssh_key: pulumi.Input[Optional[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict']]] = None,
+                 snowflake_key: pulumi.Input[Optional[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict', 'outputs.NativeUserV3SnowflakeKey']]] = None,
+                 ssh_key: pulumi.Input[Optional[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict', 'outputs.NativeUserV3SshKey']]] = None,
                  termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -1110,26 +1110,26 @@ class NativeUserV3(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            aws_iam: pulumi.Input[Optional[Union['NativeUserV3AwsIamArgs', 'NativeUserV3AwsIamArgsDict']]] = None,
-            aws_iam_role: pulumi.Input[Optional[Union['NativeUserV3AwsIamRoleArgs', 'NativeUserV3AwsIamRoleArgsDict']]] = None,
-            azure_iam: pulumi.Input[Optional[Union['NativeUserV3AzureIamArgs', 'NativeUserV3AzureIamArgsDict']]] = None,
-            basic: pulumi.Input[Optional[Union['NativeUserV3BasicArgs', 'NativeUserV3BasicArgsDict']]] = None,
+            aws_iam: pulumi.Input[Optional[Union['NativeUserV3AwsIamArgs', 'NativeUserV3AwsIamArgsDict', 'outputs.NativeUserV3AwsIam']]] = None,
+            aws_iam_role: pulumi.Input[Optional[Union['NativeUserV3AwsIamRoleArgs', 'NativeUserV3AwsIamRoleArgsDict', 'outputs.NativeUserV3AwsIamRole']]] = None,
+            azure_iam: pulumi.Input[Optional[Union['NativeUserV3AzureIamArgs', 'NativeUserV3AzureIamArgsDict', 'outputs.NativeUserV3AzureIam']]] = None,
+            basic: pulumi.Input[Optional[Union['NativeUserV3BasicArgs', 'NativeUserV3BasicArgsDict', 'outputs.NativeUserV3Basic']]] = None,
             created_at: pulumi.Input[Optional[_builtins.str]] = None,
-            gcp_iam: pulumi.Input[Optional[Union['NativeUserV3GcpIamArgs', 'NativeUserV3GcpIamArgsDict']]] = None,
-            hook: pulumi.Input[Optional[Union['NativeUserV3HookArgs', 'NativeUserV3HookArgsDict']]] = None,
-            http_api_key_header: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyHeaderArgs', 'NativeUserV3HttpApiKeyHeaderArgsDict']]] = None,
-            http_api_key_query: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyQueryArgs', 'NativeUserV3HttpApiKeyQueryArgsDict']]] = None,
-            http_basic: pulumi.Input[Optional[Union['NativeUserV3HttpBasicArgs', 'NativeUserV3HttpBasicArgsDict']]] = None,
-            http_bearer: pulumi.Input[Optional[Union['NativeUserV3HttpBearerArgs', 'NativeUserV3HttpBearerArgsDict']]] = None,
-            kubernetes_inline: pulumi.Input[Optional[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict']]] = None,
-            kubernetes_path: pulumi.Input[Optional[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict']]] = None,
+            gcp_iam: pulumi.Input[Optional[Union['NativeUserV3GcpIamArgs', 'NativeUserV3GcpIamArgsDict', 'outputs.NativeUserV3GcpIam']]] = None,
+            hook: pulumi.Input[Optional[Union['NativeUserV3HookArgs', 'NativeUserV3HookArgsDict', 'outputs.NativeUserV3Hook']]] = None,
+            http_api_key_header: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyHeaderArgs', 'NativeUserV3HttpApiKeyHeaderArgsDict', 'outputs.NativeUserV3HttpApiKeyHeader']]] = None,
+            http_api_key_query: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyQueryArgs', 'NativeUserV3HttpApiKeyQueryArgsDict', 'outputs.NativeUserV3HttpApiKeyQuery']]] = None,
+            http_basic: pulumi.Input[Optional[Union['NativeUserV3HttpBasicArgs', 'NativeUserV3HttpBasicArgsDict', 'outputs.NativeUserV3HttpBasic']]] = None,
+            http_bearer: pulumi.Input[Optional[Union['NativeUserV3HttpBearerArgs', 'NativeUserV3HttpBearerArgsDict', 'outputs.NativeUserV3HttpBearer']]] = None,
+            kubernetes_inline: pulumi.Input[Optional[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict', 'outputs.NativeUserV3KubernetesInline']]] = None,
+            kubernetes_path: pulumi.Input[Optional[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict', 'outputs.NativeUserV3KubernetesPath']]] = None,
             label: pulumi.Input[Optional[_builtins.str]] = None,
-            linked_http_basic: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict']]] = None,
-            linked_http_bearer: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict']]] = None,
-            passthrough: pulumi.Input[Optional[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict']]] = None,
+            linked_http_basic: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict', 'outputs.NativeUserV3LinkedHttpBasic']]] = None,
+            linked_http_bearer: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict', 'outputs.NativeUserV3LinkedHttpBearer']]] = None,
+            passthrough: pulumi.Input[Optional[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict', 'outputs.NativeUserV3Passthrough']]] = None,
             resource_id: pulumi.Input[Optional[_builtins.str]] = None,
-            snowflake_key: pulumi.Input[Optional[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict']]] = None,
-            ssh_key: pulumi.Input[Optional[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict']]] = None,
+            snowflake_key: pulumi.Input[Optional[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict', 'outputs.NativeUserV3SnowflakeKey']]] = None,
+            ssh_key: pulumi.Input[Optional[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict', 'outputs.NativeUserV3SshKey']]] = None,
             termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
             updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'NativeUserV3':
         """
@@ -1139,26 +1139,26 @@ class NativeUserV3(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['NativeUserV3AwsIamArgs', 'NativeUserV3AwsIamArgsDict']] aws_iam: AWS IAM authentication.
-        :param pulumi.Input[Union['NativeUserV3AwsIamRoleArgs', 'NativeUserV3AwsIamRoleArgsDict']] aws_iam_role: AWS IAM authentication using an assumed role.
-        :param pulumi.Input[Union['NativeUserV3AzureIamArgs', 'NativeUserV3AzureIamArgsDict']] azure_iam: Azure IAM authentication.
-        :param pulumi.Input[Union['NativeUserV3BasicArgs', 'NativeUserV3BasicArgsDict']] basic: Username and password authentication, for example Postgres or MySQL.
+        :param pulumi.Input[Union['NativeUserV3AwsIamArgs', 'NativeUserV3AwsIamArgsDict', 'outputs.NativeUserV3AwsIam']] aws_iam: AWS IAM authentication.
+        :param pulumi.Input[Union['NativeUserV3AwsIamRoleArgs', 'NativeUserV3AwsIamRoleArgsDict', 'outputs.NativeUserV3AwsIamRole']] aws_iam_role: AWS IAM authentication using an assumed role.
+        :param pulumi.Input[Union['NativeUserV3AzureIamArgs', 'NativeUserV3AzureIamArgsDict', 'outputs.NativeUserV3AzureIam']] azure_iam: Azure IAM authentication.
+        :param pulumi.Input[Union['NativeUserV3BasicArgs', 'NativeUserV3BasicArgsDict', 'outputs.NativeUserV3Basic']] basic: Username and password authentication, for example Postgres or MySQL.
         :param pulumi.Input[_builtins.str] created_at: Creation time of the Native User.
-        :param pulumi.Input[Union['NativeUserV3GcpIamArgs', 'NativeUserV3GcpIamArgsDict']] gcp_iam: GCP IAM authentication.
-        :param pulumi.Input[Union['NativeUserV3HookArgs', 'NativeUserV3HookArgsDict']] hook: Credentials resolved on the connector by running a hook.
-        :param pulumi.Input[Union['NativeUserV3HttpApiKeyHeaderArgs', 'NativeUserV3HttpApiKeyHeaderArgsDict']] http_api_key_header: HTTP API key authentication, sent as a header.
-        :param pulumi.Input[Union['NativeUserV3HttpApiKeyQueryArgs', 'NativeUserV3HttpApiKeyQueryArgsDict']] http_api_key_query: HTTP API key authentication, sent as a query parameter.
-        :param pulumi.Input[Union['NativeUserV3HttpBasicArgs', 'NativeUserV3HttpBasicArgsDict']] http_basic: HTTP Basic authentication, injected on a named header.
-        :param pulumi.Input[Union['NativeUserV3HttpBearerArgs', 'NativeUserV3HttpBearerArgsDict']] http_bearer: HTTP Bearer token authentication, injected on a named header.
-        :param pulumi.Input[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict']] kubernetes_inline: Kubernetes authentication using an inline kubeconfig document.
-        :param pulumi.Input[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict']] kubernetes_path: Kubernetes authentication using a kubeconfig file path on the connector.
+        :param pulumi.Input[Union['NativeUserV3GcpIamArgs', 'NativeUserV3GcpIamArgsDict', 'outputs.NativeUserV3GcpIam']] gcp_iam: GCP IAM authentication.
+        :param pulumi.Input[Union['NativeUserV3HookArgs', 'NativeUserV3HookArgsDict', 'outputs.NativeUserV3Hook']] hook: Credentials resolved on the connector by running a hook.
+        :param pulumi.Input[Union['NativeUserV3HttpApiKeyHeaderArgs', 'NativeUserV3HttpApiKeyHeaderArgsDict', 'outputs.NativeUserV3HttpApiKeyHeader']] http_api_key_header: HTTP API key authentication, sent as a header.
+        :param pulumi.Input[Union['NativeUserV3HttpApiKeyQueryArgs', 'NativeUserV3HttpApiKeyQueryArgsDict', 'outputs.NativeUserV3HttpApiKeyQuery']] http_api_key_query: HTTP API key authentication, sent as a query parameter.
+        :param pulumi.Input[Union['NativeUserV3HttpBasicArgs', 'NativeUserV3HttpBasicArgsDict', 'outputs.NativeUserV3HttpBasic']] http_basic: HTTP Basic authentication, injected on a named header.
+        :param pulumi.Input[Union['NativeUserV3HttpBearerArgs', 'NativeUserV3HttpBearerArgsDict', 'outputs.NativeUserV3HttpBearer']] http_bearer: HTTP Bearer token authentication, injected on a named header.
+        :param pulumi.Input[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict', 'outputs.NativeUserV3KubernetesInline']] kubernetes_inline: Kubernetes authentication using an inline kubeconfig document.
+        :param pulumi.Input[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict', 'outputs.NativeUserV3KubernetesPath']] kubernetes_path: Kubernetes authentication using a kubeconfig file path on the connector.
         :param pulumi.Input[_builtins.str] label: A name for this Native User, unique within the Resource. Selection expressions reference the Native User by ID, so the label is safe to rename.
-        :param pulumi.Input[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict']] linked_http_basic: HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
-        :param pulumi.Input[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict']] linked_http_bearer: HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
-        :param pulumi.Input[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict']] passthrough: Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
+        :param pulumi.Input[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict', 'outputs.NativeUserV3LinkedHttpBasic']] linked_http_basic: HTTP Basic authentication using the requesting user's linked upstream account token as the password, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict', 'outputs.NativeUserV3LinkedHttpBearer']] linked_http_bearer: HTTP Bearer authentication using the requesting user's linked upstream account token, injected on a named header. The Resource must have linked accounts enabled through `ResourceOauthSettings`.
+        :param pulumi.Input[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict', 'outputs.NativeUserV3Passthrough']] passthrough: Sends the credentials the client sent to the Resource, instead of credentials held by the connector.
         :param pulumi.Input[_builtins.str] resource_id: The ID of the Resource this Native User authenticates to.
-        :param pulumi.Input[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict']] snowflake_key: Snowflake key-pair authentication.
-        :param pulumi.Input[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict']] ssh_key: SSH private key authentication.
+        :param pulumi.Input[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict', 'outputs.NativeUserV3SnowflakeKey']] snowflake_key: Snowflake key-pair authentication.
+        :param pulumi.Input[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict', 'outputs.NativeUserV3SshKey']] ssh_key: SSH private key authentication.
         :param pulumi.Input[_builtins.bool] termination_protection: If set to true, this Native User cannot be deleted.
         :param pulumi.Input[_builtins.str] updated_at: Last update time of the Native User.
         """
@@ -1189,6 +1189,56 @@ class NativeUserV3(pulumi.CustomResource):
         __props__.__dict__["termination_protection"] = termination_protection
         __props__.__dict__["updated_at"] = updated_at
         return NativeUserV3(resource_name, opts=opts, __props__=__props__)
+
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            aws_iam: pulumi.Input[Optional[Union['NativeUserV3AwsIamArgs', 'NativeUserV3AwsIamArgsDict', 'outputs.NativeUserV3AwsIam']]] = None,
+            aws_iam_role: pulumi.Input[Optional[Union['NativeUserV3AwsIamRoleArgs', 'NativeUserV3AwsIamRoleArgsDict', 'outputs.NativeUserV3AwsIamRole']]] = None,
+            azure_iam: pulumi.Input[Optional[Union['NativeUserV3AzureIamArgs', 'NativeUserV3AzureIamArgsDict', 'outputs.NativeUserV3AzureIam']]] = None,
+            basic: pulumi.Input[Optional[Union['NativeUserV3BasicArgs', 'NativeUserV3BasicArgsDict', 'outputs.NativeUserV3Basic']]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            gcp_iam: pulumi.Input[Optional[Union['NativeUserV3GcpIamArgs', 'NativeUserV3GcpIamArgsDict', 'outputs.NativeUserV3GcpIam']]] = None,
+            hook: pulumi.Input[Optional[Union['NativeUserV3HookArgs', 'NativeUserV3HookArgsDict', 'outputs.NativeUserV3Hook']]] = None,
+            http_api_key_header: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyHeaderArgs', 'NativeUserV3HttpApiKeyHeaderArgsDict', 'outputs.NativeUserV3HttpApiKeyHeader']]] = None,
+            http_api_key_query: pulumi.Input[Optional[Union['NativeUserV3HttpApiKeyQueryArgs', 'NativeUserV3HttpApiKeyQueryArgsDict', 'outputs.NativeUserV3HttpApiKeyQuery']]] = None,
+            http_basic: pulumi.Input[Optional[Union['NativeUserV3HttpBasicArgs', 'NativeUserV3HttpBasicArgsDict', 'outputs.NativeUserV3HttpBasic']]] = None,
+            http_bearer: pulumi.Input[Optional[Union['NativeUserV3HttpBearerArgs', 'NativeUserV3HttpBearerArgsDict', 'outputs.NativeUserV3HttpBearer']]] = None,
+            kubernetes_inline: pulumi.Input[Optional[Union['NativeUserV3KubernetesInlineArgs', 'NativeUserV3KubernetesInlineArgsDict', 'outputs.NativeUserV3KubernetesInline']]] = None,
+            kubernetes_path: pulumi.Input[Optional[Union['NativeUserV3KubernetesPathArgs', 'NativeUserV3KubernetesPathArgsDict', 'outputs.NativeUserV3KubernetesPath']]] = None,
+            label: pulumi.Input[Optional[_builtins.str]] = None,
+            linked_http_basic: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBasicArgs', 'NativeUserV3LinkedHttpBasicArgsDict', 'outputs.NativeUserV3LinkedHttpBasic']]] = None,
+            linked_http_bearer: pulumi.Input[Optional[Union['NativeUserV3LinkedHttpBearerArgs', 'NativeUserV3LinkedHttpBearerArgsDict', 'outputs.NativeUserV3LinkedHttpBearer']]] = None,
+            passthrough: pulumi.Input[Optional[Union['NativeUserV3PassthroughArgs', 'NativeUserV3PassthroughArgsDict', 'outputs.NativeUserV3Passthrough']]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            snowflake_key: pulumi.Input[Optional[Union['NativeUserV3SnowflakeKeyArgs', 'NativeUserV3SnowflakeKeyArgsDict', 'outputs.NativeUserV3SnowflakeKey']]] = None,
+            ssh_key: pulumi.Input[Optional[Union['NativeUserV3SshKeyArgs', 'NativeUserV3SshKeyArgsDict', 'outputs.NativeUserV3SshKey']]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["awsIam"] = aws_iam
+        __props__["awsIamRole"] = aws_iam_role
+        __props__["azureIam"] = azure_iam
+        __props__["basic"] = basic
+        __props__["createdAt"] = created_at
+        __props__["gcpIam"] = gcp_iam
+        __props__["hook"] = hook
+        __props__["httpApiKeyHeader"] = http_api_key_header
+        __props__["httpApiKeyQuery"] = http_api_key_query
+        __props__["httpBasic"] = http_basic
+        __props__["httpBearer"] = http_bearer
+        __props__["kubernetesInline"] = kubernetes_inline
+        __props__["kubernetesPath"] = kubernetes_path
+        __props__["label"] = label
+        __props__["linkedHttpBasic"] = linked_http_basic
+        __props__["linkedHttpBearer"] = linked_http_bearer
+        __props__["passthrough"] = passthrough
+        __props__["resourceId"] = resource_id
+        __props__["snowflakeKey"] = snowflake_key
+        __props__["sshKey"] = ssh_key
+        __props__["terminationProtection"] = termination_protection
+        __props__["updatedAt"] = updated_at
+        return pulumi.runtime.exists_resource(None, 'formal:index/nativeUserV3:NativeUserV3', id, __props__, opts or pulumi.ResourceOptions())
 
     @_builtins.property
     @pulumi.getter(name="awsIam")

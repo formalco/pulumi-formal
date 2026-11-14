@@ -225,6 +225,18 @@ class ConnectorListenerLink(pulumi.CustomResource):
         __props__.__dict__["termination_protection"] = termination_protection
         return ConnectorListenerLink(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+            connector_listener_id: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["connectorId"] = connector_id
+        __props__["connectorListenerId"] = connector_listener_id
+        __props__["terminationProtection"] = termination_protection
+        return pulumi.runtime.exists_resource(None, 'formal:index/connectorListenerLink:ConnectorListenerLink', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="connectorId")
     def connector_id(self) -> pulumi.Output[_builtins.str]:

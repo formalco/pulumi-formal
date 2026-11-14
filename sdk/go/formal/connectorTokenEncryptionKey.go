@@ -96,6 +96,12 @@ func (ConnectorTokenEncryptionKeyState) ElementType() reflect.Type {
 	return reflect.TypeOf((*connectorTokenEncryptionKeyState)(nil)).Elem()
 }
 
+// ConnectorTokenEncryptionKeyExists checks whether an existing ConnectorTokenEncryptionKey resource with the given ID exists.
+func ConnectorTokenEncryptionKeyExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConnectorTokenEncryptionKeyState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/connectorTokenEncryptionKey:ConnectorTokenEncryptionKey", id, state, "", opts...)
+}
+
 type connectorTokenEncryptionKeyArgs struct {
 	// The ID of the Connector this token encryption key is linked to.
 	ConnectorId string `pulumi:"connectorId"`

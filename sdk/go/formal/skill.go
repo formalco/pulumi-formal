@@ -88,6 +88,12 @@ func (SkillState) ElementType() reflect.Type {
 	return reflect.TypeOf((*skillState)(nil)).Elem()
 }
 
+// SkillExists checks whether an existing Skill resource with the given ID exists.
+func SkillExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *SkillState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/skill:Skill", id, state, "", opts...)
+}
+
 type skillArgs struct {
 	// Contents of the `SKILL.md` file, including its `name` and `description` frontmatter. Formatting-only changes are ignored.
 	SkillMd string `pulumi:"skillMd"`

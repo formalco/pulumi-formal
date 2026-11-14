@@ -325,6 +325,24 @@ class DataDiscovery(pulumi.CustomResource):
         __props__.__dict__["schedule"] = schedule
         return DataDiscovery(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            created_at: pulumi.Input[Optional[_builtins.int]] = None,
+            deletion_policy: pulumi.Input[Optional[_builtins.str]] = None,
+            native_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+            path: pulumi.Input[Optional[_builtins.str]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            schedule: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["createdAt"] = created_at
+        __props__["deletionPolicy"] = deletion_policy
+        __props__["nativeUserId"] = native_user_id
+        __props__["path"] = path
+        __props__["resourceId"] = resource_id
+        __props__["schedule"] = schedule
+        return pulumi.runtime.exists_resource(None, 'formal:index/dataDiscovery:DataDiscovery', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="createdAt")
     def created_at(self) -> pulumi.Output[_builtins.int]:

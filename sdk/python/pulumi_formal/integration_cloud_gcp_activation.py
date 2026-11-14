@@ -226,6 +226,18 @@ class IntegrationCloudGcpActivation(pulumi.CustomResource):
         __props__.__dict__["workload_identity_pool_provider"] = workload_identity_pool_provider
         return IntegrationCloudGcpActivation(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            integration_id: pulumi.Input[Optional[_builtins.str]] = None,
+            service_account_email: pulumi.Input[Optional[_builtins.str]] = None,
+            workload_identity_pool_provider: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["integrationId"] = integration_id
+        __props__["serviceAccountEmail"] = service_account_email
+        __props__["workloadIdentityPoolProvider"] = workload_identity_pool_provider
+        return pulumi.runtime.exists_resource(None, 'formal:index/integrationCloudGcpActivation:IntegrationCloudGcpActivation', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="integrationId")
     def integration_id(self) -> pulumi.Output[_builtins.str]:

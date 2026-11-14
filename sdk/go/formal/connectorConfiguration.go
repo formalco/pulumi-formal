@@ -90,6 +90,12 @@ func (ConnectorConfigurationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*connectorConfigurationState)(nil)).Elem()
 }
 
+// ConnectorConfigurationExists checks whether an existing ConnectorConfiguration resource with the given ID exists.
+func ConnectorConfigurationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConnectorConfigurationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/connectorConfiguration:ConnectorConfiguration", id, state, "", opts...)
+}
+
 type connectorConfigurationArgs struct {
 	// The ID of the Connector this configuration is linked to.
 	ConnectorId string `pulumi:"connectorId"`

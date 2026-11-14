@@ -842,10 +842,10 @@ class IntegrationCloud(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']]] = None,
-                 azure: pulumi.Input[Optional[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']]] = None,
+                 aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict', 'outputs.IntegrationCloudAws']]] = None,
+                 azure: pulumi.Input[Optional[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict', 'outputs.IntegrationCloudAzure']]] = None,
                  cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
-                 gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict']]] = None,
+                 gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict', 'outputs.IntegrationCloudGcp']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -855,10 +855,10 @@ class IntegrationCloud(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']] aws: Configuration block for AWS integration.
-        :param pulumi.Input[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']] azure: Configuration block for Azure integration.
+        :param pulumi.Input[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict', 'outputs.IntegrationCloudAws']] aws: Configuration block for AWS integration.
+        :param pulumi.Input[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict', 'outputs.IntegrationCloudAzure']] azure: Configuration block for Azure integration.
         :param pulumi.Input[_builtins.str] cloud_region: Region of the cloud provider. (AWS only)
-        :param pulumi.Input[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict']] gcp: Configuration block for GCP integration.
+        :param pulumi.Input[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict', 'outputs.IntegrationCloudGcp']] gcp: Configuration block for GCP integration.
         :param pulumi.Input[_builtins.str] name: Name of the Integration.
         :param pulumi.Input[_builtins.str] type: Type of the Integration. (Supported: aws, gcp)
         """
@@ -887,10 +887,10 @@ class IntegrationCloud(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']]] = None,
-                 azure: pulumi.Input[Optional[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']]] = None,
+                 aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict', 'outputs.IntegrationCloudAws']]] = None,
+                 azure: pulumi.Input[Optional[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict', 'outputs.IntegrationCloudAzure']]] = None,
                  cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
-                 gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict']]] = None,
+                 gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict', 'outputs.IntegrationCloudGcp']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -955,7 +955,7 @@ class IntegrationCloud(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']]] = None,
+            aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict', 'outputs.IntegrationCloudAws']]] = None,
             aws_allow_s3_access: pulumi.Input[Optional[_builtins.bool]] = None,
             aws_enable_ec2_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             aws_enable_ecs_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -970,7 +970,7 @@ class IntegrationCloud(pulumi.CustomResource):
             aws_formal_stack_name: pulumi.Input[Optional[_builtins.str]] = None,
             aws_s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None,
             aws_template_body: pulumi.Input[Optional[_builtins.str]] = None,
-            azure: pulumi.Input[Optional[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']]] = None,
+            azure: pulumi.Input[Optional[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict', 'outputs.IntegrationCloudAzure']]] = None,
             azure_actions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             azure_allow_blob_access: pulumi.Input[Optional[_builtins.bool]] = None,
             azure_blob_storage_accounts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
@@ -985,7 +985,7 @@ class IntegrationCloud(pulumi.CustomResource):
             azure_subscription_id: pulumi.Input[Optional[_builtins.str]] = None,
             azure_tenant_id: pulumi.Input[Optional[_builtins.str]] = None,
             cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
-            gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict']]] = None,
+            gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict', 'outputs.IntegrationCloudGcp']]] = None,
             gcp_allow_gcs_access: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_enable_cloudsql_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_enable_compute_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -1005,7 +1005,7 @@ class IntegrationCloud(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict']] aws: Configuration block for AWS integration.
+        :param pulumi.Input[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict', 'outputs.IntegrationCloudAws']] aws: Configuration block for AWS integration.
         :param pulumi.Input[_builtins.bool] aws_allow_s3_access: Whether AWS S3 access is allowed or not.
         :param pulumi.Input[_builtins.bool] aws_enable_ec2_autodiscovery: Whether AWS EC2 autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] aws_enable_ecs_autodiscovery: Whether AWS ECS autodiscovery is enabled or not.
@@ -1020,7 +1020,7 @@ class IntegrationCloud(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] aws_formal_stack_name: A generated name for your CloudFormation stack.
         :param pulumi.Input[_builtins.str] aws_s3_bucket_arn: The AWS S3 bucket ARN this Cloud Integration is allowed to use for Log Integrations, if it is allowed to access S3.
         :param pulumi.Input[_builtins.str] aws_template_body: The template body of the CloudFormation stack.
-        :param pulumi.Input[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict']] azure: Configuration block for Azure integration.
+        :param pulumi.Input[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict', 'outputs.IntegrationCloudAzure']] azure: Configuration block for Azure integration.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_actions: The Azure control-plane actions to grant Formal's managed identity, derived from the enabled capabilities. Pass these to the Azure Terraform module.
         :param pulumi.Input[_builtins.bool] azure_allow_blob_access: Whether the Cloud Integration is allowed to write logs to Azure Blob Storage.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] azure_blob_storage_accounts: The storage accounts this Cloud Integration is allowed to write logs to.
@@ -1035,7 +1035,7 @@ class IntegrationCloud(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] azure_subscription_id: The Azure subscription this integration grants Formal access to.
         :param pulumi.Input[_builtins.str] azure_tenant_id: The Entra tenant of the managed identity Formal authenticates as, reported back by `IntegrationCloudAzureActivation`.
         :param pulumi.Input[_builtins.str] cloud_region: Region of the cloud provider. (AWS only)
-        :param pulumi.Input[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict']] gcp: Configuration block for GCP integration.
+        :param pulumi.Input[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict', 'outputs.IntegrationCloudGcp']] gcp: Configuration block for GCP integration.
         :param pulumi.Input[_builtins.bool] gcp_allow_gcs_access: Whether the Cloud Integration is allowed to write logs to GCS.
         :param pulumi.Input[_builtins.bool] gcp_enable_cloudsql_instances_autodiscovery: Whether GCP Cloud SQL instances autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] gcp_enable_compute_instances_autodiscovery: Whether GCP Compute Engine instances autodiscovery is enabled or not.
@@ -1097,6 +1097,98 @@ class IntegrationCloud(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["type"] = type
         return IntegrationCloud(resource_name, opts=opts, __props__=__props__)
+
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            aws: pulumi.Input[Optional[Union['IntegrationCloudAwsArgs', 'IntegrationCloudAwsArgsDict', 'outputs.IntegrationCloudAws']]] = None,
+            aws_allow_s3_access: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_ec2_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_ecs_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_eks_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_rds_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_redshift_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_enable_s3_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            aws_formal_iam_role: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_formal_iam_role_arn: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_formal_pingback_arn: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_formal_role_arn: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_formal_stack_name: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_s3_bucket_arn: pulumi.Input[Optional[_builtins.str]] = None,
+            aws_template_body: pulumi.Input[Optional[_builtins.str]] = None,
+            azure: pulumi.Input[Optional[Union['IntegrationCloudAzureArgs', 'IntegrationCloudAzureArgsDict', 'outputs.IntegrationCloudAzure']]] = None,
+            azure_actions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            azure_allow_blob_access: pulumi.Input[Optional[_builtins.bool]] = None,
+            azure_blob_storage_accounts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            azure_client_id: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_data_actions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            azure_enable_aks_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            azure_enable_db_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            azure_enable_vm_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            azure_issuer: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_resource_group: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_role_definitions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            azure_subscription_id: pulumi.Input[Optional[_builtins.str]] = None,
+            azure_tenant_id: pulumi.Input[Optional[_builtins.str]] = None,
+            cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
+            gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict', 'outputs.IntegrationCloudGcp']]] = None,
+            gcp_allow_gcs_access: pulumi.Input[Optional[_builtins.bool]] = None,
+            gcp_enable_cloudsql_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            gcp_enable_compute_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            gcp_enable_gke_clusters_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
+            gcp_gcs_buckets: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            gcp_permissions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            gcp_project_id: pulumi.Input[Optional[_builtins.str]] = None,
+            gcp_roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            gcp_service_account_email: pulumi.Input[Optional[_builtins.str]] = None,
+            gcp_workload_identity_pool_provider: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            type: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["aws"] = aws
+        __props__["awsAllowS3Access"] = aws_allow_s3_access
+        __props__["awsEnableEc2Autodiscovery"] = aws_enable_ec2_autodiscovery
+        __props__["awsEnableEcsAutodiscovery"] = aws_enable_ecs_autodiscovery
+        __props__["awsEnableEksAutodiscovery"] = aws_enable_eks_autodiscovery
+        __props__["awsEnableRdsAutodiscovery"] = aws_enable_rds_autodiscovery
+        __props__["awsEnableRedshiftAutodiscovery"] = aws_enable_redshift_autodiscovery
+        __props__["awsEnableS3Autodiscovery"] = aws_enable_s3_autodiscovery
+        __props__["awsFormalIamRole"] = aws_formal_iam_role
+        __props__["awsFormalIamRoleArn"] = aws_formal_iam_role_arn
+        __props__["awsFormalPingbackArn"] = aws_formal_pingback_arn
+        __props__["awsFormalRoleArn"] = aws_formal_role_arn
+        __props__["awsFormalStackName"] = aws_formal_stack_name
+        __props__["awsS3BucketArn"] = aws_s3_bucket_arn
+        __props__["awsTemplateBody"] = aws_template_body
+        __props__["azure"] = azure
+        __props__["azureActions"] = azure_actions
+        __props__["azureAllowBlobAccess"] = azure_allow_blob_access
+        __props__["azureBlobStorageAccounts"] = azure_blob_storage_accounts
+        __props__["azureClientId"] = azure_client_id
+        __props__["azureDataActions"] = azure_data_actions
+        __props__["azureEnableAksAutodiscovery"] = azure_enable_aks_autodiscovery
+        __props__["azureEnableDbAutodiscovery"] = azure_enable_db_autodiscovery
+        __props__["azureEnableVmAutodiscovery"] = azure_enable_vm_autodiscovery
+        __props__["azureIssuer"] = azure_issuer
+        __props__["azureResourceGroup"] = azure_resource_group
+        __props__["azureRoleDefinitions"] = azure_role_definitions
+        __props__["azureSubscriptionId"] = azure_subscription_id
+        __props__["azureTenantId"] = azure_tenant_id
+        __props__["cloudRegion"] = cloud_region
+        __props__["gcp"] = gcp
+        __props__["gcpAllowGcsAccess"] = gcp_allow_gcs_access
+        __props__["gcpEnableCloudsqlInstancesAutodiscovery"] = gcp_enable_cloudsql_instances_autodiscovery
+        __props__["gcpEnableComputeInstancesAutodiscovery"] = gcp_enable_compute_instances_autodiscovery
+        __props__["gcpEnableGkeClustersAutodiscovery"] = gcp_enable_gke_clusters_autodiscovery
+        __props__["gcpGcsBuckets"] = gcp_gcs_buckets
+        __props__["gcpPermissions"] = gcp_permissions
+        __props__["gcpProjectId"] = gcp_project_id
+        __props__["gcpRoles"] = gcp_roles
+        __props__["gcpServiceAccountEmail"] = gcp_service_account_email
+        __props__["gcpWorkloadIdentityPoolProvider"] = gcp_workload_identity_pool_provider
+        __props__["name"] = name
+        __props__["type"] = type
+        return pulumi.runtime.exists_resource(None, 'formal:index/integrationCloud:IntegrationCloud', id, __props__, opts or pulumi.ResourceOptions())
 
     @_builtins.property
     @pulumi.getter

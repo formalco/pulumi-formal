@@ -123,6 +123,12 @@ func (IntegrationOidcState) ElementType() reflect.Type {
 	return reflect.TypeOf((*integrationOidcState)(nil)).Elem()
 }
 
+// IntegrationOidcExists checks whether an existing IntegrationOidc resource with the given ID exists.
+func IntegrationOidcExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *IntegrationOidcState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/integrationOidc:IntegrationOidc", id, state, "", opts...)
+}
+
 type integrationOidcArgs struct {
 	// CEL expression evaluated against verified token claims. Must return a boolean. Defaults to `true`. When selecting the integration with `X-Formal-OIDC-Integration-Id`, this condition must validate the provider-native audience and identity claims.
 	ClaimCondition *string `pulumi:"claimCondition"`

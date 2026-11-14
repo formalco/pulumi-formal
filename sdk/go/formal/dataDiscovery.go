@@ -105,6 +105,12 @@ func (DataDiscoveryState) ElementType() reflect.Type {
 	return reflect.TypeOf((*dataDiscoveryState)(nil)).Elem()
 }
 
+// DataDiscoveryExists checks whether an existing DataDiscovery resource with the given ID exists.
+func DataDiscoveryExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *DataDiscoveryState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/dataDiscovery:DataDiscovery", id, state, "", opts...)
+}
+
 type dataDiscoveryArgs struct {
 	// Deletion policy of the Data Discovery. Possible values: `delete`, `markForDeletion`.
 	DeletionPolicy string `pulumi:"deletionPolicy"`

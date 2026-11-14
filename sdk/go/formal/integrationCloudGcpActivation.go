@@ -84,6 +84,12 @@ func (IntegrationCloudGcpActivationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*integrationCloudGcpActivationState)(nil)).Elem()
 }
 
+// IntegrationCloudGcpActivationExists checks whether an existing IntegrationCloudGcpActivation resource with the given ID exists.
+func IntegrationCloudGcpActivationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *IntegrationCloudGcpActivationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/integrationCloudGcpActivation:IntegrationCloudGcpActivation", id, state, "", opts...)
+}
+
 type integrationCloudGcpActivationArgs struct {
 	// The ID of the GCP Cloud Integration to activate.
 	IntegrationId string `pulumi:"integrationId"`

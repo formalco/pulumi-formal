@@ -73,7 +73,7 @@ namespace Formal.Pulumi
     ///     });
     /// 
     ///     // Username and password, with the password passed as a write-only value so it
-    ///     // never lands in Terraform state. Increment literal_wo_version to rotate it.
+    ///     // never lands in Pulumi state. Increment literal_wo_version to rotate it.
     ///     var basicWriteOnly = new Pulumi.NativeUserV3("basic_write_only", new()
     ///     {
     ///         Basic = new Pulumi.Inputs.NativeUserV3BasicArgs
@@ -92,7 +92,7 @@ namespace Formal.Pulumi
     ///     // The client's own credentials, sent as is to the Resource.
     ///     var passthrough = new Pulumi.NativeUserV3("passthrough", new()
     ///     {
-    ///         Passthrough = null,
+    ///         Passthrough = new() { },
     ///         ResourceId = db.Id,
     ///         Label = "passthrough",
     ///     });

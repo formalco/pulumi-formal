@@ -111,6 +111,12 @@ func (EncryptionKeyState) ElementType() reflect.Type {
 	return reflect.TypeOf((*encryptionKeyState)(nil)).Elem()
 }
 
+// EncryptionKeyExists checks whether an existing EncryptionKey resource with the given ID exists.
+func EncryptionKeyExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *EncryptionKeyState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/encryptionKey:EncryptionKey", id, state, "", opts...)
+}
+
 type encryptionKeyArgs struct {
 	// Deprecated. Symmetric and deterministic algorithms ('aes*random', 'aes*deterministic') are no longer supported. Encryption keys use asymmetric RSA ('rsaes*oaep*sha256'), which is the default.
 	//

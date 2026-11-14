@@ -170,7 +170,7 @@ class Form(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
-                 fields: pulumi.Input[Optional[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict']]]]] = None,
+                 fields: pulumi.Input[Optional[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
@@ -180,7 +180,7 @@ class Form(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] description: The form description.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict']]]] fields: List of fields that define the form schema.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]] fields: List of fields that define the form schema.
         :param pulumi.Input[_builtins.str] name: The name of the form. Must be unique within the organization.
         """
         ...
@@ -209,7 +209,7 @@ class Form(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
-                 fields: pulumi.Input[Optional[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict']]]]] = None,
+                 fields: pulumi.Input[Optional[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -239,7 +239,7 @@ class Form(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             created_at: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
-            fields: pulumi.Input[Optional[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict']]]]] = None,
+            fields: pulumi.Input[Optional[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'Form':
         """
@@ -251,7 +251,7 @@ class Form(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] created_at: When the form was created.
         :param pulumi.Input[_builtins.str] description: The form description.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict']]]] fields: List of fields that define the form schema.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]] fields: List of fields that define the form schema.
         :param pulumi.Input[_builtins.str] name: The name of the form. Must be unique within the organization.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         """
@@ -265,6 +265,22 @@ class Form(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["updated_at"] = updated_at
         return Form(resource_name, opts=opts, __props__=__props__)
+
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            fields: pulumi.Input[Optional[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["createdAt"] = created_at
+        __props__["description"] = description
+        __props__["fields"] = fields
+        __props__["name"] = name
+        __props__["updatedAt"] = updated_at
+        return pulumi.runtime.exists_resource(None, 'formal:index/form:Form', id, __props__, opts or pulumi.ResourceOptions())
 
     @_builtins.property
     @pulumi.getter(name="createdAt")
