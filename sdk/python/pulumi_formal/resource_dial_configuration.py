@@ -225,6 +225,18 @@ class ResourceDialConfiguration(pulumi.CustomResource):
         __props__.__dict__["resource_id"] = resource_id
         return ResourceDialConfiguration(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            dial_method: pulumi.Input[Optional[_builtins.str]] = None,
+            dial_target: pulumi.Input[Optional[_builtins.str]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["dialMethod"] = dial_method
+        __props__["dialTarget"] = dial_target
+        __props__["resourceId"] = resource_id
+        return pulumi.runtime.exists_resource(None, 'formal:index/resourceDialConfiguration:ResourceDialConfiguration', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="dialMethod")
     def dial_method(self) -> pulumi.Output[_builtins.str]:

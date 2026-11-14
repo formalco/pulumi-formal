@@ -266,6 +266,22 @@ class ConnectorTokenEncryptionKey(pulumi.CustomResource):
         __props__.__dict__["updated_at"] = updated_at
         return ConnectorTokenEncryptionKey(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            key_id: pulumi.Input[Optional[_builtins.str]] = None,
+            key_provider: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["connectorId"] = connector_id
+        __props__["createdAt"] = created_at
+        __props__["keyId"] = key_id
+        __props__["keyProvider"] = key_provider
+        __props__["updatedAt"] = updated_at
+        return pulumi.runtime.exists_resource(None, 'formal:index/connectorTokenEncryptionKey:ConnectorTokenEncryptionKey', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="connectorId")
     def connector_id(self) -> pulumi.Output[_builtins.str]:

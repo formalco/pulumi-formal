@@ -170,9 +170,9 @@ class IntegrationMdm(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 fleet: pulumi.Input[Optional[Union['IntegrationMdmFleetArgs', 'IntegrationMdmFleetArgsDict']]] = None,
-                 jamf: pulumi.Input[Optional[Union['IntegrationMdmJamfArgs', 'IntegrationMdmJamfArgsDict']]] = None,
-                 kandji: pulumi.Input[Optional[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict']]] = None,
+                 fleet: pulumi.Input[Optional[Union['IntegrationMdmFleetArgs', 'IntegrationMdmFleetArgsDict', 'outputs.IntegrationMdmFleet']]] = None,
+                 jamf: pulumi.Input[Optional[Union['IntegrationMdmJamfArgs', 'IntegrationMdmJamfArgsDict', 'outputs.IntegrationMdmJamf']]] = None,
+                 kandji: pulumi.Input[Optional[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict', 'outputs.IntegrationMdmKandji']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
@@ -181,9 +181,9 @@ class IntegrationMdm(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['IntegrationMdmFleetArgs', 'IntegrationMdmFleetArgsDict']] fleet: Configuration block for Fleet integration.
-        :param pulumi.Input[Union['IntegrationMdmJamfArgs', 'IntegrationMdmJamfArgsDict']] jamf: Configuration block for Jamf Pro integration.
-        :param pulumi.Input[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict']] kandji: Configuration block for Kandji integration.
+        :param pulumi.Input[Union['IntegrationMdmFleetArgs', 'IntegrationMdmFleetArgsDict', 'outputs.IntegrationMdmFleet']] fleet: Configuration block for Fleet integration.
+        :param pulumi.Input[Union['IntegrationMdmJamfArgs', 'IntegrationMdmJamfArgsDict', 'outputs.IntegrationMdmJamf']] jamf: Configuration block for Jamf Pro integration.
+        :param pulumi.Input[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict', 'outputs.IntegrationMdmKandji']] kandji: Configuration block for Kandji integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         """
         ...
@@ -211,9 +211,9 @@ class IntegrationMdm(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 fleet: pulumi.Input[Optional[Union['IntegrationMdmFleetArgs', 'IntegrationMdmFleetArgsDict']]] = None,
-                 jamf: pulumi.Input[Optional[Union['IntegrationMdmJamfArgs', 'IntegrationMdmJamfArgsDict']]] = None,
-                 kandji: pulumi.Input[Optional[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict']]] = None,
+                 fleet: pulumi.Input[Optional[Union['IntegrationMdmFleetArgs', 'IntegrationMdmFleetArgsDict', 'outputs.IntegrationMdmFleet']]] = None,
+                 jamf: pulumi.Input[Optional[Union['IntegrationMdmJamfArgs', 'IntegrationMdmJamfArgsDict', 'outputs.IntegrationMdmJamf']]] = None,
+                 kandji: pulumi.Input[Optional[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict', 'outputs.IntegrationMdmKandji']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -238,9 +238,9 @@ class IntegrationMdm(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            fleet: pulumi.Input[Optional[Union['IntegrationMdmFleetArgs', 'IntegrationMdmFleetArgsDict']]] = None,
-            jamf: pulumi.Input[Optional[Union['IntegrationMdmJamfArgs', 'IntegrationMdmJamfArgsDict']]] = None,
-            kandji: pulumi.Input[Optional[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict']]] = None,
+            fleet: pulumi.Input[Optional[Union['IntegrationMdmFleetArgs', 'IntegrationMdmFleetArgsDict', 'outputs.IntegrationMdmFleet']]] = None,
+            jamf: pulumi.Input[Optional[Union['IntegrationMdmJamfArgs', 'IntegrationMdmJamfArgsDict', 'outputs.IntegrationMdmJamf']]] = None,
+            kandji: pulumi.Input[Optional[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict', 'outputs.IntegrationMdmKandji']]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None) -> 'IntegrationMdm':
         """
         Get an existing IntegrationMdm resource's state with the given name, id, and optional extra
@@ -249,9 +249,9 @@ class IntegrationMdm(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['IntegrationMdmFleetArgs', 'IntegrationMdmFleetArgsDict']] fleet: Configuration block for Fleet integration.
-        :param pulumi.Input[Union['IntegrationMdmJamfArgs', 'IntegrationMdmJamfArgsDict']] jamf: Configuration block for Jamf Pro integration.
-        :param pulumi.Input[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict']] kandji: Configuration block for Kandji integration.
+        :param pulumi.Input[Union['IntegrationMdmFleetArgs', 'IntegrationMdmFleetArgsDict', 'outputs.IntegrationMdmFleet']] fleet: Configuration block for Fleet integration.
+        :param pulumi.Input[Union['IntegrationMdmJamfArgs', 'IntegrationMdmJamfArgsDict', 'outputs.IntegrationMdmJamf']] jamf: Configuration block for Jamf Pro integration.
+        :param pulumi.Input[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict', 'outputs.IntegrationMdmKandji']] kandji: Configuration block for Kandji integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -263,6 +263,20 @@ class IntegrationMdm(pulumi.CustomResource):
         __props__.__dict__["kandji"] = kandji
         __props__.__dict__["name"] = name
         return IntegrationMdm(resource_name, opts=opts, __props__=__props__)
+
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            fleet: pulumi.Input[Optional[Union['IntegrationMdmFleetArgs', 'IntegrationMdmFleetArgsDict', 'outputs.IntegrationMdmFleet']]] = None,
+            jamf: pulumi.Input[Optional[Union['IntegrationMdmJamfArgs', 'IntegrationMdmJamfArgsDict', 'outputs.IntegrationMdmJamf']]] = None,
+            kandji: pulumi.Input[Optional[Union['IntegrationMdmKandjiArgs', 'IntegrationMdmKandjiArgsDict', 'outputs.IntegrationMdmKandji']]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["fleet"] = fleet
+        __props__["jamf"] = jamf
+        __props__["kandji"] = kandji
+        __props__["name"] = name
+        return pulumi.runtime.exists_resource(None, 'formal:index/integrationMdm:IntegrationMdm', id, __props__, opts or pulumi.ResourceOptions())
 
     @_builtins.property
     @pulumi.getter

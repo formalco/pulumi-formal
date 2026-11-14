@@ -631,6 +631,38 @@ class ResourceOauthSettings(pulumi.CustomResource):
         __props__.__dict__["upstream_oauth_mode"] = upstream_oauth_mode
         return ResourceOauthSettings(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            client_id: pulumi.Input[Optional[_builtins.str]] = None,
+            client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+            client_secret_set: pulumi.Input[Optional[_builtins.bool]] = None,
+            client_secret_wo: pulumi.Input[Optional[_builtins.str]] = None,
+            client_secret_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            issuer: pulumi.Input[Optional[_builtins.str]] = None,
+            oauth_settings_id: pulumi.Input[Optional[_builtins.str]] = None,
+            registered_client_id: pulumi.Input[Optional[_builtins.str]] = None,
+            requested_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None,
+            upstream_oauth_mode: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["clientId"] = client_id
+        __props__["clientSecret"] = client_secret
+        __props__["clientSecretSet"] = client_secret_set
+        __props__["clientSecretWo"] = client_secret_wo
+        __props__["clientSecretWoVersion"] = client_secret_wo_version
+        __props__["createdAt"] = created_at
+        __props__["issuer"] = issuer
+        __props__["oauthSettingsId"] = oauth_settings_id
+        __props__["registeredClientId"] = registered_client_id
+        __props__["requestedScopes"] = requested_scopes
+        __props__["resourceId"] = resource_id
+        __props__["updatedAt"] = updated_at
+        __props__["upstreamOauthMode"] = upstream_oauth_mode
+        return pulumi.runtime.exists_resource(None, 'formal:index/resourceOauthSettings:ResourceOauthSettings', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="clientId")
     def client_id(self) -> pulumi.Output[Optional[_builtins.str]]:

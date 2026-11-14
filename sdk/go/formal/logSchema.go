@@ -99,6 +99,12 @@ func (LogSchemaState) ElementType() reflect.Type {
 	return reflect.TypeOf((*logSchemaState)(nil)).Elem()
 }
 
+// LogSchemaExists checks whether an existing LogSchema resource with the given ID exists.
+func LogSchemaExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *LogSchemaState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/logSchema:LogSchema", id, state, "", opts...)
+}
+
 type logSchemaArgs struct {
 	// The ID of the asymmetric encryption key used by encrypt actions.
 	EncryptionKeyId *string `pulumi:"encryptionKeyId"`

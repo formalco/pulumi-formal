@@ -134,6 +134,12 @@ func (ConnectorHostnameState) ElementType() reflect.Type {
 	return reflect.TypeOf((*connectorHostnameState)(nil)).Elem()
 }
 
+// ConnectorHostnameExists checks whether an existing ConnectorHostname resource with the given ID exists.
+func ConnectorHostnameExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConnectorHostnameState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/connectorHostname:ConnectorHostname", id, state, "", opts...)
+}
+
 type connectorHostnameArgs struct {
 	// The TLS certificate for this hostname. It should be in PEM format and only be set if the hostname is not managed by Formal.
 	Certificate *string `pulumi:"certificate"`

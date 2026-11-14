@@ -351,6 +351,26 @@ class EncryptionKey(pulumi.CustomResource):
         __props__.__dict__["updated_at"] = updated_at
         return EncryptionKey(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            decryptor_uri: pulumi.Input[Optional[_builtins.str]] = None,
+            key_id: pulumi.Input[Optional[_builtins.str]] = None,
+            key_provider: pulumi.Input[Optional[_builtins.str]] = None,
+            public_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["algorithm"] = algorithm
+        __props__["createdAt"] = created_at
+        __props__["decryptorUri"] = decryptor_uri
+        __props__["keyId"] = key_id
+        __props__["keyProvider"] = key_provider
+        __props__["publicKeyPem"] = public_key_pem
+        __props__["updatedAt"] = updated_at
+        return pulumi.runtime.exists_resource(None, 'formal:index/encryptionKey:EncryptionKey', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     @_utilities.deprecated("""Symmetric and deterministic algorithms are no longer supported. Encryption keys now use asymmetric RSA (rsaes_oaep_sha256) by default; this field can be removed.""")

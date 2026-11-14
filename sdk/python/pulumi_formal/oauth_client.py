@@ -399,6 +399,26 @@ class OauthClient(pulumi.CustomResource):
         __props__.__dict__["updated_at"] = updated_at
         return OauthClient(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+            client_secret_rotation_triggers: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+            confidential: pulumi.Input[Optional[_builtins.bool]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            redirect_uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["clientSecret"] = client_secret
+        __props__["clientSecretRotationTriggers"] = client_secret_rotation_triggers
+        __props__["confidential"] = confidential
+        __props__["createdAt"] = created_at
+        __props__["name"] = name
+        __props__["redirectUris"] = redirect_uris
+        __props__["updatedAt"] = updated_at
+        return pulumi.runtime.exists_resource(None, 'formal:index/oauthClient:OauthClient', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> pulumi.Output[_builtins.str]:

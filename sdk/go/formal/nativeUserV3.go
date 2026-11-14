@@ -76,11 +76,11 @@ import (
 //				return err
 //			}
 //			// Username and password, with the password passed as a write-only value so it
-//			// never lands in Terraform state. Increment literal_wo_version to rotate it.
+//			// never lands in Pulumi state. Increment literal_wo_version to rotate it.
 //			_, err = formal.NewNativeUserV3(ctx, "basic_write_only", &formal.NativeUserV3Args{
 //				Basic: &formal.NativeUserV3BasicArgs{
 //					Password: &formal.NativeUserV3BasicPasswordArgs{
-//						LiteralWo:        pulumi.String(pulumi.String(analyticsAdminPassword)),
+//						LiteralWo:        pulumi.String(analyticsAdminPassword),
 //						LiteralWoVersion: pulumi.Int(1),
 //					},
 //					Username: pulumi.String("app_admin"),
@@ -391,6 +391,12 @@ type NativeUserV3State struct {
 
 func (NativeUserV3State) ElementType() reflect.Type {
 	return reflect.TypeOf((*nativeUserV3State)(nil)).Elem()
+}
+
+// NativeUserV3Exists checks whether an existing NativeUserV3 resource with the given ID exists.
+func NativeUserV3Exists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *NativeUserV3State, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/nativeUserV3:NativeUserV3", id, state, "", opts...)
 }
 
 type nativeUserV3Args struct {

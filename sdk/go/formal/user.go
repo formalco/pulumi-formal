@@ -124,6 +124,12 @@ func (UserState) ElementType() reflect.Type {
 	return reflect.TypeOf((*userState)(nil)).Elem()
 }
 
+// UserExists checks whether an existing User resource with the given ID exists.
+func UserExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *UserState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/user:User", id, state, "", opts...)
+}
+
 type userArgs struct {
 	// If the user is of type `machine`, this is an optional designation for the app that this user will be used for. Supported values are `metabase`, `tableau`, and `popsql`.
 	AppType *string `pulumi:"appType"`

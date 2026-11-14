@@ -165,6 +165,12 @@ func (OauthClientState) ElementType() reflect.Type {
 	return reflect.TypeOf((*oauthClientState)(nil)).Elem()
 }
 
+// OauthClientExists checks whether an existing OauthClient resource with the given ID exists.
+func OauthClientExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *OauthClientState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/oauthClient:OauthClient", id, state, "", opts...)
+}
+
 type oauthClientArgs struct {
 	// Arbitrary map of values that, when changed, rotates the secret of a confidential client. The old secret stops working immediately; existing grants are kept. Adding the map, for example after an import, or removing it doesn't rotate the secret.
 	ClientSecretRotationTriggers map[string]string `pulumi:"clientSecretRotationTriggers"`

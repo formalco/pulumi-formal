@@ -422,6 +422,28 @@ class ResourceTlsConfiguration(pulumi.CustomResource):
         __props__.__dict__["tls_min_version"] = tls_min_version
         return ResourceTlsConfiguration(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            tls_ca_truststore: pulumi.Input[Optional[_builtins.str]] = None,
+            tls_client_cert: pulumi.Input[Optional[_builtins.str]] = None,
+            tls_client_cert_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
+            tls_client_key: pulumi.Input[Optional[_builtins.str]] = None,
+            tls_client_key_is_env: pulumi.Input[Optional[_builtins.bool]] = None,
+            tls_config: pulumi.Input[Optional[_builtins.str]] = None,
+            tls_min_version: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["resourceId"] = resource_id
+        __props__["tlsCaTruststore"] = tls_ca_truststore
+        __props__["tlsClientCert"] = tls_client_cert
+        __props__["tlsClientCertIsEnv"] = tls_client_cert_is_env
+        __props__["tlsClientKey"] = tls_client_key
+        __props__["tlsClientKeyIsEnv"] = tls_client_key_is_env
+        __props__["tlsConfig"] = tls_config
+        __props__["tlsMinVersion"] = tls_min_version
+        return pulumi.runtime.exists_resource(None, 'formal:index/resourceTlsConfiguration:ResourceTlsConfiguration', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="resourceId")
     def resource_id(self) -> pulumi.Output[_builtins.str]:

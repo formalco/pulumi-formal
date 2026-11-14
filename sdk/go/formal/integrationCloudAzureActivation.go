@@ -84,6 +84,12 @@ func (IntegrationCloudAzureActivationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*integrationCloudAzureActivationState)(nil)).Elem()
 }
 
+// IntegrationCloudAzureActivationExists checks whether an existing IntegrationCloudAzureActivation resource with the given ID exists.
+func IntegrationCloudAzureActivationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *IntegrationCloudAzureActivationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/integrationCloudAzureActivation:IntegrationCloudAzureActivation", id, state, "", opts...)
+}
+
 type integrationCloudAzureActivationArgs struct {
 	// The client id of the managed identity created for this integration.
 	ClientId string `pulumi:"clientId"`

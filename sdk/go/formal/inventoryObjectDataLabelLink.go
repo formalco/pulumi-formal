@@ -93,6 +93,12 @@ func (InventoryObjectDataLabelLinkState) ElementType() reflect.Type {
 	return reflect.TypeOf((*inventoryObjectDataLabelLinkState)(nil)).Elem()
 }
 
+// InventoryObjectDataLabelLinkExists checks whether an existing InventoryObjectDataLabelLink resource with the given ID exists.
+func InventoryObjectDataLabelLinkExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *InventoryObjectDataLabelLinkState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/inventoryObjectDataLabelLink:InventoryObjectDataLabelLink", id, state, "", opts...)
+}
+
 type inventoryObjectDataLabelLinkArgs struct {
 	// Data label to link to the inventory object.
 	DataLabel string `pulumi:"dataLabel"`

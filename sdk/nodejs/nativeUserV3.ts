@@ -53,7 +53,7 @@ import * as utilities from "./utilities";
  *     label: "admin-secret-manager",
  * });
  * // Username and password, with the password passed as a write-only value so it
- * // never lands in Terraform state. Increment literal_wo_version to rotate it.
+ * // never lands in Pulumi state. Increment literal_wo_version to rotate it.
  * const basicWriteOnly = new formal.NativeUserV3("basic_write_only", {
  *     basic: {
  *         password: {
@@ -162,6 +162,17 @@ export class NativeUserV3 extends pulumi.CustomResource {
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: NativeUserV3State, opts?: pulumi.CustomResourceOptions): NativeUserV3 {
         return new NativeUserV3(name, <any>state, { ...opts, id: id });
+    }
+
+    /**
+     * Check whether an existing NativeUserV3 resource with the given ID exists.
+     *
+     * @param id The _unique_ provider ID of the resource to check.
+     * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
+     */
+    public static exists(id: pulumi.Input<string>, state?: NativeUserV3State, opts?: pulumi.CustomResourceOptions): pulumi.Output<boolean> {
+        return pulumi.runtime.existsResource("formal:index/nativeUserV3:NativeUserV3", id, <any>state || {}, { ...opts }, undefined);
     }
 
     /** @internal */

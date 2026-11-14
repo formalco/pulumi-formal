@@ -461,6 +461,32 @@ class User(pulumi.CustomResource):
         __props__.__dict__["type"] = type
         return User(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            app_type: pulumi.Input[Optional[_builtins.str]] = None,
+            db_username: pulumi.Input[Optional[_builtins.str]] = None,
+            email: pulumi.Input[Optional[_builtins.str]] = None,
+            expire_at: pulumi.Input[Optional[_builtins.int]] = None,
+            first_name: pulumi.Input[Optional[_builtins.str]] = None,
+            last_name: pulumi.Input[Optional[_builtins.str]] = None,
+            machine_user_access_token: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+            type: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["appType"] = app_type
+        __props__["dbUsername"] = db_username
+        __props__["email"] = email
+        __props__["expireAt"] = expire_at
+        __props__["firstName"] = first_name
+        __props__["lastName"] = last_name
+        __props__["machineUserAccessToken"] = machine_user_access_token
+        __props__["name"] = name
+        __props__["terminationProtection"] = termination_protection
+        __props__["type"] = type
+        return pulumi.runtime.exists_resource(None, 'formal:index/user:User', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="appType")
     def app_type(self) -> pulumi.Output[Optional[_builtins.str]]:

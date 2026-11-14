@@ -137,7 +137,7 @@ class IntegrationBi(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 metabase: pulumi.Input[Optional[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']]] = None,
+                 metabase: pulumi.Input[Optional[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict', 'outputs.IntegrationBiMetabase']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  sync: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
@@ -147,7 +147,7 @@ class IntegrationBi(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
+        :param pulumi.Input[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict', 'outputs.IntegrationBiMetabase']] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for this app.
         :param pulumi.Input[_builtins.bool] sync: Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         """
@@ -176,7 +176,7 @@ class IntegrationBi(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 metabase: pulumi.Input[Optional[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']]] = None,
+                 metabase: pulumi.Input[Optional[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict', 'outputs.IntegrationBiMetabase']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  sync: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
@@ -203,7 +203,7 @@ class IntegrationBi(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            metabase: pulumi.Input[Optional[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']]] = None,
+            metabase: pulumi.Input[Optional[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict', 'outputs.IntegrationBiMetabase']]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             sync: pulumi.Input[Optional[_builtins.bool]] = None) -> 'IntegrationBi':
         """
@@ -213,7 +213,7 @@ class IntegrationBi(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict']] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
+        :param pulumi.Input[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict', 'outputs.IntegrationBiMetabase']] metabase: Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for this app.
         :param pulumi.Input[_builtins.bool] sync: Whether to store the Metabase hostname and admin credentials with this integration. Formal doesn't sync Metabase users itself: run the Metabase sync worker (https://github.com/formalco/formal-metabase-sync-worker) in your infrastructure with this integration's ID to map Metabase users to Formal users.
         """
@@ -225,6 +225,18 @@ class IntegrationBi(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["sync"] = sync
         return IntegrationBi(resource_name, opts=opts, __props__=__props__)
+
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            metabase: pulumi.Input[Optional[Union['IntegrationBiMetabaseArgs', 'IntegrationBiMetabaseArgsDict', 'outputs.IntegrationBiMetabase']]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            sync: pulumi.Input[Optional[_builtins.bool]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["metabase"] = metabase
+        __props__["name"] = name
+        __props__["sync"] = sync
+        return pulumi.runtime.exists_resource(None, 'formal:index/integrationBi:IntegrationBi', id, __props__, opts or pulumi.ResourceOptions())
 
     @_builtins.property
     @pulumi.getter

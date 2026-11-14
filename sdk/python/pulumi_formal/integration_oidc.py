@@ -441,6 +441,32 @@ class IntegrationOidc(pulumi.CustomResource):
         __props__.__dict__["updated_at"] = updated_at
         return IntegrationOidc(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            audience: pulumi.Input[Optional[_builtins.str]] = None,
+            claim_condition: pulumi.Input[Optional[_builtins.str]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            end_user_email_expression: pulumi.Input[Optional[_builtins.str]] = None,
+            issuer: pulumi.Input[Optional[_builtins.str]] = None,
+            jwks_uri: pulumi.Input[Optional[_builtins.str]] = None,
+            machine_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            status: pulumi.Input[Optional[_builtins.str]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["audience"] = audience
+        __props__["claimCondition"] = claim_condition
+        __props__["createdAt"] = created_at
+        __props__["endUserEmailExpression"] = end_user_email_expression
+        __props__["issuer"] = issuer
+        __props__["jwksUri"] = jwks_uri
+        __props__["machineUserId"] = machine_user_id
+        __props__["name"] = name
+        __props__["status"] = status
+        __props__["updatedAt"] = updated_at
+        return pulumi.runtime.exists_resource(None, 'formal:index/integrationOidc:IntegrationOidc', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def audience(self) -> pulumi.Output[_builtins.str]:

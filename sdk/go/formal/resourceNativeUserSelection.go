@@ -71,8 +71,8 @@ import (
 //			_, err = formal.NewResourceNativeUserSelection(ctx, "db", &formal.ResourceNativeUserSelectionArgs{
 //				ResourceId: db.ID(),
 //				Cel: pulumi.All(admin.ID(), readOnly.ID()).ApplyT(func(_args []interface{}) (string, error) {
-//					adminId := _args[0].(string)
-//					readOnlyId := _args[1].(string)
+//					adminId := _args[0].(pulumi.ID)
+//					readOnlyId := _args[1].(pulumi.ID)
 //					return fmt.Sprintf("\\\"admins\\\" in user.groups ? \\\"%v\\\"\n: \\\"%v\\\"\n", adminId, readOnlyId), nil
 //				}).(pulumi.StringOutput),
 //			})
@@ -144,6 +144,12 @@ type ResourceNativeUserSelectionState struct {
 
 func (ResourceNativeUserSelectionState) ElementType() reflect.Type {
 	return reflect.TypeOf((*resourceNativeUserSelectionState)(nil)).Elem()
+}
+
+// ResourceNativeUserSelectionExists checks whether an existing ResourceNativeUserSelection resource with the given ID exists.
+func ResourceNativeUserSelectionExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ResourceNativeUserSelectionState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/resourceNativeUserSelection:ResourceNativeUserSelection", id, state, "", opts...)
 }
 
 type resourceNativeUserSelectionArgs struct {

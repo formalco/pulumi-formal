@@ -80,6 +80,12 @@ func (SpaceState) ElementType() reflect.Type {
 	return reflect.TypeOf((*spaceState)(nil)).Elem()
 }
 
+// SpaceExists checks whether an existing Space resource with the given ID exists.
+func SpaceExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *SpaceState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/space:Space", id, state, "", opts...)
+}
+
 type spaceArgs struct {
 	// Description of the Space.
 	Description *string `pulumi:"description"`

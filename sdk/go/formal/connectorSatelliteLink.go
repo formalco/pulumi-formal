@@ -96,6 +96,12 @@ func (ConnectorSatelliteLinkState) ElementType() reflect.Type {
 	return reflect.TypeOf((*connectorSatelliteLinkState)(nil)).Elem()
 }
 
+// ConnectorSatelliteLinkExists checks whether an existing ConnectorSatelliteLink resource with the given ID exists.
+func ConnectorSatelliteLinkExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConnectorSatelliteLinkState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/connectorSatelliteLink:ConnectorSatelliteLink", id, state, "", opts...)
+}
+
 type connectorSatelliteLinkArgs struct {
 	// The ID of the Connector to link to the satellite.
 	ConnectorId string `pulumi:"connectorId"`

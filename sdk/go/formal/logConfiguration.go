@@ -132,6 +132,12 @@ func (LogConfigurationState) ElementType() reflect.Type {
 	return reflect.TypeOf((*logConfigurationState)(nil)).Elem()
 }
 
+// LogConfigurationExists checks whether an existing LogConfiguration resource with the given ID exists.
+func LogConfigurationExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *LogConfigurationState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/logConfiguration:LogConfiguration", id, state, "", opts...)
+}
+
 type logConfigurationArgs struct {
 	// The ID of the encryption key to use for this log configuration.
 	//

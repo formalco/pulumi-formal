@@ -78,6 +78,12 @@ func (IntegrationBiState) ElementType() reflect.Type {
 	return reflect.TypeOf((*integrationBiState)(nil)).Elem()
 }
 
+// IntegrationBiExists checks whether an existing IntegrationBi resource with the given ID exists.
+func IntegrationBiExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *IntegrationBiState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/integrationBi:IntegrationBi", id, state, "", opts...)
+}
+
 type integrationBiArgs struct {
 	// Configuration block for Metabase integration. This block is optional and may be omitted if not configuring a Metabase integration.
 	Metabase *IntegrationBiMetabase `pulumi:"metabase"`

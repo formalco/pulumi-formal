@@ -75,6 +75,12 @@ func (ResourceSshHostKeyState) ElementType() reflect.Type {
 	return reflect.TypeOf((*resourceSshHostKeyState)(nil)).Elem()
 }
 
+// ResourceSshHostKeyExists checks whether an existing ResourceSshHostKey resource with the given ID exists.
+func ResourceSshHostKeyExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ResourceSshHostKeyState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/resourceSshHostKey:ResourceSshHostKey", id, state, "", opts...)
+}
+
 type resourceSshHostKeyArgs struct {
 	// OpenSSH public key of the upstream SSH host (for example the output of `ssh-keygen -yf /etc/ssh/ssh_host_ed25519_key`).
 	PublicKey string `pulumi:"publicKey"`

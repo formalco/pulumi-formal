@@ -297,14 +297,14 @@ class ConnectorAiProvider(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 anthropic: pulumi.Input[Optional[Union['ConnectorAiProviderAnthropicArgs', 'ConnectorAiProviderAnthropicArgsDict']]] = None,
-                 aws_bedrock: pulumi.Input[Optional[Union['ConnectorAiProviderAwsBedrockArgs', 'ConnectorAiProviderAwsBedrockArgsDict']]] = None,
-                 azure_ai: pulumi.Input[Optional[Union['ConnectorAiProviderAzureAiArgs', 'ConnectorAiProviderAzureAiArgsDict']]] = None,
+                 anthropic: pulumi.Input[Optional[Union['ConnectorAiProviderAnthropicArgs', 'ConnectorAiProviderAnthropicArgsDict', 'outputs.ConnectorAiProviderAnthropic']]] = None,
+                 aws_bedrock: pulumi.Input[Optional[Union['ConnectorAiProviderAwsBedrockArgs', 'ConnectorAiProviderAwsBedrockArgsDict', 'outputs.ConnectorAiProviderAwsBedrock']]] = None,
+                 azure_ai: pulumi.Input[Optional[Union['ConnectorAiProviderAzureAiArgs', 'ConnectorAiProviderAzureAiArgsDict', 'outputs.ConnectorAiProviderAzureAi']]] = None,
                  connector_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 formal_ai_satellite: pulumi.Input[Optional[Union['ConnectorAiProviderFormalAiSatelliteArgs', 'ConnectorAiProviderFormalAiSatelliteArgsDict']]] = None,
-                 gemini: pulumi.Input[Optional[Union['ConnectorAiProviderGeminiArgs', 'ConnectorAiProviderGeminiArgsDict']]] = None,
-                 google_vertex_ai: pulumi.Input[Optional[Union['ConnectorAiProviderGoogleVertexAiArgs', 'ConnectorAiProviderGoogleVertexAiArgsDict']]] = None,
-                 openai: pulumi.Input[Optional[Union['ConnectorAiProviderOpenaiArgs', 'ConnectorAiProviderOpenaiArgsDict']]] = None,
+                 formal_ai_satellite: pulumi.Input[Optional[Union['ConnectorAiProviderFormalAiSatelliteArgs', 'ConnectorAiProviderFormalAiSatelliteArgsDict', 'outputs.ConnectorAiProviderFormalAiSatellite']]] = None,
+                 gemini: pulumi.Input[Optional[Union['ConnectorAiProviderGeminiArgs', 'ConnectorAiProviderGeminiArgsDict', 'outputs.ConnectorAiProviderGemini']]] = None,
+                 google_vertex_ai: pulumi.Input[Optional[Union['ConnectorAiProviderGoogleVertexAiArgs', 'ConnectorAiProviderGoogleVertexAiArgsDict', 'outputs.ConnectorAiProviderGoogleVertexAi']]] = None,
+                 openai: pulumi.Input[Optional[Union['ConnectorAiProviderOpenaiArgs', 'ConnectorAiProviderOpenaiArgsDict', 'outputs.ConnectorAiProviderOpenai']]] = None,
                  __props__=None):
         """
         Configures the AI provider for a connector's session analyzer.
@@ -312,14 +312,14 @@ class ConnectorAiProvider(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['ConnectorAiProviderAnthropicArgs', 'ConnectorAiProviderAnthropicArgsDict']] anthropic: Use Anthropic as the provider.
-        :param pulumi.Input[Union['ConnectorAiProviderAwsBedrockArgs', 'ConnectorAiProviderAwsBedrockArgsDict']] aws_bedrock: Use AWS Bedrock as the provider.
-        :param pulumi.Input[Union['ConnectorAiProviderAzureAiArgs', 'ConnectorAiProviderAzureAiArgsDict']] azure_ai: Use Azure AI Foundry as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderAnthropicArgs', 'ConnectorAiProviderAnthropicArgsDict', 'outputs.ConnectorAiProviderAnthropic']] anthropic: Use Anthropic as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderAwsBedrockArgs', 'ConnectorAiProviderAwsBedrockArgsDict', 'outputs.ConnectorAiProviderAwsBedrock']] aws_bedrock: Use AWS Bedrock as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderAzureAiArgs', 'ConnectorAiProviderAzureAiArgsDict', 'outputs.ConnectorAiProviderAzureAi']] azure_ai: Use Azure AI Foundry as the provider.
         :param pulumi.Input[_builtins.str] connector_id: The ID of the connector this AI provider is linked to.
-        :param pulumi.Input[Union['ConnectorAiProviderFormalAiSatelliteArgs', 'ConnectorAiProviderFormalAiSatelliteArgsDict']] formal_ai_satellite: Use the Formal AI satellite as the provider.
-        :param pulumi.Input[Union['ConnectorAiProviderGeminiArgs', 'ConnectorAiProviderGeminiArgsDict']] gemini: Use Google Gemini as the provider.
-        :param pulumi.Input[Union['ConnectorAiProviderGoogleVertexAiArgs', 'ConnectorAiProviderGoogleVertexAiArgsDict']] google_vertex_ai: Use Google Vertex AI as the provider.
-        :param pulumi.Input[Union['ConnectorAiProviderOpenaiArgs', 'ConnectorAiProviderOpenaiArgsDict']] openai: Use OpenAI as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderFormalAiSatelliteArgs', 'ConnectorAiProviderFormalAiSatelliteArgsDict', 'outputs.ConnectorAiProviderFormalAiSatellite']] formal_ai_satellite: Use the Formal AI satellite as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderGeminiArgs', 'ConnectorAiProviderGeminiArgsDict', 'outputs.ConnectorAiProviderGemini']] gemini: Use Google Gemini as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderGoogleVertexAiArgs', 'ConnectorAiProviderGoogleVertexAiArgsDict', 'outputs.ConnectorAiProviderGoogleVertexAi']] google_vertex_ai: Use Google Vertex AI as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderOpenaiArgs', 'ConnectorAiProviderOpenaiArgsDict', 'outputs.ConnectorAiProviderOpenai']] openai: Use OpenAI as the provider.
         """
         ...
     @overload
@@ -346,14 +346,14 @@ class ConnectorAiProvider(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 anthropic: pulumi.Input[Optional[Union['ConnectorAiProviderAnthropicArgs', 'ConnectorAiProviderAnthropicArgsDict']]] = None,
-                 aws_bedrock: pulumi.Input[Optional[Union['ConnectorAiProviderAwsBedrockArgs', 'ConnectorAiProviderAwsBedrockArgsDict']]] = None,
-                 azure_ai: pulumi.Input[Optional[Union['ConnectorAiProviderAzureAiArgs', 'ConnectorAiProviderAzureAiArgsDict']]] = None,
+                 anthropic: pulumi.Input[Optional[Union['ConnectorAiProviderAnthropicArgs', 'ConnectorAiProviderAnthropicArgsDict', 'outputs.ConnectorAiProviderAnthropic']]] = None,
+                 aws_bedrock: pulumi.Input[Optional[Union['ConnectorAiProviderAwsBedrockArgs', 'ConnectorAiProviderAwsBedrockArgsDict', 'outputs.ConnectorAiProviderAwsBedrock']]] = None,
+                 azure_ai: pulumi.Input[Optional[Union['ConnectorAiProviderAzureAiArgs', 'ConnectorAiProviderAzureAiArgsDict', 'outputs.ConnectorAiProviderAzureAi']]] = None,
                  connector_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 formal_ai_satellite: pulumi.Input[Optional[Union['ConnectorAiProviderFormalAiSatelliteArgs', 'ConnectorAiProviderFormalAiSatelliteArgsDict']]] = None,
-                 gemini: pulumi.Input[Optional[Union['ConnectorAiProviderGeminiArgs', 'ConnectorAiProviderGeminiArgsDict']]] = None,
-                 google_vertex_ai: pulumi.Input[Optional[Union['ConnectorAiProviderGoogleVertexAiArgs', 'ConnectorAiProviderGoogleVertexAiArgsDict']]] = None,
-                 openai: pulumi.Input[Optional[Union['ConnectorAiProviderOpenaiArgs', 'ConnectorAiProviderOpenaiArgsDict']]] = None,
+                 formal_ai_satellite: pulumi.Input[Optional[Union['ConnectorAiProviderFormalAiSatelliteArgs', 'ConnectorAiProviderFormalAiSatelliteArgsDict', 'outputs.ConnectorAiProviderFormalAiSatellite']]] = None,
+                 gemini: pulumi.Input[Optional[Union['ConnectorAiProviderGeminiArgs', 'ConnectorAiProviderGeminiArgsDict', 'outputs.ConnectorAiProviderGemini']]] = None,
+                 google_vertex_ai: pulumi.Input[Optional[Union['ConnectorAiProviderGoogleVertexAiArgs', 'ConnectorAiProviderGoogleVertexAiArgsDict', 'outputs.ConnectorAiProviderGoogleVertexAi']]] = None,
+                 openai: pulumi.Input[Optional[Union['ConnectorAiProviderOpenaiArgs', 'ConnectorAiProviderOpenaiArgsDict', 'outputs.ConnectorAiProviderOpenai']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -383,14 +383,14 @@ class ConnectorAiProvider(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            anthropic: pulumi.Input[Optional[Union['ConnectorAiProviderAnthropicArgs', 'ConnectorAiProviderAnthropicArgsDict']]] = None,
-            aws_bedrock: pulumi.Input[Optional[Union['ConnectorAiProviderAwsBedrockArgs', 'ConnectorAiProviderAwsBedrockArgsDict']]] = None,
-            azure_ai: pulumi.Input[Optional[Union['ConnectorAiProviderAzureAiArgs', 'ConnectorAiProviderAzureAiArgsDict']]] = None,
+            anthropic: pulumi.Input[Optional[Union['ConnectorAiProviderAnthropicArgs', 'ConnectorAiProviderAnthropicArgsDict', 'outputs.ConnectorAiProviderAnthropic']]] = None,
+            aws_bedrock: pulumi.Input[Optional[Union['ConnectorAiProviderAwsBedrockArgs', 'ConnectorAiProviderAwsBedrockArgsDict', 'outputs.ConnectorAiProviderAwsBedrock']]] = None,
+            azure_ai: pulumi.Input[Optional[Union['ConnectorAiProviderAzureAiArgs', 'ConnectorAiProviderAzureAiArgsDict', 'outputs.ConnectorAiProviderAzureAi']]] = None,
             connector_id: pulumi.Input[Optional[_builtins.str]] = None,
-            formal_ai_satellite: pulumi.Input[Optional[Union['ConnectorAiProviderFormalAiSatelliteArgs', 'ConnectorAiProviderFormalAiSatelliteArgsDict']]] = None,
-            gemini: pulumi.Input[Optional[Union['ConnectorAiProviderGeminiArgs', 'ConnectorAiProviderGeminiArgsDict']]] = None,
-            google_vertex_ai: pulumi.Input[Optional[Union['ConnectorAiProviderGoogleVertexAiArgs', 'ConnectorAiProviderGoogleVertexAiArgsDict']]] = None,
-            openai: pulumi.Input[Optional[Union['ConnectorAiProviderOpenaiArgs', 'ConnectorAiProviderOpenaiArgsDict']]] = None) -> 'ConnectorAiProvider':
+            formal_ai_satellite: pulumi.Input[Optional[Union['ConnectorAiProviderFormalAiSatelliteArgs', 'ConnectorAiProviderFormalAiSatelliteArgsDict', 'outputs.ConnectorAiProviderFormalAiSatellite']]] = None,
+            gemini: pulumi.Input[Optional[Union['ConnectorAiProviderGeminiArgs', 'ConnectorAiProviderGeminiArgsDict', 'outputs.ConnectorAiProviderGemini']]] = None,
+            google_vertex_ai: pulumi.Input[Optional[Union['ConnectorAiProviderGoogleVertexAiArgs', 'ConnectorAiProviderGoogleVertexAiArgsDict', 'outputs.ConnectorAiProviderGoogleVertexAi']]] = None,
+            openai: pulumi.Input[Optional[Union['ConnectorAiProviderOpenaiArgs', 'ConnectorAiProviderOpenaiArgsDict', 'outputs.ConnectorAiProviderOpenai']]] = None) -> 'ConnectorAiProvider':
         """
         Get an existing ConnectorAiProvider resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -398,14 +398,14 @@ class ConnectorAiProvider(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['ConnectorAiProviderAnthropicArgs', 'ConnectorAiProviderAnthropicArgsDict']] anthropic: Use Anthropic as the provider.
-        :param pulumi.Input[Union['ConnectorAiProviderAwsBedrockArgs', 'ConnectorAiProviderAwsBedrockArgsDict']] aws_bedrock: Use AWS Bedrock as the provider.
-        :param pulumi.Input[Union['ConnectorAiProviderAzureAiArgs', 'ConnectorAiProviderAzureAiArgsDict']] azure_ai: Use Azure AI Foundry as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderAnthropicArgs', 'ConnectorAiProviderAnthropicArgsDict', 'outputs.ConnectorAiProviderAnthropic']] anthropic: Use Anthropic as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderAwsBedrockArgs', 'ConnectorAiProviderAwsBedrockArgsDict', 'outputs.ConnectorAiProviderAwsBedrock']] aws_bedrock: Use AWS Bedrock as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderAzureAiArgs', 'ConnectorAiProviderAzureAiArgsDict', 'outputs.ConnectorAiProviderAzureAi']] azure_ai: Use Azure AI Foundry as the provider.
         :param pulumi.Input[_builtins.str] connector_id: The ID of the connector this AI provider is linked to.
-        :param pulumi.Input[Union['ConnectorAiProviderFormalAiSatelliteArgs', 'ConnectorAiProviderFormalAiSatelliteArgsDict']] formal_ai_satellite: Use the Formal AI satellite as the provider.
-        :param pulumi.Input[Union['ConnectorAiProviderGeminiArgs', 'ConnectorAiProviderGeminiArgsDict']] gemini: Use Google Gemini as the provider.
-        :param pulumi.Input[Union['ConnectorAiProviderGoogleVertexAiArgs', 'ConnectorAiProviderGoogleVertexAiArgsDict']] google_vertex_ai: Use Google Vertex AI as the provider.
-        :param pulumi.Input[Union['ConnectorAiProviderOpenaiArgs', 'ConnectorAiProviderOpenaiArgsDict']] openai: Use OpenAI as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderFormalAiSatelliteArgs', 'ConnectorAiProviderFormalAiSatelliteArgsDict', 'outputs.ConnectorAiProviderFormalAiSatellite']] formal_ai_satellite: Use the Formal AI satellite as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderGeminiArgs', 'ConnectorAiProviderGeminiArgsDict', 'outputs.ConnectorAiProviderGemini']] gemini: Use Google Gemini as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderGoogleVertexAiArgs', 'ConnectorAiProviderGoogleVertexAiArgsDict', 'outputs.ConnectorAiProviderGoogleVertexAi']] google_vertex_ai: Use Google Vertex AI as the provider.
+        :param pulumi.Input[Union['ConnectorAiProviderOpenaiArgs', 'ConnectorAiProviderOpenaiArgsDict', 'outputs.ConnectorAiProviderOpenai']] openai: Use OpenAI as the provider.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -420,6 +420,28 @@ class ConnectorAiProvider(pulumi.CustomResource):
         __props__.__dict__["google_vertex_ai"] = google_vertex_ai
         __props__.__dict__["openai"] = openai
         return ConnectorAiProvider(resource_name, opts=opts, __props__=__props__)
+
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            anthropic: pulumi.Input[Optional[Union['ConnectorAiProviderAnthropicArgs', 'ConnectorAiProviderAnthropicArgsDict', 'outputs.ConnectorAiProviderAnthropic']]] = None,
+            aws_bedrock: pulumi.Input[Optional[Union['ConnectorAiProviderAwsBedrockArgs', 'ConnectorAiProviderAwsBedrockArgsDict', 'outputs.ConnectorAiProviderAwsBedrock']]] = None,
+            azure_ai: pulumi.Input[Optional[Union['ConnectorAiProviderAzureAiArgs', 'ConnectorAiProviderAzureAiArgsDict', 'outputs.ConnectorAiProviderAzureAi']]] = None,
+            connector_id: pulumi.Input[Optional[_builtins.str]] = None,
+            formal_ai_satellite: pulumi.Input[Optional[Union['ConnectorAiProviderFormalAiSatelliteArgs', 'ConnectorAiProviderFormalAiSatelliteArgsDict', 'outputs.ConnectorAiProviderFormalAiSatellite']]] = None,
+            gemini: pulumi.Input[Optional[Union['ConnectorAiProviderGeminiArgs', 'ConnectorAiProviderGeminiArgsDict', 'outputs.ConnectorAiProviderGemini']]] = None,
+            google_vertex_ai: pulumi.Input[Optional[Union['ConnectorAiProviderGoogleVertexAiArgs', 'ConnectorAiProviderGoogleVertexAiArgsDict', 'outputs.ConnectorAiProviderGoogleVertexAi']]] = None,
+            openai: pulumi.Input[Optional[Union['ConnectorAiProviderOpenaiArgs', 'ConnectorAiProviderOpenaiArgsDict', 'outputs.ConnectorAiProviderOpenai']]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["anthropic"] = anthropic
+        __props__["awsBedrock"] = aws_bedrock
+        __props__["azureAi"] = azure_ai
+        __props__["connectorId"] = connector_id
+        __props__["formalAiSatellite"] = formal_ai_satellite
+        __props__["gemini"] = gemini
+        __props__["googleVertexAi"] = google_vertex_ai
+        __props__["openai"] = openai
+        return pulumi.runtime.exists_resource(None, 'formal:index/connectorAiProvider:ConnectorAiProvider', id, __props__, opts or pulumi.ResourceOptions())
 
     @_builtins.property
     @pulumi.getter

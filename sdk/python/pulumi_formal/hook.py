@@ -420,6 +420,30 @@ class Hook(pulumi.CustomResource):
         __props__.__dict__["updated_at"] = updated_at
         return Hook(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            allowlisted_environment_variables: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            allowlisted_network_hosts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            code: pulumi.Input[Optional[_builtins.str]] = None,
+            created_at: pulumi.Input[Optional[_builtins.str]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            status: pulumi.Input[Optional[_builtins.str]] = None,
+            timeout_ms: pulumi.Input[Optional[_builtins.int]] = None,
+            updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["allowlistedEnvironmentVariables"] = allowlisted_environment_variables
+        __props__["allowlistedNetworkHosts"] = allowlisted_network_hosts
+        __props__["code"] = code
+        __props__["createdAt"] = created_at
+        __props__["description"] = description
+        __props__["name"] = name
+        __props__["status"] = status
+        __props__["timeoutMs"] = timeout_ms
+        __props__["updatedAt"] = updated_at
+        return pulumi.runtime.exists_resource(None, 'formal:index/hook:Hook', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="allowlistedEnvironmentVariables")
     def allowlisted_environment_variables(self) -> pulumi.Output[Optional[Sequence[_builtins.str]]]:

@@ -84,6 +84,12 @@ func (ConnectorListenerState) ElementType() reflect.Type {
 	return reflect.TypeOf((*connectorListenerState)(nil)).Elem()
 }
 
+// ConnectorListenerExists checks whether an existing ConnectorListener resource with the given ID exists.
+func ConnectorListenerExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ConnectorListenerState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/connectorListener:ConnectorListener", id, state, "", opts...)
+}
+
 type connectorListenerArgs struct {
 	// The ID of the connector this listener is associated with.
 	ConnectorId *string `pulumi:"connectorId"`

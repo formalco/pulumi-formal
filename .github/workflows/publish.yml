@@ -167,7 +167,7 @@ jobs:
     - name: Publish SDKs
       if: inputs.skipJavaSdk == false
       # REPO-OWNED PATCH (re-apply after `make ci-mgmt`): formalco fork with
-      # NuGet/PyPI trusted publishing (pulumi/pulumi-package-publisher#53). See AGENTS.md.
+      # npm/NuGet/PyPI trusted publishing (pulumi/pulumi-package-publisher#53). See AGENTS.md.
       uses: formalco/pulumi-package-publisher@a5e0c038f5823d4ca1e2450587128cc33726a19b # nuget-pypi-trusted-publishing
       with:
         sdk: python,nodejs,dotnet
@@ -175,8 +175,10 @@ jobs:
         nugetTrustedPublishing: true
         nugetUser: eric-formal
         pypiTrustedPublishing: true
+        npmTrustedPublishing: true
       env:
-        NODE_AUTH_TOKEN: ${{ steps.esc-secrets.outputs.NPM_TOKEN }}
+        # Must be empty for trusted publishing; overrides the setup-node placeholder.
+        NODE_AUTH_TOKEN: ''
         SIGNING_KEY: ${{ steps.esc-secrets.outputs.JAVA_SIGNING_KEY }}
         SIGNING_KEY_ID: ${{ steps.esc-secrets.outputs.JAVA_SIGNING_KEY_ID }}
         SIGNING_PASSWORD: ${{ steps.esc-secrets.outputs.JAVA_SIGNING_PASSWORD }}
@@ -187,7 +189,7 @@ jobs:
     - name: Publish SDKs (except Java)
       if: inputs.skipJavaSdk == true
       # REPO-OWNED PATCH (re-apply after `make ci-mgmt`): formalco fork with
-      # NuGet/PyPI trusted publishing (pulumi/pulumi-package-publisher#53). See AGENTS.md.
+      # npm/NuGet/PyPI trusted publishing (pulumi/pulumi-package-publisher#53). See AGENTS.md.
       uses: formalco/pulumi-package-publisher@a5e0c038f5823d4ca1e2450587128cc33726a19b # nuget-pypi-trusted-publishing
       with:
         sdk: python,nodejs,dotnet,!java
@@ -195,8 +197,10 @@ jobs:
         nugetTrustedPublishing: true
         nugetUser: eric-formal
         pypiTrustedPublishing: true
+        npmTrustedPublishing: true
       env:
-        NODE_AUTH_TOKEN: ${{ steps.esc-secrets.outputs.NPM_TOKEN }}
+        # Must be empty for trusted publishing; overrides the setup-node placeholder.
+        NODE_AUTH_TOKEN: ''
         SIGNING_KEY: ${{ steps.esc-secrets.outputs.JAVA_SIGNING_KEY }}
         SIGNING_KEY_ID: ${{ steps.esc-secrets.outputs.JAVA_SIGNING_KEY_ID }}
         SIGNING_PASSWORD: ${{ steps.esc-secrets.outputs.JAVA_SIGNING_PASSWORD }}

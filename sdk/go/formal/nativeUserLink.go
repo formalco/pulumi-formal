@@ -96,6 +96,12 @@ func (NativeUserLinkState) ElementType() reflect.Type {
 	return reflect.TypeOf((*nativeUserLinkState)(nil)).Elem()
 }
 
+// NativeUserLinkExists checks whether an existing NativeUserLink resource with the given ID exists.
+func NativeUserLinkExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *NativeUserLinkState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/nativeUserLink:NativeUserLink", id, state, "", opts...)
+}
+
 type nativeUserLinkArgs struct {
 	// The Formal ID for the User, Group, or Resource Hostname to be linked.
 	FormalIdentityId string `pulumi:"formalIdentityId"`

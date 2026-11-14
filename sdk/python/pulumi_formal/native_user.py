@@ -389,6 +389,26 @@ class NativeUser(pulumi.CustomResource):
         __props__.__dict__["use_as_default"] = use_as_default
         return NativeUser(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            native_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+            native_user_secret: pulumi.Input[Optional[_builtins.str]] = None,
+            native_user_secret_wo: pulumi.Input[Optional[_builtins.str]] = None,
+            native_user_secret_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
+            resource_id: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
+            use_as_default: pulumi.Input[Optional[_builtins.bool]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["nativeUserId"] = native_user_id
+        __props__["nativeUserSecret"] = native_user_secret
+        __props__["nativeUserSecretWo"] = native_user_secret_wo
+        __props__["nativeUserSecretWoVersion"] = native_user_secret_wo_version
+        __props__["resourceId"] = resource_id
+        __props__["terminationProtection"] = termination_protection
+        __props__["useAsDefault"] = use_as_default
+        return pulumi.runtime.exists_resource(None, 'formal:index/nativeUser:NativeUser', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="nativeUserId")
     def native_user_id(self) -> pulumi.Output[_builtins.str]:

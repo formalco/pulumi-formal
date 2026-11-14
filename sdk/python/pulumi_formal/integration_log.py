@@ -234,12 +234,12 @@ class IntegrationLog(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
-                 azure_blob: pulumi.Input[Optional[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict']]] = None,
-                 datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
-                 gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict']]] = None,
+                 aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']]] = None,
+                 azure_blob: pulumi.Input[Optional[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']]] = None,
+                 datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']]] = None,
+                 gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None,
+                 splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']]] = None,
                  __props__=None):
         """
         Registering a Integration Logs app.
@@ -247,12 +247,12 @@ class IntegrationLog(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']] aws_s3: Configuration block for AWS S3 integration.
-        :param pulumi.Input[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict']] azure_blob: Configuration block for Azure Blob Storage integration.
-        :param pulumi.Input[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']] datadog: Configuration block for Datadog integration.
-        :param pulumi.Input[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict']] gcs: Configuration block for Google Cloud Storage integration.
+        :param pulumi.Input[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']] aws_s3: Configuration block for AWS S3 integration.
+        :param pulumi.Input[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']] azure_blob: Configuration block for Azure Blob Storage integration.
+        :param pulumi.Input[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']] datadog: Configuration block for Datadog integration.
+        :param pulumi.Input[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']] gcs: Configuration block for Google Cloud Storage integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
-        :param pulumi.Input[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']] splunk: Configuration block for Splunk integration.
+        :param pulumi.Input[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']] splunk: Configuration block for Splunk integration.
         """
         ...
     @overload
@@ -279,12 +279,12 @@ class IntegrationLog(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
-                 azure_blob: pulumi.Input[Optional[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict']]] = None,
-                 datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
-                 gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict']]] = None,
+                 aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']]] = None,
+                 azure_blob: pulumi.Input[Optional[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']]] = None,
+                 datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']]] = None,
+                 gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None,
+                 splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -310,12 +310,12 @@ class IntegrationLog(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']]] = None,
-            azure_blob: pulumi.Input[Optional[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict']]] = None,
-            datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']]] = None,
-            gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict']]] = None,
+            aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']]] = None,
+            azure_blob: pulumi.Input[Optional[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']]] = None,
+            datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']]] = None,
+            gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']]] = None) -> 'IntegrationLog':
+            splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']]] = None) -> 'IntegrationLog':
         """
         Get an existing IntegrationLog resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -323,12 +323,12 @@ class IntegrationLog(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict']] aws_s3: Configuration block for AWS S3 integration.
-        :param pulumi.Input[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict']] azure_blob: Configuration block for Azure Blob Storage integration.
-        :param pulumi.Input[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict']] datadog: Configuration block for Datadog integration.
-        :param pulumi.Input[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict']] gcs: Configuration block for Google Cloud Storage integration.
+        :param pulumi.Input[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']] aws_s3: Configuration block for AWS S3 integration.
+        :param pulumi.Input[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']] azure_blob: Configuration block for Azure Blob Storage integration.
+        :param pulumi.Input[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']] datadog: Configuration block for Datadog integration.
+        :param pulumi.Input[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']] gcs: Configuration block for Google Cloud Storage integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
-        :param pulumi.Input[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict']] splunk: Configuration block for Splunk integration.
+        :param pulumi.Input[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']] splunk: Configuration block for Splunk integration.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -341,6 +341,24 @@ class IntegrationLog(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["splunk"] = splunk
         return IntegrationLog(resource_name, opts=opts, __props__=__props__)
+
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']]] = None,
+            azure_blob: pulumi.Input[Optional[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']]] = None,
+            datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']]] = None,
+            gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["awsS3"] = aws_s3
+        __props__["azureBlob"] = azure_blob
+        __props__["datadog"] = datadog
+        __props__["gcs"] = gcs
+        __props__["name"] = name
+        __props__["splunk"] = splunk
+        return pulumi.runtime.exists_resource(None, 'formal:index/integrationLog:IntegrationLog', id, __props__, opts or pulumi.ResourceOptions())
 
     @_builtins.property
     @pulumi.getter(name="awsS3")

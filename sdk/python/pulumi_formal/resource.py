@@ -586,6 +586,38 @@ class Resource(pulumi.CustomResource):
         __props__.__dict__["termination_protection"] = termination_protection
         return Resource(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            aliases: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            created_at: pulumi.Input[Optional[_builtins.int]] = None,
+            environment: pulumi.Input[Optional[_builtins.str]] = None,
+            hostname: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            native_user_selection_cel: pulumi.Input[Optional[_builtins.str]] = None,
+            native_users_v3_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            port: pulumi.Input[Optional[_builtins.int]] = None,
+            space_id: pulumi.Input[Optional[_builtins.str]] = None,
+            tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+            technology: pulumi.Input[Optional[_builtins.str]] = None,
+            technology_provider: pulumi.Input[Optional[_builtins.str]] = None,
+            termination_protection: pulumi.Input[Optional[_builtins.bool]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["aliases"] = aliases
+        __props__["createdAt"] = created_at
+        __props__["environment"] = environment
+        __props__["hostname"] = hostname
+        __props__["name"] = name
+        __props__["nativeUserSelectionCel"] = native_user_selection_cel
+        __props__["nativeUsersV3Enabled"] = native_users_v3_enabled
+        __props__["port"] = port
+        __props__["spaceId"] = space_id
+        __props__["tags"] = tags
+        __props__["technology"] = technology
+        __props__["technologyProvider"] = technology_provider
+        __props__["terminationProtection"] = termination_protection
+        return pulumi.runtime.exists_resource(None, 'formal:index/resource:Resource', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def aliases(self) -> pulumi.Output[Optional[Sequence[_builtins.str]]]:

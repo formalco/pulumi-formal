@@ -135,6 +135,12 @@ func (PolicyDataLoaderState) ElementType() reflect.Type {
 	return reflect.TypeOf((*policyDataLoaderState)(nil)).Elem()
 }
 
+// PolicyDataLoaderExists checks whether an existing PolicyDataLoader resource with the given ID exists.
+func PolicyDataLoaderExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *PolicyDataLoaderState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("formal:index/policyDataLoader:PolicyDataLoader", id, state, "", opts...)
+}
+
 type policyDataLoaderArgs struct {
 	// Policy data loader description.
 	Description string `pulumi:"description"`
