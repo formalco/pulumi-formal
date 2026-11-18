@@ -41,6 +41,12 @@ namespace Formal.Pulumi
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// The form status. Accepted values are `Active` and `Draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+        /// </summary>
+        [Output("status")]
+        public Output<string?> Status { get; private set; } = null!;
+
+        /// <summary>
         /// Last update time.
         /// </summary>
         [Output("updatedAt")]
@@ -117,6 +123,12 @@ namespace Formal.Pulumi
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// The form status. Accepted values are `Active` and `Draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+        /// </summary>
+        [Input("status")]
+        public Input<string>? Status { get; set; }
+
         public FormArgs()
         {
         }
@@ -154,6 +166,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The form status. Accepted values are `Active` and `Draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+        /// </summary>
+        [Input("status")]
+        public Input<string>? Status { get; set; }
 
         /// <summary>
         /// Last update time.

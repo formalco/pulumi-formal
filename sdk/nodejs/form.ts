@@ -65,6 +65,10 @@ export class Form extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
+     * The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+     */
+    declare public readonly status: pulumi.Output<string | undefined>;
+    /**
      * Last update time.
      */
     declare public /*out*/ readonly updatedAt: pulumi.Output<string>;
@@ -86,6 +90,7 @@ export class Form extends pulumi.CustomResource {
             resourceInputs["description"] = state?.description;
             resourceInputs["fields"] = state?.fields;
             resourceInputs["name"] = state?.name;
+            resourceInputs["status"] = state?.status;
             resourceInputs["updatedAt"] = state?.updatedAt;
         } else {
             const args = argsOrState as FormArgs | undefined;
@@ -95,6 +100,7 @@ export class Form extends pulumi.CustomResource {
             resourceInputs["description"] = args?.description;
             resourceInputs["fields"] = args?.fields;
             resourceInputs["name"] = args?.name;
+            resourceInputs["status"] = args?.status;
             resourceInputs["createdAt"] = undefined /*out*/;
             resourceInputs["updatedAt"] = undefined /*out*/;
         }
@@ -124,6 +130,10 @@ export interface FormState {
      */
     name?: pulumi.Input<string | undefined>;
     /**
+     * The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+     */
+    status?: pulumi.Input<string | undefined>;
+    /**
      * Last update time.
      */
     updatedAt?: pulumi.Input<string | undefined>;
@@ -145,4 +155,8 @@ export interface FormArgs {
      * The name of the form. Must be unique within the organization.
      */
     name?: pulumi.Input<string | undefined>;
+    /**
+     * The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+     */
+    status?: pulumi.Input<string | undefined>;
 }
