@@ -187,8 +187,7 @@ class NativeUserLink(pulumi.CustomResource):
                  termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
-        This resource creates assigns a Native User to a Formal Identity.
-
+        Create a NativeUserLink resource with the given unique name, props, and options.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -204,8 +203,7 @@ class NativeUserLink(pulumi.CustomResource):
                  args: NativeUserLinkArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        This resource creates assigns a Native User to a Formal Identity.
-
+        Create a NativeUserLink resource with the given unique name, props, and options.
 
         :param str resource_name: The name of the resource.
         :param NativeUserLinkArgs args: The arguments to use to populate this resource's properties.

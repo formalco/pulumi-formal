@@ -275,8 +275,7 @@ class NativeUser(pulumi.CustomResource):
                  use_as_default: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
-        This resource creates a Native User.
-
+        Create a NativeUser resource with the given unique name, props, and options.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -296,8 +295,7 @@ class NativeUser(pulumi.CustomResource):
                  args: NativeUserArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        This resource creates a Native User.
-
+        Create a NativeUser resource with the given unique name, props, and options.
 
         :param str resource_name: The name of the resource.
         :param NativeUserArgs args: The arguments to use to populate this resource's properties.

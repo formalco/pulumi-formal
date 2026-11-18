@@ -4,9 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * This resource creates a Native User.
- */
 export class NativeUser extends pulumi.CustomResource {
     /**
      * Get an existing NativeUser resource's state with the given name, ID, and optional extra

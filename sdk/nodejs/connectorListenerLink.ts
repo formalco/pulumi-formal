@@ -4,9 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Registering a Connector Listener Link with Formal.
- */
 export class ConnectorListenerLink extends pulumi.CustomResource {
     /**
      * Get an existing ConnectorListenerLink resource's state with the given name, ID, and optional extra

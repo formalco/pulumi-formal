@@ -10,9 +10,6 @@ using Pulumi;
 
 namespace Formal.Pulumi
 {
-    /// <summary>
-    /// This resource creates assigns a Native User to a Formal Identity.
-    /// </summary>
     [PulumiResourceType("formal:index/nativeUserLink:NativeUserLink")]
     public partial class NativeUserLink : global::Pulumi.CustomResource
     {

@@ -49,7 +49,7 @@ export class ConnectorListener extends pulumi.CustomResource {
     /**
      * The ID of the connector this listener is associated with.
      */
-    declare public readonly connectorId: pulumi.Output<string | undefined>;
+    declare public readonly connectorId: pulumi.Output<string>;
     /**
      * The name of the connector listener.
      */

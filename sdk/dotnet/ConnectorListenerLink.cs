@@ -10,9 +10,6 @@ using Pulumi;
 
 namespace Formal.Pulumi
 {
-    /// <summary>
-    /// Registering a Connector Listener Link with Formal.
-    /// </summary>
     [PulumiResourceType("formal:index/connectorListenerLink:ConnectorListenerLink")]
     public partial class ConnectorListenerLink : global::Pulumi.CustomResource
     {

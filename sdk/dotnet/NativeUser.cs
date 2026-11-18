@@ -10,9 +10,6 @@ using Pulumi;
 
 namespace Formal.Pulumi
 {
-    /// <summary>
-    /// This resource creates a Native User.
-    /// </summary>
     [PulumiResourceType("formal:index/nativeUser:NativeUser")]
     public partial class NativeUser : global::Pulumi.CustomResource
     {

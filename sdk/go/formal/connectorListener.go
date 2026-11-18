@@ -17,7 +17,7 @@ type ConnectorListener struct {
 	pulumi.CustomResourceState
 
 	// The ID of the connector this listener is associated with.
-	ConnectorId pulumi.StringPtrOutput `pulumi:"connectorId"`
+	ConnectorId pulumi.StringOutput `pulumi:"connectorId"`
 	// The name of the connector listener.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The listening port for this connector listener.
@@ -201,8 +201,8 @@ func (o ConnectorListenerOutput) ToConnectorListenerOutputWithContext(ctx contex
 }
 
 // The ID of the connector this listener is associated with.
-func (o ConnectorListenerOutput) ConnectorId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ConnectorListener) pulumi.StringPtrOutput { return v.ConnectorId }).(pulumi.StringPtrOutput)
+func (o ConnectorListenerOutput) ConnectorId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConnectorListener) pulumi.StringOutput { return v.ConnectorId }).(pulumi.StringOutput)
 }
 
 // The name of the connector listener.

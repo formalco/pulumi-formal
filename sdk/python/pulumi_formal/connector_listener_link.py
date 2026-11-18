@@ -139,8 +139,7 @@ class ConnectorListenerLink(pulumi.CustomResource):
                  termination_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
-        Registering a Connector Listener Link with Formal.
-
+        Create a ConnectorListenerLink resource with the given unique name, props, and options.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -155,8 +154,7 @@ class ConnectorListenerLink(pulumi.CustomResource):
                  args: ConnectorListenerLinkArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Registering a Connector Listener Link with Formal.
-
+        Create a ConnectorListenerLink resource with the given unique name, props, and options.
 
         :param str resource_name: The name of the resource.
         :param ConnectorListenerLinkArgs args: The arguments to use to populate this resource's properties.
