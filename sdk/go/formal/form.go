@@ -24,6 +24,8 @@ type Form struct {
 	Fields FormFieldArrayOutput `pulumi:"fields"`
 	// The name of the form. Must be unique within the organization.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+	Status pulumi.StringPtrOutput `pulumi:"status"`
 	// Last update time.
 	UpdatedAt pulumi.StringOutput `pulumi:"updatedAt"`
 }
@@ -69,6 +71,8 @@ type formState struct {
 	Fields []FormField `pulumi:"fields"`
 	// The name of the form. Must be unique within the organization.
 	Name *string `pulumi:"name"`
+	// The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+	Status *string `pulumi:"status"`
 	// Last update time.
 	UpdatedAt *string `pulumi:"updatedAt"`
 }
@@ -82,6 +86,8 @@ type FormState struct {
 	Fields FormFieldArrayInput
 	// The name of the form. Must be unique within the organization.
 	Name pulumi.StringPtrInput
+	// The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+	Status pulumi.StringPtrInput
 	// Last update time.
 	UpdatedAt pulumi.StringPtrInput
 }
@@ -103,6 +109,8 @@ type formArgs struct {
 	Fields []FormField `pulumi:"fields"`
 	// The name of the form. Must be unique within the organization.
 	Name *string `pulumi:"name"`
+	// The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+	Status *string `pulumi:"status"`
 }
 
 // The set of arguments for constructing a Form resource.
@@ -113,6 +121,8 @@ type FormArgs struct {
 	Fields FormFieldArrayInput
 	// The name of the form. Must be unique within the organization.
 	Name pulumi.StringPtrInput
+	// The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+	Status pulumi.StringPtrInput
 }
 
 func (FormArgs) ElementType() reflect.Type {
@@ -220,6 +230,11 @@ func (o FormOutput) Fields() FormFieldArrayOutput {
 // The name of the form. Must be unique within the organization.
 func (o FormOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Form) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+func (o FormOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Form) pulumi.StringPtrOutput { return v.Status }).(pulumi.StringPtrOutput)
 }
 
 // Last update time.

@@ -23,19 +23,23 @@ class FormArgs:
     def __init__(__self__, *,
                  fields: pulumi.Input[Sequence[pulumi.Input['FormFieldArgs']]],
                  description: pulumi.Input[Optional[_builtins.str]] = None,
-                 name: pulumi.Input[Optional[_builtins.str]] = None):
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a Form resource.
 
         :param pulumi.Input[Sequence[pulumi.Input['FormFieldArgs']]] fields: List of fields that define the form schema.
         :param pulumi.Input[_builtins.str] description: The form description.
         :param pulumi.Input[_builtins.str] name: The name of the form. Must be unique within the organization.
+        :param pulumi.Input[_builtins.str] status: The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
         """
         pulumi.set(__self__, "fields", fields)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
 
     @_builtins.property
     @pulumi.getter
@@ -73,6 +77,18 @@ class FormArgs:
     def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "status", value)
+
 
 @pulumi.input_type
 class _FormState:
@@ -81,6 +97,7 @@ class _FormState:
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  fields: pulumi.Input[Optional[Sequence[pulumi.Input['FormFieldArgs']]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
                  updated_at: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering Form resources.
@@ -89,6 +106,7 @@ class _FormState:
         :param pulumi.Input[_builtins.str] description: The form description.
         :param pulumi.Input[Sequence[pulumi.Input['FormFieldArgs']]] fields: List of fields that define the form schema.
         :param pulumi.Input[_builtins.str] name: The name of the form. Must be unique within the organization.
+        :param pulumi.Input[_builtins.str] status: The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         """
         if created_at is not None:
@@ -99,6 +117,8 @@ class _FormState:
             pulumi.set(__self__, "fields", fields)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
         if updated_at is not None:
             pulumi.set(__self__, "updated_at", updated_at)
 
@@ -151,6 +171,18 @@ class _FormState:
         pulumi.set(self, "name", value)
 
     @_builtins.property
+    @pulumi.getter
+    def status(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "status", value)
+
+    @_builtins.property
     @pulumi.getter(name="updatedAt")
     def updated_at(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -172,6 +204,7 @@ class Form(pulumi.CustomResource):
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  fields: pulumi.Input[Optional[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Forms define reusable input schemas for workflows.
@@ -182,6 +215,7 @@ class Form(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] description: The form description.
         :param pulumi.Input[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]] fields: List of fields that define the form schema.
         :param pulumi.Input[_builtins.str] name: The name of the form. Must be unique within the organization.
+        :param pulumi.Input[_builtins.str] status: The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
         """
         ...
     @overload
@@ -211,6 +245,7 @@ class Form(pulumi.CustomResource):
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  fields: pulumi.Input[Optional[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -225,6 +260,7 @@ class Form(pulumi.CustomResource):
                 raise TypeError("Missing required property 'fields'")
             __props__.__dict__["fields"] = fields
             __props__.__dict__["name"] = name
+            __props__.__dict__["status"] = status
             __props__.__dict__["created_at"] = None
             __props__.__dict__["updated_at"] = None
         super(Form, __self__).__init__(
@@ -241,6 +277,7 @@ class Form(pulumi.CustomResource):
             description: pulumi.Input[Optional[_builtins.str]] = None,
             fields: pulumi.Input[Optional[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
+            status: pulumi.Input[Optional[_builtins.str]] = None,
             updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> 'Form':
         """
         Get an existing Form resource's state with the given name, id, and optional extra
@@ -253,6 +290,7 @@ class Form(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] description: The form description.
         :param pulumi.Input[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]] fields: List of fields that define the form schema.
         :param pulumi.Input[_builtins.str] name: The name of the form. Must be unique within the organization.
+        :param pulumi.Input[_builtins.str] status: The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
         :param pulumi.Input[_builtins.str] updated_at: Last update time.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -263,6 +301,7 @@ class Form(pulumi.CustomResource):
         __props__.__dict__["description"] = description
         __props__.__dict__["fields"] = fields
         __props__.__dict__["name"] = name
+        __props__.__dict__["status"] = status
         __props__.__dict__["updated_at"] = updated_at
         return Form(resource_name, opts=opts, __props__=__props__)
 
@@ -273,12 +312,14 @@ class Form(pulumi.CustomResource):
             description: pulumi.Input[Optional[_builtins.str]] = None,
             fields: pulumi.Input[Optional[Sequence[pulumi.Input[Union['FormFieldArgs', 'FormFieldArgsDict', 'outputs.FormField']]]]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
+            status: pulumi.Input[Optional[_builtins.str]] = None,
             updated_at: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
         __props__: dict = {}
         __props__["createdAt"] = created_at
         __props__["description"] = description
         __props__["fields"] = fields
         __props__["name"] = name
+        __props__["status"] = status
         __props__["updatedAt"] = updated_at
         return pulumi.runtime.exists_resource(None, 'formal:index/form:Form', id, __props__, opts or pulumi.ResourceOptions())
 
@@ -313,6 +354,14 @@ class Form(pulumi.CustomResource):
         The name of the form. Must be unique within the organization.
         """
         return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        The form status. Accepted values are `active` and `draft`. Draft forms can't be selected or submitted from Slack or the Formal Endpoint.
+        """
+        return pulumi.get(self, "status")
 
     @_builtins.property
     @pulumi.getter(name="updatedAt")
