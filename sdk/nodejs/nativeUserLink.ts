@@ -4,9 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * This resource creates assigns a Native User to a Formal Identity.
- */
 export class NativeUserLink extends pulumi.CustomResource {
     /**
      * Get an existing NativeUserLink resource's state with the given name, ID, and optional extra

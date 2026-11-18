@@ -12,7 +12,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// This resource creates assigns a Native User to a Formal Identity.
 type NativeUserLink struct {
 	pulumi.CustomResourceState
 

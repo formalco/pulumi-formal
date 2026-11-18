@@ -12,7 +12,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// This resource creates a Native User.
 type NativeUser struct {
 	pulumi.CustomResourceState
 

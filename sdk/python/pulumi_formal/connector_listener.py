@@ -279,7 +279,7 @@ class ConnectorListener(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="connectorId")
-    def connector_id(self) -> pulumi.Output[Optional[_builtins.str]]:
+    def connector_id(self) -> pulumi.Output[_builtins.str]:
         """
         The ID of the connector this listener is associated with.
         """

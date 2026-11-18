@@ -20,7 +20,7 @@ namespace Formal.Pulumi
         /// The ID of the connector this listener is associated with.
         /// </summary>
         [Output("connectorId")]
-        public Output<string?> ConnectorId { get; private set; } = null!;
+        public Output<string> ConnectorId { get; private set; } = null!;
 
         /// <summary>
         /// The name of the connector listener.

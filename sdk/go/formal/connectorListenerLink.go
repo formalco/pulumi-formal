@@ -12,7 +12,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Registering a Connector Listener Link with Formal.
 type ConnectorListenerLink struct {
 	pulumi.CustomResourceState
 
