@@ -2599,14 +2599,14 @@
                 }
             },
             "required": [
+                "connectorId",
                 "name",
                 "port"
             ],
             "inputProperties": {
                 "connectorId": {
                     "type": "string",
-                    "description": "The ID of the connector this listener is associated with.\n",
-                    "willReplaceOnChanges": true
+                    "description": "The ID of the connector this listener is associated with.\n"
                 },
                 "name": {
                     "type": "string",
@@ -2630,8 +2630,7 @@
                 "properties": {
                     "connectorId": {
                         "type": "string",
-                        "description": "The ID of the connector this listener is associated with.\n",
-                        "willReplaceOnChanges": true
+                        "description": "The ID of the connector this listener is associated with.\n"
                     },
                     "name": {
                         "type": "string",
@@ -2651,19 +2650,18 @@
             }
         },
         "formal:index/connectorListenerLink:ConnectorListenerLink": {
-            "description": "Registering a Connector Listener Link with Formal.\n",
             "properties": {
                 "connectorId": {
                     "type": "string",
-                    "description": "The ID of the Connector Listener you want to link to a connector.\n"
+                    "description": "The ID of the Connector Listener you want to link to a connector."
                 },
                 "connectorListenerId": {
                     "type": "string",
-                    "description": "The ID of the Connector Listener you want to link to a connector.\n"
+                    "description": "The ID of the Connector Listener you want to link to a connector."
                 },
                 "terminationProtection": {
                     "type": "boolean",
-                    "description": "If set to true, this connector cannot be deleted.\n"
+                    "description": "If set to true, this connector cannot be deleted."
                 }
             },
             "required": [
@@ -2673,17 +2671,17 @@
             "inputProperties": {
                 "connectorId": {
                     "type": "string",
-                    "description": "The ID of the Connector Listener you want to link to a connector.\n",
+                    "description": "The ID of the Connector Listener you want to link to a connector.",
                     "willReplaceOnChanges": true
                 },
                 "connectorListenerId": {
                     "type": "string",
-                    "description": "The ID of the Connector Listener you want to link to a connector.\n",
+                    "description": "The ID of the Connector Listener you want to link to a connector.",
                     "willReplaceOnChanges": true
                 },
                 "terminationProtection": {
                     "type": "boolean",
-                    "description": "If set to true, this connector cannot be deleted.\n"
+                    "description": "If set to true, this connector cannot be deleted."
                 }
             },
             "requiredInputs": [
@@ -2695,17 +2693,17 @@
                 "properties": {
                     "connectorId": {
                         "type": "string",
-                        "description": "The ID of the Connector Listener you want to link to a connector.\n",
+                        "description": "The ID of the Connector Listener you want to link to a connector.",
                         "willReplaceOnChanges": true
                     },
                     "connectorListenerId": {
                         "type": "string",
-                        "description": "The ID of the Connector Listener you want to link to a connector.\n",
+                        "description": "The ID of the Connector Listener you want to link to a connector.",
                         "willReplaceOnChanges": true
                     },
                     "terminationProtection": {
                         "type": "boolean",
-                        "description": "If set to true, this connector cannot be deleted.\n"
+                        "description": "If set to true, this connector cannot be deleted."
                     }
                 },
                 "type": "object"
@@ -4977,11 +4975,10 @@
             }
         },
         "formal:index/nativeUser:NativeUser": {
-            "description": "This resource creates a Native User.\n",
             "properties": {
                 "nativeUserId": {
                     "type": "string",
-                    "description": "The username of the Native User.\n"
+                    "description": "The username of the Native User."
                 },
                 "nativeUserSecret": {
                     "type": "string",
@@ -4999,7 +4996,7 @@
                 },
                 "resourceId": {
                     "type": "string",
-                    "description": "The Sidecar ID for the resource this Native User is for.\n"
+                    "description": "The Sidecar ID for the resource this Native User is for."
                 },
                 "terminationProtection": {
                     "type": "boolean",
@@ -5017,7 +5014,7 @@
             "inputProperties": {
                 "nativeUserId": {
                     "type": "string",
-                    "description": "The username of the Native User.\n",
+                    "description": "The username of the Native User.",
                     "willReplaceOnChanges": true
                 },
                 "nativeUserSecret": {
@@ -5036,7 +5033,7 @@
                 },
                 "resourceId": {
                     "type": "string",
-                    "description": "The Sidecar ID for the resource this Native User is for.\n",
+                    "description": "The Sidecar ID for the resource this Native User is for.",
                     "willReplaceOnChanges": true
                 },
                 "terminationProtection": {
@@ -5057,7 +5054,7 @@
                 "properties": {
                     "nativeUserId": {
                         "type": "string",
-                        "description": "The username of the Native User.\n",
+                        "description": "The username of the Native User.",
                         "willReplaceOnChanges": true
                     },
                     "nativeUserSecret": {
@@ -5076,7 +5073,7 @@
                     },
                     "resourceId": {
                         "type": "string",
-                        "description": "The Sidecar ID for the resource this Native User is for.\n",
+                        "description": "The Sidecar ID for the resource this Native User is for.",
                         "willReplaceOnChanges": true
                     },
                     "terminationProtection": {
@@ -5092,27 +5089,26 @@
             }
         },
         "formal:index/nativeUserLink:NativeUserLink": {
-            "description": "This resource creates assigns a Native User to a Formal Identity.\n",
             "properties": {
                 "formalIdentityId": {
                     "type": "string",
-                    "description": "The Formal ID for the User, Group, or Resource Hostname to be linked.\n"
+                    "description": "The Formal ID for the User, Group, or Resource Hostname to be linked."
                 },
                 "formalIdentityType": {
                     "type": "string",
-                    "description": "The type of Formal Identity to be linked. Accepted values are \u003cspan pulumi-lang-nodejs=\"`user`\" pulumi-lang-dotnet=\"`User`\" pulumi-lang-go=\"`user`\" pulumi-lang-python=\"`user`\" pulumi-lang-yaml=\"`user`\" pulumi-lang-java=\"`user`\" pulumi-lang-hcl=\"`user`\"\u003e`user`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`group`\" pulumi-lang-dotnet=\"`Group`\" pulumi-lang-go=\"`group`\" pulumi-lang-python=\"`group`\" pulumi-lang-yaml=\"`group`\" pulumi-lang-java=\"`group`\" pulumi-lang-hcl=\"`group`\"\u003e`group`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`resourceHostname`\" pulumi-lang-dotnet=\"`ResourceHostname`\" pulumi-lang-go=\"`resourceHostname`\" pulumi-lang-python=\"`resource_hostname`\" pulumi-lang-yaml=\"`resourceHostname`\" pulumi-lang-java=\"`resourceHostname`\" pulumi-lang-hcl=\"`resource_hostname`\"\u003e`resourceHostname`\u003c/span\u003e.\n"
+                    "description": "The type of Formal Identity to be linked. Accepted values are \u003cspan pulumi-lang-nodejs=\"`user`\" pulumi-lang-dotnet=\"`User`\" pulumi-lang-go=\"`user`\" pulumi-lang-python=\"`user`\" pulumi-lang-yaml=\"`user`\" pulumi-lang-java=\"`user`\" pulumi-lang-hcl=\"`user`\"\u003e`user`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`group`\" pulumi-lang-dotnet=\"`Group`\" pulumi-lang-go=\"`group`\" pulumi-lang-python=\"`group`\" pulumi-lang-yaml=\"`group`\" pulumi-lang-java=\"`group`\" pulumi-lang-hcl=\"`group`\"\u003e`group`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`resourceHostname`\" pulumi-lang-dotnet=\"`ResourceHostname`\" pulumi-lang-go=\"`resourceHostname`\" pulumi-lang-python=\"`resource_hostname`\" pulumi-lang-yaml=\"`resourceHostname`\" pulumi-lang-java=\"`resourceHostname`\" pulumi-lang-hcl=\"`resource_hostname`\"\u003e`resourceHostname`\u003c/span\u003e."
                 },
                 "nativeUserId": {
                     "type": "string",
-                    "description": "The Native User ID of the Native User.\n"
+                    "description": "The Native User ID of the Native User."
                 },
                 "resourceId": {
                     "type": "string",
-                    "description": "The Resource ID of the Native User.\n"
+                    "description": "The Resource ID of the Native User."
                 },
                 "terminationProtection": {
                     "type": "boolean",
-                    "description": "If set to true, this Native User link cannot be deleted.\n"
+                    "description": "If set to true, this Native User link cannot be deleted."
                 }
             },
             "required": [
@@ -5124,21 +5120,21 @@
             "inputProperties": {
                 "formalIdentityId": {
                     "type": "string",
-                    "description": "The Formal ID for the User, Group, or Resource Hostname to be linked.\n"
+                    "description": "The Formal ID for the User, Group, or Resource Hostname to be linked."
                 },
                 "formalIdentityType": {
                     "type": "string",
-                    "description": "The type of Formal Identity to be linked. Accepted values are \u003cspan pulumi-lang-nodejs=\"`user`\" pulumi-lang-dotnet=\"`User`\" pulumi-lang-go=\"`user`\" pulumi-lang-python=\"`user`\" pulumi-lang-yaml=\"`user`\" pulumi-lang-java=\"`user`\" pulumi-lang-hcl=\"`user`\"\u003e`user`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`group`\" pulumi-lang-dotnet=\"`Group`\" pulumi-lang-go=\"`group`\" pulumi-lang-python=\"`group`\" pulumi-lang-yaml=\"`group`\" pulumi-lang-java=\"`group`\" pulumi-lang-hcl=\"`group`\"\u003e`group`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`resourceHostname`\" pulumi-lang-dotnet=\"`ResourceHostname`\" pulumi-lang-go=\"`resourceHostname`\" pulumi-lang-python=\"`resource_hostname`\" pulumi-lang-yaml=\"`resourceHostname`\" pulumi-lang-java=\"`resourceHostname`\" pulumi-lang-hcl=\"`resource_hostname`\"\u003e`resourceHostname`\u003c/span\u003e.\n",
+                    "description": "The type of Formal Identity to be linked. Accepted values are \u003cspan pulumi-lang-nodejs=\"`user`\" pulumi-lang-dotnet=\"`User`\" pulumi-lang-go=\"`user`\" pulumi-lang-python=\"`user`\" pulumi-lang-yaml=\"`user`\" pulumi-lang-java=\"`user`\" pulumi-lang-hcl=\"`user`\"\u003e`user`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`group`\" pulumi-lang-dotnet=\"`Group`\" pulumi-lang-go=\"`group`\" pulumi-lang-python=\"`group`\" pulumi-lang-yaml=\"`group`\" pulumi-lang-java=\"`group`\" pulumi-lang-hcl=\"`group`\"\u003e`group`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`resourceHostname`\" pulumi-lang-dotnet=\"`ResourceHostname`\" pulumi-lang-go=\"`resourceHostname`\" pulumi-lang-python=\"`resource_hostname`\" pulumi-lang-yaml=\"`resourceHostname`\" pulumi-lang-java=\"`resourceHostname`\" pulumi-lang-hcl=\"`resource_hostname`\"\u003e`resourceHostname`\u003c/span\u003e.",
                     "willReplaceOnChanges": true
                 },
                 "nativeUserId": {
                     "type": "string",
-                    "description": "The Native User ID of the Native User.\n",
+                    "description": "The Native User ID of the Native User.",
                     "willReplaceOnChanges": true
                 },
                 "terminationProtection": {
                     "type": "boolean",
-                    "description": "If set to true, this Native User link cannot be deleted.\n"
+                    "description": "If set to true, this Native User link cannot be deleted."
                 }
             },
             "requiredInputs": [
@@ -5151,25 +5147,25 @@
                 "properties": {
                     "formalIdentityId": {
                         "type": "string",
-                        "description": "The Formal ID for the User, Group, or Resource Hostname to be linked.\n"
+                        "description": "The Formal ID for the User, Group, or Resource Hostname to be linked."
                     },
                     "formalIdentityType": {
                         "type": "string",
-                        "description": "The type of Formal Identity to be linked. Accepted values are \u003cspan pulumi-lang-nodejs=\"`user`\" pulumi-lang-dotnet=\"`User`\" pulumi-lang-go=\"`user`\" pulumi-lang-python=\"`user`\" pulumi-lang-yaml=\"`user`\" pulumi-lang-java=\"`user`\" pulumi-lang-hcl=\"`user`\"\u003e`user`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`group`\" pulumi-lang-dotnet=\"`Group`\" pulumi-lang-go=\"`group`\" pulumi-lang-python=\"`group`\" pulumi-lang-yaml=\"`group`\" pulumi-lang-java=\"`group`\" pulumi-lang-hcl=\"`group`\"\u003e`group`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`resourceHostname`\" pulumi-lang-dotnet=\"`ResourceHostname`\" pulumi-lang-go=\"`resourceHostname`\" pulumi-lang-python=\"`resource_hostname`\" pulumi-lang-yaml=\"`resourceHostname`\" pulumi-lang-java=\"`resourceHostname`\" pulumi-lang-hcl=\"`resource_hostname`\"\u003e`resourceHostname`\u003c/span\u003e.\n",
+                        "description": "The type of Formal Identity to be linked. Accepted values are \u003cspan pulumi-lang-nodejs=\"`user`\" pulumi-lang-dotnet=\"`User`\" pulumi-lang-go=\"`user`\" pulumi-lang-python=\"`user`\" pulumi-lang-yaml=\"`user`\" pulumi-lang-java=\"`user`\" pulumi-lang-hcl=\"`user`\"\u003e`user`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`group`\" pulumi-lang-dotnet=\"`Group`\" pulumi-lang-go=\"`group`\" pulumi-lang-python=\"`group`\" pulumi-lang-yaml=\"`group`\" pulumi-lang-java=\"`group`\" pulumi-lang-hcl=\"`group`\"\u003e`group`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`resourceHostname`\" pulumi-lang-dotnet=\"`ResourceHostname`\" pulumi-lang-go=\"`resourceHostname`\" pulumi-lang-python=\"`resource_hostname`\" pulumi-lang-yaml=\"`resourceHostname`\" pulumi-lang-java=\"`resourceHostname`\" pulumi-lang-hcl=\"`resource_hostname`\"\u003e`resourceHostname`\u003c/span\u003e.",
                         "willReplaceOnChanges": true
                     },
                     "nativeUserId": {
                         "type": "string",
-                        "description": "The Native User ID of the Native User.\n",
+                        "description": "The Native User ID of the Native User.",
                         "willReplaceOnChanges": true
                     },
                     "resourceId": {
                         "type": "string",
-                        "description": "The Resource ID of the Native User.\n"
+                        "description": "The Resource ID of the Native User."
                     },
                     "terminationProtection": {
                         "type": "boolean",
-                        "description": "If set to true, this Native User link cannot be deleted.\n"
+                        "description": "If set to true, this Native User link cannot be deleted."
                     }
                 },
                 "type": "object"
