@@ -279,6 +279,10 @@ export interface IntegrationCloudGcp {
      */
     allowGcsAccess?: pulumi.Input<boolean | undefined>;
     /**
+     * Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
+     */
+    allowPubsubAccess?: pulumi.Input<boolean | undefined>;
+    /**
      * Enables resource autodiscovery for Cloud SQL instances.
      */
     enableCloudsqlInstancesAutodiscovery?: pulumi.Input<boolean | undefined>;
@@ -298,6 +302,10 @@ export interface IntegrationCloudGcp {
      * The GCP project ID this integration grants Formal access to.
      */
     projectId: pulumi.Input<string>;
+    /**
+     * Pub/Sub topics Formal may publish logs to, as full names (projects/\n\n/topics/\n\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
+     */
+    pubsubTopics?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 export interface IntegrationLogAwsS3 {
@@ -359,6 +367,17 @@ export interface IntegrationLogDatadog {
      * URL of your Datadog app.
      */
     site: pulumi.Input<string>;
+}
+
+export interface IntegrationLogGcpPubsub {
+    /**
+     * Cloud Integration ID.
+     */
+    cloudIntegrationId: pulumi.Input<string>;
+    /**
+     * Full Pub/Sub topic name: projects/\n\n/topics/\n\n.
+     */
+    topic: pulumi.Input<string>;
 }
 
 export interface IntegrationLogGcs {

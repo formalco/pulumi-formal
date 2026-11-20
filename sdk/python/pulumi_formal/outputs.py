@@ -36,6 +36,7 @@ __all__ = [
     'IntegrationLogAwsS3',
     'IntegrationLogAzureBlob',
     'IntegrationLogDatadog',
+    'IntegrationLogGcpPubsub',
     'IntegrationLogGcs',
     'IntegrationLogSplunk',
     'IntegrationMdmFleet',
@@ -1105,6 +1106,8 @@ class IntegrationCloudGcp(dict):
             suggest = "project_id"
         elif key == "allowGcsAccess":
             suggest = "allow_gcs_access"
+        elif key == "allowPubsubAccess":
+            suggest = "allow_pubsub_access"
         elif key == "enableCloudsqlInstancesAutodiscovery":
             suggest = "enable_cloudsql_instances_autodiscovery"
         elif key == "enableComputeInstancesAutodiscovery":
@@ -1113,6 +1116,8 @@ class IntegrationCloudGcp(dict):
             suggest = "enable_gke_clusters_autodiscovery"
         elif key == "gcsBuckets":
             suggest = "gcs_buckets"
+        elif key == "pubsubTopics":
+            suggest = "pubsub_topics"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in IntegrationCloudGcp. Access the value via the '{suggest}' property getter instead.")
@@ -1128,21 +1133,27 @@ class IntegrationCloudGcp(dict):
     def __init__(__self__, *,
                  project_id: _builtins.str,
                  allow_gcs_access: Optional[_builtins.bool] = None,
+                 allow_pubsub_access: Optional[_builtins.bool] = None,
                  enable_cloudsql_instances_autodiscovery: Optional[_builtins.bool] = None,
                  enable_compute_instances_autodiscovery: Optional[_builtins.bool] = None,
                  enable_gke_clusters_autodiscovery: Optional[_builtins.bool] = None,
-                 gcs_buckets: Optional[Sequence[_builtins.str]] = None):
+                 gcs_buckets: Optional[Sequence[_builtins.str]] = None,
+                 pubsub_topics: Optional[Sequence[_builtins.str]] = None):
         """
         :param _builtins.str project_id: The GCP project ID this integration grants Formal access to.
         :param _builtins.bool allow_gcs_access: Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
+        :param _builtins.bool allow_pubsub_access: Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
         :param _builtins.bool enable_cloudsql_instances_autodiscovery: Enables resource autodiscovery for Cloud SQL instances.
         :param _builtins.bool enable_compute_instances_autodiscovery: Enables resource autodiscovery for Compute Engine instances.
         :param _builtins.bool enable_gke_clusters_autodiscovery: Enables resource autodiscovery for GKE clusters.
         :param Sequence[_builtins.str] gcs_buckets: GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
+        :param Sequence[_builtins.str] pubsub_topics: Pub/Sub topics Formal may publish logs to, as full names (projects/\\n\\n/topics/\\n\\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
         """
         pulumi.set(__self__, "project_id", project_id)
         if allow_gcs_access is not None:
             pulumi.set(__self__, "allow_gcs_access", allow_gcs_access)
+        if allow_pubsub_access is not None:
+            pulumi.set(__self__, "allow_pubsub_access", allow_pubsub_access)
         if enable_cloudsql_instances_autodiscovery is not None:
             pulumi.set(__self__, "enable_cloudsql_instances_autodiscovery", enable_cloudsql_instances_autodiscovery)
         if enable_compute_instances_autodiscovery is not None:
@@ -1151,6 +1162,8 @@ class IntegrationCloudGcp(dict):
             pulumi.set(__self__, "enable_gke_clusters_autodiscovery", enable_gke_clusters_autodiscovery)
         if gcs_buckets is not None:
             pulumi.set(__self__, "gcs_buckets", gcs_buckets)
+        if pubsub_topics is not None:
+            pulumi.set(__self__, "pubsub_topics", pubsub_topics)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
@@ -1167,6 +1180,14 @@ class IntegrationCloudGcp(dict):
         Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
         """
         return pulumi.get(self, "allow_gcs_access")
+
+    @_builtins.property
+    @pulumi.getter(name="allowPubsubAccess")
+    def allow_pubsub_access(self) -> Optional[_builtins.bool]:
+        """
+        Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
+        """
+        return pulumi.get(self, "allow_pubsub_access")
 
     @_builtins.property
     @pulumi.getter(name="enableCloudsqlInstancesAutodiscovery")
@@ -1199,6 +1220,14 @@ class IntegrationCloudGcp(dict):
         GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
         """
         return pulumi.get(self, "gcs_buckets")
+
+    @_builtins.property
+    @pulumi.getter(name="pubsubTopics")
+    def pubsub_topics(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        Pub/Sub topics Formal may publish logs to, as full names (projects/\\n\\n/topics/\\n\\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
+        """
+        return pulumi.get(self, "pubsub_topics")
 
 
 @pulumi.output_type
@@ -1431,6 +1460,52 @@ class IntegrationLogDatadog(dict):
         URL of your Datadog app.
         """
         return pulumi.get(self, "site")
+
+
+@pulumi.output_type
+class IntegrationLogGcpPubsub(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "cloudIntegrationId":
+            suggest = "cloud_integration_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in IntegrationLogGcpPubsub. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        IntegrationLogGcpPubsub.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        IntegrationLogGcpPubsub.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cloud_integration_id: _builtins.str,
+                 topic: _builtins.str):
+        """
+        :param _builtins.str cloud_integration_id: Cloud Integration ID.
+        :param _builtins.str topic: Full Pub/Sub topic name: projects/\\n\\n/topics/\\n\\n.
+        """
+        pulumi.set(__self__, "cloud_integration_id", cloud_integration_id)
+        pulumi.set(__self__, "topic", topic)
+
+    @_builtins.property
+    @pulumi.getter(name="cloudIntegrationId")
+    def cloud_integration_id(self) -> _builtins.str:
+        """
+        Cloud Integration ID.
+        """
+        return pulumi.get(self, "cloud_integration_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def topic(self) -> _builtins.str:
+        """
+        Full Pub/Sub topic name: projects/\\n\\n/topics/\\n\\n.
+        """
+        return pulumi.get(self, "topic")
 
 
 @pulumi.output_type

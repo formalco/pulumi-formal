@@ -179,6 +179,10 @@ export class IntegrationCloud extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly gcpAllowGcsAccess: pulumi.Output<boolean>;
     /**
+     * Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
+     */
+    declare public /*out*/ readonly gcpAllowPubsubAccess: pulumi.Output<boolean>;
+    /**
      * Whether GCP Cloud SQL instances autodiscovery is enabled or not.
      */
     declare public /*out*/ readonly gcpEnableCloudsqlInstancesAutodiscovery: pulumi.Output<boolean>;
@@ -202,6 +206,10 @@ export class IntegrationCloud extends pulumi.CustomResource {
      * The GCP project ID this integration grants Formal access to.
      */
     declare public /*out*/ readonly gcpProjectId: pulumi.Output<string>;
+    /**
+     * The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
+     */
+    declare public /*out*/ readonly gcpPubsubTopics: pulumi.Output<string[]>;
     /**
      * The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
      *
@@ -272,12 +280,14 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["cloudRegion"] = state?.cloudRegion;
             resourceInputs["gcp"] = state?.gcp;
             resourceInputs["gcpAllowGcsAccess"] = state?.gcpAllowGcsAccess;
+            resourceInputs["gcpAllowPubsubAccess"] = state?.gcpAllowPubsubAccess;
             resourceInputs["gcpEnableCloudsqlInstancesAutodiscovery"] = state?.gcpEnableCloudsqlInstancesAutodiscovery;
             resourceInputs["gcpEnableComputeInstancesAutodiscovery"] = state?.gcpEnableComputeInstancesAutodiscovery;
             resourceInputs["gcpEnableGkeClustersAutodiscovery"] = state?.gcpEnableGkeClustersAutodiscovery;
             resourceInputs["gcpGcsBuckets"] = state?.gcpGcsBuckets;
             resourceInputs["gcpPermissions"] = state?.gcpPermissions;
             resourceInputs["gcpProjectId"] = state?.gcpProjectId;
+            resourceInputs["gcpPubsubTopics"] = state?.gcpPubsubTopics;
             resourceInputs["gcpRoles"] = state?.gcpRoles;
             resourceInputs["gcpServiceAccountEmail"] = state?.gcpServiceAccountEmail;
             resourceInputs["gcpWorkloadIdentityPoolProvider"] = state?.gcpWorkloadIdentityPoolProvider;
@@ -319,12 +329,14 @@ export class IntegrationCloud extends pulumi.CustomResource {
             resourceInputs["azureSubscriptionId"] = undefined /*out*/;
             resourceInputs["azureTenantId"] = undefined /*out*/;
             resourceInputs["gcpAllowGcsAccess"] = undefined /*out*/;
+            resourceInputs["gcpAllowPubsubAccess"] = undefined /*out*/;
             resourceInputs["gcpEnableCloudsqlInstancesAutodiscovery"] = undefined /*out*/;
             resourceInputs["gcpEnableComputeInstancesAutodiscovery"] = undefined /*out*/;
             resourceInputs["gcpEnableGkeClustersAutodiscovery"] = undefined /*out*/;
             resourceInputs["gcpGcsBuckets"] = undefined /*out*/;
             resourceInputs["gcpPermissions"] = undefined /*out*/;
             resourceInputs["gcpProjectId"] = undefined /*out*/;
+            resourceInputs["gcpPubsubTopics"] = undefined /*out*/;
             resourceInputs["gcpRoles"] = undefined /*out*/;
             resourceInputs["gcpServiceAccountEmail"] = undefined /*out*/;
             resourceInputs["gcpWorkloadIdentityPoolProvider"] = undefined /*out*/;
@@ -469,6 +481,10 @@ export interface IntegrationCloudState {
      */
     gcpAllowGcsAccess?: pulumi.Input<boolean | undefined>;
     /**
+     * Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
+     */
+    gcpAllowPubsubAccess?: pulumi.Input<boolean | undefined>;
+    /**
      * Whether GCP Cloud SQL instances autodiscovery is enabled or not.
      */
     gcpEnableCloudsqlInstancesAutodiscovery?: pulumi.Input<boolean | undefined>;
@@ -492,6 +508,10 @@ export interface IntegrationCloudState {
      * The GCP project ID this integration grants Formal access to.
      */
     gcpProjectId?: pulumi.Input<string | undefined>;
+    /**
+     * The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
+     */
+    gcpPubsubTopics?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
      *

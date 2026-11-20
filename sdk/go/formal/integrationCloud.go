@@ -81,6 +81,8 @@ type IntegrationCloud struct {
 	Gcp IntegrationCloudGcpPtrOutput `pulumi:"gcp"`
 	// Whether the Cloud Integration is allowed to write logs to GCS.
 	GcpAllowGcsAccess pulumi.BoolOutput `pulumi:"gcpAllowGcsAccess"`
+	// Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
+	GcpAllowPubsubAccess pulumi.BoolOutput `pulumi:"gcpAllowPubsubAccess"`
 	// Whether GCP Cloud SQL instances autodiscovery is enabled or not.
 	GcpEnableCloudsqlInstancesAutodiscovery pulumi.BoolOutput `pulumi:"gcpEnableCloudsqlInstancesAutodiscovery"`
 	// Whether GCP Compute Engine instances autodiscovery is enabled or not.
@@ -93,6 +95,8 @@ type IntegrationCloud struct {
 	GcpPermissions pulumi.StringArrayOutput `pulumi:"gcpPermissions"`
 	// The GCP project ID this integration grants Formal access to.
 	GcpProjectId pulumi.StringOutput `pulumi:"gcpProjectId"`
+	// The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
+	GcpPubsubTopics pulumi.StringArrayOutput `pulumi:"gcpPubsubTopics"`
 	// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
 	//
 	// Deprecated: Use gcp_permissions, which the GCP module grants through a single custom role.
@@ -205,6 +209,8 @@ type integrationCloudState struct {
 	Gcp *IntegrationCloudGcp `pulumi:"gcp"`
 	// Whether the Cloud Integration is allowed to write logs to GCS.
 	GcpAllowGcsAccess *bool `pulumi:"gcpAllowGcsAccess"`
+	// Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
+	GcpAllowPubsubAccess *bool `pulumi:"gcpAllowPubsubAccess"`
 	// Whether GCP Cloud SQL instances autodiscovery is enabled or not.
 	GcpEnableCloudsqlInstancesAutodiscovery *bool `pulumi:"gcpEnableCloudsqlInstancesAutodiscovery"`
 	// Whether GCP Compute Engine instances autodiscovery is enabled or not.
@@ -217,6 +223,8 @@ type integrationCloudState struct {
 	GcpPermissions []string `pulumi:"gcpPermissions"`
 	// The GCP project ID this integration grants Formal access to.
 	GcpProjectId *string `pulumi:"gcpProjectId"`
+	// The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
+	GcpPubsubTopics []string `pulumi:"gcpPubsubTopics"`
 	// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
 	//
 	// Deprecated: Use gcp_permissions, which the GCP module grants through a single custom role.
@@ -300,6 +308,8 @@ type IntegrationCloudState struct {
 	Gcp IntegrationCloudGcpPtrInput
 	// Whether the Cloud Integration is allowed to write logs to GCS.
 	GcpAllowGcsAccess pulumi.BoolPtrInput
+	// Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
+	GcpAllowPubsubAccess pulumi.BoolPtrInput
 	// Whether GCP Cloud SQL instances autodiscovery is enabled or not.
 	GcpEnableCloudsqlInstancesAutodiscovery pulumi.BoolPtrInput
 	// Whether GCP Compute Engine instances autodiscovery is enabled or not.
@@ -312,6 +322,8 @@ type IntegrationCloudState struct {
 	GcpPermissions pulumi.StringArrayInput
 	// The GCP project ID this integration grants Formal access to.
 	GcpProjectId pulumi.StringPtrInput
+	// The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
+	GcpPubsubTopics pulumi.StringArrayInput
 	// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
 	//
 	// Deprecated: Use gcp_permissions, which the GCP module grants through a single custom role.
@@ -622,6 +634,11 @@ func (o IntegrationCloudOutput) GcpAllowGcsAccess() pulumi.BoolOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.GcpAllowGcsAccess }).(pulumi.BoolOutput)
 }
 
+// Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
+func (o IntegrationCloudOutput) GcpAllowPubsubAccess() pulumi.BoolOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.GcpAllowPubsubAccess }).(pulumi.BoolOutput)
+}
+
 // Whether GCP Cloud SQL instances autodiscovery is enabled or not.
 func (o IntegrationCloudOutput) GcpEnableCloudsqlInstancesAutodiscovery() pulumi.BoolOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.BoolOutput { return v.GcpEnableCloudsqlInstancesAutodiscovery }).(pulumi.BoolOutput)
@@ -650,6 +667,11 @@ func (o IntegrationCloudOutput) GcpPermissions() pulumi.StringArrayOutput {
 // The GCP project ID this integration grants Formal access to.
 func (o IntegrationCloudOutput) GcpProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringOutput { return v.GcpProjectId }).(pulumi.StringOutput)
+}
+
+// The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
+func (o IntegrationCloudOutput) GcpPubsubTopics() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloud) pulumi.StringArrayOutput { return v.GcpPubsubTopics }).(pulumi.StringArrayOutput)
 }
 
 // The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.

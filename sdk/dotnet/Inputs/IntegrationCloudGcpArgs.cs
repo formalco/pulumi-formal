@@ -20,6 +20,12 @@ namespace Formal.Pulumi.Inputs
         public Input<bool>? AllowGcsAccess { get; set; }
 
         /// <summary>
+        /// Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
+        /// </summary>
+        [Input("allowPubsubAccess")]
+        public Input<bool>? AllowPubsubAccess { get; set; }
+
+        /// <summary>
         /// Enables resource autodiscovery for Cloud SQL instances.
         /// </summary>
         [Input("enableCloudsqlInstancesAutodiscovery")]
@@ -54,6 +60,18 @@ namespace Formal.Pulumi.Inputs
         /// </summary>
         [Input("projectId", required: true)]
         public Input<string> ProjectId { get; set; } = null!;
+
+        [Input("pubsubTopics")]
+        private InputList<string>? _pubsubTopics;
+
+        /// <summary>
+        /// Pub/Sub topics Formal may publish logs to, as full names (projects/\n\n/topics/\n\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
+        /// </summary>
+        public InputList<string> PubsubTopics
+        {
+            get => _pubsubTopics ?? (_pubsubTopics = new InputList<string>());
+            set => _pubsubTopics = value;
+        }
 
         public IntegrationCloudGcpArgs()
         {

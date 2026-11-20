@@ -209,6 +209,12 @@ namespace Formal.Pulumi
         public Output<bool> GcpAllowGcsAccess { get; private set; } = null!;
 
         /// <summary>
+        /// Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
+        /// </summary>
+        [Output("gcpAllowPubsubAccess")]
+        public Output<bool> GcpAllowPubsubAccess { get; private set; } = null!;
+
+        /// <summary>
         /// Whether GCP Cloud SQL instances autodiscovery is enabled or not.
         /// </summary>
         [Output("gcpEnableCloudsqlInstancesAutodiscovery")]
@@ -243,6 +249,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Output("gcpProjectId")]
         public Output<string> GcpProjectId { get; private set; } = null!;
+
+        /// <summary>
+        /// The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
+        /// </summary>
+        [Output("gcpPubsubTopics")]
+        public Output<ImmutableArray<string>> GcpPubsubTopics { get; private set; } = null!;
 
         /// <summary>
         /// The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
@@ -583,6 +595,12 @@ namespace Formal.Pulumi
         public Input<bool>? GcpAllowGcsAccess { get; set; }
 
         /// <summary>
+        /// Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
+        /// </summary>
+        [Input("gcpAllowPubsubAccess")]
+        public Input<bool>? GcpAllowPubsubAccess { get; set; }
+
+        /// <summary>
         /// Whether GCP Cloud SQL instances autodiscovery is enabled or not.
         /// </summary>
         [Input("gcpEnableCloudsqlInstancesAutodiscovery")]
@@ -629,6 +647,18 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("gcpProjectId")]
         public Input<string>? GcpProjectId { get; set; }
+
+        [Input("gcpPubsubTopics")]
+        private InputList<string>? _gcpPubsubTopics;
+
+        /// <summary>
+        /// The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
+        /// </summary>
+        public InputList<string> GcpPubsubTopics
+        {
+            get => _gcpPubsubTopics ?? (_gcpPubsubTopics = new InputList<string>());
+            set => _gcpPubsubTopics = value;
+        }
 
         [Input("gcpRoles")]
         private InputList<string>? _gcpRoles;

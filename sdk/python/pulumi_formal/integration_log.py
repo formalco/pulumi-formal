@@ -24,6 +24,7 @@ class IntegrationLogArgs:
                  aws_s3: pulumi.Input[Optional['IntegrationLogAwsS3Args']] = None,
                  azure_blob: pulumi.Input[Optional['IntegrationLogAzureBlobArgs']] = None,
                  datadog: pulumi.Input[Optional['IntegrationLogDatadogArgs']] = None,
+                 gcp_pubsub: pulumi.Input[Optional['IntegrationLogGcpPubsubArgs']] = None,
                  gcs: pulumi.Input[Optional['IntegrationLogGcsArgs']] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  splunk: pulumi.Input[Optional['IntegrationLogSplunkArgs']] = None):
@@ -33,6 +34,7 @@ class IntegrationLogArgs:
         :param pulumi.Input['IntegrationLogAwsS3Args'] aws_s3: Configuration block for AWS S3 integration.
         :param pulumi.Input['IntegrationLogAzureBlobArgs'] azure_blob: Configuration block for Azure Blob Storage integration.
         :param pulumi.Input['IntegrationLogDatadogArgs'] datadog: Configuration block for Datadog integration.
+        :param pulumi.Input['IntegrationLogGcpPubsubArgs'] gcp_pubsub: Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
         :param pulumi.Input['IntegrationLogGcsArgs'] gcs: Configuration block for Google Cloud Storage integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         :param pulumi.Input['IntegrationLogSplunkArgs'] splunk: Configuration block for Splunk integration.
@@ -43,6 +45,8 @@ class IntegrationLogArgs:
             pulumi.set(__self__, "azure_blob", azure_blob)
         if datadog is not None:
             pulumi.set(__self__, "datadog", datadog)
+        if gcp_pubsub is not None:
+            pulumi.set(__self__, "gcp_pubsub", gcp_pubsub)
         if gcs is not None:
             pulumi.set(__self__, "gcs", gcs)
         if name is not None:
@@ -85,6 +89,18 @@ class IntegrationLogArgs:
     @datadog.setter
     def datadog(self, value: pulumi.Input[Optional['IntegrationLogDatadogArgs']]):
         pulumi.set(self, "datadog", value)
+
+    @_builtins.property
+    @pulumi.getter(name="gcpPubsub")
+    def gcp_pubsub(self) -> pulumi.Input[Optional['IntegrationLogGcpPubsubArgs']]:
+        """
+        Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+        """
+        return pulumi.get(self, "gcp_pubsub")
+
+    @gcp_pubsub.setter
+    def gcp_pubsub(self, value: pulumi.Input[Optional['IntegrationLogGcpPubsubArgs']]):
+        pulumi.set(self, "gcp_pubsub", value)
 
     @_builtins.property
     @pulumi.getter
@@ -129,6 +145,7 @@ class _IntegrationLogState:
                  aws_s3: pulumi.Input[Optional['IntegrationLogAwsS3Args']] = None,
                  azure_blob: pulumi.Input[Optional['IntegrationLogAzureBlobArgs']] = None,
                  datadog: pulumi.Input[Optional['IntegrationLogDatadogArgs']] = None,
+                 gcp_pubsub: pulumi.Input[Optional['IntegrationLogGcpPubsubArgs']] = None,
                  gcs: pulumi.Input[Optional['IntegrationLogGcsArgs']] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  splunk: pulumi.Input[Optional['IntegrationLogSplunkArgs']] = None):
@@ -138,6 +155,7 @@ class _IntegrationLogState:
         :param pulumi.Input['IntegrationLogAwsS3Args'] aws_s3: Configuration block for AWS S3 integration.
         :param pulumi.Input['IntegrationLogAzureBlobArgs'] azure_blob: Configuration block for Azure Blob Storage integration.
         :param pulumi.Input['IntegrationLogDatadogArgs'] datadog: Configuration block for Datadog integration.
+        :param pulumi.Input['IntegrationLogGcpPubsubArgs'] gcp_pubsub: Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
         :param pulumi.Input['IntegrationLogGcsArgs'] gcs: Configuration block for Google Cloud Storage integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         :param pulumi.Input['IntegrationLogSplunkArgs'] splunk: Configuration block for Splunk integration.
@@ -148,6 +166,8 @@ class _IntegrationLogState:
             pulumi.set(__self__, "azure_blob", azure_blob)
         if datadog is not None:
             pulumi.set(__self__, "datadog", datadog)
+        if gcp_pubsub is not None:
+            pulumi.set(__self__, "gcp_pubsub", gcp_pubsub)
         if gcs is not None:
             pulumi.set(__self__, "gcs", gcs)
         if name is not None:
@@ -190,6 +210,18 @@ class _IntegrationLogState:
     @datadog.setter
     def datadog(self, value: pulumi.Input[Optional['IntegrationLogDatadogArgs']]):
         pulumi.set(self, "datadog", value)
+
+    @_builtins.property
+    @pulumi.getter(name="gcpPubsub")
+    def gcp_pubsub(self) -> pulumi.Input[Optional['IntegrationLogGcpPubsubArgs']]:
+        """
+        Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+        """
+        return pulumi.get(self, "gcp_pubsub")
+
+    @gcp_pubsub.setter
+    def gcp_pubsub(self, value: pulumi.Input[Optional['IntegrationLogGcpPubsubArgs']]):
+        pulumi.set(self, "gcp_pubsub", value)
 
     @_builtins.property
     @pulumi.getter
@@ -237,6 +269,7 @@ class IntegrationLog(pulumi.CustomResource):
                  aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']]] = None,
                  azure_blob: pulumi.Input[Optional[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']]] = None,
                  datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']]] = None,
+                 gcp_pubsub: pulumi.Input[Optional[Union['IntegrationLogGcpPubsubArgs', 'IntegrationLogGcpPubsubArgsDict', 'outputs.IntegrationLogGcpPubsub']]] = None,
                  gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']]] = None,
@@ -250,6 +283,7 @@ class IntegrationLog(pulumi.CustomResource):
         :param pulumi.Input[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']] aws_s3: Configuration block for AWS S3 integration.
         :param pulumi.Input[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']] azure_blob: Configuration block for Azure Blob Storage integration.
         :param pulumi.Input[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']] datadog: Configuration block for Datadog integration.
+        :param pulumi.Input[Union['IntegrationLogGcpPubsubArgs', 'IntegrationLogGcpPubsubArgsDict', 'outputs.IntegrationLogGcpPubsub']] gcp_pubsub: Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
         :param pulumi.Input[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']] gcs: Configuration block for Google Cloud Storage integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         :param pulumi.Input[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']] splunk: Configuration block for Splunk integration.
@@ -282,6 +316,7 @@ class IntegrationLog(pulumi.CustomResource):
                  aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']]] = None,
                  azure_blob: pulumi.Input[Optional[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']]] = None,
                  datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']]] = None,
+                 gcp_pubsub: pulumi.Input[Optional[Union['IntegrationLogGcpPubsubArgs', 'IntegrationLogGcpPubsubArgsDict', 'outputs.IntegrationLogGcpPubsub']]] = None,
                  gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']]] = None,
@@ -297,6 +332,7 @@ class IntegrationLog(pulumi.CustomResource):
             __props__.__dict__["aws_s3"] = aws_s3
             __props__.__dict__["azure_blob"] = azure_blob
             __props__.__dict__["datadog"] = datadog
+            __props__.__dict__["gcp_pubsub"] = gcp_pubsub
             __props__.__dict__["gcs"] = gcs
             __props__.__dict__["name"] = name
             __props__.__dict__["splunk"] = splunk
@@ -313,6 +349,7 @@ class IntegrationLog(pulumi.CustomResource):
             aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']]] = None,
             azure_blob: pulumi.Input[Optional[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']]] = None,
             datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']]] = None,
+            gcp_pubsub: pulumi.Input[Optional[Union['IntegrationLogGcpPubsubArgs', 'IntegrationLogGcpPubsubArgsDict', 'outputs.IntegrationLogGcpPubsub']]] = None,
             gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']]] = None) -> 'IntegrationLog':
@@ -326,6 +363,7 @@ class IntegrationLog(pulumi.CustomResource):
         :param pulumi.Input[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']] aws_s3: Configuration block for AWS S3 integration.
         :param pulumi.Input[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']] azure_blob: Configuration block for Azure Blob Storage integration.
         :param pulumi.Input[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']] datadog: Configuration block for Datadog integration.
+        :param pulumi.Input[Union['IntegrationLogGcpPubsubArgs', 'IntegrationLogGcpPubsubArgsDict', 'outputs.IntegrationLogGcpPubsub']] gcp_pubsub: Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
         :param pulumi.Input[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']] gcs: Configuration block for Google Cloud Storage integration.
         :param pulumi.Input[_builtins.str] name: Friendly name for the Integration app.
         :param pulumi.Input[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']] splunk: Configuration block for Splunk integration.
@@ -337,6 +375,7 @@ class IntegrationLog(pulumi.CustomResource):
         __props__.__dict__["aws_s3"] = aws_s3
         __props__.__dict__["azure_blob"] = azure_blob
         __props__.__dict__["datadog"] = datadog
+        __props__.__dict__["gcp_pubsub"] = gcp_pubsub
         __props__.__dict__["gcs"] = gcs
         __props__.__dict__["name"] = name
         __props__.__dict__["splunk"] = splunk
@@ -348,6 +387,7 @@ class IntegrationLog(pulumi.CustomResource):
             aws_s3: pulumi.Input[Optional[Union['IntegrationLogAwsS3Args', 'IntegrationLogAwsS3ArgsDict', 'outputs.IntegrationLogAwsS3']]] = None,
             azure_blob: pulumi.Input[Optional[Union['IntegrationLogAzureBlobArgs', 'IntegrationLogAzureBlobArgsDict', 'outputs.IntegrationLogAzureBlob']]] = None,
             datadog: pulumi.Input[Optional[Union['IntegrationLogDatadogArgs', 'IntegrationLogDatadogArgsDict', 'outputs.IntegrationLogDatadog']]] = None,
+            gcp_pubsub: pulumi.Input[Optional[Union['IntegrationLogGcpPubsubArgs', 'IntegrationLogGcpPubsubArgsDict', 'outputs.IntegrationLogGcpPubsub']]] = None,
             gcs: pulumi.Input[Optional[Union['IntegrationLogGcsArgs', 'IntegrationLogGcsArgsDict', 'outputs.IntegrationLogGcs']]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             splunk: pulumi.Input[Optional[Union['IntegrationLogSplunkArgs', 'IntegrationLogSplunkArgsDict', 'outputs.IntegrationLogSplunk']]] = None) -> pulumi.Output[bool]:
@@ -355,6 +395,7 @@ class IntegrationLog(pulumi.CustomResource):
         __props__["awsS3"] = aws_s3
         __props__["azureBlob"] = azure_blob
         __props__["datadog"] = datadog
+        __props__["gcpPubsub"] = gcp_pubsub
         __props__["gcs"] = gcs
         __props__["name"] = name
         __props__["splunk"] = splunk
@@ -383,6 +424,14 @@ class IntegrationLog(pulumi.CustomResource):
         Configuration block for Datadog integration.
         """
         return pulumi.get(self, "datadog")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpPubsub")
+    def gcp_pubsub(self) -> pulumi.Output[Optional['outputs.IntegrationLogGcpPubsub']]:
+        """
+        Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+        """
+        return pulumi.get(self, "gcp_pubsub")
 
     @_builtins.property
     @pulumi.getter
