@@ -183,6 +183,9 @@
                             "fields": {
                                 "gcs_buckets": {
                                     "maxItemsOne": false
+                                },
+                                "pubsub_topics": {
+                                    "maxItemsOne": false
                                 }
                             }
                         }
@@ -191,6 +194,9 @@
                         "maxItemsOne": false
                     },
                     "gcp_permissions": {
+                        "maxItemsOne": false
+                    },
+                    "gcp_pubsub_topics": {
                         "maxItemsOne": false
                     },
                     "gcp_roles": {
@@ -217,6 +223,9 @@
                         "maxItemsOne": true
                     },
                     "datadog": {
+                        "maxItemsOne": true
+                    },
+                    "gcp_pubsub": {
                         "maxItemsOne": true
                     },
                     "gcs": {
