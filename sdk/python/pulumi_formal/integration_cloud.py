@@ -162,12 +162,14 @@ class _IntegrationCloudState:
                  cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
                  gcp: pulumi.Input[Optional['IntegrationCloudGcpArgs']] = None,
                  gcp_allow_gcs_access: pulumi.Input[Optional[_builtins.bool]] = None,
+                 gcp_allow_pubsub_access: pulumi.Input[Optional[_builtins.bool]] = None,
                  gcp_enable_cloudsql_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  gcp_enable_compute_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  gcp_enable_gke_clusters_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  gcp_gcs_buckets: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  gcp_permissions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  gcp_project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 gcp_pubsub_topics: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  gcp_roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  gcp_service_account_email: pulumi.Input[Optional[_builtins.str]] = None,
                  gcp_workload_identity_pool_provider: pulumi.Input[Optional[_builtins.str]] = None,
@@ -208,12 +210,14 @@ class _IntegrationCloudState:
         :param pulumi.Input[_builtins.str] cloud_region: Region of the cloud provider. (AWS only)
         :param pulumi.Input['IntegrationCloudGcpArgs'] gcp: Configuration block for GCP integration.
         :param pulumi.Input[_builtins.bool] gcp_allow_gcs_access: Whether the Cloud Integration is allowed to write logs to GCS.
+        :param pulumi.Input[_builtins.bool] gcp_allow_pubsub_access: Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
         :param pulumi.Input[_builtins.bool] gcp_enable_cloudsql_instances_autodiscovery: Whether GCP Cloud SQL instances autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] gcp_enable_compute_instances_autodiscovery: Whether GCP Compute Engine instances autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] gcp_enable_gke_clusters_autodiscovery: Whether GCP GKE clusters autodiscovery is enabled or not.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_gcs_buckets: The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_permissions: The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
         :param pulumi.Input[_builtins.str] gcp_project_id: The GCP project ID this integration grants Formal access to.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_pubsub_topics: The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_roles: The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
         :param pulumi.Input[_builtins.str] gcp_service_account_email: The GCP service account email created for this integration.
         :param pulumi.Input[_builtins.str] gcp_workload_identity_pool_provider: The GCP workload identity pool provider created for this integration.
@@ -287,6 +291,8 @@ class _IntegrationCloudState:
             pulumi.set(__self__, "gcp", gcp)
         if gcp_allow_gcs_access is not None:
             pulumi.set(__self__, "gcp_allow_gcs_access", gcp_allow_gcs_access)
+        if gcp_allow_pubsub_access is not None:
+            pulumi.set(__self__, "gcp_allow_pubsub_access", gcp_allow_pubsub_access)
         if gcp_enable_cloudsql_instances_autodiscovery is not None:
             pulumi.set(__self__, "gcp_enable_cloudsql_instances_autodiscovery", gcp_enable_cloudsql_instances_autodiscovery)
         if gcp_enable_compute_instances_autodiscovery is not None:
@@ -299,6 +305,8 @@ class _IntegrationCloudState:
             pulumi.set(__self__, "gcp_permissions", gcp_permissions)
         if gcp_project_id is not None:
             pulumi.set(__self__, "gcp_project_id", gcp_project_id)
+        if gcp_pubsub_topics is not None:
+            pulumi.set(__self__, "gcp_pubsub_topics", gcp_pubsub_topics)
         if gcp_roles is not None:
             warnings.warn("""Use gcp_permissions, which the GCP module grants through a single custom role.""", DeprecationWarning)
             pulumi.log.warn("""gcp_roles is deprecated: Use gcp_permissions, which the GCP module grants through a single custom role.""")
@@ -702,6 +710,18 @@ class _IntegrationCloudState:
         pulumi.set(self, "gcp_allow_gcs_access", value)
 
     @_builtins.property
+    @pulumi.getter(name="gcpAllowPubsubAccess")
+    def gcp_allow_pubsub_access(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
+        """
+        return pulumi.get(self, "gcp_allow_pubsub_access")
+
+    @gcp_allow_pubsub_access.setter
+    def gcp_allow_pubsub_access(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "gcp_allow_pubsub_access", value)
+
+    @_builtins.property
     @pulumi.getter(name="gcpEnableCloudsqlInstancesAutodiscovery")
     def gcp_enable_cloudsql_instances_autodiscovery(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -772,6 +792,18 @@ class _IntegrationCloudState:
     @gcp_project_id.setter
     def gcp_project_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "gcp_project_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="gcpPubsubTopics")
+    def gcp_pubsub_topics(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
+        """
+        return pulumi.get(self, "gcp_pubsub_topics")
+
+    @gcp_pubsub_topics.setter
+    def gcp_pubsub_topics(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "gcp_pubsub_topics", value)
 
     @_builtins.property
     @pulumi.getter(name="gcpRoles")
@@ -936,12 +968,14 @@ class IntegrationCloud(pulumi.CustomResource):
             __props__.__dict__["azure_subscription_id"] = None
             __props__.__dict__["azure_tenant_id"] = None
             __props__.__dict__["gcp_allow_gcs_access"] = None
+            __props__.__dict__["gcp_allow_pubsub_access"] = None
             __props__.__dict__["gcp_enable_cloudsql_instances_autodiscovery"] = None
             __props__.__dict__["gcp_enable_compute_instances_autodiscovery"] = None
             __props__.__dict__["gcp_enable_gke_clusters_autodiscovery"] = None
             __props__.__dict__["gcp_gcs_buckets"] = None
             __props__.__dict__["gcp_permissions"] = None
             __props__.__dict__["gcp_project_id"] = None
+            __props__.__dict__["gcp_pubsub_topics"] = None
             __props__.__dict__["gcp_roles"] = None
             __props__.__dict__["gcp_service_account_email"] = None
             __props__.__dict__["gcp_workload_identity_pool_provider"] = None
@@ -987,12 +1021,14 @@ class IntegrationCloud(pulumi.CustomResource):
             cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
             gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict', 'outputs.IntegrationCloudGcp']]] = None,
             gcp_allow_gcs_access: pulumi.Input[Optional[_builtins.bool]] = None,
+            gcp_allow_pubsub_access: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_enable_cloudsql_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_enable_compute_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_enable_gke_clusters_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_gcs_buckets: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             gcp_permissions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             gcp_project_id: pulumi.Input[Optional[_builtins.str]] = None,
+            gcp_pubsub_topics: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             gcp_roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             gcp_service_account_email: pulumi.Input[Optional[_builtins.str]] = None,
             gcp_workload_identity_pool_provider: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1037,12 +1073,14 @@ class IntegrationCloud(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] cloud_region: Region of the cloud provider. (AWS only)
         :param pulumi.Input[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict', 'outputs.IntegrationCloudGcp']] gcp: Configuration block for GCP integration.
         :param pulumi.Input[_builtins.bool] gcp_allow_gcs_access: Whether the Cloud Integration is allowed to write logs to GCS.
+        :param pulumi.Input[_builtins.bool] gcp_allow_pubsub_access: Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
         :param pulumi.Input[_builtins.bool] gcp_enable_cloudsql_instances_autodiscovery: Whether GCP Cloud SQL instances autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] gcp_enable_compute_instances_autodiscovery: Whether GCP Compute Engine instances autodiscovery is enabled or not.
         :param pulumi.Input[_builtins.bool] gcp_enable_gke_clusters_autodiscovery: Whether GCP GKE clusters autodiscovery is enabled or not.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_gcs_buckets: The GCS buckets this Cloud Integration is allowed to write logs to. Empty with access allowed means all buckets in the project.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_permissions: The IAM permissions to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module, which grants them through a single custom role.
         :param pulumi.Input[_builtins.str] gcp_project_id: The GCP project ID this integration grants Formal access to.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_pubsub_topics: The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcp_roles: The project-level IAM roles to grant Formal's service account, derived from the enabled capabilities. Pass these to the GCP Terraform module.
         :param pulumi.Input[_builtins.str] gcp_service_account_email: The GCP service account email created for this integration.
         :param pulumi.Input[_builtins.str] gcp_workload_identity_pool_provider: The GCP workload identity pool provider created for this integration.
@@ -1085,12 +1123,14 @@ class IntegrationCloud(pulumi.CustomResource):
         __props__.__dict__["cloud_region"] = cloud_region
         __props__.__dict__["gcp"] = gcp
         __props__.__dict__["gcp_allow_gcs_access"] = gcp_allow_gcs_access
+        __props__.__dict__["gcp_allow_pubsub_access"] = gcp_allow_pubsub_access
         __props__.__dict__["gcp_enable_cloudsql_instances_autodiscovery"] = gcp_enable_cloudsql_instances_autodiscovery
         __props__.__dict__["gcp_enable_compute_instances_autodiscovery"] = gcp_enable_compute_instances_autodiscovery
         __props__.__dict__["gcp_enable_gke_clusters_autodiscovery"] = gcp_enable_gke_clusters_autodiscovery
         __props__.__dict__["gcp_gcs_buckets"] = gcp_gcs_buckets
         __props__.__dict__["gcp_permissions"] = gcp_permissions
         __props__.__dict__["gcp_project_id"] = gcp_project_id
+        __props__.__dict__["gcp_pubsub_topics"] = gcp_pubsub_topics
         __props__.__dict__["gcp_roles"] = gcp_roles
         __props__.__dict__["gcp_service_account_email"] = gcp_service_account_email
         __props__.__dict__["gcp_workload_identity_pool_provider"] = gcp_workload_identity_pool_provider
@@ -1133,12 +1173,14 @@ class IntegrationCloud(pulumi.CustomResource):
             cloud_region: pulumi.Input[Optional[_builtins.str]] = None,
             gcp: pulumi.Input[Optional[Union['IntegrationCloudGcpArgs', 'IntegrationCloudGcpArgsDict', 'outputs.IntegrationCloudGcp']]] = None,
             gcp_allow_gcs_access: pulumi.Input[Optional[_builtins.bool]] = None,
+            gcp_allow_pubsub_access: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_enable_cloudsql_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_enable_compute_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_enable_gke_clusters_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
             gcp_gcs_buckets: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             gcp_permissions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             gcp_project_id: pulumi.Input[Optional[_builtins.str]] = None,
+            gcp_pubsub_topics: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             gcp_roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             gcp_service_account_email: pulumi.Input[Optional[_builtins.str]] = None,
             gcp_workload_identity_pool_provider: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1177,12 +1219,14 @@ class IntegrationCloud(pulumi.CustomResource):
         __props__["cloudRegion"] = cloud_region
         __props__["gcp"] = gcp
         __props__["gcpAllowGcsAccess"] = gcp_allow_gcs_access
+        __props__["gcpAllowPubsubAccess"] = gcp_allow_pubsub_access
         __props__["gcpEnableCloudsqlInstancesAutodiscovery"] = gcp_enable_cloudsql_instances_autodiscovery
         __props__["gcpEnableComputeInstancesAutodiscovery"] = gcp_enable_compute_instances_autodiscovery
         __props__["gcpEnableGkeClustersAutodiscovery"] = gcp_enable_gke_clusters_autodiscovery
         __props__["gcpGcsBuckets"] = gcp_gcs_buckets
         __props__["gcpPermissions"] = gcp_permissions
         __props__["gcpProjectId"] = gcp_project_id
+        __props__["gcpPubsubTopics"] = gcp_pubsub_topics
         __props__["gcpRoles"] = gcp_roles
         __props__["gcpServiceAccountEmail"] = gcp_service_account_email
         __props__["gcpWorkloadIdentityPoolProvider"] = gcp_workload_identity_pool_provider
@@ -1448,6 +1492,14 @@ class IntegrationCloud(pulumi.CustomResource):
         return pulumi.get(self, "gcp_allow_gcs_access")
 
     @_builtins.property
+    @pulumi.getter(name="gcpAllowPubsubAccess")
+    def gcp_allow_pubsub_access(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether the Cloud Integration is allowed to publish logs to Pub/Sub.
+        """
+        return pulumi.get(self, "gcp_allow_pubsub_access")
+
+    @_builtins.property
     @pulumi.getter(name="gcpEnableCloudsqlInstancesAutodiscovery")
     def gcp_enable_cloudsql_instances_autodiscovery(self) -> pulumi.Output[_builtins.bool]:
         """
@@ -1494,6 +1546,14 @@ class IntegrationCloud(pulumi.CustomResource):
         The GCP project ID this integration grants Formal access to.
         """
         return pulumi.get(self, "gcp_project_id")
+
+    @_builtins.property
+    @pulumi.getter(name="gcpPubsubTopics")
+    def gcp_pubsub_topics(self) -> pulumi.Output[Sequence[_builtins.str]]:
+        """
+        The Pub/Sub topics this Cloud Integration is allowed to publish logs to. Empty with access allowed means all topics in the project.
+        """
+        return pulumi.get(self, "gcp_pubsub_topics")
 
     @_builtins.property
     @pulumi.getter(name="gcpRoles")

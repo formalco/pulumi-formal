@@ -35,6 +35,12 @@ namespace Formal.Pulumi
         public Output<Outputs.IntegrationLogDatadog?> Datadog { get; private set; } = null!;
 
         /// <summary>
+        /// Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+        /// </summary>
+        [Output("gcpPubsub")]
+        public Output<Outputs.IntegrationLogGcpPubsub?> GcpPubsub { get; private set; } = null!;
+
+        /// <summary>
         /// Configuration block for Google Cloud Storage integration.
         /// </summary>
         [Output("gcs")]
@@ -118,6 +124,12 @@ namespace Formal.Pulumi
         public Input<Inputs.IntegrationLogDatadogArgs>? Datadog { get; set; }
 
         /// <summary>
+        /// Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+        /// </summary>
+        [Input("gcpPubsub")]
+        public Input<Inputs.IntegrationLogGcpPubsubArgs>? GcpPubsub { get; set; }
+
+        /// <summary>
         /// Configuration block for Google Cloud Storage integration.
         /// </summary>
         [Input("gcs")]
@@ -160,6 +172,12 @@ namespace Formal.Pulumi
         /// </summary>
         [Input("datadog")]
         public Input<Inputs.IntegrationLogDatadogGetArgs>? Datadog { get; set; }
+
+        /// <summary>
+        /// Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+        /// </summary>
+        [Input("gcpPubsub")]
+        public Input<Inputs.IntegrationLogGcpPubsubGetArgs>? GcpPubsub { get; set; }
 
         /// <summary>
         /// Configuration block for Google Cloud Storage integration.

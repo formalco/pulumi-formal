@@ -2786,6 +2786,8 @@ func (o IntegrationCloudAzurePtrOutput) SubscriptionId() pulumi.StringPtrOutput 
 type IntegrationCloudGcp struct {
 	// Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
 	AllowGcsAccess *bool `pulumi:"allowGcsAccess"`
+	// Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
+	AllowPubsubAccess *bool `pulumi:"allowPubsubAccess"`
 	// Enables resource autodiscovery for Cloud SQL instances.
 	EnableCloudsqlInstancesAutodiscovery *bool `pulumi:"enableCloudsqlInstancesAutodiscovery"`
 	// Enables resource autodiscovery for Compute Engine instances.
@@ -2796,6 +2798,8 @@ type IntegrationCloudGcp struct {
 	GcsBuckets []string `pulumi:"gcsBuckets"`
 	// The GCP project ID this integration grants Formal access to.
 	ProjectId string `pulumi:"projectId"`
+	// Pub/Sub topics Formal may publish logs to, as full names (projects/\n\n/topics/\n\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
+	PubsubTopics []string `pulumi:"pubsubTopics"`
 }
 
 // IntegrationCloudGcpInput is an input type that accepts IntegrationCloudGcpArgs and IntegrationCloudGcpOutput values.
@@ -2812,6 +2816,8 @@ type IntegrationCloudGcpInput interface {
 type IntegrationCloudGcpArgs struct {
 	// Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
 	AllowGcsAccess pulumi.BoolPtrInput `pulumi:"allowGcsAccess"`
+	// Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
+	AllowPubsubAccess pulumi.BoolPtrInput `pulumi:"allowPubsubAccess"`
 	// Enables resource autodiscovery for Cloud SQL instances.
 	EnableCloudsqlInstancesAutodiscovery pulumi.BoolPtrInput `pulumi:"enableCloudsqlInstancesAutodiscovery"`
 	// Enables resource autodiscovery for Compute Engine instances.
@@ -2822,6 +2828,8 @@ type IntegrationCloudGcpArgs struct {
 	GcsBuckets pulumi.StringArrayInput `pulumi:"gcsBuckets"`
 	// The GCP project ID this integration grants Formal access to.
 	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Pub/Sub topics Formal may publish logs to, as full names (projects/\n\n/topics/\n\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
+	PubsubTopics pulumi.StringArrayInput `pulumi:"pubsubTopics"`
 }
 
 func (IntegrationCloudGcpArgs) ElementType() reflect.Type {
@@ -2906,6 +2914,11 @@ func (o IntegrationCloudGcpOutput) AllowGcsAccess() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v IntegrationCloudGcp) *bool { return v.AllowGcsAccess }).(pulumi.BoolPtrOutput)
 }
 
+// Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
+func (o IntegrationCloudGcpOutput) AllowPubsubAccess() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IntegrationCloudGcp) *bool { return v.AllowPubsubAccess }).(pulumi.BoolPtrOutput)
+}
+
 // Enables resource autodiscovery for Cloud SQL instances.
 func (o IntegrationCloudGcpOutput) EnableCloudsqlInstancesAutodiscovery() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v IntegrationCloudGcp) *bool { return v.EnableCloudsqlInstancesAutodiscovery }).(pulumi.BoolPtrOutput)
@@ -2929,6 +2942,11 @@ func (o IntegrationCloudGcpOutput) GcsBuckets() pulumi.StringArrayOutput {
 // The GCP project ID this integration grants Formal access to.
 func (o IntegrationCloudGcpOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v IntegrationCloudGcp) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Pub/Sub topics Formal may publish logs to, as full names (projects/\n\n/topics/\n\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
+func (o IntegrationCloudGcpOutput) PubsubTopics() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v IntegrationCloudGcp) []string { return v.PubsubTopics }).(pulumi.StringArrayOutput)
 }
 
 type IntegrationCloudGcpPtrOutput struct{ *pulumi.OutputState }
@@ -2962,6 +2980,16 @@ func (o IntegrationCloudGcpPtrOutput) AllowGcsAccess() pulumi.BoolPtrOutput {
 			return nil
 		}
 		return v.AllowGcsAccess
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
+func (o IntegrationCloudGcpPtrOutput) AllowPubsubAccess() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IntegrationCloudGcp) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.AllowPubsubAccess
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -3013,6 +3041,16 @@ func (o IntegrationCloudGcpPtrOutput) ProjectId() pulumi.StringPtrOutput {
 		}
 		return &v.ProjectId
 	}).(pulumi.StringPtrOutput)
+}
+
+// Pub/Sub topics Formal may publish logs to, as full names (projects/\n\n/topics/\n\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
+func (o IntegrationCloudGcpPtrOutput) PubsubTopics() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *IntegrationCloudGcp) []string {
+		if v == nil {
+			return nil
+		}
+		return v.PubsubTopics
+	}).(pulumi.StringArrayOutput)
 }
 
 type IntegrationLogAwsS3 struct {
@@ -3613,6 +3651,162 @@ func (o IntegrationLogDatadogPtrOutput) Site() pulumi.StringPtrOutput {
 			return nil
 		}
 		return &v.Site
+	}).(pulumi.StringPtrOutput)
+}
+
+type IntegrationLogGcpPubsub struct {
+	// Cloud Integration ID.
+	CloudIntegrationId string `pulumi:"cloudIntegrationId"`
+	// Full Pub/Sub topic name: projects/\n\n/topics/\n\n.
+	Topic string `pulumi:"topic"`
+}
+
+// IntegrationLogGcpPubsubInput is an input type that accepts IntegrationLogGcpPubsubArgs and IntegrationLogGcpPubsubOutput values.
+// You can construct a concrete instance of `IntegrationLogGcpPubsubInput` via:
+//
+//	IntegrationLogGcpPubsubArgs{...}
+type IntegrationLogGcpPubsubInput interface {
+	pulumi.Input
+
+	ToIntegrationLogGcpPubsubOutput() IntegrationLogGcpPubsubOutput
+	ToIntegrationLogGcpPubsubOutputWithContext(context.Context) IntegrationLogGcpPubsubOutput
+}
+
+type IntegrationLogGcpPubsubArgs struct {
+	// Cloud Integration ID.
+	CloudIntegrationId pulumi.StringInput `pulumi:"cloudIntegrationId"`
+	// Full Pub/Sub topic name: projects/\n\n/topics/\n\n.
+	Topic pulumi.StringInput `pulumi:"topic"`
+}
+
+func (IntegrationLogGcpPubsubArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationLogGcpPubsub)(nil)).Elem()
+}
+
+func (i IntegrationLogGcpPubsubArgs) ToIntegrationLogGcpPubsubOutput() IntegrationLogGcpPubsubOutput {
+	return i.ToIntegrationLogGcpPubsubOutputWithContext(context.Background())
+}
+
+func (i IntegrationLogGcpPubsubArgs) ToIntegrationLogGcpPubsubOutputWithContext(ctx context.Context) IntegrationLogGcpPubsubOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationLogGcpPubsubOutput)
+}
+
+func (i IntegrationLogGcpPubsubArgs) ToIntegrationLogGcpPubsubPtrOutput() IntegrationLogGcpPubsubPtrOutput {
+	return i.ToIntegrationLogGcpPubsubPtrOutputWithContext(context.Background())
+}
+
+func (i IntegrationLogGcpPubsubArgs) ToIntegrationLogGcpPubsubPtrOutputWithContext(ctx context.Context) IntegrationLogGcpPubsubPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationLogGcpPubsubOutput).ToIntegrationLogGcpPubsubPtrOutputWithContext(ctx)
+}
+
+// IntegrationLogGcpPubsubPtrInput is an input type that accepts IntegrationLogGcpPubsubArgs, IntegrationLogGcpPubsubPtr and IntegrationLogGcpPubsubPtrOutput values.
+// You can construct a concrete instance of `IntegrationLogGcpPubsubPtrInput` via:
+//
+//	        IntegrationLogGcpPubsubArgs{...}
+//
+//	or:
+//
+//	        nil
+type IntegrationLogGcpPubsubPtrInput interface {
+	pulumi.Input
+
+	ToIntegrationLogGcpPubsubPtrOutput() IntegrationLogGcpPubsubPtrOutput
+	ToIntegrationLogGcpPubsubPtrOutputWithContext(context.Context) IntegrationLogGcpPubsubPtrOutput
+}
+
+type integrationLogGcpPubsubPtrType IntegrationLogGcpPubsubArgs
+
+func IntegrationLogGcpPubsubPtr(v *IntegrationLogGcpPubsubArgs) IntegrationLogGcpPubsubPtrInput {
+	return (*integrationLogGcpPubsubPtrType)(v)
+}
+
+func (*integrationLogGcpPubsubPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationLogGcpPubsub)(nil)).Elem()
+}
+
+func (i *integrationLogGcpPubsubPtrType) ToIntegrationLogGcpPubsubPtrOutput() IntegrationLogGcpPubsubPtrOutput {
+	return i.ToIntegrationLogGcpPubsubPtrOutputWithContext(context.Background())
+}
+
+func (i *integrationLogGcpPubsubPtrType) ToIntegrationLogGcpPubsubPtrOutputWithContext(ctx context.Context) IntegrationLogGcpPubsubPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IntegrationLogGcpPubsubPtrOutput)
+}
+
+type IntegrationLogGcpPubsubOutput struct{ *pulumi.OutputState }
+
+func (IntegrationLogGcpPubsubOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IntegrationLogGcpPubsub)(nil)).Elem()
+}
+
+func (o IntegrationLogGcpPubsubOutput) ToIntegrationLogGcpPubsubOutput() IntegrationLogGcpPubsubOutput {
+	return o
+}
+
+func (o IntegrationLogGcpPubsubOutput) ToIntegrationLogGcpPubsubOutputWithContext(ctx context.Context) IntegrationLogGcpPubsubOutput {
+	return o
+}
+
+func (o IntegrationLogGcpPubsubOutput) ToIntegrationLogGcpPubsubPtrOutput() IntegrationLogGcpPubsubPtrOutput {
+	return o.ToIntegrationLogGcpPubsubPtrOutputWithContext(context.Background())
+}
+
+func (o IntegrationLogGcpPubsubOutput) ToIntegrationLogGcpPubsubPtrOutputWithContext(ctx context.Context) IntegrationLogGcpPubsubPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IntegrationLogGcpPubsub) *IntegrationLogGcpPubsub {
+		return &v
+	}).(IntegrationLogGcpPubsubPtrOutput)
+}
+
+// Cloud Integration ID.
+func (o IntegrationLogGcpPubsubOutput) CloudIntegrationId() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationLogGcpPubsub) string { return v.CloudIntegrationId }).(pulumi.StringOutput)
+}
+
+// Full Pub/Sub topic name: projects/\n\n/topics/\n\n.
+func (o IntegrationLogGcpPubsubOutput) Topic() pulumi.StringOutput {
+	return o.ApplyT(func(v IntegrationLogGcpPubsub) string { return v.Topic }).(pulumi.StringOutput)
+}
+
+type IntegrationLogGcpPubsubPtrOutput struct{ *pulumi.OutputState }
+
+func (IntegrationLogGcpPubsubPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IntegrationLogGcpPubsub)(nil)).Elem()
+}
+
+func (o IntegrationLogGcpPubsubPtrOutput) ToIntegrationLogGcpPubsubPtrOutput() IntegrationLogGcpPubsubPtrOutput {
+	return o
+}
+
+func (o IntegrationLogGcpPubsubPtrOutput) ToIntegrationLogGcpPubsubPtrOutputWithContext(ctx context.Context) IntegrationLogGcpPubsubPtrOutput {
+	return o
+}
+
+func (o IntegrationLogGcpPubsubPtrOutput) Elem() IntegrationLogGcpPubsubOutput {
+	return o.ApplyT(func(v *IntegrationLogGcpPubsub) IntegrationLogGcpPubsub {
+		if v != nil {
+			return *v
+		}
+		var ret IntegrationLogGcpPubsub
+		return ret
+	}).(IntegrationLogGcpPubsubOutput)
+}
+
+// Cloud Integration ID.
+func (o IntegrationLogGcpPubsubPtrOutput) CloudIntegrationId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogGcpPubsub) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CloudIntegrationId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Full Pub/Sub topic name: projects/\n\n/topics/\n\n.
+func (o IntegrationLogGcpPubsubPtrOutput) Topic() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IntegrationLogGcpPubsub) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Topic
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -17945,6 +18139,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogAzureBlobPtrInput)(nil)).Elem(), IntegrationLogAzureBlobArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogDatadogInput)(nil)).Elem(), IntegrationLogDatadogArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogDatadogPtrInput)(nil)).Elem(), IntegrationLogDatadogArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogGcpPubsubInput)(nil)).Elem(), IntegrationLogGcpPubsubArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogGcpPubsubPtrInput)(nil)).Elem(), IntegrationLogGcpPubsubArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogGcsInput)(nil)).Elem(), IntegrationLogGcsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogGcsPtrInput)(nil)).Elem(), IntegrationLogGcsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IntegrationLogSplunkInput)(nil)).Elem(), IntegrationLogSplunkArgs{})
@@ -18165,6 +18361,8 @@ func init() {
 	pulumi.RegisterOutputType(IntegrationLogAzureBlobPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogDatadogOutput{})
 	pulumi.RegisterOutputType(IntegrationLogDatadogPtrOutput{})
+	pulumi.RegisterOutputType(IntegrationLogGcpPubsubOutput{})
+	pulumi.RegisterOutputType(IntegrationLogGcpPubsubPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogGcsOutput{})
 	pulumi.RegisterOutputType(IntegrationLogGcsPtrOutput{})
 	pulumi.RegisterOutputType(IntegrationLogSplunkOutput{})

@@ -21,6 +21,8 @@ type IntegrationLog struct {
 	AzureBlob IntegrationLogAzureBlobPtrOutput `pulumi:"azureBlob"`
 	// Configuration block for Datadog integration.
 	Datadog IntegrationLogDatadogPtrOutput `pulumi:"datadog"`
+	// Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+	GcpPubsub IntegrationLogGcpPubsubPtrOutput `pulumi:"gcpPubsub"`
 	// Configuration block for Google Cloud Storage integration.
 	Gcs IntegrationLogGcsPtrOutput `pulumi:"gcs"`
 	// Friendly name for the Integration app.
@@ -65,6 +67,8 @@ type integrationLogState struct {
 	AzureBlob *IntegrationLogAzureBlob `pulumi:"azureBlob"`
 	// Configuration block for Datadog integration.
 	Datadog *IntegrationLogDatadog `pulumi:"datadog"`
+	// Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+	GcpPubsub *IntegrationLogGcpPubsub `pulumi:"gcpPubsub"`
 	// Configuration block for Google Cloud Storage integration.
 	Gcs *IntegrationLogGcs `pulumi:"gcs"`
 	// Friendly name for the Integration app.
@@ -80,6 +84,8 @@ type IntegrationLogState struct {
 	AzureBlob IntegrationLogAzureBlobPtrInput
 	// Configuration block for Datadog integration.
 	Datadog IntegrationLogDatadogPtrInput
+	// Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+	GcpPubsub IntegrationLogGcpPubsubPtrInput
 	// Configuration block for Google Cloud Storage integration.
 	Gcs IntegrationLogGcsPtrInput
 	// Friendly name for the Integration app.
@@ -105,6 +111,8 @@ type integrationLogArgs struct {
 	AzureBlob *IntegrationLogAzureBlob `pulumi:"azureBlob"`
 	// Configuration block for Datadog integration.
 	Datadog *IntegrationLogDatadog `pulumi:"datadog"`
+	// Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+	GcpPubsub *IntegrationLogGcpPubsub `pulumi:"gcpPubsub"`
 	// Configuration block for Google Cloud Storage integration.
 	Gcs *IntegrationLogGcs `pulumi:"gcs"`
 	// Friendly name for the Integration app.
@@ -121,6 +129,8 @@ type IntegrationLogArgs struct {
 	AzureBlob IntegrationLogAzureBlobPtrInput
 	// Configuration block for Datadog integration.
 	Datadog IntegrationLogDatadogPtrInput
+	// Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+	GcpPubsub IntegrationLogGcpPubsubPtrInput
 	// Configuration block for Google Cloud Storage integration.
 	Gcs IntegrationLogGcsPtrInput
 	// Friendly name for the Integration app.
@@ -229,6 +239,11 @@ func (o IntegrationLogOutput) AzureBlob() IntegrationLogAzureBlobPtrOutput {
 // Configuration block for Datadog integration.
 func (o IntegrationLogOutput) Datadog() IntegrationLogDatadogPtrOutput {
 	return o.ApplyT(func(v *IntegrationLog) IntegrationLogDatadogPtrOutput { return v.Datadog }).(IntegrationLogDatadogPtrOutput)
+}
+
+// Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+func (o IntegrationLogOutput) GcpPubsub() IntegrationLogGcpPubsubPtrOutput {
+	return o.ApplyT(func(v *IntegrationLog) IntegrationLogGcpPubsubPtrOutput { return v.GcpPubsub }).(IntegrationLogGcpPubsubPtrOutput)
 }
 
 // Configuration block for Google Cloud Storage integration.

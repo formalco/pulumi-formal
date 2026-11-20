@@ -19,6 +19,10 @@ namespace Formal.Pulumi.Outputs
         /// </summary>
         public readonly bool? AllowGcsAccess;
         /// <summary>
+        /// Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
+        /// </summary>
+        public readonly bool? AllowPubsubAccess;
+        /// <summary>
         /// Enables resource autodiscovery for Cloud SQL instances.
         /// </summary>
         public readonly bool? EnableCloudsqlInstancesAutodiscovery;
@@ -38,10 +42,16 @@ namespace Formal.Pulumi.Outputs
         /// The GCP project ID this integration grants Formal access to.
         /// </summary>
         public readonly string ProjectId;
+        /// <summary>
+        /// Pub/Sub topics Formal may publish logs to, as full names (projects/\n\n/topics/\n\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
+        /// </summary>
+        public readonly ImmutableArray<string> PubsubTopics;
 
         [OutputConstructor]
         private IntegrationCloudGcp(
             bool? allowGcsAccess,
+
+            bool? allowPubsubAccess,
 
             bool? enableCloudsqlInstancesAutodiscovery,
 
@@ -51,14 +61,18 @@ namespace Formal.Pulumi.Outputs
 
             ImmutableArray<string> gcsBuckets,
 
-            string projectId)
+            string projectId,
+
+            ImmutableArray<string> pubsubTopics)
         {
             AllowGcsAccess = allowGcsAccess;
+            AllowPubsubAccess = allowPubsubAccess;
             EnableCloudsqlInstancesAutodiscovery = enableCloudsqlInstancesAutodiscovery;
             EnableComputeInstancesAutodiscovery = enableComputeInstancesAutodiscovery;
             EnableGkeClustersAutodiscovery = enableGkeClustersAutodiscovery;
             GcsBuckets = gcsBuckets;
             ProjectId = projectId;
+            PubsubTopics = pubsubTopics;
         }
     }
 }

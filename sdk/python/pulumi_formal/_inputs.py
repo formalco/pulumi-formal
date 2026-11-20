@@ -55,6 +55,8 @@ __all__ = [
     'IntegrationLogAzureBlobArgsDict',
     'IntegrationLogDatadogArgs',
     'IntegrationLogDatadogArgsDict',
+    'IntegrationLogGcpPubsubArgs',
+    'IntegrationLogGcpPubsubArgsDict',
     'IntegrationLogGcsArgs',
     'IntegrationLogGcsArgsDict',
     'IntegrationLogSplunkArgs',
@@ -1454,6 +1456,10 @@ class IntegrationCloudGcpArgsDict(TypedDict):
     """
     Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
     """
+    allow_pubsub_access: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
+    """
     enable_cloudsql_instances_autodiscovery: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
     Enables resource autodiscovery for Cloud SQL instances.
@@ -1470,27 +1476,37 @@ class IntegrationCloudGcpArgsDict(TypedDict):
     """
     GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
     """
+    pubsub_topics: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    Pub/Sub topics Formal may publish logs to, as full names (projects/\\n\\n/topics/\\n\\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
+    """
 
 @pulumi.input_type
 class IntegrationCloudGcpArgs:
     def __init__(__self__, *,
                  project_id: pulumi.Input[_builtins.str],
                  allow_gcs_access: pulumi.Input[Optional[_builtins.bool]] = None,
+                 allow_pubsub_access: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_cloudsql_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_compute_instances_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_gke_clusters_autodiscovery: pulumi.Input[Optional[_builtins.bool]] = None,
-                 gcs_buckets: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 gcs_buckets: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 pubsub_topics: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         :param pulumi.Input[_builtins.str] project_id: The GCP project ID this integration grants Formal access to.
         :param pulumi.Input[_builtins.bool] allow_gcs_access: Allows the Cloud Integration to write logs to GCS buckets for Log Integrations.
+        :param pulumi.Input[_builtins.bool] allow_pubsub_access: Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
         :param pulumi.Input[_builtins.bool] enable_cloudsql_instances_autodiscovery: Enables resource autodiscovery for Cloud SQL instances.
         :param pulumi.Input[_builtins.bool] enable_compute_instances_autodiscovery: Enables resource autodiscovery for Compute Engine instances.
         :param pulumi.Input[_builtins.bool] enable_gke_clusters_autodiscovery: Enables resource autodiscovery for GKE clusters.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] gcs_buckets: GCS buckets Formal may write logs to. An empty list with access allowed grants all buckets in the project; a non-empty list restricts writes to those buckets.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] pubsub_topics: Pub/Sub topics Formal may publish logs to, as full names (projects/\\n\\n/topics/\\n\\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
         """
         pulumi.set(__self__, "project_id", project_id)
         if allow_gcs_access is not None:
             pulumi.set(__self__, "allow_gcs_access", allow_gcs_access)
+        if allow_pubsub_access is not None:
+            pulumi.set(__self__, "allow_pubsub_access", allow_pubsub_access)
         if enable_cloudsql_instances_autodiscovery is not None:
             pulumi.set(__self__, "enable_cloudsql_instances_autodiscovery", enable_cloudsql_instances_autodiscovery)
         if enable_compute_instances_autodiscovery is not None:
@@ -1499,6 +1515,8 @@ class IntegrationCloudGcpArgs:
             pulumi.set(__self__, "enable_gke_clusters_autodiscovery", enable_gke_clusters_autodiscovery)
         if gcs_buckets is not None:
             pulumi.set(__self__, "gcs_buckets", gcs_buckets)
+        if pubsub_topics is not None:
+            pulumi.set(__self__, "pubsub_topics", pubsub_topics)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
@@ -1523,6 +1541,18 @@ class IntegrationCloudGcpArgs:
     @allow_gcs_access.setter
     def allow_gcs_access(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "allow_gcs_access", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowPubsubAccess")
+    def allow_pubsub_access(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
+        """
+        return pulumi.get(self, "allow_pubsub_access")
+
+    @allow_pubsub_access.setter
+    def allow_pubsub_access(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "allow_pubsub_access", value)
 
     @_builtins.property
     @pulumi.getter(name="enableCloudsqlInstancesAutodiscovery")
@@ -1571,6 +1601,18 @@ class IntegrationCloudGcpArgs:
     @gcs_buckets.setter
     def gcs_buckets(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "gcs_buckets", value)
+
+    @_builtins.property
+    @pulumi.getter(name="pubsubTopics")
+    def pubsub_topics(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Pub/Sub topics Formal may publish logs to, as full names (projects/\\n\\n/topics/\\n\\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
+        """
+        return pulumi.get(self, "pubsub_topics")
+
+    @pubsub_topics.setter
+    def pubsub_topics(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "pubsub_topics", value)
 
 
 class IntegrationLogAwsS3ArgsDict(TypedDict):
@@ -1850,6 +1892,53 @@ class IntegrationLogDatadogArgs:
     @site.setter
     def site(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "site", value)
+
+
+class IntegrationLogGcpPubsubArgsDict(TypedDict):
+    cloud_integration_id: pulumi.Input[_builtins.str]
+    """
+    Cloud Integration ID.
+    """
+    topic: pulumi.Input[_builtins.str]
+    """
+    Full Pub/Sub topic name: projects/\\n\\n/topics/\\n\\n.
+    """
+
+@pulumi.input_type
+class IntegrationLogGcpPubsubArgs:
+    def __init__(__self__, *,
+                 cloud_integration_id: pulumi.Input[_builtins.str],
+                 topic: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] cloud_integration_id: Cloud Integration ID.
+        :param pulumi.Input[_builtins.str] topic: Full Pub/Sub topic name: projects/\\n\\n/topics/\\n\\n.
+        """
+        pulumi.set(__self__, "cloud_integration_id", cloud_integration_id)
+        pulumi.set(__self__, "topic", topic)
+
+    @_builtins.property
+    @pulumi.getter(name="cloudIntegrationId")
+    def cloud_integration_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        Cloud Integration ID.
+        """
+        return pulumi.get(self, "cloud_integration_id")
+
+    @cloud_integration_id.setter
+    def cloud_integration_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "cloud_integration_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def topic(self) -> pulumi.Input[_builtins.str]:
+        """
+        Full Pub/Sub topic name: projects/\\n\\n/topics/\\n\\n.
+        """
+        return pulumi.get(self, "topic")
+
+    @topic.setter
+    def topic(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "topic", value)
 
 
 class IntegrationLogGcsArgsDict(TypedDict):

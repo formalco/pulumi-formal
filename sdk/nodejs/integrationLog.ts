@@ -61,6 +61,10 @@ export class IntegrationLog extends pulumi.CustomResource {
      */
     declare public readonly datadog: pulumi.Output<outputs.IntegrationLogDatadog | undefined>;
     /**
+     * Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+     */
+    declare public readonly gcpPubsub: pulumi.Output<outputs.IntegrationLogGcpPubsub | undefined>;
+    /**
      * Configuration block for Google Cloud Storage integration.
      */
     declare public readonly gcs: pulumi.Output<outputs.IntegrationLogGcs | undefined>;
@@ -89,6 +93,7 @@ export class IntegrationLog extends pulumi.CustomResource {
             resourceInputs["awsS3"] = state?.awsS3;
             resourceInputs["azureBlob"] = state?.azureBlob;
             resourceInputs["datadog"] = state?.datadog;
+            resourceInputs["gcpPubsub"] = state?.gcpPubsub;
             resourceInputs["gcs"] = state?.gcs;
             resourceInputs["name"] = state?.name;
             resourceInputs["splunk"] = state?.splunk;
@@ -97,6 +102,7 @@ export class IntegrationLog extends pulumi.CustomResource {
             resourceInputs["awsS3"] = args?.awsS3;
             resourceInputs["azureBlob"] = args?.azureBlob;
             resourceInputs["datadog"] = args?.datadog;
+            resourceInputs["gcpPubsub"] = args?.gcpPubsub;
             resourceInputs["gcs"] = args?.gcs;
             resourceInputs["name"] = args?.name;
             resourceInputs["splunk"] = args?.splunk;
@@ -122,6 +128,10 @@ export interface IntegrationLogState {
      * Configuration block for Datadog integration.
      */
     datadog?: pulumi.Input<inputs.IntegrationLogDatadog | undefined>;
+    /**
+     * Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+     */
+    gcpPubsub?: pulumi.Input<inputs.IntegrationLogGcpPubsub | undefined>;
     /**
      * Configuration block for Google Cloud Storage integration.
      */
@@ -152,6 +162,10 @@ export interface IntegrationLogArgs {
      * Configuration block for Datadog integration.
      */
     datadog?: pulumi.Input<inputs.IntegrationLogDatadog | undefined>;
+    /**
+     * Configuration block for Google Cloud Pub/Sub integration. Each log is published as one raw JSON message, e.g. for a BigQuery subscription.
+     */
+    gcpPubsub?: pulumi.Input<inputs.IntegrationLogGcpPubsub | undefined>;
     /**
      * Configuration block for Google Cloud Storage integration.
      */

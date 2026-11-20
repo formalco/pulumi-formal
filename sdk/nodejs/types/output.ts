@@ -337,6 +337,10 @@ export interface IntegrationCloudGcp {
      */
     allowGcsAccess?: boolean;
     /**
+     * Allows the Cloud Integration to publish logs to Pub/Sub topics for Log Integrations.
+     */
+    allowPubsubAccess?: boolean;
+    /**
      * Enables resource autodiscovery for Cloud SQL instances.
      */
     enableCloudsqlInstancesAutodiscovery?: boolean;
@@ -356,6 +360,10 @@ export interface IntegrationCloudGcp {
      * The GCP project ID this integration grants Formal access to.
      */
     projectId: string;
+    /**
+     * Pub/Sub topics Formal may publish logs to, as full names (projects/\n\n/topics/\n\n). An empty list with access allowed grants all topics in the project; a non-empty list restricts publishing to those topics, which may live in other projects.
+     */
+    pubsubTopics?: string[];
 }
 
 export interface IntegrationLogAwsS3 {
@@ -417,6 +425,17 @@ export interface IntegrationLogDatadog {
      * URL of your Datadog app.
      */
     site: string;
+}
+
+export interface IntegrationLogGcpPubsub {
+    /**
+     * Cloud Integration ID.
+     */
+    cloudIntegrationId: string;
+    /**
+     * Full Pub/Sub topic name: projects/\n\n/topics/\n\n.
+     */
+    topic: string;
 }
 
 export interface IntegrationLogGcs {
